@@ -13,7 +13,8 @@ export default {
         18: '4.5rem'
       },
       borderRadius: {
-        xl: '0.625rem'
+        xl: '0.625rem',
+        '2xl': '12px'
       },
       colors: {
         accent: {
@@ -24,12 +25,21 @@ export default {
           500: '#EC4E46'
         },
         neutral: {
+          50: '#FAFBFB',
           100: '#F3F5F5',
           200: '#E9EBEB',
           300: '#CCCECE',
           400: '#A5A7A7',
           500: '#7E7F7F',
           800: '#0A0A0A'
+        },
+        sherwood: {
+          500: '#194136'
+        },
+        white: {
+          5: 'rgba(255, 255, 255, 0.05)',
+          10: 'rgba(255, 255, 255, 0.1)',
+          70: 'rgba(255, 255, 255, 0.7)'
         }
       }
     }

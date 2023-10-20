@@ -24,3 +24,24 @@ export const SingleSelect: Story = {
     ]
   }
 }
+
+export const MultipleSelect: Story = {
+  args: {
+    items: [
+      { label: 'Cobee S.L.', value: 'cobee' },
+      { label: 'Payflow S.L.', value: 'payflow' }
+    ],
+    multiple: true
+  }
+}
+
+export const Searchable: Story = {
+  args: {
+    items: [
+      { label: 'Cobee S.L.', value: 'cobee' },
+      { label: 'Payflow S.L.', value: 'payflow' }
+    ],
+    multiple: true,
+    searchable: true
+  }
+}

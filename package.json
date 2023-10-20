@@ -44,6 +44,7 @@
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
     "@sveltejs/package": "^2.0.0",
+    "@tailwindcss/forms": "^0.5.6",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "^10.4.16",
@@ -71,6 +72,7 @@
   "types": "./dist/index.d.ts",
   "type": "module",
   "dependencies": {
+    "clsx": "^2.0.0",
     "postcss-load-config": "^4.0.1"
   }
 }

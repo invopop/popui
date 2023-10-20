@@ -37,6 +37,7 @@ export default {
           500: '#194136'
         },
         white: {
+          DEFAULT: '#FFFFFF',
           5: 'rgba(255, 255, 255, 0.05)',
           10: 'rgba(255, 255, 255, 0.1)',
           70: 'rgba(255, 255, 255, 0.7)'
@@ -44,5 +45,9 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/forms')({
+      strategy: 'class' // only generate classes
+    })
+  ]
 }

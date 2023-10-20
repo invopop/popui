@@ -3,11 +3,16 @@
   import BaseButton from '../../lib/BaseButton.svelte'
   import type { ButtonType, IconPosition } from '$lib/types.js'
 
-  export let slot = 'Button'
+  export let slot = ''
   export let disabled = false
   export let icon: IconSource | undefined = undefined
   export let iconPosition: IconPosition = 'left'
   export let type: ButtonType = 'default'
+  export let small = false
 </script>
 
-<BaseButton {disabled} {icon} {iconPosition} {type}>{slot}</BaseButton>
+{#if slot}
+  <BaseButton {disabled} {icon} {iconPosition} {type} {small}>{slot}</BaseButton>
+{:else}
+  <BaseButton {disabled} {icon} {iconPosition} {type} {small} />
+{/if}

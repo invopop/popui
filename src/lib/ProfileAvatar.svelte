@@ -1,27 +1,20 @@
 <script lang="ts">
+  import clsx from 'clsx'
+
   export let name = ''
   export let large = false
   export let dark = false
   export let picture = ''
+
+  $: avatarStyles = clsx(
+    { 'h-4 w-4 text-xs rounded': !large },
+    { 'h-6 w-6 text-sm rounded-md': large },
+    { 'bg-neutral-50 border-neutral-100 text-neutral-500': !dark },
+    { 'bg-white-5 border-white-10 text-white-70': dark }
+  )
 </script>
 
-<div
-  class:h-4={!large}
-  class:w-4={!large}
-  class:text-xs={!large}
-  class:rounded={!large}
-  class:h-6={large}
-  class:w-6={large}
-  class:text-sm={large}
-  class:rounded-md={large}
-  class:bg-neutral-50={!dark}
-  class:border-neutral-100={!dark}
-  class:text-neutral-500={!dark}
-  class:bg-white-5={dark}
-  class:border-white-10={dark}
-  class:text-white-70={dark}
-  class="flex items-center justify-center font-semibold border"
->
+<div class="{avatarStyles} flex items-center justify-center font-semibold border">
   {#if picture}
     <img
       class:rounded={!large}

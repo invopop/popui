@@ -1,23 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/svelte'
 
-import DatePicker from '../lib/DatePicker.svelte'
+import InputRadio from '../lib/InputRadio.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Components/DatePicker',
-  component: DatePicker,
+  title: 'Components/InputRadio',
+  component: InputRadio,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
-} satisfies Meta<DatePicker>
+} satisfies Meta<InputRadio>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
-export const NoSelectedDate: Story = {
+export const Unckecked: Story = {}
+
+export const Checked: Story = {
   args: {
-    label: 'Pick a Date'
+    checked: true
   }
 }

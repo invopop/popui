@@ -7,7 +7,7 @@ import DarkBackgroundDecorator from './decorartors/DarkBackgroundDecorator.svelt
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Example/ProfileAvatar',
+  title: 'Components/ProfileAvatar',
   component: ProfileAvatar,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]

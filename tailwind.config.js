@@ -18,10 +18,15 @@ export default {
       },
       colors: {
         accent: {
+          50: 'rgba(22, 153, 88, 0.05)',
+          100: 'rgba(22, 153, 88, 0.1)',
           400: 'rgba(22, 153, 88, 0.4)',
           500: '#169958'
         },
         danger: {
+          50: 'rgba(236, 78, 70, 0.05)',
+          100: 'rgba(236, 78, 70, 0.1)',
+          400: 'rgba(236, 78, 70, 0.4)',
           500: '#EC4E46'
         },
         neutral: {
@@ -36,18 +41,30 @@ export default {
         sherwood: {
           500: '#194136'
         },
+        warning: {
+          50: 'rgba(237, 110, 28, 0.05)',
+          100: 'rgba(237, 110, 28, 0.1)',
+          500: '#ED6E1C'
+        },
         white: {
           DEFAULT: '#FFFFFF',
           5: 'rgba(255, 255, 255, 0.05)',
           10: 'rgba(255, 255, 255, 0.1)',
+          20: 'rgba(255, 255, 255, 0.2)',
+          40: 'rgba(255, 255, 255, 0.4)',
           70: 'rgba(255, 255, 255, 0.7)'
+        },
+        yellow: {
+          50: 'rgba(249, 194, 49, 0.05)',
+          100: 'rgba(249, 194, 49, 0.1)',
+          600: '#D1A329'
         }
       }
     }
   },
   plugins: [
     require('@tailwindcss/forms')({
-      strategy: 'class' // only generate classes
+      strategy: 'class'
     })
   ]
 }

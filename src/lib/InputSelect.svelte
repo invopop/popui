@@ -1,31 +1,42 @@
 <script lang="ts">
-  import type { SelectOption } from '$lib/types.ts'
+  import type { IconTheme, SelectOption } from '$lib/types.ts'
+  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
+  import InputLabel from '$lib/InputLabel.svelte'
 
   export let id = ''
   export let name = ''
   export let label = ''
   export let disabled = false
   export let value = ''
+  export let icon: IconSource | undefined = undefined
+  export let iconTheme: IconTheme = 'default'
   export let options: SelectOption[] = []
   export let placeholder = 'Select one...'
   export let disablePlaceholder = true
 </script>
 
 {#if label}
-  <label for={id} class="text-sm font-medium text-neutral-500 mb-2">{label}</label>
+  <InputLabel {id} {label} />
 {/if}
-<select
-  {id}
-  {name}
-  bind:value
-  {disabled}
-  class="py-1.25 pl-3 border border-neutral-200 hover:border-neutral-300 w-full rounded-xl text-neutral-800 text-base pr-9 outline-accent-400"
->
-  <option value="" disabled={disablePlaceholder}>{placeholder}</option>
-  {#each options as option}
-    <option value={option.value}>{option.label}</option>
-  {/each}
-</select>
+<div class="relative">
+  <select
+    {id}
+    {name}
+    bind:value
+    {disabled}
+    class:pl-7={icon}
+    class:pl-3={!icon}
+    class="py-1.25 border border-neutral-200 hover:border-neutral-300 w-full rounded-xl text-neutral-800 text-base pr-9 outline-accent-400"
+  >
+    <option value="" disabled={disablePlaceholder}>{placeholder}</option>
+    {#each options as option}
+      <option value={option.value}>{option.label}</option>
+    {/each}
+  </select>
+  {#if icon}
+    <Icon src={icon} theme={iconTheme} class="h-4 w-4 absolute top-2 left-2 mt-0.5" />
+  {/if}
+</div>
 
 <style>
   select {

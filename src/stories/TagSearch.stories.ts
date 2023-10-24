@@ -1,23 +1,31 @@
 import type { Meta, StoryObj } from '@storybook/svelte'
+import { Cog6Tooth } from '@steeze-ui/heroicons'
 
-import DatePicker from '../lib/DatePicker.svelte'
+import TagSearch from '../lib/TagSearch.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Components/DatePicker',
-  component: DatePicker,
+  title: 'Components/TagSearch',
+  component: TagSearch,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
-} satisfies Meta<DatePicker>
+} satisfies Meta<TagSearch>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
-export const NoSelectedDate: Story = {
+export const WithoutIcon: Story = {
   args: {
-    label: 'Pick a Date'
+    label: 'Tag'
+  }
+}
+
+export const WithIcon: Story = {
+  args: {
+    label: 'Tag',
+    icon: Cog6Tooth
   }
 }

@@ -3,7 +3,7 @@
   import type { ButtonType, IconPosition, IconTheme } from '$lib/types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
 
-  export let icon: IconSource | undefined
+  export let icon: IconSource | undefined = undefined
   export let iconTheme: IconTheme = 'default'
   export let iconPosition: IconPosition = 'left'
   export let type: ButtonType = 'default'
@@ -14,26 +14,30 @@
     { 'opacity-30 pointer-events-none': disabled },
     { 'flex-row-reverse space-x-reverse': iconPosition === 'right' },
     { 'bg-white': type === 'default' },
-    { 'bg-accent-500 text-white': type === 'primary' },
+    { 'bg-accent-500': type === 'primary' },
     { 'bg-neutral-100': type === 'secondary' },
-    { 'bg-danger-500 text-white': type === 'danger' },
+    { 'bg-danger-500': type === 'danger' },
     { 'text-sm': small },
     { 'text-base': !small },
     { 'px-2 pt-[2.5px] pb-[3.5px]': small && $$slots.default },
     { 'px-3 py-1.25': !small && $$slots.default },
-    { 'p-2': !$$slots.default }
+    { 'p-2': !$$slots.default },
+    { 'text-white': ['primary', 'danger', 'dark'].includes(type) },
+    { 'text-neutral-800': ['default', 'secondary'].includes(type) },
+    { 'border-white-10 hover:border-white-20 focus:border-white-40': type === 'dark' },
+    { 'border-neutral-200 hover:border-neutral-300 focus:border-neutral-400': type !== 'dark' }
   )
 </script>
 
 <button
   type="button"
   {disabled}
-  class="{buttonStyles} flex items-center justify-center rounded-xl border border-neutral-200 hover:border-neutral-300 focus:border-neutral-400 font-medium text-neutral-800 space-x-1"
+  class="{buttonStyles} flex items-center justify-center rounded-xl border font-medium space-x-1"
   {...$$restProps}
   on:click
 >
   {#if icon}
-    <Icon src={icon} theme={iconTheme} class="h-5 w-5 text-invopop-grey-500" />
+    <Icon src={icon} theme={iconTheme} class="h-5 w-5" />
   {/if}
   {#if $$slots.default}
     <span><slot /></span>

@@ -6,7 +6,7 @@ import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Example/InputSearch',
+  title: 'Components/InputSearch',
   component: InputSearch,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]

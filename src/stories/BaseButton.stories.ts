@@ -3,10 +3,11 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 import BaseButton from './helpers/BaseButtonWithSlot.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import { Cog6Tooth } from '@steeze-ui/heroicons'
+import DarkBackgroundDecorator from './decorartors/DarkBackgroundDecorator.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Example/BaseButton',
+  title: 'Components/BaseButton',
   component: BaseButton,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator]
@@ -75,5 +76,13 @@ export const Danger: Story = {
   args: {
     slot: 'Danger Button',
     type: 'danger'
+  }
+}
+
+export const Dark: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    slot: 'Dark Button',
+    type: 'dark'
   }
 }

@@ -49,3 +49,20 @@ export const FolderItemWithIcon: Story = {
     icon: Cog6Tooth
   }
 }
+
+export const CollapsableClosed: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    label: 'Folder Item',
+    collapsable: true
+  }
+}
+
+export const CollapsableOpen: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    label: 'Folder Item',
+    collapsable: true,
+    open: true
+  }
+}

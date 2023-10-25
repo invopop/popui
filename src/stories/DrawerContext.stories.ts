@@ -25,6 +25,16 @@ export const SingleSelect: Story = {
   }
 }
 
+export const WithFooter: Story = {
+  args: {
+    items: [
+      { label: 'Cobee S.L.', value: 'cobee' },
+      { label: 'Payflow S.L.', value: 'payflow' },
+      { label: 'Footer S.L.', value: 'footer', footer: true }
+    ]
+  }
+}
+
 export const MultipleSelect: Story = {
   args: {
     items: [

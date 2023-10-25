@@ -2,11 +2,13 @@
   export let type = ''
   export let name = ''
   export let disabled = false
+  export let fullwidth = false
 </script>
 
 <button
   {disabled}
   class:opacity-30={disabled}
+  class:w-full={fullwidth}
   class="border border-neutral-200 hover:border-neutral-300 rounded-xl flex items-center space-x-2"
 >
   <span

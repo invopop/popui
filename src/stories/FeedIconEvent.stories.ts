@@ -1,40 +1,40 @@
 import type { Meta, StoryObj } from '@storybook/svelte'
 
-import ButtonFile from '../lib/ButtonFile.svelte'
+import FeedIconEvent from '../lib/FeedIconEvent.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
+import { Cog6Tooth } from '@steeze-ui/heroicons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Components/ButtonFile',
-  component: ButtonFile,
+  title: 'Components/FeedIconEvent',
+  component: FeedIconEvent,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
-} satisfies Meta<ButtonFile>
+} satisfies Meta<FeedIconEvent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
-export const Default: Story = {
+export const Default: Story = {}
+
+export const WithIcon: Story = {
   args: {
-    type: 'pdf',
-    name: 'File name'
+    icon: Cog6Tooth
   }
 }
 
-export const FullWidth: Story = {
+export const WithSuccessStatus: Story = {
   args: {
-    type: 'pdf',
-    name: 'File name',
-    fullwidth: true
+    icon: Cog6Tooth,
+    status: 'success'
   }
 }
 
-export const Disabled: Story = {
+export const WithFailureStatus: Story = {
   args: {
-    type: 'pdf',
-    name: 'File name',
-    disabled: true
+    icon: Cog6Tooth,
+    status: 'failure'
   }
 }

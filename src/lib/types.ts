@@ -21,8 +21,21 @@ export type SelectOption = {
   value: string | number | object | boolean
 }
 
+export type DrawerOption = SelectOption & {
+  footer?: boolean
+}
+
 export type Company = {
   id: string
   slug: string
   name: string
+}
+
+export type FeedEvent = {
+  status: {
+    label: string
+    type: StatusType
+  }
+  date: Date
+  message?: string
 }

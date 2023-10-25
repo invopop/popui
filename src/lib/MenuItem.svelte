@@ -2,11 +2,17 @@
   import clsx from 'clsx'
   import type { IconTheme } from '$lib/types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
+  import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons'
+  import { createEventDispatcher } from 'svelte'
 
   export let label = ''
   export let isFolderItem = false
+  export let collapsable = false
+  export let open = false
   export let iconTheme: IconTheme = 'default'
   export let icon: IconSource | undefined = undefined
+
+  const dispatch = createEventDispatcher()
 
   $: itemStyles = clsx(
     { 'text-white font-semibold': !isFolderItem },
@@ -14,15 +20,26 @@
   )
 
   $: wrapperStyles = clsx({ 'ml-4 border-l border-white-10 pl-2': isFolderItem })
+
+  function handleClick() {
+    open = !open
+    dispatch('click')
+  }
 </script>
 
 <div class={wrapperStyles}>
   <button
-    class="{itemStyles} text-sm flex items-center space-x-1 hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 px-2 py-1.5 rounded-lg w-full"
+    on:click={handleClick}
+    class="{itemStyles} text-sm flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 px-2 py-1.5 rounded-lg w-full"
   >
-    {#if icon}
-      <Icon src={icon} theme={iconTheme} class="h-5 w-5 text-white-70" />
+    <span class="flex items-center space-x-1">
+      {#if icon}
+        <Icon src={icon} theme={iconTheme} class="h-5 w-5 text-white-70" />
+      {/if}
+      <span>{label}</span></span
+    >
+    {#if collapsable}
+      <Icon src={open ? ChevronDown : ChevronRight} class="h-4 w-4 text-white-40" />
     {/if}
-    <span>{label}</span>
   </button>
 </div>

@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/svelte'
 
-import ButtonFile from '../lib/ButtonFile.svelte'
+import UuidCopy from '../lib/UuidCopy.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Components/ButtonFile',
-  component: ButtonFile,
+  title: 'Components/UuidCopy',
+  component: UuidCopy,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
-} satisfies Meta<ButtonFile>
+} satisfies Meta<UuidCopy>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -18,23 +18,26 @@ type Story = StoryObj<typeof meta>
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {
   args: {
-    type: 'pdf',
-    name: 'File name'
+    uuid: 'e73d5d2083493458812'
   }
 }
 
-export const FullWidth: Story = {
+export const Dark: Story = {
   args: {
-    type: 'pdf',
-    name: 'File name',
-    fullwidth: true
+    uuid: 'e73d5d2083493458812',
+    dark: true
   }
 }
 
-export const Disabled: Story = {
+export const Small: Story = {
   args: {
-    type: 'pdf',
-    name: 'File name',
-    disabled: true
+    uuid: 'e73d5d2083493458812',
+    small: true
+  }
+}
+
+export const Shortened: Story = {
+  args: {
+    uuid: 'e73d5d20834934588127389172381789bc2f275460'
   }
 }

@@ -1,0 +1,42 @@
+import type { Meta, StoryObj } from '@storybook/svelte'
+
+import MenuItemWithChildren from './MenuItemWithChildren.svelte'
+import MarginDecorator from '../decorartors/MarginDecorator.svelte'
+import MaxWidthSmDecorator from '../decorartors/MaxWidthSmDecorator.svelte'
+import DarkBackgroundDecorator from '../decorartors/DarkBackgroundDecorator.svelte'
+
+// More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
+const meta = {
+  title: 'Examples/Menu Item With Children',
+  component: MenuItemWithChildren,
+  tags: ['autodocs'],
+  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+} satisfies Meta<MenuItemWithChildren>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+// More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
+export const Default: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    children: [{ label: 'Child Item' }, { label: 'Another Child Item' }]
+  }
+}
+
+export const CollapsableClosed: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    collapsable: true,
+    children: [{ label: 'Child Item' }, { label: 'Another Child Item' }]
+  }
+}
+
+export const CollapsableOpen: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    collapsable: true,
+    open: true,
+    children: [{ label: 'Child Item' }, { label: 'Another Child Item' }]
+  }
+}

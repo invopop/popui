@@ -9,7 +9,7 @@
 </script>
 
 <div
-  class="relative w-8 h-8 rounded-full border border-neutral-100 flex items-center justify-center text-neutral-800"
+  class="relative w-8 h-8 rounded-full border border-neutral-100 flex items-center justify-center text-neutral-800 bg-white"
 >
   {#if icon}
     <Icon src={icon} theme={iconTheme} class="h-5 w-5" />

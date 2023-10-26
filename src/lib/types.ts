@@ -39,3 +39,29 @@ export type FeedEvent = {
   date: Date
   message?: string
 }
+
+export type MenuItemProps = {
+  label?: string
+  isFolderItem?: boolean
+  collapsable?: boolean
+  open?: boolean
+  iconTheme?: IconTheme
+  icon?: IconSource | undefined
+  children?: MenuItemProps[]
+}
+
+export type FeedItemStatus = 'success' | 'failure' | ''
+
+export type FeedItemProps = {
+  status?: FeedItemStatus
+  icon?: IconSource
+  title?: string
+  date?: Date
+  expandable?: boolean
+  uuid?: string
+  hasPrev?: boolean
+  hasNext?: boolean
+  isChild?: boolean
+  children?: FeedItemProps[]
+  events?: FeedEvent[]
+}

@@ -11,6 +11,7 @@
   export let open = false
   export let iconTheme: IconTheme = 'default'
   export let icon: IconSource | undefined = undefined
+  export let children: MenuItemProps[] | undefined = undefined
 
   const dispatch = createEventDispatcher()
 
@@ -42,4 +43,9 @@
       <Icon src={open ? ChevronDown : ChevronRight} class="h-4 w-4 text-white-40" />
     {/if}
   </button>
+  {#if children?.length && (open || !collapsable)}
+    {#each children as child}
+      <svelte:self {...child} isFolderItem />
+    {/each}
+  {/if}
 </div>

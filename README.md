@@ -14,13 +14,13 @@ npm run storybook
 
 ## Compiling Web Components
 
+The following command will compile a file called `dist/invopop-web-components.js` that can be imported on any external project.
+
 ```bash
 npm run build-web-components
 ```
 
-The following command will compile a file called `dist/invopop-web-components.js` that can be imported on any external project.
-
-A test HTML file using this script can be found at `src/wbc-preview/index.html``
+A test HTML file using this script can be found at `src/wbc-preview/index.html`
 
 ## Building
 

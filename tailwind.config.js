@@ -61,10 +61,10 @@ export default {
           100: 'rgba(249, 194, 49, 0.1)',
           600: '#D1A329'
         }
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif']
       }
-    },
-    fontFamily: {
-      sans: ['Inter', 'sans-serif']
     }
   },
   plugins: [

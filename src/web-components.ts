@@ -24,7 +24,12 @@ customElements.define(
           title: this.getAttribute('title') || ''
         }
       })
+
+      // Attach styles from component to the shadow root
+      const sheet = this._element.getSheet()
+      shadowRoot.adoptedStyleSheets = [sheet]
     }
+
     disconnectedCallback(): void {
       // Destroy the Svelte component when this web component gets
       // disconnected. If this web component is expected to be moved

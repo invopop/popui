@@ -74,6 +74,7 @@
   "types": "./dist/index.d.ts",
   "type": "module",
   "dependencies": {
+    "@fontsource/inter": "^5.0.15",
     "clsx": "^2.0.0",
     "postcss-load-config": "^4.0.1"
   }

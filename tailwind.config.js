@@ -62,6 +62,9 @@ export default {
           600: '#D1A329'
         }
       }
+    },
+    fontFamily: {
+      sans: ['Inter', 'sans-serif']
     }
   },
   plugins: [

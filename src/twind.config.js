@@ -1,7 +1,20 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
+import { defineConfig } from '@twind/core'
+import presetAutoprefix from '@twind/preset-autoprefix'
+import presetTailwind from '@twind/preset-tailwind'
+import presetTailwindForms from '@twind/preset-tailwind-forms'
+
+export default defineConfig({
+  presets: [
+    presetAutoprefix(),
+    presetTailwind(),
+    presetTailwindForms({
+      strategy: 'class'
+    })
+  ],
   theme: {
+    fontFamily: {
+      sans: ['Inter', 'sans-serif']
+    },
     extend: {
       fontSize: {
         '2xl': ['27px', '32px'],
@@ -66,10 +79,5 @@ export default {
         sans: ['Inter', 'sans-serif']
       }
     }
-  },
-  plugins: [
-    require('@tailwindcss/forms')({
-      strategy: 'class'
-    })
-  ]
-}
+  }
+})

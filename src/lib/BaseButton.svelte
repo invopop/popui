@@ -2,13 +2,16 @@
   import clsx from 'clsx'
   import type { ButtonType, IconPosition, IconTheme } from '$lib/types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
+  import { onMount } from 'svelte'
 
-  export let icon: IconSource | undefined = undefined
+  export let icon: IconSource | string | undefined = undefined
   export let iconTheme: IconTheme = 'default'
   export let iconPosition: IconPosition = 'left'
   export let type: ButtonType = 'default'
   export let disabled = false
   export let small = false
+
+  let resolvedIcon: IconSource | undefined
 
   $: buttonStyles = clsx(
     { 'opacity-30 pointer-events-none': disabled },
@@ -27,17 +30,37 @@
     { 'border-white-10 hover:border-white-20 focus:border-white-40': type === 'dark' },
     { 'border-neutral-200 hover:border-neutral-300 focus:border-neutral-400': type !== 'dark' }
   )
+
+  onMount(async () => {
+    if (!icon) return
+
+    if (typeof icon !== 'string') {
+      resolvedIcon = icon
+      return
+    }
+
+    try {
+      const { [toPascalCase(icon)]: i } = await import('@steeze-ui/heroicons')
+      resolvedIcon = i
+    } catch (error) {
+      console.log(error)
+    }
+  })
+
+  function toPascalCase(text: string) {
+    return text.replace(/(^\w|-\w)/g, (text) => text.replace(/-/, '').toUpperCase())
+  }
 </script>
 
 <button
   type="button"
   {disabled}
-  class="{buttonStyles} flex items-center justify-center rounded-xl border font-medium space-x-1"
+  class="{buttonStyles} flex items-center justify-center rounded-xl border font-medium space-x-1 font-sans"
   {...$$restProps}
   on:click
 >
-  {#if icon}
-    <Icon src={icon} theme={iconTheme} class="h-5 w-5" />
+  {#if resolvedIcon}
+    <Icon src={resolvedIcon} theme={iconTheme} class="h-5 w-5" />
   {/if}
   {#if $$slots.default}
     <span><slot /></span>

@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="../../dist/invopop-web-components.js" defer></script>
-    </head>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../dist/invopop-web-components.js" defer></script>
+  </head>
 <body>
+  <div class="p-8 space-y-4 flex flex-col">
+    <pop-title-main title="Main Title using web components (title prop)"></pop-title-main>
+    <pop-title-main>Main Title using web components (slot)</pop-title-main>
 
-<pop-title-main title="Main Title using web components (title prop)"></pop-title-main>
-<pop-title-main>Main Title using web components (slot)</pop-title-main>
+    <pop-title-section title="Section Title using web components (title prop)"></pop-title-section>
+    <pop-title-section>Section Title using web components (slot)</pop-title-section>
 
-<pop-title-section title="Section Title using web components (title prop)"></pop-title-section>
-<pop-title-section>Section Title using web components (slot)</pop-title-section>
-
-
-
+    <pop-button onClick="alert('button clicked')">Default Button</pop-button>
+    <pop-button onClick="alert('button clicked')" small="true">Default Small Button</pop-button>
+    <pop-button onClick="alert('button clicked')" type="primary">Primary Button</pop-button>
+    <pop-button onClick="alert('button clicked')" type="secondary">Secondary Button</pop-button>
+    <pop-button onClick="alert('button clicked')" type="danger">Danger Button</pop-button>
+    <pop-button onClick="alert('button clicked')" type="secondary" icon="Cog6Tooth"><span>Icon Button</span></pop-button>
+    <pop-button onClick="alert('button clicked')" type="secondary" icon="Cog6Tooth"></pop-button>
+    <div class="bg-green-900 w-48 p-6"><pop-button onClick="alert('button clicked')" type="dark">Dark Button</pop-button></div>
+  </div>
 </body>
 </html>

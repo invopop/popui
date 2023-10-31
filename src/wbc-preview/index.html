@@ -13,13 +13,25 @@
     <pop-title-section>Section Title using web components (slot)</pop-title-section>
 
     <pop-button onClick="alert('button clicked')">Default Button</pop-button>
+    <pop-button onClick="alert('button clicked')" disabled="true">Disabled Button</pop-button>
     <pop-button onClick="alert('button clicked')" small="true">Default Small Button</pop-button>
     <pop-button onClick="alert('button clicked')" type="primary">Primary Button</pop-button>
     <pop-button onClick="alert('button clicked')" type="secondary">Secondary Button</pop-button>
     <pop-button onClick="alert('button clicked')" type="danger">Danger Button</pop-button>
-    <pop-button onClick="alert('button clicked')" type="secondary" icon="Cog6Tooth"><span>Icon Button</span></pop-button>
+    <pop-button onClick="alert('button clicked')" type="secondary" icon="Cog6Tooth">Icon Button</pop-button>
+    <pop-button onClick="alert('button clicked')" type="secondary" icon="Cog6Tooth" iconPosition="right">Right Icon</pop-button>
     <pop-button onClick="alert('button clicked')" type="secondary" icon="Cog6Tooth"></pop-button>
     <div class="bg-green-900 w-48 p-6"><pop-button onClick="alert('button clicked')" type="dark">Dark Button</pop-button></div>
+
+    <pop-dropdown>
+      <span slot="trigger">Trigger</span>
+      <span>Content</span>
+    </pop-dropdown>
+
+    <pop-dropdown>
+      <span slot="trigger">Trigger</span>
+      Content
+    </pop-dropdown>
   </div>
 </body>
 </html>

@@ -51,10 +51,34 @@ export default class extends withTwind(HTMLElement) {
   }
 
   createProps(props) {
-    if (this.childNodes.length) {
-      props.$$slots = createSlots({ default: this.childNodes })
-      props.$$scope = {}
+    // Fill slots
+    const slots: Record<string, Element[] | HTMLCollection> = {}
+
+    // Find slots different to default
+    Array.from(this.children).forEach((c) => {
+      const slotAttribute = Array.from(c.attributes).find((a) => a.name === 'slot')
+
+      if (!slotAttribute) return
+
+      const slotName = slotAttribute.nodeValue
+
+      if (!slotName) return
+
+      slots[slotName] = [c]
+
+      // remove from the default slot
+      this.removeChild(c)
+    })
+
+    // add the rest to the default slot
+    if (this.childNodes.length || this.children.length) {
+      const spanElement = document.createElement('span')
+      spanElement.textContent = this.textContent
+      slots.default = this.children.length ? this.children : [spanElement]
     }
+
+    props.$$slots = createSlots(slots)
+    props.$$scope = {}
 
     return props
   }

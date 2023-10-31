@@ -15,8 +15,9 @@ export default class extends WebComponent {
         // the native string attributes and the types you expect
         // in your svelte components
         icon: this.getAttribute('icon') || undefined,
+        iconPosition: this.getAttribute('iconPosition') || undefined,
         type: getType(this.getAttribute('type') || 'default'),
-        disabled: this.getAttribute('disabled') === 'disabled' || false,
+        disabled: this.getAttribute('disabled') === 'true' || false,
         small: this.getAttribute('small') === 'true' || false
       })
     })

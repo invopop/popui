@@ -1,15 +1,31 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte'
+  import { dispatchWcEvent } from './wcdispatch.js'
+
   export let type = ''
   export let name = ''
   export let disabled = false
   export let fullwidth = false
+
+  let rootEl: HTMLElement
+
+  const dispatch = createEventDispatcher()
+
+  function handleClick() {
+    dispatch('click')
+    // We emit a different event to be listened in a web component
+    // to differentiate to the outer DOM event
+    dispatchWcEvent(rootEl, 'clicked')
+  }
 </script>
 
 <button
+  bind:this={rootEl}
   {disabled}
   class:opacity-30={disabled}
   class:w-full={fullwidth}
   class="border border-neutral-200 hover:border-neutral-300 rounded-xl flex items-center space-x-2"
+  on:click={handleClick}
 >
   <span
     class="px-2 py-1 bg-neutral-50 border-r border-neutral-200 hover:border-neutral-300 rounded-l-lg text-neutral-500 text-base font-semibold"

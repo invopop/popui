@@ -5,6 +5,8 @@ export default class extends WebComponent {
   constructor() {
     super()
 
+    this.hasSlots = true
+
     // Instantiate the Svelte Component
     this._element = new TitleSection({
       // Tell it that it lives in the shadow root

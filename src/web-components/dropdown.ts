@@ -5,17 +5,14 @@ export default class extends WebComponent {
   constructor() {
     super()
 
-    this.slots = ['default', 'trigger']
+    this.hasSlots = true
 
     this._element = new BaseDropdown({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,
-      // Pass any props
-      props: this.createProps({
-        // This is the place where you do any conversion between
-        // the native string attributes and the types you expect
-        // in your svelte components
-      })
+      // We need to call createProps even with empty props
+      // in order to inject the slots
+      props: this.createProps() as Record<string, never>
     })
   }
 }

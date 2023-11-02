@@ -2,7 +2,21 @@
   import clsx from 'clsx'
   import type { ButtonType, IconPosition, IconTheme } from '$lib/types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import { onMount } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
+
+  let rootEl: HTMLElement
+
+  // Standard function for dispatching custom events to web components
+  const dispatchWcEvent = (name: string) => {
+    rootEl.dispatchEvent(
+      new CustomEvent(name, {
+        bubbles: true,
+        composed: true // propagate across the shadow DOM
+      })
+    )
+  }
+
+  const dispatch = createEventDispatcher()
 
   export let icon: IconSource | string | undefined = undefined
   export let iconTheme: IconTheme = 'default'
@@ -50,14 +64,22 @@
   function toPascalCase(text: string) {
     return text.replace(/(^\w|-\w)/g, (text) => text.replace(/-/, '').toUpperCase())
   }
+
+  function handleClick() {
+    dispatch('click')
+    // We emit a different event to be listened in a web component
+    // to differentiate to the outer DOM event
+    dispatchWcEvent('clicked')
+  }
 </script>
 
 <button
+  bind:this={rootEl}
   type="button"
   {disabled}
   class="{buttonStyles} flex items-center justify-center rounded-xl border font-medium space-x-1 font-sans"
   {...$$restProps}
-  on:click
+  on:click={handleClick}
 >
   {#if resolvedIcon}
     <Icon src={resolvedIcon} theme={iconTheme} class="h-5 w-5" />

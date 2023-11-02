@@ -18,6 +18,8 @@ export default class extends withTwind(HTMLElement) {
 
   _shadowRoot: ShadowRoot
 
+  hasSlots = false
+
   constructor() {
     super()
 
@@ -50,7 +52,9 @@ export default class extends withTwind(HTMLElement) {
     this._element?.$destroy()
   }
 
-  createProps(props) {
+  createProps(props: Record<string, any> = {}) {
+    if (!this.hasSlots) return props
+
     // Fill slots
     const slots: Record<string, Element[] | HTMLCollection> = {}
 
@@ -71,10 +75,18 @@ export default class extends withTwind(HTMLElement) {
     })
 
     // add the rest to the default slot
-    if (this.childNodes.length || this.children.length) {
+    if (this.children.length) {
+      slots.default = [...this.children]
+      // remove the children
+      while (this.firstChild) {
+        this.removeChild(this.firstChild)
+      }
+    } else if (this.textContent) {
       const spanElement = document.createElement('span')
       spanElement.textContent = this.textContent
-      slots.default = this.children.length ? this.children : [spanElement]
+      slots.default = [spanElement]
+      // remove the textContent
+      this.innerHTML = ''
     }
 
     props.$$slots = createSlots(slots)
@@ -84,7 +96,7 @@ export default class extends withTwind(HTMLElement) {
   }
 }
 
-export const createSlots = (slots) => {
+export const createSlots = (slots: Record<string, Element[] | HTMLCollection>) => {
   const svelteSlots = {}
 
   for (const slotName in slots) {

@@ -6,6 +6,8 @@ export default class extends WebComponent {
   constructor() {
     super()
 
+    this.hasSlots = true
+
     this._element = new BaseButton({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,

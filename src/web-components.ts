@@ -2,6 +2,7 @@ import BaseButton from './web-components/button.js'
 import ButtonFile from './web-components/button-file.js'
 import InputCheckbox from './web-components/checkbox.js'
 import BaseDropdown from './web-components/dropdown.js'
+import InputText from './web-components/input-text.js'
 import DataListItem from './web-components/list-item.js'
 import InputRadio from './web-components/radio.js'
 import TagStatus from './web-components/tag-status.js'
@@ -12,6 +13,7 @@ customElements.define('pop-button', BaseButton)
 customElements.define('pop-button-file', ButtonFile)
 customElements.define('pop-checkbox', InputCheckbox)
 customElements.define('pop-dropdown', BaseDropdown)
+customElements.define('pop-input-text', InputText)
 customElements.define('pop-list-item', DataListItem)
 customElements.define('pop-radio', InputRadio)
 customElements.define('pop-tag-status', TagStatus)

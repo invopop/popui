@@ -1,7 +1,8 @@
 <script lang="ts">
   import clsx from 'clsx'
   import { createEventDispatcher } from 'svelte'
-  import InputLabel from '$lib/InputLabel.svelte'
+  import InputLabel from './InputLabel.svelte'
+  import { dispatchWcEvent } from './wcdispatch.js'
 
   export let id = ''
   export let label = ''
@@ -13,10 +14,11 @@
 
   const dispatch = createEventDispatcher()
 
-  const debounce = (v: string) => {
+  const debounce = (target: HTMLInputElement) => {
     clearTimeout(timer)
     timer = setTimeout(() => {
-      dispatch('input', v)
+      dispatch('input', target.value)
+      dispatchWcEvent(target, 'input', target.value)
     }, 750)
   }
 
@@ -31,6 +33,15 @@
       'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-accent-400': !errorText
     }
   )
+
+  function handleInput(event: unknown) {
+    // If event is not a native event we skip the dispatch to avoid infinite loop
+    if (event instanceof CustomEvent) return
+
+    const target = (event as PointerEvent).target as HTMLInputElement
+
+    debounce(target)
+  }
 </script>
 
 {#if label}
@@ -42,7 +53,7 @@
   class="{inputStyles} py-1.25 px-3 border w-full rounded-xl placeholder:text-neutral-400 text-base caret-accent-500"
   {placeholder}
   readonly={disabled}
-  on:input={(event) => debounce(event.target.value)}
+  on:input={handleInput}
   on:focus={() => dispatch('focus')}
   on:blur={(e) => dispatch('blur', e)}
 />

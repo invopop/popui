@@ -7,20 +7,19 @@
   export let disabled = false
   export let fullwidth = false
 
-  let rootEl: HTMLElement
-
   const dispatch = createEventDispatcher()
 
-  function handleClick() {
+  function handleClick(event: unknown) {
+    // If event is not a native event we skip the dispatch to avoid infinite loop
+    if (event instanceof CustomEvent) return
+
     dispatch('click')
-    // We emit a different event to be listened in a web component
-    // to differentiate to the outer DOM event
-    dispatchWcEvent(rootEl, 'clicked')
+
+    dispatchWcEvent((event as PointerEvent).target, 'click')
   }
 </script>
 
 <button
-  bind:this={rootEl}
   {disabled}
   class:opacity-30={disabled}
   class:w-full={fullwidth}

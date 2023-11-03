@@ -20,6 +20,8 @@ export default class extends withTwind(HTMLElement) {
 
   hasSlots = false
 
+  disableNativeEvents: string[] = []
+
   constructor() {
     super()
 
@@ -41,6 +43,18 @@ export default class extends withTwind(HTMLElement) {
       link.rel = 'stylesheet'
       link.href = FONT_URL
       document.getElementsByTagName('head')[0].appendChild(link)
+    }
+
+    // Disable native events to avoid duplication
+    // TODO: disabled buttons are still emiting click events
+    for (const eventName of this.disableNativeEvents) {
+      this._shadowRoot.removeEventListener(eventName, () => {})
+      this._shadowRoot.addEventListener(eventName, function (event) {
+        if (!(event instanceof CustomEvent)) {
+          event.preventDefault()
+          event.stopImmediatePropagation()
+        }
+      })
     }
   }
 

@@ -5,8 +5,6 @@
   import { createEventDispatcher, onMount } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
 
-  let rootEl: HTMLElement
-
   const dispatch = createEventDispatcher()
 
   export let icon: IconSource | string | undefined = undefined
@@ -56,16 +54,17 @@
     return text.replace(/(^\w|-\w)/g, (text) => text.replace(/-/, '').toUpperCase())
   }
 
-  function handleClick() {
+  function handleClick(event: unknown) {
+    // If event is not a native event we skip the dispatch to avoid infinite loop
+    if (event instanceof CustomEvent) return
+
     dispatch('click')
-    // We emit a different event to be listened in a web component
-    // to differentiate to the outer DOM event
-    dispatchWcEvent(rootEl, 'clicked')
+
+    dispatchWcEvent((event as PointerEvent).target, 'click')
   }
 </script>
 
 <button
-  bind:this={rootEl}
   type="button"
   {disabled}
   class="{buttonStyles} flex items-center justify-center rounded-xl border font-medium space-x-1 font-sans"

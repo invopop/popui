@@ -5,6 +5,8 @@ export default class extends WebComponent {
   constructor() {
     super()
 
+    this.disableNativeEvents = ['click']
+
     this._element = new ButtonFile({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,

@@ -6,6 +6,8 @@ export default class extends WebComponent {
   constructor() {
     super()
 
+    this.disableNativeEvents = ['click']
+
     this.hasSlots = true
 
     this._element = new BaseButton({

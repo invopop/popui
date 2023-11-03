@@ -13,17 +13,20 @@
     <pop-title-section title="Section Title using web components (title prop)"></pop-title-section>
     <pop-title-section>Section Title using web components (slot)</pop-title-section>
 
-    <pop-button @clicked="alert('button clicked')" class="inline">Default Button</pop-button>
-    <pop-button @clicked="alert('button clicked')" disabled="true">Disabled Button</pop-button>
-    <pop-button @clicked="alert('button clicked')" small="true">Default Small Button</pop-button>
-    <pop-button @clicked="alert('button clicked')" type="primary">Primary Button</pop-button>
-    <pop-button @clicked="alert('button clicked')" type="secondary">Secondary Button</pop-button>
-    <pop-button @clicked="alert('button clicked')" type="danger">Danger Button</pop-button>
-    <pop-button @clicked="alert('button clicked')" type="secondary" icon="Cog6Tooth">Icon Button</pop-button>
-    <pop-button @clicked="alert('button clicked')" type="secondary" icon="Cog6Tooth" iconPosition="right">Right Icon</pop-button>
-    <pop-button @clicked="alert('button clicked')" type="secondary" icon="Cog6Tooth"></pop-button>
-    <div class="bg-green-900 w-48 p-6"><pop-button @clicked="alert('button clicked')" type="dark">Dark Button</pop-button></div>
-    <pop-button-file @clicked="alert('button clicked')" name="File Button" type="PDF"></pop-button-file>
+    <pop-button
+      @click="alert('button click')"
+      class="inline"
+    >Default Button</pop-button>
+    <pop-button @click="console.log('button clicked')" disabled="true">Disabled Button</pop-button>
+    <pop-button @click="alert('button clicked')" small="true">Default Small Button</pop-button>
+    <pop-button @click="alert('button clicked')" type="primary">Primary Button</pop-button>
+    <pop-button @click="alert('button clicked')" type="secondary">Secondary Button</pop-button>
+    <pop-button @click="alert('button clicked')" type="danger">Danger Button</pop-button>
+    <pop-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth">Icon Button</pop-button>
+    <pop-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth" iconPosition="right">Right Icon</pop-button>
+    <pop-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth"></pop-button>
+    <div class="bg-green-900 w-48 p-6"><pop-button @click="alert('button clicked')" type="dark">Dark Button</pop-button></div>
+    <pop-button-file @click="alert('button clicked')" name="File Button" type="PDF"></pop-button-file>
 
     <pop-dropdown>
       <span slot="trigger">Trigger</span>
@@ -41,10 +44,10 @@
     <pop-tag-status label="Orange Tag" status="orange"></pop-tag-status>
     <pop-list-item label="Customer" value="Value as prop"></pop-list-item>
     <pop-list-item label="Status"><pop-tag-status label="Closed" status="success"></pop-tag-status></pop-list-item>
-    <pop-checkbox @changed="alert('value changed to ' + $event.detail)"></pop-checkbox>
-    <pop-checkbox checked="true" @changed="alert('value changed to ' + $event.detail)"></pop-checkbox>
-    <pop-radio @changed="alert('value changed to ' + $event.detail)"></pop-radio>
-    <pop-radio checked="true" @changed="alert('value changed to ' + $event.detail)"></pop-radio>
+    <pop-checkbox @change="alert('value changed to ' + $event.detail)"></pop-checkbox>
+    <pop-checkbox checked="true" @change="alert('value changed to ' + $event.detail)"></pop-checkbox>
+    <pop-radio @change="alert('value changed to ' + $event.detail)"></pop-radio>
+    <pop-radio checked="true" @change="alert('value changed to ' + $event.detail)"></pop-radio>
   </div>
 </body>
 </html>

@@ -1,4 +1,10 @@
-export const dispatchWcEvent = (rootEl: HTMLElement, name: string, detail: any = null) => {
+export const dispatchWcEvent = (
+  rootEl: EventTarget | null,
+  name: string,
+  detail: unknown = null
+) => {
+  if (!rootEl) return
+
   rootEl.dispatchEvent(
     new CustomEvent(name, {
       detail,

@@ -4,6 +4,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../dist/invopop-web-components.js" defer></script>
+    <link rel="stylesheet" href="../../dist/style.css"></link>
   </head>
 <body>
   <div x-data="{}" class="p-8 space-y-4 flex flex-col items-start">
@@ -53,6 +54,11 @@
     <pop-input-text label="With label" placeholder="Placeholder" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
     <pop-input-text placeholder="Disabled" disabled="true" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
     <pop-input-text placeholder="With Error" errorText="This is the error" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
+    <pop-select label="With label" placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></pop-select>
+    <pop-select placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></pop-select>
+    <pop-select placeholder="No selectable Placeholder" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></pop-select>
+    <pop-select placeholder="With icon" icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></pop-select>
+    <pop-select placeholder="With options" options='[{"value": "1", "label":"one"}, {"value": "2", "label":"two"}]' icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></pop-select>
   </div>
 </body>
 </html>

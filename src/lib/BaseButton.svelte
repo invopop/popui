@@ -4,6 +4,7 @@
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { createEventDispatcher, onMount } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
+  import { resolveIcon } from './helpers.js'
 
   const dispatch = createEventDispatcher()
 
@@ -35,24 +36,8 @@
   )
 
   onMount(async () => {
-    if (!icon) return
-
-    if (typeof icon !== 'string') {
-      resolvedIcon = icon
-      return
-    }
-
-    try {
-      const { [toPascalCase(icon)]: i } = await import('@steeze-ui/heroicons')
-      resolvedIcon = i
-    } catch (error) {
-      console.log(error)
-    }
+    resolvedIcon = await resolveIcon(icon)
   })
-
-  function toPascalCase(text: string) {
-    return text.replace(/(^\w|-\w)/g, (text) => text.replace(/-/, '').toUpperCase())
-  }
 
   function handleClick(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop

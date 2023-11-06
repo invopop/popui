@@ -6,7 +6,9 @@ export default class extends WebComponent {
     super()
 
     this.hasSlots = true
+  }
 
+  connectedCallback(): void {
     this._element = new DataListItem({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,
@@ -19,5 +21,7 @@ export default class extends WebComponent {
         value: this.getAttribute('value') || ''
       })
     })
+
+    super.connectedCallback()
   }
 }

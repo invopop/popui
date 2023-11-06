@@ -9,7 +9,9 @@ export default class extends WebComponent {
     this.disableNativeEvents = ['click']
 
     this.hasSlots = true
+  }
 
+  connectedCallback(): void {
     this._element = new BaseButton({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,
@@ -25,6 +27,8 @@ export default class extends WebComponent {
         small: this.getAttribute('small') === 'true' || false
       })
     })
+
+    super.connectedCallback()
   }
 }
 

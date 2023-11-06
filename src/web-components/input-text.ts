@@ -6,7 +6,9 @@ export default class extends WebComponent {
     super()
 
     this.disableNativeEvents = ['input']
+  }
 
+  connectedCallback(): void {
     // Instantiate the Svelte Component
     this._element = new InputText({
       // Tell it that it lives in the shadow root
@@ -23,5 +25,7 @@ export default class extends WebComponent {
         disabled: this.getAttribute('disabled') === 'true' || false
       })
     })
+
+    super.connectedCallback()
   }
 }

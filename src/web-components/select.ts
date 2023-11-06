@@ -2,9 +2,7 @@ import InputSelect from '../lib/InputSelect.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {
-  constructor() {
-    super()
-
+  connectedCallback(): void {
     this._element = new InputSelect({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,
@@ -24,9 +22,7 @@ export default class extends WebComponent {
         options: JSON.parse(this.getAttribute('options') || '[]')
       })
     })
-  }
 
-  connectedCallback(): void {
     super.connectedCallback()
 
     const sheet = new CSSStyleSheet()

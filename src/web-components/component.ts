@@ -90,7 +90,7 @@ export default class extends withTwind(HTMLElement) {
 
     // add the rest to the default slot
     if (this.children.length) {
-      slots.default = [...this.children]
+      addChildrenToSlot(this.children, slots, 'default')
       // remove the children
       while (this.firstChild) {
         this.removeChild(this.firstChild)
@@ -107,6 +107,23 @@ export default class extends withTwind(HTMLElement) {
     props.$$scope = {}
 
     return props
+  }
+}
+
+function addChildrenToSlot(
+  children: HTMLCollection,
+  slots: Record<string, Element[] | HTMLCollection>,
+  slotName: string
+) {
+  if (children.length > 1) {
+    const childrenArray = Array.from(children)
+    const spanElement = document.createElement('span')
+    for (const child of childrenArray) {
+      spanElement.appendChild(child).cloneNode(true)
+    }
+    slots[slotName] = [spanElement]
+  } else {
+    slots[slotName] = [...children]
   }
 }
 

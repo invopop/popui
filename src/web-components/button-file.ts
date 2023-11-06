@@ -6,7 +6,9 @@ export default class extends WebComponent {
     super()
 
     this.disableNativeEvents = ['click']
+  }
 
+  connectedCallback(): void {
     this._element = new ButtonFile({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,
@@ -21,5 +23,7 @@ export default class extends WebComponent {
         fullwidth: this.getAttribute('fullwidth') === 'true' || false
       })
     })
+
+    super.connectedCallback()
   }
 }

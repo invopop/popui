@@ -1,10 +1,27 @@
 <script lang="ts">
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import type { IconTheme } from '$lib/types.ts'
+  import type { IconTheme } from './types.ts'
+  import { createEventDispatcher, onMount } from 'svelte'
+  import { dispatchWcEvent } from './wcdispatch.js'
+  import { resolveIcon } from './helpers.js'
+
+  const dispatch = createEventDispatcher()
 
   export let label = ''
-  export let icon: IconSource | undefined = undefined
+  export let icon: IconSource | string | undefined = undefined
   export let iconTheme: IconTheme = 'default'
+
+  let resolvedIcon: IconSource | undefined
+
+  function handleClear(event: unknown) {
+    const target = (event as PointerEvent).target
+    dispatch('clear')
+    dispatchWcEvent(target, 'clear')
+  }
+
+  onMount(async () => {
+    resolvedIcon = await resolveIcon(icon)
+  })
 </script>
 
 <span
@@ -12,11 +29,11 @@
   class:pl-3={!icon}
   class="border rounded-full pr-1.5 text-sm inline-flex items-center border-accent-100 bg-accent-50"
 >
-  {#if icon}
-    <Icon src={icon} theme={iconTheme} class="h-4 w-4 mr-1 text-accent-500" />
+  {#if resolvedIcon}
+    <Icon src={resolvedIcon} theme={iconTheme} class="h-4 w-4 mr-1 text-accent-500" />
   {/if}
   <span class="py-1 pr-2 text-neutral-800">{label}</span>
-  <button class="py-1 border-l border-accent-100 pl-1 text-neutral-500">
+  <button class="py-1 border-l border-accent-100 pl-1 text-neutral-500" on:click={handleClear}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

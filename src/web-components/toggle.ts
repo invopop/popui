@@ -2,9 +2,7 @@ import InputToggle from '../lib/InputToggle.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {
-  constructor() {
-    super()
-
+  connectedCallback(): void {
     this._element = new InputToggle({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,
@@ -16,5 +14,7 @@ export default class extends WebComponent {
         checked: this.getAttribute('checked') === 'true' || false
       })
     })
+
+    super.connectedCallback()
   }
 }

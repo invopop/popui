@@ -6,7 +6,9 @@ export default class extends WebComponent {
     super()
 
     this.hasSlots = true
+  }
 
+  connectedCallback(): void {
     this._element = new BaseDropdown({
       // Tell it that it lives in the shadow root
       target: this._shadowRoot,
@@ -14,5 +16,7 @@ export default class extends WebComponent {
       // in order to inject the slots
       props: this.createProps() as Record<string, never>
     })
+
+    super.connectedCallback()
   }
 }

@@ -6,7 +6,9 @@ export default class extends WebComponent {
     super()
 
     this.disableNativeEvents = ['input']
+  }
 
+  connectedCallback(): void {
     // Instantiate the Svelte Component
     this._element = new InputSearch({
       // Tell it that it lives in the shadow root
@@ -20,5 +22,7 @@ export default class extends WebComponent {
         shortcut: this.getAttribute('shortcut') || ''
       })
     })
+
+    super.connectedCallback()
   }
 }

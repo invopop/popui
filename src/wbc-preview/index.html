@@ -54,6 +54,8 @@
     <pop-input-text label="With label" placeholder="Placeholder" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
     <pop-input-text placeholder="Disabled" disabled="true" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
     <pop-input-text placeholder="With Error" errorText="This is the error" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
+    <pop-input-search shortcut="⌘K" placeholder="Search Placeholder" @input="alert('value changed to ' + $event.detail)"></pop-input-search>
+    <pop-input-search placeholder="Without shortcut" @input="alert('value changed to ' + $event.detail)"></pop-input-search>
     <pop-select label="With label" placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></pop-select>
     <pop-select placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></pop-select>
     <pop-select placeholder="No selectable Placeholder" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></pop-select>

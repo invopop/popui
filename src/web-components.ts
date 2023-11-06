@@ -1,6 +1,7 @@
 import BaseButton from './web-components/button.js'
 import ButtonFile from './web-components/button-file.js'
 import InputCheckbox from './web-components/checkbox.js'
+import DrawerContext from './web-components/drawer-context.js'
 import BaseDropdown from './web-components/dropdown.js'
 import InputText from './web-components/input-text.js'
 import InputSearch from './web-components/input-search.js'
@@ -17,6 +18,7 @@ import TitleSection from './web-components/title-section.js'
 customElements.define('pop-button', BaseButton)
 customElements.define('pop-button-file', ButtonFile)
 customElements.define('pop-checkbox', InputCheckbox)
+customElements.define('pop-drawer-context', DrawerContext)
 customElements.define('pop-dropdown', BaseDropdown)
 customElements.define('pop-input-text', InputText)
 customElements.define('pop-input-search', InputSearch)

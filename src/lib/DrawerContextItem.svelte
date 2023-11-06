@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { DrawerOption } from '$lib/types.ts'
-  import InputCheckbox from '$lib/InputCheckbox.svelte'
+  import type { DrawerOption } from './types.ts'
+  import InputCheckbox from './InputCheckbox.svelte'
 
   export let multiple = false
   export let item: DrawerOption

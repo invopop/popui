@@ -9,8 +9,6 @@ export default class extends WebComponent {
   }
 
   connectedCallback(): void {
-    super.connectedCallback()
-
     // Instantiate the Svelte Component
     this._element = new SectionLayout({
       // Tell it that it lives in the shadow root
@@ -23,5 +21,7 @@ export default class extends WebComponent {
         title: this.getAttribute('title') || ''
       })
     })
+
+    super.connectedCallback()
   }
 }

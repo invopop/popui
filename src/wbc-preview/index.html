@@ -30,14 +30,24 @@
     <pop-button-file @click="alert('button clicked')" name="File Button" type="PDF"></pop-button-file>
 
     <pop-dropdown>
-      <span slot="trigger">Trigger</span>
-      <span class="bg-white p-4">Content</span>
+      <span slot="trigger"><pop-button
+        class="inline"
+      >Dropdown</pop-button></span>
+        <pop-drawer-context items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></pop-drawer-context>
+    </pop-dropdown>
+    <pop-dropdown>
+      <span slot="trigger"><pop-button
+        class="inline"
+      >Dropdown Multiple</pop-button></span>
+      <pop-drawer-context multiple="true" items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></pop-drawer-context>
+    </pop-dropdown>
+    <pop-dropdown>
+      <span slot="trigger"><pop-button
+        class="inline"
+      >Dropdown Searchable</pop-button></span>
+      <pop-drawer-context searchable="true" multiple="true" items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></pop-drawer-context>
     </pop-dropdown>
 
-    <pop-dropdown>
-      <span slot="trigger">Trigger</span>
-      Content
-    </pop-dropdown>
     <pop-tag-status label="Default Tag"></pop-tag-status>
     <pop-tag-status label="Success Tag" status="success"></pop-tag-status>
     <pop-tag-status label="Danger Tag" status="danger"></pop-tag-status>
@@ -48,7 +58,9 @@
     <pop-list-item label="Status"><pop-tag-status label="Closed" status="success"></pop-tag-status></pop-list-item>
     <pop-list-item label="Customer" value="Value as prop"></pop-list-item>
     <pop-section title="Section Title">
-        <pop-list-item label="Customer" value="Value as prop"></pop-list-item>
+      <pop-list-item label="Status">
+        <pop-tag-status label="Closed" status="success"></pop-tag-status>
+      </pop-list-item>
     </pop-section>
     <pop-checkbox @change="alert('value changed to ' + $event.detail)"></pop-checkbox>
     <pop-checkbox checked="true" @change="alert('value changed to ' + $event.detail)"></pop-checkbox>

@@ -18,6 +18,8 @@ export default class extends withTwind(HTMLElement) {
 
   _shadowRoot: ShadowRoot
 
+  _slots: Record<string, Element[] | HTMLCollection> = {}
+
   hasSlots = false
 
   disableNativeEvents: string[] = []
@@ -69,9 +71,6 @@ export default class extends withTwind(HTMLElement) {
   createProps(props: Record<string, any> = {}) {
     if (!this.hasSlots) return props
 
-    // Fill slots
-    const slots: Record<string, Element[] | HTMLCollection> = {}
-
     // Find slots different to default
     Array.from(this.children).forEach((c) => {
       const slotAttribute = Array.from(c.attributes).find((a) => a.name === 'slot')
@@ -82,48 +81,42 @@ export default class extends withTwind(HTMLElement) {
 
       if (!slotName) return
 
-      slots[slotName] = [c]
+      this.addChildrenToSlot(c, slotName)
 
       // remove from the default slot
       this.removeChild(c)
     })
 
     // add the rest to the default slot
-    if (this.children.length) {
-      addChildrenToSlot(this.children, slots, 'default')
-      // remove the children
-      while (this.firstChild) {
-        this.removeChild(this.firstChild)
-      }
-    } else if (this.textContent) {
-      const spanElement = document.createElement('span')
-      spanElement.textContent = this.textContent
-      slots.default = [spanElement]
-      // remove the textContent
-      this.innerHTML = ''
-    }
+    this.addChildrenToSlot(this, 'default')
 
-    props.$$slots = createSlots(slots)
+    props.$$slots = createSlots(this._slots)
     props.$$scope = {}
 
     return props
   }
-}
 
-function addChildrenToSlot(
-  children: HTMLCollection,
-  slots: Record<string, Element[] | HTMLCollection>,
-  slotName: string
-) {
-  if (children.length > 1) {
-    const childrenArray = Array.from(children)
-    const spanElement = document.createElement('span')
-    for (const child of childrenArray) {
-      spanElement.appendChild(child).cloneNode(true)
+  addChildrenToSlot(element: Element, slotName: string) {
+    if (element.children.length) {
+      if (element.children.length > 1) {
+        const childrenArray = Array.from(element.children)
+        const spanElement = document.createElement('span')
+        for (const child of childrenArray) {
+          spanElement.appendChild(child).cloneNode(true)
+        }
+        this._slots[slotName] = [spanElement]
+      } else {
+        this._slots[slotName] = [...element.children]
+      }
+      while (element.firstChild) {
+        element.removeChild(element.firstChild)
+      }
+    } else if (element.textContent) {
+      const spanElement = document.createElement('span')
+      spanElement.textContent = element.textContent
+      this._slots[slotName] = [spanElement]
+      element.innerHTML = ''
     }
-    slots[slotName] = [spanElement]
-  } else {
-    slots[slotName] = [...children]
   }
 }
 

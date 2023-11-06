@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { DrawerOption } from '$lib/types.ts'
-  import DrawerContextItem from '$lib/DrawerContextItem.svelte'
+  import type { DrawerOption } from './types.ts'
+  import DrawerContextItem from './DrawerContextItem.svelte'
   import InputSearch from './InputSearch.svelte'
 
   export let items: DrawerOption[] = []

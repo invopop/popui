@@ -8,7 +8,7 @@ export default defineConfig({
       entry: 'src/web-components.ts',
       formats: ['iife'],
       name: 'app',
-      fileName: () => 'invopop-web-components.js'
+      fileName: () => 'index.js'
     }
   }
 })

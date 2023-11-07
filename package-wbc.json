@@ -1,0 +1,25 @@
+{
+  "name": "@invopop/web-components",
+  "version": "0.0.1",
+  "description": "Set of Web Components ready to be used on Invopop modules",
+  "main": "index.js",
+  "scripts": {
+    "publish": "npm publish --access=public",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/invopop/ui-kit.git"
+  },
+  "keywords": [
+    "invopop",
+    "console",
+    "sdk"
+  ],
+  "author": "Invopop",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/invopop/ui-kit/issues"
+  },
+  "homepage": "https://github.com/invopop/ui-kit#readme"
+}

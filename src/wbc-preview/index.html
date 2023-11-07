@@ -3,81 +3,81 @@
   <head>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../../dist/invopop-web-components.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@invopop/web-components@0.0.1/index.js" defer></script>
     <link rel="stylesheet" href="../../dist/style.css"></link>
   </head>
 <body>
   <div x-data="{}" class="p-8 space-y-4 flex flex-col items-start">
-    <pop-title-main title="Main Title using web components (title prop)"></pop-title-main>
-    <pop-title-main>Main Title using web components (slot)</pop-title-main>
+    <ui-title-main title="Main Title using web components (title prop)"></ui-title-main>
+    <ui-title-main>Main Title using web components (slot)</ui-title-main>
 
-    <pop-title-section title="Section Title using web components (title prop)"></pop-title-section>
-    <pop-title-section>Section Title using web components (slot)</pop-title-section>
+    <ui-title-section title="Section Title using web components (title prop)"></ui-title-section>
+    <ui-title-section>Section Title using web components (slot)</ui-title-section>
 
-    <pop-button
+    <ui-button
       @click="alert('button click')"
       class="inline"
-    >Default Button</pop-button>
-    <pop-button @click="console.log('button clicked')" disabled="true">Disabled Button</pop-button>
-    <pop-button @click="alert('button clicked')" small="true">Default Small Button</pop-button>
-    <pop-button @click="alert('button clicked')" type="primary">Primary Button</pop-button>
-    <pop-button @click="alert('button clicked')" type="secondary">Secondary Button</pop-button>
-    <pop-button @click="alert('button clicked')" type="danger">Danger Button</pop-button>
-    <pop-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth">Icon Button</pop-button>
-    <pop-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth" iconPosition="right">Right Icon</pop-button>
-    <pop-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth"></pop-button>
-    <div class="bg-green-900 w-48 p-6"><pop-button @click="alert('button clicked')" type="dark">Dark Button</pop-button></div>
-    <pop-button-file @click="alert('button clicked')" name="File Button" type="PDF"></pop-button-file>
+    >Default Button</ui-button>
+    <ui-button @click="console.log('button clicked')" disabled="true">Disabled Button</ui-button>
+    <ui-button @click="alert('button clicked')" small="true">Default Small Button</ui-button>
+    <ui-button @click="alert('button clicked')" type="primary">Primary Button</ui-button>
+    <ui-button @click="alert('button clicked')" type="secondary">Secondary Button</ui-button>
+    <ui-button @click="alert('button clicked')" type="danger">Danger Button</ui-button>
+    <ui-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth">Icon Button</ui-button>
+    <ui-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth" iconPosition="right">Right Icon</ui-button>
+    <ui-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth"></ui-button>
+    <div class="bg-green-900 w-48 p-6"><ui-button @click="alert('button clicked')" type="dark">Dark Button</ui-button></div>
+    <ui-button-file @click="alert('button clicked')" name="File Button" type="PDF"></ui-button-file>
 
-    <pop-dropdown>
-      <span slot="trigger"><pop-button
+    <ui-dropdown>
+      <span slot="trigger"><ui-button
         class="inline"
-      >Dropdown</pop-button></span>
-        <pop-drawer-context items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></pop-drawer-context>
-    </pop-dropdown>
-    <pop-dropdown>
-      <span slot="trigger"><pop-button
+      >Dropdown</ui-button></span>
+        <ui-drawer-context items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></ui-drawer-context>
+    </ui-dropdown>
+    <ui-dropdown>
+      <span slot="trigger"><ui-button
         class="inline"
-      >Dropdown Multiple</pop-button></span>
-      <pop-drawer-context multiple="true" items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></pop-drawer-context>
-    </pop-dropdown>
-    <pop-dropdown>
-      <span slot="trigger"><pop-button
+      >Dropdown Multiple</ui-button></span>
+      <ui-drawer-context multiple="true" items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></ui-drawer-context>
+    </ui-dropdown>
+    <ui-dropdown>
+      <span slot="trigger"><ui-button
         class="inline"
-      >Dropdown Searchable</pop-button></span>
-      <pop-drawer-context searchable="true" multiple="true" items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></pop-drawer-context>
-    </pop-dropdown>
+      >Dropdown Searchable</ui-button></span>
+      <ui-drawer-context searchable="true" multiple="true" items='[{"value": "1", "label":"Cobee S.L."}, {"value": "2", "label":"Payflow S.L."}]'></ui-drawer-context>
+    </ui-dropdown>
 
-    <pop-tag-status label="Default Tag"></pop-tag-status>
-    <pop-tag-status label="Success Tag" status="success"></pop-tag-status>
-    <pop-tag-status label="Danger Tag" status="danger"></pop-tag-status>
-    <pop-tag-status label="Warning Tag" status="warning"></pop-tag-status>
-    <pop-tag-status label="Orange Tag" status="orange"></pop-tag-status>
-    <pop-tag-search label="Search Tag" @clear="alert('clear')"></pop-tag-search>
-    <pop-tag-search label="With Icon" icon="Cog6Tooth" @clear="alert('clear')"></pop-tag-search>
-    <pop-list-item label="Status"><pop-tag-status label="Closed" status="success"></pop-tag-status></pop-list-item>
-    <pop-list-item label="Customer" value="Value as prop"></pop-list-item>
-    <pop-section title="Section Title">
-      <pop-list-item label="Status">
-        <pop-tag-status label="Closed" status="success"></pop-tag-status>
-      </pop-list-item>
-    </pop-section>
-    <pop-checkbox @change="alert('value changed to ' + $event.detail)"></pop-checkbox>
-    <pop-checkbox checked="true" @change="alert('value changed to ' + $event.detail)"></pop-checkbox>
-    <pop-radio @change="alert('value changed to ' + $event.detail)"></pop-radio>
-    <pop-radio checked="true" @change="alert('value changed to ' + $event.detail)"></pop-radio>
-    <pop-toggle checked="true" @change="alert('value changed to ' + $event.detail)"></pop-toggle>
-    <pop-toggle @change="alert('value changed to ' + $event.detail)"></pop-toggle>
-    <pop-input-text label="With label" placeholder="Placeholder" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
-    <pop-input-text placeholder="Disabled" disabled="true" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
-    <pop-input-text placeholder="With Error" errorText="This is the error" @input="alert('value changed to ' + $event.detail)"></pop-input-text>
-    <pop-input-search shortcut="⌘K" placeholder="Search Placeholder" @input="alert('value changed to ' + $event.detail)"></pop-input-search>
-    <pop-input-search placeholder="Without shortcut" @input="alert('value changed to ' + $event.detail)"></pop-input-search>
-    <pop-select label="With label" placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></pop-select>
-    <pop-select placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></pop-select>
-    <pop-select placeholder="No selectable Placeholder" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></pop-select>
-    <pop-select placeholder="With icon" icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></pop-select>
-    <pop-select placeholder="With options" options='[{"value": "1", "label":"one"}, {"value": "2", "label":"two"}]' icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></pop-select>
+    <ui-tag-status label="Default Tag"></ui-tag-status>
+    <ui-tag-status label="Success Tag" status="success"></ui-tag-status>
+    <ui-tag-status label="Danger Tag" status="danger"></ui-tag-status>
+    <ui-tag-status label="Warning Tag" status="warning"></ui-tag-status>
+    <ui-tag-status label="Orange Tag" status="orange"></ui-tag-status>
+    <ui-tag-search label="Search Tag" @clear="alert('clear')"></ui-tag-search>
+    <ui-tag-search label="With Icon" icon="Cog6Tooth" @clear="alert('clear')"></ui-tag-search>
+    <ui-list-item label="Status"><ui-tag-status label="Closed" status="success"></ui-tag-status></ui-list-item>
+    <ui-list-item label="Customer" value="Value as prop"></ui-list-item>
+    <ui-section title="Section Title">
+      <ui-list-item label="Status">
+        <ui-tag-status label="Closed" status="success"></ui-tag-status>
+      </ui-list-item>
+    </ui-section>
+    <ui-checkbox @change="alert('value changed to ' + $event.detail)"></ui-checkbox>
+    <ui-checkbox checked="true" @change="alert('value changed to ' + $event.detail)"></ui-checkbox>
+    <ui-radio @change="alert('value changed to ' + $event.detail)"></ui-radio>
+    <ui-radio checked="true" @change="alert('value changed to ' + $event.detail)"></ui-radio>
+    <ui-toggle checked="true" @change="alert('value changed to ' + $event.detail)"></ui-toggle>
+    <ui-toggle @change="alert('value changed to ' + $event.detail)"></ui-toggle>
+    <ui-input-text label="With label" placeholder="Placeholder" @input="alert('value changed to ' + $event.detail)"></ui-input-text>
+    <ui-input-text placeholder="Disabled" disabled="true" @input="alert('value changed to ' + $event.detail)"></ui-input-text>
+    <ui-input-text placeholder="With Error" errorText="This is the error" @input="alert('value changed to ' + $event.detail)"></ui-input-text>
+    <ui-input-search shortcut="⌘K" placeholder="Search Placeholder" @input="alert('value changed to ' + $event.detail)"></ui-input-search>
+    <ui-input-search placeholder="Without shortcut" @input="alert('value changed to ' + $event.detail)"></ui-input-search>
+    <ui-select label="With label" placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></ui-select>
+    <ui-select placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></ui-select>
+    <ui-select placeholder="No selectable Placeholder" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></ui-select>
+    <ui-select placeholder="With icon" icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></ui-select>
+    <ui-select placeholder="With options" options='[{"value": "1", "label":"one"}, {"value": "2", "label":"two"}]' icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></ui-select>
   </div>
 </body>
 </html>

@@ -88,6 +88,8 @@ You can pass props and listen to events
 
 ## Available Web Components
 
+> NOTE: Due to web component limitations booleans need to be passed as strings ie: "true", other structures like objects or arrays need to be passed as JSON.stringify()
+
 | Component          | Events Emitted | Props Accepted                                                                     |
 | ------------------ | -------------- | ---------------------------------------------------------------------------------- |
 | `ui-button`        | `@click`       | `type`: 'default', 'primary', 'secondary', 'danger', 'dark'` (default: 'default')  |

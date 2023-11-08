@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@invopop/web-components@0.0.1/index.js" defer></script>
-    <link rel="stylesheet" href="../../dist/style.css"></link>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@invopop/web-components@0.0.2/index.js" defer></script> -->
+    <script src="../../dist/index.js" defer></script>
   </head>
 <body>
   <div x-data="{}" class="p-8 space-y-4 flex flex-col items-start">
+    <ui-title-main title="Form modal example"></ui-title-main>
+
+    <ui-form-layout-modal>
+      <ui-input-text label="Name" placeholder="Placeholder" @input="alert('value changed')"></ui-input-text>
+      <ui-select label="Province" placeholder="Select one..." options='[{"value": "1", "label":"Madrid"}, {"value": "2", "label":"Burgos"}]' disablePlaceholder="true"></ui-select>
+      <div slot="footer">
+        <ui-button type="primary" @click="alert('button click')">Save</ui-button>
+      </div>
+    </ui-form-layout-modal>
+
     <ui-title-main title="Main Title using web components (title prop)"></ui-title-main>
     <ui-title-main>Main Title using web components (slot)</ui-title-main>
 
@@ -77,7 +87,7 @@
     <ui-select placeholder="Placeholder" @change="alert('value changed to ' + $event.detail)"></ui-select>
     <ui-select placeholder="No selectable Placeholder" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></ui-select>
     <ui-select placeholder="With icon" icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></ui-select>
-    <ui-select placeholder="With options" options='[{"value": "1", "label":"one"}, {"value": "2", "label":"two"}]' icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></ui-select>
+    <ui-select placeholder="With options" options='[{"value": "1", "label":"one"}, {"value": "2", "label":"two"}]' icon="Cog6Tooth" disablePlaceholder="true" @change="alert('value changed to ' + $event.detail)"></ui-select> -->
   </div>
 </body>
 </html>

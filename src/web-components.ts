@@ -3,6 +3,7 @@ import ButtonFile from './web-components/button-file.js'
 import InputCheckbox from './web-components/checkbox.js'
 import DrawerContext from './web-components/drawer-context.js'
 import BaseDropdown from './web-components/dropdown.js'
+import FormLayoutModal from './web-components/form-modal.js'
 import InputText from './web-components/input-text.js'
 import InputSearch from './web-components/input-search.js'
 import InputToggle from './web-components/toggle.js'
@@ -22,6 +23,7 @@ customElements.define(`${NAMESPACE}-button-file`, ButtonFile)
 customElements.define(`${NAMESPACE}-checkbox`, InputCheckbox)
 customElements.define(`${NAMESPACE}-drawer-context`, DrawerContext)
 customElements.define(`${NAMESPACE}-dropdown`, BaseDropdown)
+customElements.define(`${NAMESPACE}-form-layout-modal`, FormLayoutModal)
 customElements.define(`${NAMESPACE}-input-text`, InputText)
 customElements.define(`${NAMESPACE}-input-search`, InputSearch)
 customElements.define(`${NAMESPACE}-toggle`, InputToggle)

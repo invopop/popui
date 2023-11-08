@@ -12,7 +12,8 @@ export default {
     },
     spacing: {
       1.25: '5px',
-      18: '4.5rem'
+      18: '4.5rem',
+      128: '32rem'
     },
     borderRadius: {
       xl: '0.625rem',

@@ -1,12 +1,4 @@
-import {
-  destroy_component,
-  detach,
-  insert,
-  is_function,
-  mount_component,
-  noop,
-  SvelteComponent
-} from 'svelte/internal'
+import { detach, insert, noop, SvelteComponent } from 'svelte/internal'
 import install from '@twind/with-web-components'
 import config from '../twind.config.js'
 const withTwind = install(config)
@@ -18,7 +10,7 @@ export default class extends withTwind(HTMLElement) {
 
   _shadowRoot: ShadowRoot
 
-  _slots: Record<string, Element[] | HTMLCollection> = {}
+  _slots: Record<string, Element[]> = {}
 
   hasSlots = false
 
@@ -98,16 +90,8 @@ export default class extends withTwind(HTMLElement) {
 
   addChildrenToSlot(element: Element, slotName: string) {
     if (element.children.length) {
-      if (element.children.length > 1) {
-        const childrenArray = Array.from(element.children)
-        const spanElement = document.createElement('span')
-        for (const child of childrenArray) {
-          spanElement.appendChild(child).cloneNode(true)
-        }
-        this._slots[slotName] = [spanElement]
-      } else {
-        this._slots[slotName] = [...element.children]
-      }
+      const childrenArray = Array.from(element.children)
+      this._slots[slotName] = childrenArray
       while (element.firstChild) {
         element.removeChild(element.firstChild)
       }
@@ -120,45 +104,33 @@ export default class extends withTwind(HTMLElement) {
   }
 }
 
-export const createSlots = (slots: Record<string, Element[] | HTMLCollection>) => {
-  const svelteSlots = {}
+export const createSlots = (slots: Record<string, Element[]>) => {
+  const svelteSlots: Record<string, unknown> = {}
 
   for (const slotName in slots) {
     svelteSlots[slotName] = [createSlotFn(slots[slotName])]
   }
 
-  function createSlotFn([ele, props = {}]) {
-    if (is_function(ele) && ele.prototype instanceof SvelteComponent) {
-      let component
-      return function () {
-        return {
-          c: noop,
-          m(target, anchor) {
-            component = new ele({ target, props })
-            mount_component(component, target, anchor, null)
-          },
-          d(detaching) {
-            destroy_component(component, detaching)
-          },
-          l: noop
-        }
-      }
-    } else {
-      return function () {
-        return {
-          c: noop,
-          m: function mount(target, anchor) {
-            insert(target, ele, anchor)
-          },
-          d: function destroy(detaching) {
-            if (detaching) {
-              detach(ele)
-            }
-          },
-          l: noop
-        }
+  function createSlotFn(ele: Element[]) {
+    return function () {
+      return {
+        c: noop,
+        m: function mount(target: Node, anchor: Node) {
+          ele.forEach((el: Element) => {
+            insert(target, el, anchor)
+          })
+        },
+        d: function destroy(detaching: boolean) {
+          if (detaching) {
+            ele.forEach((el: Element) => {
+              detach(el)
+            })
+          }
+        },
+        l: noop
       }
     }
   }
+
   return svelteSlots
 }

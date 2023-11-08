@@ -27,6 +27,7 @@ import TagStatus from './TagStatus.svelte'
 import TitleMain from './TitleMain.svelte'
 import TitleSection from './TitleSection.svelte'
 import UuidCopy from './UuidCopy.svelte'
+import twTheme from './tw.theme.js'
 
 export {
   BaseButton,
@@ -57,5 +58,6 @@ export {
   TagStatus,
   TitleMain,
   TitleSection,
-  UuidCopy
+  UuidCopy,
+  twTheme
 }

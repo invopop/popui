@@ -27,7 +27,10 @@
     { 'text-sm': small },
     { 'text-base': !small },
     { 'px-2 pt-[2.5px] pb-[3.5px]': small && $$slots.default },
-    { 'px-3 py-1.25': !small && $$slots.default },
+    { 'px-3': !small && $$slots.default && !icon },
+    { 'pl-2 pr-3': !small && $$slots.default && icon && iconPosition === 'left' },
+    { 'pl-3 pr-2': !small && $$slots.default && icon && iconPosition === 'right' },
+    { 'py-1.25': !small && $$slots.default },
     { 'p-2': !$$slots.default },
     { 'text-white': ['primary', 'danger', 'dark'].includes(type) },
     { 'text-neutral-800': ['default', 'secondary'].includes(type) },
@@ -52,7 +55,7 @@
 <button
   type="button"
   {disabled}
-  class="{buttonStyles} flex items-center justify-center rounded-xl border font-medium space-x-1 font-sans"
+  class="{buttonStyles} flex items-center justify-center rounded border font-medium space-x-1 font-sans"
   {...$$restProps}
   on:click={handleClick}
 >

@@ -7,6 +7,8 @@
 
   export let label = 'Date'
 
+  let currentLabel = label
+
   const styling = new CalendarStyle({
     timeConfirmButtonColor: '#169958',
     dayHighlightedBackgroundColor: '#169958',
@@ -27,11 +29,19 @@
   }
 
   function handleRangeSelected(event: CustomEvent) {
-    dispatch('selected', { from: getDate(event.detail.from), to: getDate(event.detail.to) })
+    const from = getDate(event.detail.from)
+    const to = getDate(event.detail.to)
+    currentLabel = `${from} → ${to}`
+    dispatch('selected', { from, to })
+  }
+
+  function clearDates() {
+    currentLabel = label
+    dispatch('selected', { from: '', to: '' })
   }
 </script>
 
-<div>
+<div class="relative">
   <DatePicker
     continueText="Confirm"
     {styling}
@@ -40,9 +50,29 @@
     on:range-selected={handleRangeSelected}
   >
     <button
-      class="datepicker-trigger py-1.25 pl-3 border border-neutral-200 hover:border-neutral-300 w-full rounded text-neutral-800 text-base pr-9 outline-accent-400"
-      >{label}</button
+      class:pr-9={currentLabel === label}
+      class:pr-18={currentLabel !== label}
+      class="datepicker-trigger py-1.25 pl-3 border border-neutral-200 hover:border-neutral-300 w-full rounded text-neutral-800 text-base outline-accent-400"
+      >{currentLabel}</button
     >
+    {#if currentLabel !== label}
+      <button on:click|stopPropagation={clearDates} class="absolute right-10 top-2 mt-px z-10">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      </button>
+    {/if}
   </DatePicker>
 </div>
 

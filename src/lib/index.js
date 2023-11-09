@@ -20,6 +20,7 @@ import InputText from './InputText.svelte'
 import InputToggle from './InputToggle.svelte'
 import MenuItem from './MenuItem.svelte'
 import ProfileAvatar from './ProfileAvatar.svelte'
+import ProfileSelector from './ProfileSelector.svelte'
 import SectionLayout from './SectionLayout.svelte'
 import Tabs from './Tabs.svelte'
 import TagSearch from './TagSearch.svelte'
@@ -28,6 +29,7 @@ import TitleMain from './TitleMain.svelte'
 import TitleSection from './TitleSection.svelte'
 import UuidCopy from './UuidCopy.svelte'
 import twTheme from './tw.theme.js'
+import { resolveIcon } from './helpers.js'
 
 export {
   BaseButton,
@@ -52,6 +54,7 @@ export {
   InputToggle,
   MenuItem,
   ProfileAvatar,
+  ProfileSelector,
   SectionLayout,
   Tabs,
   TagSearch,
@@ -59,5 +62,6 @@ export {
   TitleMain,
   TitleSection,
   UuidCopy,
-  twTheme
+  twTheme,
+  resolveIcon
 }

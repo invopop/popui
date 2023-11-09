@@ -1,14 +1,16 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import type { IconTheme } from '$lib/types.ts'
+  import type { IconTheme, MenuItemProps } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons'
   import { createEventDispatcher } from 'svelte'
 
   export let label = ''
+  export let url = ''
   export let isFolderItem = false
   export let collapsable = false
   export let open = false
+  export let active = false
   export let iconTheme: IconTheme = 'default'
   export let icon: IconSource | undefined = undefined
   export let children: MenuItemProps[] | undefined = undefined
@@ -17,14 +19,14 @@
 
   $: itemStyles = clsx(
     { 'text-white font-semibold': !isFolderItem },
-    { 'text-white-40': isFolderItem }
+    { 'text-white-40': isFolderItem },
+    { 'bg-white-10': active }
   )
 
   $: wrapperStyles = clsx({ 'ml-4 border-l border-white-10 pl-2': isFolderItem })
 
   function handleClick() {
-    open = !open
-    dispatch('click')
+    dispatch('click', url)
   }
 </script>
 
@@ -40,7 +42,13 @@
       <span>{label}</span></span
     >
     {#if collapsable}
-      <Icon src={open ? ChevronDown : ChevronRight} class="h-4 w-4 text-white-40" />
+      <button
+        on:click|stopPropagation={() => {
+          open = !open
+        }}
+      >
+        <Icon src={open ? ChevronDown : ChevronRight} class="h-4 w-4 text-white-40" />
+      </button>
     {/if}
   </button>
   {#if children?.length && (open || !collapsable)}

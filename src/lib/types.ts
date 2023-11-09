@@ -45,8 +45,10 @@ export type MenuItemProps = {
   isFolderItem?: boolean
   collapsable?: boolean
   open?: boolean
-  iconTheme?: IconTheme
+  url?: string
+  active?: boolean
   icon?: IconSource | undefined
+  iconTheme?: IconTheme
   children?: MenuItemProps[]
 }
 

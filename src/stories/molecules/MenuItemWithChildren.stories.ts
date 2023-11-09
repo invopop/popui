@@ -40,3 +40,22 @@ export const CollapsableOpen: Story = {
     children: [{ label: 'Child Item' }, { label: 'Another Child Item' }]
   }
 }
+
+export const ParentActive: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    collapsable: true,
+    open: true,
+    active: true,
+    children: [{ label: 'Child Item' }, { label: 'Another Child Item' }]
+  }
+}
+
+export const ChildActive: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    collapsable: true,
+    open: true,
+    children: [{ label: 'Child Item' }, { label: 'Another Child Item', active: true }]
+  }
+}

@@ -33,6 +33,14 @@ export const WithIcon: Story = {
   }
 }
 
+export const WithIconAsText: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    label: 'Item',
+    icon: 'Cog6Tooth'
+  }
+}
+
 export const FolderItem: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

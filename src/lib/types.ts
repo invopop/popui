@@ -4,7 +4,7 @@ export type IconTheme = 'default' | 'solid' | 'mini'
 
 export type IconPosition = 'right' | 'left'
 
-export type ButtonType = 'default' | 'primary' | 'secondary' | 'danger' | 'dark'
+export type ButtonVariant = 'default' | 'primary' | 'secondary' | 'danger' | 'dark'
 export type StatusType = 'default' | 'success' | 'warning' | 'danger' | 'orange'
 
 export type SidebarIcon = {

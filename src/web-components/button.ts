@@ -1,4 +1,4 @@
-import type { ButtonType } from '$lib/types.js'
+import type { ButtonVariant } from '$lib/types.js'
 import BaseButton from '../lib/BaseButton.svelte'
 import WebComponent from './component.js'
 
@@ -22,7 +22,7 @@ export default class extends WebComponent {
         // in your svelte components
         icon: this.getAttribute('icon') || undefined,
         iconPosition: this.getAttribute('iconPosition') || undefined,
-        type: getType(this.getAttribute('type') || 'default'),
+        variant: getType(this.getAttribute('variant') || 'default'),
         disabled: this.getAttribute('disabled') === 'true' || false,
         small: this.getAttribute('small') === 'true' || false
       })
@@ -32,10 +32,10 @@ export default class extends WebComponent {
   }
 }
 
-function getType(type: string): ButtonType {
-  const types: ButtonType[] = ['default', 'primary', 'secondary', 'danger', 'dark']
+function getType(type: string): ButtonVariant {
+  const types: ButtonVariant[] = ['default', 'primary', 'secondary', 'danger', 'dark']
 
-  if (types.includes(type as ButtonType)) return type as ButtonType
+  if (types.includes(type as ButtonVariant)) return type as ButtonVariant
 
   return 'default'
 }

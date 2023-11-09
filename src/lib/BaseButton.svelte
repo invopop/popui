@@ -1,6 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import type { ButtonType, IconPosition, IconTheme } from '$lib/types.ts'
+  import type { ButtonVariant, IconPosition, IconTheme } from '$lib/types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { createEventDispatcher, onMount } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
@@ -11,7 +11,7 @@
   export let icon: IconSource | string | undefined = undefined
   export let iconTheme: IconTheme = 'default'
   export let iconPosition: IconPosition = 'left'
-  export let type: ButtonType = 'default'
+  export let variant: ButtonVariant = 'default'
   export let disabled = false
   export let small = false
 
@@ -20,10 +20,10 @@
   $: buttonStyles = clsx(
     { 'opacity-30 pointer-events-none': disabled },
     { 'flex-row-reverse space-x-reverse': iconPosition === 'right' },
-    { 'bg-white': type === 'default' },
-    { 'bg-accent-500': type === 'primary' },
-    { 'bg-neutral-100': type === 'secondary' },
-    { 'bg-danger-500': type === 'danger' },
+    { 'bg-white': variant === 'default' },
+    { 'bg-accent-500': variant === 'primary' },
+    { 'bg-neutral-100': variant === 'secondary' },
+    { 'bg-danger-500': variant === 'danger' },
     { 'text-sm': small },
     { 'text-base': !small },
     { 'px-2 pt-[2.5px] pb-[3.5px]': small && $$slots.default },
@@ -32,10 +32,10 @@
     { 'pl-3 pr-2': !small && $$slots.default && icon && iconPosition === 'right' },
     { 'py-1.25': !small && $$slots.default },
     { 'p-2': !$$slots.default },
-    { 'text-white': ['primary', 'danger', 'dark'].includes(type) },
-    { 'text-neutral-800': ['default', 'secondary'].includes(type) },
-    { 'border-white-10 hover:border-white-20 focus:border-white-40': type === 'dark' },
-    { 'border-neutral-200 hover:border-neutral-300 focus:border-neutral-400': type !== 'dark' }
+    { 'text-white': ['primary', 'danger', 'dark'].includes(variant) },
+    { 'text-neutral-800': ['default', 'secondary'].includes(variant) },
+    { 'border-white-10 hover:border-white-20 focus:border-white-40': variant === 'dark' },
+    { 'border-neutral-200 hover:border-neutral-300 focus:border-neutral-400': variant !== 'dark' }
   )
 
   onMount(async () => {

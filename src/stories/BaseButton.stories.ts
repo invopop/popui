@@ -61,21 +61,21 @@ export const DefaultWithOnlyIcon: Story = {
 export const Primary: Story = {
   args: {
     slot: 'Primary Button',
-    type: 'primary'
+    variant: 'primary'
   }
 }
 
 export const Secondary: Story = {
   args: {
     slot: 'Secondary Button',
-    type: 'secondary'
+    variant: 'secondary'
   }
 }
 
 export const Danger: Story = {
   args: {
     slot: 'Danger Button',
-    type: 'danger'
+    variant: 'danger'
   }
 }
 
@@ -83,6 +83,6 @@ export const Dark: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {
     slot: 'Dark Button',
-    type: 'dark'
+    variant: 'dark'
   }
 }

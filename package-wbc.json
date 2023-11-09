@@ -1,6 +1,6 @@
 {
   "name": "@invopop/web-components",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Set of Web Components ready to be used on Invopop modules",
   "main": "index.js",
   "scripts": {

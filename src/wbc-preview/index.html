@@ -3,7 +3,7 @@
   <head>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@invopop/web-components@0.0.4/index.js" defer></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@invopop/web-components@0.0.5/index.js" defer></script> -->
     <script src="../../dist/index.js" defer></script>
   </head>
 <body>
@@ -14,7 +14,7 @@
       <ui-input-text label="Name" placeholder="Placeholder" @input="alert('value changed')"></ui-input-text>
       <ui-select label="Province" placeholder="Select one..." options='[{"value": "1", "label":"Madrid"}, {"value": "2", "label":"Burgos"}]' disablePlaceholder="true"></ui-select>
       <div slot="footer">
-        <ui-button type="primary" @click="alert('button click')">Save</ui-button>
+        <ui-button variant="primary" @click="alert('button click')">Save</ui-button>
       </div>
     </ui-form-layout-modal>
 
@@ -30,13 +30,13 @@
     >Default Button</ui-button>
     <ui-button @click="console.log('button clicked')" disabled="true">Disabled Button</ui-button>
     <ui-button @click="alert('button clicked')" small="true">Default Small Button</ui-button>
-    <ui-button @click="alert('button clicked')" type="primary">Primary Button</ui-button>
-    <ui-button @click="alert('button clicked')" type="secondary">Secondary Button</ui-button>
-    <ui-button @click="alert('button clicked')" type="danger">Danger Button</ui-button>
-    <ui-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth">Icon Button</ui-button>
-    <ui-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth" iconPosition="right">Right Icon</ui-button>
-    <ui-button @click="alert('button clicked')" type="secondary" icon="Cog6Tooth"></ui-button>
-    <div class="bg-green-900 w-48 p-6"><ui-button @click="alert('button clicked')" type="dark">Dark Button</ui-button></div>
+    <ui-button @click="alert('button clicked')" variant="primary">Primary Button</ui-button>
+    <ui-button @click="alert('button clicked')" variant="secondary">Secondary Button</ui-button>
+    <ui-button @click="alert('button clicked')" variant="danger">Danger Button</ui-button>
+    <ui-button @click="alert('button clicked')" variant="secondary" icon="Cog6Tooth">Icon Button</ui-button>
+    <ui-button @click="alert('button clicked')" variant="secondary" icon="Cog6Tooth" iconPosition="right">Right Icon</ui-button>
+    <ui-button @click="alert('button clicked')" variant="secondary" icon="Cog6Tooth"></ui-button>
+    <div class="bg-green-900 w-48 p-6"><ui-button @click="alert('button clicked')" variant="dark">Dark Button</ui-button></div>
     <ui-button-file @click="alert('button clicked')" name="File Button" type="PDF"></ui-button-file>
 
     <ui-dropdown>

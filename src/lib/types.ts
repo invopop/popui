@@ -67,3 +67,8 @@ export type FeedItemProps = {
   children?: FeedItemProps[]
   events?: FeedEvent[]
 }
+
+export type TableHeader = {
+  label: string
+  slug: string
+}

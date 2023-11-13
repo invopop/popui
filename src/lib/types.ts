@@ -86,5 +86,6 @@ export type TableField = {
   sortable?: boolean
   fullWidth?: boolean
   grayed?: boolean
+  formatter?: undefined | ((data: TableDataRow) => string | number)
   helperBadge?: undefined | ((data: TableDataRow) => Badge | null)
 }

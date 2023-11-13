@@ -24,7 +24,12 @@
     <tbody>
       {#each data as row}
         {@const actions = getActions instanceof Function ? getActions(row) : []}
-        <tr class="hover:bg-neutral-100 rounded">
+        <tr
+          class="hover:bg-neutral-100 rounded hover:cursor-pointer"
+          on:click={() => {
+            dispatch('rowClick', row)
+          }}
+        >
           {#each fields as field, i (i)}
             <BaseTableCell
               currentIndex={i}
@@ -32,10 +37,8 @@
               totalActions={actions.length}
               totalFields={fields.length}
               badge={field.helperBadge ? field.helperBadge(row) : null}
-              on:click={() => {
-                dispatch('rowClick', row)
-              }}>{row[field.slug]}</BaseTableCell
-            >
+              data={field.formatter ? field.formatter(row) : row[field.slug]}
+            />
           {/each}
           {#if actions.length}
             <td class="pl-3 pr-4">

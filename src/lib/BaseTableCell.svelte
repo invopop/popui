@@ -8,6 +8,7 @@
   export let totalFields: number
   export let totalActions: number
   export let badge: Badge | null = null
+  export let data: unknown = ''
 
   $: cellStyles = clsx(
     { 'text-neutral-500': field.grayed },
@@ -21,7 +22,7 @@
 
 <td class="{cellStyles} whitespace-nowrap text-sm py-2.5">
   <span>
-    <slot />
+    <span>{data}</span>
     {#if badge}
       <span class="ml-2">
         <TagStatus label={badge.label} status={badge.status} />

@@ -15,7 +15,7 @@
 
 <div class="relative">
   <button
-    on:click={async () => {
+    on:click|stopPropagation={async () => {
       if (closedFromClickOutside) return
       isOpen = !isOpen
     }}

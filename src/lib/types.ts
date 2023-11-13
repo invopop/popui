@@ -68,7 +68,23 @@ export type FeedItemProps = {
   events?: FeedEvent[]
 }
 
-export type TableHeader = {
+export type Badge = { label: string; status: StatusType }
+
+export type TableDataRow = { [key: string]: unknown }
+
+export type TableAction = {
+  icon?: IconSource
   label: string
   slug: string
+}
+
+export type TableActionProp = undefined | ((data: TableDataRow) => TableAction[])
+
+export type TableField = {
+  headerLabel: string
+  slug: string
+  sortable?: boolean
+  fullWidth?: boolean
+  grayed?: boolean
+  helperBadge?: undefined | ((data: TableDataRow) => Badge | null)
 }

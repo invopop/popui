@@ -2,6 +2,7 @@ export default {
   fontFamily: {
     sans: ['Inter', 'sans-serif']
   },
+
   extend: {
     fontSize: {
       '2xl': ['27px', '32px'],
@@ -10,15 +11,22 @@ export default {
       sm: ['13px', '18.20px'],
       xs: ['11px', '15,62px']
     },
+
     spacing: {
       1.25: '5px',
       18: '4.5rem',
       128: '32rem'
     },
+
     borderRadius: {
       xl: '0.625rem',
       '2xl': '12px'
     },
+
+    minWidth: {
+      dropdown: '175px'
+    },
+
     colors: {
       accent: {
         50: 'rgba(22, 153, 88, 0.05)',
@@ -63,6 +71,7 @@ export default {
         600: '#D1A329'
       }
     },
+
     fontFamily: {
       sans: ['Inter', 'sans-serif']
     }

@@ -1,34 +1,52 @@
 <script lang="ts">
-  import type { TableHeader } from './types.js'
+  import type { TableActionProp, TableDataRow, TableField } from './types.js'
+  import BaseTableHeader from './BaseTableHeader.svelte'
+  import BaseTableActions from './BaseTableActions.svelte'
+  import { createEventDispatcher } from 'svelte'
+  import BaseTableCell from './BaseTableCell.svelte'
 
-  export let headers: TableHeader[] = []
-  export let data: { [key: string]: unknown }[] = []
+  const dispatch = createEventDispatcher()
+
+  export let fields: TableField[] = []
+  export let data: TableDataRow[] = []
+  export let getActions: TableActionProp = undefined
 </script>
 
 <div class="w-full rounded border border-neutral-50 font-sans">
   <table>
     <thead>
       <tr class="border-b border-neutral-50">
-        {#each headers as header, i (i)}
-          <th
-            scope="col"
-            class="text-left text-sm text-neutral-500 font-semibold py-2.5 {i === 0
-              ? 'pl-4'
-              : 'pl-3'}  {i === headers.length - 1 ? 'pr-4' : 'pr-3'}">{header.label}</th
-          >
+        {#each fields as field, i (i)}
+          <BaseTableHeader {field} totalFields={fields.length} currentIndex={i} on:orderBy />
         {/each}
       </tr>
     </thead>
     <tbody>
       {#each data as row}
-        <tr>
-          {#each headers as header, i (i)}
-            <td
-              class="whitespace-nowrap text-sm text-neutral-800 py-2.5 {i === 0
-                ? 'pl-4 font-semibold'
-                : 'pl-3'}  {i === headers.length - 1 ? 'pr-4' : 'pr-3'}">{row[header.slug]}</td
+        {@const actions = getActions instanceof Function ? getActions(row) : []}
+        <tr class="hover:bg-neutral-100 rounded">
+          {#each fields as field, i (i)}
+            <BaseTableCell
+              currentIndex={i}
+              {field}
+              totalActions={actions.length}
+              totalFields={fields.length}
+              badge={field.helperBadge ? field.helperBadge(row) : null}
+              on:click={() => {
+                dispatch('rowClick', row)
+              }}>{row[field.slug]}</BaseTableCell
             >
           {/each}
+          {#if actions.length}
+            <td class="pl-3 pr-4">
+              <BaseTableActions
+                {actions}
+                on:click={(event) => {
+                  dispatch('action', { row, action: event.detail })
+                }}
+              />
+            </td>
+          {/if}
         </tr>
       {/each}
     </tbody>

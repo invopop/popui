@@ -13,7 +13,7 @@
 </script>
 
 <div class="w-full rounded border border-neutral-50 font-sans">
-  <table>
+  <table class="w-full">
     <thead>
       <tr class="border-b border-neutral-50">
         {#each fields as field, i (i)}

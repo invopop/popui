@@ -1,6 +1,7 @@
 import BaseButton from './BaseButton.svelte'
 import BaseCounter from './BaseCounter.svelte'
 import BaseDropdown from './BaseDropdown.svelte'
+import BaseTable from './BaseTable.svelte'
 import ButtonFile from './ButtonFile.svelte'
 import CompanySelector from './CompanySelector.svelte'
 import DataListItem from './DataListItem.svelte'
@@ -35,6 +36,7 @@ export {
   BaseButton,
   BaseCounter,
   BaseDropdown,
+  BaseTable,
   ButtonFile,
   CompanySelector,
   DataListItem,

@@ -23,7 +23,7 @@
   {disabled}
   class:opacity-30={disabled}
   class:w-full={fullwidth}
-  class="border border-neutral-200 hover:border-neutral-300 rounded-xl flex items-center space-x-2"
+  class="border border-neutral-200 hover:border-neutral-300 rounded flex items-center space-x-2"
   on:click={handleClick}
 >
   <span

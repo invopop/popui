@@ -1,6 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import type { StatusType } from '$lib/types.ts'
+  import type { StatusType } from './types.ts'
 
   export let label = ''
   export let status: StatusType = 'default'

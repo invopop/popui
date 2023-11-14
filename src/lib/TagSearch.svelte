@@ -27,7 +27,7 @@
 <span
   class:pl-2={icon}
   class:pl-3={!icon}
-  class="border rounded-full pr-1.5 text-sm inline-flex items-center border-accent-100 bg-accent-50"
+  class="border rounded pr-1.5 text-sm inline-flex items-center border-accent-100 bg-accent-50"
 >
   {#if resolvedIcon}
     <Icon src={resolvedIcon} theme={iconTheme} class="h-4 w-4 mr-1 text-accent-500" />

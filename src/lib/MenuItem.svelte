@@ -21,12 +21,12 @@
   const dispatch = createEventDispatcher()
 
   $: itemStyles = clsx(
-    { 'text-white font-semibold': !isFolderItem },
+    { 'text-white font-medium': !isFolderItem },
     { 'text-white-40': isFolderItem },
     { 'bg-white-10': active }
   )
 
-  $: wrapperStyles = clsx({ 'ml-4 border-l border-white-10 pl-2': isFolderItem })
+  $: wrapperStyles = clsx({ 'ml-4 border-l border-white-10 pl-2 pt-1': isFolderItem })
 
   function handleClick() {
     dispatch('click', url)
@@ -40,7 +40,7 @@
 <div class={wrapperStyles}>
   <button
     on:click={handleClick}
-    class="{itemStyles} text-sm flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 px-2 py-1.5 rounded-lg w-full"
+    class="{itemStyles} text-sm flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 px-2 py-1.5 rounded w-full"
   >
     <span class="flex items-center space-x-1">
       {#if resolvedIcon}
@@ -59,8 +59,12 @@
     {/if}
   </button>
   {#if children?.length && (open || !collapsable)}
-    {#each children as child}
-      <svelte:self {...child} isFolderItem on:click />
-    {/each}
+    <ul>
+      {#each children as child}
+        <li>
+          <svelte:self {...child} isFolderItem on:click />
+        </li>
+      {/each}
+    </ul>
   {/if}
 </div>

@@ -25,7 +25,7 @@
   }
 </script>
 
-<div class="border border-neutral-100 bg-neutral-50 rounded-2xl">
+<div class="border border-neutral-100 bg-neutral-50 rounded">
   {#each events as event, i (i)}
     <div class:border-t={i > 0} class="border-neutral-100 py-2 px-3">
       <div class="flex items-center justify-between">

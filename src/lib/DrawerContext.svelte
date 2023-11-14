@@ -11,7 +11,7 @@
   $: footerItems = items.filter((i) => i.footer)
 </script>
 
-<div class="w-60 border border-neutral-100 rounded-2xl shadow-lg space-y-0.5">
+<div class="w-60 border border-neutral-100 rounded shadow-lg space-y-0.5">
   {#if searchable}
     <div class="px-2 mt-2 mb-1"><InputSearch placeholder="Search" /></div>
   {/if}

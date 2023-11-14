@@ -88,4 +88,5 @@ export type TableField = {
   grayed?: boolean
   formatter?: undefined | ((data: TableDataRow) => string | number)
   helperBadge?: undefined | ((data: TableDataRow) => Badge | null)
+  monospaced?: boolean
 }

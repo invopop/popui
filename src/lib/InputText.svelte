@@ -50,7 +50,7 @@
 <input
   bind:value
   type="text"
-  class="{inputStyles} py-1.25 px-3 border w-full rounded-xl placeholder:text-neutral-400 text-base caret-accent-500"
+  class="{inputStyles} py-1.25 px-3 border w-full rounded placeholder:text-neutral-400 text-base caret-accent-500"
   {placeholder}
   readonly={disabled}
   on:input={handleInput}

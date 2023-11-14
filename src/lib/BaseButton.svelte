@@ -38,6 +38,11 @@
     { 'border-neutral-200 hover:border-neutral-300 focus:border-neutral-400': variant !== 'dark' }
   )
 
+  $: iconStyles = clsx(
+    { 'text-neutral-500': ['default', 'secondary'].includes(variant) },
+    { 'text-white-70': !['default', 'secondary'].includes(variant) }
+  )
+
   onMount(async () => {
     resolvedIcon = await resolveIcon(icon)
   })
@@ -60,7 +65,7 @@
   on:click={handleClick}
 >
   {#if resolvedIcon}
-    <Icon src={resolvedIcon} theme={iconTheme} class="h-5 w-5" />
+    <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5" />
   {/if}
   {#if $$slots.default}
     <span><slot /></span>

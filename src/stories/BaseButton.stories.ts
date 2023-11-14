@@ -65,9 +65,25 @@ export const Primary: Story = {
   }
 }
 
+export const PrimaryWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'primary'
+  }
+}
+
 export const Secondary: Story = {
   args: {
     slot: 'Secondary Button',
+    variant: 'secondary'
+  }
+}
+
+export const SecondaryWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
     variant: 'secondary'
   }
 }
@@ -79,10 +95,27 @@ export const Danger: Story = {
   }
 }
 
+export const DangerWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'danger'
+  }
+}
+
 export const Dark: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {
     slot: 'Dark Button',
+    variant: 'dark'
+  }
+}
+
+export const DarkWithIcon: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
     variant: 'dark'
   }
 }

@@ -122,6 +122,67 @@ export const WithFormatter: Story = {
   }
 }
 
+export const WithSelectedOrderByAsc: Story = {
+  args: {
+    sortBy: 'created_at',
+    fields: [
+      {
+        headerLabel: 'Invoice',
+        slug: 'code',
+        sortable: true,
+        formatter: (data) => {
+          const code = data.code as string
+          return code.toLowerCase()
+        }
+      },
+      { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
+      { headerLabel: 'Amount', slug: 'total' },
+      { headerLabel: 'Date', slug: 'created_at', grayed: true, sortable: true }
+    ],
+    data: [
+      {
+        code: 'CC2300028X',
+        customer: 'Cobee',
+        total: '-',
+        created_at: 'Sep 22, 2023',
+        draft: true
+      },
+      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+    ]
+  }
+}
+
+export const WithSelectedOrderByDesc: Story = {
+  args: {
+    sortBy: 'created_at',
+    sortDirection: 'desc',
+    fields: [
+      {
+        headerLabel: 'Invoice',
+        slug: 'code',
+        sortable: true,
+        formatter: (data) => {
+          const code = data.code as string
+          return code.toLowerCase()
+        }
+      },
+      { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
+      { headerLabel: 'Amount', slug: 'total' },
+      { headerLabel: 'Date', slug: 'created_at', grayed: true, sortable: true }
+    ],
+    data: [
+      {
+        code: 'CC2300028X',
+        customer: 'Cobee',
+        total: '-',
+        created_at: 'Sep 22, 2023',
+        draft: true
+      },
+      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+    ]
+  }
+}
+
 export const WithMonospacedFont: Story = {
   args: {
     fields: [

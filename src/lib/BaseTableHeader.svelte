@@ -9,7 +9,8 @@
   export let currentIndex: number
   export let field: TableField
 
-  let sortDirection = 'desc'
+  export let sortBy = ''
+  export let sortDirection = 'desc'
 
   $: headerStyles = clsx(
     { 'pl-4': currentIndex === 0 },
@@ -18,6 +19,8 @@
     { 'pr-3': currentIndex < totalFields - 1 },
     { 'w-full': field.fullWidth }
   )
+
+  $: buttonStyles = clsx({ 'hidden group-hover:block': sortBy !== field.slug })
 
   function toggleDirection() {
     if (sortDirection === 'desc') {
@@ -30,11 +33,14 @@
   }
 </script>
 
-<th scope="col" class="{headerStyles} text-left text-sm text-neutral-500 font-semibold py-2.5">
+<th
+  scope="col"
+  class="{headerStyles} text-left text-sm text-neutral-500 font-semibold py-2.5 group"
+>
   <span class="flex items-center justify-start space-x-1">
     <span>{field.headerLabel}</span>
     {#if field.sortable}
-      <button class="mt-px" on:click={toggleDirection}>
+      <button class="{buttonStyles} mt-px" on:click={toggleDirection}>
         {#if sortDirection === 'desc'}
           <svg
             width="12"

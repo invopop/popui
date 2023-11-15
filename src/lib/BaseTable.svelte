@@ -7,17 +7,26 @@
 
   const dispatch = createEventDispatcher()
 
+  export let sortBy = ''
+  export let sortDirection = ''
   export let fields: TableField[] = []
   export let data: TableDataRow[] = []
   export let getActions: TableActionProp = undefined
 </script>
 
-<div class="w-full rounded border border-neutral-50 font-sans">
+<div class="w-full rounded border border-neutral-100 font-sans">
   <table class="w-full">
     <thead>
-      <tr class="border-b border-neutral-50">
+      <tr class="border-b border-neutral-100">
         {#each fields as field, i (i)}
-          <BaseTableHeader {field} totalFields={fields.length} currentIndex={i} on:orderBy />
+          <BaseTableHeader
+            {sortBy}
+            {sortDirection}
+            {field}
+            totalFields={fields.length}
+            currentIndex={i}
+            on:orderBy
+          />
         {/each}
       </tr>
     </thead>

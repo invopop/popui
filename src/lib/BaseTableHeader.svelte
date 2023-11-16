@@ -35,7 +35,7 @@
 
 <th
   scope="col"
-  class="{headerStyles} text-left text-sm text-neutral-500 font-semibold py-2.5 group"
+  class="{headerStyles} bg-white text-left text-sm text-neutral-500 font-semibold py-2.5 group sticky top-0"
 >
   <span class="flex items-center justify-start space-x-1">
     <span>{field.headerLabel}</span>

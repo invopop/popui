@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 
 import BaseTable from '../lib/BaseTable.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
+import FixedHeightDecorator from './decorartors/FixedHeightDecorator.svelte'
 import type { TableDataRow } from '$lib/types.js'
 import { ArrowDownOnSquare, Cog6Tooth, Pencil } from '@steeze-ui/heroicons'
 
@@ -202,6 +203,62 @@ export const WithMonospacedFont: Story = {
         total: '-',
         created_at: 'Sep 22, 2023',
         draft: true
+      },
+      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+    ]
+  }
+}
+
+export const WithStickyHeaders: Story = {
+  decorators: [() => FixedHeightDecorator],
+  args: {
+    fields: [
+      {
+        headerLabel: 'Invoice',
+        slug: 'code',
+        sortable: true
+      },
+      { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
+      { headerLabel: 'Amount', slug: 'total', monospaced: true },
+      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+    ],
+    data: [
+      {
+        code: 'CC2300028X',
+        customer: 'Cobee',
+        total: '-',
+        created_at: 'Sep 22, 2023',
+        draft: true
+      },
+      {
+        code: 'CAB-0042',
+        customer: 'Cabify, Inc',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
+      },
+      {
+        code: 'CAB-0042',
+        customer: 'Cabify, Inc',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
+      },
+      {
+        code: 'CAB-0042',
+        customer: 'Cabify, Inc',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
+      },
+      {
+        code: 'CAB-0042',
+        customer: 'Cabify, Inc',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
+      },
+      {
+        code: 'CAB-0042',
+        customer: 'Cabify, Inc',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
       },
       { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }
     ]

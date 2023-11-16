@@ -30,7 +30,7 @@
         {/each}
         {#if getActions instanceof Function}
           <!-- if table has actions cell we need to add an extra header -->
-          <tr class="bg-white" />
+          <th scope="col" class="bg-white sticky top-0 z-10" />
         {/if}
       </tr>
     </thead>

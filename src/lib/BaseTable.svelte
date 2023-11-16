@@ -28,6 +28,10 @@
             on:orderBy
           />
         {/each}
+        {#if getActions instanceof Function}
+          <!-- if table has actions cell we need to add an extra header -->
+          <tr class="bg-white" />
+        {/if}
       </tr>
     </thead>
     <tbody>

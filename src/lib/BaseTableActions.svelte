@@ -14,20 +14,20 @@
 
 <BaseDropdown bind:this={actionDropdown} position="right">
   <Icon slot="trigger" src={EllipsisHorizontal} class="w-5 mt-1" />
-  <ul class="bg-white border border-neutral-100 rounded-2xl space-y-0.5 p-1 min-w-dropdown">
+  <ul class="bg-white border border-neutral-100 rounded space-y-0.5 p-1 min-w-dropdown">
     {#each actions as action}
       <li>
         <button
-          class="hover:bg-neutral-50 rounded-xl py-3 px-4 flex items-center space-x-2 w-full"
-          on:click={() => {
-            dispatch('click', action)
+          class="hover:bg-neutral-50 rounded py-1.5 px-2 flex items-center space-x-2 w-full"
+          on:click|stopPropagation={() => {
+            dispatch('clickAction', action)
             actionDropdown.toggle()
           }}
         >
           {#if action.icon}
             <Icon src={action.icon} class="w-5 text-neutral-500" />
           {/if}
-          <span class="text-sm font-medium text-neutral-800">{action.label}</span>
+          <span class="text-sm font-medium text-neutral-800 whitespace-nowrap">{action.label}</span>
         </button>
       </li>
     {/each}

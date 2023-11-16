@@ -53,7 +53,7 @@
             <td class="pl-3 pr-4">
               <BaseTableActions
                 {actions}
-                on:click={(event) => {
+                on:clickAction={(event) => {
                   dispatch('action', { row, action: event.detail })
                 }}
               />

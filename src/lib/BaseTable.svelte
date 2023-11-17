@@ -69,8 +69,8 @@
           <tr>
             <th
               scope="colgroup"
-              colspan={fields.length}
-              class="bg-neutral-50 px-4 py-2.5 text-left text-sm font-medium text-neutral-500 sticky top-9"
+              colspan={fields.length + 1}
+              class="bg-neutral-50 px-4 py-2.5 text-left text-sm font-medium text-neutral-500 sticky top-9 z-10"
             >
               <span>{group.label}</span>
               <BaseCounter content={group.rows.length} />

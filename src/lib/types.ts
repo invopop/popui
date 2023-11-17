@@ -80,6 +80,13 @@ export type TableAction = {
 
 export type TableActionProp = undefined | ((data: TableDataRow) => TableAction[])
 
+export type TableGroupLabelProp = undefined | ((data: TableDataRow) => string)
+
+export type TableGroup = {
+  label: string
+  rows: TableDataRow[]
+}
+
 export type TableField = {
   headerLabel: string
   slug: string

@@ -24,7 +24,7 @@
   </button>
   {#if isOpen}
     <div
-      class="{dropdownStyles} absolute max-h-40 z-10 overflow-auto mt-2"
+      class="{dropdownStyles} absolute max-h-40 z-20 overflow-auto mt-2"
       use:clickOutside
       on:click_outside={() => {
         closedFromClickOutside = true

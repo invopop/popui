@@ -1,23 +1,43 @@
 <script lang="ts">
-  import DatePicker from '@beyonk/svelte-datepicker/src/components/DatePicker.svelte'
-  import { CalendarStyle } from '@beyonk/svelte-datepicker/src/calendar-style'
-  import { createEventDispatcher } from 'svelte'
+  import flatpickr from 'flatpickr'
+  import 'flatpickr/dist/flatpickr.min.css'
+  import { createEventDispatcher, onMount } from 'svelte'
 
   const dispatch = createEventDispatcher()
 
   export let label = 'Date'
 
-  let currentLabel = label
+  let datePickerEl: HTMLElement
+  let selectedLabel = ''
 
-  const styling = new CalendarStyle({
-    timeConfirmButtonColor: '#169958',
-    dayHighlightedBackgroundColor: '#169958',
-    highlightColor: '#169958',
-    passiveHighlightColor: '#F3F5F5',
-    dayTextColorInRange: 'black',
-    monthYearTextColor: '09101C',
-    legendTextColor: '7E7F7F',
-    toolbarBorderColor: '#F3F5F5'
+  onMount(() => {
+    flatpickr(datePickerEl, {
+      onChange: function (selectedDates: Date[], datesAsText: string) {
+        if (selectedDates.length === 0) {
+          clearDates()
+          return
+        }
+
+        if (selectedDates.length === 1) return
+
+        const from = getDate(selectedDates[0])
+        const to = getDate(selectedDates[1])
+
+        selectedLabel = datesAsText
+
+        dispatch('selected', { from, to })
+      },
+      wrap: true,
+      mode: 'range',
+      // minDate: "today",
+      dateFormat: 'Y-m-d'
+      // disable: [
+      //     function(date) {
+      //         // disable every multiple of 8
+      //         return !(date.getDate() % 8);
+      //     }
+      // ]
+    })
   })
 
   function getDate(date: Date) {
@@ -28,52 +48,34 @@
     return `${year}-${month}-${day}`
   }
 
-  function handleRangeSelected(event: CustomEvent) {
-    const from = getDate(event.detail.from)
-    const to = getDate(event.detail.to)
-    currentLabel = `${from} → ${to}`
-    dispatch('selected', { from, to })
-  }
-
   function clearDates() {
-    currentLabel = label
+    selectedLabel = ''
     dispatch('selected', { from: '', to: '' })
   }
 </script>
 
-<div class="relative">
-  <DatePicker
-    continueText="Confirm"
-    {styling}
-    range={true}
-    defaultRange={[1, 'day']}
-    on:range-selected={handleRangeSelected}
-  >
-    <button
-      class:pr-9={currentLabel === label}
-      class:pr-18={currentLabel !== label}
-      class="datepicker-trigger py-1.25 pl-3 border border-neutral-200 hover:border-neutral-300 w-full rounded text-neutral-800 text-base outline-accent-400"
-      >{currentLabel}</button
+<div bind:this={datePickerEl} class="relative">
+  <input
+    placeholder={label}
+    class="datepicker-trigger py-1.25 pl-3 border border-neutral-200 hover:border-neutral-300 w-full rounded text-neutral-800 placeholder-neutral-800 text-base outline-accent-400"
+    data-input
+  />
+  <button data-clear class:hidden={!selectedLabel} class="absolute right-10 top-2 mt-px z-20">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-4 h-4"
     >
-    {#if currentLabel !== label}
-      <button on:click|stopPropagation={clearDates} class="absolute right-10 top-2 mt-px z-10">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-4 h-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      </button>
-    {/if}
-  </DatePicker>
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+  </button>
 </div>
 
 <style>

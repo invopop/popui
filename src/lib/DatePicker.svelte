@@ -171,7 +171,7 @@
     <div
       class:left-0={position === 'left'}
       class:right-0={position === 'right'}
-      class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2"
+      class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-30"
     >
       <div class="flex border-b border-neutral-100">
         <div class="flex flex-col justify-around items-start px-3 py-2 border-r border-neutral-100">

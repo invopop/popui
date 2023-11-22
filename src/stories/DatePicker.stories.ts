@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 
 import DatePicker from '../lib/DatePicker.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
+import ItemPushedToRightDecorator from './decorartors/ItemPushedToRightDecorator.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -22,6 +23,8 @@ export const LeftPosition: Story = {
 }
 
 export const RightPosition: Story = {
+  decorators: [() => ItemPushedToRightDecorator],
+
   args: {
     label: 'Pick a Date',
     position: 'right'

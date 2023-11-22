@@ -32,15 +32,15 @@
   const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 })
   const endOfThisWeek = endOfWeek(today, { weekStartsOn: 1 })
   const startOfLastWeek = subWeeks(startOfThisWeek, 1)
-  const endOfLastWeek = subWeeks(endOfThisWeek, 1)
+  const endOfLastWeek = endOfWeek(startOfLastWeek, { weekStartsOn: 1 })
   const startOfThisMonth = startOfMonth(today)
   const endOfThisMonth = endOfMonth(today)
   const startOfLastMonth = subMonths(startOfThisMonth, 1)
-  const endOfLastMonth = subMonths(endOfThisMonth, 1)
+  const endOfLastMonth = endOfMonth(startOfLastMonth)
   const startOfThisQuarter = startOfQuarter(today)
   const endOfThisQuarter = endOfQuarter(today)
   const startOfLastQuarter = subQuarters(startOfThisQuarter, 1)
-  const endOfLastQuarter = subQuarters(endOfThisQuarter, 1)
+  const endOfLastQuarter = endOfQuarter(startOfLastQuarter)
 
   onMount(() => {
     datepicker = flatpickr(datePickerEl, {
@@ -131,6 +131,8 @@
 <div class="relative">
   <button
     on:click={() => (isOpen = !isOpen)}
+    class:pr-9={selectedLabel === label}
+    class:pr-16={selectedLabel !== label}
     class="datepicker-trigger w-full py-1.25 pl-3 border border-neutral-200 hover:border-neutral-300 rounded text-neutral-800 placeholder-neutral-800 text-base outline-accent-400"
     >{selectedLabel}</button
   >
@@ -169,7 +171,7 @@
     <div
       class:left-0={position === 'left'}
       class:right-0={position === 'right'}
-      class="inline-flex flex-col shadow rounded-lg absolute right-0 top-2"
+      class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2"
     >
       <div class="flex border-b border-neutral-100">
         <div class="flex flex-col justify-around items-start px-3 py-2 border-r border-neutral-100">

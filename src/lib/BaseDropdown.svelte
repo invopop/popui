@@ -1,20 +1,25 @@
 <script lang="ts">
-  import clsx from 'clsx'
+  import { offset, flip, shift } from 'svelte-floating-ui/dom'
+  import { createFloatingActions } from 'svelte-floating-ui'
   import { clickOutside } from './clickOutside.js'
 
-  export let position: 'left' | 'right' = 'left'
+  const [floatingRef, floatingContent] = createFloatingActions({
+    strategy: 'absolute',
+    placement: 'bottom-end',
+    middleware: [offset(6), flip(), shift()]
+  })
+
   let closedFromClickOutside = false
   let isOpen = false
-
-  $: dropdownStyles = clsx({ 'left-0': position === 'left' }, { 'right-0': position === 'right' })
 
   export const toggle = () => {
     isOpen = !isOpen
   }
 </script>
 
-<div class="relative">
+<div class="w-full">
   <button
+    use:floatingRef
     on:click|stopPropagation={async () => {
       if (closedFromClickOutside) return
       isOpen = !isOpen
@@ -24,7 +29,8 @@
   </button>
   {#if isOpen}
     <div
-      class="{dropdownStyles} absolute max-h-40 z-20 overflow-auto mt-2"
+      class="max-h-40 mt-2"
+      use:floatingContent
       use:clickOutside
       on:click_outside={() => {
         closedFromClickOutside = true

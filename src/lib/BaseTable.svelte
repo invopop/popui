@@ -4,7 +4,8 @@
     TableDataRow,
     TableField,
     TableGroup,
-    TableGroupLabelProp
+    TableGroupLabelProp,
+    TableSortBy
   } from './types.js'
   import BaseTableHeader from './BaseTableHeader.svelte'
   import BaseTableActions from './BaseTableActions.svelte'
@@ -15,7 +16,7 @@
   const dispatch = createEventDispatcher()
 
   export let sortBy = ''
-  export let sortDirection = ''
+  export let sortDirection: TableSortBy = ''
   export let fields: TableField[] = []
   export let data: TableDataRow[] = []
   export let getActions: TableActionProp = undefined
@@ -80,7 +81,7 @@
         {#each group.rows as row}
           {@const actions = getActions instanceof Function ? getActions(row) : []}
           <tr
-            class="hover:bg-neutral-100 rounded hover:cursor-pointer"
+            class="hover:bg-neutral-50 active:bg-accent-50 hover:cursor-pointer"
             on:click={() => {
               dispatch('rowClick', row)
             }}

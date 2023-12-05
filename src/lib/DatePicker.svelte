@@ -16,6 +16,8 @@
     endOfQuarter,
     subQuarters
   } from 'date-fns'
+  import { Icon } from '@steeze-ui/svelte-icon'
+  import { Calendar } from '@steeze-ui/heroicons'
 
   const dispatch = createEventDispatcher()
 
@@ -25,7 +27,7 @@
   let datePickerEl: HTMLElement
   let selectedLabel = label
   let datepicker: Instance
-  let selectedDates = { from: '', to: '' }
+  let selectedDates = { from: { value: '', display: '' }, to: { value: '', display: '' } }
   let isOpen = false
 
   const today = new Date()
@@ -77,7 +79,7 @@
     const month = ('0' + (date.getMonth() + 1)).slice(-2)
     const day = ('0' + date.getDate()).slice(-2)
 
-    return `${year}-${month}-${day}`
+    return { value: `${year}-${month}-${day}`, display: `${day}/${month}/${year}` }
   }
 
   function cancel() {
@@ -87,14 +89,17 @@
 
   function confirm() {
     isOpen = false
-    selectedLabel = selectedDates.from ? `${selectedDates.from} → ${selectedDates.to}` : label
-    dispatch('selected', selectedDates)
+    selectedLabel = getLabel()
+
+    dispatch('selected', { from: selectedDates.from.value, to: selectedDates.to.value })
   }
 
-  function clearDates() {
-    datepicker.clear()
-    selectedDates = { from: '', to: '' }
-    confirm()
+  function getLabel() {
+    if (!selectedDates.from.value) return label
+
+    if (selectedDates.from.value === selectedDates.to.value) return selectedDates.from.display
+
+    return `${selectedDates.from.display} → ${selectedDates.to.display}`
   }
 
   function onThisWeek() {
@@ -128,88 +133,71 @@
   }
 </script>
 
-<div class="relative">
-  <button
-    on:click={() => (isOpen = !isOpen)}
-    class:pr-9={selectedLabel === label}
-    class:pr-16={selectedLabel !== label}
-    class="datepicker-trigger w-full py-1.25 pl-3 border border-neutral-200 hover:border-neutral-300 rounded text-neutral-800 placeholder-neutral-800 text-base outline-accent-400"
-    >{selectedLabel}</button
-  >
-  <button
-    on:click={clearDates}
-    class:hidden={selectedLabel === label}
-    class="absolute right-10 top-2 mt-px z-20"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="w-4 h-4"
+<div>
+  <div class="relative">
+    <button
+      on:click={() => (isOpen = !isOpen)}
+      class="datepicker-trigger w-full py-1.25 pl-7 pr-8 border border-neutral-200 hover:border-neutral-300 rounded text-neutral-800 placeholder-neutral-800 text-base outline-accent-400"
+      >{selectedLabel}</button
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    </svg>
-  </button>
-</div>
+    <Icon src={Calendar} class="h-4 w-4 absolute top-2 left-2 mt-0.5 text-neutral-500" />
+  </div>
 
-<div class="relative">
-  <Transition
-    show={isOpen}
-    enter="transition ease-out duration-100"
-    enterFrom="transform opacity-0 scale-95"
-    enterTo="transform opacity-100 scale-100"
-    leave="transition ease-in duration-75"
-    leaveFrom="transform opacity-100 scale-100"
-    leaveTo="transform opacity-0 scale-95"
-  >
-    <div
-      class:left-0={position === 'left'}
-      class:right-0={position === 'right'}
-      class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-30"
+  <div class="relative">
+    <Transition
+      show={isOpen}
+      enter="transition ease-out duration-100"
+      enterFrom="transform opacity-0 scale-95"
+      enterTo="transform opacity-100 scale-100"
+      leave="transition ease-in duration-75"
+      leaveFrom="transform opacity-100 scale-100"
+      leaveTo="transform opacity-0 scale-95"
     >
-      <div class="flex border-b border-neutral-100">
-        <div class="flex flex-col justify-around items-start px-3 py-2 border-r border-neutral-100">
-          <button
-            on:click={onThisWeek}
-            class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Week</button
+      <div
+        class:left-0={position === 'left'}
+        class:right-0={position === 'right'}
+        class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-30"
+      >
+        <div class="flex border-b border-neutral-100">
+          <div
+            class="flex flex-col justify-around items-start px-3 py-2 border-r border-neutral-100"
           >
-          <button
-            on:click={onLastWeek}
-            class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Week</button
-          >
-          <button
-            on:click={onThisMonth}
-            class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Month</button
-          >
-          <button
-            on:click={onLastMonth}
-            class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Month</button
-          >
-          <button
-            on:click={onThisQuarter}
-            class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Quarter</button
-          >
-          <button
-            on:click={onLastQuarter}
-            class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Quarter</button
+            <button
+              on:click={onThisWeek}
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Week</button
+            >
+            <button
+              on:click={onLastWeek}
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Week</button
+            >
+            <button
+              on:click={onThisMonth}
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Month</button
+            >
+            <button
+              on:click={onLastMonth}
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Month</button
+            >
+            <button
+              on:click={onThisQuarter}
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Quarter</button
+            >
+            <button
+              on:click={onLastQuarter}
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Quarter</button
+            >
+          </div>
+          <div bind:this={datePickerEl} />
+        </div>
+        <div class="p-4 flex justify-end items-center space-x-3">
+          <BaseButton variant="secondary" on:click={cancel}>Cancel</BaseButton>
+          <BaseButton variant="primary" on:click={confirm} disabled={!selectedDates.to.value}
+            >Confirm</BaseButton
           >
         </div>
-        <div bind:this={datePickerEl} />
       </div>
-      <div class="p-4 flex justify-end items-center space-x-3">
-        <BaseButton variant="secondary" on:click={cancel}>Cancel</BaseButton>
-        <BaseButton variant="primary" on:click={confirm} disabled={!selectedDates.to}
-          >Confirm</BaseButton
-        >
-      </div>
-    </div>
-  </Transition>
+    </Transition>
+  </div>
 </div>
 
 <style>
@@ -402,6 +390,6 @@
     -moz-appearance: none;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI0YzRjVGNSIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwQTBBMEEiIHN0cm9rZS13aWR0aD0iMS4yIi8+Cjwvc3ZnPgo=');
     background-repeat: no-repeat;
-    background-position: center right 12px;
+    background-position: center right 8px;
   }
 </style>

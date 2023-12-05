@@ -126,6 +126,7 @@ export const WithFormatter: Story = {
 export const WithSelectedOrderByAsc: Story = {
   args: {
     sortBy: 'created_at',
+    sortDirection: 'asc',
     fields: [
       {
         headerLabel: 'Invoice',

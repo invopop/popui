@@ -57,7 +57,11 @@
     {/each}
   </select>
   {#if resolvedIcon}
-    <Icon src={resolvedIcon} theme={iconTheme} class="h-4 w-4 absolute top-2 left-2 mt-0.5" />
+    <Icon
+      src={resolvedIcon}
+      theme={iconTheme}
+      class="h-4 w-4 absolute top-2 left-2 mt-0.5 text-neutral-500"
+    />
   {/if}
 </div>
 
@@ -68,6 +72,6 @@
     -moz-appearance: none;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI0YzRjVGNSIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwQTBBMEEiIHN0cm9rZS13aWR0aD0iMS4yIi8+Cjwvc3ZnPgo=');
     background-repeat: no-repeat;
-    background-position: center right 12px;
+    background-position: center right 8px;
   }
 </style>

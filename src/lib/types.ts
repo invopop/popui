@@ -78,6 +78,8 @@ export type TableAction = {
   slug: string
 }
 
+export type TableSortBy = '' | 'asc' | 'desc'
+
 export type TableActionProp = undefined | ((data: TableDataRow) => TableAction[])
 
 export type TableGroupLabelProp = undefined | ((data: TableDataRow) => string)

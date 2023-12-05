@@ -12,7 +12,7 @@
   let actionDropdown: BaseDropdown
 </script>
 
-<BaseDropdown bind:this={actionDropdown} position="right">
+<BaseDropdown bind:this={actionDropdown}>
   <Icon slot="trigger" src={EllipsisHorizontal} class="w-5 mt-1" />
   <ul class="bg-white border border-neutral-100 rounded space-y-0.5 p-1 min-w-dropdown">
     {#each actions as action}

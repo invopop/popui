@@ -47,7 +47,7 @@
 <div class="w-full rounded border border-neutral-100 font-sans">
   <table class="w-full">
     <thead>
-      <tr class="border-b border-neutral-100">
+      <tr class="border-b border-neutral-100 relative">
         {#each fields as field, i (i)}
           <BaseTableHeader
             {sortBy}
@@ -71,7 +71,7 @@
             <th
               scope="colgroup"
               colspan={fields.length + 1}
-              class="bg-neutral-50 px-4 py-2.5 text-left text-sm font-medium text-neutral-500 sticky top-9 z-10"
+              class="bg-neutral-50 px-4 py-2.5 text-left text-sm font-medium text-neutral-500 sticky top-9"
             >
               <span>{group.label}</span>
               <BaseCounter content={group.rows.length} />

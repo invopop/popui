@@ -125,6 +125,17 @@ export const WithFormatter: Story = {
 
 export const WithSelectedOrderByAsc: Story = {
   args: {
+    groupLabel: (data) => {
+      const months = {
+        '02': 'February',
+        '03': 'March',
+        '07': 'July'
+      }
+
+      const parts = data.created_at.split('-')
+
+      return months[parts[1]]
+    },
     sortBy: 'created_at',
     sortDirection: 'asc',
     fields: [
@@ -146,7 +157,7 @@ export const WithSelectedOrderByAsc: Story = {
         code: 'CC2300028X',
         customer: 'Cobee',
         total: '-',
-        created_at: 'Sep 22, 2023',
+        created_at: '2023-02-03',
         draft: true
       },
       { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }

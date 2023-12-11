@@ -33,7 +33,7 @@
 
 <th
   scope="col"
-  class="{outerStyles} bg-white text-left text-sm text-neutral-500 font-medium py-2.5 group sticky top-0"
+  class="{outerStyles} bg-white text-left text-sm text-neutral-500 font-medium py-2.5 group sticky z-10 top-0"
 >
   <span class="{headerStyles} -ml-1 flex">
     {#if field.sortable}

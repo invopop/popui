@@ -60,7 +60,7 @@
     <Icon
       src={resolvedIcon}
       theme={iconTheme}
-      class="h-4 w-4 absolute top-2 left-2 mt-0.5 text-neutral-500"
+      class="h-4 w-4 absolute top-2 left-2 text-neutral-500"
     />
   {/if}
 </div>

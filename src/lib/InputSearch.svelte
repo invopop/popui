@@ -55,7 +55,7 @@
     on:focus={() => dispatch('focus')}
     on:blur={(e) => dispatch('blur', e)}
   />
-  <Icon src={icon} class="absolute text-neutral-500 w-4 h-4 left-2 mt-px" />
+  <Icon src={icon} class="absolute text-neutral-500 w-4 h-4 left-2" />
 
   {#if shortcut}
     <div class="absolute top-1 right-0 flex py-1.5 pr-1.5 space-x-1">

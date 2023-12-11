@@ -85,6 +85,7 @@
   function cancel() {
     isOpen = false
     datepicker.clear()
+    dispatch('selected', { from: '', to: '' })
   }
 
   function confirm() {
@@ -140,7 +141,7 @@
       class="datepicker-trigger w-full py-1.25 pl-7 pr-8 border border-neutral-200 hover:border-neutral-300 rounded text-neutral-800 placeholder-neutral-800 text-base outline-accent-400"
       >{selectedLabel}</button
     >
-    <Icon src={Calendar} class="h-4 w-4 absolute top-2 left-2 mt-0.5 text-neutral-500" />
+    <Icon src={Calendar} class="h-4 w-4 absolute top-2 left-2 text-neutral-500" />
   </div>
 
   <div class="relative">

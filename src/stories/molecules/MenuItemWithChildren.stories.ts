@@ -4,6 +4,7 @@ import MenuItemWithChildren from './MenuItemWithChildren.svelte'
 import MarginDecorator from '../decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from '../decorartors/MaxWidthSmDecorator.svelte'
 import DarkBackgroundDecorator from '../decorartors/DarkBackgroundDecorator.svelte'
+import { Document } from '@steeze-ui/heroicons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -57,5 +58,20 @@ export const ChildActive: Story = {
     collapsable: true,
     open: true,
     children: [{ label: 'Child Item' }, { label: 'Another Child Item', active: true }]
+  }
+}
+
+export const CollapsedSidebarWithChild: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    icon: Document,
+    collapsedSidebar: true,
+    collapsable: true,
+    open: true,
+    url: 'parent-item',
+    children: [
+      { label: 'Child Item', url: 'child-item' },
+      { label: 'Another Child Item', url: 'another-child-item', active: true }
+    ]
   }
 }

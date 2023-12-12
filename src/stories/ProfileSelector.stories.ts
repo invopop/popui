@@ -23,3 +23,11 @@ export const Default: Story = {
     name: 'Sam Lown'
   }
 }
+
+export const Collapsed: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    collapsed: true,
+    name: 'Sam Lown'
+  }
+}

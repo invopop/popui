@@ -24,7 +24,7 @@ export type SelectOption = {
 export type DrawerOption = SelectOption & {
   footer?: boolean
   selected?: boolean
-  icon?: IconSource
+  icon?: IconSource | undefined
 }
 
 export type Company = {

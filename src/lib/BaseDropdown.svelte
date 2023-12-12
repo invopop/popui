@@ -19,7 +19,7 @@
   }
 </script>
 
-<div class="w-full relative">
+<div class="w-full">
   <button
     use:floatingRef
     on:click|stopPropagation={async () => {
@@ -32,7 +32,7 @@
   </button>
   {#if isOpen}
     <div
-      class="max-h-40 mt-2 absolute z-10"
+      class="max-h-40 mt-2 absolute z-30"
       use:floatingContent
       use:clickOutside
       on:click_outside={() => {

@@ -1,14 +1,32 @@
 <script lang="ts">
   import type { DrawerOption } from './types.ts'
   import InputCheckbox from './InputCheckbox.svelte'
+  import { Check } from '@steeze-ui/heroicons'
+  import { Icon } from '@steeze-ui/svelte-icon'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 
   export let multiple = false
   export let item: DrawerOption
 </script>
 
-<li class="px-2 py-1.5 hover:bg-neutral-50 rounded flex items-center justify-between space-x-2">
-  <span class="text-neutral-800 text-sm font-medium">{item.label}</span>
+<button
+  class:bg-accent-50={item.selected}
+  class="hover:bg-neutral-50 rounded py-1.5 px-2 flex items-center justify-start space-x-2 w-full"
+  on:click|stopPropagation={() => {
+    dispatch('click', item.value)
+  }}
+>
+  {#if item.icon}
+    <Icon src={item.icon} class="w-5 h-5 text-neutral-500" />
+  {/if}
+  <span class="text-sm font-medium text-neutral-800 whitespace-nowrap flex-1 text-left"
+    >{item.label}</span
+  >
   {#if multiple}
     <InputCheckbox />
+  {:else if item.selected}
+    <Icon src={Check} class="w-5 h-5 text-accent-500" />
   {/if}
-</li>
+</button>

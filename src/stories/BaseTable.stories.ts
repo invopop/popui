@@ -45,7 +45,11 @@ export const WithActions: Story = {
       }
 
       if (data.code === 'CAB-0042') {
-        return [{ icon: ArrowDownOnSquare, label: 'F2023-101.pdf', slug: 'config' }]
+        return [
+          { icon: Cog6Tooth, label: 'Configure', slug: 'config' },
+          { icon: Pencil, label: 'Edit', slug: 'edit' },
+          { icon: ArrowDownOnSquare, label: 'F2023-101.pdf', slug: 'config', footer: true }
+        ]
       }
 
       return []

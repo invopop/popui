@@ -34,14 +34,29 @@
     { 'p-2': !$$slots.default },
     { 'text-white': ['primary', 'danger', 'dark'].includes(variant) },
     { 'text-neutral-800': ['default', 'secondary'].includes(variant) },
-    { 'border-white-10 hover:border-white-20 focus:border-white-40': variant === 'dark' },
-    { 'border-neutral-200 hover:border-neutral-300 focus:border-neutral-400': variant !== 'dark' }
+    { 'border border-white-10 hover:border-white-20 focus:border-white-40': variant === 'dark' },
+    {
+      'border border-neutral-200 hover:border-neutral-300 focus:border-neutral-400':
+        variant === 'default'
+    },
+    { 'space-x-1': icon && $$slots.default }
   )
 
   $: iconStyles = clsx(
-    { 'text-neutral-500': ['default', 'secondary'].includes(variant) },
-    { 'text-white-70': !['default', 'secondary'].includes(variant) }
+    { 'text-neutral-500': ['default', 'secondary'].includes(variant) && $$slots.default },
+    { 'text-neutral-800': ['default', 'secondary'].includes(variant) && !$$slots.default },
+    { 'text-white-70': !['default', 'secondary'].includes(variant) && $$slots.default },
+    { 'text-white': !['default', 'secondary'].includes(variant) && !$$slots.default }
   )
+
+  $: overlayClasses = clsx({
+    'group-hover:bg-black/[.16] group-active:bg-black/[.32]': [
+      'primary',
+      'danger',
+      'dark'
+    ].includes(variant),
+    'group-hover:bg-black/[.04] group-active:bg-black/[.12]': ['secondary'].includes(variant)
+  })
 
   onMount(async () => {
     resolvedIcon = await resolveIcon(icon)
@@ -60,14 +75,15 @@
 <button
   type="button"
   {disabled}
-  class="{buttonStyles} flex items-center justify-center rounded border font-medium space-x-1 font-sans"
+  class="{buttonStyles} flex items-center justify-center rounded font-medium font-sans relative group"
   {...$$restProps}
   on:click={handleClick}
 >
+  <span class="{overlayClasses} absolute inset-0 rounded" />
   {#if resolvedIcon}
-    <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5" />
+    <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5 z-10" />
   {/if}
   {#if $$slots.default}
-    <span><slot /></span>
+    <span class="z-10"><slot /></span>
   {/if}
 </button>

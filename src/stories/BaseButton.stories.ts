@@ -88,6 +88,13 @@ export const SecondaryWithIcon: Story = {
   }
 }
 
+export const SecondaryWithOnlyIcon: Story = {
+  args: {
+    icon: Cog6Tooth,
+    variant: 'secondary'
+  }
+}
+
 export const Danger: Story = {
   args: {
     slot: 'Danger Button',
@@ -98,6 +105,13 @@ export const Danger: Story = {
 export const DangerWithIcon: Story = {
   args: {
     slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'danger'
+  }
+}
+
+export const DangerWithOnlyIcon: Story = {
+  args: {
     icon: Cog6Tooth,
     variant: 'danger'
   }

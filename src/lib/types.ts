@@ -23,6 +23,8 @@ export type SelectOption = {
 
 export type DrawerOption = SelectOption & {
   footer?: boolean
+  selected?: boolean
+  icon?: IconSource
 }
 
 export type Company = {
@@ -76,6 +78,7 @@ export type TableAction = {
   icon?: IconSource
   label: string
   slug: string
+  footer?: boolean
 }
 
 export type TableSortBy = '' | 'asc' | 'desc'

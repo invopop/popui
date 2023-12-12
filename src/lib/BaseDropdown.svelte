@@ -10,7 +10,7 @@
   })
 
   let closedFromClickOutside = false
-  let isOpen = false
+  export let isOpen = false
 
   export const toggle = () => {
     isOpen = !isOpen
@@ -24,6 +24,7 @@
       if (closedFromClickOutside) return
       isOpen = !isOpen
     }}
+    class="w-full"
   >
     <slot name="trigger" />
   </button>

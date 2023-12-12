@@ -1,16 +1,18 @@
 <script lang="ts">
-  import { offset, flip, shift } from 'svelte-floating-ui/dom'
+  import { offset, flip, shift, type Placement } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import { clickOutside } from './clickOutside.js'
 
+  export let isOpen = false
+  export let placement: Placement = 'bottom-end'
+
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: 'absolute',
-    placement: 'bottom-end',
+    placement,
     middleware: [offset(6), flip(), shift()]
   })
 
   let closedFromClickOutside = false
-  export let isOpen = false
 
   export const toggle = () => {
     isOpen = !isOpen

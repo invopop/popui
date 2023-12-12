@@ -35,11 +35,11 @@
     }
 
     selectedCompany = companies.find((c) => c.id === event.detail) || null
-    dispatch('select', selectCompany)
+    dispatch('select', selectedCompany)
   }
 </script>
 
-<BaseDropdown bind:isOpen bind:this={companyDropdown}>
+<BaseDropdown bind:isOpen bind:this={companyDropdown} placement="bottom-start">
   <span
     slot="trigger"
     class="text-white text-sm font-medium flex items-center justify-between space-x-2 border border-white-10 hover:border-white-20 focus:bg-white-5 pl-1.5 pr-2 py-[7px] rounded w-full"

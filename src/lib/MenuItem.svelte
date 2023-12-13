@@ -37,8 +37,8 @@
     { 'text-white font-medium': !isFolderItem },
     { 'text-white-40': isFolderItem },
     { 'bg-white-10': active },
-    { 'border border-transparent hover:border-white-5 group': collapsedSidebar },
-    { 'w-full': !collapsedSidebar }
+    { 'border border-transparent hover:border-white-5 group p-1.5': collapsedSidebar },
+    { 'w-full pl-1.5 pr-2 py-1.5': !collapsedSidebar }
   )
 
   $: iconStyles = clsx({ 'group-hover:text-white': collapsedSidebar })
@@ -48,7 +48,7 @@
   })
 
   $: items = [
-    { label, value: url, selected: active, icon },
+    { label, value: url, selected: active, icon: resolvedIcon },
     ...(children || []).map((c) => ({
       label: c.label || '',
       value: c.url || '',
@@ -90,7 +90,7 @@
     on:mouseleave={handleBlur}
     on:click={handleClick}
     title={label}
-    class="{itemStyles} text-sm flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 px-2 py-1.5 rounded"
+    class="{itemStyles} text-sm flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 rounded"
   >
     <span class="flex items-center space-x-1">
       {#if resolvedIcon}

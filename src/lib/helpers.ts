@@ -14,7 +14,7 @@ export async function resolveIcon(
   }
 
   try {
-    const { [toPascalCase(icon)]: i } = await import('@steeze-ui/heroicons')
+    const { [toPascalCase(icon)]: i } = await import('@invopop/ui-icons')
     return i
   } catch (error) {
     console.log(error)

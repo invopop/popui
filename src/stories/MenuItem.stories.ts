@@ -33,6 +33,14 @@ export const WithIcon: Story = {
   }
 }
 
+export const WithUnresolvedIcon: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    label: 'Item',
+    icon: 'document-text'
+  }
+}
+
 export const WithIconAsText: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

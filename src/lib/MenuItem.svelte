@@ -37,8 +37,8 @@
     { 'text-white font-medium': !isFolderItem },
     { 'text-white-40': isFolderItem },
     { 'bg-white-10': active },
-    { 'border border-transparent hover:border-white-5 group p-1.5': collapsedSidebar },
-    { 'w-full pl-1.5 pr-2 py-1.5': !collapsedSidebar }
+    { 'border border-transparent hover:border-white-5 group p-[5px]': collapsedSidebar },
+    { 'w-full pl-[5px] pr-[7px] py-[5px]': !collapsedSidebar }
   )
 
   $: iconStyles = clsx({ 'group-hover:text-white': collapsedSidebar })
@@ -62,6 +62,7 @@
   }
 
   function handleClickChild(event: CustomEvent) {
+    hovered = false
     dispatch('click', event.detail)
   }
 

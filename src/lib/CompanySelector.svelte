@@ -6,6 +6,7 @@
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContext from './DrawerContext.svelte'
   import { createEventDispatcher } from 'svelte'
+  import clsx from 'clsx'
 
   const dispatch = createEventDispatcher()
 
@@ -14,6 +15,7 @@
 
   let companyDropdown: BaseDropdown
   let isOpen = false
+  export let collapsed = false
 
   $: name = selectedCompany?.name || ''
   $: icon = isOpen ? ChevronUp : ChevronDown
@@ -25,6 +27,11 @@
     })),
     { value: 'add', label: 'Add company', icon: Plus, footer: true }
   ] as DrawerOption[]
+
+  $: styles = clsx(
+    { 'p-[7px]': collapsed },
+    { 'space-x-2 w-full pl-1.5 pr-2 py-[7px]': !collapsed }
+  )
 
   function selectCompany(event: CustomEvent) {
     companyDropdown.toggle()
@@ -39,16 +46,26 @@
   }
 </script>
 
-<BaseDropdown bind:isOpen bind:this={companyDropdown} placement="bottom-start">
+<BaseDropdown
+  bind:isOpen
+  bind:this={companyDropdown}
+  placement="bottom-start"
+  fullWidth={!collapsed}
+>
   <span
     slot="trigger"
-    class="text-white text-sm font-medium flex items-center justify-between space-x-2 border border-white-10 hover:border-white-20 focus:bg-white-5 pl-1.5 pr-2 py-[7px] rounded w-full"
+    title={name}
+    class="{styles} text-white text-sm font-medium flex items-center justify-between border border-transparent focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
   >
-    <span class="flex items-center space-x-2">
+    <span class:space-x-2={!collapsed} class="flex items-center">
       <ProfileAvatar {name} dark large />
-      <span>{name}</span>
+      {#if !collapsed}
+        <span>{name}</span>
+      {/if}
     </span>
-    <Icon src={icon} class="h-4 w-4 text-white-40 mt-px" />
+    {#if !collapsed}
+      <Icon src={icon} class="h-4 w-4 text-white-40 mt-px" />
+    {/if}
   </span>
   <DrawerContext {items} on:click={selectCompany} />
 </BaseDropdown>

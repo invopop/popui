@@ -4,6 +4,7 @@
   import { clickOutside } from './clickOutside.js'
 
   export let isOpen = false
+  export let fullWidth = false
   export let placement: Placement = 'bottom-end'
 
   const [floatingRef, floatingContent] = createFloatingActions({
@@ -19,14 +20,14 @@
   }
 </script>
 
-<div class="w-full">
+<div>
   <button
     use:floatingRef
     on:click|stopPropagation={async () => {
       if (closedFromClickOutside) return
       isOpen = !isOpen
     }}
-    class="w-full"
+    class:w-full={fullWidth}
   >
     <slot name="trigger" />
   </button>

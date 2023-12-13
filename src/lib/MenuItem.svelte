@@ -89,6 +89,7 @@
     on:mouseenter={handleHover}
     on:mouseleave={handleBlur}
     on:click={handleClick}
+    title={label}
     class="{itemStyles} text-sm flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 px-2 py-1.5 rounded"
   >
     <span class="flex items-center space-x-1">
@@ -117,7 +118,7 @@
           role="contentinfo"
           on:mouseenter={handleHover}
           on:mouseleave={handleBlur}
-          class="pt-4"
+          class="pt-4 z-30"
         >
           <DrawerContext on:click={handleClickChild} {items} />
         </div>

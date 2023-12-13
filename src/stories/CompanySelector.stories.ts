@@ -39,3 +39,27 @@ export const Default: Story = {
     ]
   }
 }
+
+export const Collapsed: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    collapsed: true,
+    selectedCompany: {
+      name: 'Invopop',
+      slug: 'invopop',
+      id: 'whatever'
+    },
+    companies: [
+      {
+        name: 'Invopop',
+        slug: 'invopop',
+        id: 'whatever'
+      },
+      {
+        name: 'Payflow',
+        slug: 'payflow',
+        id: 'whatever-2'
+      }
+    ]
+  }
+}

@@ -49,7 +49,7 @@ export type MenuItemProps = {
   open?: boolean
   url?: string
   active?: boolean
-  icon?: IconSource | undefined
+  icon?: IconSource | string
   iconTheme?: IconTheme
   children?: MenuItemProps[]
 }

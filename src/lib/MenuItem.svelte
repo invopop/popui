@@ -97,7 +97,7 @@
     title={label}
     class="{itemStyles} text-sm flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 rounded"
   >
-    <span class="flex items-center space-x-1">
+    <span class="flex items-center space-x-2">
       {#if resolvedIcon}
         <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5 text-white-70" />
       {/if}

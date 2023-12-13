@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ArrowDown, ArrowUp } from '@steeze-ui/heroicons'
+  import { ArrowDown, ArrowUp } from '@invopop/ui-icons'
   import { createEventDispatcher } from 'svelte'
   import type { TableSortBy, DrawerOption } from './types.js'
   import DrawerContext from './DrawerContext.svelte'

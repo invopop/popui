@@ -1,10 +1,10 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { EllipsisHorizontal } from '@steeze-ui/heroicons'
   import type { TableAction, DrawerOption } from './types.js'
   import BaseDropdown from './BaseDropdown.svelte'
   import { createEventDispatcher } from 'svelte'
   import DrawerContext from './DrawerContext.svelte'
+  import { Options } from '@invopop/ui-icons'
 
   const dispatch = createEventDispatcher()
 
@@ -21,7 +21,7 @@
 </script>
 
 <BaseDropdown bind:this={actionDropdown}>
-  <Icon slot="trigger" src={EllipsisHorizontal} class="w-5 mt-1" />
+  <Icon slot="trigger" src={Options} class="w-5 mt-1 text-neutral-500" />
   <DrawerContext
     {items}
     on:click={(e) => {

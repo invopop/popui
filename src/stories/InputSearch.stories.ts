@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 import InputSearch from '../lib/InputSearch.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
-import { Hashtag } from '@steeze-ui/heroicons'
+import { Hashtag } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {

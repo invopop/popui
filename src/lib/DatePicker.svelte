@@ -17,7 +17,7 @@
     subQuarters
   } from 'date-fns'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { Calendar } from '@steeze-ui/heroicons'
+  import { Calendar } from '@invopop/ui-icons'
 
   const dispatch = createEventDispatcher()
 

@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { DrawerOption } from './types.ts'
   import InputCheckbox from './InputCheckbox.svelte'
-  import { Check } from '@steeze-ui/heroicons'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { createEventDispatcher } from 'svelte'
+  import { Tick } from '@invopop/ui-icons'
 
   const dispatch = createEventDispatcher()
 
@@ -27,6 +27,6 @@
   {#if multiple}
     <InputCheckbox />
   {:else if item.selected}
-    <Icon src={Check} class="w-5 h-5 text-accent-500" />
+    <Icon src={Tick} class="w-5 h-5 text-accent-500" />
   {/if}
 </button>

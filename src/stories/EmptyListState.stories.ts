@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/svelte'
 
 import EmptyListState from '../lib/EmptyListState.svelte'
-import { Document } from '@steeze-ui/heroicons'
+import { EmptyState } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -23,7 +23,7 @@ export const WithoutIcon: Story = {
 
 export const WithIcon: Story = {
   args: {
-    icon: Document,
+    icon: EmptyState,
     title: 'No invoices yet',
     description: 'Create your first invoice to start'
   }

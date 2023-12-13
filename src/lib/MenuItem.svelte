@@ -4,7 +4,7 @@
   import clsx from 'clsx'
   import type { IconTheme, MenuItemProps, DrawerOption } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons'
+  import { ChevronDown, ChevronRight } from '@invopop/ui-icons'
   import { SubFolder } from '@invopop/ui-icons'
   import { createEventDispatcher, onMount } from 'svelte'
   import { resolveIcon } from './helpers.js'
@@ -58,6 +58,10 @@
   ] as DrawerOption[]
 
   function handleClick() {
+    if (!url && collapsable) {
+      open = !open
+    }
+
     dispatch('click', url)
   }
 

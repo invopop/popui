@@ -2,11 +2,11 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import ProfileAvatar from './ProfileAvatar.svelte'
   import type { Company, DrawerOption } from './types.js'
-  import { ChevronDown, ChevronUp, Plus } from '@steeze-ui/heroicons'
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContext from './DrawerContext.svelte'
   import { createEventDispatcher } from 'svelte'
   import clsx from 'clsx'
+  import { Add, ChevronDown } from '@invopop/ui-icons'
 
   const dispatch = createEventDispatcher()
 
@@ -18,14 +18,14 @@
   export let collapsed = false
 
   $: name = selectedCompany?.name || ''
-  $: icon = isOpen ? ChevronUp : ChevronDown
+  // $: icon = isOpen ? ChevronUp : ChevronDown
   $: items = [
     ...companies.map((c) => ({
       value: c.id,
       label: c.name,
       selected: c.slug === selectedCompany?.slug
     })),
-    { value: 'add', label: 'Add company', icon: Plus, footer: true }
+    { value: 'add', label: 'Add company', icon: Add, footer: true }
   ] as DrawerOption[]
 
   $: styles = clsx(
@@ -64,7 +64,7 @@
       {/if}
     </span>
     {#if !collapsed}
-      <Icon src={icon} class="h-4 w-4 text-white-40 mt-px" />
+      <Icon src={ChevronDown} class="{isOpen ? 'rotate-180' : ''} h-4 w-4 text-white-40 mt-px" />
     {/if}
   </span>
   <DrawerContext {items} on:click={selectCompany} />

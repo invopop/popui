@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import { MagnifyingGlass } from '@steeze-ui/heroicons'
+  import { Search } from '@invopop/ui-icons'
 
   let timer: ReturnType<typeof setTimeout>
 
@@ -18,7 +18,7 @@
 
   export let shortcut = ''
   export let placeholder = ''
-  export let icon: IconSource = MagnifyingGlass
+  export let icon: IconSource = Search
 
   let input: HTMLInputElement
   let value = ''
@@ -61,7 +61,7 @@
     <div class="absolute top-1 right-0 flex py-1.5 pr-1.5 space-x-1">
       {#each shortcutKeys as key}
         <kbd
-          class="w-4 h-4 flex justify-center items-center rounded-md border border-neutral-200 bg-neutral-100 font-sans text-xs text-neutral-500 font-semibold"
+          class="w-4 h-4 flex justify-center items-center rounded border border-neutral-200 bg-neutral-100 font-sans text-xs text-neutral-500 font-semibold"
           >{key}</kbd
         >
       {/each}

@@ -4,7 +4,7 @@ import BaseTable from '../lib/BaseTable.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import FixedHeightDecorator from './decorartors/FixedHeightDecorator.svelte'
 import type { TableDataRow } from '$lib/types.js'
-import { ArrowDownOnSquare, Cog6Tooth, Pencil } from '@steeze-ui/heroicons'
+import { DocumentText, Edit, Settings } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -39,16 +39,16 @@ export const WithActions: Story = {
       // Action only applies to certain conditions
       if (data.code === 'CC2300028X') {
         return [
-          { icon: Cog6Tooth, label: 'Configure', slug: 'config' },
-          { icon: Pencil, label: 'Edit', slug: 'edit' }
+          { icon: Settings, label: 'Configure', slug: 'config' },
+          { icon: Edit, label: 'Edit', slug: 'edit' }
         ]
       }
 
       if (data.code === 'CAB-0042') {
         return [
-          { icon: Cog6Tooth, label: 'Configure', slug: 'config' },
-          { icon: Pencil, label: 'Edit', slug: 'edit' },
-          { icon: ArrowDownOnSquare, label: 'F2023-101.pdf', slug: 'config', footer: true }
+          { icon: Settings, label: 'Configure', slug: 'config' },
+          { icon: Edit, label: 'Edit', slug: 'edit' },
+          { icon: DocumentText, label: 'F2023-101.pdf', slug: 'config', footer: true }
         ]
       }
 

@@ -2,7 +2,7 @@
   import { flip, shift, offset } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import clsx from 'clsx'
-  import type { IconTheme, MenuItemProps } from './types.ts'
+  import type { IconTheme, MenuItemProps, DrawerOption } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons'
   import { SubFolder } from '@invopop/ui-icons'
@@ -55,7 +55,7 @@
       selected: c.active,
       icon: SubFolder
     }))
-  ]
+  ] as DrawerOption[]
 
   function handleClick() {
     dispatch('click', url)
@@ -97,7 +97,7 @@
         <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5 text-white-70" />
       {/if}
       {#if !collapsedSidebar}
-        <span>{label}</span>
+        <span class="whitespace-nowrap">{label}</span>
       {/if}
     </span>
     {#if collapsable && !collapsedSidebar}

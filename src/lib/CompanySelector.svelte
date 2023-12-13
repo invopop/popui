@@ -60,7 +60,7 @@
     <span class:space-x-2={!collapsed} class="flex items-center">
       <ProfileAvatar {name} dark large />
       {#if !collapsed}
-        <span>{name}</span>
+        <span class="whitespace-nowrap">{name}</span>
       {/if}
     </span>
     {#if !collapsed}

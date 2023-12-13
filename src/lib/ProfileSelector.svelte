@@ -14,7 +14,7 @@
   <span class="flex items-center space-x-1">
     <ProfileAvatar {name} dark />
     {#if !collapsed}
-      <span>{name}</span>
+      <span class="whitespace-nowrap">{name}</span>
     {/if}
   </span>
 </button>

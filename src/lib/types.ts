@@ -52,6 +52,7 @@ export type MenuItemProps = {
   icon?: IconSource | string
   iconTheme?: IconTheme
   children?: MenuItemProps[]
+  collapsedSidebar?: boolean
 }
 
 export type FeedItemStatus = 'success' | 'failure' | ''

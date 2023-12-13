@@ -21,7 +21,7 @@
     { 'pl-4': currentIndex === 0 },
     { 'pl-3': currentIndex !== 0 },
     { 'pr-4': currentIndex === totalFields - 1 },
-    { 'pr-3 border-r border-neutral-100': currentIndex < totalFields - 1 }
+    { 'pr-3': currentIndex < totalFields - 1 }
   )
 
   function handleSortBy(event: CustomEvent) {
@@ -33,7 +33,7 @@
 
 <th
   scope="col"
-  class="{outerStyles} bg-white text-left text-sm text-neutral-500 font-medium py-2.5 group sticky z-10 top-0"
+  class="{outerStyles} bg-white text-left text-sm text-neutral-600 font-medium py-2.5 group sticky z-10 top-0"
 >
   <span class="{headerStyles} -ml-1 flex">
     {#if field.sortable}

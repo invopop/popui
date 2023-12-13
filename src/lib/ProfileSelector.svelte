@@ -5,7 +5,7 @@
   export let name = ''
   export let collapsed = false
 
-  $: styles = clsx({ 'p-[7px]': collapsed }, { 'w-full pl-1.5 pr-2 py-[7px]': !collapsed })
+  $: styles = clsx({ 'p-[5px]': collapsed }, { 'w-full pl-1.5 pr-2 py-[7px]': !collapsed })
 </script>
 
 <button

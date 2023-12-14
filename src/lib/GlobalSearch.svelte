@@ -13,9 +13,6 @@
   })
 
   function onKeyDown(event: KeyboardEvent) {
-    event.stopPropagation()
-    event.preventDefault()
-
     if (event.key === '/') {
       open()
     }

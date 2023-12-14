@@ -31,3 +31,23 @@ export const RightPosition: Story = {
     position: 'right'
   }
 }
+
+export const WithSelectedDates: Story = {
+  decorators: [() => ItemPushedToRightDecorator],
+  args: {
+    from: '2022-12-10',
+    to: '2022-12-12',
+    label: 'Pick a Date',
+    position: 'right'
+  }
+}
+
+export const WithSelectedEmptyDates: Story = {
+  decorators: [() => ItemPushedToRightDecorator],
+  args: {
+    from: '',
+    to: '',
+    label: 'Pick a Date',
+    position: 'right'
+  }
+}

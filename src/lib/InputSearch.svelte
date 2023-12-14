@@ -21,7 +21,7 @@
   export let icon: IconSource = Search
 
   let input: HTMLInputElement
-  let value = ''
+  export let value = ''
 
   export const toggle = () => {
     input === document.activeElement ? input.blur() : input.focus()
@@ -54,6 +54,7 @@
     on:input={handleInput}
     on:focus={() => dispatch('focus')}
     on:blur={(e) => dispatch('blur', e)}
+    on:click
   />
   <Icon src={icon} class="absolute text-neutral-500 w-4 h-4 left-2" />
 

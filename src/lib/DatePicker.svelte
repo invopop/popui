@@ -23,6 +23,12 @@
 
   export let label = 'Date'
   export let position: 'left' | 'right' = 'left'
+  export let from = ''
+  export let to = ''
+
+  $: if (datepicker) {
+    setDates(from, to)
+  }
 
   let datePickerEl: HTMLElement
   let selectedLabel = label
@@ -131,6 +137,23 @@
   function onLastQuarter() {
     datepicker.setDate([startOfLastQuarter, endOfLastQuarter], true)
     datepicker.jumpToDate(startOfLastQuarter)
+  }
+
+  function setDates(from: string, to: string) {
+    datepicker.setDate([from, to])
+    selectedDates = {
+      from: { value: from, display: getDisplayFromValue(from) },
+      to: { value: to, display: getDisplayFromValue(to) }
+    }
+    selectedLabel = getLabel()
+  }
+
+  function getDisplayFromValue(value: string) {
+    if (!value) return ''
+
+    const parts = value.split('-')
+
+    return `${parts[2]}/${parts[1]}/${parts[0]}`
   }
 </script>
 

@@ -43,3 +43,10 @@ export const WithLongShortcut: Story = {
     shortcut: '⌘K'
   }
 }
+
+export const WithDefaultValue: Story = {
+  args: {
+    value: 'This value',
+    placeholder: 'Search'
+  }
+}

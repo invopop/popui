@@ -36,7 +36,7 @@
   }
 </script>
 
-<BaseDropdown bind:this={selectDropdown}>
+<BaseDropdown placement="bottom-start" bind:this={selectDropdown}>
   <div
     class="dropdown-select flex items-center border hover:border-neutral-300 rounded py-1.25 pl-2"
     slot="trigger"

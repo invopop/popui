@@ -14,6 +14,7 @@ import FeedIconEvent from './FeedIconEvent.svelte'
 import FeedIconStatus from './FeedIconStatus.svelte'
 import FeedItem from './FeedItem.svelte'
 import FeedViewer from './FeedViewer.svelte'
+import GlobalSearch from './GlobalSearch.svelte'
 import InputCheckbox from './InputCheckbox.svelte'
 import InputLabel from './InputLabel.svelte'
 import InputRadio from './InputRadio.svelte'
@@ -51,6 +52,7 @@ export {
   FeedIconStatus,
   FeedItem,
   FeedViewer,
+  GlobalSearch,
   InputCheckbox,
   InputLabel,
   InputRadio,

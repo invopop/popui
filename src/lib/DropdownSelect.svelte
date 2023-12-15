@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { DrawerOption, IconTheme } from './types.ts'
+  import type { AnyProp, DrawerOption, IconTheme } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { createEventDispatcher, onMount } from 'svelte'
   import { resolveIcon } from './helpers.js'
@@ -8,7 +8,7 @@
 
   const dispatch = createEventDispatcher()
 
-  export let value: string | number | object | boolean = ''
+  export let value: AnyProp = ''
   export let icon: IconSource | string | undefined = undefined
   export let iconTheme: IconTheme = 'default'
   export let options: DrawerOption[] = []

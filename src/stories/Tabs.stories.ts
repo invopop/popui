@@ -2,14 +2,13 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 
 import Tabs from '../lib/Tabs.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
-import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/Tabs',
   component: Tabs,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator]
 } satisfies Meta<Tabs>
 
 export default meta

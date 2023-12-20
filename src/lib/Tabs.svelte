@@ -12,7 +12,7 @@
   const tabs = createTabs({ selected: items.find((i) => i.label === selected) || items[0] })
 </script>
 
-<div use:tabs.list class="flex space-x-4">
+<div use:tabs.list class="inline-flex space-x-4">
   {#each items as value}
     <button
       use:tabs.tab={{ value }}

@@ -18,13 +18,38 @@ type Story = StoryObj<typeof meta>
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {
   args: {
-    items: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4', 'Tab 5']
+    items: [
+      { label: 'Tab 1' },
+      { label: 'Tab 2' },
+      { label: 'Tab 3' },
+      { label: 'Tab 4' },
+      { label: 'Tab 5' }
+    ]
   }
 }
 
 export const SelectedTab: Story = {
   args: {
-    items: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4', 'Tab 5'],
+    items: [
+      { label: 'Tab 1' },
+      { label: 'Tab 2' },
+      { label: 'Tab 3' },
+      { label: 'Tab 4' },
+      { label: 'Tab 5' }
+    ],
     selected: 'Tab 2'
+  }
+}
+
+export const WithCounter: Story = {
+  args: {
+    items: [
+      { label: 'Tab 1' },
+      { label: 'Tab 2', counter: 3 },
+      { label: 'Tab 3' },
+      { label: 'Tab 4' },
+      { label: 'Tab 5' }
+    ],
+    selected: 'Tab 3'
   }
 }

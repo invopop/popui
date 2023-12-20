@@ -9,10 +9,10 @@
 </script>
 
 <div
-  class="relative w-8 h-8 rounded-full border border-neutral-100 flex items-center justify-center text-neutral-800 bg-white"
+  class="relative w-8 h-8 rounded border border-neutral-100 flex items-center justify-center text-neutral-800 bg-white"
 >
   {#if icon}
-    <Icon src={icon} theme={iconTheme} class="h-5 w-5" />
+    <Icon src={icon} theme={iconTheme} class="h-5 w-5 text-neutral-800" />
   {/if}
   {#if status}
     <span class="absolute bottom-0 right-0 -mb-1 -mr-1 w-4 h-4">

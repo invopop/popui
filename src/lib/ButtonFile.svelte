@@ -1,34 +1,38 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-  import { dispatchWcEvent } from './wcdispatch.js'
+  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
+  import { DocumentText, Download, Preview } from '@invopop/ui-icons'
+  import BaseButton from './BaseButton.svelte'
 
-  export let type = ''
+  export let icon: IconSource = DocumentText
   export let name = ''
   export let disabled = false
-  export let fullwidth = false
 
   const dispatch = createEventDispatcher()
-
-  function handleClick(event: unknown) {
-    // If event is not a native event we skip the dispatch to avoid infinite loop
-    if (event instanceof CustomEvent) return
-
-    dispatch('click')
-
-    dispatchWcEvent((event as PointerEvent).target, 'click')
-  }
 </script>
 
-<button
-  {disabled}
-  class:opacity-30={disabled}
-  class:w-full={fullwidth}
-  class="border border-neutral-200 hover:border-neutral-300 rounded flex items-center space-x-2"
-  on:click={handleClick}
+<div
+  class:opacity-40={disabled}
+  class="border border-neutral-200 hover:border-neutral-300 rounded flex items-center space-x-2 py-2 pr-2 pl-3"
 >
-  <span
-    class="px-2 py-1 bg-neutral-50 border-r border-neutral-200 hover:border-neutral-300 rounded-l-lg text-neutral-500 text-base font-semibold"
-    >{type.toUpperCase()}</span
-  >
-  <span class="pr-3 text-sm py-1 text-neutral-800">{name}</span>
-</button>
+  <span class="flex items-center justify-start space-x-1.5 flex-1">
+    <Icon src={icon} class="w-5 h-5 text-neutral-500" />
+    <span class="text-sm text-neutral-800">{name}</span>
+  </span>
+  <span class="flex space-x-2">
+    <BaseButton
+      {disabled}
+      icon={Preview}
+      on:click={() => {
+        dispatch('preview')
+      }}
+    />
+    <BaseButton
+      {disabled}
+      icon={Download}
+      on:click={() => {
+        dispatch('download')
+      }}
+    />
+  </span>
+</div>

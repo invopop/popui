@@ -31,7 +31,7 @@
     { 'pl-2 pr-3': !small && $$slots.default && icon && iconPosition === 'left' },
     { 'pl-3 pr-2': !small && $$slots.default && icon && iconPosition === 'right' },
     { 'py-1.25': !small && $$slots.default },
-    { 'p-2': !$$slots.default },
+    { 'p-1.5': !$$slots.default },
     { 'text-white': ['primary', 'danger', 'dark'].includes(variant) },
     { 'text-neutral-800': ['default', 'secondary'].includes(variant) },
     { 'border border-white-10 hover:border-white-20 focus:border-white-40': variant === 'dark' },

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 import ButtonFile from '../lib/ButtonFile.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
+import { Code } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -18,22 +19,19 @@ type Story = StoryObj<typeof meta>
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {
   args: {
-    type: 'pdf',
     name: 'File name'
   }
 }
 
-export const FullWidth: Story = {
+export const WithDifferentIcon: Story = {
   args: {
-    type: 'pdf',
-    name: 'File name',
-    fullwidth: true
+    icon: Code,
+    name: 'File name'
   }
 }
 
 export const Disabled: Story = {
   args: {
-    type: 'pdf',
     name: 'File name',
     disabled: true
   }

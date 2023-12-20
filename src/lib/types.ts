@@ -107,3 +107,8 @@ export type TableField = {
   helperBadge?: undefined | ((data: TableDataRow) => Badge | null)
   monospaced?: boolean
 }
+
+export type TabItem = {
+  label: string
+  counter?: number
+}

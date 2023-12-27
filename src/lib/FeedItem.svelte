@@ -39,7 +39,7 @@
     <span
       class:left-4={icon}
       class:left-2={!icon}
-      class="absolute -bottom-4 border-l border-neutral-100 w-px h-full -z-10"
+      class="absolute -bottom-4 border-l border-neutral-100 w-px h-full"
     />
   {/if}
   <div
@@ -49,9 +49,7 @@
   >
     <div class="relative">
       {#if hasPrev}
-        <span
-          class="absolute -top-4 inset-x-0 mx-auto border-l border-neutral-100 w-px h-full -z-10"
-        />
+        <span class="absolute -top-4 inset-x-0 mx-auto border-l border-neutral-100 w-px h-full" />
       {/if}
       {#if icon}
         <FeedIconEvent {icon} {status} />

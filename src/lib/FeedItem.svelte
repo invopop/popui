@@ -5,6 +5,9 @@
   import FeedIconStatus from './FeedIconStatus.svelte'
   import FeedEvents from './FeedEvents.svelte'
   import UuidCopy from './UuidCopy.svelte'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 
   export let status: FeedItemStatus = ''
   export let icon: IconSource | undefined = undefined
@@ -17,6 +20,7 @@
   export let isChild = false
   export let children: FeedItemProps[] | undefined = undefined
   export let events: FeedEvent[] | undefined = undefined
+  export let slug = ''
 
   let open = false
 
@@ -67,10 +71,20 @@
           <UuidCopy {uuid} small />
         {/if}
       </p>
-      {#if children?.length && open}
-        {#each children as child, i (i)}
-          <svelte:self {...child} isChild hasPrev={i > 0} hasNext={i < children.length - 1} />
-        {/each}
+      {#if open}
+        {#if children?.length}
+          {#each children as child, i (i)}
+            <svelte:self {...child} isChild hasPrev={i > 0} hasNext={i < children.length - 1} />
+          {/each}
+        {:else if !events?.length}
+          <div
+            class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-neutral-300 rounded-full mt-2"
+            role="status"
+            aria-label="loading"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        {/if}
       {/if}
       {#if events?.length && open}
         <div class="mt-2">
@@ -84,6 +98,9 @@
       class="absolute top-2.5 right-0"
       on:click={() => {
         open = !open
+        if (open) {
+          dispatch('open', slug)
+        }
       }}
     >
       <svg

@@ -72,6 +72,7 @@ export type FeedItemProps = {
   isChild?: boolean
   children?: FeedItemProps[]
   events?: FeedEvent[]
+  slug?: string
 }
 
 export type Badge = { label: string; status: StatusType }

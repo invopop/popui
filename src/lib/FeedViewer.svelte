@@ -7,6 +7,6 @@
 
 <div>
   {#each items as item, i (i)}
-    <FeedItem {...item} hasPrev={i > 0} hasNext={i < items.length - 1} />
+    <FeedItem {...item} hasPrev={i > 0} hasNext={i < items.length - 1} on:open />
   {/each}
 </div>

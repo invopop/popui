@@ -9,6 +9,7 @@
   export let placeholder = ''
   export let errorText = ''
   export let disabled = false
+  export let value: string | number = ''
 
   let timer: ReturnType<typeof setTimeout>
 
@@ -21,8 +22,6 @@
       dispatchWcEvent(target, 'input', target.value)
     }, 750)
   }
-
-  export let value = ''
 
   $: inputStyles = clsx(
     { 'pointer-events-none bg-neutral-50': disabled },

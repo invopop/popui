@@ -93,7 +93,7 @@
                 totalActions={actions.length}
                 totalFields={fields.length}
                 badge={field.helperBadge ? field.helperBadge(row) : null}
-                data={field.formatter ? field.formatter(row) : row[field.slug]}
+                data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
               />
             {/each}
             {#if actions.length}

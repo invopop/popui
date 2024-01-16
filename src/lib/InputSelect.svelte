@@ -2,7 +2,7 @@
   import type { IconTheme, SelectOption } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import InputLabel from './InputLabel.svelte'
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { resolveIcon } from './helpers.js'
   import { dispatchWcEvent } from './wcdispatch.js'
 
@@ -21,6 +21,12 @@
 
   let resolvedIcon: IconSource | undefined
 
+  $: {
+    resolveIcon(icon).then((icon) => {
+      resolvedIcon = icon
+    })
+  }
+
   function handleChange(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
     if (event instanceof CustomEvent) return
@@ -31,10 +37,6 @@
 
     dispatchWcEvent(target, 'change', target.value)
   }
-
-  onMount(async () => {
-    resolvedIcon = await resolveIcon(icon)
-  })
 </script>
 
 {#if label}

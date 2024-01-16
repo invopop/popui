@@ -6,7 +6,7 @@
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { ChevronDown, ChevronRight } from '@invopop/ui-icons'
   import { SubFolder } from '@invopop/ui-icons'
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { resolveIcon } from './helpers.js'
   import DrawerContext from './DrawerContext.svelte'
 
@@ -32,6 +32,12 @@
   let leaveHoverTimeout: ReturnType<typeof setTimeout> | null = null
 
   const dispatch = createEventDispatcher()
+
+  $: {
+    resolveIcon(icon).then((icon) => {
+      resolvedIcon = icon
+    })
+  }
 
   $: itemStyles = clsx(
     { 'text-white font-medium': !isFolderItem },
@@ -82,10 +88,6 @@
       hovered = false
     }, 200)
   }
-
-  onMount(async () => {
-    resolvedIcon = await resolveIcon(icon)
-  })
 </script>
 
 <div class={wrapperStyles}>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import type { IconTheme } from './types.ts'
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import { resolveIcon } from './helpers.js'
 
@@ -13,15 +13,17 @@
 
   let resolvedIcon: IconSource | undefined
 
+  $: {
+    resolveIcon(icon).then((icon) => {
+      resolvedIcon = icon
+    })
+  }
+
   function handleClear(event: unknown) {
     const target = (event as PointerEvent).target
     dispatch('clear')
     dispatchWcEvent(target, 'clear')
   }
-
-  onMount(async () => {
-    resolvedIcon = await resolveIcon(icon)
-  })
 </script>
 
 <span

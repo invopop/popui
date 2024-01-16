@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { AnyProp, DrawerOption, IconTheme } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { resolveIcon } from './helpers.js'
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContext from './DrawerContext.svelte'
@@ -17,16 +17,18 @@
   let selectDropdown: BaseDropdown
   let resolvedIcon: IconSource | undefined
 
+  $: {
+    resolveIcon(icon).then((icon) => {
+      resolvedIcon = icon
+    })
+  }
+
   $: items = options.map((o) => ({
     ...o,
     selected: o.value === value
   }))
 
   $: selectedLabel = items.find((i) => i.selected)?.label || placeholder
-
-  onMount(async () => {
-    resolvedIcon = await resolveIcon(icon)
-  })
 
   function handleClick(e: CustomEvent) {
     selectDropdown.toggle()

@@ -2,7 +2,7 @@
   import clsx from 'clsx'
   import type { ButtonVariant, IconPosition, IconTheme } from '$lib/types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import { resolveIcon } from './helpers.js'
 
@@ -16,6 +16,12 @@
   export let small = false
 
   let resolvedIcon: IconSource | undefined
+
+  $: {
+    resolveIcon(icon).then((icon) => {
+      resolvedIcon = icon
+    })
+  }
 
   $: buttonStyles = clsx(
     { 'opacity-30 pointer-events-none': disabled },
@@ -56,10 +62,6 @@
       'dark'
     ].includes(variant),
     'group-hover:bg-black/[.04] group-active:bg-black/[.12]': ['secondary'].includes(variant)
-  })
-
-  onMount(async () => {
-    resolvedIcon = await resolveIcon(icon)
   })
 
   function handleClick(event: unknown) {

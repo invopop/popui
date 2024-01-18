@@ -16,7 +16,8 @@
     label: a.label,
     value: a,
     icon: a.icon,
-    footer: a.footer
+    footer: a.footer,
+    destructive: a.destructive
   })) as DrawerOption[]
 </script>
 

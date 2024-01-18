@@ -14,6 +14,7 @@
   export let variant: ButtonVariant = 'default'
   export let disabled = false
   export let small = false
+  export let dangerIcon = false
 
   let resolvedIcon: IconSource | undefined
 
@@ -49,10 +50,21 @@
   )
 
   $: iconStyles = clsx(
-    { 'text-neutral-500': ['default', 'secondary'].includes(variant) && $$slots.default },
-    { 'text-neutral-800': ['default', 'secondary'].includes(variant) && !$$slots.default },
-    { 'text-white-70': !['default', 'secondary'].includes(variant) && $$slots.default },
-    { 'text-white': !['default', 'secondary'].includes(variant) && !$$slots.default }
+    {
+      'text-neutral-500':
+        ['default', 'secondary'].includes(variant) && $$slots.default && !dangerIcon
+    },
+    {
+      'text-neutral-800':
+        ['default', 'secondary'].includes(variant) && !$$slots.default && !dangerIcon
+    },
+    {
+      'text-white-70': !['default', 'secondary'].includes(variant) && $$slots.default && !dangerIcon
+    },
+    {
+      'text-white': !['default', 'secondary'].includes(variant) && !$$slots.default && !dangerIcon
+    },
+    { 'text-danger-500': dangerIcon }
   )
 
   $: overlayClasses = clsx({

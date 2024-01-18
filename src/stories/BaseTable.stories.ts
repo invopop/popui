@@ -4,7 +4,7 @@ import BaseTable from '../lib/BaseTable.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import FixedHeightDecorator from './decorartors/FixedHeightDecorator.svelte'
 import type { TableDataRow } from '$lib/types.js'
-import { DocumentText, Edit, Settings } from '@invopop/ui-icons'
+import { Delete, DocumentText, Edit, Settings } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -40,7 +40,8 @@ export const WithActions: Story = {
       if (data.code === 'CC2300028X') {
         return [
           { icon: Settings, label: 'Configure', slug: 'config' },
-          { icon: Edit, label: 'Edit', slug: 'edit' }
+          { icon: Edit, label: 'Edit', slug: 'edit' },
+          { icon: Delete, label: 'Delete', slug: 'delete', footer: true, destructive: true }
         ]
       }
 

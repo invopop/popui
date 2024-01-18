@@ -19,10 +19,15 @@
   }}
 >
   {#if item.icon}
-    <Icon src={item.icon} class="w-5 h-5 text-neutral-500" />
+    <Icon
+      src={item.icon}
+      class="w-5 h-5 {item.destructive ? 'text-danger-500' : 'text-neutral-500'}"
+    />
   {/if}
-  <span class="text-sm font-medium text-neutral-800 whitespace-nowrap flex-1 text-left"
-    >{item.label}</span
+  <span
+    class="text-sm font-medium {item.destructive
+      ? 'text-danger-500'
+      : 'text-neutral-800'} whitespace-nowrap flex-1 text-left">{item.label}</span
   >
   {#if multiple}
     <InputCheckbox />

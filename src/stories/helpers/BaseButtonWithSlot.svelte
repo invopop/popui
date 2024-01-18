@@ -9,10 +9,11 @@
   export let iconPosition: IconPosition = 'left'
   export let variant: ButtonVariant = 'default'
   export let small = false
+  export let dangerIcon = false
 </script>
 
 {#if slot}
-  <BaseButton {disabled} {icon} {iconPosition} {variant} {small}>{slot}</BaseButton>
+  <BaseButton {dangerIcon} {disabled} {icon} {iconPosition} {variant} {small}>{slot}</BaseButton>
 {:else}
-  <BaseButton {disabled} {icon} {iconPosition} {variant} {small} />
+  <BaseButton {dangerIcon} {disabled} {icon} {iconPosition} {variant} {small} />
 {/if}

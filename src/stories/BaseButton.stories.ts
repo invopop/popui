@@ -133,3 +133,12 @@ export const DarkWithIcon: Story = {
     variant: 'dark'
   }
 }
+
+export const DangerIcon: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    dangerIcon: true
+  }
+}

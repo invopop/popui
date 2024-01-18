@@ -1,4 +1,5 @@
 import BaseButton from './BaseButton.svelte'
+import BaseCard from './BaseCard.svelte'
 import BaseCounter from './BaseCounter.svelte'
 import BaseDropdown from './BaseDropdown.svelte'
 import BaseTable from './BaseTable.svelte'
@@ -16,6 +17,7 @@ import FeedItem from './FeedItem.svelte'
 import FeedViewer from './FeedViewer.svelte'
 import GlobalSearch from './GlobalSearch.svelte'
 import InputCheckbox from './InputCheckbox.svelte'
+import InputError from './InputError.svelte'
 import InputLabel from './InputLabel.svelte'
 import InputRadio from './InputRadio.svelte'
 import InputSearch from './InputSearch.svelte'
@@ -37,6 +39,7 @@ import { resolveIcon } from './helpers.js'
 
 export {
   BaseButton,
+  BaseCard,
   BaseCounter,
   BaseDropdown,
   BaseTable,
@@ -54,6 +57,7 @@ export {
   FeedViewer,
   GlobalSearch,
   InputCheckbox,
+  InputError,
   InputLabel,
   InputRadio,
   InputSearch,

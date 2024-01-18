@@ -26,6 +26,7 @@ export type SelectOption = {
 
 export type DrawerOption = SelectOption & {
   footer?: boolean
+  destructive?: boolean
   selected?: boolean
   icon?: IconSource | undefined
 }
@@ -84,6 +85,7 @@ export type TableAction = {
   label: string
   slug: string
   footer?: boolean
+  destructive?: boolean
   value?: AnyProp
 }
 

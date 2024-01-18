@@ -6,7 +6,7 @@
   import DrawerContext from './DrawerContext.svelte'
   import { createEventDispatcher } from 'svelte'
   import clsx from 'clsx'
-  import { Add, ChevronDown } from '@invopop/ui-icons'
+  import { Add, ChevronDown, Settings } from '@invopop/ui-icons'
 
   const dispatch = createEventDispatcher()
 
@@ -18,14 +18,14 @@
   export let collapsed = false
 
   $: name = selectedCompany?.name || ''
-  // $: icon = isOpen ? ChevronUp : ChevronDown
   $: items = [
     ...companies.map((c) => ({
       value: c.id,
       label: c.name,
       selected: c.slug === selectedCompany?.slug
     })),
-    { value: 'add', label: 'Add company', icon: Add, footer: true }
+    { value: 'add', label: 'Add workspace', icon: Add, footer: true },
+    { value: 'settings', label: 'Settings', icon: Settings, footer: true }
   ] as DrawerOption[]
 
   $: styles = clsx(

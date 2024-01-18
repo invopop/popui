@@ -23,6 +23,7 @@ import InputRadio from './InputRadio.svelte'
 import InputSearch from './InputSearch.svelte'
 import InputSelect from './InputSelect.svelte'
 import InputText from './InputText.svelte'
+import InputTextarea from './InputTextarea.svelte'
 import InputToggle from './InputToggle.svelte'
 import MenuItem from './MenuItem.svelte'
 import ProfileAvatar from './ProfileAvatar.svelte'
@@ -63,6 +64,7 @@ export {
   InputSearch,
   InputSelect,
   InputText,
+  InputTextarea,
   InputToggle,
   MenuItem,
   ProfileAvatar,

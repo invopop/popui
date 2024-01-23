@@ -5,6 +5,7 @@
   import { createEventDispatcher } from 'svelte'
   import { resolveIcon } from './helpers.js'
   import { dispatchWcEvent } from './wcdispatch.js'
+  import InputError from './InputError.svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -18,6 +19,7 @@
   export let options: SelectOption[] = []
   export let placeholder = 'Select one...'
   export let disablePlaceholder = true
+  export let errorText = ''
 
   let resolvedIcon: IconSource | undefined
 
@@ -66,6 +68,10 @@
     />
   {/if}
 </div>
+
+{#if errorText}
+  <InputError {errorText} />
+{/if}
 
 <style>
   select {

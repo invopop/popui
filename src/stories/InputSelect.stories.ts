@@ -57,3 +57,11 @@ export const WithIcon: Story = {
     icon: Cog6Tooth
   }
 }
+
+export const WithError: Story = {
+  args: {
+    value: 'Wrong Thing',
+    placeholder: 'Placeholder',
+    errorText: 'Error label'
+  }
+}

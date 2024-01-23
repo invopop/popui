@@ -15,6 +15,8 @@
 
   const dispatch = createEventDispatcher()
 
+  let metaKeyPressed = false
+
   export let sortBy = ''
   export let sortDirection: TableSortBy = ''
   export let fields: TableField[] = []
@@ -43,6 +45,15 @@
     return groups
   }
 </script>
+
+<svelte:window
+  on:keydown={(event) => {
+    metaKeyPressed = event.metaKey
+  }}
+  on:keyup={() => {
+    metaKeyPressed = false
+  }}
+/>
 
 <div class="w-full rounded border border-neutral-100 font-sans">
   <table class="w-full">
@@ -83,7 +94,10 @@
           <tr
             class="hover:bg-neutral-50 active:bg-accent-50 hover:cursor-pointer"
             on:click={() => {
-              dispatch('rowClick', row)
+              dispatch(metaKeyPressed ? 'rowNewTabClick' : 'rowClick', row)
+            }}
+            on:contextmenu={() => {
+              dispatch('rowRightClick', row)
             }}
           >
             {#each fields as field, i (i)}

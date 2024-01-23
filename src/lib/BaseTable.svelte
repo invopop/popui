@@ -8,10 +8,9 @@
     TableSortBy
   } from './types.js'
   import BaseTableHeader from './BaseTableHeader.svelte'
-  import BaseTableActions from './BaseTableActions.svelte'
   import { createEventDispatcher } from 'svelte'
-  import BaseTableCell from './BaseTableCell.svelte'
   import BaseCounter from './BaseCounter.svelte'
+  import BaseTableRow from './BaseTableRow.svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -90,37 +89,21 @@
           </tr>
         {/if}
         {#each group.rows as row}
-          {@const actions = getActions instanceof Function ? getActions(row) : []}
-          <tr
-            class="hover:bg-neutral-50 active:bg-accent-50 hover:cursor-pointer"
+          <BaseTableRow
+            {row}
+            {fields}
+            {getActions}
             on:click={() => {
-              dispatch(metaKeyPressed ? 'rowNewTabClick' : 'rowClick', row)
+              if (metaKeyPressed) {
+                dispatch('rowNewTabClick', row)
+              } else {
+                dispatch('rowClick', row)
+              }
             }}
             on:contextmenu={() => {
               dispatch('rowRightClick', row)
             }}
-          >
-            {#each fields as field, i (i)}
-              <BaseTableCell
-                currentIndex={i}
-                {field}
-                totalActions={actions.length}
-                totalFields={fields.length}
-                badge={field.helperBadge ? field.helperBadge(row) : null}
-                data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
-              />
-            {/each}
-            {#if actions.length}
-              <td class="pl-3 pr-4">
-                <BaseTableActions
-                  {actions}
-                  on:clickAction={(event) => {
-                    dispatch('action', { row, action: event.detail })
-                  }}
-                />
-              </td>
-            {/if}
-          </tr>
+          />
         {/each}
       {/each}
     </tbody>

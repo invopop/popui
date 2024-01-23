@@ -19,6 +19,10 @@
     footer: a.footer,
     destructive: a.destructive
   })) as DrawerOption[]
+
+  export const toggle = () => {
+    actionDropdown.toggle()
+  }
 </script>
 
 <BaseDropdown bind:this={actionDropdown}>

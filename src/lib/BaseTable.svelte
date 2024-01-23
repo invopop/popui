@@ -103,6 +103,7 @@
             on:contextmenu={() => {
               dispatch('rowRightClick', row)
             }}
+            on:action
           />
         {/each}
       {/each}

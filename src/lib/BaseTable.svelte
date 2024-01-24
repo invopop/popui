@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { intersect } from 'svelte-intersection-observer-action'
   import type {
     TableActionProp,
     TableDataRow,
@@ -13,6 +14,12 @@
   import BaseTableRow from './BaseTableRow.svelte'
 
   const dispatch = createEventDispatcher()
+  const callback = (entry: IntersectionObserverEntry) => {
+    if (entry.intersectionRatio && entry.isIntersecting) {
+      dispatch('tableEndReached')
+    }
+  }
+  const intersectOptions = { callback }
 
   let metaKeyPressed = false
 
@@ -109,5 +116,5 @@
       {/each}
     </tbody>
   </table>
-  <slot name="bottom" />
+  <div use:intersect={intersectOptions} />
 </div>

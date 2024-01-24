@@ -109,4 +109,5 @@
       {/each}
     </tbody>
   </table>
+  <slot name="bottom" />
 </div>

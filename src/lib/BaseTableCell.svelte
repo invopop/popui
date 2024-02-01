@@ -2,6 +2,8 @@
   import clsx from 'clsx'
   import type { Badge, TableField } from './types.js'
   import TagStatus from './TagStatus.svelte'
+  import BaseFlag from './BaseFlag.svelte'
+  import { getCountryName } from './helpers.js'
 
   export let field: TableField
   export let currentIndex: number
@@ -23,7 +25,14 @@
 
 <td class="{cellStyles} whitespace-nowrap text-sm py-2.5">
   <span>
-    <span>{data}</span>
+    {#if field.isCountry}
+      <span class="flex items-center space-x-1">
+        <BaseFlag country={String(data)} />
+        <span>{getCountryName(String(data))}</span>
+      </span>
+    {:else}
+      <span>{data}</span>
+    {/if}
     {#if badge}
       <span class="ml-2">
         <TagStatus label={badge.label} status={badge.status} />

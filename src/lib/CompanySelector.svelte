@@ -31,7 +31,6 @@
   ] as DrawerOption[]
 
   $: styles = clsx(
-    { 'p-[7px]': collapsed },
     { 'space-x-2 w-full pl-1 pr-2 py-[7px]': !collapsed },
     { 'border-white-10 bg-white-5': isOpen },
     { 'border-transparent': !isOpen }

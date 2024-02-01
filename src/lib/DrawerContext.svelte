@@ -15,7 +15,7 @@
   {#if searchable}
     <div class="px-2 mt-2 mb-1"><InputSearch placeholder="Search" /></div>
   {/if}
-  <ul class="p-1">
+  <ul class="p-1 space-y-1">
     {#each mainItems as item}
       <DrawerContextItem {item} {multiple} on:click />
     {/each}

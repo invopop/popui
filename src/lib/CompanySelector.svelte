@@ -18,11 +18,13 @@
   export let collapsed = false
 
   $: name = selectedCompany?.name || ''
+  $: country = selectedCompany?.country || ''
   $: items = [
     ...companies.map((c) => ({
       value: c.id,
       label: c.name,
-      selected: c.slug === selectedCompany?.slug
+      selected: c.slug === selectedCompany?.slug,
+      country: c.country
     })),
     { value: 'add', label: 'Add workspace', icon: Add, footer: true },
     { value: 'settings', label: 'Settings', icon: Settings, footer: true }
@@ -30,7 +32,9 @@
 
   $: styles = clsx(
     { 'p-[7px]': collapsed },
-    { 'space-x-2 w-full pl-1.5 pr-2 py-[7px]': !collapsed }
+    { 'space-x-2 w-full pl-1 pr-2 py-[7px]': !collapsed },
+    { 'border-white-10 bg-white-5': isOpen },
+    { 'border-transparent': !isOpen }
   )
 
   function selectCompany(event: CustomEvent) {
@@ -60,10 +64,10 @@
   <span
     slot="trigger"
     title={name}
-    class="{styles} text-white text-sm font-medium flex items-center justify-between border border-transparent focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
+    class="{styles} text-white text-sm font-medium flex items-center justify-between border focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
   >
     <span class:space-x-2={!collapsed} class="flex items-center">
-      <ProfileAvatar {name} dark large />
+      <ProfileAvatar {name} {country} dark large />
       {#if !collapsed}
         <span class="whitespace-nowrap">{name}</span>
       {/if}

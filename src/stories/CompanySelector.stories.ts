@@ -40,6 +40,32 @@ export const Default: Story = {
   }
 }
 
+export const WithFlag: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    selectedCompany: {
+      name: 'Invopop',
+      slug: 'invopop',
+      id: 'whatever',
+      country: 'es'
+    },
+    companies: [
+      {
+        name: 'Invopop',
+        slug: 'invopop',
+        id: 'whatever',
+        country: 'co'
+      },
+      {
+        name: 'Payflow',
+        slug: 'payflow',
+        id: 'whatever-2',
+        country: 'pe'
+      }
+    ]
+  }
+}
+
 export const Collapsed: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {
@@ -59,6 +85,33 @@ export const Collapsed: Story = {
         name: 'Payflow',
         slug: 'payflow',
         id: 'whatever-2'
+      }
+    ]
+  }
+}
+
+export const CollapsedWithFlag: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    collapsed: true,
+    selectedCompany: {
+      name: 'Invopop',
+      slug: 'invopop',
+      id: 'whatever',
+      country: 'fr'
+    },
+    companies: [
+      {
+        name: 'Invopop',
+        slug: 'invopop',
+        id: 'whatever',
+        country: 'mx'
+      },
+      {
+        name: 'Payflow',
+        slug: 'payflow',
+        id: 'whatever-2',
+        country: 'us'
       }
     ]
   }

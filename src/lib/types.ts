@@ -29,12 +29,14 @@ export type DrawerOption = SelectOption & {
   destructive?: boolean
   selected?: boolean
   icon?: IconSource | undefined
+  country?: string
 }
 
 export type Company = {
   id: string
   slug: string
   name: string
+  country?: string
 }
 
 export type FeedEvent = {

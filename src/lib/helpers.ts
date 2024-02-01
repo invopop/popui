@@ -20,3 +20,8 @@ export async function resolveIcon(
     console.log(error)
   }
 }
+
+export function getCountryName(code: string) {
+  const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
+  return regionNames.of(code.toUpperCase())
+}

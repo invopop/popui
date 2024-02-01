@@ -4,31 +4,49 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import { createEventDispatcher } from 'svelte'
   import { Tick } from '@invopop/ui-icons'
+  import ProfileAvatar from './ProfileAvatar.svelte'
+  import clsx from 'clsx'
+  import BaseFlag from './BaseFlag.svelte'
+  import { getCountryName } from './helpers.js'
 
   const dispatch = createEventDispatcher()
 
   export let multiple = false
   export let item: DrawerOption
+
+  $: styles = clsx({ 'py-1 space-x-3': item.country }, { 'py-1.5 space-x-2': !item.country })
+  $: labelStyles = clsx(
+    { 'text-danger-500': item.destructive },
+    { 'text-neutral-800': !item.destructive },
+    { 'font-semibold': item.country },
+    { 'text-sm font-medium': !item.country }
+  )
 </script>
 
 <button
   class:bg-accent-50={item.selected}
-  class="hover:bg-neutral-50 rounded py-1.5 px-2 flex items-center justify-start space-x-2 w-full"
+  class="{styles} hover:bg-neutral-50 rounded px-2 flex items-center justify-start w-full"
   on:click|stopPropagation={() => {
     dispatch('click', item.value)
   }}
 >
-  {#if item.icon}
+  {#if item.country}
+    <ProfileAvatar name={item.label} large />
+  {:else if item.icon}
     <Icon
       src={item.icon}
       class="w-5 h-5 {item.destructive ? 'text-danger-500' : 'text-neutral-500'}"
     />
   {/if}
-  <span
-    class="text-sm font-medium {item.destructive
-      ? 'text-danger-500'
-      : 'text-neutral-800'} whitespace-nowrap flex-1 text-left">{item.label}</span
-  >
+  <div class="whitespace-nowrap flex-1 text-left">
+    <span class={labelStyles}>{item.label}</span>
+    {#if item.country}
+      <span class="flex space-x-1 items-center">
+        <BaseFlag country={item.country} />
+        <span class="text-sm text-neutral-500">{getCountryName(item.country)}</span>
+      </span>
+    {/if}
+  </div>
   {#if multiple}
     <InputCheckbox />
   {:else if item.selected}

@@ -2,6 +2,7 @@ import BaseButton from './BaseButton.svelte'
 import BaseCard from './BaseCard.svelte'
 import BaseCounter from './BaseCounter.svelte'
 import BaseDropdown from './BaseDropdown.svelte'
+import BaseFlag from './BaseFlag.svelte'
 import BaseTable from './BaseTable.svelte'
 import ButtonFile from './ButtonFile.svelte'
 import CompanySelector from './CompanySelector.svelte'
@@ -36,13 +37,14 @@ import TitleMain from './TitleMain.svelte'
 import TitleSection from './TitleSection.svelte'
 import UuidCopy from './UuidCopy.svelte'
 import twTheme from './tw.theme.js'
-import { resolveIcon } from './helpers.js'
+import { resolveIcon, getCountryName } from './helpers.js'
 
 export {
   BaseButton,
   BaseCard,
   BaseCounter,
   BaseDropdown,
+  BaseFlag,
   BaseTable,
   ButtonFile,
   CompanySelector,
@@ -77,5 +79,6 @@ export {
   TitleSection,
   UuidCopy,
   twTheme,
-  resolveIcon
+  resolveIcon,
+  getCountryName
 }

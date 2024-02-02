@@ -111,6 +111,7 @@ export type TableField = {
   formatter?: undefined | ((data: TableDataRow) => string | number)
   helperBadge?: undefined | ((data: TableDataRow) => Badge | null)
   monospaced?: boolean
+  rightAlign?: boolean
   isCountry?: boolean
 }
 

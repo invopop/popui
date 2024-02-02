@@ -21,7 +21,8 @@
     { 'pl-4': currentIndex === 0 },
     { 'pl-3': currentIndex !== 0 },
     { 'pr-4': currentIndex === totalFields - 1 },
-    { 'pr-3': currentIndex < totalFields - 1 }
+    { 'pr-3': currentIndex < totalFields - 1 },
+    { 'justify-end': field.rightAlign }
   )
 
   function handleSortBy(event: CustomEvent) {

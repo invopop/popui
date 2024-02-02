@@ -19,7 +19,8 @@
     { 'pl-4 font-medium': currentIndex === 0 },
     { 'pl-3': currentIndex > 0 },
     { 'pr-4': totalActions === 0 && currentIndex === totalFields - 1 },
-    { 'pr-3': totalActions > 0 || currentIndex < totalFields - 1 }
+    { 'pr-3': totalActions > 0 || currentIndex < totalFields - 1 },
+    { 'text-right': field.rightAlign }
   )
 </script>
 

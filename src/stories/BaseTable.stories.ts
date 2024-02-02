@@ -24,7 +24,7 @@ export const Default: Story = {
       { headerLabel: 'Invoice', slug: 'code', sortable: true },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
-      { headerLabel: 'Amount', slug: 'total' },
+      { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
       { headerLabel: 'Date', slug: 'created_at', grayed: true }
     ],
     data: [
@@ -32,10 +32,10 @@ export const Default: Story = {
         code: 'CC2300028X',
         customer: 'Cobee',
         country: 'es',
-        total: '-',
+        total: '403,50',
         created_at: 'Sep 22, 2023'
       },
-      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '87.403,50', created_at: 'Sep 23, 2023' }
     ]
   }
 }

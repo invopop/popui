@@ -161,7 +161,7 @@
   <div class="relative">
     <button
       on:click={() => (isOpen = !isOpen)}
-      class:border-accent-200={!isOpen}
+      class:border-neutral-200={!isOpen}
       class:border-accent-400={isOpen}
       class="datepicker-trigger w-full py-1.25 pl-7 pr-8 border hover:border-neutral-300 rounded text-neutral-800 placeholder-neutral-800 text-base"
       >{selectedLabel}</button

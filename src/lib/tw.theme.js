@@ -9,7 +9,7 @@ export default {
       xl: ['19px', '28px'],
       base: ['15px', '22px'],
       sm: ['13px', '18.20px'],
-      xs: ['11px', '15,62px']
+      xs: ['11px', '15.62px']
     },
 
     spacing: {

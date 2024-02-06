@@ -3,6 +3,8 @@
   export let small = false
   export let dark = false
 
+  let copied = false
+
   function shortenString(inputString, prefixLength, suffixLength) {
     if (inputString.length <= prefixLength + suffixLength) {
       return inputString // Return the whole string if it's too short
@@ -17,7 +19,16 @@
   $: formattedUuid = shortenString(uuid, 7, 12)
 </script>
 
-<span class="flex items-center space-x-1">
+<button
+  class="relative flex items-center space-x-1"
+  on:click|stopPropagation={async () => {
+    await navigator.clipboard.writeText(uuid)
+    copied = true
+    setTimeout(() => {
+      copied = false
+    }, 1000)
+  }}
+>
   <span
     class:text-xs={small}
     class:text-sm={!small}
@@ -43,4 +54,7 @@
       />
     </svg>
   </span>
-</span>
+  {#if copied}
+    <span class="absolute mt-4 top-0 right-0 text-xs text-accent-500">Copied!</span>
+  {/if}
+</button>

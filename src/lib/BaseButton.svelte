@@ -5,6 +5,7 @@
   import { createEventDispatcher } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import { resolveIcon } from './helpers.js'
+  import ShortcutWrapper from './ShortcutWrapper.svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -15,6 +16,8 @@
   export let disabled = false
   export let small = false
   export let dangerIcon = false
+  export let shortcut = false
+  export let fullwidth = false
 
   let resolvedIcon: IconSource | undefined
 
@@ -25,6 +28,7 @@
   }
 
   $: buttonStyles = clsx(
+    { 'w-full': fullwidth },
     { 'opacity-30 pointer-events-none': disabled },
     { 'flex-row-reverse space-x-reverse': iconPosition === 'right' },
     { 'bg-white': variant === 'default' },
@@ -46,7 +50,7 @@
       'border border-neutral-200 hover:border-neutral-300 focus:border-neutral-400':
         variant === 'default'
     },
-    { 'space-x-1': icon && $$slots.default }
+    { 'gap-1': icon && $$slots.default }
   )
 
   $: iconStyles = clsx(
@@ -95,7 +99,13 @@
 >
   <span class="{overlayClasses} absolute inset-0 rounded" />
   {#if resolvedIcon}
-    <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5 z-10" />
+    {#if shortcut}
+      <ShortcutWrapper>
+        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
+      </ShortcutWrapper>
+    {:else}
+      <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5 z-10" />
+    {/if}
   {/if}
   {#if $$slots.default}
     <span class="z-10"><slot /></span>

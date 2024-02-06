@@ -31,7 +31,7 @@
   ] as DrawerOption[]
 
   $: styles = clsx(
-    { 'space-x-2 w-full pl-1 pr-2 py-[7px]': !collapsed },
+    { 'space-x-2 w-full pl-1 pr-2 py-1': !collapsed },
     { 'border-white-10 bg-white-5': isOpen },
     { 'border-transparent': !isOpen }
   )
@@ -68,7 +68,7 @@
     <span class:space-x-2={!collapsed} class="flex items-center">
       <ProfileAvatar {name} {country} dark large />
       {#if !collapsed}
-        <span class="whitespace-nowrap">{name}</span>
+        <div class="whitespace-nowrap max-w-[140px] truncate">{name}</div>
       {/if}
     </span>
     {#if !collapsed}

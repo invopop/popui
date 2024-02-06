@@ -34,7 +34,17 @@
   }
 </script>
 
-<div class="relative">
+<button
+  class:cursor-default={!expandable}
+  disabled={!expandable}
+  class="relative text-left w-full"
+  on:click|stopPropagation={() => {
+    open = !open
+    if (open) {
+      dispatch('open', slug)
+    }
+  }}
+>
   {#if hasNext}
     <span
       class:left-4={icon}
@@ -61,7 +71,7 @@
       <p class="text-sm text-neutral-800 whitespace-nowrap">{title}</p>
       <p class="flex items-end space-x-2">
         {#if date}
-          <span class="text-sm text-neutral-500 whitespace-nowrap">
+          <span class="text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero">
             {date.toLocaleDateString('en-us', dateOptions)}
           </span>
         {/if}
@@ -92,15 +102,7 @@
     </div>
   </div>
   {#if expandable}
-    <button
-      class="absolute top-2.5 right-0"
-      on:click={() => {
-        open = !open
-        if (open) {
-          dispatch('open', slug)
-        }
-      }}
-    >
+    <span class="absolute top-2.5 right-0">
       <svg
         class:rotate-180={open}
         class="w-5 h-5"
@@ -111,6 +113,6 @@
         <circle cx="10" cy="10" r="8" fill="#F3F5F5" />
         <path d="M6.5 8.25004L10 11.75L13.5 8.25" stroke="#0A0A0A" stroke-width="1.2" />
       </svg>
-    </button>
+    </span>
   {/if}
-</div>
+</button>

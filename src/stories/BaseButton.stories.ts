@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 
 import BaseButton from './helpers/BaseButtonWithSlot.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
+import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 import { Cog6Tooth } from '@steeze-ui/heroicons'
 import DarkBackgroundDecorator from './decorartors/DarkBackgroundDecorator.svelte'
 
@@ -95,6 +96,16 @@ export const SecondaryWithOnlyIcon: Story = {
   }
 }
 
+export const SecondaryFullwidth: Story = {
+  decorators: [() => MaxWidthSmDecorator],
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'secondary',
+    fullwidth: true
+  }
+}
+
 export const Danger: Story = {
   args: {
     slot: 'Danger Button',
@@ -140,5 +151,16 @@ export const DangerIcon: Story = {
     slot: 'Button',
     icon: Cog6Tooth,
     dangerIcon: true
+  }
+}
+
+export const ShortcutIcon: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    slot: 'Button',
+    variant: 'primary',
+    iconPosition: 'right',
+    icon: Cog6Tooth,
+    shortcut: true
   }
 }

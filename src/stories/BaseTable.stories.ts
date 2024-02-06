@@ -25,7 +25,7 @@ export const Default: Story = {
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
     ],
     data: [
       {

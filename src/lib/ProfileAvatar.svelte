@@ -9,7 +9,7 @@
   export let country = ''
 
   $: avatarStyles = clsx(
-    { 'h-4 w-4 text-xs rounded-sm': !large },
+    { 'h-5 w-5 text-xs rounded-sm': !large },
     { 'h-8 w-8 rounded': large },
     { 'bg-neutral-50 border-neutral-100 text-neutral-500': !dark },
     { 'bg-white-5 border-white-10 text-white-70': dark }

@@ -14,7 +14,16 @@
   export let multiple = false
   export let item: DrawerOption
 
-  $: styles = clsx({ 'py-1 space-x-3': item.country }, { 'py-1.5 space-x-2': !item.country })
+  $: hasIcon = item.icon || item.country
+
+  $: styles = clsx(
+    { 'py-1 space-x-3': item.country },
+    { 'py-1.5 space-x-2': !item.country },
+    { 'px-1.5': hasIcon },
+    { 'px-2': !hasIcon },
+    { 'bg-accent-100': item.selected && item.country },
+    { 'bg-accent-50': item.selected && !item.country }
+  )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
@@ -24,8 +33,7 @@
 </script>
 
 <button
-  class:bg-accent-50={item.selected}
-  class="{styles} hover:bg-neutral-50 rounded px-2 flex items-center justify-start w-full"
+  class="{styles} hover:bg-neutral-50 rounded pr-2 flex items-center justify-start w-full"
   on:click|stopPropagation={() => {
     dispatch('click', item.value)
   }}
@@ -38,7 +46,7 @@
       class="w-5 h-5 {item.destructive ? 'text-danger-500' : 'text-neutral-500'}"
     />
   {/if}
-  <div class="whitespace-nowrap flex-1 text-left">
+  <div class="whitespace-nowrap flex-1 text-left max-w-40 truncate" title={item.label}>
     <span class={labelStyles}>{item.label}</span>
     {#if item.country}
       <span class="flex space-x-1 items-center">
@@ -51,5 +59,7 @@
     <InputCheckbox />
   {:else if item.selected}
     <Icon src={Tick} class="w-5 h-5 text-accent-500" />
+  {:else if item.rightIcon}
+    <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-300" />
   {/if}
 </button>

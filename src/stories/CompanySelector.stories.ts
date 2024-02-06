@@ -57,7 +57,7 @@ export const WithFlag: Story = {
         country: 'co'
       },
       {
-        name: 'Payflow',
+        name: 'Payflow name too long that should truncate',
         slug: 'payflow',
         id: 'whatever-2',
         country: 'pe'

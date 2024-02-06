@@ -22,7 +22,7 @@
   </ul>
   {#if footerItems.length}
     <hr class="!my-1 border-neutral-100" />
-    <ul class="p-1">
+    <ul class="p-1 space-y-1">
       {#each footerItems as item}
         <DrawerContextItem {item} {multiple} on:click />
       {/each}

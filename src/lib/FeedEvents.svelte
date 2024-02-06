@@ -30,7 +30,7 @@
     <div class:border-t={i > 0} class="border-neutral-100 py-2 px-3">
       <div class="flex items-center justify-between">
         <TagStatus status={event.status.type} label={event.status.label} />
-        <p class="text-xs text-neutral-500">{formatDate(event.date)}</p>
+        <p class="text-xs text-neutral-500 tabular-nums slashed-zero">{formatDate(event.date)}</p>
       </div>
       {#if event.message}
         <p class="text-neutral-800 text-sm mt-2">{event.message}</p>

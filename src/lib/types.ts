@@ -29,6 +29,7 @@ export type DrawerOption = SelectOption & {
   destructive?: boolean
   selected?: boolean
   icon?: IconSource | undefined
+  rightIcon?: IconSource | undefined
   country?: string
 }
 

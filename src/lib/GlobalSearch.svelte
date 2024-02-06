@@ -3,6 +3,7 @@
   import { GlobalSearch, Slash } from '@invopop/ui-icons'
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
   import clsx from 'clsx'
+  import ShortcutWrapper from './ShortcutWrapper.svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -38,8 +39,8 @@
   <Icon src={GlobalSearch} class="w-5 h-5 text-white-70" />
   {#if !collapsed}
     <span class="text-white-40 text-sm flex-1 text-left">Search</span>
-    <span class="border border-white-10 bg-white-5 p-0.5 rounded">
+    <ShortcutWrapper>
       <Icon src={Slash} class="w-3 h-3 text-white-70" />
-    </span>
+    </ShortcutWrapper>
   {/if}
 </button>

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 import DrawerContext from '../lib/DrawerContext.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
+import { Close, Download, Edit } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -53,5 +54,15 @@ export const Searchable: Story = {
     ],
     multiple: true,
     searchable: true
+  }
+}
+
+export const WithIcon: Story = {
+  args: {
+    items: [
+      { label: 'Cobee S.L.', value: 'cobee', icon: Close },
+      { label: 'Payflow S.L.', value: 'payflow', icon: Edit, rightIcon: Download },
+      { label: 'Footer S.L.', value: 'footer', footer: true }
+    ]
   }
 }

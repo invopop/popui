@@ -10,10 +10,32 @@
   export let variant: ButtonVariant = 'default'
   export let small = false
   export let dangerIcon = false
+  export let shortcut = false
+  export let fullwidth = false
 </script>
 
 {#if slot}
-  <BaseButton {dangerIcon} {disabled} {icon} {iconPosition} {variant} {small}>{slot}</BaseButton>
+  <BaseButton
+    {dangerIcon}
+    {disabled}
+    {icon}
+    {iconPosition}
+    {variant}
+    {small}
+    {shortcut}
+    {fullwidth}
+  >
+    {slot}
+  </BaseButton>
 {:else}
-  <BaseButton {dangerIcon} {disabled} {icon} {iconPosition} {variant} {small} />
+  <BaseButton
+    {dangerIcon}
+    {disabled}
+    {icon}
+    {iconPosition}
+    {variant}
+    {small}
+    {shortcut}
+    {fullwidth}
+  />
 {/if}

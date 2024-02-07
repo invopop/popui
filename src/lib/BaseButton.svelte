@@ -38,11 +38,12 @@
     { 'text-sm': small },
     { 'text-base': !small },
     { 'px-2 pt-[2.5px] pb-[3.5px]': small && $$slots.default },
+    { 'p-1': small && !$$slots.default },
     { 'px-3': !small && $$slots.default && !icon },
     { 'pl-2 pr-3': !small && $$slots.default && icon && iconPosition === 'left' },
     { 'pl-3 pr-2': !small && $$slots.default && icon && iconPosition === 'right' },
     { 'py-1.25': !small && $$slots.default },
-    { 'p-1.5': !$$slots.default },
+    { 'p-1.5': !small && !$$slots.default },
     { 'text-white': ['primary', 'danger', 'dark'].includes(variant) },
     { 'text-neutral-800': ['default', 'secondary'].includes(variant) },
     { 'border border-white-10 hover:border-white-20 focus:border-white-40': variant === 'dark' },
@@ -68,7 +69,10 @@
     {
       'text-white': !['default', 'secondary'].includes(variant) && !$$slots.default && !dangerIcon
     },
-    { 'text-danger-500': dangerIcon }
+    { 'text-danger-500': dangerIcon },
+    { 'h-4 w-4': shortcut },
+    { 'h-4 w-4': shortcut || small },
+    { 'h-5 w-5': !shortcut && !small }
   )
 
   $: overlayClasses = clsx({
@@ -101,10 +105,10 @@
   {#if resolvedIcon}
     {#if shortcut}
       <ShortcutWrapper>
-        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
+        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} z-10" />
       </ShortcutWrapper>
     {:else}
-      <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5 z-10" />
+      <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} z-10" />
     {/if}
   {/if}
   {#if $$slots.default}

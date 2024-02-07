@@ -5,6 +5,7 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 import { Cog6Tooth } from '@steeze-ui/heroicons'
 import DarkBackgroundDecorator from './decorartors/DarkBackgroundDecorator.svelte'
+import { Close } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -35,6 +36,13 @@ export const DefaultSmall: Story = {
   args: {
     slot: 'Button',
     small: true
+  }
+}
+
+export const DefaultSmallOnlyIcon: Story = {
+  args: {
+    small: true,
+    icon: Close
   }
 }
 

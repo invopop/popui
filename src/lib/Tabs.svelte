@@ -20,7 +20,7 @@
         selected = value.label
       }}
     >
-      <span>{value.label}</span>
+      <span class="tracking-tighter">{value.label}</span>
       {#if value.counter}
         <BaseCounter content={value.counter} />
       {/if}

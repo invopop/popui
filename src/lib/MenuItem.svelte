@@ -104,7 +104,7 @@
         <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5 text-white-70" />
       {/if}
       {#if !collapsedSidebar}
-        <span class="whitespace-nowrap">{label}</span>
+        <span class="whitespace-nowrap tracking-normal">{label}</span>
       {/if}
     </span>
     {#if collapsable && !collapsedSidebar}

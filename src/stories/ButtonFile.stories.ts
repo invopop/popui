@@ -30,6 +30,12 @@ export const WithDifferentIcon: Story = {
   }
 }
 
+export const LongName: Story = {
+  args: {
+    name: 'File name that is very very long and does not fit at all'
+  }
+}
+
 export const Disabled: Story = {
   args: {
     name: 'File name',

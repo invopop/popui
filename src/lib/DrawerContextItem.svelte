@@ -27,8 +27,8 @@
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
-    { 'font-semibold': item.country },
-    { 'text-sm font-medium': !item.country }
+    { 'text-base font-semibold tracking-tight': item.country },
+    { 'text-sm font-medium tracking-normal': !item.country }
   )
 </script>
 
@@ -51,7 +51,7 @@
     {#if item.country}
       <span class="flex space-x-1 items-center">
         <BaseFlag country={item.country} />
-        <span class="text-sm text-neutral-500">{getCountryName(item.country)}</span>
+        <span class="text-sm text-neutral-500 tracking-normal">{getCountryName(item.country)}</span>
       </span>
     {/if}
   </div>

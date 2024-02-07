@@ -35,7 +35,7 @@
   {id}
   {placeholder}
   {value}
-  class="{inputStyles} py-1.25 px-3 border w-full rounded placeholder-neutral-400 text-base caret-accent-500"
+  class="{inputStyles} py-1.25 px-3 border w-full rounded placeholder-neutral-400 text-base caret-accent-500 tracking-tight"
   {disabled}
   {rows}
   on:input={handleInput}

@@ -32,14 +32,14 @@
   }
 </script>
 
-<th
-  scope="col"
-  class="{outerStyles} bg-white text-left text-sm text-neutral-600 font-medium py-2.5 group sticky z-10 top-0"
->
+<th scope="col" class="{outerStyles} bg-white text-neutral-600 py-2.5 group sticky z-10 top-0">
   <span class="{headerStyles} -ml-1 flex">
     {#if field.sortable}
       <BaseDropdown bind:this={sortDropdown}>
-        <button slot="trigger" class="w-full flex items-center justify-start space-x-1">
+        <button
+          slot="trigger"
+          class="w-full flex items-center justify-start space-x-1 text-left text-sm font-medium tracking-normal"
+        >
           <span>{field.headerLabel}</span>
           {#if sortBy === field.slug}
             <svg
@@ -65,7 +65,7 @@
         />
       </BaseDropdown>
     {:else}
-      <span>{field.headerLabel}</span>
+      <span class="text-left text-sm font-medium tracking-normal">{field.headerLabel}</span>
     {/if}
   </span>
 </th>

@@ -74,6 +74,13 @@ export default {
         600: '#D1A329'
       }
     },
+    letterSpacing: {
+      tightest: '-0.567px',
+      tighter: '-0.304px',
+      tight: '-0.135px',
+      normal: '-0.039px',
+      wide: '0.055px'
+    },
 
     fontFamily: {
       sans: ['Inter', 'sans-serif']

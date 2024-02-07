@@ -14,6 +14,8 @@
   })
 </script>
 
-<span class="{tagStyles} border rounded px-1 py-px text-sm inline-flex items-center">
+<span
+  class="{tagStyles} border rounded px-1 py-px text-sm inline-flex items-center tracking-[-0.055px]"
+>
   {label}
 </span>

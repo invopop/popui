@@ -38,7 +38,7 @@
 >
   <Icon src={GlobalSearch} class="w-5 h-5 text-white-70" />
   {#if !collapsed}
-    <span class="text-white-40 text-sm flex-1 text-left">Search</span>
+    <span class="text-white-40 text-sm flex-1 text-left tracking-normal">Search</span>
     <ShortcutWrapper>
       <Icon src={Slash} class="w-3 h-3 text-white-70" />
     </ShortcutWrapper>

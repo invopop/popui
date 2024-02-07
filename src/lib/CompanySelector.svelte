@@ -63,12 +63,12 @@
   <span
     slot="trigger"
     title={name}
-    class="{styles} text-white text-sm font-medium flex items-center justify-between border focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
+    class="{styles} text-white text-base font-semibold flex items-center justify-between border focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
   >
     <span class:space-x-2={!collapsed} class="flex items-center">
       <ProfileAvatar {name} {country} dark large />
       {#if !collapsed}
-        <div class="whitespace-nowrap max-w-[140px] truncate">{name}</div>
+        <div class="whitespace-nowrap max-w-[140px] truncate tracking-tight">{name}</div>
       {/if}
     </span>
     {#if !collapsed}

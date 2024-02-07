@@ -93,7 +93,7 @@
 <button
   type="button"
   {disabled}
-  class="{buttonStyles} flex items-center justify-center rounded font-medium font-sans relative group"
+  class="{buttonStyles} flex items-center justify-center rounded font-medium font-sans relative group tracking-tight"
   {...$$restProps}
   on:click={handleClick}
 >

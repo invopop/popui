@@ -52,7 +52,7 @@
     {disabled}
     class:pl-7={icon}
     class:pl-3={!icon}
-    class="py-1.25 border border-neutral-200 hover:border-neutral-300 w-full rounded text-neutral-800 text-base pr-9 outline-accent-400"
+    class="py-1.25 border border-neutral-200 hover:border-neutral-300 w-full rounded text-neutral-800 text-base pr-9 outline-accent-400 tracking-tight"
     on:change={handleChange}
   >
     <option value="" disabled={disablePlaceholder}>{placeholder}</option>

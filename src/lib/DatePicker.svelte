@@ -190,27 +190,33 @@
           >
             <button
               on:click={onThisWeek}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Week</button
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
+              >This Week</button
             >
             <button
               on:click={onLastWeek}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Week</button
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
+              >Last Week</button
             >
             <button
               on:click={onThisMonth}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Month</button
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
+              >This Month</button
             >
             <button
               on:click={onLastMonth}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Month</button
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
+              >Last Month</button
             >
             <button
               on:click={onThisQuarter}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">This Quarter</button
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
+              >This Quarter</button
             >
             <button
               on:click={onLastQuarter}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5">Last Quarter</button
+              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
+              >Last Quarter</button
             >
           </div>
           <div bind:this={datePickerEl} />
@@ -255,6 +261,7 @@
     justify-content: center;
     font-size: 15px;
     height: 24px !important;
+    letter-spacing: -0.135px;
   }
   :global(.flatpickr-monthDropdown-months) {
     font-weight: 500 !important;

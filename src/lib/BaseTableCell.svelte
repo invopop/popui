@@ -24,7 +24,7 @@
   )
 </script>
 
-<td class="{cellStyles} whitespace-nowrap text-sm py-2.5">
+<td class="{cellStyles} whitespace-nowrap text-sm py-2.5 tracking-normal">
   <span>
     {#if field.isCountry}
       <span class="flex items-center space-x-1">

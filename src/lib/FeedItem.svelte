@@ -68,10 +68,14 @@
       {/if}
     </div>
     <div class="flex-1 items-center justify-start">
-      <p class="text-sm text-neutral-800 whitespace-nowrap">{title}</p>
+      <p class="text-sm text-neutral-800 whitespace-nowrap tracking-normal font-semibold">
+        {title}
+      </p>
       <p class="flex items-end space-x-2">
         {#if date}
-          <span class="text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero">
+          <span
+            class="text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero tracking-normal"
+          >
             {date.toLocaleDateString('en-us', dateOptions)}
           </span>
         {/if}

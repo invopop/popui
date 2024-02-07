@@ -10,9 +10,9 @@
     <div class="rounded border border-neutral-200 p-2">
       <img class="h-4 w-4 flex-shrink-0" src={imageUrl} alt={imageAlt} />
     </div>
-    <h3 class="truncate text-base font-semibold text-neutral-800">{title}</h3>
+    <h3 class="truncate text-base font-semibold text-neutral-800 tracking-tight">{title}</h3>
   </div>
-  <p class="flex mt-1 text-sm text-neutral-500">
+  <p class="flex mt-1 text-sm text-neutral-500 tracking-normal">
     {description}
   </p>
   <div class="mt-5">

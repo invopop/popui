@@ -33,8 +33,11 @@
     class:text-xs={small}
     class:text-sm={!small}
     class:text-neutral-800={dark}
-    class:text-neutral-400={!dark}>{formattedUuid}</span
+    class:text-neutral-400={!dark}
+    class="tracking-wide"
   >
+    {formattedUuid}
+  </span>
 
   <span class:text-neutral-500={dark} class:text-neutral-400={!dark}>
     <svg

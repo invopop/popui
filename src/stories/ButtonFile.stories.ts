@@ -42,3 +42,10 @@ export const Disabled: Story = {
     disabled: true
   }
 }
+
+export const PreviewHidden: Story = {
+  args: {
+    name: 'File name',
+    hidePreview: true
+  }
+}

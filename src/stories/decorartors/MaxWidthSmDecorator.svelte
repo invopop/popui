@@ -1,3 +1,3 @@
-<div class="max-w-sm">
+<div class="max-w-[350px]">
   <slot />
 </div>

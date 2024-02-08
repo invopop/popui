@@ -7,6 +7,7 @@
   export let icon: IconSource = DocumentText
   export let name = ''
   export let disabled = false
+  export let hidePreview = false
 
   const dispatch = createEventDispatcher()
 </script>
@@ -20,13 +21,15 @@
     <span class="text-sm text-neutral-800 tracking-tight max-w-[180px] truncate">{name}</span>
   </span>
   <span class="flex space-x-2">
-    <BaseButton
-      {disabled}
-      icon={Preview}
-      on:click={() => {
-        dispatch('preview')
-      }}
-    />
+    {#if !hidePreview}
+      <BaseButton
+        {disabled}
+        icon={Preview}
+        on:click={() => {
+          dispatch('preview')
+        }}
+      />
+    {/if}
     <BaseButton
       {disabled}
       icon={Download}

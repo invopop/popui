@@ -38,7 +38,7 @@
       <BaseDropdown bind:this={sortDropdown}>
         <button
           slot="trigger"
-          class="w-full flex items-center justify-start space-x-1 text-left text-sm font-medium tracking-normal"
+          class="w-full flex items-center justify-start space-x-1 text-left text-sm font-medium tracking-normal whitespace-nowrap"
         >
           <span>{field.headerLabel}</span>
           {#if sortBy === field.slug}
@@ -65,7 +65,9 @@
         />
       </BaseDropdown>
     {:else}
-      <span class="text-left text-sm font-medium tracking-normal">{field.headerLabel}</span>
+      <span class="text-left text-sm font-medium tracking-normal whitespace-nowrap"
+        >{field.headerLabel}</span
+      >
     {/if}
   </span>
 </th>

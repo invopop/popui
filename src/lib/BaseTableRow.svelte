@@ -11,12 +11,14 @@
   export let row: TableDataRow
   export let getActions: TableActionProp = undefined
   export let fields: TableField[] = []
+  export let disableRowClick = false
 
   $: actions = getActions instanceof Function ? getActions(row) : []
 </script>
 
 <tr
-  class="hover:bg-neutral-50 active:bg-accent-50 hover:cursor-pointer"
+  class:cursor-pointer={!disableRowClick}
+  class="hover:bg-neutral-50 active:bg-accent-50"
   on:click
   on:contextmenu|preventDefault={() => {
     if (!actionsDropdown) return

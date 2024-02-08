@@ -29,6 +29,7 @@
   export let data: TableDataRow[] = []
   export let getActions: TableActionProp = undefined
   export let groupLabel: TableGroupLabelProp = undefined
+  export let disableRowClick = false
 
   $: groupedData = groupData(data)
 
@@ -100,7 +101,10 @@
             {row}
             {fields}
             {getActions}
+            {disableRowClick}
             on:click={() => {
+              if (disableRowClick) return
+
               if (metaKeyPressed) {
                 dispatch('rowNewTabClick', row)
               } else {

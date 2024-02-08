@@ -33,7 +33,7 @@
 </script>
 
 <button
-  class="{styles} flex items-center border p-1.5 border-white-10 bg-neutral-800/10 rounded"
+  class="{styles} flex items-center border pl-1.5 py-1.5 pr-2 border-white-10 bg-neutral-800/10 rounded"
   on:click={() => open()}
 >
   <Icon src={GlobalSearch} class="w-5 h-5 text-white-70" />

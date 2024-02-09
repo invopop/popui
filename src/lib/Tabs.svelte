@@ -22,9 +22,7 @@
     >
       <span class="tracking-tighter">{value.label}</span>
       {#if value.counter}
-        <div class="pt-0.5">
-          <BaseCounter content={value.counter} />
-        </div>
+        <BaseCounter content={value.counter} />
       {/if}
     </button>
   {/each}

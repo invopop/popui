@@ -4,6 +4,7 @@
   import TagStatus from './TagStatus.svelte'
   import BaseFlag from './BaseFlag.svelte'
   import { getCountryName } from './helpers.js'
+  import UuidCopy from './UuidCopy.svelte'
 
   export let field: TableField
   export let currentIndex: number
@@ -31,6 +32,8 @@
         <BaseFlag country={String(data)} />
         <span>{getCountryName(String(data))}</span>
       </span>
+    {:else if field.copy && data}
+      <UuidCopy uuid={String(data)} />
     {:else}
       <span>{data}</span>
     {/if}

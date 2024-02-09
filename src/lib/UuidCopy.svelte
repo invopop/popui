@@ -42,9 +42,9 @@
   <span class:text-neutral-500={dark} class:text-neutral-400={!dark}>
     <svg
       class:w-3={small}
-      class:h3={small}
-      class:w-5={!small}
-      class:h-5={!small}
+      class:h-3={small}
+      class:w-4={!small}
+      class:h-4={!small}
       viewBox="0 0 12 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

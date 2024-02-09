@@ -47,6 +47,7 @@ export const DisabledRowClick: Story = {
       { headerLabel: 'Invoice', slug: 'code', sortable: true },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
+      { headerLabel: 'ID', slug: 'id', copy: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
       { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
     ],
@@ -55,6 +56,7 @@ export const DisabledRowClick: Story = {
         code: 'CC2300028X',
         customer: 'Cobee',
         country: 'es',
+        id: 'fc77384b-823e-43d1-b196-f4be0fcb5035',
         total: '403,50',
         created_at: 'Sep 22, 2023'
       },

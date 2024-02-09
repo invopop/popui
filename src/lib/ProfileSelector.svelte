@@ -3,6 +3,7 @@
   import ProfileAvatar from './ProfileAvatar.svelte'
 
   export let name = ''
+  export let picture = ''
   export let collapsed = false
 
   $: styles = clsx({ 'p-[5px]': collapsed }, { 'w-full pl-1.5 pr-2 py-[7px]': !collapsed })
@@ -13,7 +14,7 @@
   on:click
 >
   <span class="flex items-center space-x-2">
-    <ProfileAvatar {name} dark />
+    <ProfileAvatar {name} {picture} dark />
     {#if !collapsed}
       <span class="whitespace-nowrap tracking-normal">{name}</span>
     {/if}

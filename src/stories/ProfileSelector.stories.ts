@@ -24,6 +24,15 @@ export const Default: Story = {
   }
 }
 
+export const WithPicture: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    name: 'Sam Lown',
+    picture:
+      'https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg'
+  }
+}
+
 export const Collapsed: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

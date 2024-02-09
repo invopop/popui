@@ -49,7 +49,7 @@
     <span
       class:left-4={icon}
       class:left-2={!icon}
-      class="absolute -bottom-4 border-l border-neutral-100 w-px h-full"
+      class="absolute -bottom-6 border-l border-neutral-100 w-px h-full"
     />
   {/if}
   <div

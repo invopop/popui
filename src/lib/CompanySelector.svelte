@@ -76,5 +76,5 @@
       <Icon src={ChevronDown} class="{isOpen ? 'rotate-180' : ''} h-4 w-4 text-white-40 mt-px" />
     {/if}
   </span>
-  <DrawerContext {items} on:click={selectCompany} />
+  <DrawerContext widthClass="w-[300px]" {items} on:click={selectCompany} />
 </BaseDropdown>

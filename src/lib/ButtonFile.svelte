@@ -18,7 +18,9 @@
 >
   <span class="flex items-center justify-start space-x-1.5 flex-1">
     <Icon src={icon} class="w-5 h-5 text-neutral-500" />
-    <span class="text-sm text-neutral-800 tracking-tight max-w-[180px] truncate">{name}</span>
+    <span class="text-sm font-medium text-neutral-800 tracking-tight max-w-[180px] truncate">
+      {name}
+    </span>
   </span>
   <span class="flex space-x-2">
     {#if !hidePreview}

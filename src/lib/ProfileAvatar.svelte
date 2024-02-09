@@ -9,22 +9,17 @@
   export let country = ''
 
   $: avatarStyles = clsx(
-    { 'h-5 w-5 text-xs rounded-sm': !large },
-    { 'h-8 w-8 rounded': large },
+    { 'h-5 w-5 text-xs': !large },
+    { 'h-8 w-8': large },
     { 'bg-neutral-50 border-neutral-100 text-neutral-500': !dark },
-    { 'bg-white-5 border-white-10 text-white-70': dark }
+    { 'bg-white-5 border-white-10 text-white-70': dark },
+    { border: !picture }
   )
 </script>
 
-<div class="{avatarStyles} flex items-center justify-center font-semibold border relative">
+<div class="{avatarStyles} rounded flex items-center justify-center font-semibold relative">
   {#if picture}
-    <img
-      class:rounded-sm={!large}
-      class:rounded={large}
-      class="h-full w-full"
-      src={picture}
-      alt={name}
-    />
+    <img class="h-full w-full rounded object-cover" src={picture} alt={name} />
   {:else}
     <span>{name?.charAt(0)}</span>
   {/if}

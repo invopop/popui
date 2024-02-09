@@ -47,7 +47,7 @@ export const DisabledRowClick: Story = {
       { headerLabel: 'Invoice', slug: 'code', sortable: true },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
-      { headerLabel: 'ID', slug: 'id', copy: true },
+      { headerLabel: 'ID', slug: 'id', copy: true, rightAlign: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
       { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
     ],
@@ -60,7 +60,13 @@ export const DisabledRowClick: Story = {
         total: '403,50',
         created_at: 'Sep 22, 2023'
       },
-      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '87.403,50', created_at: 'Sep 23, 2023' }
+      {
+        code: 'CAB-0042',
+        id: '08a656bb-44e7-4393-9fff-4bd709a24b37',
+        customer: 'Cabify, Inc',
+        total: '87.403,50',
+        created_at: 'Sep 23, 2023'
+      }
     ]
   }
 }

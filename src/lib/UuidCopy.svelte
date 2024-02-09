@@ -1,7 +1,10 @@
 <script lang="ts">
+  import clsx from 'clsx'
+
   export let uuid = ''
   export let small = false
   export let dark = false
+  export let rightAlign = false
 
   let copied = false
 
@@ -17,10 +20,13 @@
   }
 
   $: formattedUuid = shortenString(uuid, 7, 12)
+  $: styles = clsx({
+    'justify-end w-full': rightAlign
+  })
 </script>
 
 <button
-  class="relative flex items-center space-x-1"
+  class="{styles} relative flex items-center space-x-1"
   on:click|stopPropagation={async () => {
     await navigator.clipboard.writeText(uuid)
     copied = true

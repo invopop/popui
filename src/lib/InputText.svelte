@@ -1,6 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
   import InputLabel from './InputLabel.svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import InputError from './InputError.svelte'
@@ -11,7 +11,9 @@
   export let errorText = ''
   export let disabled = false
   export let value: string | number = ''
+  export let focusOnLoad = false
 
+  let inputEl: HTMLInputElement
   let timer: ReturnType<typeof setTimeout>
 
   const dispatch = createEventDispatcher()
@@ -42,12 +44,19 @@
 
     debounce(target)
   }
+
+  onMount(() => {
+    if (!focusOnLoad) return
+
+    inputEl.focus()
+  })
 </script>
 
 {#if label}
   <InputLabel {id} {label} />
 {/if}
 <input
+  bind:this={inputEl}
   bind:value
   type="text"
   class="{inputStyles} py-1.25 px-3 border w-full rounded placeholder-neutral-400 text-base caret-accent-500 tracking-tight"

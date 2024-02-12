@@ -43,3 +43,11 @@ export const WithError: Story = {
     errorText: 'Error label'
   }
 }
+
+export const Autofocus: Story = {
+  args: {
+    value: '',
+    placeholder: 'Placeholder',
+    focusOnLoad: true
+  }
+}

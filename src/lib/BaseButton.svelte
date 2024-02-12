@@ -12,6 +12,7 @@
   export let icon: IconSource | string | undefined = undefined
   export let iconTheme: IconTheme = 'default'
   export let iconPosition: IconPosition = 'left'
+  export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button'
   export let variant: ButtonVariant = 'default'
   export let disabled = false
   export let small = false
@@ -95,7 +96,7 @@
 </script>
 
 <button
-  type="button"
+  {type}
   {disabled}
   class="{buttonStyles} flex items-center justify-center rounded font-medium font-sans relative group tracking-tight"
   {...$$restProps}

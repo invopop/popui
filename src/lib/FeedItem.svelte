@@ -86,7 +86,13 @@
       {#if open}
         {#if children?.length}
           {#each children as child, i (i)}
-            <svelte:self {...child} isChild hasPrev={i > 0} hasNext={i < children.length - 1} />
+            <svelte:self
+              {...child}
+              isChild
+              hasPrev={i > 0}
+              hasNext={i < children.length - 1}
+              on:copied
+            />
           {/each}
         {:else if !events?.length}
           <div

@@ -18,7 +18,7 @@
 >
   <span class="flex items-center justify-start space-x-1.5 flex-1">
     <Icon src={icon} class="w-5 h-5 text-neutral-500" />
-    <span class="text-sm font-medium text-neutral-800 tracking-tight max-w-[180px] truncate">
+    <span class="text-base font-medium text-neutral-800 tracking-tight max-w-[180px] truncate">
       {name}
     </span>
   </span>

@@ -22,7 +22,8 @@
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
     { 'bg-accent-100': item.selected && item.country },
-    { 'bg-accent-50': item.selected && !item.country }
+    { 'bg-accent-50': item.selected && !item.country },
+    { 'hover:bg-neutral-50 hover:border-neutral-100 rounded-sm': !item.selected }
   )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
@@ -33,7 +34,7 @@
 </script>
 
 <button
-  class="{styles} hover:bg-neutral-50 rounded pr-2 flex items-center justify-start w-full"
+  class="{styles} border border-transparent rounded pr-2 flex items-center justify-start w-full"
   on:click|stopPropagation={() => {
     dispatch('click', item.value)
   }}

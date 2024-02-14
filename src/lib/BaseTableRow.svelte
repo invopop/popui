@@ -34,6 +34,7 @@
       totalFields={fields.length}
       badge={field.helperBadge ? field.helperBadge(row) : null}
       data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
+      on:copied
     />
   {/each}
   {#if actions.length}

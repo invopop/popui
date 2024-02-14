@@ -80,7 +80,7 @@
           </span>
         {/if}
         {#if uuid}
-          <UuidCopy {uuid} small />
+          <UuidCopy {uuid} small on:copied />
         {/if}
       </p>
       {#if open}

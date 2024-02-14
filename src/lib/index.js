@@ -30,6 +30,7 @@ import MenuItem from './MenuItem.svelte'
 import ProfileAvatar from './ProfileAvatar.svelte'
 import ProfileSelector from './ProfileSelector.svelte'
 import SectionLayout from './SectionLayout.svelte'
+import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import Tabs from './Tabs.svelte'
 import TagSearch from './TagSearch.svelte'
@@ -73,6 +74,7 @@ export {
   ProfileAvatar,
   ProfileSelector,
   SectionLayout,
+  SeparatorHorizontal,
   ShortcutWrapper,
   Tabs,
   TagSearch,

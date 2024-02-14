@@ -41,3 +41,11 @@ export const Shortened: Story = {
     uuid: 'e73d5d20834934588127389172381789bc2f275460'
   }
 }
+
+export const ShortenedWithLessCharacters: Story = {
+  args: {
+    uuid: 'e73d5d20834934588127389172381789bc2f275460',
+    prefixLength: 4,
+    suffixLength: 4
+  }
+}

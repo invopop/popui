@@ -1,14 +1,17 @@
 <script lang="ts">
   import clsx from 'clsx'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 
   export let uuid = ''
   export let small = false
   export let dark = false
   export let rightAlign = false
+  export let prefixLength = 7
+  export let suffixLength = 12
 
-  let copied = false
-
-  function shortenString(inputString, prefixLength, suffixLength) {
+  function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
     if (inputString.length <= prefixLength + suffixLength) {
       return inputString // Return the whole string if it's too short
     }
@@ -19,7 +22,7 @@
     return prefix + '...' + suffix
   }
 
-  $: formattedUuid = shortenString(uuid, 7, 12)
+  $: formattedUuid = shortenString(uuid, prefixLength, suffixLength)
   $: styles = clsx({
     'justify-end w-full': rightAlign
   })
@@ -29,10 +32,7 @@
   class="{styles} relative flex items-center space-x-1"
   on:click|stopPropagation={async () => {
     await navigator.clipboard.writeText(uuid)
-    copied = true
-    setTimeout(() => {
-      copied = false
-    }, 1000)
+    dispatch('copied', uuid)
   }}
 >
   <span
@@ -63,7 +63,4 @@
       />
     </svg>
   </span>
-  {#if copied}
-    <span class="absolute mt-4 top-0 right-0 text-xs text-accent-500">Copied!</span>
-  {/if}
 </button>

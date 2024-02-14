@@ -33,7 +33,7 @@
         <span>{getCountryName(String(data))}</span>
       </span>
     {:else if field.copy && data}
-      <UuidCopy rightAlign={field.rightAlign} uuid={String(data)} />
+      <UuidCopy rightAlign={field.rightAlign} uuid={String(data)} on:copied />
     {:else}
       <span>{data}</span>
     {/if}

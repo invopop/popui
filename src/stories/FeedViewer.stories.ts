@@ -42,7 +42,7 @@ export const TwoItems: Story = {
         icon: CircleStack,
         status: 'success',
         date: new Date(),
-        uuid: 'e73d5d2089bc289bc2f275460'
+        uuid: '43c38540-7cc6-11ee-8b96-979986851607'
       }
     ]
   }
@@ -61,18 +61,18 @@ export const ExpandableOneLevel: Story = {
         icon: CircleStack,
         status: 'failure',
         date: new Date(),
-        uuid: 'e73d5d2089bc289bc2f275460',
+        uuid: '43c38540-7cc6-11ee-8b96-979986851607',
         expandable: true,
         children: [
           {
             title: 'Series enumerator',
             status: 'success',
-            uuid: 'e73d5d2089bc289bc2f275460'
+            uuid: '43c38540-7cc6-11ee-8b96-979986851607'
           },
           {
             title: 'Factura E',
             status: 'failure',
-            uuid: 'e73d5d2089bc289bc2f275460'
+            uuid: '43c38540-7cc6-11ee-8b96-979986851607'
           }
         ]
       },
@@ -81,7 +81,7 @@ export const ExpandableOneLevel: Story = {
         icon: CircleStack,
         status: 'success',
         date: new Date(),
-        uuid: 'e73d5d2089bc289bc2f275460'
+        uuid: '43c38540-7cc6-11ee-8b96-979986851607'
       }
     ]
   }
@@ -100,18 +100,18 @@ export const ExpandableTwoLevels: Story = {
         icon: CircleStack,
         status: 'failure',
         date: new Date(),
-        uuid: 'e73d5d2089bc289bc2f275460',
+        uuid: '43c38540-7cc6-11ee-8b96-979986851607',
         expandable: true,
         children: [
           {
             title: 'Series enumerator',
             status: 'success',
-            uuid: 'e73d5d2089bc289bc2f275460'
+            uuid: '43c38540-7cc6-11ee-8b96-979986851607'
           },
           {
             title: 'Factura E',
             status: 'failure',
-            uuid: 'e73d5d2089bc289bc2f275460',
+            uuid: '43c38540-7cc6-11ee-8b96-979986851607',
             expandable: true,
             events: [
               {
@@ -138,7 +138,7 @@ export const ExpandableTwoLevels: Story = {
         icon: CircleStack,
         status: 'success',
         date: new Date(),
-        uuid: 'e73d5d2089bc289bc2f275460'
+        uuid: '43c38540-7cc6-11ee-8b96-979986851607'
       }
     ]
   }

@@ -10,6 +10,7 @@
   export let rightAlign = false
   export let prefixLength = 7
   export let suffixLength = 12
+  export let full = false
 
   function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
     if (inputString.length <= prefixLength + suffixLength) {
@@ -22,7 +23,7 @@
     return prefix + '...' + suffix
   }
 
-  $: formattedUuid = shortenString(uuid, prefixLength, suffixLength)
+  $: formattedUuid = full ? uuid : shortenString(uuid, prefixLength, suffixLength)
   $: styles = clsx({
     'justify-end w-full': rightAlign
   })

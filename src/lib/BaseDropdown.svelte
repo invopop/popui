@@ -20,7 +20,7 @@
   }
 </script>
 
-<div>
+<div class="inline-flex">
   <button
     use:floatingRef
     on:click|stopPropagation={async () => {

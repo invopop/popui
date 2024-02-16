@@ -36,7 +36,7 @@
   <span class="{headerStyles} -ml-1 flex">
     {#if field.sortable}
       <BaseDropdown bind:this={sortDropdown}>
-        <button
+        <span
           slot="trigger"
           class="w-full flex items-center justify-start space-x-1 text-left text-sm font-medium tracking-normal whitespace-nowrap"
         >
@@ -57,7 +57,7 @@
               />
             </svg>
           {/if}
-        </button>
+        </span>
         <BaseTableHeaderSortBy
           {sortDirection}
           isActive={sortBy === field.slug}
@@ -65,9 +65,9 @@
         />
       </BaseDropdown>
     {:else}
-      <span class="text-left text-sm font-medium tracking-normal whitespace-nowrap"
-        >{field.headerLabel}</span
-      >
+      <div class="text-left text-sm font-medium tracking-normal whitespace-nowrap">
+        {field.headerLabel}
+      </div>
     {/if}
   </span>
 </th>

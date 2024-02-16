@@ -71,7 +71,7 @@
       <p class="text-sm text-neutral-800 whitespace-nowrap tracking-normal font-semibold">
         {title}
       </p>
-      <p class="flex items-end space-x-2">
+      <p class="flex flex-col space-y-0.5">
         {#if date}
           <span
             class="text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero tracking-normal"
@@ -80,7 +80,7 @@
           </span>
         {/if}
         {#if uuid}
-          <UuidCopy {uuid} small on:copied />
+          <UuidCopy {uuid} full small on:copied />
         {/if}
       </p>
       {#if open}

@@ -32,13 +32,18 @@
   }
 </script>
 
-<th scope="col" class="{outerStyles} bg-white text-neutral-600 py-2.5 group sticky z-10 top-0">
-  <span class="{headerStyles} -ml-1 flex">
+<th
+  scope="col"
+  class="{outerStyles} bg-white text-neutral-600 group sticky z-10 top-0"
+  style:min-width={field.width}
+  style:max-width={field.width}
+>
+  <span class="-ml-1 flex">
     {#if field.sortable}
-      <BaseDropdown bind:this={sortDropdown}>
+      <BaseDropdown bind:this={sortDropdown} fullWidth>
         <span
           slot="trigger"
-          class="w-full flex items-center justify-start space-x-1 text-left text-sm font-medium tracking-normal whitespace-nowrap"
+          class="{headerStyles} w-full py-2.5 flex items-center justify-start space-x-1 text-left text-sm font-medium tracking-normal whitespace-nowrap"
         >
           <span>{field.headerLabel}</span>
           {#if sortBy === field.slug}
@@ -65,7 +70,9 @@
         />
       </BaseDropdown>
     {:else}
-      <div class="text-left text-sm font-medium tracking-normal whitespace-nowrap">
+      <div
+        class="{headerStyles} py-2.5 text-left text-sm font-medium tracking-normal whitespace-nowrap"
+      >
         {field.headerLabel}
       </div>
     {/if}

@@ -21,7 +21,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     fields: [
-      { headerLabel: 'Invoice', slug: 'code', sortable: true },
+      { headerLabel: 'Invoice', slug: 'code', sortable: true, width: '174px' },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
@@ -35,7 +35,12 @@ export const Default: Story = {
         total: '403,50',
         created_at: 'Sep 22, 2023'
       },
-      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '87.403,50', created_at: 'Sep 23, 2023' }
+      {
+        code: 'VERY-LONG-CODE-THAT-SHOULDNT-FIT',
+        customer: 'Cabify, Inc',
+        total: '87.403,50',
+        created_at: 'Sep 23, 2023'
+      }
     ]
   }
 }
@@ -266,6 +271,56 @@ export const WithMonospacedFont: Story = {
 
 export const WithGroupLabel: Story = {
   args: {
+    groupLabel: (data) => {
+      const months = {
+        '02': 'February',
+        '03': 'March',
+        '07': 'July'
+      }
+
+      const parts = data.created_at.split('-')
+
+      return months[parts[1]]
+    },
+    fields: [
+      {
+        headerLabel: 'Invoice',
+        slug: 'code',
+        sortable: true
+      },
+      { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
+      { headerLabel: 'Amount', slug: 'total', monospaced: true },
+      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+    ],
+    data: [
+      {
+        code: 'CC2300028X',
+        customer: 'Febify, Inc',
+        total: '-',
+        created_at: '2023-02-03',
+        draft: true
+      },
+      { code: 'CAB-0042', customer: 'Febify, Inc', total: '€87.403,50', created_at: '2023-02-23' },
+      {
+        code: 'CAB-0042',
+        customer: 'Marchify, Inc',
+        total: '€87.403,50',
+        created_at: '2023-03-23'
+      },
+      {
+        code: 'CAB-0042',
+        customer: 'Marchify, Inc',
+        total: '€87.403,50',
+        created_at: '2023-03-25'
+      },
+      { code: 'CAB-0042', customer: 'Julify, Inc', total: '€87.403,50', created_at: '2023-07-25' }
+    ]
+  }
+}
+
+export const WithGroupLabelAndNoCounter: Story = {
+  args: {
+    hideCounter: true,
     groupLabel: (data) => {
       const months = {
         '02': 'February',

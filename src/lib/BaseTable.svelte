@@ -30,6 +30,7 @@
   export let getActions: TableActionProp = undefined
   export let groupLabel: TableGroupLabelProp = undefined
   export let disableRowClick = false
+  export let hideCounter = false
 
   $: groupedData = groupData(data)
 
@@ -92,7 +93,9 @@
               class="bg-neutral-50 px-4 py-[6.4px] text-left text-sm font-medium text-neutral-500 sticky top-9 tracking-normal border-t border-b border-neutral-100"
             >
               <span>{group.label}</span>
-              <BaseCounter content={group.rows.length} />
+              {#if !hideCounter}
+                <BaseCounter content={group.rows.length} />
+              {/if}
             </th>
           </tr>
         {/if}

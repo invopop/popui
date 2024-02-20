@@ -21,11 +21,16 @@
     { 'pl-3': currentIndex > 0 },
     { 'pr-4': totalActions === 0 && currentIndex === totalFields - 1 },
     { 'pr-3': totalActions > 0 || currentIndex < totalFields - 1 },
-    { 'text-right': field.rightAlign }
+    { 'text-right': field.rightAlign },
+    { 'w-full max-w-0': field.fullWidth }
   )
 </script>
 
-<td class="{cellStyles} whitespace-nowrap text-sm py-2.5 tracking-normal">
+<td
+  class="{cellStyles} whitespace-nowrap text-sm py-2.5 tracking-normal truncate"
+  style:min-width={field.width}
+  style:max-width={field.width}
+>
   <span>
     {#if field.isCountry}
       <span class="flex items-center space-x-1">

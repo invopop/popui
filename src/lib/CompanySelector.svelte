@@ -6,7 +6,7 @@
   import DrawerContext from './DrawerContext.svelte'
   import { createEventDispatcher } from 'svelte'
   import clsx from 'clsx'
-  import { Add, ChevronDown, Settings } from '@invopop/ui-icons'
+  import { Add, DoubleArrow, Settings } from '@invopop/ui-icons'
 
   const dispatch = createEventDispatcher()
 
@@ -73,7 +73,7 @@
       {/if}
     </span>
     {#if !collapsed}
-      <Icon src={ChevronDown} class="{isOpen ? 'rotate-180' : ''} h-4 w-4 text-white-40 mt-px" />
+      <Icon src={DoubleArrow} class="h-4 w-4 text-white-40 mt-px" />
     {/if}
   </span>
   <DrawerContext widthClass="w-[300px]" {items} on:click={selectCompany} />

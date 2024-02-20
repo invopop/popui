@@ -115,6 +115,7 @@ export type TableField = {
   rightAlign?: boolean
   isCountry?: boolean
   copy?: boolean
+  width?: string
 }
 
 export type TabItem = {

@@ -20,7 +20,7 @@
   }
 </script>
 
-<div class="inline-flex">
+<div class="inline-flex" class:w-full={fullWidth}>
   <button
     use:floatingRef
     on:click|stopPropagation={async () => {

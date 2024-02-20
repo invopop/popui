@@ -125,7 +125,17 @@ export const WithHelperBadge: Story = {
           return null
         }
       },
-      { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
+      {
+        headerLabel: 'Customer',
+        slug: 'customer',
+        fullWidth: true,
+        helperBadge: (data) => {
+          if (data.draft) return { label: 'Draft', status: 'orange' }
+
+          return null
+        },
+        formatter: () => '' // Force only badge
+      },
       { headerLabel: 'Amount', slug: 'total' },
       { headerLabel: 'Date', slug: 'created_at', grayed: true }
     ],

@@ -49,7 +49,7 @@
       <span>{data}</span>
     {/if}
     {#if badge}
-      <span class="ml-2">
+      <span class:ml-2={!!data}>
         <TagStatus label={badge.label} status={badge.status} />
       </span>
     {/if}

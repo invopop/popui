@@ -35,6 +35,7 @@
 </script>
 
 <button
+  id={`feed-item-${slug}`}
   class:cursor-default={!expandable}
   disabled={!expandable}
   class="relative text-left w-full"

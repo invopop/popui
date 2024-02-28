@@ -66,6 +66,80 @@ export const WithFlag: Story = {
   }
 }
 
+export const WithMaxHeight: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    selectedCompany: {
+      name: 'Invopop',
+      slug: 'invopop',
+      id: 'whatever',
+      country: 'es'
+    },
+    companies: [
+      {
+        name: 'Invopop',
+        slug: 'invopop',
+        id: 'invopop',
+        country: 'co'
+      },
+      {
+        name: 'Invopop',
+        slug: 'invopop1',
+        id: 'invopop1',
+        country: 'co'
+      },
+      {
+        name: 'Invopop',
+        slug: 'invopop2',
+        id: 'invopop2',
+        country: 'co'
+      },
+      {
+        name: 'Invopop',
+        slug: 'invopop3',
+        id: 'invopop3',
+        country: 'co'
+      },
+      {
+        name: 'Invopop',
+        slug: 'invopop4',
+        id: 'invopop4',
+        country: 'co'
+      },
+      {
+        name: 'Invopop',
+        slug: 'invopop5',
+        id: 'invopop5',
+        country: 'co'
+      },
+      {
+        name: 'Invopop',
+        slug: 'invopop6',
+        id: 'invopop6',
+        country: 'co'
+      },
+      {
+        name: 'Invopop',
+        slug: 'invopop7',
+        id: 'invopop7',
+        country: 'co'
+      },
+      {
+        name: 'Invopop',
+        slug: 'invopop8',
+        id: 'invopop8',
+        country: 'co'
+      },
+      {
+        name: 'Payflow name too long that should truncate',
+        slug: 'payflow',
+        id: 'payflow',
+        country: 'pe'
+      }
+    ]
+  }
+}
+
 export const Collapsed: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

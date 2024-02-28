@@ -3,10 +3,10 @@
   import ProfileAvatar from './ProfileAvatar.svelte'
   import type { Company, DrawerOption } from './types.js'
   import BaseDropdown from './BaseDropdown.svelte'
-  import DrawerContext from './DrawerContext.svelte'
+  import DrawerContextWorkspace from './DrawerContextWorkspace.svelte'
   import { createEventDispatcher } from 'svelte'
   import clsx from 'clsx'
-  import { Add, DoubleArrow, Settings } from '@invopop/ui-icons'
+  import { DoubleArrow } from '@invopop/ui-icons'
 
   const dispatch = createEventDispatcher()
 
@@ -25,9 +25,7 @@
       label: c.name,
       selected: c.slug === selectedCompany?.slug,
       country: c.country
-    })),
-    { value: 'add', label: 'Add workspace', icon: Add, footer: true },
-    { value: 'settings', label: 'Settings', icon: Settings, footer: true }
+    }))
   ] as DrawerOption[]
 
   $: styles = clsx(
@@ -76,5 +74,5 @@
       <Icon src={DoubleArrow} class="h-4 w-4 text-white-40 mt-px" />
     {/if}
   </span>
-  <DrawerContext widthClass="w-[300px]" {items} on:click={selectCompany} />
+  <DrawerContextWorkspace {items} on:click={selectCompany} />
 </BaseDropdown>

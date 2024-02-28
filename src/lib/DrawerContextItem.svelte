@@ -2,7 +2,7 @@
   import type { DrawerOption } from './types.ts'
   import InputCheckbox from './InputCheckbox.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
   import { Tick } from '@invopop/ui-icons'
   import ProfileAvatar from './ProfileAvatar.svelte'
   import clsx from 'clsx'
@@ -13,6 +13,8 @@
 
   export let multiple = false
   export let item: DrawerOption
+
+  let el: HTMLElement
 
   $: hasIcon = item.icon || item.country
 
@@ -31,9 +33,16 @@
     { 'text-base font-semibold tracking-tight': item.country },
     { 'text-sm font-medium tracking-normal': !item.country }
   )
+
+  onMount(() => {
+    if (item.selected) {
+      el.scrollIntoView()
+    }
+  })
 </script>
 
 <button
+  bind:this={el}
   class="{styles} border border-transparent rounded pr-2 flex items-center justify-start w-full"
   on:click|stopPropagation={() => {
     dispatch('click', item.value)

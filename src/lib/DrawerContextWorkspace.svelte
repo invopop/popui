@@ -12,7 +12,7 @@
 </script>
 
 <div class="w-[300px] border border-neutral-100 pt-1 rounded shadow-lg space-y-0.5 bg-white">
-  <ul class="px-1 space-y-1 max-h-[540px] overflow-y-auto">
+  <ul class="px-1 space-y-1 max-h-[60vh] overflow-y-auto">
     {#each items as item}
       <DrawerContextItem {item} {multiple} on:click />
     {/each}

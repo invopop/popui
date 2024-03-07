@@ -32,7 +32,7 @@
   style:max-width={field.width}
 >
   <span>
-    {#if field.isCountry}
+    {#if field.isCountry && data}
       <span class="flex items-center space-x-1">
         <BaseFlag country={String(data)} />
         <span>{getCountryName(String(data))}</span>

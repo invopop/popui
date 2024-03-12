@@ -6,7 +6,15 @@ export type IconPosition = 'right' | 'left'
 
 export type ButtonVariant = 'default' | 'primary' | 'secondary' | 'danger' | 'dark'
 
-export type StatusType = 'default' | 'success' | 'warning' | 'danger' | 'orange'
+export type StatusType =
+  | 'default'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'orange'
+  | 'info'
+  | 'purple'
+  | 'empty'
 
 export type AnyProp = string | number | object | boolean
 
@@ -79,7 +87,11 @@ export type FeedItemProps = {
   slug?: string
 }
 
-export type Badge = { label: string; status: StatusType }
+export type Badge = {
+  label: string
+  status: StatusType
+  dot?: boolean
+}
 
 export type TableDataRow = { [key: string]: unknown }
 

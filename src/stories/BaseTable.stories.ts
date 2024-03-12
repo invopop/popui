@@ -120,7 +120,7 @@ export const WithHelperBadge: Story = {
         slug: 'code',
         sortable: true,
         helperBadge: (data) => {
-          if (data.draft) return { label: 'Draft', status: 'orange' }
+          if (data.draft) return { label: 'Draft', status: 'orange', dot: true }
 
           return null
         }

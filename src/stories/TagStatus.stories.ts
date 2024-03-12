@@ -49,3 +49,32 @@ export const Orange: Story = {
     status: 'orange'
   }
 }
+
+export const Info: Story = {
+  args: {
+    label: 'Tag',
+    status: 'info'
+  }
+}
+
+export const Purple: Story = {
+  args: {
+    label: 'Tag',
+    status: 'purple'
+  }
+}
+
+export const Empty: Story = {
+  args: {
+    label: 'Tag',
+    status: 'empty'
+  }
+}
+
+export const WithDot: Story = {
+  args: {
+    label: 'Tag',
+    status: 'empty',
+    dot: true
+  }
+}

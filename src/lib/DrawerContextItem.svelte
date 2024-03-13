@@ -66,7 +66,12 @@
     {/if}
   </div>
   {#if multiple}
-    <InputCheckbox />
+    <InputCheckbox
+      bind:checked={item.selected}
+      on:change={() => {
+        dispatch('change', item)
+      }}
+    />
   {:else if item.selected}
     <Icon src={Tick} class="w-5 h-5 text-accent-500" />
   {:else if item.rightIcon}

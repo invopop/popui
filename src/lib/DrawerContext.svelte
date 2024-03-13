@@ -2,6 +2,9 @@
   import type { DrawerOption } from './types.ts'
   import DrawerContextItem from './DrawerContextItem.svelte'
   import InputSearch from './InputSearch.svelte'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 
   export let items: DrawerOption[] = []
   export let multiple = false
@@ -10,6 +13,16 @@
 
   $: mainItems = items.filter((i) => !i.footer)
   $: footerItems = items.filter((i) => i.footer)
+  $: selectedItems = items.filter((i) => i.selected)
+  $: dispatch('selected', selectedItems)
+
+  function updateItem(event: CustomEvent) {
+    const item = event.detail as DrawerOption
+    items = items.map((i) => {
+      if (i.value === item.value) return item
+      return i
+    })
+  }
 </script>
 
 <div class="{widthClass} border border-neutral-100 py-1 rounded shadow-lg space-y-0.5 bg-white">
@@ -18,7 +31,7 @@
   {/if}
   <ul class="px-1 space-y-1">
     {#each mainItems as item}
-      <DrawerContextItem {item} {multiple} on:click />
+      <DrawerContextItem {item} {multiple} on:click on:change={updateItem} />
     {/each}
   </ul>
   {#if footerItems.length}

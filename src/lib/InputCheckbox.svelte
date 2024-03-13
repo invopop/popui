@@ -12,9 +12,11 @@
 
     const target = (event as PointerEvent).target as HTMLInputElement
 
-    dispatch('change', target.checked)
+    checked = target.checked
 
-    dispatchWcEvent(target, 'change', target.checked)
+    dispatch('change', checked)
+
+    dispatchWcEvent(target, 'change', checked)
   }
 </script>
 

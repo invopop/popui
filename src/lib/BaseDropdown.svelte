@@ -22,6 +22,7 @@
 
 <div class="inline-flex" class:w-full={fullWidth}>
   <button
+    class="text-left"
     use:floatingRef
     on:click|stopPropagation={async () => {
       if (closedFromClickOutside) return

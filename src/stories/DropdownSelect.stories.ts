@@ -59,3 +59,15 @@ export const WithSelectedOption: Story = {
     ]
   }
 }
+
+export const Multiple: Story = {
+  args: {
+    placeholder: 'Label',
+    value: [{ icon: Locked, value: 2, label: 'Option Two' }],
+    options: [
+      { icon: Edit, value: 1, label: 'Option one' },
+      { icon: Locked, value: 2, label: 'Option Two' }
+    ],
+    multiple: true
+  }
+}

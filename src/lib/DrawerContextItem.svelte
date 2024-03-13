@@ -23,8 +23,8 @@
     { 'py-1.5 space-x-2': !item.country },
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
-    { 'bg-accent-100': item.selected && item.country },
-    { 'bg-accent-50': item.selected && !item.country },
+    { 'bg-accent-100': item.selected && item.country && !multiple },
+    { 'bg-accent-50': item.selected && !item.country && !multiple },
     { 'hover:bg-neutral-50 hover:border-neutral-100 rounded-sm': !item.selected }
   )
   $: labelStyles = clsx(
@@ -45,7 +45,12 @@
   bind:this={el}
   class="{styles} border border-transparent rounded pr-2 flex items-center justify-start w-full"
   on:click|stopPropagation={() => {
-    dispatch('click', item.value)
+    if (multiple) {
+      item.selected = !item.selected
+      dispatch('change', item)
+    } else {
+      dispatch('click', item.value)
+    }
   }}
 >
   {#if item.country}

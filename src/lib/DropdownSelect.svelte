@@ -1,4 +1,5 @@
 <script lang="ts">
+  import isEqual from 'lodash/isEqual.js'
   import type { AnyProp, DrawerOption, IconTheme } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { createEventDispatcher } from 'svelte'
@@ -13,6 +14,7 @@
   export let iconTheme: IconTheme = 'default'
   export let options: DrawerOption[] = []
   export let placeholder = ''
+  export let multiple = false
 
   let selectDropdown: BaseDropdown
   let resolvedIcon: IconSource | undefined
@@ -25,16 +27,30 @@
 
   $: items = options.map((o) => ({
     ...o,
-    selected: o.value === value
+    selected: multiple
+      ? Boolean((value as DrawerOption[]).find((v) => v.value === o.value))
+      : o.value === value
   }))
 
-  $: selectedLabel = items.find((i) => i.selected)?.label || placeholder
+  $: selectedLabel = (!multiple && items.find((i) => i.selected)?.label) || placeholder
 
   function handleClick(e: CustomEvent) {
-    selectDropdown.toggle()
     value = e.detail
 
     dispatch('selected', value)
+
+    if (multiple) return
+
+    selectDropdown.toggle()
+  }
+
+  function handleSelected(e: CustomEvent) {
+    if (!multiple) return
+
+    // Avoid re-firing watcher
+    if (isEqual(value, e.detail)) return
+
+    value = e.detail
   }
 </script>
 
@@ -50,7 +66,7 @@
       >{selectedLabel}</span
     >
   </div>
-  <DrawerContext {items} on:click={handleClick} />
+  <DrawerContext {multiple} {items} on:click={handleClick} on:selected={handleSelected} />
 </BaseDropdown>
 
 <style>

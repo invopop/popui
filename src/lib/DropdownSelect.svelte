@@ -15,6 +15,7 @@
   export let options: DrawerOption[] = []
   export let placeholder = ''
   export let multiple = false
+  export let fullWidth = false
 
   let selectDropdown: BaseDropdown
   let resolvedIcon: IconSource | undefined
@@ -54,7 +55,7 @@
   }
 </script>
 
-<BaseDropdown placement="bottom-start" bind:this={selectDropdown}>
+<BaseDropdown placement="bottom-start" {fullWidth} bind:this={selectDropdown}>
   <div
     class="dropdown-select flex items-center border hover:border-neutral-300 rounded py-1.25 pl-2"
     slot="trigger"

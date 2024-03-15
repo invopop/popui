@@ -9,7 +9,7 @@
 
 {#if useSlot}
   <DataListItem {label} {value}>
-    <TagStatus status="success" label="Closed" />
+    <TagStatus status="green" label="Closed" />
   </DataListItem>
 {:else}
   <DataListItem {label} {value} />

@@ -7,12 +7,12 @@ export type IconPosition = 'right' | 'left'
 export type ButtonVariant = 'default' | 'primary' | 'secondary' | 'danger' | 'dark'
 
 export type StatusType =
-  | 'default'
-  | 'success'
-  | 'warning'
-  | 'danger'
+  | 'grey'
+  | 'green'
+  | 'yellow'
+  | 'red'
   | 'orange'
-  | 'info'
+  | 'blue'
   | 'purple'
   | 'empty'
 

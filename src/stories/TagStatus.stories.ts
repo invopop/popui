@@ -25,21 +25,21 @@ export const Default: Story = {
 export const Success: Story = {
   args: {
     label: 'Tag',
-    status: 'success'
+    status: 'green'
   }
 }
 
 export const Warning: Story = {
   args: {
     label: 'Tag',
-    status: 'warning'
+    status: 'yellow'
   }
 }
 
 export const Danger: Story = {
   args: {
     label: 'Tag',
-    status: 'danger'
+    status: 'red'
   }
 }
 
@@ -53,7 +53,7 @@ export const Orange: Story = {
 export const Info: Story = {
   args: {
     label: 'Tag',
-    status: 'info'
+    status: 'blue'
   }
 }
 

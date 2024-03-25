@@ -15,7 +15,7 @@
       use:tabs.tab={{ value }}
       class:text-neutral-800={selected === value.label}
       class:text-neutral-300={selected !== value.label}
-      class="flex items-center space-x-1 justify-start w-full whitespace-nowrap text-xl font-semibold focus:outline-none focus:ring-0"
+      class="flex items-center space-x-1 justify-start w-full whitespace-nowrap text-lg font-semibold focus:outline-none focus:ring-0"
       on:click={() => {
         selected = value.label
       }}

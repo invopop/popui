@@ -37,8 +37,8 @@
   }}
 >
   <span
-    class:text-xs={small}
-    class:text-sm={!small}
+    class:text-sm={small}
+    class:text-base={!small}
     class:text-neutral-800={dark}
     class:text-neutral-400={!dark}
     class="tracking-wide"

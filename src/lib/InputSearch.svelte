@@ -62,7 +62,7 @@
     <div class="absolute top-1 right-0 flex py-1.5 pr-1.5 space-x-1">
       {#each shortcutKeys as key}
         <kbd
-          class="w-4 h-4 flex justify-center items-center rounded border border-neutral-200 bg-neutral-100 font-sans text-xs text-neutral-500 font-semibold"
+          class="w-4 h-4 flex justify-center items-center rounded border border-neutral-200 bg-neutral-100 font-sans text-sm text-neutral-500 font-semibold"
           >{key}</kbd
         >
       {/each}

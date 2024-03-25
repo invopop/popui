@@ -30,7 +30,7 @@
     <div class:border-t={i > 0} class="border-neutral-100 py-2 px-3">
       <div class="flex items-center justify-between">
         <TagStatus status={event.status.type} label={event.status.label} />
-        <p class="text-xs text-neutral-500 tabular-nums slashed-zero tracking-wide">
+        <p class="text-sm text-neutral-500 tabular-nums slashed-zero tracking-wide">
           {formatDate(event.date)}
         </p>
       </div>

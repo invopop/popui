@@ -39,9 +39,23 @@ export const DefaultSmall: Story = {
   }
 }
 
+export const DefaultBig: Story = {
+  args: {
+    slot: 'Button',
+    big: true
+  }
+}
+
 export const DefaultSmallOnlyIcon: Story = {
   args: {
     small: true,
+    icon: Close
+  }
+}
+
+export const DefaultBigOnlyIcon: Story = {
+  args: {
+    big: true,
     icon: Close
   }
 }
@@ -50,6 +64,14 @@ export const DefaultWithLeftIcon: Story = {
   args: {
     slot: 'Button',
     icon: Cog6Tooth
+  }
+}
+
+export const DefaultBigWithLeftIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    big: true
   }
 }
 

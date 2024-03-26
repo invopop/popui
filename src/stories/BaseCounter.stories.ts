@@ -33,3 +33,17 @@ export const ThreeFigures: Story = {
     content: 980
   }
 }
+
+export const Light: Story = {
+  args: {
+    content: 2,
+    variant: 'light'
+  }
+}
+
+export const Dark: Story = {
+  args: {
+    content: 2,
+    variant: 'dark'
+  }
+}

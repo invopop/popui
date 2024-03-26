@@ -51,8 +51,8 @@
     bind:value
     {disabled}
     class:pl-7={icon}
-    class:pl-3={!icon}
-    class="py-1.25 border border-neutral-200 hover:border-neutral-300 w-full rounded text-neutral-800 text-base pr-9 outline-accent-400 tracking-tight"
+    class:pl-2={!icon}
+    class="py-1.5 border border-neutral-200 hover:border-neutral-300 focus:border-accent-500 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight ui-select"
     on:change={handleChange}
   >
     <option value="" disabled={disablePlaceholder}>{placeholder}</option>
@@ -81,5 +81,9 @@
     background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI0YzRjVGNSIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwQTBBMEEiIHN0cm9rZS13aWR0aD0iMS4yIi8+Cjwvc3ZnPgo=');
     background-repeat: no-repeat;
     background-position: center right 8px;
+  }
+
+  .ui-select:focus {
+    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
   }
 </style>

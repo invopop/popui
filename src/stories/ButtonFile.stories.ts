@@ -23,10 +23,18 @@ export const Default: Story = {
   }
 }
 
+export const WithDate: Story = {
+  args: {
+    name: 'File name',
+    date: 'Mar 06, 2024 · 09:48'
+  }
+}
+
 export const WithDifferentIcon: Story = {
   args: {
     icon: Code,
-    name: 'File name'
+    name: 'File name',
+    iconColor: 'blue'
   }
 }
 
@@ -40,12 +48,5 @@ export const Disabled: Story = {
   args: {
     name: 'File name',
     disabled: true
-  }
-}
-
-export const PreviewHidden: Story = {
-  args: {
-    name: 'File name',
-    hidePreview: true
   }
 }

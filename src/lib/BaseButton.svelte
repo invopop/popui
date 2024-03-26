@@ -99,7 +99,7 @@
   {disabled}
   class="{buttonStyles} flex items-center justify-center rounded-md font-medium font-sans relative group tracking-tight"
   {...$$restProps}
-  on:click={handleClick}
+  on:click|stopPropagation={handleClick}
 >
   <span class="{overlayClasses} absolute inset-0 rounded" />
   {#if resolvedIcon}

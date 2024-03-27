@@ -8,26 +8,20 @@
 
   export let field: TableField
   export let currentIndex: number
-  export let totalFields: number
-  export let totalActions: number
   export let badge: Badge | null = null
   export let data: unknown = ''
 
   $: cellStyles = clsx(
     { 'tabular-nums slashed-zero': field.monospaced },
-    { 'text-neutral-500': field.grayed },
-    { 'text-neutral-800': !field.grayed },
-    { 'pl-4 font-medium': currentIndex === 0 },
-    { 'pl-3': currentIndex > 0 },
-    { 'pr-4': totalActions === 0 && currentIndex === totalFields - 1 },
-    { 'pr-3': totalActions > 0 || currentIndex < totalFields - 1 },
+    { 'text-neutral-800 font-medium': currentIndex === 0 },
+    { 'text-neutral-500': currentIndex > 0 },
     { 'text-right': field.rightAlign },
     { 'w-full max-w-0': field.fullWidth }
   )
 </script>
 
 <td
-  class="{cellStyles} whitespace-nowrap text-sm py-2.5 tracking-normal truncate"
+  class="{cellStyles} whitespace-nowrap text-base p-3 tracking-normal truncate"
   style:min-width={field.width}
   style:max-width={field.width}
 >

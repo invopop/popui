@@ -29,6 +29,7 @@
 
   let resolvedIcon: IconSource | undefined
   let hovered = false
+  let highlight = false
   let leaveHoverTimeout: ReturnType<typeof setTimeout> | null = null
 
   const dispatch = createEventDispatcher()
@@ -44,8 +45,7 @@
     { 'text-white-40': isFolderItem },
     { 'bg-white-10': active },
     { 'border border-transparent hover:border-white-5 group p-[5px]': collapsedSidebar },
-    { 'w-full pl-1.5 pr-2 py-1.5': !collapsedSidebar && !isFolderItem },
-    { 'w-full px-2 py-[7px]': !collapsedSidebar && isFolderItem }
+    { 'w-full px-2 py-1.5': !collapsedSidebar }
   )
 
   $: iconStyles = clsx({ 'group-hover:text-white': collapsedSidebar })
@@ -78,6 +78,7 @@
   }
 
   function handleHover() {
+    highlight = true
     if (leaveHoverTimeout) {
       clearTimeout(leaveHoverTimeout)
     }
@@ -85,24 +86,28 @@
   }
 
   function handleBlur() {
+    highlight = false
     leaveHoverTimeout = setTimeout(() => {
       hovered = false
     }, 200)
   }
 </script>
 
-<div class={wrapperStyles}>
+<div class="{wrapperStyles} relative">
+  {#if isFolderItem && (highlight || active)}
+    <div class="border-l border-white h-3 w-px absolute top-[14px] left-0 -m-px" />
+  {/if}
   <button
     use:floatingRef
     on:mouseenter={handleHover}
     on:mouseleave={handleBlur}
     on:click={handleClick}
     title={label}
-    class="{itemStyles} text-sm flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 focus:bg-white-10 rounded"
+    class="{itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 hover:border-white-10 focus:bg-white-10 focus:border-white-10 rounded"
   >
     <span class="flex items-center space-x-2">
       {#if resolvedIcon}
-        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-5 w-5 text-white-70" />
+        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 text-white-70" />
       {/if}
       {#if !collapsedSidebar}
         <span class="whitespace-nowrap tracking-normal">{label}</span>

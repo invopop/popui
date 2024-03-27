@@ -164,8 +164,9 @@
       class:border-neutral-200={!isOpen}
       class:border-accent-400={isOpen}
       class="datepicker-trigger w-full py-1.25 pl-7 pr-8 border hover:border-neutral-300 rounded text-neutral-800 placeholder-neutral-800 text-base"
-      >{selectedLabel}</button
     >
+      {selectedLabel}
+    </button>
     <Icon src={Calendar} class="h-4 w-4 absolute top-2 left-2 text-neutral-500" />
   </div>
 
@@ -184,40 +185,44 @@
         class:right-0={position === 'right'}
         class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-30"
       >
-        <div class="flex border-b border-neutral-100">
-          <div
-            class="flex flex-col justify-around items-start px-3 py-2 border-r border-neutral-100"
-          >
+        <div class="flex border-b border-neutral-100 h-[300px]">
+          <div class="flex flex-col space-y-2 items-start p-3 border-r border-neutral-100">
             <button
               on:click={onThisWeek}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
-              >This Week</button
+              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
             >
+              This Week
+            </button>
             <button
               on:click={onLastWeek}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
-              >Last Week</button
+              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
             >
+              Last Week
+            </button>
             <button
               on:click={onThisMonth}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
-              >This Month</button
+              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
             >
+              This Month
+            </button>
             <button
               on:click={onLastMonth}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
-              >Last Month</button
+              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
             >
+              Last Month
+            </button>
             <button
               on:click={onThisQuarter}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
-              >This Quarter</button
+              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
             >
+              This Quarter
+            </button>
             <button
               on:click={onLastQuarter}
-              class="whitespace-nowrap text-neutral-500 text-sm px-2 py-1.5 tracking-normal"
-              >Last Quarter</button
+              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
             >
+              Last Quarter
+            </button>
           </div>
           <div bind:this={datePickerEl} />
         </div>
@@ -259,9 +264,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    font-size: 14px;
     height: 24px !important;
-    letter-spacing: -0.135px;
+    letter-spacing: -0.07px;
   }
   :global(.flatpickr-monthDropdown-months) {
     font-weight: 500 !important;
@@ -326,7 +331,7 @@
     background-color: #169958 !important;
     border: 0;
     border-radius: 4px !important;
-    box-shadow: none !important;
+    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12) !important;
   }
   :global(
       .flatpickr-day.selected:hover,
@@ -355,9 +360,9 @@
     display: flex !important;
     align-items: center;
     justify-content: center;
-    font-weight: 500 !important;
-    color: #7e7f7f !important;
-    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #9ca3af !important;
+    font-size: 12px !important;
   }
   :global(.flatpickr-weekdaycontainer) {
     flex: 0 !important;
@@ -394,6 +399,7 @@
     height: 32px;
     line-height: 32px;
     display: flex !important;
+    font-weight: 500 !important;
     align-items: center;
     justify-content: center;
     color: #0a0a0a;

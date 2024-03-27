@@ -22,21 +22,21 @@ export const Default: Story = {
   }
 }
 
-export const Success: Story = {
+export const Green: Story = {
   args: {
     label: 'Tag',
     status: 'green'
   }
 }
 
-export const Warning: Story = {
+export const Yellow: Story = {
   args: {
     label: 'Tag',
     status: 'yellow'
   }
 }
 
-export const Danger: Story = {
+export const Red: Story = {
   args: {
     label: 'Tag',
     status: 'red'
@@ -50,7 +50,7 @@ export const Orange: Story = {
   }
 }
 
-export const Info: Story = {
+export const Blue: Story = {
   args: {
     label: 'Tag',
     status: 'blue'

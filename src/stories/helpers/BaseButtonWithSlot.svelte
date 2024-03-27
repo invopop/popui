@@ -9,6 +9,7 @@
   export let iconPosition: IconPosition = 'left'
   export let variant: ButtonVariant = 'default'
   export let small = false
+  export let big = false
   export let dangerIcon = false
   export let shortcut = false
   export let fullwidth = false
@@ -22,6 +23,7 @@
     {iconPosition}
     {variant}
     {small}
+    {big}
     {shortcut}
     {fullwidth}
   >
@@ -35,6 +37,7 @@
     {iconPosition}
     {variant}
     {small}
+    {big}
     {shortcut}
     {fullwidth}
   />

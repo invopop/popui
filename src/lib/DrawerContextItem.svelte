@@ -23,15 +23,14 @@
     { 'py-1.5 space-x-2': !item.country },
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
-    { 'bg-accent-100': item.selected && item.country && !multiple },
-    { 'bg-accent-50': item.selected && !item.country && !multiple },
-    { 'hover:bg-neutral-50 hover:border-neutral-100 rounded-sm': !item.selected }
+    { 'bg-accent-100': item.selected && !multiple },
+    { 'hover:bg-neutral-100 rounded-sm': !item.selected }
   )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
-    { 'text-base font-semibold tracking-tight': item.country },
-    { 'text-sm font-medium tracking-normal': !item.country }
+    { 'font-semibold tracking-tight': item.country },
+    { 'font-medium tracking-normal': !item.country }
   )
 
   onMount(() => {
@@ -62,7 +61,7 @@
     />
   {/if}
   <div class="whitespace-nowrap flex-1 text-left max-w-40 truncate" title={item.label}>
-    <span class={labelStyles}>{item.label}</span>
+    <span class="{labelStyles} text-base">{item.label}</span>
     {#if item.country}
       <span class="flex space-x-1 items-center">
         <BaseFlag country={item.country} />

@@ -10,13 +10,31 @@
 </script>
 
 <div
-  class="flex flex-col text-center items-center justify-center h-full font-sans"
+  class="flex flex-col text-center items-center justify-center h-full font-sans gap-1"
   aria-label={title}
 >
   {#if icon}
-    <Icon src={icon} theme={iconTheme} class="mx-auto h-18 w-18 text-neutral-300 mb-3" />
+    <div class="relative mb-3 h-[120px] w-full max-w-sm">
+      <Icon
+        src={icon}
+        theme={iconTheme}
+        class="text-neutral-400 absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] -ml-[35px] rotate-[-8deg] opacity-40 scale-y-[80%] mt-0.5 z-10"
+      />
+      <Icon
+        src={icon}
+        theme={iconTheme}
+        class="text-accent-500 absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] z-20"
+      />
+      <Icon
+        src={icon}
+        theme={iconTheme}
+        class="text-neutral-400 absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] ml-[35px] rotate-[8deg] opacity-40 scale-y-[80%] mt-0.5 z-10"
+      />
+    </div>
   {/if}
-  <h4 class="font-medium textbase text-neutral-500 text-base tracking-tight">{title}</h4>
-  <p class="max-w-xs text-sm text-neutral-400 mt-1 tracking-normal">{description}</p>
-  <p><slot /></p>
+  <div class="space-y-0.5">
+    <h4 class="font-medium text-base text-neutral-800 text-base tracking-tight">{title}</h4>
+    <p class="max-w-xs text-base text-neutral-500 tracking-normal">{description}</p>
+    <p><slot /></p>
+  </div>
 </div>

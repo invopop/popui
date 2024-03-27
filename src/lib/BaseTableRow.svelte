@@ -30,15 +30,13 @@
     <BaseTableCell
       currentIndex={i}
       {field}
-      totalActions={actions.length}
-      totalFields={fields.length}
       badge={field.helperBadge ? field.helperBadge(row) : null}
       data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
       on:copied
     />
   {/each}
   {#if actions.length}
-    <td class="pl-3 pr-4">
+    <td class="pl-1 pr-3 py-2.5">
       <BaseTableActions
         bind:this={actionsDropdown}
         {actions}

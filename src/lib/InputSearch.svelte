@@ -48,7 +48,7 @@
     bind:this={input}
     bind:value
     type="search"
-    class="py-1.25 pl-7 border border-neutral-200 hover:border-neutral-300 focus:border-accent-400 w-full rounded text-neutral-800 placeholder-neutral-400 text-base outline-none caret-accent-500 tracking-tight"
+    class="py-1.5 pl-7 border border-neutral-200 hover:border-neutral-300 focus:border-accent-500 w-full rounded text-neutral-800 placeholder-neutral-500 text-base outline-none caret-accent-500 tracking-tight ui-input"
     style:padding-right={`${shortcutKeys.length * 15 + 12}px`}
     {placeholder}
     on:input={handleInput}
@@ -62,10 +62,16 @@
     <div class="absolute top-1 right-0 flex py-1.5 pr-1.5 space-x-1">
       {#each shortcutKeys as key}
         <kbd
-          class="w-4 h-4 flex justify-center items-center rounded border border-neutral-200 bg-neutral-100 font-sans text-xs text-neutral-500 font-semibold"
+          class="w-4 h-4 flex justify-center items-center rounded border border-neutral-200 bg-neutral-100 font-sans text-sm text-neutral-500 font-semibold"
           >{key}</kbd
         >
       {/each}
     </div>
   {/if}
 </div>
+
+<style>
+  .ui-input:focus {
+    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
+  }
+</style>

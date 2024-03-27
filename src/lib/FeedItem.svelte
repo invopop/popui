@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type { IconSource } from '@steeze-ui/svelte-icon'
+  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import type { FeedItemStatus, FeedItemProps, FeedEvent } from './types.ts'
   import FeedIconEvent from './FeedIconEvent.svelte'
   import FeedIconStatus from './FeedIconStatus.svelte'
   import FeedEvents from './FeedEvents.svelte'
-  import UuidCopy from './UuidCopy.svelte'
   import { createEventDispatcher } from 'svelte'
+  import BaseButton from './BaseButton.svelte'
+  import { Duplicate } from '@invopop/ui-icons'
 
   const dispatch = createEventDispatcher()
 
@@ -34,24 +35,9 @@
   }
 </script>
 
-<button
-  id={`feed-item-${slug}`}
-  class:cursor-default={!expandable}
-  disabled={!expandable}
-  class="relative text-left w-full"
-  on:click|stopPropagation={() => {
-    open = !open
-    if (open) {
-      dispatch('open', slug)
-    }
-  }}
->
-  {#if hasNext}
-    <span
-      class:left-4={icon}
-      class:left-2={!icon}
-      class="absolute -bottom-6 border-l border-neutral-100 w-px h-full"
-    />
+<span id={`feed-item-${slug}`} class="relative text-left w-full">
+  {#if hasNext && icon}
+    <span class="absolute -bottom-6 left-2 border-l border-neutral-100 w-px h-full" />
   {/if}
   <div
     class:mt-3={isChild && !hasPrev}
@@ -59,18 +45,21 @@
     class="flex items-start justify-between space-x-2 pt-3"
   >
     <div class="relative">
-      {#if hasPrev}
-        <span class="absolute -top-4 inset-x-0 mx-auto border-l border-neutral-100 w-px h-full" />
-      {/if}
       {#if icon}
-        <FeedIconEvent {icon} {status} />
-      {:else if status}
-        <FeedIconStatus {status} />
+        <FeedIconEvent {icon} />
       {/if}
     </div>
-    <div class="flex-1 items-center justify-start">
-      <p class="text-sm text-neutral-800 whitespace-nowrap tracking-normal font-semibold">
-        {title}
+    <div
+      class="flex-1 items-center justify-start pl-2.5 py-2 pr-2 rounded-md border border-neutral-100"
+    >
+      <p
+        class="text-base text-neutral-800 whitespace-nowrap tracking-normal font-medium flex items-center gap-1"
+      >
+        <span>{title}</span>
+
+        {#if status}
+          <FeedIconStatus {status} />
+        {/if}
       </p>
       <p class="flex flex-col space-y-0.5">
         {#if date}
@@ -80,10 +69,22 @@
             {date.toLocaleDateString('en-us', dateOptions)}
           </span>
         {/if}
-        {#if uuid}
-          <UuidCopy {uuid} full small on:copied />
-        {/if}
       </p>
+      {#if uuid}
+        <div
+          class="border-t border-dashed border-neutral-100 mt-2.5 flex items-center justify-between py-1"
+        >
+          <span class="text-sm text-neutral-500">ID: {uuid}</span>
+          <button
+            on:click|stopPropagation={async () => {
+              await navigator.clipboard.writeText(uuid)
+              dispatch('copied', uuid)
+            }}
+          >
+            <Icon src={Duplicate} class="w-4 h-4 text-neutral-500" />
+          </button>
+        </div>
+      {/if}
       {#if open}
         {#if children?.length}
           {#each children as child, i (i)}
@@ -113,17 +114,19 @@
     </div>
   </div>
   {#if expandable}
-    <span class="absolute top-2.5 right-0">
-      <svg
-        class:rotate-180={open}
-        class="w-5 h-5"
-        viewBox="0 0 20 20"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+    <span class="absolute top-5 right-2">
+      <BaseButton
+        small
+        variant="secondary"
+        on:click={() => {
+          open = !open
+          if (open) {
+            dispatch('open', slug)
+          }
+        }}
       >
-        <circle cx="10" cy="10" r="8" fill="#F3F5F5" />
-        <path d="M6.5 8.25004L10 11.75L13.5 8.25" stroke="#0A0A0A" stroke-width="1.2" />
-      </svg>
+        View
+      </BaseButton>
     </span>
   {/if}
-</button>
+</span>

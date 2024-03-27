@@ -9,21 +9,16 @@
 
   let sortDropdown: BaseDropdown
 
-  export let totalFields: number
-  export let currentIndex: number
   export let field: TableField
   export let sortBy = ''
   export let sortDirection: TableSortBy
 
-  $: outerStyles = clsx({ 'w-full': field.fullWidth }, { 'hover:bg-neutral-50': field.sortable })
+  $: outerStyles = clsx({ 'w-full': field.fullWidth })
 
-  $: headerStyles = clsx(
-    { 'pl-4': currentIndex === 0 },
-    { 'pl-3': currentIndex !== 0 },
-    { 'pr-4': currentIndex === totalFields - 1 },
-    { 'pr-3': currentIndex < totalFields - 1 },
-    { 'justify-end': field.rightAlign }
-  )
+  $: headerStyles = clsx({
+    'justify-end': field.rightAlign,
+    'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable
+  })
 
   function handleSortBy(event: CustomEvent) {
     sortDirection = event.detail
@@ -34,16 +29,16 @@
 
 <th
   scope="col"
-  class="{outerStyles} bg-white text-neutral-600 group sticky z-10 top-0"
+  class="{outerStyles} bg-white text-neutral-500 group sticky z-10 top-0"
   style:min-width={field.width}
   style:max-width={field.width}
 >
-  <span class="-ml-1 flex">
+  <span class="flex">
     {#if field.sortable}
       <BaseDropdown bind:this={sortDropdown} fullWidth>
         <span
           slot="trigger"
-          class="{headerStyles} w-full py-2.5 flex items-center justify-start space-x-1 text-left text-sm font-medium tracking-normal whitespace-nowrap"
+          class="{headerStyles} w-full p-3 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap"
         >
           <span>{field.headerLabel}</span>
           {#if sortBy === field.slug}
@@ -71,7 +66,7 @@
       </BaseDropdown>
     {:else}
       <div
-        class="{headerStyles} py-2.5 text-left text-sm font-medium tracking-normal whitespace-nowrap"
+        class="{headerStyles} p-3 text-left text-base font-normal tracking-normal whitespace-nowrap"
       >
         {field.headerLabel}
       </div>

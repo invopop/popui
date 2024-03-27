@@ -68,14 +68,7 @@
     <thead>
       <tr class="border-b border-neutral-100 relative">
         {#each fields as field, i (i)}
-          <BaseTableHeader
-            {sortBy}
-            {sortDirection}
-            {field}
-            totalFields={fields.length}
-            currentIndex={i}
-            on:orderBy
-          />
+          <BaseTableHeader {sortBy} {sortDirection} {field} on:orderBy />
         {/each}
         {#if getActions instanceof Function}
           <!-- if table has actions cell we need to add an extra header -->
@@ -90,7 +83,7 @@
             <th
               scope="colgroup"
               colspan={fields.length + 1}
-              class="bg-neutral-50 px-4 py-[6.4px] text-left text-sm font-medium text-neutral-500 sticky top-9 tracking-normal border-t border-b border-neutral-100"
+              class="bg-neutral-50 px-3 py-1.5 text-left text-sm font-medium text-neutral-500 sticky top-11 tracking-normal border-t border-b border-neutral-100 h-8"
             >
               <span>{group.label}</span>
               {#if !hideCounter}

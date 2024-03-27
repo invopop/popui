@@ -26,7 +26,7 @@
 </script>
 
 <BaseDropdown bind:this={actionDropdown}>
-  <Icon slot="trigger" src={Options} class="w-5 mt-1 text-neutral-500" />
+  <Icon slot="trigger" src={Options} class="w-4 mt-1 text-neutral-500" />
   <DrawerContext
     {items}
     on:click={(e) => {

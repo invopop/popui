@@ -117,14 +117,14 @@ export const ExpandableTwoLevels: Story = {
               {
                 status: {
                   label: 'RUN',
-                  type: 'warning'
+                  type: 'yellow'
                 },
                 date: new Date()
               },
               {
                 status: {
                   label: 'ERROR',
-                  type: 'danger'
+                  type: 'red'
                 },
                 date: new Date(),
                 message: 'User must accept legal terms'

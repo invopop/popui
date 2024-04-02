@@ -30,7 +30,7 @@
 
   $: styles = clsx(
     { 'p-1': collapsed },
-    { 'space-x-2 w-full pl-1 pr-2 py-1': !collapsed },
+    { 'space-x-2 w-full p-[7px]': !collapsed },
     { 'border-white-10 bg-white-5': isOpen },
     { 'border-transparent': !isOpen }
   )

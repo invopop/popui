@@ -4,24 +4,8 @@
 
   export let events: FeedEvent[] = []
 
-  const dateOptions = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  }
-
-  const timeOptions = {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  }
-
   function formatDate(date: Date) {
-    const formattedDate = date.toLocaleDateString('en-US', dateOptions)
-    const formattedTime = date.toLocaleTimeString('en-US', timeOptions)
-
-    return `${formattedDate} at ${formattedTime}`
+    return date.toISOString()
   }
 </script>
 

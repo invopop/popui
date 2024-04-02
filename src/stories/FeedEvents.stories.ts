@@ -22,14 +22,14 @@ export const Default: Story = {
       {
         status: {
           label: 'RUN',
-          type: 'warning'
+          type: 'yellow'
         },
         date: new Date()
       },
       {
         status: {
           label: 'OK',
-          type: 'success'
+          type: 'green'
         },
         date: new Date()
       }
@@ -43,14 +43,14 @@ export const WithMessage: Story = {
       {
         status: {
           label: 'RUN',
-          type: 'warning'
+          type: 'yellow'
         },
         date: new Date()
       },
       {
         status: {
           label: 'ERROR',
-          type: 'danger'
+          type: 'red'
         },
         date: new Date(),
         message: 'User must accept legal terms'

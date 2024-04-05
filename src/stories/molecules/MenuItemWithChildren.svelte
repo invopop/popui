@@ -12,15 +12,18 @@
   export let url = ''
 </script>
 
-<div>
-  <MenuItem
-    label="Parent Item"
-    {icon}
-    {active}
-    {collapsable}
-    {collapsedSidebar}
-    {open}
-    {children}
-    {url}
-  />
+<div class="flex h-40">
+  <div class="w-14 overflow-x-hidden">
+    <MenuItem
+      label="Parent Item"
+      {icon}
+      {active}
+      {collapsable}
+      {collapsedSidebar}
+      {open}
+      {children}
+      {url}
+    />
+  </div>
+  <div class="bg-white flex-1">Content</div>
 </div>

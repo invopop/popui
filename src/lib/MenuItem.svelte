@@ -44,7 +44,7 @@
     { 'text-white font-medium': !isFolderItem },
     { 'text-white-40': isFolderItem },
     { 'bg-white-10': active },
-    { 'border border-transparent hover:border-white-5 group p-[5px]': collapsedSidebar },
+    { 'border border-transparent hover:border-white-5 group p-2': collapsedSidebar },
     { 'w-full px-2 py-1.5': !collapsedSidebar }
   )
 

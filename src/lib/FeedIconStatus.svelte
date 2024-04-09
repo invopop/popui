@@ -1,22 +1,28 @@
 <script lang="ts">
-  export let status: 'success' | 'failure' | '' = ''
+  import { Icon } from '@steeze-ui/svelte-icon'
+  import type { FeedItemStatus } from './types.ts'
+  import { Alert, Failure, Queue, Running, Success } from '@invopop/ui-icons'
+  import type { IconSource } from '@steeze-ui/heroicons'
+
+  export let status: FeedItemStatus
+
+  $: iconStatus = getIconStatus(status)
+
+  function getIconStatus(status: FeedItemStatus): IconSource | undefined {
+    const icons: Record<FeedItemStatus, IconSource> = {
+      failure: Failure,
+      success: Success,
+      run: Running,
+      queued: Queue,
+      alert: Alert
+    }
+
+    return icons[status]
+  }
 </script>
 
-{#if status === 'success'}
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="8" cy="8" r="6.5" fill="#3FC275" />
-    <path d="M11 5L7 10.6842L5 8.64719" stroke="white" />
-  </svg>
-{:else if status === 'failure'}
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="8" cy="8" r="6.5" fill="#EC4E46" />
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M7.2933 8.0004L5 10.2937L5.70711 11.0008L8.00041 8.7075L10.2937 11.0008L11.0008 10.2937L8.70752 8.0004L11.0008 5.70711L10.2937 5L8.00041 7.29329L5.70712 5L5.00001 5.70711L7.2933 8.0004Z"
-      fill="white"
-    />
-  </svg>
+{#if iconStatus}
+  <Icon src={iconStatus} class="h-4 w-4" />
 {:else}
   <div class="w-4 h-4 bg-neutral-200 rounded-full" />
 {/if}

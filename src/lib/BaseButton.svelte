@@ -101,7 +101,7 @@
   {...$$restProps}
   on:click|stopPropagation={handleClick}
 >
-  <span class="{overlayClasses} absolute inset-0 rounded" />
+  <span class="{overlayClasses} absolute inset-0 rounded-md" />
   {#if resolvedIcon}
     {#if shortcut}
       <ShortcutWrapper>

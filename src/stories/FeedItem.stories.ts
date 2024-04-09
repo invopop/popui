@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 import FeedItem from '../lib/FeedItem.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
-import { Cog6Tooth } from '@steeze-ui/heroicons'
+import { Workflow } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -20,14 +20,14 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     title: 'Sam Lown ran "Send Invoice" workflow',
-    icon: Cog6Tooth
+    icon: Workflow
   }
 }
 
 export const WithDate: Story = {
   args: {
     title: 'Sam Lown ran "Send Invoice" workflow',
-    icon: Cog6Tooth,
+    icon: Workflow,
     date: new Date()
   }
 }
@@ -35,7 +35,7 @@ export const WithDate: Story = {
 export const WithSuccessStatus: Story = {
   args: {
     title: 'Sam Lown ran "Send Invoice" workflow',
-    icon: Cog6Tooth,
+    icon: Workflow,
     date: new Date(),
     status: 'success'
   }
@@ -44,28 +44,45 @@ export const WithSuccessStatus: Story = {
 export const WithFailureStatus: Story = {
   args: {
     title: 'Sam Lown ran "Send Invoice" workflow',
-    icon: Cog6Tooth,
+    icon: Workflow,
     date: new Date(),
     status: 'failure'
   }
 }
 
-export const WithUuid: Story = {
+export const WithAlertStatus: Story = {
   args: {
     title: 'Sam Lown ran "Send Invoice" workflow',
-    icon: Cog6Tooth,
+    icon: Workflow,
     date: new Date(),
-    status: 'failure',
-    uuid: 'e73d5d20834934588127389172381789bc2f275460'
+    status: 'alert'
   }
 }
 
-export const Expandable: Story = {
+export const WithQueuedStatus: Story = {
   args: {
     title: 'Sam Lown ran "Send Invoice" workflow',
-    icon: Cog6Tooth,
+    icon: Workflow,
     date: new Date(),
-    status: 'failure',
-    expandable: true
+    status: 'queued'
+  }
+}
+
+export const WithViewButton: Story = {
+  args: {
+    title: 'Sam Lown ran "Send Invoice" workflow',
+    icon: Workflow,
+    date: new Date(),
+    status: 'queued',
+    viewable: true
+  }
+}
+
+export const LongTextWithoutViewButton: Story = {
+  args: {
+    title: 'Sam Lown ran "Send long Invoice" workflow',
+    icon: Workflow,
+    date: new Date(),
+    status: 'queued'
   }
 }

@@ -38,7 +38,7 @@
       <BaseDropdown bind:this={sortDropdown} fullWidth>
         <span
           slot="trigger"
-          class="{headerStyles} w-full p-3 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap"
+          class="{headerStyles} w-full p-3 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
         >
           <span>{field.headerLabel}</span>
           {#if sortBy === field.slug}

@@ -13,7 +13,7 @@
 </script>
 
 <div class="flex h-40">
-  <div class="w-14 overflow-x-hidden">
+  <div class="pr-2">
     <MenuItem
       label="Parent Item"
       {icon}

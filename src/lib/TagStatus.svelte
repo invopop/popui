@@ -15,7 +15,8 @@
     'border-purple-200 bg-purple-100 text-purple-600': status === 'purple',
     'border-dashed border-neutral-200 text-neutral-400': status === 'empty',
     'border-neutral-200 bg-neutral-100 text-neutral-600': status === 'grey',
-    'pl-1.5 pr-[5px]': dot,
+    'pl-1.5 pr-[5px]': dot && label,
+    'p-0.5': dot && !label,
     'px-1': !dot
   })
 
@@ -35,5 +36,7 @@
   {#if dot}
     <span class="{dotStyles} w-2 h-2 rounded-sm" />
   {/if}
-  <span>{label}</span>
+  {#if label}
+    <span>{label}</span>
+  {/if}
 </span>

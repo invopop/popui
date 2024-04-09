@@ -39,6 +39,7 @@ export type DrawerOption = SelectOption & {
   icon?: IconSource | undefined
   rightIcon?: IconSource | undefined
   country?: string
+  color?: StatusType
 }
 
 export type Company = {
@@ -70,21 +71,16 @@ export type MenuItemProps = {
   collapsedSidebar?: boolean
 }
 
-export type FeedItemStatus = 'success' | 'failure' | ''
+export type FeedItemStatus = 'success' | 'failure' | 'run' | 'queued' | 'alert'
 
 export type FeedItemProps = {
   status?: FeedItemStatus
   icon?: IconSource
   title?: string
   date?: Date
-  expandable?: boolean
-  uuid?: string
-  hasPrev?: boolean
   hasNext?: boolean
-  isChild?: boolean
-  children?: FeedItemProps[]
-  events?: FeedEvent[]
   slug?: string
+  viewable?: boolean
 }
 
 export type Badge = {

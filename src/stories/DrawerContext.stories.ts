@@ -66,3 +66,13 @@ export const WithIcon: Story = {
     ]
   }
 }
+
+export const WithColor: Story = {
+  args: {
+    items: [
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Footer S.L.', value: 'footer', footer: true, color: 'orange' }
+    ]
+  }
+}

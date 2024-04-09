@@ -41,104 +41,32 @@ export const TwoItems: Story = {
         title: 'Sam Lown ran Send invoice workflow',
         icon: CircleStack,
         status: 'success',
-        date: new Date(),
-        uuid: '43c38540-7cc6-11ee-8b96-979986851607'
+        date: new Date()
       }
     ]
   }
 }
 
-export const ExpandableOneLevel: Story = {
+export const Viewable: Story = {
   args: {
     items: [
       {
         title: 'Juan Moliner corrected the invoice',
         icon: Sparkles,
-        date: new Date()
+        date: new Date(),
+        viewable: true
       },
       {
         title: 'Sam Lown ran Send invoice workflow',
         icon: CircleStack,
         status: 'failure',
-        date: new Date(),
-        uuid: '43c38540-7cc6-11ee-8b96-979986851607',
-        expandable: true,
-        children: [
-          {
-            title: 'Series enumerator',
-            status: 'success',
-            uuid: '43c38540-7cc6-11ee-8b96-979986851607'
-          },
-          {
-            title: 'Factura E',
-            status: 'failure',
-            uuid: '43c38540-7cc6-11ee-8b96-979986851607'
-          }
-        ]
-      },
-      {
-        title: 'Sam Lown ran Send invoice workflow',
-        icon: CircleStack,
-        status: 'success',
-        date: new Date(),
-        uuid: '43c38540-7cc6-11ee-8b96-979986851607'
-      }
-    ]
-  }
-}
-
-export const ExpandableTwoLevels: Story = {
-  args: {
-    items: [
-      {
-        title: 'Juan Moliner corrected the invoice',
-        icon: Sparkles,
         date: new Date()
       },
       {
         title: 'Sam Lown ran Send invoice workflow',
         icon: CircleStack,
-        status: 'failure',
-        date: new Date(),
-        uuid: '43c38540-7cc6-11ee-8b96-979986851607',
-        expandable: true,
-        children: [
-          {
-            title: 'Series enumerator',
-            status: 'success',
-            uuid: '43c38540-7cc6-11ee-8b96-979986851607'
-          },
-          {
-            title: 'Factura E',
-            status: 'failure',
-            uuid: '43c38540-7cc6-11ee-8b96-979986851607',
-            expandable: true,
-            events: [
-              {
-                status: {
-                  label: 'RUN',
-                  type: 'yellow'
-                },
-                date: new Date()
-              },
-              {
-                status: {
-                  label: 'ERROR',
-                  type: 'red'
-                },
-                date: new Date(),
-                message: 'User must accept legal terms'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        title: 'Sam Lown ran Send invoice workflow',
-        icon: CircleStack,
         status: 'success',
-        date: new Date(),
-        uuid: '43c38540-7cc6-11ee-8b96-979986851607'
+        date: new Date()
       }
     ]
   }

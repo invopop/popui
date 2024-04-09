@@ -8,6 +8,7 @@
   import clsx from 'clsx'
   import BaseFlag from './BaseFlag.svelte'
   import { getCountryName } from './helpers.js'
+  import TagStatus from './TagStatus.svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -57,10 +58,16 @@
   {:else if item.icon}
     <Icon
       src={item.icon}
-      class="w-5 h-5 {item.destructive ? 'text-danger-500' : 'text-neutral-500'}"
+      class="w-4 h-4 {item.destructive ? 'text-danger-500' : 'text-neutral-500'}"
     />
   {/if}
-  <div class="whitespace-nowrap flex-1 text-left max-w-40 truncate" title={item.label}>
+  <div
+    class="whitespace-nowrap flex-1 text-left max-w-40 truncate flex items-center space-x-1.5"
+    title={item.label}
+  >
+    {#if item.color}
+      <TagStatus status={item.color} dot />
+    {/if}
     <span class="{labelStyles} text-base">{item.label}</span>
     {#if item.country}
       <span class="flex space-x-1 items-center">

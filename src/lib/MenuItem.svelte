@@ -45,7 +45,9 @@
     { 'text-white-40': isFolderItem },
     { 'bg-white-10': active },
     { 'border border-transparent hover:border-white-5 group p-2': collapsedSidebar },
-    { 'w-full px-2 py-1.5': !collapsedSidebar }
+    { 'w-full px-2 py-1.5': !collapsedSidebar },
+    { 'hover:bg-white-10 hover:border-white-5 focus:bg-white-10 focus:border-white-5': active },
+    { 'hover:bg-white-5 focus:bg-white-10': !active }
   )
 
   $: iconStyles = clsx({ 'group-hover:text-white': collapsedSidebar })
@@ -103,7 +105,7 @@
     on:mouseleave={handleBlur}
     on:click={handleClick}
     title={label}
-    class="{itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white hover:bg-white-5 hover:border-white-10 focus:bg-white-10 focus:border-white-10 rounded"
+    class="{itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-md"
   >
     <span class="flex items-center space-x-2">
       {#if resolvedIcon}

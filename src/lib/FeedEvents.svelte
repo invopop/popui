@@ -35,7 +35,7 @@
         </p>
       </div>
       {#if event.message}
-        <p class="text-neutral-800 text-sm mt-2 tracking-normal">{event.message}</p>
+        <p class="text-neutral-800 text-sm pt-2 tracking-normal">{event.message}</p>
       {/if}
     </div>
   {/each}

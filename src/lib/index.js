@@ -15,6 +15,7 @@ import FeedEvents from './FeedEvents.svelte'
 import FeedIconEvent from './FeedIconEvent.svelte'
 import FeedIconStatus from './FeedIconStatus.svelte'
 import FeedItem from './FeedItem.svelte'
+import FeedItemDetail from './FeedItemDetail.svelte'
 import FeedViewer from './FeedViewer.svelte'
 import GlobalSearch from './GlobalSearch.svelte'
 import InputCheckbox from './InputCheckbox.svelte'
@@ -59,6 +60,7 @@ export {
   FeedIconEvent,
   FeedIconStatus,
   FeedItem,
+  FeedItemDetail,
   FeedViewer,
   GlobalSearch,
   InputCheckbox,

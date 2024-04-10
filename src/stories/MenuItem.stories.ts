@@ -58,6 +58,15 @@ export const FolderItemWithIcon: Story = {
   }
 }
 
+export const FolderItemSelected: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    label: 'Folder Item',
+    isFolderItem: true,
+    active: true
+  }
+}
+
 export const CollapsableClosed: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

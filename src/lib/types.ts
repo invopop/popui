@@ -130,3 +130,5 @@ export type TabItem = {
   label: string
   counter?: number
 }
+
+export type EmptyStateIcon = 'invoices' | 'contacts' | 'products' | 'pdf' | 'file' | 'no-results'

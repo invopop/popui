@@ -42,11 +42,14 @@
 
   $: itemStyles = clsx(
     { 'text-white font-medium': !isFolderItem },
-    { 'text-white-40': isFolderItem },
+    { 'text-white-40': isFolderItem && !active },
     { 'bg-white-10': active },
     { 'border border-transparent hover:border-white-5 group p-2': collapsedSidebar },
     { 'w-full px-2 py-1.5': !collapsedSidebar },
-    { 'hover:bg-white-10 hover:border-white-5 focus:bg-white-10 focus:border-white-5': active },
+    {
+      'hover:bg-white-10 hover:border-white-5 focus:bg-white-10 focus:border-white-5 text-white':
+        active
+    },
     { 'hover:bg-white-5 focus:bg-white-10': !active }
   )
 

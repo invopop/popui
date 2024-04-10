@@ -6,6 +6,7 @@
   import { resolveIcon } from './helpers.js'
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContext from './DrawerContext.svelte'
+  import clsx from 'clsx'
 
   const dispatch = createEventDispatcher()
 
@@ -19,6 +20,7 @@
 
   let selectDropdown: BaseDropdown
   let resolvedIcon: IconSource | undefined
+  let isOpen = false
 
   $: {
     resolveIcon(icon).then((icon) => {
@@ -34,6 +36,10 @@
   }))
 
   $: selectedLabel = (!multiple && items.find((i) => i.selected)?.label) || placeholder
+
+  $: styles = clsx({
+    'input-shadow border-accent-500': isOpen
+  })
 
   function handleClick(e: CustomEvent) {
     value = e.detail
@@ -55,9 +61,9 @@
   }
 </script>
 
-<BaseDropdown placement="bottom-start" {fullWidth} bind:this={selectDropdown}>
+<BaseDropdown bind:isOpen placement="bottom-start" {fullWidth} bind:this={selectDropdown}>
   <div
-    class="dropdown-select flex items-center border hover:border-neutral-300 rounded py-1.25 pl-2"
+    class="{styles} dropdown-select flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2"
     slot="trigger"
   >
     {#if resolvedIcon}
@@ -72,8 +78,11 @@
 
 <style>
   .dropdown-select {
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI0YzRjVGNSIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwQTBBMEEiIHN0cm9rZS13aWR0aD0iMS4yIi8+Cjwvc3ZnPgo=');
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0YzRjRGNiIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwMzA3MTIiIHN0cm9rZS13aWR0aD0iMS4xIi8+Cjwvc3ZnPg==');
     background-repeat: no-repeat;
     background-position: center right 8px;
+  }
+  .input-shadow {
+    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
   }
 </style>

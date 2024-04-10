@@ -14,6 +14,7 @@
 
   export let multiple = false
   export let item: DrawerOption
+  export let scrollIfSelected = false
 
   let el: HTMLElement
 
@@ -35,6 +36,8 @@
   )
 
   onMount(() => {
+    if (!scrollIfSelected) return
+
     if (item.selected) {
       el.scrollIntoView()
     }

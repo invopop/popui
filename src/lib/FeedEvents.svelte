@@ -3,26 +3,6 @@
   import type { FeedEvent } from './types.js'
 
   export let events: FeedEvent[] = []
-
-  const dateOptions = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  }
-
-  const timeOptions = {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  }
-
-  function formatDate(date: Date) {
-    const formattedDate = date.toLocaleDateString('en-US', dateOptions)
-    const formattedTime = date.toLocaleTimeString('en-US', timeOptions)
-
-    return `${formattedDate} at ${formattedTime}`
-  }
 </script>
 
 <div class="border border-neutral-100 bg-neutral-50 rounded">
@@ -31,7 +11,7 @@
       <div class="flex items-center justify-between">
         <TagStatus status={event.status.type} label={event.status.label} />
         <p class="text-sm text-neutral-500 tabular-nums slashed-zero tracking-wide">
-          {formatDate(event.date)}
+          {event.date.toISOString()}
         </p>
       </div>
       {#if event.message}

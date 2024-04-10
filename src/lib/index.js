@@ -33,6 +33,7 @@ import ProfileSelector from './ProfileSelector.svelte'
 import SectionLayout from './SectionLayout.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
+import StatusLabel from './StatusLabel.svelte'
 import Tabs from './Tabs.svelte'
 import TagSearch from './TagSearch.svelte'
 import TagStatus from './TagStatus.svelte'
@@ -78,6 +79,7 @@ export {
   SectionLayout,
   SeparatorHorizontal,
   ShortcutWrapper,
+  StatusLabel,
   Tabs,
   TagSearch,
   TagStatus,

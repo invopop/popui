@@ -36,7 +36,7 @@
 </script>
 
 <button
-  class="{styles} relative flex items-center justify-between w-full space-x-1"
+  class="{styles} relative flex items-center justify-between w-full space-x-1 text-left whitespace-nowrap"
   on:click|stopPropagation={async () => {
     await navigator.clipboard.writeText(uuid)
     dispatch('copied', uuid)

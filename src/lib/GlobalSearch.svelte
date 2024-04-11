@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { GlobalSearch, Slash } from '@invopop/ui-icons'
+  import { Search, Slash } from '@invopop/ui-icons'
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
   import clsx from 'clsx'
   import ShortcutWrapper from './ShortcutWrapper.svelte'
@@ -33,10 +33,10 @@
 </script>
 
 <button
-  class="{styles} flex items-center border pl-1.5 py-1.5 pr-2 border-white-10 bg-neutral-800/10 rounded"
+  class="{styles} flex items-center border pl-1.5 py-1.5 pr-2 border-white-10 bg-neutral-800/10 rounded-md"
   on:click={() => open()}
 >
-  <Icon src={GlobalSearch} class="w-5 h-5 text-white-70" />
+  <Icon src={Search} class="w-4 h-4 text-white-70" />
   {#if !collapsed}
     <span class="text-white-40 text-sm flex-1 text-left tracking-normal">Search</span>
     <ShortcutWrapper>

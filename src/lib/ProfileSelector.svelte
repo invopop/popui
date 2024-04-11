@@ -10,7 +10,7 @@
 </script>
 
 <button
-  class="{styles} text-white text-sm font-medium flex items-center justify-between space-x-1 focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
+  class="{styles} text-white text-base font-medium flex items-center justify-between space-x-1 focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
   on:click
 >
   <span class="flex items-center space-x-2">

@@ -4,8 +4,8 @@
   .hr-separator {
     border-image: repeating-linear-gradient(
       90deg,
-      #cccece,
-      #cccece 3px,
+      #f3f4f6,
+      #f3f4f6 3px,
       transparent 3px,
       transparent 7px
     );

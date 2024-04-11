@@ -15,14 +15,15 @@
   export let multiple = false
   export let item: DrawerOption
   export let scrollIfSelected = false
+  export let workspace = false
 
   let el: HTMLElement
 
-  $: hasIcon = item.icon || item.country
+  $: hasIcon = item.icon || workspace
 
   $: styles = clsx(
-    { 'py-1 space-x-3': item.country },
-    { 'py-1.5 space-x-2': !item.country },
+    { 'py-1 space-x-3': workspace },
+    { 'py-1.5 space-x-2': !workspace },
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
     { 'bg-accent-100': item.selected && !multiple },
@@ -31,8 +32,8 @@
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
-    { 'font-semibold tracking-tight': item.country },
-    { 'font-medium tracking-normal': !item.country }
+    { 'font-semibold tracking-tight': workspace },
+    { 'font-medium tracking-normal': !workspace }
   )
 
   onMount(() => {
@@ -56,7 +57,7 @@
     }
   }}
 >
-  {#if item.country}
+  {#if workspace}
     <ProfileAvatar name={item.label} large />
   {:else if item.icon}
     <Icon
@@ -65,13 +66,16 @@
     />
   {/if}
   <div
-    class="whitespace-nowrap flex-1 text-left max-w-40 truncate flex items-center space-x-1.5"
+    class="whitespace-nowrap flex-1 text-left max-w-40 truncate flex flex-col"
     title={item.label}
   >
-    {#if item.color}
-      <TagStatus status={item.color} dot />
-    {/if}
-    <span class="{labelStyles} text-base">{item.label}</span>
+    <span class="flex items-center space-x-1.5">
+      {#if item.color}
+        <TagStatus status={item.color} dot />
+      {/if}
+      <span class="{labelStyles} text-base">{item.label}</span>
+    </span>
+
     {#if item.country}
       <span class="flex space-x-1 items-center">
         <BaseFlag country={item.country} />

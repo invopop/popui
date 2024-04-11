@@ -98,7 +98,7 @@
   }
 </script>
 
-<div class={wrapperStyles}>
+<div class="{wrapperStyles} relative">
   {#if isFolderItem && (highlight || active)}
     <div class="border-l border-white h-3 w-px absolute top-[14px] left-0 -m-px" />
   {/if}

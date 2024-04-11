@@ -63,7 +63,7 @@
   }}
 />
 
-<div class="w-full rounded border border-neutral-100 font-sans">
+<div class="w-full rounded-md border border-neutral-100 font-sans">
   <table class="w-full">
     <thead>
       <tr class="border-b border-neutral-100 relative">

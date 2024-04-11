@@ -4,6 +4,7 @@
   import UuidCopy from './UuidCopy.svelte'
   import FeedEvents from './FeedEvents.svelte'
   import { slide } from 'svelte/transition'
+  import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 
   export let status: FeedItemStatus | undefined = undefined
   export let title = ''
@@ -18,8 +19,9 @@
     {#if status}
       <FeedIconStatus {status} />
     {/if}
-    <span class="truncate">{title}</span>
+    <span class="truncate font-medium text-neutral-800 text-base">{title}</span>
   </div>
+  <SeparatorHorizontal />
   <div class="pl-3 py-1 pr-2.5 flex items-center space-x-0.5">
     <span class="text-sm text-neutral-500">ID:</span>
     {#if uuid}
@@ -27,6 +29,7 @@
     {/if}
   </div>
   {#if events.length}
+    <SeparatorHorizontal />
     <div class="px-3 py-2 text-sm text-neutral-500 flex items-center justify-between">
       <span>Logs</span>
       <button
@@ -48,7 +51,7 @@
       </button>
     </div>
     {#if open}
-      <div transition:slide class="px-3 py-2">
+      <div transition:slide class="px-3 pb-3">
         <FeedEvents {events} />
       </div>
     {/if}

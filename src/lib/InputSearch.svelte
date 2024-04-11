@@ -48,7 +48,7 @@
     bind:this={input}
     bind:value
     type="search"
-    class="py-1.5 pl-7 border border-neutral-200 hover:border-neutral-300 focus:border-accent-500 w-full rounded text-neutral-800 placeholder-neutral-500 text-base outline-none caret-accent-500 tracking-tight ui-input"
+    class="py-[5px] pl-7 border border-neutral-200 hover:border-neutral-300 focus:border-accent-500 w-full rounded-md text-neutral-800 placeholder-neutral-500 text-base outline-none caret-accent-500 tracking-tight ui-input"
     style:padding-right={`${shortcutKeys.length * 15 + 12}px`}
     {placeholder}
     on:input={handleInput}

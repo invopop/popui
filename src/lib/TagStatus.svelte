@@ -32,7 +32,7 @@
   })
 </script>
 
-<span class="{tagStyles} border rounded py-0.5 text-sm inline-flex items-center font-medium gap-1">
+<span class="{tagStyles} border rounded py-px text-sm inline-flex items-center font-medium gap-1">
   {#if dot}
     <span class="{dotStyles} w-2 h-2 rounded-sm" />
   {/if}

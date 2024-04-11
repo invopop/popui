@@ -14,7 +14,7 @@
 <div class="w-[300px] border border-neutral-100 pt-1 rounded shadow-lg space-y-0.5 bg-white">
   <ul class="px-1 space-y-1 max-h-[60vh] overflow-y-auto">
     {#each items as item}
-      <DrawerContextItem {item} {multiple} on:click />
+      <DrawerContextItem {item} {multiple} workspace on:click />
     {/each}
   </ul>
   <ul class="px-1 space-y-1 bg-neutral-50 rounded-b border-t border-neutral-100 p-1 space-y-1">

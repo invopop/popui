@@ -36,7 +36,7 @@
     />
   {/each}
   {#if actions.length}
-    <td class="pl-1 pr-3 py-2.5">
+    <td class="pl-1 pr-3">
       <BaseTableActions
         bind:this={actionsDropdown}
         {actions}

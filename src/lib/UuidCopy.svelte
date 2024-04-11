@@ -42,7 +42,7 @@
     dispatch('copied', uuid)
   }}
 >
-  <span class="tracking-wide">
+  <span class="tracking-wide tabular-nums slashed-zero">
     {formattedUuid}
   </span>
   <div class="p-1">

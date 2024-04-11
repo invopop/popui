@@ -16,12 +16,14 @@
     { 'text-neutral-800 font-medium': currentIndex === 0 },
     { 'text-neutral-500': currentIndex > 0 },
     { 'text-right': field.rightAlign },
-    { 'w-full max-w-0': field.fullWidth }
+    { 'w-full max-w-0': field.fullWidth },
+    { 'py-[11.25px]': badge },
+    { 'py-[11.75px]': !badge }
   )
 </script>
 
 <td
-  class="{cellStyles} whitespace-nowrap text-base p-3 tracking-normal truncate"
+  class="{cellStyles} whitespace-nowrap text-base px-3 tracking-normal truncate"
   style:min-width={field.width}
   style:max-width={field.width}
 >

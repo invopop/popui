@@ -61,6 +61,12 @@ export const WithFlag: Story = {
         slug: 'payflow',
         id: 'whatever-2',
         country: 'pe'
+      },
+      {
+        name: 'Without flag',
+        slug: 'flagless',
+        id: 'whatever-3',
+        country: ''
       }
     ]
   }

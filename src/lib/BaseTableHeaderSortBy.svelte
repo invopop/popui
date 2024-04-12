@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ArrowDown, ArrowUp } from '@invopop/ui-icons'
+  import { SortAscending, SortDescending } from '@invopop/ui-icons'
   import { createEventDispatcher } from 'svelte'
   import type { TableSortBy, DrawerOption } from './types.js'
   import DrawerContext from './DrawerContext.svelte'
@@ -10,8 +10,8 @@
   export let sortDirection: TableSortBy
 
   $: items = [
-    { icon: ArrowUp, label: 'Sort Ascending', value: 'asc' },
-    { icon: ArrowDown, label: 'Sort Descending', value: 'desc' }
+    { icon: SortAscending, label: 'Sort Ascending', value: 'asc' },
+    { icon: SortDescending, label: 'Sort Descending', value: 'desc' }
   ].map((o) => ({
     ...o,
     selected: isActive && sortDirection === o.value

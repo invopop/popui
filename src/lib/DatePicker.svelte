@@ -41,6 +41,7 @@
   let datepicker: Instance
   let selectedDates = { from: { value: '', display: '' }, to: { value: '', display: '' } }
   let isOpen = false
+  let selectedPeriod = 'custom'
 
   const today = new Date()
   const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 })
@@ -56,6 +57,71 @@
   const startOfLastQuarter = subQuarters(startOfThisQuarter, 1)
   const endOfLastQuarter = endOfQuarter(startOfLastQuarter)
 
+  const periods = [
+    {
+      slug: 'this-week',
+      label: 'This Week',
+      action: () => {
+        selectedPeriod = 'this-week'
+        datepicker.setDate([startOfThisWeek, endOfThisWeek], true)
+        datepicker.jumpToDate(startOfThisWeek)
+      }
+    },
+    {
+      slug: 'last-week',
+      label: 'Last Week',
+      action: () => {
+        selectedPeriod = 'last-week'
+        datepicker.setDate([startOfLastWeek, endOfLastWeek], true)
+        datepicker.jumpToDate(startOfLastWeek)
+      }
+    },
+    {
+      slug: 'this-month',
+      label: 'This month',
+      action: () => {
+        selectedPeriod = 'this-month'
+        datepicker.setDate([startOfThisMonth, endOfThisMonth], true)
+        datepicker.jumpToDate(startOfThisMonth)
+      }
+    },
+    {
+      slug: 'last-month',
+      label: 'Last month',
+      action: () => {
+        selectedPeriod = 'last-month'
+        datepicker.setDate([startOfLastMonth, endOfLastMonth], true)
+        datepicker.jumpToDate(startOfLastMonth)
+      }
+    },
+    {
+      slug: 'this-quarter',
+      label: 'This quarter',
+      action: () => {
+        selectedPeriod = 'this-quarter'
+        datepicker.setDate([startOfThisQuarter, endOfThisQuarter], true)
+        datepicker.jumpToDate(startOfThisQuarter)
+      }
+    },
+    {
+      slug: 'last-quarter',
+      label: 'Last quarter',
+      action: () => {
+        selectedPeriod = 'last-quarter'
+        datepicker.setDate([startOfLastQuarter, endOfLastQuarter], true)
+        datepicker.jumpToDate(startOfLastQuarter)
+      }
+    },
+    {
+      slug: 'custom',
+      label: 'Custom',
+      action: () => {
+        datepicker.clear()
+        selectedPeriod = 'custom'
+      }
+    }
+  ]
+
   onMount(() => {
     datepicker = flatpickr(datePickerEl, {
       onChange: function (dates: Date[]) {
@@ -64,7 +130,10 @@
           return
         }
 
-        if (dates.length === 1) return
+        if (dates.length === 1) {
+          selectedPeriod = 'custom'
+          return
+        }
 
         const from = getDate(dates[0])
         const to = getDate(dates[1])
@@ -115,36 +184,6 @@
     return `${selectedDates.from.display} → ${selectedDates.to.display}`
   }
 
-  function onThisWeek() {
-    datepicker.setDate([startOfThisWeek, endOfThisWeek], true)
-    datepicker.jumpToDate(startOfThisWeek)
-  }
-
-  function onLastWeek() {
-    datepicker.setDate([startOfLastWeek, endOfLastWeek], true)
-    datepicker.jumpToDate(startOfLastWeek)
-  }
-
-  function onThisMonth() {
-    datepicker.setDate([startOfThisMonth, endOfThisMonth], true)
-    datepicker.jumpToDate(startOfThisMonth)
-  }
-
-  function onLastMonth() {
-    datepicker.setDate([startOfLastMonth, endOfLastMonth], true)
-    datepicker.jumpToDate(startOfLastMonth)
-  }
-
-  function onThisQuarter() {
-    datepicker.setDate([startOfThisQuarter, endOfThisQuarter], true)
-    datepicker.jumpToDate(startOfThisQuarter)
-  }
-
-  function onLastQuarter() {
-    datepicker.setDate([startOfLastQuarter, endOfLastQuarter], true)
-    datepicker.jumpToDate(startOfLastQuarter)
-  }
-
   function setDates(from: string, to: string) {
     datepicker.setDate([from, to])
     selectedDates = {
@@ -191,50 +230,24 @@
       >
         <div class="flex border-b border-neutral-100 h-[300px]">
           <div class="flex flex-col space-y-2 items-start p-3 border-r border-neutral-100">
-            <button
-              on:click={onThisWeek}
-              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
-            >
-              This Week
-            </button>
-            <button
-              on:click={onLastWeek}
-              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
-            >
-              Last Week
-            </button>
-            <button
-              on:click={onThisMonth}
-              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
-            >
-              This Month
-            </button>
-            <button
-              on:click={onLastMonth}
-              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
-            >
-              Last Month
-            </button>
-            <button
-              on:click={onThisQuarter}
-              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
-            >
-              This Quarter
-            </button>
-            <button
-              on:click={onLastQuarter}
-              class="whitespace-nowrap text-neutral-500 text-base px-2 py-1 tracking-normal"
-            >
-              Last Quarter
-            </button>
+            {#each periods as period}
+              <button
+                on:click={period.action}
+                class="{selectedPeriod === period.slug
+                  ? 'text-accent-500 border-accent-500/20 bg-accent-500/5'
+                  : 'text-neutral-500 border-transparent'} whitespace-nowrap text-base px-2 py-1 tracking-normal border rounded"
+              >
+                {period.label}
+              </button>
+            {/each}
           </div>
           <div bind:this={datePickerEl} />
         </div>
         <div class="p-4 flex justify-end items-center space-x-3">
           <BaseButton variant="secondary" on:click={cancel}>Cancel</BaseButton>
-          <BaseButton variant="primary" on:click={confirm} disabled={!selectedDates.to.value}
-            >Confirm</BaseButton
-          >
+          <BaseButton variant="primary" on:click={confirm} disabled={!selectedDates.to.value}>
+            Confirm
+          </BaseButton>
         </div>
       </div>
     </Transition>

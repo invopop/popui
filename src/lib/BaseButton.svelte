@@ -37,8 +37,8 @@
     { 'bg-accent-500': variant === 'primary' },
     { 'bg-neutral-100 hover:bg-neutral-200 focus:bg-neutral-300': variant === 'secondary' },
     { 'bg-danger-500': variant === 'danger' },
-    { 'text-sm': small },
-    { 'text-base': !small },
+    { 'text-sm rounded': small },
+    { 'text-base rounded-md': !small },
     { 'p-1': small && !$$slots.default },
     { 'p-1.5': !small && !big && !$$slots.default },
     { 'p-2': big && !$$slots.default },
@@ -79,6 +79,8 @@
   )
 
   $: overlayClasses = clsx({
+    'rounded-md': !small,
+    rounded: small,
     'group-hover:bg-black/[.16] group-active:bg-black/[.32]': ['primary', 'danger'].includes(
       variant
     )
@@ -97,11 +99,11 @@
 <button
   {type}
   {disabled}
-  class="{buttonStyles} flex items-center justify-center rounded-md font-medium font-sans relative group tracking-tight"
+  class="{buttonStyles} flex items-center justify-center font-medium font-sans relative group tracking-tight"
   {...$$restProps}
   on:click|stopPropagation={handleClick}
 >
-  <span class="{overlayClasses} absolute inset-0 rounded-md" />
+  <span class="{overlayClasses} absolute inset-0" />
   {#if resolvedIcon}
     {#if shortcut}
       <ShortcutWrapper>

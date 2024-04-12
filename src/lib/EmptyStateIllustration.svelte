@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { EmptyStateIcon } from './types.ts'
+  import type { EmptyStateIcon } from './types.js'
   import BgPattern from './svg/BgPattern.svelte'
   import IconContact from './svg/IconContact.svelte'
   import IconInvoice from './svg/IconInvoice.svelte'

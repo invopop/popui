@@ -25,7 +25,7 @@
   }
 </script>
 
-<div class="{widthClass} border border-neutral-100 py-0.5 rounded shadow-lg space-y-0.5 bg-white">
+<div class="{widthClass} border border-neutral-200 py-1 rounded shadow-lg space-y-0.5 bg-white">
   {#if searchable}
     <div class="px-2 mt-2 mb-1">
       <InputSearch placeholder="Search" />

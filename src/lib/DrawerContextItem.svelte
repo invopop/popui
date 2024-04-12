@@ -27,13 +27,13 @@
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
     { 'bg-accent-100': item.selected && !multiple },
-    { 'hover:bg-neutral-100 rounded-sm': !item.selected }
+    { 'hover:bg-neutral-100 rounded': !item.selected }
   )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
     { 'font-semibold tracking-tight': workspace },
-    { 'font-medium tracking-normal': !workspace }
+    { 'font-normal tracking-normal': !workspace }
   )
 
   onMount(() => {

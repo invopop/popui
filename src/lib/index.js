@@ -10,7 +10,8 @@ import DataListItem from './DataListItem.svelte'
 import DatePicker from './DatePicker.svelte'
 import DrawerContext from './DrawerContext.svelte'
 import DropdownSelect from './DropdownSelect.svelte'
-import EmptyListState from './EmptyListState.svelte'
+import EmptyStateIcon from './EmptyStateIcon.svelte'
+import EmptyStateIllustration from './EmptyStateIllustration.svelte'
 import FeedEvents from './FeedEvents.svelte'
 import FeedIconEvent from './FeedIconEvent.svelte'
 import FeedIconStatus from './FeedIconStatus.svelte'
@@ -56,7 +57,8 @@ export {
   DatePicker,
   DrawerContext,
   DropdownSelect,
-  EmptyListState,
+  EmptyStateIcon,
+  EmptyStateIllustration,
   FeedEvents,
   FeedIconEvent,
   FeedIconStatus,

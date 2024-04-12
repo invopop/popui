@@ -33,6 +33,7 @@
   export let hideCounter = false
 
   $: groupedData = groupData(data)
+  $: addExtraCell = getActions instanceof Function
 
   function groupData(rows: TableDataRow[]): TableGroup[] {
     if (rows.length === 0) return []
@@ -64,15 +65,22 @@
 />
 
 <div class="w-full rounded-md border border-neutral-100 font-sans">
-  <table class="w-full">
+  <table class="w-full rounded-md">
     <thead>
       <tr class="border-b border-neutral-100 relative">
         {#each fields as field, i (i)}
-          <BaseTableHeader {sortBy} {sortDirection} {field} on:orderBy />
+          <BaseTableHeader
+            isFirst={i === 0}
+            isLast={!addExtraCell && i === fields.length - 1}
+            {sortBy}
+            {sortDirection}
+            {field}
+            on:orderBy
+          />
         {/each}
-        {#if getActions instanceof Function}
+        {#if addExtraCell}
           <!-- if table has actions cell we need to add an extra header -->
-          <th scope="col" class="bg-white sticky top-0 z-10" />
+          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md" />
         {/if}
       </tr>
     </thead>

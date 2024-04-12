@@ -12,8 +12,14 @@
   export let field: TableField
   export let sortBy = ''
   export let sortDirection: TableSortBy
+  export let isFirst = false
+  export let isLast = false
 
-  $: outerStyles = clsx({ 'w-full': field.fullWidth })
+  $: outerStyles = clsx({
+    'w-full': field.fullWidth,
+    'rounded-tl-md': isFirst,
+    'rounded-tr-md': isLast
+  })
 
   $: headerStyles = clsx({
     'justify-end': field.rightAlign,
@@ -47,12 +53,12 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               class:rotate-180={sortDirection === 'asc'}
-              class="mt-px text-neutral-300 h-3 w-3"
+              class="mt-px text-neutral-400 h-3 w-3"
             >
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
-                d="M6 1C6.27614 1 6.5 1.22386 6.5 1.5V9.29289L7.64645 8.14645C7.84171 7.95118 8.15829 7.95118 8.35355 8.14645C8.54882 8.34171 8.54882 8.65829 8.35355 8.85355L6.35355 10.8536C6.25978 10.9473 6.13261 11 6 11C5.86739 11 5.74021 10.9473 5.64645 10.8536L3.64645 8.85355C3.45118 8.65829 3.45118 8.34171 3.64645 8.14645C3.84171 7.95118 4.15829 7.95118 4.35355 8.14645L5.5 9.29289V1.5C5.5 1.22386 5.72386 1 6 1Z"
+                d="M6.56519 8.8272L7.9966 7.39579L8.7037 8.1029L6.41082 10.3958L6.05726 10.7493L5.70371 10.3958L3.41082 8.1029L4.11793 7.39579L5.56507 8.84293L5.61453 1.24609L6.61451 1.2526L6.56519 8.8272Z"
                 fill="currentColor"
               />
             </svg>

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/svelte'
 
-import EmptyListState from '../lib/EmptyListState.svelte'
+import EmptyStateIllustration from '../lib/EmptyStateIllustration.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Components/EmptyListState',
-  component: EmptyListState,
+  title: 'Components/EmptyStateIllustration',
+  component: EmptyStateIllustration,
   tags: ['autodocs']
-} satisfies Meta<EmptyListState>
+} satisfies Meta<EmptyStateIllustration>
 
 export default meta
 type Story = StoryObj<typeof meta>

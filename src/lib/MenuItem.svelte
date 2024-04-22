@@ -135,7 +135,7 @@
           role="contentinfo"
           on:mouseenter={handleHover}
           on:mouseleave={handleBlur}
-          class="pt-4"
+          class="pt-4 z-30"
         >
           <DrawerContext on:click={handleClickChild} {items} />
         </div>

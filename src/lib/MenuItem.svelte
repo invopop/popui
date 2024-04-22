@@ -97,7 +97,7 @@
   }
 </script>
 
-<div class="{wrapperStyles} relative">
+<div class={wrapperStyles}>
   {#if isFolderItem && (highlight || active)}
     <div class="border-l border-white h-3 w-px absolute top-[14px] left-0 -m-px" />
   {/if}
@@ -135,7 +135,7 @@
           role="contentinfo"
           on:mouseenter={handleHover}
           on:mouseleave={handleBlur}
-          class="pt-4 z-30 absolute"
+          class="pt-4"
         >
           <DrawerContext on:click={handleClickChild} {items} />
         </div>

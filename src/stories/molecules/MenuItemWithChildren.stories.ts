@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 
 import MenuItemWithChildren from './MenuItemWithChildren.svelte'
 import MarginDecorator from '../decorartors/MarginDecorator.svelte'
-import MaxWidthSmDecorator from '../decorartors/MaxWidthSmDecorator.svelte'
 import DarkBackgroundDecorator from '../decorartors/DarkBackgroundDecorator.svelte'
 import { DocumentText } from '@invopop/ui-icons'
 
@@ -11,7 +10,7 @@ const meta = {
   title: 'Examples/Menu Item With Children',
   component: MenuItemWithChildren,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator]
 } satisfies Meta<MenuItemWithChildren>
 
 export default meta
@@ -62,7 +61,6 @@ export const ChildActive: Story = {
 }
 
 export const CollapsedSidebarWithChild: Story = {
-  decorators: [() => DarkBackgroundDecorator],
   args: {
     icon: DocumentText,
     collapsedSidebar: true,

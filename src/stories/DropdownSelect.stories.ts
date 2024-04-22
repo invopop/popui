@@ -33,7 +33,7 @@ export const WithIcon: Story = {
     placeholder: 'Placeholder Label',
     options: [
       { value: 1, label: 'Option one' },
-      { value: 2, label: 'Option Two' }
+      { value: 2, label: 'Option Two', color: 'red' }
     ]
   }
 }
@@ -56,6 +56,16 @@ export const WithSelectedOption: Story = {
     options: [
       { icon: Edit, value: 1, label: 'Option one' },
       { icon: Locked, value: 2, label: 'Option Two' }
+    ]
+  }
+}
+
+export const WithColors: Story = {
+  args: {
+    placeholder: 'Label',
+    options: [
+      { value: 1, label: 'Option one', color: 'blue' },
+      { value: 2, label: 'Option Two', color: 'green' }
     ]
   }
 }

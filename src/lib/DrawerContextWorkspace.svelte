@@ -25,7 +25,7 @@
           dispatch('click', 'add')
         }}
       >
-        <Icon src={AddCircle} class="w-4 h-4 text-neutral-500" />
+        <Icon src={AddCircle} class="w-4 h-4 text-neutral-500 flex-shrink-0" />
         <span class="text-neutral-800 tracking-tight text-base">Create workspace</span>
       </button>
     </li>
@@ -37,7 +37,7 @@
         }}
       >
         <Icon src={Settings} class="w-4 h-4 text-neutral-500" />
-        <span class="text-neutral-800 tracking-tight text-base f">Settings</span>
+        <span class="text-neutral-800 tracking-tight text-base">Settings</span>
       </button>
     </li>
   </ul>

@@ -7,6 +7,7 @@
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContext from './DrawerContext.svelte'
   import clsx from 'clsx'
+  import TagStatus from './TagStatus.svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -35,6 +36,7 @@
       : o.value === value
   }))
 
+  $: selectedColor = !multiple && items.find((i) => i.selected)?.color
   $: selectedLabel = (!multiple && items.find((i) => i.selected)?.label) || placeholder
 
   $: styles = clsx({
@@ -63,15 +65,18 @@
 
 <BaseDropdown bind:isOpen placement="bottom-start" {fullWidth} bind:this={selectDropdown}>
   <div
-    class="{styles} dropdown-select flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2"
+    class="{styles} dropdown-select flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1"
     slot="trigger"
   >
     {#if resolvedIcon}
-      <Icon src={resolvedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 mr-1" />
+      <Icon src={resolvedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 flex-shrink-0" />
     {/if}
-    <span class="w-full pr-8 text-neutral-800 placeholder-neutral-800 text-base"
-      >{selectedLabel}</span
-    >
+    {#if selectedColor}
+      <TagStatus dot status={selectedColor} />
+    {/if}
+    <span class="w-full pr-8 text-neutral-800 placeholder-neutral-800 text-base">
+      {selectedLabel}
+    </span>
   </div>
   <DrawerContext {multiple} {items} on:click={handleClick} on:selected={handleSelected} />
 </BaseDropdown>

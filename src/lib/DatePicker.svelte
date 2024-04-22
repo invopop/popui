@@ -243,7 +243,7 @@
           </div>
           <div bind:this={datePickerEl} />
         </div>
-        <div class="p-4 flex justify-end items-center space-x-3">
+        <div class="p-3 flex justify-end items-center space-x-3">
           <BaseButton variant="secondary" on:click={cancel}>Cancel</BaseButton>
           <BaseButton variant="primary" on:click={confirm} disabled={!selectedDates.to.value}>
             Confirm

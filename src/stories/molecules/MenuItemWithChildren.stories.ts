@@ -75,3 +75,19 @@ export const CollapsedSidebarWithChild: Story = {
     ]
   }
 }
+
+export const CollapsedSidebarParentSelected: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    icon: DocumentText,
+    collapsedSidebar: true,
+    collapsable: true,
+    open: true,
+    url: 'parent-item',
+    active: true,
+    children: [
+      { label: 'Child Item', url: 'child-item' },
+      { label: 'Another Child Item', url: 'another-child-item' }
+    ]
+  }
+}

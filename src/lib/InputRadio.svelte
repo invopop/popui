@@ -9,7 +9,7 @@
 
   const dispatch = createEventDispatcher()
 
-  $: if (checked) {
+  $: if (el && checked) {
     el.focus()
   }
 

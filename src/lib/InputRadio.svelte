@@ -3,8 +3,15 @@
   import { dispatchWcEvent } from './wcdispatch.js'
 
   export let checked = false
+  export let id = ''
+
+  let el: HTMLInputElement
 
   const dispatch = createEventDispatcher()
+
+  $: if (checked) {
+    el.focus()
+  }
 
   function updateInput(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
@@ -19,7 +26,9 @@
 </script>
 
 <input
+  bind:this={el}
   type="radio"
+  {id}
   {checked}
   class="form-radio h-5 w-5 border-neutral-200 text-accent-500 focus:ring-0 focus:ring-offset-0"
   on:change={updateInput}

@@ -36,7 +36,7 @@
   aria-label={title}
 >
   {#if iconComponent}
-    <div class="relative mb-3 h-[120px] w-full max-w-sm">
+    <div class="relative h-[120px] w-full max-w-sm">
       <div class="absolute top-0 left-0">
         <BgPattern />
       </div>

@@ -51,9 +51,15 @@ export const WithFlag: Story = {
     },
     companies: [
       {
-        name: 'Invopop',
+        name: 'Invopop Global',
         slug: 'invopop',
         id: 'whatever',
+        country: ''
+      },
+      {
+        name: 'Invopop',
+        slug: 'co_invopop',
+        id: 'whatever_co',
         country: 'co'
       },
       {

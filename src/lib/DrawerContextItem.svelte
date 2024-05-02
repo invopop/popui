@@ -13,25 +13,26 @@
 
   export let multiple = false
   export let item: DrawerOption
+  export let workspace = false
 
   let el: HTMLElement
 
-  $: hasIcon = item.icon || item.country
+  $: hasIcon = item.icon || workspace
 
   $: styles = clsx(
-    { 'py-1 space-x-3': item.country },
-    { 'py-1.5 space-x-2': !item.country },
+    { 'py-1 space-x-3': workspace },
+    { 'py-1.5 space-x-2': !workspace },
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
-    { 'bg-accent-100': item.selected && item.country && !multiple },
-    { 'bg-accent-50': item.selected && !item.country && !multiple },
+    { 'bg-accent-100': item.selected && workspace && !multiple },
+    { 'bg-accent-50': item.selected && !workspace && !multiple },
     { 'hover:bg-neutral-50 hover:border-neutral-100 rounded-sm': !item.selected }
   )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
-    { 'text-base font-semibold tracking-tight': item.country },
-    { 'text-sm font-medium tracking-normal': !item.country }
+    { 'text-base font-semibold tracking-tight': workspace },
+    { 'text-sm font-medium tracking-normal': !workspace }
   )
 
   onMount(() => {
@@ -53,7 +54,7 @@
     }
   }}
 >
-  {#if item.country}
+  {#if workspace}
     <ProfileAvatar name={item.label} large />
   {:else if item.icon}
     <Icon

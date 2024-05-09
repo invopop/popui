@@ -1,7 +1,7 @@
 <script lang="ts">
   import clsx from 'clsx'
 
-  export let content: number
+  export let content: number | string
   export let variant: 'default' | 'transparent' = 'default'
 
   $: styles = clsx({

@@ -5,7 +5,9 @@ import BaseDropdown from './BaseDropdown.svelte'
 import BaseFlag from './BaseFlag.svelte'
 import BaseTable from './BaseTable.svelte'
 import ButtonFile from './ButtonFile.svelte'
+import CardRelation from './CardRelation.svelte'
 import CompanySelector from './CompanySelector.svelte'
+import CounterWorkflow from './CounterWorkflow.svelte'
 import DataListItem from './DataListItem.svelte'
 import DatePicker from './DatePicker.svelte'
 import DrawerContext from './DrawerContext.svelte'
@@ -52,7 +54,9 @@ export {
   BaseFlag,
   BaseTable,
   ButtonFile,
+  CardRelation,
   CompanySelector,
+  CounterWorkflow,
   DataListItem,
   DatePicker,
   DrawerContext,

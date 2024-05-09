@@ -132,3 +132,8 @@ export type TabItem = {
 }
 
 export type EmptyStateIcon = 'invoices' | 'contacts' | 'products' | 'pdf' | 'file' | 'no-results'
+
+export type DataListItem = {
+  label: string
+  value: string
+}

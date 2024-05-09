@@ -47,6 +47,30 @@ export const TwoItems: Story = {
   }
 }
 
+export const ThreeItems: Story = {
+  args: {
+    items: [
+      {
+        title: 'Juan Moliner corrected the invoice',
+        icon: Sparkles,
+        date: new Date()
+      },
+      {
+        title: 'Sam Lown ran Send invoice workflow',
+        icon: CircleStack,
+        status: 'success',
+        date: new Date()
+      },
+      {
+        title: 'Javier ran Send invoice workflow',
+        icon: CircleStack,
+        status: 'success',
+        date: new Date()
+      }
+    ]
+  }
+}
+
 export const Viewable: Story = {
   args: {
     items: [

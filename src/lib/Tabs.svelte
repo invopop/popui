@@ -24,10 +24,7 @@
     >
       <span class="tracking-tighter">{value.label}</span>
       {#if value.counter}
-        <BaseCounter
-          content={value.counter}
-          variant={selected === value.label ? 'light' : 'dark'}
-        />
+        <BaseCounter content={value.counter} />
       {/if}
     </button>
   {/each}

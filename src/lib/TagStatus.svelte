@@ -7,32 +7,39 @@
   export let dot = false
 
   $: tagStyles = clsx({
-    'border-positive-200 bg-positive-100 text-positive-600': status === 'green',
-    'border-yellow-200 bg-yellow-100 text-yellow-600': status === 'yellow',
-    'border-danger-200 bg-danger-100 text-danger-600': status === 'red',
-    'border-warning-200 bg-warning-100 text-warning-600': status === 'orange',
-    'border-blue-200 bg-blue-100 text-blue-600': status === 'blue',
-    'border-purple-200 bg-purple-100 text-purple-600': status === 'purple',
-    'border-dashed border-neutral-200 text-neutral-400': status === 'empty',
-    'border-neutral-200 bg-neutral-100 text-neutral-600': status === 'grey',
+    'bg-positive-100 text-positive-500': status === 'green',
+    'border border-positive-200': status === 'green' && dot,
+    'bg-yellow-100 text-yellow-500': status === 'yellow',
+    'border border-yellow-200': status === 'yellow' && dot,
+    'bg-danger-100 text-danger-500': status === 'red',
+    'border border-danger-200': status === 'red' && dot,
+    'bg-warning-100 text-warning-500': status === 'orange',
+    'border border-warning-200': status === 'orange' && dot,
+    'bg-blue-100 text-blue-500': status === 'blue',
+    'border border-blue-200': status === 'blue' && dot,
+    'bg-purple-100 text-purple-500': status === 'purple',
+    'border border-purple-200': status === 'purple' && dot,
+    'border border-dashed border-neutral-200 text-neutral-400': status === 'empty',
+    'bg-neutral-100 text-neutral-500': status === 'grey',
+    'border border-neutral-200': status === 'grey' && dot,
     'pl-1.5 pr-[5px]': dot && label,
     'p-0.5': dot && !label,
     'px-1': !dot
   })
 
   $: dotStyles = clsx({
-    'bg-positive-600': status === 'green',
-    'bg-yellow-600': status === 'yellow',
-    'bg-danger-600': status === 'red',
-    'bg-warning-600': status === 'orange',
-    'bg-blue-600': status === 'blue',
-    'bg-purple-600': status === 'purple',
-    'bg-neutral-400': status === 'empty',
-    'bg-neutral-600': status === 'grey'
+    'bg-positive-500': status === 'green',
+    'bg-yellow-500': status === 'yellow',
+    'bg-danger-500': status === 'red',
+    'bg-warning-500': status === 'orange',
+    'bg-blue-500': status === 'blue',
+    'bg-purple-500': status === 'purple',
+    'bg-neutral-300': status === 'empty',
+    'bg-neutral-500': status === 'grey'
   })
 </script>
 
-<span class="{tagStyles} border rounded py-px text-sm inline-flex items-center font-medium gap-1">
+<span class="{tagStyles} rounded py-px text-sm inline-flex items-center font-medium gap-1">
   {#if dot}
     <span class="{dotStyles} w-2 h-2 rounded-sm" />
   {/if}

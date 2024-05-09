@@ -28,7 +28,7 @@
 
 <div id={`feed-item-${slug}`} class="relative text-left w-full min-w-[344px]">
   {#if hasNext && icon}
-    <span class="absolute -bottom-6 left-2 border-l border-neutral-100 w-px h-full" />
+    <span class="absolute bottom-[-20px] left-2 border-l border-neutral-100 w-px h-[58px]" />
   {/if}
   <div class="flex items-start justify-between space-x-2 py-3">
     <div class="relative">
@@ -37,7 +37,7 @@
       {/if}
     </div>
     <div
-      class="flex-1 items-center justify-start pl-2.5 py-2 pr-2 rounded-md border border-neutral-100"
+      class="flex-1 items-center justify-start pl-2.5 py-2 pr-2 rounded-lg border border-neutral-100"
     >
       <p
         class="text-base text-neutral-800 whitespace-nowrap tracking-normal font-medium flex items-center gap-1 {viewable

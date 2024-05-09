@@ -10,6 +10,7 @@
   export let title = ''
   export let uuid = ''
   export let events: FeedEvent[] = []
+  export let idLabel = 'ID:'
 
   let open = false
 </script>
@@ -23,7 +24,7 @@
   </div>
   <SeparatorHorizontal />
   <div class="pl-3 py-1 pr-2.5 flex items-center space-x-0.5">
-    <span class="text-sm text-neutral-500">ID:</span>
+    <span class="text-sm text-neutral-500 whitespace-nowrap">{idLabel}</span>
     {#if uuid}
       <UuidCopy {uuid} full small on:copied />
     {/if}

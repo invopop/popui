@@ -31,6 +31,15 @@ export const WithStatus: Story = {
   }
 }
 
+export const WithDifferentIdLabel: Story = {
+  args: {
+    title: 'Series enumerator',
+    uuid: '8ef5ac2a-1437-498b-a3d6-781234cf0ba1',
+    status: 'success',
+    idLabel: 'Intent ID:'
+  }
+}
+
 export const WithLongText: Story = {
   args: {
     title: 'Series enumerator with a long text that does not fit',

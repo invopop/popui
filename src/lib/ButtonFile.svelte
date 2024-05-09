@@ -28,7 +28,7 @@
 
 <button
   class:opacity-40={disabled}
-  class="border border-neutral-100 hover:bg-neutral-50 active:bg-neutral-100 rounded flex items-center space-x-3 py-[7px] pr-3 pl-2.5 w-full"
+  class="border border-neutral-100 hover:bg-neutral-50 active:bg-neutral-100 hover:border-neutral-200 active:border-neutral-300 rounded-lg flex items-center space-x-3 py-1.5 pr-3 pl-2.5 w-full"
   {disabled}
   on:click|stopPropagation={() => {
     dispatch('preview')
@@ -42,7 +42,7 @@
       <span class="text-base font-medium text-neutral-800 tracking-tight max-w-[174px] truncate">
         {name}
       </span>
-      <span class="text-sm text-neutral-400">{date}</span>
+      <span class="text-sm text-neutral-500">{date}</span>
     </div>
   </span>
   <BaseButton

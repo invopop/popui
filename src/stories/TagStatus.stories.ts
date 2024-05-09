@@ -22,10 +22,25 @@ export const Default: Story = {
   }
 }
 
+export const DefaultWithDot: Story = {
+  args: {
+    label: 'Tag',
+    dot: true
+  }
+}
+
 export const Green: Story = {
   args: {
     label: 'Tag',
     status: 'green'
+  }
+}
+
+export const GreenWithDot: Story = {
+  args: {
+    label: 'Tag',
+    status: 'green',
+    dot: true
   }
 }
 
@@ -36,10 +51,26 @@ export const Yellow: Story = {
   }
 }
 
+export const YellowWithDot: Story = {
+  args: {
+    label: 'Tag',
+    status: 'yellow',
+    dot: true
+  }
+}
+
 export const Red: Story = {
   args: {
     label: 'Tag',
     status: 'red'
+  }
+}
+
+export const RedWithDot: Story = {
+  args: {
+    label: 'Tag',
+    status: 'red',
+    dot: true
   }
 }
 
@@ -50,10 +81,26 @@ export const Orange: Story = {
   }
 }
 
+export const OrangeWithDot: Story = {
+  args: {
+    label: 'Tag',
+    status: 'orange',
+    dot: true
+  }
+}
+
 export const Blue: Story = {
   args: {
     label: 'Tag',
     status: 'blue'
+  }
+}
+
+export const BlueWithDot: Story = {
+  args: {
+    label: 'Tag',
+    status: 'blue',
+    dot: true
   }
 }
 
@@ -64,6 +111,14 @@ export const Purple: Story = {
   }
 }
 
+export const PurpleWithDot: Story = {
+  args: {
+    label: 'Tag',
+    status: 'purple',
+    dot: true
+  }
+}
+
 export const Empty: Story = {
   args: {
     label: 'Tag',
@@ -71,7 +126,7 @@ export const Empty: Story = {
   }
 }
 
-export const WithDot: Story = {
+export const EmptyWithDot: Story = {
   args: {
     label: 'Tag',
     status: 'empty',

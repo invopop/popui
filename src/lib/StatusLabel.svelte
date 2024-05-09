@@ -7,11 +7,11 @@
   export let label = ''
 
   $: styles = clsx({
-    'text-positive-600': status === 'success',
-    'text-neutral-400': status === 'queued',
-    'text-warning-600': status === 'alert',
-    'text-danger-600': status === 'failure',
-    'text-yellow-600': status === 'run'
+    'text-positive-500': status === 'success',
+    'text-neutral-500': status === 'queued',
+    'text-warning-500': status === 'alert',
+    'text-danger-500': status === 'failure',
+    'text-yellow-500': status === 'run'
   })
 </script>
 

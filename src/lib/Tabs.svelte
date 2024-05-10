@@ -2,6 +2,8 @@
   import { createTabs } from 'svelte-headlessui'
   import type { TabItem } from './types.js'
   import BaseCounter from './BaseCounter.svelte'
+  import { Icon } from '@steeze-ui/svelte-icon'
+  import { Success } from '@invopop/ui-icons'
 
   export let items: TabItem[] = []
   export let selected = ''
@@ -25,6 +27,9 @@
       <span class="tracking-tighter">{value.label}</span>
       {#if value.counter}
         <BaseCounter content={value.counter} />
+      {/if}
+      {#if value.check}
+        <Icon src={Success} class="h-4 w-4" />
       {/if}
     </button>
   {/each}

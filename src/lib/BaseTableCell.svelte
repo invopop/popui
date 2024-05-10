@@ -10,6 +10,7 @@
   export let currentIndex: number
   export let badge: Badge | null = null
   export let data: unknown = ''
+  export let freeWrap = false
 
   $: cellStyles = clsx(
     { 'tabular-nums slashed-zero': field.monospaced },
@@ -18,12 +19,13 @@
     { 'text-right': field.rightAlign },
     { 'w-full max-w-0': field.fullWidth },
     { 'py-[11.25px]': badge },
-    { 'py-[11.75px]': !badge }
+    { 'py-[11.75px]': !badge },
+    { 'whitespace-nowrap truncate': !freeWrap }
   )
 </script>
 
 <td
-  class="{cellStyles} whitespace-nowrap text-base px-3 tracking-normal truncate"
+  class="{cellStyles}  text-base px-3 tracking-normal"
   style:min-width={field.width}
   style:max-width={field.width}
 >

@@ -45,6 +45,29 @@ export const Default: Story = {
   }
 }
 
+export const WithFreeWrap: Story = {
+  args: {
+    freeWrap: true,
+    fields: [
+      { headerLabel: 'Invoice', slug: 'code', sortable: true },
+      { headerLabel: 'Customer', slug: 'customer' },
+      { headerLabel: 'Country', slug: 'country', isCountry: true },
+      { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
+      { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
+    ],
+    data: [
+      {
+        code: 'Super dupe long name that we want to show even though it does not fit in the screen',
+        customer:
+          'Super dupe long name that we want to show even though it does not fit in the screen',
+        country: 'es',
+        total: '403,50',
+        created_at: 'Sep 22, 2023'
+      }
+    ]
+  }
+}
+
 export const DisabledRowClick: Story = {
   args: {
     disableRowClick: true,

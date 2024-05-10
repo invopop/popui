@@ -12,6 +12,7 @@
   export let getActions: TableActionProp = undefined
   export let fields: TableField[] = []
   export let disableRowClick = false
+  export let freeWrap = false
 
   $: actions = getActions instanceof Function ? getActions(row) : []
 </script>
@@ -30,6 +31,7 @@
     <BaseTableCell
       currentIndex={i}
       {field}
+      {freeWrap}
       badge={field.helperBadge ? field.helperBadge(row) : null}
       data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
       on:copied

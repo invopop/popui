@@ -129,6 +129,7 @@ export type TableField = {
 export type TabItem = {
   label: string
   counter?: number
+  check?: boolean
 }
 
 export type EmptyStateIcon = 'invoices' | 'contacts' | 'products' | 'pdf' | 'file' | 'no-results'

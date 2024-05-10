@@ -31,6 +31,7 @@
   export let groupLabel: TableGroupLabelProp = undefined
   export let disableRowClick = false
   export let hideCounter = false
+  export let freeWrap = false
 
   $: groupedData = groupData(data)
   $: addExtraCell = getActions instanceof Function
@@ -106,6 +107,7 @@
             {fields}
             {getActions}
             {disableRowClick}
+            {freeWrap}
             on:click={() => {
               if (disableRowClick) return
 

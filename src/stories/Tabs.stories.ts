@@ -47,3 +47,16 @@ export const WithCounter: Story = {
     selected: 'Tab 3'
   }
 }
+
+export const WithCheck: Story = {
+  args: {
+    items: [
+      { label: 'Tab 1' },
+      { label: 'Tab 2', check: true },
+      { label: 'Tab 3' },
+      { label: 'Tab 4' },
+      { label: 'Tab 5' }
+    ],
+    selected: 'Tab 3'
+  }
+}

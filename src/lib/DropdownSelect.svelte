@@ -68,7 +68,7 @@
     class="{styles} dropdown-select flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1"
     slot="trigger"
   >
-    {#if resolvedIcon}
+    {#if resolvedIcon && !selectedColor}
       <Icon src={resolvedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 flex-shrink-0" />
     {/if}
     {#if selectedColor}

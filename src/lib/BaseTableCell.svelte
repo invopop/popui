@@ -41,6 +41,7 @@
         uuid={String(data)}
         prefixLength={4}
         suffixLength={4}
+        compact
         on:copied
       />
     {:else}

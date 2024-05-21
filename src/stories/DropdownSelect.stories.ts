@@ -70,6 +70,17 @@ export const WithColors: Story = {
   }
 }
 
+export const WithColorsAndIcon: Story = {
+  args: {
+    icon: Flag,
+    placeholder: 'Label',
+    options: [
+      { value: 1, label: 'Option one', color: 'blue' },
+      { value: 2, label: 'Option Two', color: 'green' }
+    ]
+  }
+}
+
 export const Multiple: Story = {
   args: {
     placeholder: 'Label',

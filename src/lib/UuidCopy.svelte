@@ -13,6 +13,7 @@
   export let prefixLength = 7
   export let suffixLength = 12
   export let full = false
+  export let compact = false
 
   function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
     if (inputString.length <= prefixLength + suffixLength) {
@@ -31,12 +32,13 @@
     'text-sm': small,
     'text-base': !small,
     'text-neutral-800 font-medium': dark,
-    'text-neutral-500': !dark
+    'text-neutral-500': !dark,
+    'justify-between': !compact
   })
 </script>
 
 <button
-  class="{styles} relative flex items-center justify-between w-full space-x-1 text-left whitespace-nowrap"
+  class="{styles} relative flex items-center w-full space-x-2 text-left whitespace-nowrap"
   on:click|stopPropagation={async () => {
     await navigator.clipboard.writeText(uuid)
     dispatch('copied', uuid)

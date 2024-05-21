@@ -26,7 +26,10 @@
     >
       <span class="tracking-tighter">{value.label}</span>
       {#if value.counter}
-        <BaseCounter content={value.counter} />
+        <BaseCounter
+          content={value.counter}
+          variant={selected === value.label ? 'light' : 'default'}
+        />
       {/if}
       {#if value.check}
         <Icon src={Success} class="h-4 w-4" />

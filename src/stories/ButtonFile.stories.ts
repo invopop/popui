@@ -34,7 +34,7 @@ export const WithDifferentIcon: Story = {
   args: {
     icon: Code,
     name: 'File name',
-    iconColor: 'blue'
+    iconColor: 'red'
   }
 }
 

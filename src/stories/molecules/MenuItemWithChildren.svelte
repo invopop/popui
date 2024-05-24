@@ -17,7 +17,7 @@
   <div class="h-[400px]">
     <div class="absolute inset-0 h-full z-10">
       <div class="flex flex-1 h-full">
-        <nav class="w-14 flex flex-col">
+        <nav class="w-30 flex flex-col">
           <div class="flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
             <MenuItem
               label="Parent Item"

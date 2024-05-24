@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { Search } from '@invopop/ui-icons'
-
-  let timer: ReturnType<typeof setTimeout>
 
   const dispatch = createEventDispatcher()
 
@@ -16,12 +14,14 @@
     }, 750)
   }
 
+  export let value = ''
   export let shortcut = ''
   export let placeholder = ''
   export let icon: IconSource = Search
+  export let focusOnLoad = false
 
   let input: HTMLInputElement
-  export let value = ''
+  let timer: ReturnType<typeof setTimeout>
 
   export const toggle = () => {
     input === document.activeElement ? input.blur() : input.focus()
@@ -41,6 +41,12 @@
 
     debounce(target)
   }
+
+  onMount(() => {
+    if (!focusOnLoad) return
+
+    input.focus()
+  })
 </script>
 
 <div class="relative flex items-center">

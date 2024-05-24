@@ -55,7 +55,7 @@
   $: iconStyles = clsx({ 'group-hover:text-white': collapsedSidebar })
 
   $: wrapperStyles = clsx({
-    'ml-4 border-l border-white-10 pl-2 pt-0.5': isFolderItem
+    'ml-4 border-l border-white-10 pl-2 pt-0.5 relative': isFolderItem
   })
 
   $: items = [

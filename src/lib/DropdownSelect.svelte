@@ -65,7 +65,7 @@
 
 <BaseDropdown bind:isOpen placement="bottom-start" {fullWidth} bind:this={selectDropdown}>
   <div
-    class="{styles} dropdown-select flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1"
+    class="{styles} dropdown-select flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1 bg-white"
     slot="trigger"
   >
     {#if resolvedIcon && !selectedColor}

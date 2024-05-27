@@ -1,7 +1,7 @@
 {
   "name": "@invopop/ui-kit",
   "license": "MIT",
-  "version": "0.2.24",
+  "version": "0.2.25",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -89,6 +89,7 @@
     "svelte-floating-ui": "^1.5.8",
     "svelte-intersection-observer-action": "^0.0.4",
     "svelte-transition": "^0.0.10",
+    "svelte-viewport-info": "^1.0.2",
     "twind": "^0.16.19"
   }
 }

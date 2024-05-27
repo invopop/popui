@@ -31,7 +31,7 @@
     'justify-end w-full': rightAlign,
     'text-sm': small,
     'text-base': !small,
-    'text-neutral-800 font-medium': dark,
+    'text-neutral-800': dark,
     'text-neutral-500': !dark,
     'justify-between': !compact
   })

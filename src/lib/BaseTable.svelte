@@ -12,6 +12,7 @@
   import { createEventDispatcher } from 'svelte'
   import BaseCounter from './BaseCounter.svelte'
   import BaseTableRow from './BaseTableRow.svelte'
+  import BaseTableCell from './BaseTableCell.svelte'
 
   const dispatch = createEventDispatcher()
   const callback = (entry: IntersectionObserverEntry) => {
@@ -65,8 +66,8 @@
   }}
 />
 
-<div class="w-full rounded-md border border-neutral-100 font-sans">
-  <table class="w-full rounded-md">
+<div class="w-full rounded-md md:border border-neutral-100 font-sans">
+  <table class="hidden md:block w-full rounded-md">
     <thead>
       <tr class="border-b border-neutral-100 relative">
         {#each fields as field, i (i)}
@@ -127,5 +128,35 @@
       {/each}
     </tbody>
   </table>
+  <div class="md:hidden space-y-3">
+    {#each groupedData as group}
+      {#each group.rows as row}
+        <button
+          class:cursor-default={disableRowClick}
+          class="w-full text-left border border-neutral-200 rounded"
+          on:click={() => {
+            if (disableRowClick) return
+
+            if (metaKeyPressed) {
+              dispatch('rowNewTabClick', row)
+            } else {
+              dispatch('rowClick', row)
+            }
+          }}
+        >
+          {#each fields as field, i (i)}
+            <BaseTableCell
+              tag="div"
+              currentIndex={i}
+              {field}
+              badge={field.helperBadge ? field.helperBadge(row) : null}
+              data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
+              on:copied
+            />
+          {/each}
+        </button>
+      {/each}
+    {/each}
+  </div>
   <div use:intersect={intersectOptions} />
 </div>

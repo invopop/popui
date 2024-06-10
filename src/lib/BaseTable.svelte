@@ -67,7 +67,7 @@
 />
 
 <div class="w-full rounded-md md:border border-neutral-100 font-sans">
-  <table class="hidden md:block w-full rounded-md">
+  <table class="hidden md:table w-full rounded-md">
     <thead>
       <tr class="border-b border-neutral-100 relative">
         {#each fields as field, i (i)}

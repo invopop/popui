@@ -22,6 +22,8 @@ export async function resolveIcon(
 }
 
 export function getCountryName(code: string) {
+  if (code === 'global') return 'Global'
+
   const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
   return regionNames.of(code.toUpperCase())
 }

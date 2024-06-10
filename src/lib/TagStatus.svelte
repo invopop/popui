@@ -22,9 +22,9 @@
     'border border-dashed border-neutral-200 text-neutral-400': status === 'empty',
     'bg-neutral-100 text-neutral-500': status === 'grey',
     'border border-neutral-200': status === 'grey' && dot,
-    'pl-1.5 pr-[5px]': dot && label,
+    'pl-1.5 pr-[5px] py-0.5': dot && label,
     'p-0.5': dot && !label,
-    'px-1': !dot
+    'px-1 py-0.5': !dot
   })
 
   $: dotStyles = clsx({
@@ -39,7 +39,7 @@
   })
 </script>
 
-<span class="{tagStyles} rounded py-px text-sm inline-flex items-center font-medium gap-1">
+<span class="{tagStyles} rounded text-sm inline-flex items-center font-medium gap-1">
   {#if dot}
     <span class="{dotStyles} w-2 h-2 rounded-sm" />
   {/if}

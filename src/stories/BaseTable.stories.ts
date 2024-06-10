@@ -36,8 +36,15 @@ export const Default: Story = {
         created_at: 'Sep 22, 2023'
       },
       {
+        code: 'CC2456P',
+        customer: 'No Country',
+        total: '201,50',
+        created_at: 'Sep 22, 2023'
+      },
+      {
         code: 'VERY-LONG-CODE-THAT-SHOULDNT-FIT',
         customer: 'Cabify, Inc',
+        country: 'global',
         total: '87.403,50',
         created_at: 'Sep 23, 2023'
       }

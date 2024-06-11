@@ -24,3 +24,44 @@ export const Default: Story = {
     description: 'This is incredible, trust me.'
   }
 }
+
+export const Enabled: Story = {
+  args: {
+    imageUrl: 'https://picsum.photos/16',
+    imageAlt: 'Best pic ever',
+    title: 'Amazing Stuff',
+    description: 'This is incredible, trust me.',
+    enabled: true
+  }
+}
+
+export const Beta: Story = {
+  args: {
+    imageUrl: 'https://picsum.photos/16',
+    imageAlt: 'Best pic ever',
+    title: 'Amazing Stuff',
+    description: 'This is incredible, trust me.',
+    type: 'beta'
+  }
+}
+
+export const EnabledBeta: Story = {
+  args: {
+    imageUrl: 'https://picsum.photos/16',
+    imageAlt: 'Best pic ever',
+    title: 'Amazing Stuff',
+    description: 'This is incredible, trust me.',
+    type: 'beta',
+    enabled: true
+  }
+}
+
+export const Soon: Story = {
+  args: {
+    imageUrl: 'https://picsum.photos/16',
+    imageAlt: 'Best pic ever',
+    title: 'Amazing Stuff',
+    description: 'This is incredible, trust me.',
+    type: 'soon'
+  }
+}

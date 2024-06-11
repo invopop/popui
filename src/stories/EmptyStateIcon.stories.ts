@@ -28,3 +28,12 @@ export const WithIcon: Story = {
     description: 'Create your first invoice to start'
   }
 }
+
+export const WithCheck: Story = {
+  args: {
+    icon: Hashtag,
+    title: 'No invoices yet',
+    description: 'Create your first invoice to start',
+    check: true
+  }
+}

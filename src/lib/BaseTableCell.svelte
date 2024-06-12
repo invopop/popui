@@ -40,7 +40,7 @@
     <span>
       {#if field.isCountry && data}
         <span class="flex items-center space-x-1">
-          <BaseFlag country={String(data)} />
+          <BaseFlag country={String(data)} width={16} />
           <span>{getCountryName(String(data))}</span>
         </span>
       {:else if field.copy && data}

@@ -3,13 +3,13 @@
   import { Icon } from '@steeze-ui/svelte-icon'
 
   export let country = ''
-  export let width = 16
+  export let width = 12
 
   $: iso = country.toLowerCase()
 </script>
 
 {#if country === 'global'}
-  <Icon src={World} class="h-4 w-4" />
+  <Icon src={World} style={`width: ${width}px;`} />
 {:else}
   <!-- https://github.com/HatScripts/circle-flags -->
   <img src={`https://hatscripts.github.io/circle-flags/flags/${iso}.svg`} alt={country} {width} />

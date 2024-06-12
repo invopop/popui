@@ -78,7 +78,7 @@
 
     {#if item.country}
       <span class="flex space-x-1 items-center">
-        <BaseFlag country={item.country} />
+        <BaseFlag country={item.country} width={10} />
         <span class="text-sm text-neutral-500 tracking-normal">{getCountryName(item.country)}</span>
       </span>
     {/if}

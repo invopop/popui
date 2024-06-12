@@ -8,7 +8,7 @@
 </script>
 
 <button
-  class="rounded-lg bg-white hover:bg-neutral-100 focus:bg-neutral-200 disabled:bg-neutral-50 disabled:pointer-events-none border border-neutral-100 p-3 flex flex-col min-w-[298px] min-h-[126px]"
+  class="rounded-lg bg-white hover:bg-neutral-100 focus:bg-neutral-200 disabled:bg-neutral-50 disabled:pointer-events-none border border-neutral-100 p-3 flex flex-col min-w-[298px] min-h-[126px] text-left"
   disabled={type === 'soon'}
   on:click
 >

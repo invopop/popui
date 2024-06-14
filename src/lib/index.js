@@ -38,6 +38,7 @@ import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import StatusLabel from './StatusLabel.svelte'
 import Tabs from './Tabs.svelte'
+import TagBeta from './TagBeta.svelte'
 import TagSearch from './TagSearch.svelte'
 import TagStatus from './TagStatus.svelte'
 import TitleMain from './TitleMain.svelte'
@@ -87,6 +88,7 @@ export {
   ShortcutWrapper,
   StatusLabel,
   Tabs,
+  TagBeta,
   TagSearch,
   TagStatus,
   TitleMain,

@@ -4,6 +4,9 @@
   import BaseCounter from './BaseCounter.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Success } from '@invopop/ui-icons'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 
   export let items: TabItem[] = []
   export let selected = ''
@@ -22,6 +25,7 @@
       class="flex items-center space-x-1 justify-center w-full whitespace-nowrap text-neutral-800 text-base font-medium focus:outline-none focus:ring-0 py-0.5 px-3 rounded"
       on:click={() => {
         selected = value.label
+        dispatch('selected', selected)
       }}
     >
       <span class="tracking-tighter">{value.label}</span>

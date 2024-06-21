@@ -150,8 +150,7 @@
       inline: true,
       mode: 'range',
       dateFormat: 'Y-m-d',
-      showMonths: 2,
-      numberOfMonths: 2
+      showMonths: 2
     })
   })
 
@@ -226,7 +225,7 @@
       <div
         class:left-0={position === 'left'}
         class:right-0={position === 'right'}
-        class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-30"
+        class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-40"
       >
         <div class="flex border-b border-neutral-100 h-[300px]">
           <div class="flex flex-col space-y-2 items-start p-3 border-r border-neutral-100">

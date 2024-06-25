@@ -48,13 +48,13 @@ export const WithCounter: Story = {
   }
 }
 
-export const WithCheck: Story = {
+export const WithIcons: Story = {
   args: {
     items: [
       { label: 'Tab 1' },
       { label: 'Tab 2', check: true },
       { label: 'Tab 3' },
-      { label: 'Tab 4' },
+      { label: 'Tab 4', warning: true },
       { label: 'Tab 5' }
     ],
     selected: 'Tab 3'

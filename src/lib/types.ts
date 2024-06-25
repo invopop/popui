@@ -130,6 +130,7 @@ export type TabItem = {
   label: string
   counter?: number
   check?: boolean
+  warning?: boolean
 }
 
 export type EmptyStateIcon = 'invoices' | 'contacts' | 'products' | 'pdf' | 'file' | 'no-results'

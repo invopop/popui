@@ -3,7 +3,7 @@
   import type { TabItem } from './types.js'
   import BaseCounter from './BaseCounter.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { Success } from '@invopop/ui-icons'
+  import { Alert, Success } from '@invopop/ui-icons'
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
@@ -37,6 +37,9 @@
       {/if}
       {#if value.check}
         <Icon src={Success} class="h-4 w-4" />
+      {/if}
+      {#if value.warning}
+        <Icon src={Alert} class="h-4 w-4" />
       {/if}
     </button>
   {/each}

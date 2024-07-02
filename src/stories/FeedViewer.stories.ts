@@ -95,3 +95,30 @@ export const Viewable: Story = {
     ]
   }
 }
+
+export const ViewableWithCustomText: Story = {
+  args: {
+    items: [
+      {
+        title: 'Juan Moliner corrected the invoice',
+        icon: Sparkles,
+        date: new Date(),
+        viewable: true
+      },
+      {
+        title: 'Sam Lown ran Send invoice workflow',
+        icon: CircleStack,
+        status: 'failure',
+        date: new Date(),
+        viewable: true,
+        viewableText: 'Preview'
+      },
+      {
+        title: 'Sam Lown ran Send invoice workflow',
+        icon: CircleStack,
+        status: 'success',
+        date: new Date()
+      }
+    ]
+  }
+}

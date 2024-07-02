@@ -81,6 +81,8 @@ export type FeedItemProps = {
   hasNext?: boolean
   slug?: string
   viewable?: boolean
+  viewableText?: string
+  type?: string
 }
 
 export type Badge = {

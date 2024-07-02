@@ -1,10 +1,11 @@
 <script lang="ts">
   import type { IconSource } from '@steeze-ui/svelte-icon'
-  import type { FeedItemStatus } from './types.ts'
+  import type { FeedItemStatus, FeedItemUser } from './types.ts'
   import FeedIconEvent from './FeedIconEvent.svelte'
   import FeedIconStatus from './FeedIconStatus.svelte'
   import { createEventDispatcher } from 'svelte'
   import BaseButton from './BaseButton.svelte'
+  import ProfileAvatar from './ProfileAvatar.svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -16,6 +17,7 @@
   export let slug = ''
   export let viewable = false
   export let viewableText = 'View'
+  export let user: FeedItemUser | undefined = undefined
 
   const dateOptions = {
     year: 'numeric',
@@ -40,18 +42,23 @@
     <div
       class="flex-1 items-center justify-start pl-2.5 py-2 pr-2 rounded-lg border border-neutral-100"
     >
-      <p
+      <div
         class="text-base text-neutral-800 whitespace-nowrap tracking-normal font-medium flex items-center gap-1 {viewable
-          ? 'max-w-[250px]'
-          : 'max-w-[300px]'}"
+          ? 'max-w-[260px]'
+          : 'max-w-[320px]'}"
       >
-        <span class="truncate">{title}</span>
+        {#if user}
+          <div class="mr-0.5">
+            <ProfileAvatar small {...user} />
+          </div>
+        {/if}
+        <p class="truncate" {title}>{title}</p>
 
         {#if status}
           <FeedIconStatus {status} />
         {/if}
-      </p>
-      <p class="flex flex-col space-y-0.5">
+      </div>
+      <p class="flex flex-col space-y-0.5" class:ml-[22px]={user}>
         {#if date}
           <span
             class="text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero tracking-normal"

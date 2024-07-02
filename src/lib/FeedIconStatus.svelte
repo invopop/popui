@@ -22,7 +22,7 @@
 </script>
 
 {#if iconStatus}
-  <Icon src={iconStatus} class="h-4 w-4" />
+  <Icon src={iconStatus} class="h-4 w-4 flex-shrink-0" />
 {:else}
-  <div class="w-4 h-4 bg-neutral-200 rounded-full" />
+  <div class="w-4 h-4 flex-shrink-0 bg-neutral-200 rounded-full" />
 {/if}

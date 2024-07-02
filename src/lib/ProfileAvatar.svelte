@@ -3,13 +3,16 @@
   import BaseFlag from './BaseFlag.svelte'
 
   export let name = ''
+  export let small = false
   export let large = false
   export let dark = false
   export let picture = ''
   export let country = ''
 
   $: avatarStyles = clsx(
-    { 'h-5 w-5 text-sm': !large },
+    { 'text-sm': !large },
+    { 'h-4 w-4': small },
+    { 'h-5 w-5': !large && !small },
     { 'h-8 w-8': large },
     { 'bg-neutral-50 border-neutral-100 text-neutral-500': !dark },
     { 'bg-white-5 border-white-10 text-white-70': dark },

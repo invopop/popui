@@ -15,6 +15,7 @@
   export let hasNext = false
   export let slug = ''
   export let viewable = false
+  export let viewableText = 'View'
 
   const dateOptions = {
     year: 'numeric',
@@ -67,10 +68,10 @@
         small
         variant="secondary"
         on:click={() => {
-          dispatch('view', slug)
+          dispatch('view')
         }}
       >
-        View
+        {viewableText}
       </BaseButton>
     </span>
   {/if}

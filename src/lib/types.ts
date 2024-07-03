@@ -73,6 +73,11 @@ export type MenuItemProps = {
 
 export type FeedItemStatus = 'success' | 'failure' | 'run' | 'queued' | 'alert'
 
+export type FeedItemUser = {
+  name: string
+  picture?: string
+}
+
 export type FeedItemProps = {
   status?: FeedItemStatus
   icon?: IconSource
@@ -83,6 +88,7 @@ export type FeedItemProps = {
   viewable?: boolean
   viewableText?: string
   type?: string
+  user?: FeedItemUser
 }
 
 export type Badge = {

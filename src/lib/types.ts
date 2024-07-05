@@ -136,6 +136,7 @@ export type TableField = {
 
 export type TabItem = {
   label: string
+  slug: string
   counter?: number
   check?: boolean
   warning?: boolean

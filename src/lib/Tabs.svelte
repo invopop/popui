@@ -11,7 +11,7 @@
   export let items: TabItem[] = []
   export let selected = ''
 
-  const tabs = createTabs({ selected: items.find((i) => i.label === selected) || items[0] })
+  const tabs = createTabs({ selected: items.find((i) => i.slug === selected) || items[0] })
 </script>
 
 <div
@@ -21,10 +21,10 @@
   {#each items as value}
     <button
       use:tabs.tab={{ value }}
-      class:bg-white={selected === value.label}
+      class:bg-white={selected === value.slug}
       class="flex items-center space-x-1 justify-center w-full whitespace-nowrap text-neutral-800 text-base font-medium focus:outline-none focus:ring-0 py-0.5 px-3 rounded"
       on:click={() => {
-        selected = value.label
+        selected = value.slug
         dispatch('selected', selected)
       }}
     >
@@ -32,7 +32,7 @@
       {#if value.counter}
         <BaseCounter
           content={value.counter}
-          variant={selected === value.label ? 'light' : 'default'}
+          variant={selected === value.slug ? 'light' : 'default'}
         />
       {/if}
       {#if value.check}

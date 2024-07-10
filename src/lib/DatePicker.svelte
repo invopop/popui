@@ -32,7 +32,7 @@
   }
 
   $: styles = clsx({
-    'border-accent-500 input-shadow': isOpen,
+    'border-datepicker-accent input-shadow': isOpen,
     'border-neutral-200': !isOpen
   })
 
@@ -205,7 +205,7 @@
   <div class="relative">
     <button
       on:click={() => (isOpen = !isOpen)}
-      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border hover:border-neutral-300 rounded-md text-neutral-800 placeholder-neutral-800 text-base focus:border-accent-500"
+      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border hover:border-neutral-300 rounded-md text-neutral-800 placeholder-neutral-800 text-base"
     >
       {selectedLabel}
     </button>
@@ -233,7 +233,7 @@
               <button
                 on:click={period.action}
                 class="{selectedPeriod === period.slug
-                  ? 'text-accent-500 border-accent-500/20 bg-accent-500/5'
+                  ? 'selected-period'
                   : 'text-neutral-500 border-transparent'} whitespace-nowrap text-base px-2 py-1 tracking-normal border rounded"
               >
                 {period.label}
@@ -344,10 +344,11 @@
     height: 32px;
   }
   :global(.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange) {
-    background-color: #169958 !important;
+    background-color: var(--workspace-accent-color, #169958) !important;
     border: 0;
     border-radius: 4px !important;
-    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12) !important;
+    box-shadow: 0px 0px 0px 2px
+      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958)) !important;
   }
   :global(
       .flatpickr-day.selected:hover,
@@ -422,7 +423,7 @@
   }
   :global(.flatpickr-day.today) {
     border: 0;
-    border-bottom: 1px solid #169958;
+    border-bottom: 1px solid var(--workspace-accent-color, #169958);
     border-radius: 0;
   }
   :global(.flatpickr-day.today:hover) {
@@ -448,9 +449,19 @@
     background-position: center right 8px;
   }
   .datepicker-trigger:focus {
-    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
+    box-shadow: 0px 0px 0px 2px
+      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958));
   }
   .input-shadow {
-    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
+    box-shadow: 0px 0px 0px 2px
+      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958));
+  }
+  .border-datepicker-accent {
+    border-color: var(--workspace-accent-color, #169958);
+  }
+  .selected-period {
+    color: var(--workspace-accent-color, #169958);
+    border-color: color-mix(in lab, transparent 80%, var(--workspace-accent-color, #169958));
+    background-color: color-mix(in lab, transparent 95%, var(--workspace-accent-color, #169958));
   }
 </style>

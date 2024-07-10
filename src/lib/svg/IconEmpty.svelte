@@ -7,14 +7,22 @@
     />
     <g filter="url(#filter0_bd_3803_83677)">
       <rect x="144" y="28" width="64" height="64" rx="12" fill="white" />
-      <rect x="144" y="28" width="64" height="64" rx="12" fill="#169958" fill-opacity="0.02" />
+      <rect
+        x="144"
+        y="28"
+        width="64"
+        height="64"
+        rx="12"
+        fill="var(--workspace-accent-color, #169958)"
+        fill-opacity="0.02"
+      />
       <rect
         x="144.4"
         y="28.4"
         width="63.2"
         height="63.2"
         rx="11.6"
-        stroke="#169958"
+        stroke="var(--workspace-accent-color, #169958)"
         stroke-opacity="0.6"
         stroke-width="0.8"
       />
@@ -24,7 +32,7 @@
         width="55.4"
         height="55.4"
         rx="7.7"
-        stroke="#008852"
+        stroke="var(--workspace-accent-color, #169958)"
         stroke-opacity="0.4"
         stroke-width="0.6"
       />

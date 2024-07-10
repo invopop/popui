@@ -52,7 +52,7 @@
     {disabled}
     class:pl-7={icon}
     class:pl-2={!icon}
-    class="py-1.5 border border-neutral-200 hover:border-neutral-300 focus:border-accent-500 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight ui-select"
+    class="py-1.5 border border-neutral-200 hover:border-neutral-300 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight ui-select"
     on:change={handleChange}
   >
     <option value="" disabled={disablePlaceholder}>{placeholder}</option>
@@ -84,6 +84,8 @@
   }
 
   .ui-select:focus {
-    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
+    box-shadow: 0px 0px 0px 2px
+      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958));
+    border-color: var(--workspace-accent-color, #169958);
   }
 </style>

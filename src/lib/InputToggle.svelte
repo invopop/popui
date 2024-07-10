@@ -13,7 +13,7 @@
 
   $: $sw.checked = checked
 
-  $: togleStyles = clsx({ 'bg-gray-200': !$sw.checked }, { 'bg-accent-500': $sw.checked })
+  $: togleStyles = clsx({ 'bg-gray-200': !$sw.checked }, { 'bg-toggle-accent': $sw.checked })
 
   function handleChange() {
     dispatch('change', $sw.checked)
@@ -36,3 +36,9 @@
     />
   </button>
 </div>
+
+<style>
+  .bg-toggle-accent {
+    background-color: var(--workspace-accent-color, #169958);
+  }
+</style>

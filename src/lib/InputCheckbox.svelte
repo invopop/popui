@@ -23,6 +23,13 @@
 <input
   type="checkbox"
   {checked}
-  class="form-checkbox w-5 h-5 text-accent-500 focus:text-accent-500 rounded border border-neutral-200 focus:ring-0 focus:ring-offset-0"
+  class="form-checkbox w-5 h-5 color-checkbox-accent rounded border border-neutral-200 focus:ring-0 focus:ring-offset-0"
   on:change={updateInput}
 />
+
+<style>
+  .color-checkbox-accent,
+  .color-checkbox-accent:focus {
+    color: var(--workspace-accent-color, #169958);
+  }
+</style>

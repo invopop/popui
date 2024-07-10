@@ -16,7 +16,7 @@
     <div class="relative h-[120px] w-[352px] max-w-sm">
       <IconEmpty />
       <div class="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]">
-        <Icon src={icon} class="h-12 w-12 text-accent-500" />
+        <Icon src={icon} class="h-12 w-12 color-emptystate-accent" />
         {#if check}
           <svg
             width="26"
@@ -46,3 +46,9 @@
     <p><slot /></p>
   </div>
 </div>
+
+<style>
+  :global(.color-emptystate-accent) {
+    color: var(--workspace-accent-color, #169958);
+  }
+</style>

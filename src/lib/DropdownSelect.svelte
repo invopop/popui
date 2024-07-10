@@ -40,7 +40,7 @@
   $: selectedLabel = (!multiple && items.find((i) => i.selected)?.label) || placeholder
 
   $: styles = clsx({
-    'input-shadow border-accent-500': isOpen
+    'input-shadow border-dropdown-accent': isOpen
   })
 
   function handleClick(e: CustomEvent) {
@@ -88,6 +88,10 @@
     background-position: center right 8px;
   }
   .input-shadow {
-    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
+    box-shadow: 0px 0px 0px 2px
+      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958));
+  }
+  .border-dropdown-accent {
+    border-color: var(--workspace-accent-color, #169958);
   }
 </style>

@@ -29,13 +29,13 @@
 <span
   class:pl-2={icon}
   class:pl-3={!icon}
-  class="border rounded pr-1.5 text-sm inline-flex items-center border-accent-100 bg-accent-50"
+  class="border rounded pr-1.5 text-sm inline-flex items-center border-tag-accent bg-tag-accent"
 >
   {#if resolvedIcon}
-    <Icon src={resolvedIcon} theme={iconTheme} class="h-4 w-4 mr-1 text-accent-500" />
+    <Icon src={resolvedIcon} theme={iconTheme} class="h-4 w-4 mr-1 color-tag-accent" />
   {/if}
-  <span class="py-1 pr-2 text-neutral-800 tracking-normal">{label}</span>
-  <button class="py-1 border-l border-accent-100 pl-1 text-neutral-500" on:click={handleClear}>
+  <span class="py-1 pr-2 color-tag-accent tracking-normal">{label}</span>
+  <button class="py-1 border-l border-tag-accent pl-1 text-neutral-500" on:click={handleClear}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -48,3 +48,15 @@
     </svg>
   </button>
 </span>
+
+<style>
+  .bg-tag-accent {
+    background-color: color-mix(in lab, transparent 95%, var(--workspace-accent-color, #169958));
+  }
+  .border-tag-accent {
+    border-color: color-mix(in lab, transparent 90%, var(--workspace-accent-color, #169958));
+  }
+  :global(.color-tag-accent) {
+    color: var(--workspace-accent-color, #169958);
+  }
+</style>

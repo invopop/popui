@@ -20,7 +20,7 @@
       'text-danger-500 border-danger-400 outline-danger-400': errorText
     },
     {
-      'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none ui-textarea':
+      'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
         !errorText
     }
   )
@@ -45,14 +45,3 @@
 {#if errorText}
   <InputError {errorText} />
 {/if}
-
-<style>
-  .ui-textarea {
-    caret-color: var(--workspace-accent-color, #169958);
-  }
-  .ui-textarea:focus {
-    box-shadow: 0px 0px 0px 2px
-      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958));
-    border-color: var(--workspace-accent-color, #169958);
-  }
-</style>

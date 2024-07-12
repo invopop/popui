@@ -26,7 +26,7 @@
     { 'py-1.5 space-x-2': !workspace },
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
-    { 'bg-drawer-accent': item.selected && !multiple },
+    { 'bg-workspace-accent-100': item.selected && !multiple },
     { 'hover:bg-neutral-100 rounded': !item.selected }
   )
   $: labelStyles = clsx(
@@ -91,17 +91,8 @@
       }}
     />
   {:else if item.selected}
-    <Icon src={Tick} class="w-5 h-5 color-drawer-accent" />
+    <Icon src={Tick} class="w-5 h-5 text-workspace-accent" />
   {:else if item.rightIcon}
     <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-300" />
   {/if}
 </button>
-
-<style>
-  .bg-drawer-accent {
-    background-color: color-mix(in lab, transparent 90%, var(--workspace-accent-color, #169958));
-  }
-  :global(.color-drawer-accent) {
-    color: var(--workspace-accent-color, #169958);
-  }
-</style>

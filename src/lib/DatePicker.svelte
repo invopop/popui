@@ -32,7 +32,7 @@
   }
 
   $: styles = clsx({
-    'border-datepicker-accent input-shadow': isOpen,
+    'border-workspace-accent focus:border-workspace-accent shadow-active': isOpen,
     'border-neutral-200': !isOpen
   })
 
@@ -233,7 +233,7 @@
               <button
                 on:click={period.action}
                 class="{selectedPeriod === period.slug
-                  ? 'selected-period'
+                  ? 'selected-period text-workspace-accent border-workspace-accent-200 bg-workspace-accent-50'
                   : 'text-neutral-500 border-transparent'} whitespace-nowrap text-base px-2 py-1 tracking-normal border rounded"
               >
                 {period.label}
@@ -447,21 +447,5 @@
     background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0YzRjRGNiIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwMzA3MTIiIHN0cm9rZS13aWR0aD0iMS4xIi8+Cjwvc3ZnPg==');
     background-repeat: no-repeat;
     background-position: center right 8px;
-  }
-  .datepicker-trigger:focus {
-    box-shadow: 0px 0px 0px 2px
-      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958));
-  }
-  .input-shadow {
-    box-shadow: 0px 0px 0px 2px
-      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958));
-  }
-  .border-datepicker-accent {
-    border-color: var(--workspace-accent-color, #169958);
-  }
-  .selected-period {
-    color: var(--workspace-accent-color, #169958);
-    border-color: color-mix(in lab, transparent 80%, var(--workspace-accent-color, #169958));
-    background-color: color-mix(in lab, transparent 95%, var(--workspace-accent-color, #169958));
   }
 </style>

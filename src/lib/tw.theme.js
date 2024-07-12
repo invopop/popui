@@ -27,15 +27,14 @@ export default {
     },
 
     colors: {
-      accent: {
-        50: 'rgba(0, 136, 82, 0.05)',
-        100: 'rgba(0, 136, 82, 0.1)',
-        200: 'rgba(0, 136, 82, 0.2)',
-        300: 'rgba(0, 136, 82, 0.3)',
-        400: 'rgba(0, 136, 82, 0.4)',
-        500: '#008852',
-        600: '#007245',
-        700: '#005C38'
+      workspace: {
+        accent: {
+          DEFAULT: 'var(--workspace-accent-color, #169958)',
+          50: 'color-mix(in lab, transparent 95%, var(--workspace-accent-color, #169958))',
+          100: 'color-mix(in lab, transparent 90%, var(--workspace-accent-color, #169958))',
+          200: 'color-mix(in lab, transparent 80%, var(--workspace-accent-color, #169958))',
+          500: 'var(--workspace-accent-color, #169958)'
+        }
       },
       positive: {
         50: 'rgba(2, 144, 98, 0.05)',
@@ -125,6 +124,12 @@ export default {
         500: '#884ABE'
       }
     },
+
+    boxShadow: {
+      active:
+        '0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958))'
+    },
+
     letterSpacing: {
       tightest: '-0.567px',
       tighter: '-0.304px',

@@ -23,6 +23,10 @@
   let input: HTMLInputElement
   let timer: ReturnType<typeof setTimeout>
 
+  export const focus = () => {
+    input.focus()
+  }
+
   export const toggle = () => {
     input === document.activeElement ? input.blur() : input.focus()
   }

@@ -5,7 +5,7 @@
   import { dispatchWcEvent } from './wcdispatch.js'
   import InputError from './InputError.svelte'
 
-  export let id = ''
+  export let id = Math.random().toString(36).slice(2, 7)
   export let label = ''
   export let placeholder = ''
   export let errorText = ''
@@ -57,6 +57,7 @@
   <InputLabel {id} {label} />
 {/if}
 <input
+  {id}
   bind:this={inputEl}
   bind:value
   type="text"

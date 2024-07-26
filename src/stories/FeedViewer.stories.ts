@@ -157,3 +157,39 @@ export const WithAvatar: Story = {
     ]
   }
 }
+
+export const WithExtraText: Story = {
+  args: {
+    items: [
+      {
+        title: 'Javi created new version',
+        icon: Sparkles,
+        date: new Date(),
+        viewable: true,
+        user: {
+          name: 'Javi',
+          picture:
+            'https://ams3.digitaloceanspaces.com/invopop-console-files-dev/b31c1a0867576428e6520f53f275d1d9c0c1cb88057f9c9436c29608beb3f739'
+        },
+        extraText: '09c87v67'
+      },
+      {
+        title: 'Sam Lown ran Send invoice workflow with super long name',
+        icon: CircleStack,
+        status: 'failure',
+        date: new Date(),
+        viewable: true,
+        viewableText: 'View',
+        user: {
+          name: 'Sam'
+        }
+      },
+      {
+        title: 'Sam Lown ran Send invoice workflow with super long name',
+        icon: CircleStack,
+        status: 'success',
+        date: new Date()
+      }
+    ]
+  }
+}

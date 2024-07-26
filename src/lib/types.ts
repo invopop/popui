@@ -89,6 +89,7 @@ export type FeedItemProps = {
   viewableText?: string
   type?: string
   user?: FeedItemUser
+  extraText?: string
 }
 
 export type Badge = {

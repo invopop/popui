@@ -21,7 +21,8 @@
 
     const activeElement = document.activeElement
     const isInputText =
-      activeElement?.tagName === 'INPUT' && (activeElement as HTMLInputElement).type === 'text'
+      activeElement?.tagName === 'INPUT' &&
+      ['text', 'search'].includes((activeElement as HTMLInputElement).type)
     const isTextarea = activeElement?.tagName === 'TEXTAREA'
 
     // We allow to type the GLOBAL SEARCH KEY on text fields

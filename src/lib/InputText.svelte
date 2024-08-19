@@ -4,6 +4,7 @@
   import InputLabel from './InputLabel.svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import InputError from './InputError.svelte'
+  import { GLOBAL_SEARCH_KEY } from './constants.js'
 
   export let id = Math.random().toString(36).slice(2, 7)
   export let label = ''
@@ -46,6 +47,14 @@
     debounce(target)
   }
 
+  function handleKeydown(event: KeyboardEvent) {
+    // We need to prevent the keydown event if matches with the GLOBAL SEARCH KEY
+    // So it doesn't open the Global Search Modal inside text inputs
+    if (event.key === GLOBAL_SEARCH_KEY) {
+      event.preventDefault()
+    }
+  }
+
   onMount(() => {
     if (!focusOnLoad) return
 
@@ -67,6 +76,7 @@
   on:input={handleInput}
   on:focus={() => dispatch('focus')}
   on:blur={(e) => dispatch('blur', e)}
+  on:keydown={handleKeydown}
 />
 {#if errorText}
   <InputError {errorText} />

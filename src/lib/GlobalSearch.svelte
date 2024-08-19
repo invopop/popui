@@ -4,6 +4,7 @@
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
   import clsx from 'clsx'
   import ShortcutWrapper from './ShortcutWrapper.svelte'
+  import { GLOBAL_SEARCH_KEY } from './constants.js'
 
   const dispatch = createEventDispatcher()
 
@@ -14,7 +15,7 @@
   })
 
   function onKeyDown(event: KeyboardEvent) {
-    if (event.key === '/') {
+    if (event.key === GLOBAL_SEARCH_KEY) {
       open()
     }
   }

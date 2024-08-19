@@ -15,9 +15,21 @@
   })
 
   function onKeyDown(event: KeyboardEvent) {
-    if (event.key === GLOBAL_SEARCH_KEY) {
-      open()
+    if (event.key !== GLOBAL_SEARCH_KEY) {
+      return
     }
+
+    const activeElement = document.activeElement
+    const isInputText =
+      activeElement?.tagName === 'INPUT' && (activeElement as HTMLInputElement).type === 'text'
+    const isTextarea = activeElement?.tagName === 'TEXTAREA'
+
+    // We allow to type the GLOBAL SEARCH KEY on text fields
+    if (isInputText || isTextarea) {
+      return
+    }
+
+    open()
   }
 
   function open() {

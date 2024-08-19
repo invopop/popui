@@ -3,7 +3,6 @@
   import { dispatchWcEvent } from './wcdispatch.js'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { Search } from '@invopop/ui-icons'
-  import { GLOBAL_SEARCH_KEY } from './constants.js'
 
   const dispatch = createEventDispatcher()
 
@@ -47,14 +46,6 @@
     debounce(target)
   }
 
-  function handleKeydown(event: KeyboardEvent) {
-    // We need to prevent the keydown event if matches with the GLOBAL SEARCH KEY
-    // So it doesn't open the Global Search Modal inside text inputs
-    if (event.key === GLOBAL_SEARCH_KEY) {
-      event.preventDefault()
-    }
-  }
-
   onMount(() => {
     if (!focusOnLoad) return
 
@@ -71,7 +62,6 @@
     style:padding-right={`${shortcutKeys.length * 15 + 12}px`}
     {placeholder}
     on:input={handleInput}
-    on:keydown={handleKeydown}
     on:focus={() => dispatch('focus')}
     on:blur={(e) => dispatch('blur', e)}
     on:click

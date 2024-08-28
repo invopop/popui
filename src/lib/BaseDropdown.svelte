@@ -34,7 +34,7 @@
   </button>
   {#if isOpen}
     <div
-      class="max-h-40 absolute z-30"
+      class="max-h-40 absolute z-40"
       use:floatingContent
       use:clickOutside
       on:click_outside={() => {

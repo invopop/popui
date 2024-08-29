@@ -1,4 +1,5 @@
 import type { IconSource } from '@steeze-ui/svelte-icon'
+import type { FeedItemStatus } from './types.js'
 
 export function toPascalCase(text: string) {
   return text.replace(/(^\w|-\w)/g, (text) => text.replace(/-/, '').toUpperCase())
@@ -26,4 +27,17 @@ export function getCountryName(code: string) {
 
   const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
   return regionNames.of(code.toUpperCase())
+}
+
+export function getStatusType(status: string): FeedItemStatus {
+  const statuses: Record<string, FeedItemStatus> = {
+    OK: 'success',
+    KO: 'failure',
+    ERR: 'alert',
+    RUN: 'run',
+    QUEUED: 'queued',
+    SKIP: 'queued' // TODO: Define a unique icon for this status
+  }
+
+  return statuses[status]
 }

@@ -133,6 +133,7 @@ export type TableField = {
   isCountry?: boolean
   copy?: boolean
   width?: string
+  status?: boolean
 }
 
 export type TabItem = {

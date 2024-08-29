@@ -39,7 +39,7 @@
     <span class="md:hidden text-sm text-neutral-600 font-normal">
       {field.headerLabel}
     </span>
-    <span class="flex items-center">
+    <span class="flex items-center" class:justify-end={field.rightAlign}>
       {#if field.isCountry && data}
         <span class="flex items-center space-x-1">
           <BaseFlag country={String(data)} width={16} />

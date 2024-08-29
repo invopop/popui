@@ -182,6 +182,40 @@ export const WithHelperBadge: Story = {
   }
 }
 
+export const WithStatus: Story = {
+  args: {
+    fields: [
+      {
+        headerLabel: 'Status',
+        slug: 'status',
+        sortable: true,
+        status: true
+      },
+      {
+        headerLabel: 'No formatted status',
+        slug: 'no_status',
+        fullWidth: true
+      },
+      { headerLabel: 'Amount', slug: 'total' },
+      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+    ],
+    data: [
+      {
+        status: 'RUN',
+        no_status: 'RUN',
+        total: '-',
+        created_at: 'Sep 22, 2023',
+        draft: true
+      },
+      { status: 'OK', no_status: 'KO', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'ERR', no_status: 'ERR', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'KO', no_status: 'KO', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'QUEUED', no_status: 'QUEUED', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'SKIP', no_status: 'SKIP', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+    ]
+  }
+}
+
 export const WithFormatter: Story = {
   args: {
     fields: [

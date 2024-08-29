@@ -4,8 +4,9 @@
   import type { Badge, TableField } from './types.js'
   import TagStatus from './TagStatus.svelte'
   import BaseFlag from './BaseFlag.svelte'
-  import { getCountryName } from './helpers.js'
+  import { getCountryName, getStatusType } from './helpers.js'
   import UuidCopy from './UuidCopy.svelte'
+  import StatusLabel from './StatusLabel.svelte'
 
   export let field: TableField
   export let currentIndex: number
@@ -53,6 +54,8 @@
           dark={isMobile}
           on:copied
         />
+      {:else if field.status && data}
+        <StatusLabel status={getStatusType(String(data))} label={String(data)} />
       {:else}
         <span class="hidden md:inline">{data}</span>
         <span class="md:hidden">{data ? data : badge ? '' : '-'}</span>

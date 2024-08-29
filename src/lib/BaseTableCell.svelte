@@ -1,16 +1,17 @@
 <script lang="ts">
   import Viewport from 'svelte-viewport-info'
   import clsx from 'clsx'
-  import type { Badge, TableField } from './types.js'
+  import type { Badge, FeedItemStatus, TableField } from './types.js'
   import TagStatus from './TagStatus.svelte'
+  import FeedIconStatus from './FeedIconStatus.svelte'
   import BaseFlag from './BaseFlag.svelte'
-  import { getCountryName, getStatusType } from './helpers.js'
+  import { getCountryName } from './helpers.js'
   import UuidCopy from './UuidCopy.svelte'
-  import StatusLabel from './StatusLabel.svelte'
 
   export let field: TableField
   export let currentIndex: number
   export let badge: Badge | null = null
+  export let status: FeedItemStatus | null = null
   export let data: unknown = ''
   export let freeWrap = false
   export let tag = 'td'
@@ -38,7 +39,7 @@
     <span class="md:hidden text-sm text-neutral-600 font-normal">
       {field.headerLabel}
     </span>
-    <span>
+    <span class="flex items-center">
       {#if field.isCountry && data}
         <span class="flex items-center space-x-1">
           <BaseFlag country={String(data)} width={16} />
@@ -54,15 +55,18 @@
           dark={isMobile}
           on:copied
         />
-      {:else if field.status && data}
-        <StatusLabel status={getStatusType(String(data))} label={String(data)} />
       {:else}
         <span class="hidden md:inline">{data}</span>
-        <span class="md:hidden">{data ? data : badge ? '' : '-'}</span>
+        <span class="md:hidden">{data ? data : badge || status ? '' : '-'}</span>
       {/if}
       {#if badge}
         <span class:ml-2={!!data}>
           <TagStatus label={badge.label} status={badge.status} dot={Boolean(badge.dot)} />
+        </span>
+      {/if}
+      {#if status}
+        <span class:ml-2={!!data}>
+          <FeedIconStatus {status} />
         </span>
       {/if}
     </span>

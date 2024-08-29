@@ -126,8 +126,9 @@ export type TableField = {
   sortable?: boolean
   fullWidth?: boolean
   grayed?: boolean
-  formatter?: undefined | ((data: TableDataRow) => string | number)
-  helperBadge?: undefined | ((data: TableDataRow) => Badge | null)
+  formatter?: (data: TableDataRow) => string | number
+  helperBadge?: (data: TableDataRow) => Badge | null
+  helperStatus?: (data: TableDataRow) => FeedItemStatus | null
   monospaced?: boolean
   rightAlign?: boolean
   isCountry?: boolean

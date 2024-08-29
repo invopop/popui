@@ -5,6 +5,7 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import FixedHeightDecorator from './decorartors/FixedHeightDecorator.svelte'
 import type { TableDataRow } from '$lib/types.js'
 import { Delete, DocumentText, Edit, Settings } from '@invopop/ui-icons'
+import { getStatusType } from '$lib/helpers.js'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -188,8 +189,14 @@ export const WithStatus: Story = {
       {
         headerLabel: 'Status',
         slug: 'status',
-        sortable: true,
-        status: true
+        helperStatus: (data) => {
+          return getStatusType(data.status as string)
+        },
+        formatter: (data) => {
+          if (data.status === 'RUN') return 'running'
+          if (data.status === 'SKIP') return ''
+          return data.status as string
+        }
       },
       {
         headerLabel: 'No formatted status',

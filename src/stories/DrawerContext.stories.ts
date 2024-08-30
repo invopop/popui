@@ -76,3 +76,26 @@ export const WithColor: Story = {
     ]
   }
 }
+
+export const WithMaxHeight: Story = {
+  args: {
+    items: [
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' }
+    ]
+  }
+}

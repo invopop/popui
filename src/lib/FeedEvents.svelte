@@ -12,12 +12,16 @@
         <div class="flex items-center space-x-2">
           <TagStatus status={event.status.type} label={event.status.label} />
           {#if event.code}
-            <p class="text-sm text-neutral-500 tabular-nums slashed-zero tracking-wide">
+            <p
+              class="text-sm text-neutral-500 tabular-nums slashed-zero lining-nums font-mono tracking-wide"
+            >
               {event.code}
             </p>
           {/if}
         </div>
-        <p class="text-sm text-neutral-500 tabular-nums slashed-zero tracking-wide">
+        <p
+          class="text-sm text-neutral-500 tabular-nums slashed-zero lining-nums font-mono tracking-wide"
+        >
           {event.date.toISOString()}
         </p>
       </div>

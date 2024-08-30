@@ -1,8 +1,4 @@
 export default {
-  fontFamily: {
-    sans: ['Inter', 'sans-serif']
-  },
-
   extend: {
     fontSize: {
       xl: ['20px', '28px'],
@@ -134,7 +130,18 @@ export default {
     },
 
     fontFamily: {
-      sans: ['Inter', 'sans-serif']
+      sans: ['Inter', 'sans-serif'],
+      mono: [
+        'ui-monospace',
+        '"Fira Code"',
+        'SFMono-Regular',
+        'Menlo',
+        'Monaco',
+        'Consolas',
+        '"Liberation Mono"',
+        '"Courier New"',
+        'monospace'
+      ]
     }
   }
 }

@@ -49,3 +49,10 @@ export const ShortenedWithLessCharacters: Story = {
     suffixLength: 4
   }
 }
+
+export const WithLink: Story = {
+  args: {
+    uuid: 'e73d5d2083493458812',
+    link: true
+  }
+}

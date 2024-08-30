@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Duplicate } from '@invopop/ui-icons'
+  import { Duplicate, ExternalLink } from '@invopop/ui-icons'
   import { Icon } from '@steeze-ui/svelte-icon'
   import clsx from 'clsx'
   import { createEventDispatcher } from 'svelte'
@@ -14,6 +14,7 @@
   export let suffixLength = 12
   export let full = false
   export let compact = false
+  export let link = false
 
   function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
     if (inputString.length <= prefixLength + suffixLength) {
@@ -37,17 +38,23 @@
   })
 </script>
 
-<button
-  class="{styles} relative flex items-center w-full space-x-2 text-left whitespace-nowrap"
-  on:click|stopPropagation={async () => {
-    await navigator.clipboard.writeText(uuid)
-    dispatch('copied', uuid)
-  }}
->
-  <span class="tracking-wide tabular-nums slashed-zero">
+<div class="{styles} relative flex items-center w-full space-x-2 text-left whitespace-nowrap">
+  <button
+    class="tracking-wide tabular-nums slashed-zero"
+    on:click|stopPropagation={async () => {
+      await navigator.clipboard.writeText(uuid)
+      dispatch('copied', uuid)
+    }}
+  >
     {formattedUuid}
-  </span>
-  <div class="p-1">
-    <Icon src={Duplicate} class="w-4 h-4 text-neutral-500" />
-  </div>
-</button>
+  </button>
+  <button
+    class="p-1"
+    on:click|stopPropagation={async () => {
+      await navigator.clipboard.writeText(uuid)
+      dispatch(link ? 'link' : 'copied', uuid)
+    }}
+  >
+    <Icon src={link ? ExternalLink : Duplicate} class="w-4 h-4 text-neutral-500" />
+  </button>
+</div>

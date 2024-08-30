@@ -18,8 +18,8 @@
 
   $: cellStyles = clsx(
     { 'tabular-nums slashed-zero': field.monospaced },
-    { 'text-neutral-800 font-medium': currentIndex === 0 },
-    { 'text-neutral-800 md:text-neutral-500': currentIndex > 0 },
+    { 'text-neutral-800 font-medium': currentIndex === 0 && !field.grayed },
+    { 'text-neutral-800 md:text-neutral-500': currentIndex > 0 || field.grayed },
     { 'md:text-right': field.rightAlign },
     { 'md:w-full md:max-w-0': field.fullWidth },
     { 'py-2 md:py-[11.25px]': badge },

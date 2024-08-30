@@ -58,3 +58,27 @@ export const WithMessage: Story = {
     ]
   }
 }
+
+export const WithCode: Story = {
+  args: {
+    events: [
+      {
+        status: {
+          label: 'RUN',
+          type: 'yellow'
+        },
+        date: new Date(),
+        code: '1234'
+      },
+      {
+        status: {
+          label: 'ERROR',
+          type: 'red'
+        },
+        date: new Date(),
+        message: 'User must accept legal terms',
+        code: 'rejected'
+      }
+    ]
+  }
+}

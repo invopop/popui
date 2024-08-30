@@ -12,7 +12,7 @@
 </script>
 
 <div
-  class="{styles} inline-flex items-center justify-center rounded p-[3px] text-neutral-500 text-sm font-medium h-4 min-w-[16px] tracking-wide tabular-nums slashed-zero"
+  class="{styles} inline-flex items-center justify-center rounded p-[3px] text-neutral-500 text-sm font-medium h-4 min-w-[16px] tracking-wide tabular-nums slashed-zero lining-nums font-mono"
 >
   {content}
 </div>

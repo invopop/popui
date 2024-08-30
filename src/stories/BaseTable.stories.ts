@@ -360,19 +360,24 @@ export const WithMonospacedFont: Story = {
         slug: 'code',
         sortable: true
       },
-      { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
+      { headerLabel: 'UUID', slug: 'uuid', fullWidth: true, monospaced: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
       { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
         code: 'CC2300028X',
-        customer: 'Cobee',
+        uuid: 'cdf77eb0-66a9-11ef-8b20-d16fce9ec62a',
         total: '-',
         created_at: 'Sep 22, 2023',
         draft: true
       },
-      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+      {
+        code: 'CAB-0042',
+        uuid: '867e76a8-9574-4421-82e1-ca15ce2eec8d',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
+      }
     ]
   }
 }

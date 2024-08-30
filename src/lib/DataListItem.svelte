@@ -7,7 +7,7 @@
   export let fullWidth = false
 
   $: styles = clsx({
-    'tabular-nums slashed-zero': valueMonospaced,
+    'tabular-nums slashed-zero lining-nums font-mono': valueMonospaced,
     'w-full': fullWidth
   })
 </script>

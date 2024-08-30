@@ -55,6 +55,7 @@ export type FeedEvent = {
     type: StatusType
   }
   date: Date
+  code?: string
   message?: string
 }
 

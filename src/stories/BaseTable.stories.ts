@@ -26,7 +26,7 @@ export const Default: Story = {
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
+      { headerLabel: 'Date', slug: 'created_at', rightAlign: true }
     ],
     data: [
       {
@@ -61,7 +61,7 @@ export const WithFreeWrap: Story = {
       { headerLabel: 'Customer', slug: 'customer' },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
+      { headerLabel: 'Date', slug: 'created_at', rightAlign: true }
     ],
     data: [
       {
@@ -85,7 +85,7 @@ export const DisabledRowClick: Story = {
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'ID', slug: 'id', copy: true, rightAlign: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
+      { headerLabel: 'Date', slug: 'created_at', rightAlign: true }
     ],
     data: [
       {
@@ -134,7 +134,7 @@ export const WithActions: Story = {
       { headerLabel: 'Invoice', slug: 'code', sortable: true },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       { code: 'CC2300028X', customer: 'Cobee', total: '-', created_at: 'Sep 22, 2023' },
@@ -168,7 +168,7 @@ export const WithHelperBadge: Story = {
         formatter: () => '' // Force only badge
       },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -204,7 +204,7 @@ export const WithStatus: Story = {
         fullWidth: true
       },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -237,7 +237,7 @@ export const WithFormatter: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -264,7 +264,7 @@ export const WithUuid: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -306,7 +306,7 @@ export const WithSelectedOrderByAsc: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, sortable: true }
+      { headerLabel: 'Date', slug: 'created_at', sortable: true }
     ],
     data: [
       {
@@ -337,7 +337,7 @@ export const WithSelectedOrderByDesc: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, sortable: true }
+      { headerLabel: 'Date', slug: 'created_at', sortable: true }
     ],
     data: [
       {
@@ -362,7 +362,7 @@ export const WithMonospacedFont: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -398,7 +398,7 @@ export const WithGroupLabel: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -448,7 +448,7 @@ export const WithGroupLabelAndNoCounter: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -490,7 +490,7 @@ export const WithStickyHeaders: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {

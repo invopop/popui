@@ -4,9 +4,11 @@
   export let label = ''
   export let value = ''
   export let valueMonospaced = false
+  export let fullWidth = false
 
   $: styles = clsx({
-    'tabular-nums slashed-zero': valueMonospaced
+    'tabular-nums slashed-zero': valueMonospaced,
+    'w-full': fullWidth
   })
 </script>
 

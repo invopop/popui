@@ -132,14 +132,14 @@ export default {
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
       mono: [
+        'CommitMono',
         'ui-monospace',
-        '"Fira Code"',
-        'SFMono-Regular',
         'Menlo',
         'Monaco',
         'Consolas',
-        '"Liberation Mono"',
-        '"Courier New"',
+        '"Ubuntu Mono"',
+        '"Roboto Mono"',
+        '"DejaVu Sans Mono"',
         'monospace'
       ]
     }

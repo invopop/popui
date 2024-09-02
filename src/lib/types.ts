@@ -131,6 +131,7 @@ export type TableField = {
   helperBadge?: (data: TableDataRow) => Badge | null
   helperStatus?: (data: TableDataRow) => FeedItemStatus | null
   monospaced?: boolean
+  monospacedNums?: boolean
   rightAlign?: boolean
   isCountry?: boolean
   copy?: boolean

@@ -9,7 +9,7 @@
     />
   </svg>
   <div
-    class="rounded-[3px] py-px px-1 text-white font-medium text-sm tabular-nums lining-nums font-mono"
+    class="rounded-[3px] py-px px-1 text-white font-mono"
     style="border: 0.5px solid var(--white-60, rgba(255, 255, 255, 0.60));"
   >
     Beta

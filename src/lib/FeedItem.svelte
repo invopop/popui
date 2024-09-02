@@ -61,7 +61,7 @@
         {/if}
       </div>
       <p
-        class="mt-0.5 flex items-center space-x-2 text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero lining-nums font-mono tracking-normal"
+        class="mt-0.5 flex items-center space-x-2 text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero lining-nums tracking-normal"
       >
         {#if date}
           <span>

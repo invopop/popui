@@ -40,7 +40,7 @@
 
 <div class="{styles} relative flex items-center w-full space-x-2 text-left whitespace-nowrap">
   <button
-    class="tracking-wide tabular-nums slashed-zero lining-nums font-mono"
+    class="tracking-wide font-mono"
     on:click|stopPropagation={async () => {
       await navigator.clipboard.writeText(uuid)
       dispatch('copied', uuid)

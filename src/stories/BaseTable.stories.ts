@@ -362,7 +362,7 @@ export const WithMonospacedFont: Story = {
       },
       { headerLabel: 'UUID', slug: 'uuid', fullWidth: true, monospaced: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', monospaced: true }
+      { headerLabel: 'Date', slug: 'created_at', monospacedNums: true }
     ],
     data: [
       {

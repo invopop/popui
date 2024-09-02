@@ -17,7 +17,8 @@
   export let tag = 'td'
 
   $: cellStyles = clsx(
-    { 'tabular-nums slashed-zero lining-nums font-mono': field.monospaced },
+    { 'tabular-nums slashed-zero lining-nums': field.monospacedNums },
+    { 'font-mono': field.monospaced },
     { 'text-neutral-800 font-medium': currentIndex === 0 && !field.grayed },
     { 'text-neutral-800 md:text-neutral-500': currentIndex > 0 || field.grayed },
     { 'md:text-right': field.rightAlign },

@@ -58,7 +58,7 @@
   }}
 >
   {#if workspace}
-    <ProfileAvatar name={item.label} large />
+    <ProfileAvatar name={item.label} picture={item.picture} large />
   {:else if item.icon}
     <Icon
       src={item.icon}

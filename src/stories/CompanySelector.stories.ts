@@ -40,6 +40,33 @@ export const Default: Story = {
   }
 }
 
+export const WithLogo: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    selectedCompany: {
+      name: 'Invopop',
+      slug: 'invopop',
+      id: 'whatever',
+      logo_url:
+        'https://ams3.digitaloceanspaces.com/invopop-console-files-dev/d8a7cc5163f5bf7fee3832e714dcc883ba748d15863e0e1fcb819c6224267525'
+    },
+    companies: [
+      {
+        name: 'Invopop',
+        slug: 'invopop',
+        id: 'whatever',
+        logo_url:
+          'https://ams3.digitaloceanspaces.com/invopop-console-files-dev/d8a7cc5163f5bf7fee3832e714dcc883ba748d15863e0e1fcb819c6224267525'
+      },
+      {
+        name: 'Payflow',
+        slug: 'payflow',
+        id: 'whatever-2'
+      }
+    ]
+  }
+}
+
 export const WithFlag: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

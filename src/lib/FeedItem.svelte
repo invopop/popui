@@ -18,6 +18,8 @@
   export let viewable = false
   export let viewableText = 'View'
   export let user: FeedItemUser | undefined = undefined
+  export let type = ''
+  export let extraText = ''
 
   const dateOptions = {
     year: 'numeric',
@@ -58,13 +60,19 @@
           <FeedIconStatus {status} />
         {/if}
       </div>
-      <p class="flex flex-col space-y-0.5" class:ml-[22px]={user}>
+      <p
+        class="mt-0.5 flex items-center space-x-2 text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero lining-nums tracking-normal"
+      >
         {#if date}
-          <span
-            class="text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero tracking-normal"
-          >
+          <span>
             {date.toLocaleDateString('en-us', dateOptions)}
           </span>
+        {/if}
+        {#if date && extraText}
+          <span>·</span>
+        {/if}
+        {#if extraText}
+          <span>{extraText}</span>
         {/if}
       </p>
     </div>
@@ -75,7 +83,7 @@
         small
         variant="secondary"
         on:click={() => {
-          dispatch('view')
+          dispatch('view', type)
         }}
       >
         {viewableText}

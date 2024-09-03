@@ -1,8 +1,4 @@
 export default {
-  fontFamily: {
-    sans: ['Inter', 'sans-serif']
-  },
-
   extend: {
     fontSize: {
       xl: ['20px', '28px'],
@@ -139,7 +135,18 @@ export default {
     },
 
     fontFamily: {
-      sans: ['Inter', 'sans-serif']
+      sans: ['Inter', 'sans-serif'],
+      mono: [
+        'CommitMono',
+        'ui-monospace',
+        'Menlo',
+        'Monaco',
+        'Consolas',
+        '"Ubuntu Mono"',
+        '"Roboto Mono"',
+        '"DejaVu Sans Mono"',
+        'monospace'
+      ]
     }
   }
 }

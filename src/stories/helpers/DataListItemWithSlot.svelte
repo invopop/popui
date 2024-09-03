@@ -5,6 +5,8 @@
   export let useSlot = false
   export let label = ''
   export let value = ''
+  export let monospaced = false
+  export let monospacedNums = false
 </script>
 
 {#if useSlot}
@@ -12,5 +14,5 @@
     <TagStatus status="green" label="Closed" />
   </DataListItem>
 {:else}
-  <DataListItem {label} {value} />
+  <DataListItem {label} {value} {monospaced} {monospacedNums} />
 {/if}

@@ -45,7 +45,7 @@ import TitleMain from './TitleMain.svelte'
 import TitleSection from './TitleSection.svelte'
 import UuidCopy from './UuidCopy.svelte'
 import twTheme from './tw.theme.js'
-import { resolveIcon, getCountryName } from './helpers.js'
+import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
 
 export {
   BaseButton,
@@ -96,5 +96,6 @@ export {
   UuidCopy,
   twTheme,
   resolveIcon,
-  getCountryName
+  getCountryName,
+  getStatusType
 }

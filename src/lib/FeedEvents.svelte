@@ -9,8 +9,15 @@
   {#each events as event, i (i)}
     <div class:border-t={i > 0} class="border-neutral-100 py-2 px-3">
       <div class="flex items-center justify-between">
-        <TagStatus status={event.status.type} label={event.status.label} />
-        <p class="text-sm text-neutral-500 tabular-nums slashed-zero tracking-wide">
+        <div class="flex items-center space-x-2">
+          <TagStatus status={event.status.type} label={event.status.label} />
+          {#if event.code}
+            <p class="text-sm text-neutral-500 font-mono tracking-wide">
+              {event.code}
+            </p>
+          {/if}
+        </div>
+        <p class="text-sm text-neutral-500 font-mono tracking-wide">
           {event.date.toISOString()}
         </p>
       </div>

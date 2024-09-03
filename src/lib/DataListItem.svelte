@@ -3,10 +3,14 @@
 
   export let label = ''
   export let value = ''
-  export let valueMonospaced = false
+  export let monospaced = false
+  export let monospacedNums = false
+  export let fullWidth = false
 
   $: styles = clsx({
-    'tabular-nums slashed-zero': valueMonospaced
+    'font-mono': monospaced,
+    'slashed-zero tabular-nums lining-nums': monospacedNums,
+    'w-full': fullWidth
   })
 </script>
 

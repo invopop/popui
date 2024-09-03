@@ -9,7 +9,7 @@
 
   const dispatch = createEventDispatcher()
 
-  export let id = ''
+  export let id = Math.random().toString(36).slice(2, 7)
   export let name = ''
   export let label = ''
   export let disabled = false

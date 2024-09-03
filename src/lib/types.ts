@@ -55,6 +55,7 @@ export type FeedEvent = {
     type: StatusType
   }
   date: Date
+  code?: string
   message?: string
 }
 
@@ -89,6 +90,7 @@ export type FeedItemProps = {
   viewableText?: string
   type?: string
   user?: FeedItemUser
+  extraText?: string
 }
 
 export type Badge = {
@@ -125,13 +127,16 @@ export type TableField = {
   sortable?: boolean
   fullWidth?: boolean
   grayed?: boolean
-  formatter?: undefined | ((data: TableDataRow) => string | number)
-  helperBadge?: undefined | ((data: TableDataRow) => Badge | null)
+  formatter?: (data: TableDataRow) => string | number
+  helperBadge?: (data: TableDataRow) => Badge | null
+  helperStatus?: (data: TableDataRow) => FeedItemStatus | null
   monospaced?: boolean
+  monospacedNums?: boolean
   rightAlign?: boolean
   isCountry?: boolean
   copy?: boolean
   width?: string
+  status?: boolean
 }
 
 export type TabItem = {

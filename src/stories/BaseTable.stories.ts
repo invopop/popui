@@ -5,6 +5,7 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import FixedHeightDecorator from './decorartors/FixedHeightDecorator.svelte'
 import type { TableDataRow } from '$lib/types.js'
 import { Delete, DocumentText, Edit, Settings } from '@invopop/ui-icons'
+import { getStatusType } from '$lib/helpers.js'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -25,7 +26,7 @@ export const Default: Story = {
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
+      { headerLabel: 'Date', slug: 'created_at', rightAlign: true }
     ],
     data: [
       {
@@ -60,7 +61,7 @@ export const WithFreeWrap: Story = {
       { headerLabel: 'Customer', slug: 'customer' },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
+      { headerLabel: 'Date', slug: 'created_at', rightAlign: true }
     ],
     data: [
       {
@@ -84,7 +85,7 @@ export const DisabledRowClick: Story = {
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'ID', slug: 'id', copy: true, rightAlign: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, rightAlign: true }
+      { headerLabel: 'Date', slug: 'created_at', rightAlign: true }
     ],
     data: [
       {
@@ -133,7 +134,7 @@ export const WithActions: Story = {
       { headerLabel: 'Invoice', slug: 'code', sortable: true },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       { code: 'CC2300028X', customer: 'Cobee', total: '-', created_at: 'Sep 22, 2023' },
@@ -167,7 +168,7 @@ export const WithHelperBadge: Story = {
         formatter: () => '' // Force only badge
       },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -178,6 +179,46 @@ export const WithHelperBadge: Story = {
         draft: true
       },
       { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+    ]
+  }
+}
+
+export const WithStatus: Story = {
+  args: {
+    fields: [
+      {
+        headerLabel: 'Status',
+        slug: 'status',
+        helperStatus: (data) => {
+          return getStatusType(data.status as string)
+        },
+        formatter: (data) => {
+          if (data.status === 'RUN') return 'running'
+          if (data.status === 'SKIP') return ''
+          return data.status as string
+        }
+      },
+      {
+        headerLabel: 'No formatted status',
+        slug: 'no_status',
+        fullWidth: true
+      },
+      { headerLabel: 'Amount', slug: 'total' },
+      { headerLabel: 'Date', slug: 'created_at' }
+    ],
+    data: [
+      {
+        status: 'RUN',
+        no_status: 'RUN',
+        total: '-',
+        created_at: 'Sep 22, 2023',
+        draft: true
+      },
+      { status: 'OK', no_status: 'KO', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'ERR', no_status: 'ERR', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'KO', no_status: 'KO', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'QUEUED', no_status: 'QUEUED', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'SKIP', no_status: 'SKIP', total: '€87.403,50', created_at: 'Sep 23, 2023' }
     ]
   }
 }
@@ -196,7 +237,7 @@ export const WithFormatter: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -223,7 +264,7 @@ export const WithUuid: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -265,7 +306,7 @@ export const WithSelectedOrderByAsc: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, sortable: true }
+      { headerLabel: 'Date', slug: 'created_at', sortable: true }
     ],
     data: [
       {
@@ -296,7 +337,7 @@ export const WithSelectedOrderByDesc: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true, sortable: true }
+      { headerLabel: 'Date', slug: 'created_at', sortable: true }
     ],
     data: [
       {
@@ -319,19 +360,24 @@ export const WithMonospacedFont: Story = {
         slug: 'code',
         sortable: true
       },
-      { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
+      { headerLabel: 'UUID', slug: 'uuid', fullWidth: true, monospaced: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at', monospacedNums: true }
     ],
     data: [
       {
         code: 'CC2300028X',
-        customer: 'Cobee',
+        uuid: 'cdf77eb0-66a9-11ef-8b20-d16fce9ec62a',
         total: '-',
         created_at: 'Sep 22, 2023',
         draft: true
       },
-      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+      {
+        code: 'CAB-0042',
+        uuid: '867e76a8-9574-4421-82e1-ca15ce2eec8d',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
+      }
     ]
   }
 }
@@ -357,7 +403,7 @@ export const WithGroupLabel: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -407,7 +453,7 @@ export const WithGroupLabelAndNoCounter: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {
@@ -449,7 +495,7 @@ export const WithStickyHeaders: Story = {
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
-      { headerLabel: 'Date', slug: 'created_at', grayed: true }
+      { headerLabel: 'Date', slug: 'created_at' }
     ],
     data: [
       {

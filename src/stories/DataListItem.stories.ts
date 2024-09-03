@@ -23,6 +23,22 @@ export const Default: Story = {
   }
 }
 
+export const Monospaced: Story = {
+  args: {
+    label: 'Customer',
+    monospaced: true,
+    value: '1234-5678 012'
+  }
+}
+
+export const MonospacedNums: Story = {
+  args: {
+    label: 'Customer',
+    monospacedNums: true,
+    value: '1234-5678 012'
+  }
+}
+
 export const WithSlot: Story = {
   args: {
     label: 'Status',

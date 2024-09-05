@@ -19,12 +19,14 @@
 
   $: name = selectedCompany?.name || ''
   $: country = selectedCompany?.country || ''
+  $: picture = selectedCompany?.logo_url || ''
   $: items = [
     ...companies.map((c) => ({
       value: c.id,
       label: c.name,
       selected: c.slug === selectedCompany?.slug,
-      country: c.country
+      country: c.country,
+      picture: c.logo_url
     }))
   ] as DrawerOption[]
 
@@ -65,7 +67,7 @@
     class="{styles} text-white text-base font-semibold flex items-center justify-between border focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
   >
     <span class:space-x-2={!collapsed} class="flex items-center">
-      <ProfileAvatar {name} {country} dark large />
+      <ProfileAvatar {name} {picture} {country} dark large />
       {#if !collapsed}
         <div class="whitespace-nowrap max-w-[140px] truncate tracking-tight">{name}</div>
       {/if}

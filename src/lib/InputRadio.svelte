@@ -30,6 +30,6 @@
   type="radio"
   {id}
   {checked}
-  class="form-radio h-5 w-5 border-neutral-200 text-accent-500 focus:ring-0 focus:ring-offset-0"
+  class="form-radio h-5 w-5 border-neutral-200 text-workspace-accent focus:ring-0 focus:ring-offset-0"
   on:change={updateInput}
 />

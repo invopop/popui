@@ -48,7 +48,7 @@
         this={iconComponent}
         classes="{icon === 'no-results'
           ? 'text-neutral-400'
-          : 'text-accent-500'} absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] z-30 w-[97px] h-[117px]"
+          : 'text-workspace-accent'} absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] z-30 w-[97px] h-[117px]"
       />
       <svelte:component
         this={iconComponent}

@@ -12,6 +12,8 @@ Once you've created a project and installed dependencies with `npm install` (or 
 npm run storybook
 ```
 
+> For using a different `accent` color for some components you can set the `--workspace-accent-color:` CSS variable placed in `.storybook/variables.css` file.
+
 ## Compiling Web Components
 
 The following command will compile a file called `dist/invopop-web-components.js` that can be imported on any external project.

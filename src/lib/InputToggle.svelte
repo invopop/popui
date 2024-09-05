@@ -13,7 +13,7 @@
 
   $: $sw.checked = checked
 
-  $: togleStyles = clsx({ 'bg-gray-200': !$sw.checked }, { 'bg-accent-500': $sw.checked })
+  $: togleStyles = clsx({ 'bg-gray-200': !$sw.checked }, { 'bg-workspace-accent': $sw.checked })
 
   function handleChange() {
     dispatch('change', $sw.checked)

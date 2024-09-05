@@ -52,7 +52,7 @@
     {disabled}
     class:pl-7={icon}
     class:pl-2={!icon}
-    class="py-1.5 border border-neutral-200 hover:border-neutral-300 focus:border-accent-500 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight ui-select"
+    class="py-1.5 border border-neutral-200 hover:border-neutral-300 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight ui-select focus:border-workspace-accent focus:shadow-active"
     on:change={handleChange}
   >
     <option value="" disabled={disablePlaceholder}>{placeholder}</option>
@@ -74,16 +74,12 @@
 {/if}
 
 <style>
-  select {
+  .ui-select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0YzRjRGNiIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwMzA3MTIiIHN0cm9rZS13aWR0aD0iMS4xIi8+Cjwvc3ZnPg==');
     background-repeat: no-repeat;
     background-position: center right 6px;
-  }
-
-  .ui-select:focus {
-    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
   }
 </style>

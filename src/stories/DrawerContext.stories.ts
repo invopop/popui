@@ -21,7 +21,7 @@ export const SingleSelect: Story = {
   args: {
     items: [
       { label: 'Cobee S.L.', value: 'cobee' },
-      { label: 'Payflow S.L.', value: 'payflow' }
+      { label: 'Payflow S.L.', value: 'payflow', selected: true }
     ]
   }
 }

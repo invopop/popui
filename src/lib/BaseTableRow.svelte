@@ -19,7 +19,7 @@
 
 <tr
   class:cursor-pointer={!disableRowClick}
-  class="hover:bg-neutral-50 active:bg-accent-50"
+  class="hover:bg-neutral-50"
   on:click
   on:contextmenu|preventDefault={() => {
     if (!actionsDropdown) return

@@ -32,7 +32,7 @@
       'text-danger-500 border-danger-400 outline-danger-400': errorText
     },
     {
-      'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none focus:border-accent-500 ui-input':
+      'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
         !errorText
     }
   )
@@ -61,7 +61,7 @@
   bind:this={inputEl}
   bind:value
   type="text"
-  class="{inputStyles} py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base caret-accent-500 tracking-tight"
+  class="{inputStyles} py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight"
   {placeholder}
   readonly={disabled}
   on:input={handleInput}
@@ -71,9 +71,3 @@
 {#if errorText}
   <InputError {errorText} />
 {/if}
-
-<style>
-  .ui-input:focus {
-    box-shadow: 0px 0px 0px 2px rgba(22, 153, 88, 0.12);
-  }
-</style>

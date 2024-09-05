@@ -34,7 +34,7 @@
     { 'opacity-30 pointer-events-none': disabled },
     { 'flex-row-reverse space-x-reverse': iconPosition === 'right' },
     { 'bg-white': variant === 'default' },
-    { 'bg-accent-500': variant === 'primary' },
+    { 'bg-workspace-accent': variant === 'primary' },
     { 'bg-neutral-100 hover:bg-neutral-200 focus:bg-neutral-300': variant === 'secondary' },
     { 'bg-danger-500': variant === 'danger' },
     { 'text-sm rounded': small },

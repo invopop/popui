@@ -40,6 +40,7 @@ export type DrawerOption = SelectOption & {
   rightIcon?: IconSource | undefined
   country?: string
   color?: StatusType
+  picture?: string
 }
 
 export type Company = {
@@ -47,6 +48,7 @@ export type Company = {
   slug: string
   name: string
   country?: string
+  logo_url?: string
 }
 
 export type FeedEvent = {

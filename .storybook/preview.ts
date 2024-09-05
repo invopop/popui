@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/svelte'
 import 'inter-ui/inter.css'
+import './variables.css'
 import { install } from '@twind/core'
 import twconfig from '../src/twind.config.js'
 install(twconfig)

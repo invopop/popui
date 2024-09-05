@@ -26,7 +26,7 @@
     { 'py-1.5 space-x-2': !workspace },
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
-    { 'bg-accent-100': item.selected && !multiple },
+    { 'bg-workspace-accent-100': item.selected && !multiple },
     { 'hover:bg-neutral-100 rounded': !item.selected }
   )
   $: labelStyles = clsx(
@@ -58,7 +58,7 @@
   }}
 >
   {#if workspace}
-    <ProfileAvatar name={item.label} large />
+    <ProfileAvatar name={item.label} picture={item.picture} large />
   {:else if item.icon}
     <Icon
       src={item.icon}
@@ -91,7 +91,7 @@
       }}
     />
   {:else if item.selected}
-    <Icon src={Tick} class="w-5 h-5 text-accent-500" />
+    <Icon src={Tick} class="w-5 h-5 text-workspace-accent" />
   {:else if item.rightIcon}
     <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-300" />
   {/if}

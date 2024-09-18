@@ -38,6 +38,13 @@ export const WithPicture: Story = {
   }
 }
 
+export const WithBrokenPicture: Story = {
+  args: {
+    name: 'Brad Pitt',
+    picture: 'https://images.unsplash.com/photo-1550525811-'
+  }
+}
+
 export const WithPictureLarge: Story = {
   args: {
     name: 'Brad Pitt',

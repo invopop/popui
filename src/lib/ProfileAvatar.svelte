@@ -22,7 +22,14 @@
 
 <div class="{avatarStyles} rounded flex items-center justify-center font-semibold relative">
   {#if picture}
-    <img class="h-full w-full rounded object-cover" src={picture} alt={name} />
+    <img
+      class="h-full w-full rounded object-cover"
+      src={picture}
+      alt={name}
+      on:error={() => {
+        picture = ''
+      }}
+    />
   {:else}
     <span>{name?.charAt(0)}</span>
   {/if}

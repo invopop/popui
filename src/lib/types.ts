@@ -142,6 +142,7 @@ export type TableField = {
   copy?: boolean
   width?: string
   status?: boolean
+  noPadding?: boolean
 }
 
 export type TabItem = {

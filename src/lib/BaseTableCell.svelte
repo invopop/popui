@@ -27,6 +27,8 @@
     { 'md:w-full md:max-w-0': field.fullWidth },
     { 'py-2 md:py-[11.25px]': badge },
     { 'py-2 md:py-[11.75px]': !badge },
+    { 'px-3': !field.noPadding },
+    { 'px-0': field.noPadding },
     { 'whitespace-nowrap truncate': !freeWrap }
   )
   $: isMobile = Viewport.Width < 769
@@ -34,7 +36,7 @@
 
 <svelte:element
   this={tag}
-  class="{cellStyles} text-base px-3 tracking-normal"
+  class="{cellStyles} text-base tracking-normal"
   style:min-width={field.width}
   style:max-width={isMobile ? `${Viewport.Width}px` : field.width}
 >

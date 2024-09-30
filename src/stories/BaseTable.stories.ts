@@ -389,12 +389,14 @@ export const WithIcons: Story = {
       {
         headerLabel: 'Invoice',
         slug: 'code',
-        sortable: true
+        sortable: true,
+        fullWidth: true
       },
       {
         headerLabel: 'Icon',
         slug: 'icon',
-        width: '20px',
+        noPadding: true,
+        rightAlign: true,
         formatter: () => {
           return ''
         },

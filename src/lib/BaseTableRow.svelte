@@ -34,6 +34,7 @@
       {freeWrap}
       badge={field.helperBadge ? field.helperBadge(row) : null}
       status={field.helperStatus ? field.helperStatus(row) : null}
+      icons={field.helperIcons ? field.helperIcons(row) : null}
       data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
       on:copied
     />

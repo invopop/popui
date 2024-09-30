@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
   import type { FeedItemStatus } from './types.ts'
-  import { Alert, Failure, Queue, Running, Success } from '@invopop/ui-icons'
+  import { Alert, Failure, Queue, Running, Success, CheckBadge } from '@invopop/ui-icons'
   import type { IconSource } from '@steeze-ui/heroicons'
 
   export let status: FeedItemStatus
@@ -14,7 +14,8 @@
       success: Success,
       run: Running,
       queued: Queue,
-      alert: Alert
+      alert: Alert,
+      signed: CheckBadge
     }
 
     return icons[status]

@@ -4,7 +4,7 @@ import BaseTable from '../lib/BaseTable.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import FixedHeightDecorator from './decorartors/FixedHeightDecorator.svelte'
 import type { TableDataRow } from '$lib/types.js'
-import { Delete, DocumentText, Edit, Settings } from '@invopop/ui-icons'
+import { Delete, DocumentText, Edit, Settings, CheckBadge } from '@invopop/ui-icons'
 import { getStatusType } from '$lib/helpers.js'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
@@ -218,7 +218,8 @@ export const WithStatus: Story = {
       { status: 'ERR', no_status: 'ERR', total: '€87.403,50', created_at: 'Sep 23, 2023' },
       { status: 'KO', no_status: 'KO', total: '€87.403,50', created_at: 'Sep 23, 2023' },
       { status: 'QUEUED', no_status: 'QUEUED', total: '€87.403,50', created_at: 'Sep 23, 2023' },
-      { status: 'SKIP', no_status: 'SKIP', total: '€87.403,50', created_at: 'Sep 23, 2023' }
+      { status: 'SKIP', no_status: 'SKIP', total: '€87.403,50', created_at: 'Sep 23, 2023' },
+      { status: 'SIGNED', no_status: 'SIGNED', total: '€87.403,50', created_at: 'Sep 23, 2023' }
     ]
   }
 }
@@ -361,6 +362,51 @@ export const WithMonospacedFont: Story = {
         sortable: true
       },
       { headerLabel: 'UUID', slug: 'uuid', fullWidth: true, monospaced: true },
+      { headerLabel: 'Amount', slug: 'total', monospaced: true },
+      { headerLabel: 'Date', slug: 'created_at', monospacedNums: true }
+    ],
+    data: [
+      {
+        code: 'CC2300028X',
+        uuid: 'cdf77eb0-66a9-11ef-8b20-d16fce9ec62a',
+        total: '-',
+        created_at: 'Sep 22, 2023',
+        draft: true
+      },
+      {
+        code: 'CAB-0042',
+        uuid: '867e76a8-9574-4421-82e1-ca15ce2eec8d',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
+      }
+    ]
+  }
+}
+
+export const WithIcons: Story = {
+  args: {
+    fields: [
+      {
+        headerLabel: 'Invoice',
+        slug: 'code',
+        sortable: true
+      },
+      {
+        headerLabel: 'Icon',
+        slug: 'icon',
+        width: '20px',
+        formatter: () => {
+          return ''
+        },
+        helperStatus: (data) => {
+          if (data.code === 'CC2300028X') return 'signed'
+          return null
+        },
+        helperIcons: (data) => {
+          if (data.code === 'CC2300028X') return []
+          return ['https://console.invopop.com/images/providers/tags-icon.png', CheckBadge]
+        }
+      },
       { headerLabel: 'Amount', slug: 'total', monospaced: true },
       { headerLabel: 'Date', slug: 'created_at', monospacedNums: true }
     ],

@@ -74,7 +74,7 @@ export type MenuItemProps = {
   collapsedSidebar?: boolean
 }
 
-export type FeedItemStatus = 'success' | 'failure' | 'run' | 'queued' | 'alert'
+export type FeedItemStatus = 'success' | 'failure' | 'run' | 'queued' | 'alert' | 'signed'
 
 export type FeedItemUser = {
   name: string
@@ -123,6 +123,8 @@ export type TableGroup = {
   rows: TableDataRow[]
 }
 
+export type TableIcon = string | IconSource
+
 export type TableField = {
   headerLabel: string
   slug: string
@@ -132,6 +134,7 @@ export type TableField = {
   formatter?: (data: TableDataRow) => string | number
   helperBadge?: (data: TableDataRow) => Badge | null
   helperStatus?: (data: TableDataRow) => FeedItemStatus | null
+  helperIcons?: (data: TableDataRow) => TableIcon[]
   monospaced?: boolean
   monospacedNums?: boolean
   rightAlign?: boolean

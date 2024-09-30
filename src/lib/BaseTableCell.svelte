@@ -1,17 +1,19 @@
 <script lang="ts">
   import Viewport from 'svelte-viewport-info'
   import clsx from 'clsx'
-  import type { Badge, FeedItemStatus, TableField } from './types.js'
+  import type { Badge, FeedItemStatus, TableField, TableIcon } from './types.js'
   import TagStatus from './TagStatus.svelte'
   import FeedIconStatus from './FeedIconStatus.svelte'
   import BaseFlag from './BaseFlag.svelte'
   import { getCountryName } from './helpers.js'
   import UuidCopy from './UuidCopy.svelte'
+  import { Icon } from '@steeze-ui/svelte-icon'
 
   export let field: TableField
   export let currentIndex: number
   export let badge: Badge | null = null
   export let status: FeedItemStatus | null = null
+  export let icons: TableIcon[] | null = null
   export let data: unknown = ''
   export let freeWrap = false
   export let tag = 'td'
@@ -68,6 +70,19 @@
       {#if status}
         <span class:ml-2={!!data}>
           <FeedIconStatus {status} />
+        </span>
+      {/if}
+      {#if icons}
+        <span class:ml-2={!!data} class="flex items-center gap-1 flex-shrink-0">
+          {#each icons as icon}
+            <div class="border border-neutral-200 rounded-md p-px">
+              {#if typeof icon === 'string'}
+                <img alt="icon" src={icon} class="h-4 w-4" />
+              {:else}
+                <Icon src={icon} class="h-4 w-4" />
+              {/if}
+            </div>
+          {/each}
         </span>
       {/if}
     </span>

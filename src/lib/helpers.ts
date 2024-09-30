@@ -36,7 +36,8 @@ export function getStatusType(status: string): FeedItemStatus {
     ERR: 'alert',
     RUN: 'run',
     QUEUED: 'queued',
-    SKIP: 'queued' // TODO: Define a unique icon for this status
+    SKIP: 'queued', // TODO: Define a unique icon for this status
+    SIGNED: 'signed'
   }
 
   return statuses[status]

@@ -74,7 +74,7 @@ export type MenuItemProps = {
   collapsedSidebar?: boolean
 }
 
-export type FeedItemStatus = 'success' | 'failure' | 'run' | 'queued' | 'alert' | 'signed'
+export type FeedItemStatus = 'success' | 'failure' | 'run' | 'queued' | 'alert' | 'skip' | 'signed'
 
 export type FeedItemUser = {
   name: string

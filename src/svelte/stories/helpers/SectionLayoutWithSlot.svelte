@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SectionLayout from '../../lib/SectionLayout.svelte'
+  import SectionLayout from '$lib/SectionLayout.svelte'
 
   export let title = ''
 </script>

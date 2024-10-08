@@ -1,5 +1,5 @@
 <script lang="ts">
-  import '../app.css'
+  // import '../app.css'
   import BaseButton from '$lib/BaseButton.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
   import InputSearch from '$lib/InputSearch.svelte'

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TagStatus from '$lib/TagStatus.svelte'
+  import TagStatus from '../../lib/TagStatus.svelte'
   import DataListItem from '../../lib/DataListItem.svelte'
 
   export let useSlot = false

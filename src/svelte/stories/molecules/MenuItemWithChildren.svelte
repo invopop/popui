@@ -2,7 +2,7 @@
   import type { IconSource } from '@steeze-ui/svelte-icon'
   import MenuItem from '../../lib/MenuItem.svelte'
   import type { MenuItemProps } from '../../lib/types.ts'
-  import ProfileAvatar from '$lib/ProfileAvatar.svelte'
+  import ProfileAvatar from '../../lib/ProfileAvatar.svelte'
 
   export let collapsable = false
   export let collapsedSidebar = false

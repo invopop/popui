@@ -14,7 +14,8 @@ const config = {
     adapter: adapter(),
     files: {
       lib: 'src/svelte/lib',
-      routes: 'src/svelte/routes'
+      routes: 'src/svelte/routes',
+      appTemplate: 'src/svelte/app.html'
     }
   }
 }

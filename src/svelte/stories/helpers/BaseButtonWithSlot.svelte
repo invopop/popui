@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { IconSource } from '@steeze-ui/svelte-icon'
-  import BaseButton from '../../lib/BaseButton.svelte'
+  import BaseButton from '$lib/BaseButton.svelte'
   import type { ButtonVariant, IconPosition } from '$lib/types.js'
 
   export let slot = ''

@@ -3,9 +3,9 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 import BaseTable from '../lib/BaseTable.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import FixedHeightDecorator from './decorartors/FixedHeightDecorator.svelte'
-import type { TableDataRow } from '$lib/types.js'
+import type { TableDataRow } from '../lib/types.js'
 import { Delete, DocumentText, Edit, Settings, CheckBadge } from '@invopop/ui-icons'
-import { getStatusType } from '$lib/helpers.js'
+import { getStatusType } from '../lib/helpers.js'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {

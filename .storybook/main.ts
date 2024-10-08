@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/sveltekit'
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../src/svelte/**/*.mdx', '../src/svelte/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -14,6 +14,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag'
   },
-  staticDirs: ['../static']
+  staticDirs: ['../src/svelte/static']
 }
 export default config

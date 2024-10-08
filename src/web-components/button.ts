@@ -1,4 +1,4 @@
-import type { ButtonVariant } from '$lib/types.js'
+import type { ButtonVariant } from '../svelte/lib/types.js'
 import BaseButton from '../lib/BaseButton.svelte'
 import WebComponent from './component.js'
 

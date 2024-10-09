@@ -7,7 +7,8 @@ module.exports = {
     /* tslint:disable no-var-requires */
     require('@tailwindcss/forms')({
       strategy: 'class'
-    })
+    }),
+    require('@tailwindcss/typography')
   ],
   theme: {
     extend: { ...twTheme.extend }

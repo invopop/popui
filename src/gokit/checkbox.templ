@@ -1,0 +1,23 @@
+package gokit
+
+import (
+	"github.com/invopop/ui-kit/src/gokit/classes"
+	"github.com/invopop/ui-kit/src/gokit/props"
+)
+
+templ Checkbox(p props.Checkbox) {
+	<div class={ classes.CheckboxWrapper }>
+		<input
+			id={ p.ID }
+			type="checkbox"
+			class={ classes.CheckboxInput, templ.KV(p.Class, p.Class != "") }
+			{ p.Attrs... }
+		/>
+		<label
+			for={ p.ID }
+			class={ classes.CheckboxLabel, templ.KV(p.LabelClass, p.LabelClass != "") }
+		>
+			{ children... }
+		</label>
+	</div>
+}

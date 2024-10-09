@@ -1,0 +1,19 @@
+package gokit
+
+import (
+	"github.com/invopop/ui-kit/src/gokit/classes"
+	"github.com/invopop/ui-kit/src/gokit/props"
+)
+
+templ Image(p props.Image) {
+	<img
+		class={ classes.Image, templ.KV(p.Class, p.Class != "") }
+		if (p.Src != "") {
+			src={ p.Src }
+		}
+		if (p.Alt != "") {
+			alt={ p.Alt }
+		}
+		{ p.Attrs... }
+	/>
+}

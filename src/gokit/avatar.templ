@@ -1,0 +1,18 @@
+package gokit
+
+import (
+	"github.com/invopop/ui-kit/src/gokit/classes"
+	"github.com/invopop/ui-kit/src/gokit/props"
+)
+
+templ Avatar(p props.Avatar) {
+	<div
+		class={
+			classes.AvatarBase,
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</div>
+}

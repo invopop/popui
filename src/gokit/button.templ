@@ -1,0 +1,24 @@
+package gokit
+
+import (
+	"github.com/invopop/ui-kit/src/gokit/classes"
+	"github.com/invopop/ui-kit/src/gokit/props"
+)
+
+templ Button(p props.Button) {
+	<button
+		class={ classes.ButtonBase,
+			templ.KV(p.Class, p.Class != ""),
+			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
+			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),
+			templ.KV(classes.ButtonDefault, p.Variant == ""),
+			templ.KV(classes.ButtonSmall, p.Small),
+			templ.KV(classes.ButtonRegular, !p.Small) }
+		if p.Disabled {
+			disabled
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</button>
+}

@@ -1,0 +1,29 @@
+package gokit
+
+import (
+	"github.com/invopop/ui-kit/src/gokit/classes"
+	"github.com/invopop/ui-kit/src/gokit/props"
+)
+
+templ Select(p props.Select) {
+	<div class={ classes.SelectWrapper }>
+		if p.Label != "" {
+			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass}) {
+				{ p.Label }
+			}
+		}
+		<select
+			id={ p.ID }
+			class={ classes.SelectBase, templ.KV(p.Class, p.Class != "") }
+			if p.Disabled {
+				disabled
+			}
+			{ p.Attrs... }
+		>
+			{ children... }
+		</select>
+		if !p.Error.Empty() {
+			@InputError(p.Error)
+		}
+	</div>
+}

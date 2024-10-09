@@ -18,6 +18,9 @@ templ Page() {
 					disabled: false,
 					value: ''
 				},
+				checkbox: {
+					value: ''
+				},
 				select: {
 					errorText: '',
 					disabled: false,
@@ -53,11 +56,29 @@ templ Page() {
 			})
 			<div>
 				@gokit.Info() {
-					The Silo Entry ID of the new document will be available in the
+					The Silo Entry ID of the new document will be available in the 
 					@gokit.Mark() {
 						connected-silo-entry-id
 					}
 					shared meta field.
+				}
+			</div>
+			// Title
+			@fieldConfig(&config{
+				Title: "Title Text",
+			})
+			<div>
+				@gokit.Title() {
+					This is a main section
+				}
+			</div>
+			// Subtitle
+			@fieldConfig(&config{
+				Title: "Subtitle Text",
+			})
+			<div>
+				@gokit.Subtitle() {
+					This is a secondary section
 				}
 			</div>
 			// Tags
@@ -139,6 +160,20 @@ templ Page() {
 							"x-model":   "inputText.value",
 							":disabled": "inputText.disabled",
 							":class":    "{ '" + classes.InputTextError + "': inputText.errorText, '" + classes.InputTextSuccess + "': !inputText.errorText }",
+						},
+					})
+			</div>
+			// Checkbox
+			@fieldConfig(&config{
+				Title:  "Checkbox",
+				XModel: "checkbox.value",
+			})
+			<div class="max-w-md">
+				@gokit.Checkbox(
+					props.Checkbox{
+						Label: "This is the label for the checbox",
+						Attrs: templ.Attributes{
+							"x-model": "checkbox.value",
 						},
 					})
 			</div>

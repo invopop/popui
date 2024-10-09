@@ -14,7 +14,7 @@ templ Textarea(p props.Textarea) {
 		}
 		<textarea
 			id={ p.ID }
-			class={ classes.TextareaBase, templ.KV(p.Class, p.Class != "") }
+			class={ templ.KV(classes.TextareaBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 			rows={ p.GetRows() }
 			if p.Disabled {
 				disabled
@@ -40,7 +40,7 @@ templ Contenteditable(p props.Textarea) {
 			role="textarea"
 			contenteditable="true"
 			id={ p.ID }
-			class={ classes.TextareaBase, "min-h-[80px]", templ.KV(p.Class, p.Class != "") }
+			class={ templ.KV(classes.TextareaBase, p.Class == ""), "min-h-[80px]", templ.KV(p.Class, p.Class != "") }
 			{ p.Attrs... }
 		></div>
 		if !p.Error.Empty() {

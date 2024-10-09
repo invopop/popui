@@ -15,7 +15,7 @@ templ Popover(p props.Popover) {
 		}
 		<div popover id={ p.ID }></div>
 		<div
-			class={ classes.PopoverList, templ.KV(p.Class, p.Class != "") }
+			class={ templ.KV(classes.PopoverList, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 			{ p.Attrs... }
 		>
 			{ children... }

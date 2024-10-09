@@ -10,14 +10,18 @@ templ Checkbox(p props.Checkbox) {
 		<input
 			id={ p.ID }
 			type="checkbox"
-			class={ classes.CheckboxInput, templ.KV(p.Class, p.Class != "") }
+			class={ templ.KV(classes.CheckboxInput, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 			{ p.Attrs... }
 		/>
 		<label
 			for={ p.ID }
-			class={ classes.CheckboxLabel, templ.KV(p.LabelClass, p.LabelClass != "") }
+			class={ templ.KV(classes.CheckboxLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }
 		>
-			{ children... }
+			if (p.Label != "") {
+				{ p.Label }
+			} else {
+				{ children... }
+			}
 		</label>
 	</div>
 }

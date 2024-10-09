@@ -31,7 +31,7 @@ func InputLabel(p props.Label) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{classes.Label, templ.KV(p.Class, p.Class != "")}
+		var templ_7745c5c3_Var2 = []any{templ.KV(classes.Label, p.Class == ""), templ.KV(p.Class, p.Class != "")}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -155,7 +155,7 @@ func InputText(p props.InputText) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		var templ_7745c5c3_Var10 = []any{classes.InputTextBase, templ.KV(p.Class, p.Class != "")}
+		var templ_7745c5c3_Var10 = []any{templ.KV(classes.InputTextBase, p.Class == ""), templ.KV(p.Class, p.Class != "")}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var10...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -230,7 +230,7 @@ func InputError(e props.Error) templ.Component {
 			templ_7745c5c3_Var13 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var14 = []any{classes.Error, templ.KV(e.Class, e.Class != "")}
+		var templ_7745c5c3_Var14 = []any{templ.KV(classes.Error, e.Class == ""), templ.KV(e.Class, e.Class != "")}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var14...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

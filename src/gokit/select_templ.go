@@ -82,7 +82,7 @@ func Select(p props.Select) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		var templ_7745c5c3_Var6 = []any{classes.SelectBase, templ.KV(p.Class, p.Class != "")}
+		var templ_7745c5c3_Var6 = []any{templ.KV(classes.SelectBase, p.Class == ""), templ.KV(p.Class, p.Class != "")}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var6...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

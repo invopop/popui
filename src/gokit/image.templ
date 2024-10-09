@@ -7,7 +7,7 @@ import (
 
 templ Image(p props.Image) {
 	<img
-		class={ classes.Image, templ.KV(p.Class, p.Class != "") }
+		class={ templ.KV(classes.Image, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 		if (p.Src != "") {
 			src={ p.Src }
 		}

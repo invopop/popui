@@ -14,7 +14,7 @@ templ Select(p props.Select) {
 		}
 		<select
 			id={ p.ID }
-			class={ classes.SelectBase, templ.KV(p.Class, p.Class != "") }
+			class={ templ.KV(classes.SelectBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 			if p.Disabled {
 				disabled
 			}

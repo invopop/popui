@@ -31,7 +31,7 @@ func Button(p props.Button) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{classes.ButtonBase,
+		var templ_7745c5c3_Var2 = []any{templ.KV(classes.ButtonBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
 			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),

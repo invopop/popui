@@ -32,7 +32,7 @@ func Avatar(p props.Avatar) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		var templ_7745c5c3_Var2 = []any{
-			classes.AvatarBase,
+			templ.KV(classes.AvatarBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)

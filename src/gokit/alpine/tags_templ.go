@@ -218,6 +218,7 @@ func Tags(p props.Tags) templ.Component {
 			templ_7745c5c3_Err = gokit.InputText(props.InputText{ID: id, Attrs: templ.Attributes{
 				"x-model":        "tags_newTag",
 				"@keydown.enter": "tags_addTag",
+				":class":         "{ '" + classes.InputTextError + "': tags_error, '" + classes.InputTextSuccess + "': !tags_error }",
 			}, Error: props.Error{Attrs: templ.Attributes{"x-text": "tags_error"}}}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

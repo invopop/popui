@@ -31,7 +31,7 @@ func Image(p props.Image) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{classes.Image, templ.KV(p.Class, p.Class != "")}
+		var templ_7745c5c3_Var2 = []any{templ.KV(classes.Image, p.Class == ""), templ.KV(p.Class, p.Class != "")}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

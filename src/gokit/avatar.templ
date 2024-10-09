@@ -8,7 +8,7 @@ import (
 templ Avatar(p props.Avatar) {
 	<div
 		class={
-			classes.AvatarBase,
+			templ.KV(classes.AvatarBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
 		{ p.Attrs... }

@@ -8,7 +8,7 @@ import (
 templ InputLabel(p props.Label) {
 	<label
 		for={ p.ID }
-		class={ classes.Label, templ.KV(p.Class, p.Class != "") }
+		class={ templ.KV(classes.Label, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 		{ p.Attrs... }
 	>
 		{ children... }
@@ -24,7 +24,7 @@ templ InputText(p props.InputText) {
 		}
 		<input
 			id={ p.ID }
-			class={ classes.InputTextBase, templ.KV(p.Class, p.Class != "") }
+			class={ templ.KV(classes.InputTextBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 			{ p.Attrs... }
 		/>
 		if !p.Error.Empty() {
@@ -34,7 +34,7 @@ templ InputText(p props.InputText) {
 }
 
 templ InputError(e props.Error) {
-	<p class={ classes.Error, templ.KV(e.Class, e.Class != "") } { e.Attrs... }>
+	<p class={ templ.KV(classes.Error, e.Class == ""), templ.KV(e.Class, e.Class != "") } { e.Attrs... }>
 		{ e.Text }
 	</p>
 }

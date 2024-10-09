@@ -1,0 +1,50 @@
+package gokit
+
+import (
+	"github.com/invopop/ui-kit/src/gokit/classes"
+	"github.com/invopop/ui-kit/src/gokit/props"
+)
+
+templ Textarea(p props.Textarea) {
+	<div class={ classes.TextareaWrapper }>
+		if p.Label != "" {
+			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass}) {
+				{ p.Label }
+			}
+		}
+		<textarea
+			id={ p.ID }
+			class={ classes.TextareaBase, templ.KV(p.Class, p.Class != "") }
+			rows={ p.GetRows() }
+			if p.Disabled {
+				disabled
+			}
+			{ p.Attrs... }
+		></textarea>
+		if !p.Error.Empty() {
+			@InputError(p.Error)
+		}
+	</div>
+}
+
+// TODO: Use the same component and find a way to render a div or a textarea dynamicly
+templ Contenteditable(p props.Textarea) {
+	<div class={ classes.TextareaWrapper }>
+		if p.Label != "" {
+			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass}) {
+				{ p.Label }
+			}
+		}
+		<div
+			tabindex="0"
+			role="textarea"
+			contenteditable="true"
+			id={ p.ID }
+			class={ classes.TextareaBase, "min-h-[80px]", templ.KV(p.Class, p.Class != "") }
+			{ p.Attrs... }
+		></div>
+		if !p.Error.Empty() {
+			@InputError(p.Error)
+		}
+	</div>
+}

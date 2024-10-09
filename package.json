@@ -1,7 +1,7 @@
 {
   "name": "@invopop/ui-kit",
   "license": "MIT",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -16,7 +16,7 @@
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
     "storybook": "storybook dev -p 6006",
-    "build:tailwind": "npx tailwindcss -i ./tw.css -o ./dist/appkit.css",
+    "build:tailwind": "npx tailwindcss -i ./styles.css -o ./dist/gokit.css",
     "build-storybook": "storybook build",
     "build-web-components": "vite build --config vite.wbc.config.ts",
     "publish-wbc": "npm run build-web-components && cp ./package-wbc.json ./dist/package.json && cd ./dist && npm run publish"
@@ -49,6 +49,7 @@
     "@sveltejs/kit": "^1.20.4",
     "@sveltejs/package": "^2.0.0",
     "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "^10.4.20",

@@ -1,0 +1,64 @@
+package alpine
+
+import (
+	"github.com/dchest/uniuri"
+	"github.com/invopop/ui-kit/src/gokit"
+	"github.com/invopop/ui-kit/src/gokit/classes"
+	"github.com/invopop/ui-kit/src/gokit/props"
+)
+
+templ Tags(p props.Tags) {
+	{{ id := uniuri.New() }}
+	<div class="flex flex-col gap-1">
+		if p.Label != "" {
+			@gokit.InputLabel(props.Label{ID: id}) {
+				{ p.Label }
+			}
+		}
+		<ul x-show={ p.Tags + `.length` } class={ classes.Tags }>
+			<template x-for={ `(tag, idx) in ` + p.Tags } :key="idx">
+				<li class={ classes.Tag }>
+					<span x-text="tag"></span>
+					<button class={ classes.TagButton } data-tooltip="remove tag" @click={ p.Tags + `.splice(idx, 1); ` + p.OnRemove + `(tag)` }>
+						@gokit.CloseIcon()
+					</button>
+				</li>
+			</template>
+		</ul>
+		if !p.HideAddInput {
+			{{ addTag := `this.` + p.Tags + `.push(this.tags_newTag); this.` + p.OnAdd + `(this.tags_newTag); this.tags_newTag = ''` }}
+			<div
+				class="flex items-start gap-2 w-full"
+				x-data={ `{
+					tags_newTag: '',
+					tags_error: '',
+
+					tags_addTag() {
+						this.tags_error = ''
+						let nt = this.tags_newTag.trim()
+						if (!nt) return
+						const regex = /^(?:[a-z]|[a-z0-9][a-z0-9-+]*[a-z0-9])$/
+						if (!nt.match(regex)) {
+							this.tags_error = "invalid format";
+							return
+						}` +
+						
+						addTag +
+				`	}
+				}` }
+			>
+				<div class="flex-1">
+					@gokit.InputText(props.InputText{ID: id, Attrs: templ.Attributes{
+						"x-model":        "tags_newTag",
+						"@keydown.enter": "tags_addTag",
+					}, Error: props.Error{Attrs: templ.Attributes{"x-text": "tags_error"}}})
+				</div>
+				<div class="mt-0.5">
+					@gokit.Button(props.Button{Attrs: templ.Attributes{"@click": "tags_addTag"}}) {
+						Add
+					}
+				</div>
+			</div>
+		}
+	</div>
+}

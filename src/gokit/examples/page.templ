@@ -159,7 +159,7 @@ templ Page() {
 						Attrs: templ.Attributes{
 							"x-model":   "inputText.value",
 							":disabled": "inputText.disabled",
-							":class":    "{ '" + classes.InputTextError + "': inputText.errorText, '" + classes.InputTextSuccess + "': !inputText.errorText }",
+							":class":    "{ '" + classes.InputTextError + "': inputText.errorText }",
 						},
 					})
 			</div>
@@ -199,7 +199,11 @@ templ Page() {
 					props.Select{
 						Label: "Name",
 						Error: props.Error{Attrs: templ.Attributes{"x-text": "select.errorText"}},
-						Attrs: templ.Attributes{"x-model": "select.value", ":disabled": "select.disabled"},
+						Attrs: templ.Attributes{
+							"x-model":   "select.value",
+							":disabled": "select.disabled",
+							":class":    "{ '" + classes.SelectError + "': select.errorText }",
+						},
 					}) {
 					<template x-for="row in select.options" :key="row">
 						<option
@@ -235,7 +239,7 @@ templ Page() {
 						Attrs: templ.Attributes{
 							"x-model":   "textarea.value",
 							":disabled": "textarea.disabled",
-							":class":    "{ '" + classes.InputTextError + "': textarea.errorText, '" + classes.InputTextSuccess + "': !textarea.errorText }",
+							":class":    "{ '" + classes.TextareaError + "': textarea.errorText }",
 						},
 					})
 			</div>

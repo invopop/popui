@@ -31,13 +31,13 @@ func Button(p props.Button) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{templ.KV(classes.ButtonBase, p.Class == ""),
+		var templ_7745c5c3_Var2 = []any{
+			templ.KV(classes.ButtonBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
 			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),
-			templ.KV(classes.ButtonDefault, p.Variant == ""),
 			templ.KV(classes.ButtonSmall, p.Small),
-			templ.KV(classes.ButtonRegular, !p.Small)}
+		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

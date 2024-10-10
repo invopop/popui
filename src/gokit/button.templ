@@ -7,13 +7,13 @@ import (
 
 templ Button(p props.Button) {
 	<button
-		class={ templ.KV(classes.ButtonBase, p.Class == ""),
+		class={
+			templ.KV(classes.ButtonBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
 			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),
-			templ.KV(classes.ButtonDefault, p.Variant == ""),
 			templ.KV(classes.ButtonSmall, p.Small),
-			templ.KV(classes.ButtonRegular, !p.Small) }
+		}
 		if p.Disabled {
 			disabled
 		}

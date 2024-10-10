@@ -137,7 +137,10 @@ mark {
   @apply border-neutral-300;
 }
 .kit-select:focus {
-  @apply border-workspace-accent shadow-active ring-0 ring-offset-0;
+  @apply ring-0 ring-offset-0;
+}
+.kit-select:not(.kit-input--error):focus {
+  @apply border-workspace-accent-500 shadow-active;
 }
 
 /* Textarea */
@@ -149,6 +152,12 @@ mark {
 }
 .kit-textarea:focus {
   @apply ring-0 ring-offset-0;
+}
+.kit-textarea:hover:enabled {
+  @apply border-neutral-300;
+}
+.kit-textarea:not(.kit-input--error):focus {
+  @apply border-workspace-accent-500 shadow-active;
 }
 div[contenteditable='true'] .tag {
   display: inline-flex;

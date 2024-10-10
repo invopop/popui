@@ -1,6 +1,6 @@
 /* Avatar */
 .kit-avatar {
-  @apply h-5 w-5 bg-neutral-50 text-neutral-500 rounded flex items-center justify-center font-semibold relative;
+  @apply h-5 w-5 bg-neutral-50 text-neutral-500 rounded flex items-center justify-center font-semibold relative font-sans;
 }
 .kit-avatar--initial {
   @apply border border-neutral-100;
@@ -8,22 +8,16 @@
 
 /* Button */
 .kit-button {
-  @apply flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none;
+  @apply flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base;
 }
 .kit-button--danger {
-  @apply bg-danger-500 text-white;
+  @apply border-0 bg-danger-500 text-white;
 }
 .kit-button--primary {
-  @apply bg-workspace-accent text-white self-end;
-}
-.kit-button--default {
-  @apply border border-neutral-200;
+  @apply border-0 bg-workspace-accent text-white;
 }
 .kit-button--small {
   @apply text-sm;
-}
-.kit-button--regular {
-  @apply text-base;
 }
 .kit-button:hover {
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.16);
@@ -43,7 +37,7 @@
   @apply text-workspace-accent ring-0 ring-offset-0;
 }
 .kit-checkbox-label {
-  @apply text-base text-neutral-800;
+  @apply font-sans text-base text-neutral-800;
 }
 
 /* Image */
@@ -56,50 +50,47 @@
   @apply flex flex-col space-y-2;
 }
 .kit-input {
-  @apply py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight;
+  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
 }
 .kit-input:focus {
   @apply ring-0 ring-offset-0;
 }
-.kit-input--success {
-  @apply border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
-}
-.kit-input--success:hover:enabled {
+.kit-input:hover:enabled {
   @apply border-neutral-300;
 }
-.kit-input--success:focus {
+.kit-input:not(.kit-input--error):focus {
   @apply border-workspace-accent-500 shadow-active;
 }
 .kit-input--error {
-  @apply text-danger-500 border-danger-400 outline-danger-400;
+  @apply !text-danger-500 !border-danger-400 !outline-none !caret-danger-500;
 }
 .kit-label {
-  @apply text-sm font-medium text-neutral-500;
+  @apply font-sans text-sm font-medium text-neutral-500;
 }
 .kit-error {
-  @apply text-sm text-danger-500 flex items-center space-x-1 pl-[20px] bg-no-repeat bg-left bg-[length:16px_16px];
+  @apply font-sans text-sm text-danger-500 flex items-center space-x-1 pl-[20px] bg-no-repeat bg-left bg-[length:16px_16px];
 
   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCQk8cGF0aAoJCQlmaWxsLXJ1bGU9ImV2ZW5vZGQiCgkJCWNsaXAtcnVsZT0iZXZlbm9kZCIKCQkJZD0iTTggMTQuNUMxMS41ODk5IDE0LjUgMTQuNSAxMS41ODk5IDE0LjUgOEMxNC41IDQuNDEwMTUgMTEuNTg5OSAxLjUgOCAxLjVDNC40MTAxNSAxLjUgMS41IDQuNDEwMTUgMS41IDhDMS41IDExLjU4OTkgNC40MTAxNSAxNC41IDggMTQuNVpNNy45OTk5OSA5LjM1QzcuNjY4NjIgOS4zNSA3LjM5OTk5IDkuMDgxMzcgNy4zOTk5OSA4Ljc1VjQuNzVDNy4zOTk5OSA0LjQxODYzIDcuNjY4NjIgNC4xNSA3Ljk5OTk5IDQuMTVDOC4zMzEzNyA0LjE1IDguNTk5OTkgNC40MTg2MyA4LjU5OTk5IDQuNzVMOC41OTk5OSA4Ljc1QzguNTk5OTkgOS4wODEzNyA4LjMzMTM2IDkuMzUgNy45OTk5OSA5LjM1Wk04Ljc1IDExQzguNzUgMTEuNDE0MiA4LjQxNDIxIDExLjc1IDggMTEuNzVDNy41ODU3OSAxMS43NSA3LjI1IDExLjQxNDIgNy4yNSAxMUM3LjI1IDEwLjU4NTggNy41ODU3OSAxMC4yNSA4IDEwLjI1QzguNDE0MjEgMTAuMjUgOC43NSAxMC41ODU4IDguNzUgMTFaIgoJCQlmaWxsPSIjQzkyRDQ1IgoJCT48L3BhdGg+Cgk8L3N2Zz4=');
 }
 
 /* Text */
 .kit-paragraph {
-  @apply text-base text-neutral-800;
+  @apply font-sans text-base text-neutral-800;
 }
 .kit-title {
-  @apply text-black text-2xl font-semibold;
+  @apply font-sans text-black text-2xl font-semibold;
 }
 .kit-sbutitle {
-  @apply text-base text-neutral-800 font-medium;
+  @apply font-sans text-base text-neutral-800 font-medium;
 }
 .kit-info {
-  @apply text-sm text-neutral-500 flex items-center gap-1;
+  @apply font-sans text-sm text-neutral-500 flex items-center gap-1;
 }
 .kit-info-text {
   @apply flex-1;
 }
 mark {
-  @apply border border-neutral-200 bg-neutral-50 rounded text-sm text-neutral-500 px-1 py-0.5 inline-flex;
+  @apply font-sans border border-neutral-200 bg-neutral-50 rounded text-sm text-neutral-500 px-1 py-0.5 inline-flex;
 }
 
 /* Popover */
@@ -107,7 +98,7 @@ mark {
   @apply hidden absolute left-0 top-7 popover-menu border border-neutral-200 rounded-md px-1 py-0.5 w-full bg-white;
 }
 .kit-popover-list-item {
-  @apply px-2 py-1.5 font-medium text-base text-neutral-800 w-full rounded;
+  @apply font-sans px-2 py-1.5 font-medium text-base text-neutral-800 w-full rounded;
 }
 .kit-popover-list-item:hover {
   @apply bg-neutral-100;
@@ -123,7 +114,6 @@ mark {
   top: 0px;
   right: 0px;
   pointer-events: none;
-
   overlay: none;
 }
 [popover]:popover-open + .popover-menu {
@@ -135,7 +125,7 @@ mark {
   @apply flex flex-col space-y-2;
 }
 .kit-select {
-  @apply pl-2 py-1.5 border border-neutral-200 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight disabled:bg-neutral-50;
+  @apply font-sans pl-2 py-1.5 border border-neutral-200 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight disabled:bg-neutral-50;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -155,7 +145,7 @@ mark {
   @apply flex flex-col space-y-2;
 }
 .kit-textarea {
-  @apply py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight disabled:bg-neutral-50;
+  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight disabled:bg-neutral-50;
 }
 .kit-textarea:focus {
   @apply ring-0 ring-offset-0;

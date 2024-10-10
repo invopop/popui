@@ -171,7 +171,7 @@ div[contenteditable='true'] .tag {
 /* Layouts */
 
 .kit-container-config {
-  @apply flex items-center gap-2;
+  @apply flex flex-col gap-2;
 }
 
 .kit-prose {

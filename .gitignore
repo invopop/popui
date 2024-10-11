@@ -11,5 +11,5 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 /src
 /storybook-static
-popui
+/popui
 /tmp

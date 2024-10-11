@@ -1,14 +1,14 @@
 {
-  "name": "@invopop/ui-kit",
+  "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.4.6",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
     "preview": "vite preview",
-    "prepackage": "rm -rf src/lib && cp -r src/svelte/lib src/lib",
+    "prepackage": "rm -rf src && mkdir src && cp -r svelte/lib src/lib",
     "package": "svelte-kit sync && svelte-package && npm run build:tailwind && publint",
-    "postpackage": "rm -rf src/lib",
+    "postpackage": "rm -rf src",
     "prepublishOnly": "npm run package",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -16,7 +16,7 @@
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
     "storybook": "storybook dev -p 6006",
-    "build:tailwind": "npx tailwindcss -i ./styles.css -o ./dist/gokit.css --minify",
+    "build:tailwind": "npx tailwindcss -i ./styles.css -o ./dist/popui.css --minify",
     "build-storybook": "storybook build",
     "build-web-components": "vite build --config vite.wbc.config.ts",
     "publish-wbc": "npm run build-web-components && cp ./package-wbc.json ./dist/package.json && cd ./dist && npm run publish"

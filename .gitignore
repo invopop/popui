@@ -9,8 +9,7 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-/src/lib
-/src/gokit/tmp
+/src
 /storybook-static
-gokit
+popui
 /tmp

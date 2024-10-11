@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Appkit - Popover</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/@invopop/ui-kit@0.4.6/dist/gokit.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="p-5 space-y-4">
+    <div class="relative inline-block">
+      <button class="popui-button kit-button--small" popovertarget="popover-id">
+        Open popover
+      </button>
+      <!-- Following div is empty on purpose and needs to be present -->
+		  <div popover id="popover-id"></div>
+      <div class="popui-popover-list">
+        <ul>
+          <li class="popui-popover-list-item">1</li>
+          <li class="popui-popover-list-item">2</li>
+        </ul>
+      </div>
+	  </div>
+  </body>
+</html>

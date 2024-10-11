@@ -1,0 +1,27 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Checkbox(p props.Checkbox) {
+	<div class={ classes.CheckboxWrapper }>
+		<input
+			id={ p.ID }
+			type="checkbox"
+			class={ templ.KV(classes.CheckboxInput, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+			{ p.Attrs... }
+		/>
+		<label
+			for={ p.ID }
+			class={ templ.KV(classes.CheckboxLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }
+		>
+			if (p.Label != "") {
+				{ p.Label }
+			} else {
+				{ children... }
+			}
+		</label>
+	</div>
+}

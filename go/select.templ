@@ -1,0 +1,29 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Select(p props.Select) {
+	<div class={ classes.SelectWrapper }>
+		if p.Label != "" {
+			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass}) {
+				{ p.Label }
+			}
+		}
+		<select
+			id={ p.ID }
+			class={ templ.KV(classes.SelectBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+			if p.Disabled {
+				disabled
+			}
+			{ p.Attrs... }
+		>
+			{ children... }
+		</select>
+		if !p.Error.Empty() {
+			@InputError(p.Error)
+		}
+	</div>
+}

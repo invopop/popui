@@ -1,0 +1,40 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+templ InputLabel(p props.Label) {
+	<label
+		for={ p.ID }
+		class={ templ.KV(classes.Label, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+		{ p.Attrs... }
+	>
+		{ children... }
+	</label>
+}
+
+templ InputText(p props.InputText) {
+	<div class={ classes.InputTextWrapper }>
+		if p.Label != "" {
+			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass}) {
+				{ p.Label }
+			}
+		}
+		<input
+			id={ p.ID }
+			class={ templ.KV(classes.InputTextBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+			{ p.Attrs... }
+		/>
+		if !p.Error.Empty() {
+			@InputError(p.Error)
+		}
+	</div>
+}
+
+templ InputError(e props.Error) {
+	<p class={ templ.KV(classes.Error, e.Class == ""), templ.KV(e.Class, e.Class != "") } { e.Attrs... }>
+		{ e.Text }
+	</p>
+}

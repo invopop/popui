@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [svelte()],
   build: {
     lib: {
-      entry: 'src/web-components.ts',
+      entry: 'web-components/web-components.ts',
       formats: ['iife'],
       name: 'app',
       fileName: () => 'index.js'

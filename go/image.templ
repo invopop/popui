@@ -1,0 +1,19 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Image(p props.Image) {
+	<img
+		class={ templ.KV(classes.Image, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+		if (p.Src != "") {
+			src={ p.Src }
+		}
+		if (p.Alt != "") {
+			alt={ p.Alt }
+		}
+		{ p.Attrs... }
+	/>
+}

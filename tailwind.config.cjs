@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import twTheme from './src/svelte/lib/tw.theme'
+import twTheme from './svelte/lib/tw.theme'
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

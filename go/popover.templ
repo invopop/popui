@@ -1,0 +1,24 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Popover(p props.Popover) {
+	<div class="relative inline-block">
+		@Button(props.Button{
+			Attrs: templ.Attributes{"popovertarget": p.ID},
+			Small: true,
+		}) {
+			{ p.ButtonLabel }
+		}
+		<div popover id={ p.ID }></div>
+		<div
+			class={ templ.KV(classes.PopoverList, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+			{ p.Attrs... }
+		>
+			{ children... }
+		</div>
+	</div>
+}

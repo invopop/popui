@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/sveltekit'
 
 const config: StorybookConfig = {
-  stories: ['../src/svelte/**/*.mdx', '../src/svelte/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../svelte/**/*.mdx', '../svelte/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -14,6 +14,17 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag'
   },
-  staticDirs: ['../src/svelte/static']
+  staticDirs: ['../svelte/static'],
+  async viteFinal(config) {
+    const { mergeConfig } = await import('vite')
+
+    return mergeConfig(config, {
+      server: {
+        fs: {
+          allow: ['./svelte']
+        }
+      }
+    })
+  }
 }
 export default config

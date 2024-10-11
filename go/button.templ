@@ -1,0 +1,24 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Button(p props.Button) {
+	<button
+		class={
+			templ.KV(classes.ButtonBase, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
+			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),
+			templ.KV(classes.ButtonSmall, p.Small),
+		}
+		if p.Disabled {
+			disabled
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</button>
+}

@@ -25,6 +25,12 @@ templ InputText(p props.InputText) {
 		<input
 			id={ p.ID }
 			class={ templ.KV(classes.InputTextBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+			if p.Placeholder != "" {
+				placeholder={ p.Placeholder }
+			}
+			if p.Type != "" {
+				type={ p.Type }
+			}
 			{ p.Attrs... }
 		/>
 		if !p.Error.Empty() {

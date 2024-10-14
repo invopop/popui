@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/invopop/ui-kit.git"
+    "url": "git+https://github.com/invopop/popui.git"
   },
   "keywords": [
     "invopop",
@@ -19,7 +19,7 @@
   "author": "Invopop",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/invopop/ui-kit/issues"
+    "url": "https://github.com/invopop/popui/issues"
   },
-  "homepage": "https://github.com/invopop/ui-kit#readme"
+  "homepage": "https://github.com/invopop/popui#readme"
 }

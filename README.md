@@ -1,10 +1,17 @@
-# Invopop UI Kit
+# Popui
 
-Set of reusable components to be used inside Console UI and other Invopop Microfrontends.
+Popui is a set of reusable components to be used inside Console UI and other Invopop Apps.
 
-Everything inside `src/lib` is part of the library, everything else will be omitted on the NPM package.
+Currently we provide different libraries and examples for
 
-## Runing Storybook
+- Svelte
+- HTML
+- Go
+- Web Components
+
+## Svelte
+
+### Runing Storybook for development
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development storybook server:
 
@@ -14,43 +21,78 @@ npm run storybook
 
 > For using a different `accent` color for some components you can set the `--workspace-accent-color:` CSS variable placed in `.storybook/variables.css` file.
 
-## Compiling Web Components
+### Publishing the Svelte Library
 
-The following command will compile a file called `dist/invopop-web-components.js` that can be imported on any external project.
+To publish the library to [npm](https://www.npmjs.com) you only need to manually increase the version of package.json and make a PR to `main` branch. Once merged, it will automatically relase a new version of the library.
 
-```bash
-npm run build-web-components
+### Using the Svelte Library in your app
+
+```
+import { InputText } from '@invopop/popui'
+
+<div>
+  <InputText
+    label="Name"
+    placeholder="Company's legal name"
+    on:input={(event) => {
+      console.log(event.detail)
+    }}
+  />
+</div>
 ```
 
-A test HTML file using this script can be found at `src/wbc-preview/index.html`
+A complete catalogue of examples is availabe on [Storybook](https://popui-svelte.netlify.app/)
 
-## Building the Svelte Library
+## HTML
 
-To build the Svelte library:
+Raw HTML Examples of most of the components are available under the [html](https://github.com/invopop/popui/tree/main/html) folder of this repo.
 
-```bash
-npm run package
-```
+They all make use of the `popui.css` file that is deployed to a CDN on each release.
 
-To create a production version of the showcase app:
+## Go
 
-```bash
-npm run build
-```
+For Go, we are using Templ for creating template wrappers around these HTML components.
 
-You can preview the production build with `npm run preview`.
+### Development server
 
-> To deploy the app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing the Svelte Library
-
-To publish the library to [npm](https://www.npmjs.com):
+To run a development server for the Go library:
 
 ```bash
-npm publish
+npm air
 ```
 
-## Building the Web Components Library
+This command will compile the `.templ` templates and start up a web server loading the `go/examples/page.templ` file.
+
+Air will also watch for changes and re-run everything for you.
+
+### Using the go library in your app
+
+```go
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Page() {
+    <div class="max-w-md">
+        @popui.Button(
+            props.Button{
+                Variant: "primary",
+                Small: true,
+            }) {
+            Click Me
+        }
+    </div>
+}
+```
+
+You can check out examples of each component in `go/examples/page.templ` file.
+
+## Web Components
+
+Some of the Svelte components have a wrapper for making it work using Web Components
+
+### Building the Web Components Library
 
 To build the Web Components library:
 
@@ -60,7 +102,7 @@ npm run build-web-components
 
 This will generate a `/dist/index.js` file that you can include on any HTML to test. There is a ready-to-use HTML file with an example of any of the components located in `/src/wbc-preview/index.html`
 
-## Publishing the Web Components Library
+### Publishing the Web Components Library
 
 To publish the Web Components library to [npm](https://www.npmjs.com):
 
@@ -68,79 +110,79 @@ To publish the Web Components library to [npm](https://www.npmjs.com):
 npm publish-wbc
 ```
 
-## Using the Web Components Library in your module
+### Using the Web Components Library in your app
 
 Include the CDN script in your HTML file
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@invopop/web-components@0.0.1/index.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@invopop/web-components@0.0.13/index.js" defer></script>
 ```
 
 Use any of the components available
 
 ```html
-<ui-button>Default Button</ui-button>
+<popui-button>Default Button</popui-button>
 ```
 
 You can pass props and listen to events
 
 ```html
-<ui-button onClick="alert('button click')" type="primary">Primary Button</ui-button>
+<popui-button onClick="alert('button click')" type="primary">Primary Button</popui-button>
 ```
 
-## Available Web Components
+### Available Web Components
 
 > NOTE: Due to web component limitations booleans need to be passed as strings ie: "true", other structures like objects or arrays need to be passed as JSON.stringify()
 
-| Component          | Events Emitted | Props Accepted                                                                     |
-| ------------------ | -------------- | ---------------------------------------------------------------------------------- |
-| `ui-button`        | `@click`       | `type`: 'default', 'primary', 'secondary', 'danger', 'dark'` (default: 'default')  |
-|                    |                | `disabled`: boolean (default: false)                                               |
-|                    |                | `small`: boolean (default: false)                                                  |
-|                    |                | `icon`: Cog6Tooth (Heroicons library name) (default: undefined)                    |
-|                    |                | `iconPosition`: 'right', 'left' (default: left)                                    |
-|                    |                |                                                                                    |
-| `ui-button-file`   | `@click`       | `type`: 'default', 'primary', 'secondary', 'danger', 'dark'` (default: 'default')  |
-|                    |                | `disabled`: boolean (default: false)                                               |
-|                    |                | `name`: string (default: '')                                                       |
-|                    |                | `fullwidth`: boolean (default: false)                                              |
-|                    |                |                                                                                    |
-| `ui-checkbox`      | `@change`      | `checked`: boolean (default: false)                                                |
-|                    |                |                                                                                    |
-| `ui-input-search`  | `@input`       | `placeholder`: string (default: '')                                                |
-|                    |                | `shortcut`: string (default: '')                                                   |
-|                    |                |                                                                                    |
-| `ui-input-text`    | `@input`       | `id`: string (default: '')                                                         |
-|                    |                | `label`: string (default: '')                                                      |
-|                    |                | `placeholder`: string (default: '')                                                |
-|                    |                | `errorText`: string (default: '')                                                  |
-|                    |                | `disabled`: boolean (default: 'false')                                             |
-|                    |                |                                                                                    |
-| `ui-list-item`     | `@input`       | `value`: string (default: '')                                                      |
-|                    |                | `label`: string (default: '')                                                      |
-|                    |                |                                                                                    |
-| `ui-radio`         | `@change`      | `checked`: boolean (default: false)                                                |
-|                    |                |                                                                                    |
-| `ui-section`       |                | `title`: string (default: '')                                                      |
-|                    |                |                                                                                    |
-| `ui-select`        | `@change`      | `id`: string (default: '')                                                         |
-|                    |                | `name`: string (default: '')                                                       |
-|                    |                | `label`: string (default: '')                                                      |
-|                    |                | `placeholder`: string (default: '')                                                |
-|                    |                | `value`: string (default: '')                                                      |
-|                    |                | `icon`: Cog6Tooth (Heroicons library name) (default: undefined)                    |
-|                    |                | `disabled`: boolean (default: 'false')                                             |
-|                    |                | `disablePlaceholder`: boolean (default: 'false')                                   |
-|                    |                | `options`: string (default: '[]')                                                  |
-|                    |                |                                                                                    |
-| `ui-tag-search`    | `@clear`       | `label`: string (default: '')                                                      |
-|                    |                | `icon`: Cog6Tooth (Heroicons library name) (default: undefined)                    |
-|                    |                |                                                                                    |
-| `ui-tag-status`    |                | `label`: string (default: '')                                                      |
-|                    |                | `status`: 'default', 'success', 'warning', 'danger', 'orange' (default: 'default') |
-|                    |                |                                                                                    |
-| `ui-title-main`    |                | `title`: string (default: '')                                                      |
-|                    |                |                                                                                    |
-| `ui-title-section` |                | `title`: string (default: '')                                                      |
-|                    |                |                                                                                    |
-| `ui-toggle`        | `@change`      | `checked`: boolean (default: false)                                                |
+| Component             | Events Emitted | Props Accepted                                                                     |
+| --------------------- | -------------- | ---------------------------------------------------------------------------------- |
+| `popui-button`        | `@click`       | `type`: 'default', 'primary', 'secondary', 'danger', 'dark'` (default: 'default')  |
+|                       |                | `disabled`: boolean (default: false)                                               |
+|                       |                | `small`: boolean (default: false)                                                  |
+|                       |                | `icon`: Cog6Tooth (Heroicons library name) (default: undefined)                    |
+|                       |                | `iconPosition`: 'right', 'left' (default: left)                                    |
+|                       |                |                                                                                    |
+| `popui-button-file`   | `@click`       | `type`: 'default', 'primary', 'secondary', 'danger', 'dark'` (default: 'default')  |
+|                       |                | `disabled`: boolean (default: false)                                               |
+|                       |                | `name`: string (default: '')                                                       |
+|                       |                | `fullwidth`: boolean (default: false)                                              |
+|                       |                |                                                                                    |
+| `popui-checkbox`      | `@change`      | `checked`: boolean (default: false)                                                |
+|                       |                |                                                                                    |
+| `popui-input-search`  | `@input`       | `placeholder`: string (default: '')                                                |
+|                       |                | `shortcut`: string (default: '')                                                   |
+|                       |                |                                                                                    |
+| `popui-input-text`    | `@input`       | `id`: string (default: '')                                                         |
+|                       |                | `label`: string (default: '')                                                      |
+|                       |                | `placeholder`: string (default: '')                                                |
+|                       |                | `errorText`: string (default: '')                                                  |
+|                       |                | `disabled`: boolean (default: 'false')                                             |
+|                       |                |                                                                                    |
+| `popui-list-item`     | `@input`       | `value`: string (default: '')                                                      |
+|                       |                | `label`: string (default: '')                                                      |
+|                       |                |                                                                                    |
+| `popui-radio`         | `@change`      | `checked`: boolean (default: false)                                                |
+|                       |                |                                                                                    |
+| `popui-section`       |                | `title`: string (default: '')                                                      |
+|                       |                |                                                                                    |
+| `popui-select`        | `@change`      | `id`: string (default: '')                                                         |
+|                       |                | `name`: string (default: '')                                                       |
+|                       |                | `label`: string (default: '')                                                      |
+|                       |                | `placeholder`: string (default: '')                                                |
+|                       |                | `value`: string (default: '')                                                      |
+|                       |                | `icon`: Cog6Tooth (Heroicons library name) (default: undefined)                    |
+|                       |                | `disabled`: boolean (default: 'false')                                             |
+|                       |                | `disablePlaceholder`: boolean (default: 'false')                                   |
+|                       |                | `options`: string (default: '[]')                                                  |
+|                       |                |                                                                                    |
+| `popui-tag-search`    | `@clear`       | `label`: string (default: '')                                                      |
+|                       |                | `icon`: Cog6Tooth (Heroicons library name) (default: undefined)                    |
+|                       |                |                                                                                    |
+| `popui-tag-status`    |                | `label`: string (default: '')                                                      |
+|                       |                | `status`: 'default', 'success', 'warning', 'danger', 'orange' (default: 'default') |
+|                       |                |                                                                                    |
+| `popui-title-main`    |                | `title`: string (default: '')                                                      |
+|                       |                |                                                                                    |
+| `popui-title-section` |                | `title`: string (default: '')                                                      |
+|                       |                |                                                                                    |
+| `popui-toggle`        | `@change`      | `checked`: boolean (default: false)                                                |

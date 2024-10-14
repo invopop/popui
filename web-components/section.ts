@@ -1,4 +1,4 @@
-import SectionLayout from '../lib/SectionLayout.svelte'
+import SectionLayout from '../svelte/lib/SectionLayout.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

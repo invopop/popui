@@ -1,4 +1,4 @@
-import ButtonFile from '../lib/ButtonFile.svelte'
+import ButtonFile from '../svelte/lib/ButtonFile.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

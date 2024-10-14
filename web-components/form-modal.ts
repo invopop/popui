@@ -1,4 +1,4 @@
-import FormLayoutModal from '../lib/FormLayoutModal.svelte'
+import FormLayoutModal from '../svelte/lib/FormLayoutModal.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

@@ -1,4 +1,4 @@
-import InputCheckbox from '../lib/InputCheckbox.svelte'
+import InputCheckbox from '../svelte/lib/InputCheckbox.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

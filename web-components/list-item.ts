@@ -1,4 +1,4 @@
-import DataListItem from '../lib/DataListItem.svelte'
+import DataListItem from '../svelte/lib/DataListItem.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

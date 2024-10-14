@@ -1,4 +1,4 @@
-import DrawerContext from '../lib/DrawerContext.svelte'
+import DrawerContext from '../svelte/lib/DrawerContext.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

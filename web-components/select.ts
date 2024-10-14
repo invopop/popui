@@ -1,4 +1,4 @@
-import InputSelect from '../lib/InputSelect.svelte'
+import InputSelect from '../svelte/lib/InputSelect.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

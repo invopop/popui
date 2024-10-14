@@ -1,4 +1,4 @@
-import BaseDropdown from '../lib/BaseDropdown.svelte'
+import BaseDropdown from '../svelte/lib/BaseDropdown.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

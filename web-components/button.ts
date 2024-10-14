@@ -1,5 +1,5 @@
 import type { ButtonVariant } from '../svelte/lib/types.js'
-import BaseButton from '../lib/BaseButton.svelte'
+import BaseButton from '../svelte/lib/BaseButton.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

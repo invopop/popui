@@ -1,4 +1,4 @@
-import TagSearch from '../lib/TagSearch.svelte'
+import TagSearch from '../svelte/lib/TagSearch.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

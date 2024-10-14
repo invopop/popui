@@ -1,4 +1,4 @@
-import TagStatus from '../lib/TagStatus.svelte'
+import TagStatus from '../svelte/lib/TagStatus.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

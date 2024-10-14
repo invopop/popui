@@ -1,4 +1,4 @@
-import TitleMain from '../lib/TitleMain.svelte'
+import TitleMain from '../svelte/lib/TitleMain.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

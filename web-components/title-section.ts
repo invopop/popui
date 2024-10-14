@@ -1,4 +1,4 @@
-import TitleSection from '../lib/TitleSection.svelte'
+import TitleSection from '../svelte/lib/TitleSection.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

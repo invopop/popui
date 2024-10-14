@@ -1,4 +1,4 @@
-import InputText from '../lib/InputText.svelte'
+import InputText from '../svelte/lib/InputText.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

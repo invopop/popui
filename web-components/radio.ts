@@ -1,4 +1,4 @@
-import InputRadio from '../lib/InputRadio.svelte'
+import InputRadio from '../svelte/lib/InputRadio.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

@@ -1,4 +1,4 @@
-import InputToggle from '../lib/InputToggle.svelte'
+import InputToggle from '../svelte/lib/InputToggle.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

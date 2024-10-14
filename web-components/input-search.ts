@@ -1,4 +1,4 @@
-import InputSearch from '../lib/InputSearch.svelte'
+import InputSearch from '../svelte/lib/InputSearch.svelte'
 import WebComponent from './component.js'
 
 export default class extends WebComponent {

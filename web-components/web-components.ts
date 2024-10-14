@@ -16,7 +16,7 @@ import TagStatus from './tag-status.js'
 import TitleMain from './title-main.js'
 import TitleSection from './title-section.js'
 
-const NAMESPACE = 'ui'
+const NAMESPACE = 'popui'
 
 customElements.define(`${NAMESPACE}-button`, BaseButton)
 customElements.define(`${NAMESPACE}-button-file`, ButtonFile)

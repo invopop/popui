@@ -9,10 +9,12 @@ type Label struct {
 }
 
 type InputText struct {
-	ID         string
-	Class      string
-	Label      string
-	LabelClass string
-	Error      Error
-	Attrs      templ.Attributes
+	ID          string
+	Placeholder string
+	Type        string
+	Class       string
+	Label       string
+	LabelClass  string
+	Error       Error
+	Attrs       templ.Attributes
 }

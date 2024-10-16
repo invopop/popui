@@ -80,7 +80,7 @@
 .popui-title {
   @apply font-sans text-black text-2xl font-semibold;
 }
-.popui-sbutitle {
+.popui-subtitle {
   @apply font-sans text-base text-neutral-800 font-medium;
 }
 .popui-info {
@@ -89,7 +89,8 @@
 .popui-info-text {
   @apply flex-1;
 }
-mark {
+mark,
+p > code {
   @apply font-sans border border-neutral-200 bg-neutral-50 rounded text-sm text-neutral-500 px-1 py-0.5 inline-flex;
 }
 
@@ -181,6 +182,10 @@ div[contenteditable='true'] .tag {
 
 .popui-container-config {
   @apply flex flex-col gap-2;
+}
+
+.popui-form-section {
+  @apply space-y-2;
 }
 
 .popui-prose {

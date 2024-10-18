@@ -13,6 +13,7 @@
   import BaseCounter from './BaseCounter.svelte'
   import BaseTableRow from './BaseTableRow.svelte'
   import BaseTableCell from './BaseTableCell.svelte'
+  import InputCheckbox from './InputCheckbox.svelte'
 
   const dispatch = createEventDispatcher()
   const callback = (entry: IntersectionObserverEntry) => {
@@ -33,6 +34,9 @@
   export let disableRowClick = false
   export let hideCounter = false
   export let freeWrap = false
+  export let selectable = false
+  export let selectedRows: TableDataRow[] = []
+  export let selectedTrackedBy = 'id'
 
   $: groupedData = groupData(data)
   $: addExtraCell = getActions instanceof Function
@@ -55,6 +59,14 @@
 
     return groups
   }
+
+  function toggleAllSelected(selected: boolean) {
+    selectedRows = []
+
+    if (!selected) return
+
+    selectedRows = data
+  }
 </script>
 
 <svelte:window
@@ -70,6 +82,16 @@
   <table class="hidden md:table w-full rounded-md">
     <thead>
       <tr class="border-b border-neutral-100 relative">
+        {#if selectable}
+          <!-- if table is selectable we need to add an extra header with a checkbox -->
+          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md pl-1.5">
+            <InputCheckbox
+              on:change={(event) => {
+                toggleAllSelected(event.detail)
+              }}
+            />
+          </th>
+        {/if}
         {#each fields as field, i (i)}
           <BaseTableHeader
             isFirst={i === 0}
@@ -109,6 +131,9 @@
             {getActions}
             {disableRowClick}
             {freeWrap}
+            {selectable}
+            {selectedRows}
+            {selectedTrackedBy}
             on:click={() => {
               if (disableRowClick) return
 
@@ -120,6 +145,15 @@
             }}
             on:contextmenu={() => {
               dispatch('rowRightClick', row)
+            }}
+            on:checked={(event) => {
+              if (event.detail) {
+                selectedRows = [...selectedRows, row]
+              } else {
+                selectedRows = selectedRows.filter(
+                  (r) => r[selectedTrackedBy] !== row[selectedTrackedBy]
+                )
+              }
             }}
             on:action
             on:copied

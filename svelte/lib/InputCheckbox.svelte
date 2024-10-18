@@ -25,4 +25,5 @@
   {checked}
   class="form-checkbox w-5 h-5 text-workspace-accent focus:text-workspace-accent rounded border border-neutral-200 focus:ring-0 focus:ring-offset-0"
   on:change={updateInput}
+  on:click|stopPropagation
 />

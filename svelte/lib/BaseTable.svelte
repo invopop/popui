@@ -40,6 +40,8 @@
 
   $: groupedData = groupData(data)
   $: addExtraCell = getActions instanceof Function
+  $: indeterminate = selectedRows.length > 0 && selectedRows.length < data.length
+  $: allChecked = selectedRows.length === data.length
 
   function groupData(rows: TableDataRow[]): TableGroup[] {
     if (rows.length === 0) return []
@@ -86,6 +88,8 @@
           <!-- if table is selectable we need to add an extra header with a checkbox -->
           <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md pl-1.5">
             <InputCheckbox
+              checked={allChecked}
+              {indeterminate}
               on:change={(event) => {
                 toggleAllSelected(event.detail)
               }}

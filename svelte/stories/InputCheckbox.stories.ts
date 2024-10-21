@@ -23,3 +23,10 @@ export const Checked: Story = {
     checked: true
   }
 }
+
+export const Indeterminate: Story = {
+  args: {
+    indeterminate: true,
+    checked: true
+  }
+}

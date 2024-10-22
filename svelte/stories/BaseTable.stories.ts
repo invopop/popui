@@ -415,6 +415,57 @@ export const Selectable: Story = {
   }
 }
 
+export const SelectableSelectAllDisabled: Story = {
+  args: {
+    hideSelectAll: true,
+    selectedTrackedBy: 'uuid',
+    selectable: true,
+    fields: [
+      {
+        headerLabel: 'Invoice',
+        slug: 'code',
+        sortable: true
+      },
+      { headerLabel: 'UUID', slug: 'uuid', fullWidth: true, monospaced: true },
+      { headerLabel: 'Amount', slug: 'total', monospaced: true },
+      { headerLabel: 'Date', slug: 'created_at', monospacedNums: true }
+    ],
+    data: [
+      {
+        code: 'CC2300028X',
+        uuid: 'cdf77eb0-66a9-11ef-8b20-d16fce9ec62a',
+        total: '-',
+        created_at: 'Sep 22, 2023',
+        draft: true
+      },
+      {
+        code: 'CAB-0042',
+        uuid: '867e76a8-9574-4421-82e1-ca15ce2eec8d',
+        total: '€87.403,50',
+        created_at: 'Sep 23, 2023'
+      },
+      {
+        code: 'CAB-0043',
+        uuid: '867e76a8-9574-4421-82e1-ca15ce2eec9d',
+        total: '€7.903,50',
+        created_at: 'Sep 24, 2023'
+      },
+      {
+        code: 'CAB-0044',
+        uuid: '867e76a8-9574-4421-82e1-ca15ce2eec9e',
+        total: '€903,50',
+        created_at: 'Sep 25, 2023'
+      },
+      {
+        code: 'CAB-0045',
+        uuid: '867e76a8-9574-4421-82e1-ca15ce2e8c9e',
+        total: '€3,50',
+        created_at: 'Sep 26, 2023'
+      }
+    ]
+  }
+}
+
 export const WithIcons: Story = {
   args: {
     fields: [

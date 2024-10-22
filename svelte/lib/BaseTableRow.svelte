@@ -31,6 +31,7 @@
 
 <tr
   class:cursor-pointer={!disableRowClick}
+  class:bg-workspace-accent-50={checked}
   class="hover:bg-neutral-50"
   on:click
   on:contextmenu|preventDefault={() => {

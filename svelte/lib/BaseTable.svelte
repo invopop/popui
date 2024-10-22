@@ -24,6 +24,9 @@
   const intersectOptions = { callback }
 
   let metaKeyPressed = false
+  let shiftKeyPressed = false
+  let lastSelected: TableDataRow = {}
+  let selectWithArrowPosition = -1
 
   export let sortBy = ''
   export let sortDirection: TableSortBy = ''
@@ -37,11 +40,16 @@
   export let selectable = false
   export let selectedRows: TableDataRow[] = []
   export let selectedTrackedBy = 'id'
+  export let hideSelectAll = false
 
   $: groupedData = groupData(data)
   $: addExtraCell = getActions instanceof Function
   $: indeterminate = selectedRows.length > 0 && selectedRows.length < data.length
   $: allChecked = selectedRows.length === data.length
+  $: flattedData = groupedData.flatMap((d) => d.rows)
+  $: lastSelectedIndex = flattedData.findIndex(
+    (d) => d[selectedTrackedBy] === lastSelected[selectedTrackedBy]
+  )
 
   function groupData(rows: TableDataRow[]): TableGroup[] {
     if (rows.length === 0) return []
@@ -64,19 +72,99 @@
 
   function toggleAllSelected(selected: boolean) {
     selectedRows = []
+    lastSelected = {}
 
     if (!selected) return
 
     selectedRows = data
   }
+
+  function selectRow(row: TableDataRow) {
+    selectedRows = [...new Set([...selectedRows, row])]
+  }
+
+  function unselectRow(row: TableDataRow) {
+    selectedRows = selectedRows.filter((r) => r[selectedTrackedBy] !== row[selectedTrackedBy])
+    if (!selectedRows.length) {
+      lastSelected = {}
+    }
+  }
+
+  function selectRange(to: TableDataRow) {
+    if (lastSelectedIndex < 0) return
+
+    let fromIndex = lastSelectedIndex
+    let toIndex = flattedData.findIndex((d) => d[selectedTrackedBy] === to[selectedTrackedBy])
+    if (fromIndex > toIndex) {
+      ;[fromIndex, toIndex] = [toIndex, fromIndex]
+    }
+
+    const itemsToSelect = flattedData.slice(fromIndex, toIndex + 1)
+
+    selectedRows = [...new Set([...selectedRows, ...itemsToSelect])]
+  }
 </script>
 
 <svelte:window
   on:keydown={(event) => {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      selectedRows = []
+      lastSelected = {}
+    }
+
     metaKeyPressed = event.metaKey
+    shiftKeyPressed = event.shiftKey
+
+    if (event.key === 'Shift') {
+      selectWithArrowPosition = lastSelectedIndex
+      return
+    }
+
+    if (event.key === 'ArrowUp') {
+      if (!shiftKeyPressed) return
+      const toIndex = lastSelectedIndex - 1
+      const to = flattedData[toIndex]
+
+      if (!to) return
+
+      if (toIndex < selectWithArrowPosition) {
+        selectRow(to)
+      } else {
+        unselectRow(lastSelected)
+      }
+
+      lastSelected = to
+    }
+
+    if (event.key === 'ArrowDown') {
+      if (lastSelectedIndex < 0) {
+        selectRow(flattedData[0])
+        lastSelected = flattedData[0]
+      }
+
+      if (!shiftKeyPressed) return
+
+      const toIndex = lastSelectedIndex + 1
+      const to = flattedData[toIndex]
+
+      if (!to) return
+
+      if (toIndex > selectWithArrowPosition) {
+        selectRow(to)
+      } else {
+        unselectRow(lastSelected)
+      }
+
+      lastSelected = to
+    }
   }}
-  on:keyup={() => {
+  on:keyup={(event) => {
     metaKeyPressed = false
+    shiftKeyPressed = false
+
+    if (!event.shiftKey) {
+      selectWithArrowPosition = -1
+    }
   }}
 />
 
@@ -87,13 +175,15 @@
         {#if selectable}
           <!-- if table is selectable we need to add an extra header with a checkbox -->
           <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md pl-1.5">
-            <InputCheckbox
-              checked={allChecked}
-              {indeterminate}
-              on:change={(event) => {
-                toggleAllSelected(event.detail)
-              }}
-            />
+            {#if !hideSelectAll}
+              <InputCheckbox
+                checked={allChecked}
+                {indeterminate}
+                on:change={(event) => {
+                  toggleAllSelected(event.detail)
+                }}
+              />
+            {/if}
           </th>
         {/if}
         {#each fields as field, i (i)}
@@ -152,11 +242,14 @@
             }}
             on:checked={(event) => {
               if (event.detail) {
-                selectedRows = [...selectedRows, row]
+                if (shiftKeyPressed) {
+                  selectRange(row)
+                } else {
+                  selectRow(row)
+                }
+                lastSelected = row
               } else {
-                selectedRows = selectedRows.filter(
-                  (r) => r[selectedTrackedBy] !== row[selectedTrackedBy]
-                )
+                unselectRow(row)
               }
             }}
             on:action

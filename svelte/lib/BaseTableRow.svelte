@@ -42,8 +42,10 @@
 >
   {#if selectable}
     <td>
-      <!-- for hack is needed in order to be used with the custom checkbox and silence the linter -->
-      <label class="pl-5 pr-1.5 h-[40px] flex items-center" for={undefined}>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-label-has-associated-control -->
+      <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+      <label class="pl-5 pr-1.5 h-[40px] flex items-center" on:click|stopPropagation>
         <InputCheckbox
           {checked}
           on:change={(event) => {

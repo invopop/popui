@@ -176,7 +176,10 @@
           <!-- if table is selectable we need to add an extra header with a checkbox -->
           <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
             {#if !hideSelectAll}
-              <label class="pl-5 pr-3 h-[40px] flex items-center" for={undefined}>
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <!-- svelte-ignore a11y-label-has-associated-control -->
+              <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+              <label class="pl-5 pr-3 h-[40px] flex items-center" on:click|stopPropagation>
                 <InputCheckbox
                   checked={allChecked}
                   {indeterminate}

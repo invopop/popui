@@ -16,14 +16,16 @@
   export let isLast = false
 
   $: outerStyles = clsx({
-    'w-full': field.fullWidth,
-    'rounded-tl-md': isFirst,
-    'rounded-tr-md': isLast
+    'w-full': field.fullWidth
   })
 
   $: headerStyles = clsx({
     'justify-end': field.rightAlign,
-    'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable
+    'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable,
+    'pl-5': isFirst,
+    'pl-3': !isFirst,
+    'pr-5': isLast,
+    'pr-3': !isLast
   })
 
   function handleSortBy(event: CustomEvent) {
@@ -44,7 +46,7 @@
       <BaseDropdown bind:this={sortDropdown} fullWidth>
         <span
           slot="trigger"
-          class="{headerStyles} w-full p-3 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
+          class="{headerStyles} w-full py-3 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
         >
           <span>{field.headerLabel}</span>
           {#if sortBy === field.slug}

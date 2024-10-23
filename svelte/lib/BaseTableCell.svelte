@@ -10,23 +10,30 @@
   import { Icon } from '@steeze-ui/svelte-icon'
 
   export let field: TableField
-  export let currentIndex: number
+  export let isFirst = false
+  export let isLast = false
   export let badge: Badge | null = null
   export let status: FeedItemStatus | null = null
   export let icons: TableIcon[] | null = null
   export let data: unknown = ''
   export let freeWrap = false
   export let tag = 'td'
+  export let selectable = false
+  export let hasActions = false
 
   $: cellStyles = clsx(
     { 'tabular-nums slashed-zero lining-nums': field.monospacedNums },
     { 'font-mono': field.monospaced },
-    { 'text-neutral-800 font-medium': currentIndex === 0 && !field.grayed },
-    { 'text-neutral-800 md:text-neutral-500': currentIndex > 0 || field.grayed },
+    { 'text-neutral-800 font-medium': isFirst && !field.grayed },
+    { 'text-neutral-800 md:text-neutral-500': !isFirst || field.grayed },
     { 'md:text-right': field.rightAlign },
     { 'md:w-full md:max-w-0': field.fullWidth },
     { 'py-2 md:py-[11.25px]': badge },
     { 'py-2 md:py-[11.75px]': !badge },
+    { 'pl-5': isFirst && !selectable },
+    { 'pl-3': !isFirst || selectable },
+    { 'pr-5': isLast && !hasActions },
+    { 'pr-3': !isLast || hasActions },
     { 'px-3': !field.noPadding },
     { 'px-0': field.noPadding },
     { 'whitespace-nowrap truncate': !freeWrap }

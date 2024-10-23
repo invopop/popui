@@ -168,27 +168,29 @@
   }}
 />
 
-<div class="w-full rounded-md md:border border-neutral-100 font-sans">
-  <table class="hidden md:table w-full rounded-md">
+<div class="w-full font-sans">
+  <table class="hidden md:table w-full">
     <thead>
       <tr class="border-b border-neutral-100 relative">
         {#if selectable}
           <!-- if table is selectable we need to add an extra header with a checkbox -->
-          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md pl-1.5">
+          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
             {#if !hideSelectAll}
-              <InputCheckbox
-                checked={allChecked}
-                {indeterminate}
-                on:change={(event) => {
-                  toggleAllSelected(event.detail)
-                }}
-              />
+              <label class="pl-5 pr-3 h-[40px] flex items-center" for={undefined}>
+                <InputCheckbox
+                  checked={allChecked}
+                  {indeterminate}
+                  on:change={(event) => {
+                    toggleAllSelected(event.detail)
+                  }}
+                />
+              </label>
             {/if}
           </th>
         {/if}
         {#each fields as field, i (i)}
           <BaseTableHeader
-            isFirst={i === 0}
+            isFirst={i === 0 && !selectable}
             isLast={!addExtraCell && i === fields.length - 1}
             {sortBy}
             {sortDirection}
@@ -208,8 +210,8 @@
           <tr>
             <th
               scope="colgroup"
-              colspan={fields.length + 1}
-              class="bg-neutral-50 px-3 py-1.5 text-left text-sm font-medium text-neutral-500 sticky top-11 tracking-normal border-t border-b border-neutral-100 h-8"
+              colspan={fields.length + (selectable ? 2 : 1)}
+              class="bg-neutral-50 px-5 text-left text-sm font-medium text-neutral-500 sticky top-11 tracking-normal border-t border-b border-neutral-100 h-8"
             >
               <span>{group.label}</span>
               {#if !hideCounter}
@@ -278,7 +280,6 @@
           {#each fields as field, i (i)}
             <BaseTableCell
               tag="div"
-              currentIndex={i}
               {field}
               badge={field.helperBadge ? field.helperBadge(row) : null}
               status={field.helperStatus ? field.helperStatus(row) : null}

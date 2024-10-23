@@ -143,6 +143,53 @@ export const WithActions: Story = {
   }
 }
 
+export const WithActionsAndGroups: Story = {
+  args: {
+    selectable: true,
+    groupLabel: (data) => {
+      const months = {
+        '02': 'February',
+        '03': 'March'
+      }
+
+      const parts = data.created_at.split('-')
+
+      return months[parts[1]]
+    },
+    getActions: (data: TableDataRow) => {
+      // Action only applies to certain conditions
+      if (data.code === 'CC2300028X') {
+        return [
+          { icon: Settings, label: 'Configure', slug: 'config' },
+          { icon: Edit, label: 'Edit', slug: 'edit' },
+          { icon: Delete, label: 'Delete', slug: 'delete', footer: true, destructive: true }
+        ]
+      }
+
+      if (data.code === 'CAB-0042') {
+        return [
+          { icon: Settings, label: 'Configure', slug: 'config' },
+          { icon: Edit, label: 'Edit', slug: 'edit' },
+          { icon: DocumentText, label: 'F2023-101.pdf', slug: 'config', footer: true }
+        ]
+      }
+
+      return []
+    },
+
+    fields: [
+      { headerLabel: 'Invoice', slug: 'code', sortable: true },
+      { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
+      { headerLabel: 'Amount', slug: 'total' },
+      { headerLabel: 'Date', slug: 'created_at' }
+    ],
+    data: [
+      { code: 'CC2300028X', customer: 'Cobee', total: '-', created_at: '2023-02-23' },
+      { code: 'CAB-0042', customer: 'Cabify, Inc', total: '€87.403,50', created_at: '2023-03-23' }
+    ]
+  }
+}
+
 export const WithHelperBadge: Story = {
   args: {
     fields: [
@@ -564,6 +611,7 @@ export const WithGroupLabel: Story = {
 
 export const WithGroupLabelAndNoCounter: Story = {
   args: {
+    selectable: true,
     hideCounter: true,
     groupLabel: (data) => {
       const months = {

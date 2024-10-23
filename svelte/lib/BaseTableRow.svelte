@@ -41,20 +41,26 @@
   }}
 >
   {#if selectable}
-    <td class="pl-1.5">
-      <InputCheckbox
-        {checked}
-        on:change={(event) => {
-          dispatch('checked', event.detail)
-        }}
-      />
+    <td>
+      <!-- for hack is needed in order to be used with the custom checkbox and silence the linter -->
+      <label class="pl-5 pr-1.5 h-[40px] flex items-center" for={undefined}>
+        <InputCheckbox
+          {checked}
+          on:change={(event) => {
+            dispatch('checked', event.detail)
+          }}
+        />
+      </label>
     </td>
   {/if}
   {#each fields as field, i (i)}
     <BaseTableCell
-      currentIndex={i}
+      isFirst={i === 0}
+      isLast={i === fields.length - 1}
       {field}
       {freeWrap}
+      {selectable}
+      hasActions={!!actions.length}
       badge={field.helperBadge ? field.helperBadge(row) : null}
       status={field.helperStatus ? field.helperStatus(row) : null}
       icons={field.helperIcons ? field.helperIcons(row) : null}
@@ -63,7 +69,7 @@
     />
   {/each}
   {#if actions.length}
-    <td class="pl-1 pr-3">
+    <td class="pl-1 pr-5">
       <BaseTableActions
         bind:this={actionsDropdown}
         {actions}

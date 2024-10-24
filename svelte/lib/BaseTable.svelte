@@ -177,7 +177,7 @@
           <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
             {#if !hideSelectAll}
               <button
-                class="pl-5 pr-3 h-[40px] flex items-center"
+                class="pl-5 pr-3 h-[40px] flex items-center outline-none"
                 on:click|stopPropagation={() => {
                   toggleAllSelected(!selectedRows.length)
                 }}

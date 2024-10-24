@@ -74,7 +74,7 @@
         bind:this={checkboxButton}
         class="pl-5 pr-1.5 h-[40px] flex items-center outline-none group cursor-default"
         on:click|stopPropagation={() => {
-          dispatch('checked', !checked)
+          dispatch('checked', checked)
         }}
       >
         <div class:invisible={!checked} class="group-hover:visible">

@@ -8,6 +8,7 @@
   const dispatch = createEventDispatcher()
 
   let actionsDropdown: BaseTableActions
+  let checkboxButton: HTMLButtonElement
 
   export let row: TableDataRow
   export let getActions: TableActionProp = undefined
@@ -27,6 +28,33 @@
 
     return field === row[selectedTrackedBy]
   })
+
+  $: if (checked) {
+    scrollIntoView()
+  }
+
+  function scrollIntoView() {
+    const offset = 40
+    const elementRect = checkboxButton.getBoundingClientRect()
+    const elementTop = elementRect.top + offset
+    const elementBottom = elementRect.bottom + offset
+    const viewportHeight = window.innerHeight
+
+    const isAboveView = elementRect.top - offset < 0
+    const isBelowView = elementRect.bottom + offset > viewportHeight
+
+    if (isAboveView) {
+      window.scrollTo({
+        top: elementTop - offset,
+        behavior: 'smooth'
+      })
+    } else if (isBelowView) {
+      window.scrollTo({
+        top: elementBottom - viewportHeight + offset,
+        behavior: 'smooth'
+      })
+    }
+  }
 </script>
 
 <tr
@@ -43,6 +71,7 @@
   {#if selectable}
     <td>
       <button
+        bind:this={checkboxButton}
         class="pl-5 pr-1.5 h-[40px] flex items-center outline-none group cursor-default"
         on:click|stopPropagation={() => {
           dispatch('checked', !checked)

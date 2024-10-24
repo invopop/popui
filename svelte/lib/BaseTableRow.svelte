@@ -42,17 +42,19 @@
 >
   {#if selectable}
     <td>
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-label-has-associated-control -->
-      <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-      <label class="pl-5 pr-1.5 h-[40px] flex items-center" on:click|stopPropagation>
+      <button
+        class="pl-5 pr-1.5 h-[40px] flex items-center"
+        on:click|stopPropagation={() => {
+          dispatch('checked', !checked)
+        }}
+      >
         <InputCheckbox
           {checked}
           on:change={(event) => {
             dispatch('checked', event.detail)
           }}
         />
-      </label>
+      </button>
     </td>
   {/if}
   {#each fields as field, i (i)}

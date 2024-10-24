@@ -31,7 +31,7 @@
   @apply flex items-center gap-2;
 }
 .popui-checkbox-input {
-  @apply form-checkbox w-5 h-5 text-workspace-accent rounded border border-neutral-200;
+  @apply form-checkbox w-4 h-4 text-workspace-accent rounded border border-neutral-200;
 }
 .popui-checkbox-input:focus {
   @apply text-workspace-accent ring-0 ring-offset-0;

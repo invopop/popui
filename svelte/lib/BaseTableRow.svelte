@@ -43,7 +43,7 @@
   {#if selectable}
     <td>
       <button
-        class="pl-5 pr-1.5 h-[40px] flex items-center outline-none group"
+        class="pl-5 pr-1.5 h-[40px] flex items-center outline-none group cursor-default"
         on:click|stopPropagation={() => {
           dispatch('checked', !checked)
         }}

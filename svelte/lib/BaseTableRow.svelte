@@ -43,17 +43,19 @@
   {#if selectable}
     <td>
       <button
-        class="pl-5 pr-1.5 h-[40px] flex items-center outline-none"
+        class="pl-5 pr-1.5 h-[40px] flex items-center outline-none group"
         on:click|stopPropagation={() => {
           dispatch('checked', !checked)
         }}
       >
-        <InputCheckbox
-          {checked}
-          on:change={(event) => {
-            dispatch('checked', event.detail)
-          }}
-        />
+        <div class:invisible={!checked} class="group-hover:visible">
+          <InputCheckbox
+            {checked}
+            on:change={(event) => {
+              dispatch('checked', event.detail)
+            }}
+          />
+        </div>
       </button>
     </td>
   {/if}

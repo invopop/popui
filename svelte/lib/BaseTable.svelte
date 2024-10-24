@@ -177,18 +177,20 @@
           <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
             {#if !hideSelectAll}
               <button
-                class="pl-5 pr-3 h-[40px] flex items-center outline-none"
+                class="pl-5 pr-3 h-[40px] flex items-center outline-none group"
                 on:click|stopPropagation={() => {
                   toggleAllSelected(!selectedRows.length)
                 }}
               >
-                <InputCheckbox
-                  checked={allChecked}
-                  {indeterminate}
-                  on:change={(event) => {
-                    toggleAllSelected(event.detail)
-                  }}
-                />
+                <div class:invisible={!selectedRows.length} class="group-hover:visible">
+                  <InputCheckbox
+                    checked={allChecked}
+                    {indeterminate}
+                    on:change={(event) => {
+                      toggleAllSelected(event.detail)
+                    }}
+                  />
+                </div>
               </button>
             {/if}
           </th>

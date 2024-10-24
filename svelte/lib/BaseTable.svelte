@@ -115,6 +115,13 @@
     metaKeyPressed = event.metaKey
     shiftKeyPressed = event.shiftKey
 
+    if (event.key === 'Enter') {
+      if (lastSelectedIndex >= 0) {
+        dispatch('rowClick', lastSelected)
+      }
+      return
+    }
+
     if (event.key === 'Shift') {
       selectWithArrowPosition = lastSelectedIndex
       return

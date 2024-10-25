@@ -115,6 +115,8 @@
 
 <svelte:window
   on:keydown={(event) => {
+    event.preventDefault()
+
     if (event.key === 'Escape' || event.key === 'Esc') {
       selectedRows = []
       lastSelected = {}

@@ -4,6 +4,7 @@
   import BaseTableCell from './BaseTableCell.svelte'
   import type { TableActionProp, TableDataRow, TableField } from './types.js'
   import InputCheckbox from './InputCheckbox.svelte'
+  import { scrollIntoTableView } from './helpers.js'
 
   const dispatch = createEventDispatcher()
 
@@ -34,26 +35,7 @@
   }
 
   function scrollIntoView() {
-    const offset = 40
-    const elementRect = checkboxButton.getBoundingClientRect()
-    const elementTop = elementRect.top + offset
-    const elementBottom = elementRect.bottom + offset
-    const viewportHeight = window.innerHeight
-
-    const isAboveView = elementRect.top - offset < 0
-    const isBelowView = elementRect.bottom + offset > viewportHeight
-
-    if (isAboveView) {
-      window.scrollTo({
-        top: elementTop - offset,
-        behavior: 'smooth'
-      })
-    } else if (isBelowView) {
-      window.scrollTo({
-        top: elementBottom - viewportHeight + offset,
-        behavior: 'smooth'
-      })
-    }
+    scrollIntoTableView(checkboxButton)
   }
 </script>
 

@@ -42,3 +42,49 @@ export function getStatusType(status: string): FeedItemStatus {
 
   return statuses[status]
 }
+
+export function getScrollableContainer(element: HTMLElement) {
+  if (!element) {
+    return undefined
+  }
+
+  let parent = element.parentElement
+  while (parent) {
+    const { overflow } = window.getComputedStyle(parent)
+    if (overflow.split(' ').every((o) => o === 'auto' || o === 'scroll')) {
+      return parent
+    }
+    parent = parent.parentElement
+  }
+
+  return document.documentElement
+}
+
+export function scrollIntoTableView(element: HTMLElement) {
+  const offset = 40
+  const offsetTop = offset + 40
+  const container = getScrollableContainer(element)
+
+  if (!container) return
+
+  const containerRect = container.getBoundingClientRect()
+  const elementRect = element.getBoundingClientRect()
+
+  const elementTop = elementRect.top - containerRect.top + container.scrollTop
+  const elementBottom = elementRect.bottom - containerRect.top + container.scrollTop
+
+  const isAboveView = elementTop - offsetTop < container.scrollTop
+  const isBelowView = elementBottom + offset > container.scrollTop + container.clientHeight
+
+  if (isAboveView) {
+    container.scrollTo({
+      top: elementTop - offsetTop,
+      behavior: 'smooth'
+    })
+  } else if (isBelowView) {
+    container.scrollTo({
+      top: elementBottom - container.clientHeight + offset,
+      behavior: 'smooth'
+    })
+  }
+}

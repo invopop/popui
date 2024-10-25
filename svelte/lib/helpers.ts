@@ -76,14 +76,17 @@ export function scrollIntoTableView(element: HTMLElement) {
   const isAboveView = elementTop - offsetTop < container.scrollTop
   const isBelowView = elementBottom + offset > container.scrollTop + container.clientHeight
 
+  if (isBelowView) {
+    container.scrollTo({
+      top: elementBottom - container.clientHeight + offset,
+      behavior: 'smooth'
+    })
+    return
+  }
+
   if (isAboveView) {
     container.scrollTo({
       top: elementTop - offsetTop,
-      behavior: 'smooth'
-    })
-  } else if (isBelowView) {
-    container.scrollTo({
-      top: elementBottom - container.clientHeight + offset,
       behavior: 'smooth'
     })
   }

@@ -61,8 +61,8 @@ export function getScrollableContainer(element: HTMLElement) {
 }
 
 export function scrollIntoTableView(element: HTMLElement) {
-  const offset = 80
-  const offsetTop = offset + 40
+  const offset = 80 // 1 extra row to jump group headers
+  const offsetTop = offset + 80 // 1 extra row to reach the prev row, 1 more for jump sticky headers
   const container = getScrollableContainer(element)
 
   if (!container) return

@@ -145,11 +145,13 @@
 
       if (!to) return
 
+      const previousSelected = { ...lastSelected }
       lastSelected = to
 
       if (!shiftKeyPressed) return
 
       if (toIndex < selectWithArrowPosition) {
+        selectRow(previousSelected)
         selectRow(to)
       } else {
         unselectRow(lastSelected)

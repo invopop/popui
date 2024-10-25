@@ -90,6 +90,14 @@
     }
   }
 
+  function toggleRow(row: TableDataRow) {
+    if (selectedRows.find((r) => r[selectedTrackedBy] === row[selectedTrackedBy])) {
+      unselectRow(row)
+    } else {
+      selectRow(row)
+    }
+  }
+
   function selectRange(to: TableDataRow) {
     if (lastSelectedIndex < 0) return
 
@@ -112,6 +120,10 @@
       lastSelected = {}
     }
 
+    if ((event.code === 'Space' || event.key === ' ') && lastSelected) {
+      toggleRow(lastSelected)
+    }
+
     metaKeyPressed = event.metaKey
     shiftKeyPressed = event.shiftKey
 
@@ -128,41 +140,47 @@
     }
 
     if (event.key === 'ArrowUp') {
-      if (!shiftKeyPressed) return
       const toIndex = lastSelectedIndex - 1
       const to = flattedData[toIndex]
 
       if (!to) return
+
+      lastSelected = to
+
+      if (!shiftKeyPressed) return
 
       if (toIndex < selectWithArrowPosition) {
         selectRow(to)
       } else {
         unselectRow(lastSelected)
       }
-
-      lastSelected = to
     }
 
     if (event.key === 'ArrowDown') {
       if (lastSelectedIndex < 0) {
-        selectRow(flattedData[0])
+        if (shiftKeyPressed) {
+          selectRow(flattedData[0])
+        }
         lastSelected = flattedData[0]
+        return
       }
-
-      if (!shiftKeyPressed) return
 
       const toIndex = lastSelectedIndex + 1
       const to = flattedData[toIndex]
 
       if (!to) return
 
+      const previousSelected = { ...lastSelected }
+      lastSelected = to
+
+      if (!shiftKeyPressed) return
+
       if (toIndex > selectWithArrowPosition) {
+        selectRow(previousSelected)
         selectRow(to)
       } else {
         unselectRow(lastSelected)
       }
-
-      lastSelected = to
     }
   }}
   on:keyup={(event) => {
@@ -244,6 +262,7 @@
             {selectable}
             {selectedRows}
             {selectedTrackedBy}
+            selected={lastSelected && row[selectedTrackedBy] === lastSelected[selectedTrackedBy]}
             on:click={() => {
               if (disableRowClick) return
 

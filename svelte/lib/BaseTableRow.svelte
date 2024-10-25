@@ -17,6 +17,7 @@
   export let disableRowClick = false
   export let freeWrap = false
   export let selectable = false
+  export let selected = false
   export let selectedTrackedBy = 'id'
   export let selectedRows: TableDataRow[] = []
 
@@ -30,7 +31,7 @@
     return field === row[selectedTrackedBy]
   })
 
-  $: if (checked) {
+  $: if (selected) {
     scrollIntoView()
   }
 
@@ -41,7 +42,8 @@
 
 <tr
   class:cursor-pointer={!disableRowClick}
-  class:bg-workspace-accent-50={checked}
+  class:bg-neutral-50={selected}
+  class:bg-workspace-accent-50={checked && !selected}
   class="hover:bg-neutral-50"
   on:click
   on:contextmenu|preventDefault={() => {

@@ -61,7 +61,7 @@ export function getScrollableContainer(element: HTMLElement) {
 }
 
 export function scrollIntoTableView(element: HTMLElement) {
-  const offset = 40
+  const offset = 80
   const offsetTop = offset + 40
   const container = getScrollableContainer(element)
 

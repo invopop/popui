@@ -18,6 +18,7 @@
   export let freeWrap = false
   export let selectable = false
   export let selected = false
+  export let selectionMode = 'keyboard'
   export let selectedTrackedBy = 'id'
   export let selectedRows: TableDataRow[] = []
 
@@ -31,7 +32,7 @@
     return field === row[selectedTrackedBy]
   })
 
-  $: if (selected) {
+  $: if (selectionMode === 'keyboard' && selected) {
     scrollIntoView()
   }
 
@@ -44,12 +45,18 @@
   class:cursor-pointer={!disableRowClick}
   class:bg-neutral-50={selected}
   class:bg-workspace-accent-50={checked && !selected}
-  class="hover:bg-neutral-50"
   on:click
   on:contextmenu|preventDefault={() => {
     if (!actionsDropdown) return
 
     actionsDropdown.toggle()
+  }}
+  on:mouseover={() => {
+    if (selectionMode === 'keyboard') return
+    dispatch('hover')
+  }}
+  on:focus={() => {
+    dispatch('focus')
   }}
 >
   {#if selectable}

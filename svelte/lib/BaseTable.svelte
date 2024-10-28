@@ -27,6 +27,7 @@
   let shiftKeyPressed = false
   let lastSelected: TableDataRow = {}
   let selectWithArrowPosition = -1
+  let selectionMode = 'keyboard'
 
   export let sortBy = ''
   export let sortDirection: TableSortBy = ''
@@ -90,8 +91,12 @@
     }
   }
 
+  function rowIsSelected(row: TableDataRow) {
+    return selectedRows.find((r) => r[selectedTrackedBy] === row[selectedTrackedBy])
+  }
+
   function toggleRow(row: TableDataRow) {
-    if (selectedRows.find((r) => r[selectedTrackedBy] === row[selectedTrackedBy])) {
+    if (rowIsSelected(row)) {
       unselectRow(row)
     } else {
       selectRow(row)
@@ -114,8 +119,13 @@
 </script>
 
 <svelte:window
+  on:mousemove={() => {
+    selectionMode = 'mouse'
+  }}
   on:keydown={(event) => {
     event.preventDefault()
+
+    selectionMode = 'keyboard'
 
     if (event.key === 'Escape' || event.key === 'Esc') {
       selectedRows = []
@@ -147,17 +157,21 @@
 
       if (!to) return
 
-      const previousSelected = { ...lastSelected }
-      lastSelected = to
+      if (!shiftKeyPressed) {
+        lastSelected = to
+        return
+      }
 
-      if (!shiftKeyPressed) return
+      if (!rowIsSelected(lastSelected)) {
+        selectRow(lastSelected)
+      }
 
       if (toIndex < selectWithArrowPosition) {
-        selectRow(previousSelected)
         selectRow(to)
       } else {
         unselectRow(lastSelected)
       }
+      lastSelected = to
     }
 
     if (event.key === 'ArrowDown') {
@@ -174,17 +188,21 @@
 
       if (!to) return
 
-      const previousSelected = { ...lastSelected }
-      lastSelected = to
+      if (!shiftKeyPressed) {
+        lastSelected = to
+        return
+      }
 
-      if (!shiftKeyPressed) return
+      if (!rowIsSelected(lastSelected)) {
+        selectRow(lastSelected)
+      }
 
       if (toIndex > selectWithArrowPosition) {
-        selectRow(previousSelected)
         selectRow(to)
       } else {
         unselectRow(lastSelected)
       }
+      lastSelected = to
     }
   }}
   on:keyup={(event) => {
@@ -198,6 +216,7 @@
 />
 
 <div class="w-full font-sans">
+  {selectWithArrowPosition}
   <table class="hidden md:table w-full">
     <thead>
       <tr class="border-b border-neutral-100 relative">
@@ -266,6 +285,7 @@
             {selectable}
             {selectedRows}
             {selectedTrackedBy}
+            {selectionMode}
             selected={lastSelected && row[selectedTrackedBy] === lastSelected[selectedTrackedBy]}
             on:click={() => {
               if (disableRowClick) return
@@ -290,6 +310,10 @@
               } else {
                 unselectRow(row)
               }
+            }}
+            on:hover={() => {
+              if (shiftKeyPressed) return
+              lastSelected = row
             }}
             on:action
             on:copied

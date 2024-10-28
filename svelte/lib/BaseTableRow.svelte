@@ -68,7 +68,7 @@
           dispatch('checked', checked)
         }}
       >
-        <div class:invisible={!checked} class="group-hover:visible">
+        <div class:invisible={selectedRows.length === 0} class="group-hover:visible">
           <InputCheckbox
             {checked}
             on:change={(event) => {

@@ -132,7 +132,7 @@
       lastSelected = {}
     }
 
-    if ((event.code === 'Space' || event.key === ' ') && lastSelected) {
+    if ((event.code === 'Space' || event.key === ' ') && lastSelectedIndex >= 0) {
       toggleRow(lastSelected)
     }
 

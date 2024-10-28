@@ -216,7 +216,6 @@
 />
 
 <div class="w-full font-sans">
-  {selectWithArrowPosition}
   <table class="hidden md:table w-full">
     <thead>
       <tr class="border-b border-neutral-100 relative">

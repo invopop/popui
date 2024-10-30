@@ -184,7 +184,7 @@ div[contenteditable='true'] .tag {
 /* Layouts */
 
 .popui-container-config {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-2 p-0.5;
 }
 
 .popui-form-section {

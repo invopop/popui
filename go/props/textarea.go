@@ -12,6 +12,7 @@ type Textarea struct {
 	Label      string
 	LabelClass string
 	Disabled   bool
+	Monospaced bool
 	Rows       int
 	Error      Error
 	Attrs      templ.Attributes

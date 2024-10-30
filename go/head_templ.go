@@ -26,7 +26,7 @@ func DefaultCSS() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Inter font --><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap\" rel=\"stylesheet\"><link href=\"https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.3/dist/popui.css\" rel=\"stylesheet\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Inter font --><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap\" rel=\"stylesheet\"><link href=\"https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.24/dist/popui.css\" rel=\"stylesheet\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

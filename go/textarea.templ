@@ -14,7 +14,7 @@ templ Textarea(p props.Textarea) {
 		}
 		<textarea
 			id={ p.ID }
-			class={ templ.KV(classes.TextareaBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+			class={ templ.KV(classes.TextareaBase, p.Class == ""), templ.KV(p.Class, p.Class != ""), templ.KV(classes.TextareaMonospaced, p.Monospaced) }
 			rows={ p.GetRows() }
 			if p.Disabled {
 				disabled

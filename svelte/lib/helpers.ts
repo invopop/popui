@@ -91,3 +91,19 @@ export function scrollIntoTableView(element: HTMLElement) {
     })
   }
 }
+
+export function isInputFocused() {
+  const activeElement = document.activeElement as HTMLElement
+
+  if (!activeElement) return false
+
+  const isInputText =
+    activeElement.tagName === 'INPUT' &&
+    ['text', 'search', 'email', 'password', 'url'].includes(
+      (activeElement as HTMLInputElement).type
+    )
+
+  const isTextArea = activeElement.tagName === 'TEXTAREA' || activeElement.isContentEditable
+
+  return isInputText || isTextArea
+}

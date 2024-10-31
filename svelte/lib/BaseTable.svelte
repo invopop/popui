@@ -14,6 +14,7 @@
   import BaseTableRow from './BaseTableRow.svelte'
   import BaseTableCell from './BaseTableCell.svelte'
   import InputCheckbox from './InputCheckbox.svelte'
+  import { isInputFocused } from './helpers.js'
 
   const dispatch = createEventDispatcher()
   const callback = (entry: IntersectionObserverEntry) => {
@@ -118,19 +119,14 @@
   }
 
   function handleKeydown(event: KeyboardEvent) {
+    // If any input is focused on the rest of the window we dont want to break the default behavior
+    if (isInputFocused()) {
+      return
+    }
+
     selectionMode = 'keyboard'
 
-    const activeElement = document.activeElement as HTMLElement
-    const isInputFocused =
-      activeElement &&
-      (activeElement.tagName === 'INPUT' ||
-        activeElement.tagName === 'TEXTAREA' ||
-        activeElement.isContentEditable)
-
-    // Prevent default only if no input, textarea, or contenteditable element is focused
-    if (!isInputFocused) {
-      event.preventDefault()
-    }
+    event.preventDefault()
 
     if (event.key === 'Escape' || event.key === 'Esc') {
       selectedRows = []

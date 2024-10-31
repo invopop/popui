@@ -11,3 +11,5 @@ const Info = "popui-info"
 const InfoText = "popui-info-text"
 
 const Prose = "popui-prose"
+
+const HorizontalDivider = "popui-divider"

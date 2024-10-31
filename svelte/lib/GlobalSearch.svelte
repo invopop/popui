@@ -5,6 +5,7 @@
   import clsx from 'clsx'
   import ShortcutWrapper from './ShortcutWrapper.svelte'
   import { GLOBAL_SEARCH_KEY } from './constants.js'
+  import { isInputFocused } from './helpers.js'
 
   const dispatch = createEventDispatcher()
 
@@ -19,14 +20,8 @@
       return
     }
 
-    const activeElement = document.activeElement
-    const isInputText =
-      activeElement?.tagName === 'INPUT' &&
-      ['text', 'search'].includes((activeElement as HTMLInputElement).type)
-    const isTextarea = activeElement?.tagName === 'TEXTAREA'
-
     // We allow to type the GLOBAL SEARCH KEY on text fields
-    if (isInputText || isTextarea) {
+    if (isInputFocused()) {
       return
     }
 

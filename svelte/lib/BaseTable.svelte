@@ -14,6 +14,7 @@
   import BaseTableRow from './BaseTableRow.svelte'
   import BaseTableCell from './BaseTableCell.svelte'
   import InputCheckbox from './InputCheckbox.svelte'
+  import { isInputFocused } from './helpers.js'
 
   const dispatch = createEventDispatcher()
   const callback = (entry: IntersectionObserverEntry) => {
@@ -116,16 +117,16 @@
 
     selectedRows = [...new Set([...selectedRows, ...itemsToSelect])]
   }
-</script>
 
-<svelte:window
-  on:mousemove={() => {
-    selectionMode = 'mouse'
-  }}
-  on:keydown={(event) => {
-    event.preventDefault()
+  function handleKeydown(event: KeyboardEvent) {
+    // If any input is focused on the rest of the window we dont want to break the default behavior
+    if (isInputFocused()) {
+      return
+    }
 
     selectionMode = 'keyboard'
+
+    event.preventDefault()
 
     if (event.key === 'Escape' || event.key === 'Esc') {
       selectedRows = []
@@ -204,7 +205,14 @@
       }
       lastSelected = to
     }
+  }
+</script>
+
+<svelte:window
+  on:mousemove={() => {
+    selectionMode = 'mouse'
   }}
+  on:keydown={handleKeydown}
   on:keyup={(event) => {
     metaKeyPressed = false
     shiftKeyPressed = false

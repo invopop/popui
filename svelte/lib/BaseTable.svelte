@@ -116,16 +116,21 @@
 
     selectedRows = [...new Set([...selectedRows, ...itemsToSelect])]
   }
-</script>
 
-<svelte:window
-  on:mousemove={() => {
-    selectionMode = 'mouse'
-  }}
-  on:keydown={(event) => {
-    event.preventDefault()
-
+  function handleKeydown(event: KeyboardEvent) {
     selectionMode = 'keyboard'
+
+    const activeElement = document.activeElement as HTMLElement
+    const isInputFocused =
+      activeElement &&
+      (activeElement.tagName === 'INPUT' ||
+        activeElement.tagName === 'TEXTAREA' ||
+        activeElement.isContentEditable)
+
+    // Prevent default only if no input, textarea, or contenteditable element is focused
+    if (!isInputFocused) {
+      event.preventDefault()
+    }
 
     if (event.key === 'Escape' || event.key === 'Esc') {
       selectedRows = []
@@ -204,7 +209,14 @@
       }
       lastSelected = to
     }
+  }
+</script>
+
+<svelte:window
+  on:mousemove={() => {
+    selectionMode = 'mouse'
   }}
+  on:keydown={handleKeydown}
   on:keyup={(event) => {
     metaKeyPressed = false
     shiftKeyPressed = false

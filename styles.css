@@ -195,6 +195,24 @@ div[contenteditable='true'] .tag {
   @apply prose prose-slate mx-auto lg:prose-lg;
 }
 
+.popui-divider {
+  border-bottom: 1px solid transparent;
+  border-image: repeating-linear-gradient(
+    90deg,
+    rgba(229, 231, 235, 1),
+    rgba(229, 231, 235, 1) 3px,
+    transparent 3px,
+    transparent 7px
+  );
+  border-image-slice: 1;
+}
+.popui-table {
+  @apply font-sans text-base;
+}
+.popui-table > td {
+  @apply pr-5;
+}
+
 /* Alpine */
 
 /* Tags */

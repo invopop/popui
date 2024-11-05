@@ -77,6 +77,8 @@
     selectedRows = []
     lastSelected = {}
 
+    dispatch('selectAll', selected)
+
     if (!selected) return
 
     selectedRows = data

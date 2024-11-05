@@ -131,14 +131,14 @@
 
     selectionMode = 'keyboard'
 
-    event.preventDefault()
-
     if (event.key === 'Escape' || event.key === 'Esc') {
+      event.preventDefault()
       selectedRows = []
       lastSelected = {}
     }
 
     if ((event.code === 'Space' || event.key === ' ') && lastSelectedIndex >= 0) {
+      event.preventDefault()
       toggleRow(lastSelected)
     }
 
@@ -147,17 +147,20 @@
 
     if (event.key === 'Enter') {
       if (lastSelectedIndex >= 0) {
+        event.preventDefault()
         dispatch('rowClick', lastSelected)
       }
       return
     }
 
     if (event.key === 'Shift') {
+      event.preventDefault()
       selectWithArrowPosition = lastSelectedIndex
       return
     }
 
     if (event.key === 'ArrowUp') {
+      event.preventDefault()
       const toIndex = lastSelectedIndex - 1
       const to = flattedData[toIndex]
 
@@ -181,6 +184,7 @@
     }
 
     if (event.key === 'ArrowDown') {
+      event.preventDefault()
       if (lastSelectedIndex < 0) {
         if (shiftKeyPressed) {
           selectRow(flattedData[0])

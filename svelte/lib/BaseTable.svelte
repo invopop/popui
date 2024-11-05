@@ -43,6 +43,7 @@
   export let selectedRows: TableDataRow[] = []
   export let selectedTrackedBy = 'id'
   export let hideSelectAll = false
+  export let disableKeyboardNavigation = false
 
   $: groupedData = groupData(data)
   $: addExtraCell = getActions instanceof Function
@@ -119,6 +120,8 @@
   }
 
   function handleKeydown(event: KeyboardEvent) {
+    if (disableKeyboardNavigation) return
+
     // If any input is focused on the rest of the window we dont want to break the default behavior
     if (isInputFocused()) {
       return

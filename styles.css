@@ -90,8 +90,13 @@
   @apply flex-1;
 }
 mark,
+pre,
 p > code {
   @apply font-sans border border-neutral-200 bg-neutral-50 rounded text-sm text-neutral-500 px-1 py-0.5 inline-flex;
+}
+
+pre {
+  @apply overflow-x-auto;
 }
 
 /* Popover */

@@ -235,37 +235,40 @@
 <div class="w-full font-sans">
   <table class="hidden md:table w-full">
     <thead>
-      <tr class="border-b border-neutral-100 relative">
+      <tr class="relative">
         {#if selectable}
           <!-- if table is selectable we need to add an extra header with a checkbox -->
-          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
-            {#if !hideSelectAll}
-              <button
-                class="pl-5 pr-3 h-[40px] flex items-center outline-none group cursor-default"
-                on:click|stopPropagation={() => {
-                  toggleAllSelected(!selectedRows.length)
-                }}
-              >
-                <div class:invisible={!selectedRows.length} class="group-hover:visible">
-                  <InputCheckbox
-                    checked={allChecked}
-                    {indeterminate}
-                    on:change={(event) => {
-                      toggleAllSelected(event.detail)
-                    }}
-                  />
-                </div>
-              </button>
-            {/if}
+          <th scope="col" class="bg-white sticky top-0 z-10 p-0">
+            <div class="border-b border-neutral-100">
+              {#if !hideSelectAll}
+                <button
+                  class="px-5 h-[36px] flex items-center outline-none group cursor-default"
+                  on:click|stopPropagation={() => {
+                    toggleAllSelected(!selectedRows.length)
+                  }}
+                >
+                  <div class:invisible={!selectedRows.length} class="group-hover:visible">
+                    <InputCheckbox
+                      checked={allChecked}
+                      {indeterminate}
+                      on:change={(event) => {
+                        toggleAllSelected(event.detail)
+                      }}
+                    />
+                  </div>
+                </button>
+              {/if}
+            </div>
           </th>
         {/if}
         {#each fields as field, i (i)}
           <BaseTableHeader
-            isFirst={i === 0 && !selectable}
+            isFirst={i === 0}
             isLast={!addExtraCell && i === fields.length - 1}
             {sortBy}
             {sortDirection}
             {field}
+            {selectable}
             on:orderBy
           />
         {/each}
@@ -276,18 +279,25 @@
       </tr>
     </thead>
     <tbody>
-      {#each groupedData as group}
+      {#each groupedData as group, i (i)}
         {#if group.label}
           <tr>
             <th
               scope="colgroup"
               colspan={fields.length + (selectable ? 2 : 1)}
-              class="bg-neutral-50 px-5 text-left text-sm font-medium text-neutral-500 sticky top-11 tracking-normal border-t border-b border-neutral-100 h-8"
+              class="bg-white text-left text-sm font-medium text-neutral-500 sticky top-9 tracking-normal h-8"
             >
-              <span>{group.label}</span>
-              {#if !hideCounter}
-                <BaseCounter content={group.rows.length} />
-              {/if}
+              <span
+                class:border-t={i > 0}
+                class:pl-14={selectable}
+                class:pl-5={!selectable}
+                class="flex items-center space-x-1 box-border border-b border-neutral-100 h-8"
+              >
+                <span>{group.label}</span>
+                {#if !hideCounter}
+                  <BaseCounter content={group.rows.length} />
+                {/if}
+              </span>
             </th>
           </tr>
         {/if}
@@ -302,7 +312,9 @@
             {selectedRows}
             {selectedTrackedBy}
             {selectionMode}
-            selected={lastSelected && row[selectedTrackedBy] === lastSelected[selectedTrackedBy]}
+            selected={selectable &&
+              lastSelected &&
+              row[selectedTrackedBy] === lastSelected[selectedTrackedBy]}
             on:click={() => {
               if (disableRowClick) return
 

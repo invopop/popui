@@ -21,6 +21,8 @@
   export let selectable = false
   export let hasActions = false
 
+  $: isSelectableFirst = isFirst && selectable
+
   $: cellStyles = clsx(
     { 'tabular-nums slashed-zero lining-nums': field.monospacedNums },
     { 'font-mono': field.monospaced },
@@ -28,13 +30,11 @@
     { 'text-neutral-800 md:text-neutral-500': !isFirst || field.grayed },
     { 'md:text-right': field.rightAlign },
     { 'md:w-full md:max-w-0': field.fullWidth },
-    { 'py-2 md:py-[11.25px]': badge },
-    { 'py-2 md:py-[11.75px]': !badge },
     { 'pl-5': isFirst && !selectable },
-    { 'pl-3': !isFirst || selectable },
+    { 'pl-3': !isFirst && !isSelectableFirst },
     { 'pr-5': isLast && !hasActions },
     { 'pr-3': !isLast || hasActions },
-    { 'px-3': !field.noPadding },
+    { 'px-3': (!isFirst || !selectable) && !field.noPadding },
     { 'px-0': field.noPadding },
     { 'whitespace-nowrap truncate': !freeWrap }
   )
@@ -43,7 +43,7 @@
 
 <svelte:element
   this={tag}
-  class="{cellStyles} text-base tracking-normal"
+  class="{cellStyles} text-base tracking-normal py-2"
   style:min-width={field.width}
   style:max-width={isMobile ? `${Viewport.Width}px` : field.width}
 >

@@ -49,7 +49,7 @@
           slot="trigger"
           class="{headerStyles} w-full py-2 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
         >
-          <span class="min-h-5" />
+          <span>{field.headerLabel}</span>
           {#if sortBy === field.slug}
             <svg
               viewBox="0 0 12 12"
@@ -77,7 +77,7 @@
       <div
         class="{headerStyles} py-2 text-left text-base font-normal tracking-normal whitespace-nowrap"
       >
-        {field.headerLabel}
+        <div class="h-5">{field.headerLabel}</div>
       </div>
     {/if}
   </span>

@@ -14,6 +14,7 @@
   export let sortDirection: TableSortBy
   export let isFirst = false
   export let isLast = false
+  export let selectable = false
 
   $: outerStyles = clsx({
     'w-full': field.fullWidth
@@ -22,7 +23,7 @@
   $: headerStyles = clsx({
     'justify-end': field.rightAlign,
     'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable,
-    'pl-5': isFirst,
+    'pl-5': isFirst && !selectable,
     'pl-3': !isFirst,
     'pr-5': isLast,
     'pr-3': !isLast
@@ -37,16 +38,16 @@
 
 <th
   scope="col"
-  class="{outerStyles} bg-white text-neutral-500 group sticky z-10 top-0"
+  class="{outerStyles} bg-white text-neutral-500 group sticky z-10 top-0 h-9 box-border p-0"
   style:min-width={field.width}
   style:max-width={field.width}
 >
-  <span class="flex">
+  <span class="flex border-b border-neutral-100">
     {#if field.sortable}
       <BaseDropdown bind:this={sortDropdown} fullWidth>
         <span
           slot="trigger"
-          class="{headerStyles} w-full py-3 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
+          class="{headerStyles} w-full py-2 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
         >
           <span>{field.headerLabel}</span>
           {#if sortBy === field.slug}
@@ -74,7 +75,7 @@
       </BaseDropdown>
     {:else}
       <div
-        class="{headerStyles} p-3 text-left text-base font-normal tracking-normal whitespace-nowrap"
+        class="{headerStyles} py-2 text-left text-base font-normal tracking-normal whitespace-nowrap"
       >
         {field.headerLabel}
       </div>

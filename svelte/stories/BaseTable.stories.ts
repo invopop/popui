@@ -146,6 +146,7 @@ export const WithActions: Story = {
 export const WithActionsAndGroups: Story = {
   args: {
     selectable: true,
+    selectedTrackedBy: 'code',
     groupLabel: (data) => {
       const months = {
         '02': 'February',
@@ -613,6 +614,7 @@ export const WithGroupLabelAndNoCounter: Story = {
   args: {
     selectable: true,
     hideCounter: true,
+    selectedTrackedBy: 'code',
     groupLabel: (data) => {
       const months = {
         '02': 'February',
@@ -642,7 +644,7 @@ export const WithGroupLabelAndNoCounter: Story = {
         created_at: '2023-02-03',
         draft: true
       },
-      { code: 'CAB-0042', customer: 'Febify, Inc', total: '€87.403,50', created_at: '2023-02-23' },
+      { code: 'CAB-0041', customer: 'Febify, Inc', total: '€87.403,50', created_at: '2023-02-23' },
       {
         code: 'CAB-0042',
         customer: 'Marchify, Inc',
@@ -650,12 +652,12 @@ export const WithGroupLabelAndNoCounter: Story = {
         created_at: '2023-03-23'
       },
       {
-        code: 'CAB-0042',
+        code: 'CAB-0043',
         customer: 'Marchify, Inc',
         total: '€87.403,50',
         created_at: '2023-03-25'
       },
-      { code: 'CAB-0042', customer: 'Julify, Inc', total: '€87.403,50', created_at: '2023-07-25' }
+      { code: 'CAB-0044', customer: 'Julify, Inc', total: '€87.403,50', created_at: '2023-07-25' }
     ]
   }
 }

@@ -63,7 +63,7 @@
     <td>
       <button
         bind:this={checkboxButton}
-        class="pl-5 pr-1.5 h-[40px] flex items-center outline-none group cursor-default"
+        class="px-5 h-[40px] flex items-center outline-none group cursor-default"
         on:click|stopPropagation={() => {
           dispatch('checked', checked)
         }}

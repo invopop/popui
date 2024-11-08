@@ -274,7 +274,9 @@
         {/each}
         {#if addExtraCell}
           <!-- if table has actions cell we need to add an extra header -->
-          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md" />
+          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
+            <div class="border-b border-neutral-100 h-9" />
+          </th>
         {/if}
       </tr>
     </thead>

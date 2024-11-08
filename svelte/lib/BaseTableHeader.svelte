@@ -21,7 +21,7 @@
   })
 
   $: headerStyles = clsx({
-    'justify-end': field.rightAlign,
+    'self-end': field.rightAlign,
     'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable,
     'pl-5': isFirst && !selectable,
     'pl-3': !isFirst,
@@ -49,7 +49,7 @@
           slot="trigger"
           class="{headerStyles} w-full py-2 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
         >
-          <span>{field.headerLabel}</span>
+          <span class="min-h-5" />
           {#if sortBy === field.slug}
             <svg
               viewBox="0 0 12 12"

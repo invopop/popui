@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -25,6 +25,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "svelte": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "default": "./dist/types.d.ts"
     },
     "./twTheme.js": "./dist/tw.theme.js",
     "./package.json": "./dist/package.json"

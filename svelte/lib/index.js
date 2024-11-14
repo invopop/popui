@@ -5,6 +5,7 @@ import BaseDropdown from './BaseDropdown.svelte'
 import BaseFlag from './BaseFlag.svelte'
 import BaseTable from './BaseTable.svelte'
 import ButtonFile from './ButtonFile.svelte'
+import CardCheckbox from './CardCheckbox.svelte'
 import CardRelation from './CardRelation.svelte'
 import CompanySelector from './CompanySelector.svelte'
 import CounterWorkflow from './CounterWorkflow.svelte'
@@ -55,6 +56,7 @@ export {
   BaseFlag,
   BaseTable,
   ButtonFile,
+  CardCheckbox,
   CardRelation,
   CompanySelector,
   CounterWorkflow,

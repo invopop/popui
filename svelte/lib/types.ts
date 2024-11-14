@@ -41,6 +41,7 @@ export type DrawerOption = SelectOption & {
   country?: string
   color?: StatusType
   picture?: string
+  sandbox?: boolean
 }
 
 export type Company = {
@@ -49,6 +50,7 @@ export type Company = {
   name: string
   country?: string
   logo_url?: string
+  sandbox?: boolean
 }
 
 export type FeedEvent = {

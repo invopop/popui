@@ -41,7 +41,7 @@
     </div>
   {/if}
   <div class="space-y-0.5">
-    <h4 class="font-medium text-base text-neutral-800 text-base tracking-tight">{title}</h4>
+    <h4 class="font-medium text-base text-neutral-800 tracking-tight">{title}</h4>
     <p class="max-w-xs text-base text-neutral-500 tracking-normal">{description}</p>
     <p><slot /></p>
   </div>

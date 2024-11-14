@@ -26,7 +26,8 @@
       label: c.name,
       selected: c.slug === selectedCompany?.slug,
       country: c.country,
-      picture: c.logo_url
+      picture: c.logo_url,
+      sandbox: c.sandbox
     }))
   ] as DrawerOption[]
 

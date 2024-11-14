@@ -173,6 +173,46 @@ export const WithMaxHeight: Story = {
   }
 }
 
+export const WithSandbox: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    selectedCompany: {
+      name: 'Invopop',
+      slug: 'invopop',
+      id: 'whatever',
+      country: 'es'
+    },
+    companies: [
+      {
+        name: 'Invopop',
+        slug: 'invopop',
+        id: 'invopop',
+        country: 'es'
+      },
+      {
+        name: 'Invopop Sandbox',
+        slug: 'invopop1',
+        id: 'invopop1',
+        country: 'es',
+        sandbox: true
+      },
+      {
+        name: 'Invopop Colombia',
+        slug: 'invopop2',
+        id: 'invopop2',
+        country: 'co'
+      },
+      {
+        name: 'Invopop Colombia Sandbox',
+        slug: 'invopop3',
+        id: 'invopop3',
+        country: 'co',
+        sandbox: true
+      }
+    ]
+  }
+}
+
 export const Collapsed: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

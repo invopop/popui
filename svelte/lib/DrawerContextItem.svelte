@@ -65,15 +65,12 @@
       class="w-4 h-4 {item.destructive ? 'text-danger-500' : 'text-neutral-500'}"
     />
   {/if}
-  <div
-    class="whitespace-nowrap flex-1 text-left max-w-40 truncate flex flex-col"
-    title={item.label}
-  >
+  <div class="whitespace-nowrap flex-1 text-left flex flex-col" title={item.label}>
     <span class="flex items-center space-x-1.5">
       {#if item.color}
         <TagStatus status={item.color} dot />
       {/if}
-      <span class="{labelStyles} text-base">{item.label}</span>
+      <span class="{labelStyles} text-base max-w-40 truncate">{item.label}</span>
     </span>
 
     {#if item.country}

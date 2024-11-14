@@ -18,6 +18,7 @@
   export let placeholder = ''
   export let multiple = false
   export let fullWidth = false
+  export let widthClass = 'w-60'
 
   let selectDropdown: BaseDropdown
   let resolvedIcon: IconSource | undefined
@@ -36,8 +37,11 @@
       : o.value === value
   }))
 
+  $: selectedItems = items.filter((i) => i.selected)
   $: selectedColor = !multiple && items.find((i) => i.selected)?.color
-  $: selectedLabel = (!multiple && items.find((i) => i.selected)?.label) || placeholder
+  $: selectedLabel =
+    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more...' : ''}` ||
+    placeholder
 
   $: styles = clsx({
     'shadow-active border-workspace-accent hover:border-workspace-accent': isOpen
@@ -78,7 +82,13 @@
       {selectedLabel}
     </span>
   </div>
-  <DrawerContext {multiple} {items} on:click={handleClick} on:selected={handleSelected} />
+  <DrawerContext
+    {widthClass}
+    {multiple}
+    {items}
+    on:click={handleClick}
+    on:selected={handleSelected}
+  />
 </BaseDropdown>
 
 <style>

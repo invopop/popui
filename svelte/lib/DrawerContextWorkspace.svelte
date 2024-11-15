@@ -112,7 +112,7 @@
   <ul class="px-1 space-y-1 bg-neutral-50 rounded-b border-t border-neutral-100">
     <li class="pl-1.5 py-1.5 pr-2 hover:bg-neutral-100 rounded-sm">
       <button
-        class="flex items-center space-x-2 w-full"
+        class="flex items-center space-x-1.5 w-full"
         on:click={() => {
           dispatch('click', 'add')
         }}
@@ -123,7 +123,7 @@
     </li>
     <li class="pl-1.5 py-1.5 pr-2 hover:bg-neutral-100 rounded-sm">
       <button
-        class="flex items-center space-x-2 w-full"
+        class="flex items-center space-x-1.5 w-full"
         on:click={() => {
           dispatch('click', 'settings')
         }}

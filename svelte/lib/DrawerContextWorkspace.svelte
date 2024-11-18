@@ -31,7 +31,7 @@
 </script>
 
 <div class="w-[300px] border border-neutral-200 rounded-md shadow-lg bg-white">
-  <div class="max-h-[60vh] overflow-y-auto rounded-md">
+  <div class="max-h-[550px] overflow-hidden rounded-md">
     <button
       class="flex items-center justify-between bg-neutral-50 border-b border-neutral-200 rounded-t-sm h-9 py-2 pl-2.5 pr-3 text-base font-medium text-neutral-800 w-full"
       on:click={() => {
@@ -52,7 +52,7 @@
       {/if}
     </button>
     {#if liveOpen}
-      <div transition:slide>
+      <div transition:slide class="max-h-[475px] overflow-auto">
         {#if !liveItems.length}
           <div class="h-[182px]">
             <EmptyStateIcon
@@ -90,7 +90,7 @@
       {/if}
     </button>
     {#if sandboxOpen}
-      <div transition:slide>
+      <div transition:slide class="max-h-[475px] overflow-auto">
         {#if !sandboxItems.length}
           <div class="h-[182px]">
             <EmptyStateIcon

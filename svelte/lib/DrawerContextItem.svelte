@@ -32,8 +32,8 @@
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
-    { 'font-semibold tracking-tight': workspace },
-    { 'font-normal tracking-normal': !workspace }
+    { 'font-semibold tracking-tight max-w-[200px]': workspace },
+    { 'font-normal tracking-normal max-w-40': !workspace }
   )
 
   onMount(() => {
@@ -70,7 +70,7 @@
       {#if item.color}
         <TagStatus status={item.color} dot />
       {/if}
-      <span class="{labelStyles} text-base max-w-40 truncate">{item.label}</span>
+      <span class="{labelStyles} text-base truncate">{item.label}</span>
     </span>
 
     {#if item.country}

@@ -208,6 +208,19 @@ export const WithSandbox: Story = {
         id: 'invopop3',
         country: 'co',
         sandbox: true
+      },
+      {
+        name: 'Invopop Portugal',
+        slug: 'invopop4',
+        id: 'invopop4',
+        country: 'pt'
+      },
+      {
+        name: 'Invopop Portugal Sandbox longname',
+        slug: 'invopop5',
+        id: 'invopop5',
+        country: 'pt',
+        sandbox: true
       }
     ]
   }

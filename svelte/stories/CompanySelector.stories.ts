@@ -216,7 +216,7 @@ export const WithSandbox: Story = {
         country: 'pt'
       },
       {
-        name: 'Invopop Portugal Sandbox longname',
+        name: 'Invopop Portugal Sandbox',
         slug: 'invopop5',
         id: 'invopop5',
         country: 'pt',

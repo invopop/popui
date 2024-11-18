@@ -20,6 +20,7 @@
   $: name = selectedCompany?.name || ''
   $: country = selectedCompany?.country || ''
   $: picture = selectedCompany?.logo_url || ''
+  $: isSandbox = selectedCompany?.sandbox
   $: items = [
     ...companies.map((c) => ({
       value: c.id,
@@ -70,7 +71,12 @@
     <span class:space-x-2={!collapsed} class="flex items-center">
       <ProfileAvatar {name} {picture} {country} dark large />
       {#if !collapsed}
-        <div class="whitespace-nowrap max-w-[140px] truncate tracking-tight">{name}</div>
+        <div>
+          <div class="whitespace-nowrap max-w-[140px] truncate tracking-tight">{name}</div>
+          {#if isSandbox}
+            <div class="text-sm font-medium text-yellow-600">Sandbox</div>
+          {/if}
+        </div>
       {/if}
     </span>
     {#if !collapsed}

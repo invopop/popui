@@ -62,7 +62,7 @@
             />
           </div>
         {/if}
-        <ul class="p-1 pb-0.5 space-y-1">
+        <ul class="p-1 space-y-1">
           {#each liveItems as item}
             <DrawerContextItem {item} {multiple} workspace on:click />
           {/each}
@@ -100,7 +100,7 @@
             />
           </div>
         {/if}
-        <ul class="p-1 pb-0.5 space-y-1">
+        <ul class="p-1 space-y-1">
           {#each sandboxItems as item}
             <DrawerContextItem {item} {multiple} workspace on:click />
           {/each}

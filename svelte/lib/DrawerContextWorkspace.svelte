@@ -31,7 +31,7 @@
 </script>
 
 <div class="w-[300px] border border-neutral-200 rounded-md shadow-lg bg-white">
-  <div class="max-h-[550px] overflow-hidden rounded-md">
+  <div class="max-h-[550px] overflow-hidden rounded-t-md">
     <button
       class="flex items-center justify-between bg-neutral-50 border-b border-neutral-200 rounded-t-sm h-9 py-2 pl-2.5 pr-3 text-base font-medium text-neutral-800 w-full"
       on:click={() => {

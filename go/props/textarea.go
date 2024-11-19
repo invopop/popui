@@ -6,6 +6,7 @@ import (
 	"github.com/a-h/templ"
 )
 
+// Textarea Templ component props
 type Textarea struct {
 	ID         string
 	Class      string

@@ -2,6 +2,7 @@ package props
 
 import "github.com/a-h/templ"
 
+// Error Templ component props
 type Error struct {
 	Text  string
 	Class string

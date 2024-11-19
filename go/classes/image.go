@@ -1,4 +1,4 @@
 package classes
 
-// Default class used for the Image component
+// Image is the default class used for the Image component
 const Image = "popui-image"

@@ -1,5 +1,6 @@
 package props
 
+// Tags Templ component props
 type Tags struct {
 	Tags         string
 	Label        string

@@ -9,12 +9,6 @@ import (
 	"syscall"
 )
 
-// build data provided by goreleaser and mage setup
-var (
-	version = "dev"
-	date    = ""
-)
-
 func main() {
 	if err := run(); err != nil {
 		_, _ = fmt.Fprintln(os.Stderr, err)
@@ -27,11 +21,4 @@ func run() error {
 	defer cancel()
 
 	return root().cmd().ExecuteContext(ctx)
-}
-
-func inputFilename(args []string) string {
-	if len(args) > 0 && args[0] != "-" {
-		return args[0]
-	}
-	return ""
 }

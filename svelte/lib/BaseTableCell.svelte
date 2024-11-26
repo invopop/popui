@@ -63,6 +63,7 @@
           uuid={String(data)}
           prefixLength={4}
           suffixLength={4}
+          full
           compact
           dark={isMobile}
           on:copied

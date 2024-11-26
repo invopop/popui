@@ -308,8 +308,7 @@ export const WithUuid: Story = {
         headerLabel: 'Invoice',
         slug: 'code',
         sortable: true,
-        copy: true,
-        width: '300px'
+        copy: true
       },
       { headerLabel: 'Customer', slug: 'customer', fullWidth: true },
       { headerLabel: 'Amount', slug: 'total' },

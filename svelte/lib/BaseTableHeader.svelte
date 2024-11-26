@@ -21,7 +21,6 @@
   })
 
   $: headerStyles = clsx({
-    'self-end': field.rightAlign,
     'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable,
     'pl-5': isFirst && !selectable,
     'pl-3': !isFirst,
@@ -42,14 +41,14 @@
   style:min-width={field.width}
   style:max-width={field.width}
 >
-  <span class="flex border-b border-neutral-100">
+  <span class="flex border-b border-neutral-100" class:justify-end={field.rightAlign}>
     {#if field.sortable}
       <BaseDropdown bind:this={sortDropdown} fullWidth>
         <span
           slot="trigger"
           class="{headerStyles} w-full py-2 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
         >
-          <span>{field.headerLabel}</span>
+          <span class="w-full" class:text-right={field.rightAlign}>{field.headerLabel}</span>
           {#if sortBy === field.slug}
             <svg
               viewBox="0 0 12 12"

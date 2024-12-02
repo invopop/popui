@@ -17,6 +17,18 @@ templ Button(p props.Button) {
 		if p.Disabled {
 			disabled
 		}
+		if p.Type != "" {
+			type={ p.Type }
+		}
+		if p.Autofocus {
+			autofocus
+		}
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
 		{ p.Attrs... }
 	>
 		{ children... }

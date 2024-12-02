@@ -19,8 +19,24 @@ templ Textarea(p props.Textarea) {
 			if p.Disabled {
 				disabled
 			}
+			if p.Autofocus {
+				autofocus
+			}
+			if p.Readonly {
+				readonly
+			}
+			if p.Name != "" {
+				name={ p.Name }
+			}
+			if p.Placeholder != "" {
+				placeholder={ p.Placeholder }
+			}
 			{ p.Attrs... }
-		></textarea>
+		>
+			if p.Value != "" {
+				value={ p.Value }
+			}
+		</textarea>
 		if !p.Error.Empty() {
 			@InputError(p.Error)
 		}

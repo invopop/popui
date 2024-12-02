@@ -11,12 +11,10 @@ templ PopupLayout(p props.PopupLayout) {
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			@DefaultCSS()
-			@DefaultScripts()
+			@DefaultPopupScripts()
 		</head>
 		<body>
-			// We hide the complete layout on purpose until twind is loaded
-			// overriding the display with !flex
-			<main style="display: none;" class="!block">
+			<main>
 				<!-- header pending -->
 				{ children... }
 				<!-- footer pending -->

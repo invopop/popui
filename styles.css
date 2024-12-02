@@ -1,3 +1,5 @@
+@tailwind base;
+
 /* Avatar */
 .popui-avatar {
   @apply h-5 w-5 bg-neutral-50 text-neutral-500 rounded flex items-center justify-center font-semibold relative font-sans;
@@ -100,6 +102,9 @@ pre {
 }
 
 /* Popover */
+.popui-popover-wrapper {
+  @apply relative inline-block;
+}
 .popui-popover-list {
   @apply hidden absolute left-0 top-7 popover-menu border border-neutral-200 rounded-md px-1 py-0.5 w-full bg-white;
 }
@@ -186,6 +191,10 @@ div[contenteditable='true'] .tag {
   line-height: 16px;
 }
 
+/* SVG */
+.popui-svg-loading {
+  @apply animate-pulse;
+}
 /* Layouts */
 
 .popui-container-config {
@@ -200,6 +209,9 @@ div[contenteditable='true'] .tag {
   @apply prose prose-slate mx-auto lg:prose-lg;
 }
 
+.popui-divider-wrapper {
+  @apply my-2;
+}
 .popui-divider {
   border-bottom: 1px solid transparent;
   border-image: repeating-linear-gradient(
@@ -221,6 +233,9 @@ div[contenteditable='true'] .tag {
 /* Alpine */
 
 /* Tags */
+.popui-tags-wrapper {
+  @apply flex flex-col gap-1;
+}
 .popui-tags {
   @apply flex items-center gap-2 flex-wrap;
 }
@@ -229,6 +244,12 @@ div[contenteditable='true'] .tag {
 }
 .popui-tag-button {
   @apply text-positive-300;
+}
+.popui-tag-add-button {
+  @apply mt-0.5;
+}
+.popui-tag-add-input {
+  @apply flex items-start gap-2 w-full;
 }
 
 /* Upload File */
@@ -249,4 +270,35 @@ div[contenteditable='true'] .tag {
 }
 [x-cloak] {
   display: none !important;
+}
+
+/* Helpers */
+.flex-1 {
+  flex: 1 1 0%;
+}
+.text-left {
+  text-align: left;
+}
+.max-w-md {
+  max-width: 28rem;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.w-full {
+  width: 100%;
+}
+
+/* Demo Page */
+
+.popui-demo-wrapper {
+  @apply space-y-2 border border-black p-4 mb-4;
+}
+
+.popui-demo-input {
+  @apply py-1.5 px-2.5 border w-full rounded-md;
+}
+
+.popui-demo-label {
+  @apply text-sm inline-flex items-center gap-2 whitespace-nowrap mr-2;
 }

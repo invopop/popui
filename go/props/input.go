@@ -14,6 +14,11 @@ type InputText struct {
 	ID          string
 	Placeholder string
 	Type        string
+	Value       string
+	Name        string
+	Autofocus   bool
+	Readonly    bool
+	Disabled    bool
 	Class       string
 	Label       string
 	LabelClass  string

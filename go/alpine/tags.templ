@@ -9,7 +9,7 @@ import (
 
 templ Tags(p props.Tags) {
 	{{ id := uniuri.New() }}
-	<div class="flex flex-col gap-1">
+	<div class={ classes.TagsWrapper }>
 		if p.Label != "" {
 			@popui.InputLabel(props.Label{ID: id}) {
 				{ p.Label }
@@ -28,7 +28,7 @@ templ Tags(p props.Tags) {
 		if !p.HideAddInput {
 			{{ addTag := `this.` + p.Tags + `.push(this.tags_newTag); this.` + p.OnAdd + `(this.tags_newTag); this.tags_newTag = ''` }}
 			<div
-				class="flex items-start gap-2 w-full"
+				class={ classes.TagAddInput }
 				x-data={ `{
 					tags_newTag: '',
 					tags_error: '',
@@ -54,7 +54,7 @@ templ Tags(p props.Tags) {
 						":class":         "{ '" + classes.InputTextError + "': tags_error }",
 					}, Error: props.Error{Attrs: templ.Attributes{"x-text": "tags_error"}}})
 				</div>
-				<div class="mt-0.5">
+				<div class={ classes.TagAddButton }>
 					@popui.Button(props.Button{Attrs: templ.Attributes{"@click": "tags_addTag"}}) {
 						Add
 					}

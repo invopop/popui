@@ -26,7 +26,7 @@ func DefaultCSS() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Inter font --><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap\" rel=\"stylesheet\"><link href=\"https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.47/dist/popui.css\" rel=\"stylesheet\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Inter font --><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap\" rel=\"stylesheet\"><link href=\"https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.49/dist/popui.css\" rel=\"stylesheet\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -34,7 +34,7 @@ func DefaultCSS() templ.Component {
 	})
 }
 
-func DefaultScripts() templ.Component {
+func DefaultPopupScripts() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -52,7 +52,7 @@ func DefaultScripts() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script>\n        const CONSOLE_SDK_URL = 'https://cdn.jsdelivr.net/npm/@invopop/console-ui-sdk@0.0.7/index.js'\n\n        window.onload = function() {\n            const urlParams = new URLSearchParams(window.location.search)\n            const accentColor = urlParams.get('accent')\n\n            if (accentColor) {\n                const root = document.querySelector(':root')\n                root.style.setProperty('--workspace-accent-color', accentColor)\n            }\n        }\n    </script><script src=\"https://cdn.jsdelivr.net/npm/alpinejs/dist/cdn.min.js\" defer></script><script type=\"module\">\n        import { install } from 'https://esm.run/@twind/core';\n        import presetAutoprefix from 'https://esm.run/@twind/preset-autoprefix';\n        import presetTailwind from 'https://esm.run/@twind/preset-tailwind';\n        import presetTypography from 'https://esm.run/@twind/preset-typography';\n        import presetForms from 'https://esm.run/@twind/preset-tailwind-forms';\n        import theme from 'https://cdn.jsdelivr.net/npm/@invopop/ui-kit/dist/tw.theme.js'\n        install({\n            hash: false,\n            presets: [presetAutoprefix(), presetTailwind(), presetTypography(), presetForms()],\n            theme\n        })\n    </script>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script>\n        const CONSOLE_SDK_URL = 'https://cdn.jsdelivr.net/npm/@invopop/console-ui-sdk@0.0.7/index.js'\n\n        window.onload = function() {\n            const urlParams = new URLSearchParams(window.location.search)\n            const accentColor = urlParams.get('accent')\n\n            if (accentColor) {\n                const root = document.querySelector(':root')\n                root.style.setProperty('--workspace-accent-color', accentColor)\n            }\n        }\n    </script><script src=\"https://cdn.jsdelivr.net/npm/alpinejs/dist/cdn.min.js\" defer></script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

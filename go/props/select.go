@@ -5,10 +5,13 @@ import "github.com/a-h/templ"
 // Select Templ component props
 type Select struct {
 	ID         string
+	Name       string
 	Class      string
 	Label      string
 	LabelClass string
 	Disabled   bool
+	Autofocus  bool
+	Multiple   bool
 	Error      Error
 	Attrs      templ.Attributes
 }

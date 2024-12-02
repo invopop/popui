@@ -5,10 +5,10 @@ templ DefaultCSS() {
 	<link rel="preconnect" href="https://fonts.googleapis.com"/>
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-	<link href="https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.47/dist/popui.css" rel="stylesheet"/>
+	<link href="https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.49/dist/popui.css" rel="stylesheet"/>
 }
 
-templ DefaultScripts() {
+templ DefaultPopupScripts() {
 	<script>
         const CONSOLE_SDK_URL = 'https://cdn.jsdelivr.net/npm/@invopop/console-ui-sdk@0.0.7/index.js'
 
@@ -23,17 +23,4 @@ templ DefaultScripts() {
         }
     </script>
 	<script src="https://cdn.jsdelivr.net/npm/alpinejs/dist/cdn.min.js" defer></script>
-	<script type="module">
-        import { install } from 'https://esm.run/@twind/core';
-        import presetAutoprefix from 'https://esm.run/@twind/preset-autoprefix';
-        import presetTailwind from 'https://esm.run/@twind/preset-tailwind';
-        import presetTypography from 'https://esm.run/@twind/preset-typography';
-        import presetForms from 'https://esm.run/@twind/preset-tailwind-forms';
-        import theme from 'https://cdn.jsdelivr.net/npm/@invopop/ui-kit/dist/tw.theme.js'
-        install({
-            hash: false,
-            presets: [presetAutoprefix(), presetTailwind(), presetTypography(), presetForms()],
-            theme
-        })
-    </script>
 }

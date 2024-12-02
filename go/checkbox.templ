@@ -12,6 +12,18 @@ templ Checkbox(p props.Checkbox) {
 			type="checkbox"
 			class={ templ.KV(classes.CheckboxInput, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 			{ p.Attrs... }
+			if p.Checked {
+				checked
+			}
+			if p.Autofocus {
+				autofocus
+			}
+			if p.Name != "" {
+				name={ p.Name }
+			}
+			if p.Value != "" {
+				value={ p.Value }
+			}
 		/>
 		<label
 			for={ p.ID }

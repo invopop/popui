@@ -8,5 +8,9 @@ type Checkbox struct {
 	Class      string
 	Label      string
 	LabelClass string
+	Autofocus  bool
+	Checked    bool
+	Name       string
+	Value      string
 	Attrs      templ.Attributes
 }

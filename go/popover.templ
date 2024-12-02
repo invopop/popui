@@ -6,7 +6,7 @@ import (
 )
 
 templ Popover(p props.Popover) {
-	<div class="relative inline-block">
+	<div class={ classes.PopoverWrapper }>
 		@Button(props.Button{
 			Attrs: templ.Attributes{"popovertarget": p.ID},
 			Small: true,

@@ -51,11 +51,11 @@ func PopupLayout(p props.PopupLayout) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = DefaultScripts().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = DefaultPopupScripts().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body><main style=\"display: none;\" class=\"!block\"><!-- header pending -->")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body><main><!-- header pending -->")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

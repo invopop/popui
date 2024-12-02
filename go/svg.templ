@@ -1,5 +1,7 @@
 package popui
 
+import "github.com/invopop/popui/go/classes"
+
 templ ErrorIcon() {
 	<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M20.0001 1.53845C9.82088 1.53845 1.53857 9.82076 1.53857 20C1.53857 30.1792 9.82088 38.4615 20.0001 38.4615C30.1793 38.4615 38.4617 30.1792 38.4617 20C38.4617 9.82076 30.1793 1.53845 20.0001 1.53845Z" fill="#C92D45"></path>
@@ -54,7 +56,7 @@ templ InvopopLogo() {
 
 templ LoadingIcon() {
 	<svg
-		class="animate-pulse"
+		class={ classes.SVGLoading }
 		width="92"
 		height="96"
 		viewBox="0 0 92 96"

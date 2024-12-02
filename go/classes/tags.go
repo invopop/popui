@@ -15,5 +15,5 @@ const TagButton = "popui-tag-button"
 // TagAddButton is the default class used for the add button of the Select component
 const TagAddButton = "popui-tag-add-button"
 
-// TagAddButton is the default class used for the add input of the Select component
+// TagAddInput is the default class used for the add input of the Select component
 const TagAddInput = "popui-tag-add-input"

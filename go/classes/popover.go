@@ -1,6 +1,6 @@
 package classes
 
-// PopoverList is the default class used for wrapper of the Popover component
+// PopoverWrapper is the default class used for wrapper of the Popover component
 const PopoverWrapper = "popui-popover-wrapper"
 
 // PopoverList is the default class used for list of the Popover component

@@ -276,3 +276,29 @@ div[contenteditable='true'] .tag {
 .flex-1 {
   flex: 1 1 0%;
 }
+.text-left {
+  text-align: left;
+}
+.max-w-md {
+  max-width: 28rem;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.w-full {
+  width: 100%;
+}
+
+/* Demo Page */
+
+.popui-demo-wrapper {
+  @apply space-y-2 border border-black p-4 mb-4;
+}
+
+.popui-demo-input {
+  @apply py-1.5 px-2.5 border w-full rounded-md;
+}
+
+.popui-demo-label {
+  @apply text-sm inline-flex items-center gap-2 whitespace-nowrap mr-2;
+}

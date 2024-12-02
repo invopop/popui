@@ -11,7 +11,7 @@ import (
 templ Page() {
 	@popui.PopupLayout(props.PopupLayout{Title: "Invopop - Appkit"}) {
 		<div
-			style="p-4"
+			style="padding: 16px;"
 			x-data="{
 				inputText: {
 					errorText: '',
@@ -300,22 +300,22 @@ type config struct {
 }
 
 templ fieldConfig(conf *config) {
-	<hr class="mt-4"/>
-	<h2 class="my-4">
+	<hr style="margin-top: 16px;"/>
+	<h2 style="margin-top: 16px; margin-bottom: 16px;">
 		{ conf.Title }:
 		if conf.XModel != "" {
 			<span x-text={ conf.XModel }></span>
 		}
 	</h2>
 	if conf.Inputs != nil {
-		<div class="space-y-2 border border-black p-4 mb-4">
+		<div class="popui-demo-wrapper">
 			<h3>Props</h3>
 			for _, i := range conf.Inputs {
-				<label class="text-sm inline-flex items-center gap-2 whitespace-nowrap mr-2">
+				<label class="popui-demo-label">
 					{ i.Label } <input
 	type={ i.Type }
 	if i.Type == "text" || i.Type == "number" {
-		class="py-1.5 px-2.5 border w-full rounded-md"
+		class="popui-demo-input"
 	}
 	x-model={ i.Xmodel }
 />

@@ -18,7 +18,7 @@ const InfoText = "popui-info-text"
 // Prose is the default class used for the Prose component
 const Prose = "popui-prose"
 
-// HorizontalDivider is the default class used for the wrapper of the HorizontalDivider component
+// HorizontalDividerWrapper is the default class used for the wrapper of the HorizontalDivider component
 const HorizontalDividerWrapper = "popui-divider-wrapper"
 
 // HorizontalDivider is the default class used for the HorizontalDivider component

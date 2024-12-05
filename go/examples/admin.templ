@@ -19,24 +19,24 @@ templ Admin() {
 			@popui.Sidebar(props.Sidebar{Title: "Cyberdyne Enterprises "}) {
 				@popui.SidebarSection(props.SidebarSection{Title: "Organization"}) {
 					<li>
-						<button>
+						<a class={ classes.SidebarSectionItemActive }>
 							@icons.Org()
 							<span>Details</span>
-						</button>
+						</a>
 					</li>
 					<li>
-						<button>
+						<a>
 							@icons.Header()
 							<span>Workspaces</span>
-						</button>
+						</a>
 					</li>
 				}
 				@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
 					<li>
-						<button>
+						<a>
 							@icons.Puzzle()
 							<span>Applications</span>
-						</button>
+						</a>
 					</li>
 				}
 			}

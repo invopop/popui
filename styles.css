@@ -83,10 +83,10 @@
   @apply font-sans text-base text-neutral-800;
 }
 .popui-title {
-  @apply font-sans text-black text-lg font-medium;
+  @apply font-sans text-black text-2xl font-semibold;
 }
 .popui-page-title {
-  @apply font-sans text-neutral-800 text-2xl font-semibold;
+  @apply font-sans text-neutral-800 text-lg font-medium;
 }
 .popui-subtitle {
   @apply font-sans text-base text-neutral-800 font-medium;
@@ -133,7 +133,7 @@ pre {
   right: 0;
 }
 .popui-popover-list-item__text-left {
-  @apply flex justify-end items-center gap-1.5;
+  @apply flex justify-start items-center gap-1.5;
 }
 [popover] {
   inset: unset;

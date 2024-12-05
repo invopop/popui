@@ -42,6 +42,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 
 	e.GET("/", s.index)
 	e.GET("/prose", s.prose)
+	e.GET("/admin", s.admin)
 
 	var startErr error
 	go func() {
@@ -70,6 +71,11 @@ func (s *serveOpts) index(c echo.Context) error {
 // prose shows the prose example page with lots of possible combinations
 func (s *serveOpts) prose(c echo.Context) error {
 	return render(c, http.StatusOK, examples.Prose())
+}
+
+// admin shows the admin panel example page
+func (s *serveOpts) admin(c echo.Context) error {
+	return render(c, http.StatusOK, examples.Admin())
 }
 
 // render provides a wrapper around the component to make it nice to render.

@@ -20,6 +20,18 @@ templ Subtitle() {
 	</h2>
 }
 
+templ PageTitle() {
+	<h1 class={ classes.PageTitle }>
+		{ children... }
+	</h1>
+}
+
+templ Description() {
+	<p class={ classes.Description }>
+		{ children... }
+	</p>
+}
+
 templ Info() {
 	<div class={ classes.Info }>
 		<div>

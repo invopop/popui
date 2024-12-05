@@ -1,0 +1,36 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Sidebar(p props.Sidebar) {
+	<div
+		class={
+			templ.KV(classes.Sidebar, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		<div class={ classes.SidebarHeader }>{ p.Title }</div>
+		<div class={ classes.SidebarContent }>
+			{ children... }
+		</div>
+	</div>
+}
+
+templ SidebarSection(p props.SidebarSection) {
+	<div
+		class={
+			templ.KV(classes.SidebarSection, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		<p>{ p.Title }</p>
+		<ul>
+			{ children... }
+		</ul>
+	</div>
+}

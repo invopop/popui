@@ -46,7 +46,7 @@ func Page() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div style=\"p-4\" x-data=\"{\n\t\t\t\tinputText: {\n\t\t\t\t\terrorText: &#39;&#39;,\n\t\t\t\t\tdisabled: false,\n\t\t\t\t\tvalue: &#39;&#39;\n\t\t\t\t},\n\t\t\t\tcheckbox: {\n\t\t\t\t\tvalue: &#39;&#39;\n\t\t\t\t},\n\t\t\t\tselect: {\n\t\t\t\t\terrorText: &#39;&#39;,\n\t\t\t\t\tdisabled: false,\n\t\t\t\t\tvalue: &#39;&#39;,\n\t\t\t\t\toptions: [&#39;&#39;, &#39;Sam&#39;, &#39;Juan&#39;, &#39;Javi&#39;, &#39;Luismi&#39;]\n\t\t\t\t},\n\t\t\t\ttextarea: {\n\t\t\t\t\terrorText: &#39;&#39;,\n\t\t\t\t\tdisabled: false,\n\t\t\t\t\tvalue: &#39;&#39;,\n\t\t\t\t},\n\t\t\t\tdefaultButton: {\n\t\t\t\t\tdisabled: false,\n\t\t\t\t},\n\t\t\t\tprimaryButton: {\n\t\t\t\t\tdisabled: false,\n\t\t\t\t},\n\t\t\t\ttags: [\n\t\t\t\t\t&#39;One&#39;,\n\t\t\t\t\t&#39;Two&#39;\n\t\t\t\t],\n\t\t\t\ttagRemoved(tag) {\n\t\t\t\t\talert(`Removed tag: ${tag}`)\n\t\t\t\t},\n\t\t\t\ttagAdded(tag) {\n\t\t\t\t\talert(`Added tag: ${tag}`)\n\t\t\t\t}\n\t\t\t}\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div style=\"padding: 16px;\" x-data=\"{\n\t\t\t\tinputText: {\n\t\t\t\t\terrorText: &#39;&#39;,\n\t\t\t\t\tdisabled: false,\n\t\t\t\t\tvalue: &#39;&#39;\n\t\t\t\t},\n\t\t\t\tcheckbox: {\n\t\t\t\t\tvalue: &#39;&#39;\n\t\t\t\t},\n\t\t\t\tselect: {\n\t\t\t\t\terrorText: &#39;&#39;,\n\t\t\t\t\tdisabled: false,\n\t\t\t\t\tvalue: &#39;&#39;,\n\t\t\t\t\toptions: [&#39;&#39;, &#39;Sam&#39;, &#39;Juan&#39;, &#39;Javi&#39;, &#39;Luismi&#39;]\n\t\t\t\t},\n\t\t\t\ttextarea: {\n\t\t\t\t\terrorText: &#39;&#39;,\n\t\t\t\t\tdisabled: false,\n\t\t\t\t\tvalue: &#39;&#39;,\n\t\t\t\t},\n\t\t\t\tdefaultButton: {\n\t\t\t\t\tdisabled: false,\n\t\t\t\t},\n\t\t\t\tprimaryButton: {\n\t\t\t\t\tdisabled: false,\n\t\t\t\t},\n\t\t\t\ttags: [\n\t\t\t\t\t&#39;One&#39;,\n\t\t\t\t\t&#39;Two&#39;\n\t\t\t\t],\n\t\t\t\ttagRemoved(tag) {\n\t\t\t\t\talert(`Removed tag: ${tag}`)\n\t\t\t\t},\n\t\t\t\ttagAdded(tag) {\n\t\t\t\t\talert(`Added tag: ${tag}`)\n\t\t\t\t}\n\t\t\t}\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -665,7 +665,7 @@ func fieldConfig(conf *config) templ.Component {
 			templ_7745c5c3_Var17 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<hr class=\"mt-4\"><h2 class=\"my-4\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<hr style=\"margin-top: 16px;\"><h2 style=\"margin-top: 16px; margin-bottom: 16px;\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -706,12 +706,12 @@ func fieldConfig(conf *config) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if conf.Inputs != nil {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"space-y-2 border border-black p-4 mb-4\"><h3>Props</h3>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"popui-demo-wrapper\"><h3>Props</h3>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			for _, i := range conf.Inputs {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label class=\"text-sm inline-flex items-center gap-2 whitespace-nowrap mr-2\">")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label class=\"popui-demo-label\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -742,7 +742,7 @@ func fieldConfig(conf *config) templ.Component {
 					return templ_7745c5c3_Err
 				}
 				if i.Type == "text" || i.Type == "number" {
-					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" class=\"py-1.5 px-2.5 border w-full rounded-md\"")
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" class=\"popui-demo-input\"")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}

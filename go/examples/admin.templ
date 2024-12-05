@@ -1,0 +1,115 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/icons"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Admin() {
+	<html>
+		<head>
+			<title>Invopop - Admin panel</title>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			@popui.DefaultCSS()
+		</head>
+		<body class="popui-admin-wrapper">
+			@popui.Sidebar(props.Sidebar{Title: "Cyberdyne Enterprises "}) {
+				@popui.SidebarSection(props.SidebarSection{Title: "Organization"}) {
+					<li>
+						<button>
+							@icons.Org()
+							<span>Details</span>
+						</button>
+					</li>
+					<li>
+						<button>
+							@icons.Header()
+							<span>Workspaces</span>
+						</button>
+					</li>
+				}
+				@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
+					<li>
+						<button>
+							@icons.Puzzle()
+							<span>Applications</span>
+						</button>
+					</li>
+				}
+			}
+			<main class="popui-admin-page">
+				@popui.PageHeader(props.PageHeader{Title: "Organization Members"}) {
+					@popui.Button(props.Button{Variant: "primary"}) {
+						@icons.Envelope()
+						<span>Invite</span>
+					}
+				}
+				@popui.PageContent() {
+					@popui.PageSection(props.PageSection{Title: "Active Members", Description: "People who have access to all the workspaces in your organization"}) {
+						@popui.Table(props.Table{Headers: []string{"Name", "Job Title", "Email", ""}}) {
+							<tr>
+								@popui.TableCell(props.TableCell{Content: "Marta García", UseInitial: true, Bold: true})
+								@popui.TableCell(props.TableCell{Content: "Finance"})
+								@popui.TableCell(props.TableCell{Content: "marga.garcia@invopop.com"})
+								@popui.TableCell(props.TableCell{Content: "Account owner", RightAlign: true})
+							</tr>
+							<tr>
+								@popui.TableCell(props.TableCell{Content: "Alejandro Lopez", UseInitial: true, Bold: true})
+								@popui.TableCell(props.TableCell{Content: "Finance"})
+								@popui.TableCell(props.TableCell{Content: "alejandro.lopez@invopop.com"})
+								@popui.TableCell(props.TableCell{RightAlign: true}) {
+									@popui.Popover(props.Popover{
+										ID:            "popover",
+										ButtonLabel:   "···",
+										ButtonVariant: "transparent",
+										RightAlign:    true,
+										Stretch:       true,
+									}) {
+										<ul>
+											<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
+												@icons.Edit()
+												<span>Edit Member</span>
+											</li>
+											<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
+												@icons.Trash()
+												<span class="text-danger">Disable Access</span>
+											</li>
+										</ul>
+									}
+								}
+							</tr>
+						}
+					}
+					@popui.PageSection(props.PageSection{Title: "Member information", Description: "Update a member’s job title within your organization"}) {
+						@popui.Form(props.Form{}) {
+							@popui.InputText(props.InputText{
+								ID:       "name",
+								Label:    "Full name",
+								Value:    "Diego Fernández",
+								Disabled: true,
+							})
+							@popui.InputText(props.InputText{
+								ID:    "JOB",
+								Label: "Job Title",
+								Value: "Finance",
+							})
+							@popui.InputText(props.InputText{
+								ID:       "email",
+								Type:     "email",
+								Label:    "Email",
+								Value:    "diego.fernandez@invopop.com",
+								Disabled: true,
+							})
+							@popui.Button(props.Button{Variant: "primary"}) {
+								Update
+							}
+						}
+					}
+				}
+			</main>
+		</body>
+	</html>
+}

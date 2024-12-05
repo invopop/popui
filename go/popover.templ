@@ -6,16 +6,22 @@ import (
 )
 
 templ Popover(p props.Popover) {
-	<div class={ classes.PopoverWrapper }>
+	<div class={ classes.PopoverWrapper, templ.KV(classes.PopoverWrapperRight, p.RightAlign) }>
 		@Button(props.Button{
-			Attrs: templ.Attributes{"popovertarget": p.ID},
-			Small: true,
+			Attrs:   templ.Attributes{"popovertarget": p.ID},
+			Small:   true,
+			Variant: p.ButtonVariant,
 		}) {
 			{ p.ButtonLabel }
 		}
 		<div popover id={ p.ID }></div>
 		<div
-			class={ templ.KV(classes.PopoverList, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+			class={
+				templ.KV(classes.PopoverList, p.Class == ""),
+				templ.KV(p.Class, p.Class != ""),
+				templ.KV(classes.PopoverListRight, p.RightAlign),
+				templ.KV(classes.PopoverListStretch, p.Stretch),
+			}
 			{ p.Attrs... }
 		>
 			{ children... }

@@ -10,7 +10,10 @@
 
 /* Button */
 .popui-button {
-  @apply flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base;
+  @apply flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base gap-1;
+}
+.popui-button--transparent {
+  @apply border-0;
 }
 .popui-button--danger {
   @apply border-0 bg-danger-500 text-white;
@@ -80,7 +83,10 @@
   @apply font-sans text-base text-neutral-800;
 }
 .popui-title {
-  @apply font-sans text-black text-2xl font-semibold;
+  @apply font-sans text-black text-lg font-medium;
+}
+.popui-page-title {
+  @apply font-sans text-neutral-800 text-2xl font-semibold;
 }
 .popui-subtitle {
   @apply font-sans text-base text-neutral-800 font-medium;
@@ -96,9 +102,11 @@ pre,
 p > code {
   @apply font-sans border border-neutral-200 bg-neutral-50 rounded text-sm text-neutral-500 px-1 py-0.5 inline-flex;
 }
-
 pre {
   @apply overflow-x-auto;
+}
+.popui-description {
+  @apply text-neutral-500 font-sans text-sm;
 }
 
 /* Popover */
@@ -106,13 +114,26 @@ pre {
   @apply relative inline-block;
 }
 .popui-popover-list {
-  @apply hidden absolute left-0 top-7 popover-menu border border-neutral-200 rounded-md px-1 py-0.5 w-full bg-white;
+  @apply hidden absolute left-0 top-7 popover-menu border border-neutral-200 rounded-md p-1 w-full bg-white;
 }
 .popui-popover-list-item {
-  @apply font-sans px-2 py-1.5 font-medium text-base text-neutral-800 w-full rounded;
+  @apply font-sans pl-1.5 pr-2 py-1.5 font-medium text-base text-neutral-800 w-full rounded;
 }
 .popui-popover-list-item:hover {
   @apply bg-neutral-100;
+}
+.popui-popover-wrapper__right {
+  @apply justify-end;
+}
+.popui-popover-list__stretch {
+  @apply w-fit;
+}
+.popui-popover-list__right {
+  left: unset !important;
+  right: 0;
+}
+.popui-popover-list-item__text-left {
+  @apply flex justify-end items-center gap-1.5;
 }
 [popover] {
   inset: unset;
@@ -191,6 +212,11 @@ div[contenteditable='true'] .tag {
   line-height: 16px;
 }
 
+/* Form */
+.popui-form {
+  @apply w-[400px] space-y-4;
+}
+
 /* SVG */
 .popui-svg-loading {
   @apply animate-pulse;
@@ -223,11 +249,26 @@ div[contenteditable='true'] .tag {
   );
   border-image-slice: 1;
 }
+
+/* Table */
 .popui-table {
-  @apply font-sans text-base;
+  @apply font-sans text-base flex-1 rounded border border-neutral-100 bg-white;
 }
-.popui-table > td {
-  @apply pr-5;
+.popui-table th {
+  @apply border-b border-neutral-100;
+}
+.popui-table td > div {
+  @apply flex items-center gap-2;
+}
+.popui-table tr:hover td {
+  @apply bg-neutral-50;
+}
+.popui-table th,
+.popui-table td {
+  @apply text-left bg-white text-neutral-500 box-border p-3 font-sans text-base font-normal;
+}
+.popui-table-cell__right {
+  @apply !text-right;
 }
 
 /* Alpine */
@@ -287,6 +328,59 @@ div[contenteditable='true'] .tag {
 }
 .w-full {
   width: 100%;
+}
+.text-danger {
+  @apply text-danger-500;
+}
+
+/* Admin */
+.popui-admin-wrapper {
+  @apply flex h-screen bg-neutral-50 p-1;
+}
+.popui-admin-sidebar {
+  @apply h-full w-[240px] bg-neutral-50 flex flex-col items-center gap-4;
+}
+.popui-admin-page {
+  @apply flex-1 rounded-md border border-neutral-100 bg-white;
+}
+.popui-admin-sidebar__header {
+  @apply w-full flex pl-4 pr-3 py-[18px] items-center gap-2.5 border-b border-neutral-50 text-sherwood-700 font-sans text-base font-semibold;
+}
+.popui-admin-page__header-actions {
+  @apply flex items-center gap-2;
+}
+.popui-admin-sidebar__content {
+  @apply w-full flex p-4 flex-col items-center gap-5;
+}
+.popui-admin-sidebar__section {
+  @apply w-full flex flex-col items-start gap-2;
+}
+.popui-admin-sidebar__section > p {
+  @apply text-neutral-400 font-sans text-sm font-medium;
+}
+.popui-admin-sidebar__section > ul {
+  @apply flex flex-col items-start w-full gap-2;
+}
+.popui-admin-sidebar__section > ul > li {
+  @apply w-full;
+}
+.popui-admin-sidebar__section button {
+  @apply w-full flex py-[5px] pl-1.5 pr-2 items-center gap-1 rounded-md border border-transparent text-neutral-800 font-sans text-base font-medium;
+}
+.popui-admin-sidebar__section button:hover {
+  @apply border-neutral-800/10 bg-neutral-800/5 backdrop-blur-[20px];
+}
+.popui-admin-page__header {
+  @apply flex pl-6 pr-4 py-[15px] justify-between items-center border-b border-neutral-100;
+}
+.popui-admin-page__content {
+  @apply flex p-6 flex-col items-center gap-6;
+}
+.popui-admin-page__section {
+  @apply w-full flex items-start gap-6;
+}
+.popui-admin-page__section-title {
+  @apply flex w-[340px] flex-col items-start gap-0.5;
 }
 
 /* Demo Page */

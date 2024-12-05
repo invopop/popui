@@ -9,6 +9,12 @@ const Title = "popui-title"
 // Subtitle is the default class used for the Subtitle component
 const Subtitle = "popui-subtitle"
 
+// PageTitle is the default class used for the PageTitle component
+const PageTitle = "popui-page-title"
+
+// Description is the default class used for the Description component
+const Description = "popui-description"
+
 // Info is the default class used for the Info component
 const Info = "popui-info"
 

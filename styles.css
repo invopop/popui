@@ -114,7 +114,7 @@ pre {
   @apply relative inline-block;
 }
 .popui-popover-list {
-  @apply hidden absolute left-0 top-7 popover-menu border border-neutral-200 rounded-md p-1 w-full bg-white;
+  @apply hidden absolute left-0 top-7 popover-menu border border-neutral-200 rounded-md p-1 w-full bg-white z-10;
 }
 .popui-popover-list-item {
   @apply font-sans pl-1.5 pr-2 py-1.5 font-medium text-base text-neutral-800 w-full rounded;
@@ -341,7 +341,7 @@ div[contenteditable='true'] .tag {
   @apply h-full w-[240px] bg-neutral-50 flex flex-col items-center gap-4;
 }
 .popui-admin-page {
-  @apply flex-1 rounded-md border border-neutral-100 bg-white;
+  @apply flex-1 rounded-md border border-neutral-100 bg-white overflow-y-auto;
 }
 .popui-admin-sidebar__header {
   @apply w-full flex pl-4 pr-3 py-[18px] items-center gap-2.5 border-b border-neutral-50 text-sherwood-700 font-sans text-base font-semibold;
@@ -364,10 +364,13 @@ div[contenteditable='true'] .tag {
 .popui-admin-sidebar__section > ul > li {
   @apply w-full;
 }
-.popui-admin-sidebar__section button {
+.popui-admin-sidebar__section a {
   @apply w-full flex py-[5px] pl-1.5 pr-2 items-center gap-1 rounded-md border border-transparent text-neutral-800 font-sans text-base font-medium;
 }
-.popui-admin-sidebar__section button:hover {
+.popui-admin-sidebar__section a:hover {
+  @apply border-neutral-800/10 bg-neutral-800/5 backdrop-blur-[20px];
+}
+.popui-admin-sidebar__item-active {
   @apply border-neutral-800/10 bg-neutral-800/5 backdrop-blur-[20px];
 }
 .popui-admin-page__header {

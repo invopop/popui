@@ -1,3 +1,5 @@
+// Package popui provides the Templ components and support functions required to use
+// POPUI in a Go application.
 package popui
 
 import (
@@ -34,7 +36,7 @@ func Versioned(file ...string) string {
 	if err != nil {
 		return p
 	}
-	defer f.Close()
+	defer f.Close() //nolint:errcheck
 
 	h := md5.New()
 	_, err = io.Copy(h, f)

@@ -56,6 +56,10 @@ templ InputText(p props.InputText) {
 
 templ InputError(e props.Error) {
 	<p class={ templ.KV(classes.Error, e.Class == ""), templ.KV(e.Class, e.Class != "") } { e.Attrs... }>
-		{ e.Text }
+		if e.Error != nil {
+			{ e.Error.Error() }
+		} else {
+			{ e.Text }
+		}
 	</p>
 }

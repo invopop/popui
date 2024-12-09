@@ -252,7 +252,7 @@ div[contenteditable='true'] .tag {
 
 /* Table */
 .popui-table {
-  @apply font-sans text-base flex-1 rounded border border-neutral-100 bg-white;
+  @apply font-sans text-base flex-1 rounded border border-separate border-neutral-100 bg-white;
 }
 .popui-table th {
   @apply border-b border-neutral-100;

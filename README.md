@@ -53,19 +53,61 @@ They all make use of the `popui.css` file that is deployed to a CDN on each rele
 
 For Go, we are using Templ for creating template wrappers around these HTML components.
 
+### Building CSS Assets
+
+Go requires the CSS with all the Tailwind components to be built independently. To do this, run the go generate command and check any potential errors with your node instalation:
+
+```bash
+go generate ./...
+```
+
 ### Development server
 
 To run a development server for the Go library:
 
 ```bash
-npm air
+air
 ```
 
 This command will compile the `.templ` templates and start up a web server loading the `go/examples/page.templ` file.
 
-Air will also watch for changes and re-run everything for you.
+Air will also watch for changes and re-run everything for you, with the exception of the tailwind classes which will need to be rebuilt manually (for the time being).
 
-### Using the go library in your app
+### Using the Go Package
+
+There are two options for incorporating the Popui styles.
+
+**Option 1**: loading assets from the CDN:
+
+```go
+templ Head() {
+  <head>
+    <title>Title</title>
+    @popui.DefaultCSS()
+  </head>
+}
+```
+
+**Option 2**: using the stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
+
+```go
+e.StaticFS(popui.AssetPath, popui.Assets)
+```
+
+Then use the `EmbeddedCSS()` header method:
+
+```go
+templ Head() {
+  <head>
+    <title>Title</title>
+    @popui.EmbeddedCSS()
+  </head>
+}
+```
+
+Either option is valid, but Option 2 will allow you to use development versions or branches of the popui packages.
+
+### Use the Go Templ Components
 
 ```go
 import (

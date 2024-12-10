@@ -111,6 +111,12 @@ templ Admin() {
 								Label: "Job Title",
 								Value: "Finance",
 							})
+							@popui.Textarea(props.Textarea{
+								ID:    "desc",
+								Label: "Description",
+								Rows:  2,
+								Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
+							})
 							@popui.InputText(props.InputText{
 								ID:       "email",
 								Type:     "email",

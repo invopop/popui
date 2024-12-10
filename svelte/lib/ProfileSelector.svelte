@@ -16,7 +16,7 @@
 
   const dispatch = createEventDispatcher()
 
-  const [floatingRef, floatingContent] = createFloatingActions({
+  const [floatingRef, floatingContent, updatePosition] = createFloatingActions({
     strategy: 'absolute',
     placement: 'top-start',
     middleware: [offset(4)]
@@ -62,6 +62,7 @@
       clearTimeout(leaveHoverTimeout)
     }
     hovered = true
+    updatePosition()
   }
 
   function handleBlur() {

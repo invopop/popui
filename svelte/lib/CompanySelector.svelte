@@ -47,11 +47,6 @@
       return
     }
 
-    if (event.detail === 'settings') {
-      dispatch('settings')
-      return
-    }
-
     selectedCompany = companies.find((c) => c.id === event.detail) || null
     dispatch('select', selectedCompany)
   }

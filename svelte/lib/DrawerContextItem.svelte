@@ -32,8 +32,8 @@
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
-    { 'font-semibold tracking-tight max-w-[200px]': workspace },
-    { 'font-normal tracking-normal max-w-40': !workspace }
+    { 'tracking-tight max-w-[200px]': workspace },
+    { 'tracking-normal max-w-40': !workspace }
   )
 
   onMount(() => {
@@ -70,7 +70,7 @@
       {#if item.color}
         <TagStatus status={item.color} dot />
       {/if}
-      <span class="{labelStyles} text-base truncate">{item.label}</span>
+      <span class="{labelStyles} text-base font-medium truncate">{item.label}</span>
     </span>
 
     {#if item.country}
@@ -88,8 +88,8 @@
       }}
     />
   {:else if item.selected}
-    <Icon src={Tick} class="w-5 h-5 text-workspace-accent" />
+    <Icon src={Tick} class="w-5 h-5 text-workspace-accent text-neutral-500" />
   {:else if item.rightIcon}
-    <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-300" />
+    <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-800" />
   {/if}
 </button>

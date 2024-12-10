@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { flip, shift, offset } from 'svelte-floating-ui/dom'
+  import { offset } from 'svelte-floating-ui/dom'
   import clsx from 'clsx'
   import ProfileAvatar from './ProfileAvatar.svelte'
   import { createFloatingActions } from 'svelte-floating-ui'
@@ -19,7 +19,7 @@
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: 'absolute',
     placement: 'top-start',
-    middleware: [offset(4), flip(), shift()]
+    middleware: [offset(4)]
   })
 
   let hovered = false
@@ -40,7 +40,7 @@
     },
     {
       label: `Configure ${orgName || 'Organization'}`,
-      value: 'profile',
+      value: 'organization',
       icon: Company,
       rightIcon: ExternalLink,
       footer: true

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/a-h/templ"
+	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/examples"
 	"github.com/labstack/echo/v4"
 	"github.com/spf13/cobra"
@@ -39,6 +40,8 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	defer cancel()
 
 	e := echo.New()
+
+	e.StaticFS(popui.AssetPath, popui.Assets)
 
 	e.GET("/", s.index)
 	e.GET("/prose", s.prose)

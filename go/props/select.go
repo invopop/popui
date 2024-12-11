@@ -12,6 +12,7 @@ type Select struct {
 	Disabled   bool
 	Autofocus  bool
 	Multiple   bool
+	Required   bool
 	Error      Error
 	Attrs      templ.Attributes
 }

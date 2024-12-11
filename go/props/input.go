@@ -19,6 +19,7 @@ type InputText struct {
 	Autofocus   bool
 	Readonly    bool
 	Disabled    bool
+	Required    bool
 	Class       string
 	Label       string
 	LabelClass  string

@@ -17,6 +17,7 @@ type Textarea struct {
 	LabelClass  string
 	Disabled    bool
 	Readonly    bool
+	Required    bool
 	Autofocus   bool
 	Monospaced  bool
 	Rows        int

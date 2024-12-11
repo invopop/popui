@@ -40,6 +40,9 @@ templ InputText(p props.InputText) {
 			if p.Readonly {
 				readonly
 			}
+			if p.Required {
+				required
+			}
 			if p.Name != "" {
 				name={ p.Name }
 			}

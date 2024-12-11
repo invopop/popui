@@ -151,6 +151,12 @@ func Textarea(p props.Textarea) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
+		if p.Required {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" required")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
 		if p.Name != "" {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" name=\"")
 			if templ_7745c5c3_Err != nil {
@@ -159,7 +165,7 @@ func Textarea(p props.Textarea) templ.Component {
 			var templ_7745c5c3_Var10 string
 			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 29, Col: 17}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 32, Col: 17}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {
@@ -178,7 +184,7 @@ func Textarea(p props.Textarea) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(p.Placeholder)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 32, Col: 31}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 35, Col: 31}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -198,14 +204,10 @@ func Textarea(p props.Textarea) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if p.Value != "" {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("value=")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
 			var templ_7745c5c3_Var12 string
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(p.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 37, Col: 19}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 40, Col: 13}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 			if templ_7745c5c3_Err != nil {
@@ -290,7 +292,7 @@ func Contenteditable(p props.Textarea) templ.Component {
 				var templ_7745c5c3_Var17 string
 				templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(p.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 51, Col: 13}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 54, Col: 13}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 				if templ_7745c5c3_Err != nil {
@@ -315,7 +317,7 @@ func Contenteditable(p props.Textarea) templ.Component {
 		var templ_7745c5c3_Var19 string
 		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 58, Col: 12}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/textarea.templ`, Line: 61, Col: 12}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 		if templ_7745c5c3_Err != nil {

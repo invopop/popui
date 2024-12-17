@@ -1,0 +1,41 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Radio(p props.Radio) {
+	<label
+		for={ p.ID }
+		class={ classes.RadioWrapper }
+	>
+		<div class={ classes.RadioWrapperInner }>
+			<div class={ classes.RadioLabelWrapper }>
+				<span class={ classes.RadioLabel }>{ p.Label }</span>
+				<span class={ classes.RadioDescription }>{ p.Description }</span>
+			</div>
+			<input
+				type="radio"
+				id={ p.ID }
+				class={ templ.KV(classes.Radio, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+				if p.Name != "" {
+					name={ p.Name }
+				}
+				if p.Value != "" {
+					value={ p.Value }
+				}
+				if p.Checked {
+					checked
+				}
+				if p.Autofocus {
+					autofocus
+				}
+				if p.Required {
+					required
+				}
+				{ p.Attrs... }
+			/>
+		</div>
+	</label>
+}

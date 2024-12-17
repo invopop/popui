@@ -135,6 +135,12 @@ func Select(p props.Select) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
+		if p.Required {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" required")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
 		if p.Name != "" {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" name=\"")
 			if templ_7745c5c3_Err != nil {
@@ -143,7 +149,7 @@ func Select(p props.Select) templ.Component {
 			var templ_7745c5c3_Var9 string
 			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/select.templ`, Line: 28, Col: 17}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/select.templ`, Line: 31, Col: 17}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {

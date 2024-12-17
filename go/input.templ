@@ -49,9 +49,6 @@ templ InputText(p props.InputText) {
 			if p.Value != "" {
 				value={ p.Value }
 			}
-			if p.Required {
-				required
-			}
 			{ p.Attrs... }
 		/>
 		if !p.Error.Empty() {

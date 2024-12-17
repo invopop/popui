@@ -24,6 +24,9 @@ templ Select(p props.Select) {
 			if p.Multiple {
 				multiple
 			}
+			if p.Required {
+				required
+			}
 			if p.Name != "" {
 				name={ p.Name }
 			}

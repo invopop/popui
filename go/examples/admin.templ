@@ -111,12 +111,42 @@ templ Admin() {
 								Label: "Job Title",
 								Value: "Finance",
 							})
+							@popui.Textarea(props.Textarea{
+								ID:    "desc",
+								Label: "Description",
+								Rows:  2,
+								Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
+							})
 							@popui.InputText(props.InputText{
 								ID:       "email",
 								Type:     "email",
 								Label:    "Email",
 								Value:    "diego.fernandez@invopop.com",
 								Disabled: true,
+							})
+							@popui.Radio(props.Radio{
+								ID:          "sandbox",
+								Name:        "sandbox",
+								Label:       "Sandbox",
+								Description: "For testing, simulates invoices for free.",
+								Value:       "true",
+								Checked:     true,
+								Attrs: templ.Attributes{
+									"x-model":  "sandbox",
+									"@:change": "calculateSlug",
+								},
+							})
+							@popui.Radio(props.Radio{
+								ID:          "sandboxLive",
+								Name:        "sandbox",
+								Label:       "Live",
+								Description: "For production, issues valid invoices.",
+								Value:       "true",
+								Checked:     false,
+								Attrs: templ.Attributes{
+									"x-model":  "sandbox",
+									"@:change": "calculateSlug",
+								},
 							})
 							@popui.Button(props.Button{Variant: "primary"}) {
 								Update

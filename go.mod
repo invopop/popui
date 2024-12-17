@@ -3,7 +3,7 @@ module github.com/invopop/popui
 go 1.22.3
 
 require (
-	github.com/a-h/templ v0.2.778
+	github.com/a-h/templ v0.2.793
 	github.com/dchest/uniuri v1.2.0
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/spf13/cobra v1.8.1

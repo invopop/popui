@@ -81,6 +81,16 @@ const (
 	PopoverListItemTextLeft = "popui-popover-list-item__text-left"
 )
 
+// Radio classes
+const (
+	Radio             = "popui-radio"
+	RadioWrapper      = "popui-radio-wrapper"
+	RadioWrapperInner = "popui-radio-wrapper__inner"
+	RadioLabel        = "popui-radio-label"
+	RadioLabelWrapper = "popui-radio-label__wrapper"
+	RadioDescription  = "popui-radio-description"
+)
+
 // Select classes
 const (
 	SelectWrapper = "popui-select-wrapper"

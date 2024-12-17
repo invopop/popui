@@ -45,6 +45,26 @@
   @apply font-sans text-base text-neutral-800;
 }
 
+/* Radio */
+.popui-radio {
+  @apply form-radio h-5 w-5 border-neutral-200 text-workspace-accent focus:ring-0 focus:ring-offset-0;
+}
+.popui-radio-wrapper {
+  @apply has-[:checked]:border-workspace-accent has-[:checked]:shadow-active has-[input:not(:checked)]:border-neutral-200 border rounded-lg w-full text-left cursor-pointer block;
+}
+.popui-radio-wrapper__inner {
+  @apply py-2 pr-2 pl-3 flex items-start justify-between;
+}
+.popui-radio-label__wrapper {
+  @apply flex flex-col space-y-0.5;
+}
+.popui-radio-label {
+  @apply text-base text-neutral-800 font-medium;
+}
+.popui-radio-description {
+  @apply text-sm text-neutral-500;
+}
+
 /* Image */
 .popui-image {
   @apply h-full w-full rounded object-cover;

@@ -20,7 +20,6 @@ type InputText struct {
 	Readonly    bool
 	Required    bool
 	Disabled    bool
-	Required    bool
 	Class       string
 	Label       string
 	LabelClass  string

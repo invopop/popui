@@ -6,6 +6,7 @@ import "github.com/a-h/templ"
 type Radio struct {
 	ID          string
 	Class       string
+	LabelClass  string
 	Label       string
 	Description string
 	Autofocus   bool

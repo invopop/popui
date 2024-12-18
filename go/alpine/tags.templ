@@ -48,7 +48,7 @@ templ Tags(p props.Tags) {
 				}` }
 			>
 				<div class="flex-1">
-					@popui.InputText(props.InputText{ID: id, Attrs: templ.Attributes{
+					@popui.Input(props.Input{ID: id, Attrs: templ.Attributes{
 						"x-model":        "tags_newTag",
 						"@keydown.enter": "tags_addTag",
 						":class":         "{ '" + classes.InputTextError + "': tags_error }",

@@ -5,6 +5,7 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
+// PageHeader provides a wrapper for the page header
 templ PageHeader(p props.PageHeader) {
 	<div
 		class={
@@ -22,12 +23,15 @@ templ PageHeader(p props.PageHeader) {
 	</div>
 }
 
+// PageContent provides a wrapper for the page content
 templ PageContent() {
 	<div class={ classes.PageContent }>
 		{ children... }
 	</div>
 }
 
+// PageSection provides a wrapper for page sections.
+// Title and Description can be passed as prop
 templ PageSection(p props.PageSection) {
 	<div
 		class={

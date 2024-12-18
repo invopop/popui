@@ -13,6 +13,9 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
+// Select provides a select element.
+// It provides an InputLabel component at the top if Label prop is present.
+// It provides an InputError component at the botton if Error prop is present.
 func Select(p props.Select) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -69,7 +72,7 @@ func Select(p props.Select) templ.Component {
 				var templ_7745c5c3_Var5 string
 				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(p.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/select.templ`, Line: 12, Col: 13}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/select.templ`, Line: 15, Col: 13}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 				if templ_7745c5c3_Err != nil {
@@ -94,7 +97,7 @@ func Select(p props.Select) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/select.templ`, Line: 16, Col: 12}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/select.templ`, Line: 19, Col: 12}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -149,7 +152,7 @@ func Select(p props.Select) templ.Component {
 			var templ_7745c5c3_Var9 string
 			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/select.templ`, Line: 31, Col: 17}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/select.templ`, Line: 34, Col: 17}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {

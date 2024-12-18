@@ -53,15 +53,14 @@ export const Default: Story = {
   }
 }
 
-export const WithFreeWrap: Story = {
+export const WithNoWrap: Story = {
   args: {
-    freeWrap: true,
     fields: [
       { headerLabel: 'Invoice', slug: 'code', sortable: true },
       { headerLabel: 'Customer', slug: 'customer' },
       { headerLabel: 'Country', slug: 'country', isCountry: true },
       { headerLabel: 'Amount', slug: 'total', monospaced: true, rightAlign: true },
-      { headerLabel: 'Date', slug: 'created_at', rightAlign: true }
+      { headerLabel: 'Date', slug: 'created_at', rightAlign: true, nowrap: true }
     ],
     data: [
       {

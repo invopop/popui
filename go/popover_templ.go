@@ -13,6 +13,8 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
+// Popopver provides a Button that can be clicked for displaying a context menu.
+// Menu content will render the html passed as slot.
 func Popover(p props.Popover) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -68,7 +70,7 @@ func Popover(p props.Popover) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(p.ButtonLabel)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/popover.templ`, Line: 15, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/popover.templ`, Line: 17, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -91,7 +93,7 @@ func Popover(p props.Popover) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/popover.templ`, Line: 17, Col: 24}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/popover.templ`, Line: 19, Col: 24}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {

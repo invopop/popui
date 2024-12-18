@@ -36,18 +36,27 @@
   @apply flex items-center gap-2;
 }
 .popui-checkbox-input {
-  @apply form-checkbox w-4 h-4 text-workspace-accent rounded border border-neutral-200;
+  @apply form-checkbox w-4 h-4 text-workspace-accent rounded border border-neutral-200 hover:border-neutral-300;
+}
+.popui-checkbox-input:hover + label {
+  @apply text-neutral-800;
 }
 .popui-checkbox-input:focus {
   @apply text-workspace-accent ring-0 ring-offset-0;
 }
 .popui-checkbox-label {
-  @apply font-sans text-base text-neutral-800;
+  @apply font-sans text-base text-neutral-500;
+}
+.popui-checkbox-label:hover {
+  @apply text-neutral-800;
 }
 
 /* Radio */
 .popui-radio {
-  @apply form-radio h-5 w-5 border-neutral-200 text-workspace-accent focus:ring-0 focus:ring-offset-0;
+  @apply form-radio h-5 w-5 border-neutral-200 hover:border-neutral-300 text-workspace-accent focus:ring-0 focus:ring-offset-0;
+}
+.popui-radio:hover + label {
+  @apply text-neutral-800;
 }
 .popui-radio-wrapper {
   @apply has-[:checked]:border-workspace-accent has-[:checked]:shadow-active has-[input:not(:checked)]:border-neutral-200 border rounded-lg w-full text-left cursor-pointer block;
@@ -60,6 +69,9 @@
 }
 .popui-radio-label {
   @apply text-base text-neutral-800 font-medium;
+}
+.popui-radio-label:hover + input {
+  @apply border-neutral-300;
 }
 .popui-radio-description {
   @apply text-sm text-neutral-500;

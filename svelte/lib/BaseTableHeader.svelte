@@ -16,10 +16,6 @@
   export let isLast = false
   export let selectable = false
 
-  $: outerStyles = clsx({
-    'w-full': field.fullWidth
-  })
-
   $: headerStyles = clsx({
     'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable,
     'pl-5': isFirst && !selectable,
@@ -35,12 +31,7 @@
   }
 </script>
 
-<th
-  scope="col"
-  class="{outerStyles} bg-white text-neutral-500 group sticky z-10 top-0 h-9 box-border p-0"
-  style:min-width={field.width}
-  style:max-width={field.width}
->
+<th scope="col" class="bg-white text-neutral-500 group sticky z-10 top-0 h-9 box-border p-0">
   <span class="flex border-b border-neutral-100" class:justify-end={field.rightAlign}>
     {#if field.sortable}
       <BaseDropdown bind:this={sortDropdown} fullWidth>

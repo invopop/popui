@@ -1,0 +1,17 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+// InputLabel provides a label element
+templ InputLabel(p props.Label) {
+	<label
+		for={ p.ID }
+		class={ templ.KV(classes.Label, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+		{ p.Attrs... }
+	>
+		{ children... }
+	</label>
+}

@@ -9,8 +9,8 @@ type Label struct {
 	Attrs templ.Attributes
 }
 
-// InputText Templ component props
-type InputText struct {
+// Input Templ component props
+type Input struct {
 	ID          string
 	Placeholder string
 	Type        string

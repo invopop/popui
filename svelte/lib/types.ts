@@ -131,18 +131,18 @@ export type TableField = {
   headerLabel: string
   slug: string
   sortable?: boolean
-  fullWidth?: boolean
   grayed?: boolean
   formatter?: (data: TableDataRow) => string | number
   helperBadge?: (data: TableDataRow) => Badge | null
   helperStatus?: (data: TableDataRow) => FeedItemStatus | null
   helperIcons?: (data: TableDataRow) => TableIcon[]
   monospaced?: boolean
+  nowrap?: boolean
   monospacedNums?: boolean
   rightAlign?: boolean
   isCountry?: boolean
   copy?: boolean
-  width?: string
+  style?: string
   status?: boolean
   noPadding?: boolean
 }

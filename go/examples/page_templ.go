@@ -390,8 +390,8 @@ func Page() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputText(
-				props.InputText{
+			templ_7745c5c3_Err = popui.Input(
+				props.Input{
 					Label: "Name",
 					Error: props.Error{Attrs: templ.Attributes{"x-text": "inputText.errorText"}},
 					Attrs: templ.Attributes{

@@ -2,36 +2,42 @@ package popui
 
 import "github.com/invopop/popui/go/classes"
 
+// P provides a p element
 templ P() {
 	<p class={ classes.P }>
 		{ children... }
 	</p>
 }
 
+// Title provides a h1 element
 templ Title() {
 	<h1 class={ classes.Title }>
 		{ children... }
 	</h1>
 }
 
+// Subtitle provides a h2 element
 templ Subtitle() {
 	<h2 class={ classes.Subtitle }>
 		{ children... }
 	</h2>
 }
 
+// PageTitle provides a h1 element used as Page title
 templ PageTitle() {
 	<h1 class={ classes.PageTitle }>
 		{ children... }
 	</h1>
 }
 
+// Description provides a p element using the description popui class
 templ Description() {
 	<p class={ classes.Description }>
 		{ children... }
 	</p>
 }
 
+// Info provides a nicely formatted info text
 templ Info() {
 	<div class={ classes.Info }>
 		<div>
@@ -43,18 +49,22 @@ templ Info() {
 	</div>
 }
 
+// Mark provides a mark element formatted as a highlighted text
 templ Mark() {
 	<mark>
 		{ children... }
 	</mark>
 }
 
+// Prose is a wrapper for using prose classes from tailwind.
+// It formats raw html with a default styling
 templ Prose() {
 	<div class={ classes.Prose }>
 		{ children... }
 	</div>
 }
 
+// HorizontalDivider provides an horizontal separator with a dashed line
 templ HorizontalDivider() {
 	<div class={ classes.HorizontalDividerWrapper }>
 		<div class={ classes.HorizontalDivider }></div>

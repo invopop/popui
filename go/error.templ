@@ -1,0 +1,17 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+// InputError provides a nicelly formatted error text
+templ InputError(e props.Error) {
+	<p class={ templ.KV(classes.Error, e.Class == ""), templ.KV(e.Class, e.Class != "") } { e.Attrs... }>
+		if e.Error != nil {
+			{ e.Error.Error() }
+		} else {
+			{ e.Text }
+		}
+	</p>
+}

@@ -27,6 +27,7 @@
   let metaKeyPressed = false
   let shiftKeyPressed = false
   let lastSelected: TableDataRow = {}
+  let lastSelectedForShift: TableDataRow = {}
   let selectWithArrowPosition = -1
   let selectionMode = 'keyboard'
 
@@ -38,7 +39,6 @@
   export let groupLabel: TableGroupLabelProp = undefined
   export let disableRowClick = false
   export let hideCounter = false
-  export let freeWrap = false
   export let selectable = false
   export let selectedRows: TableDataRow[] = []
   export let selectedTrackedBy = 'id'
@@ -85,6 +85,7 @@
   }
 
   function selectRow(row: TableDataRow) {
+    lastSelectedForShift = row
     selectedRows = [...new Set([...selectedRows, row])]
   }
 
@@ -110,7 +111,9 @@
   function selectRange(to: TableDataRow) {
     if (lastSelectedIndex < 0) return
 
-    let fromIndex = lastSelectedIndex
+    let fromIndex = flattedData.findIndex(
+      (d) => d[selectedTrackedBy] === lastSelectedForShift[selectedTrackedBy]
+    )
     let toIndex = flattedData.findIndex((d) => d[selectedTrackedBy] === to[selectedTrackedBy])
     if (fromIndex > toIndex) {
       ;[fromIndex, toIndex] = [toIndex, fromIndex]
@@ -234,6 +237,17 @@
 
 <div class="w-full font-sans">
   <table class="hidden md:table w-full">
+    <colgroup>
+      {#if selectable}
+        <col style="width: 56px" />
+      {/if}
+      {#each fields as field, i (i)}
+        <col style={field.style} />
+      {/each}
+      {#if addExtraCell}
+        <col style="width: 40px" />
+      {/if}
+    </colgroup>
     <thead>
       <tr class="relative">
         {#if selectable}
@@ -309,7 +323,6 @@
             {fields}
             {getActions}
             {disableRowClick}
-            {freeWrap}
             {selectable}
             {selectedRows}
             {selectedTrackedBy}

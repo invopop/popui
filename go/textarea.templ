@@ -5,6 +5,9 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
+// Textarea provides a text element.
+// It provides an InputLabel component at the top if Label prop is present.
+// It provides an InputError component at the botton if Error prop is present.
 templ Textarea(p props.Textarea) {
 	<div class={ classes.TextareaWrapper }>
 		if p.Label != "" {
@@ -46,6 +49,8 @@ templ Textarea(p props.Textarea) {
 	</div>
 }
 
+// Contenteditable provides a div with contenteditable set to true.
+// It behaves as a Textarea component.
 // TODO: Use the same component and find a way to render a div or a textarea dynamicly
 templ Contenteditable(p props.Textarea) {
 	<div class={ classes.TextareaWrapper }>

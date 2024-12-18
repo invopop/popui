@@ -152,8 +152,8 @@ templ Page() {
 				},
 			})
 			<div class="max-w-md">
-				@popui.InputText(
-					props.InputText{
+				@popui.Input(
+					props.Input{
 						Label: "Name",
 						Error: props.Error{Attrs: templ.Attributes{"x-text": "inputText.errorText"}},
 						Attrs: templ.Attributes{

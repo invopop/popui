@@ -15,7 +15,6 @@
   export let getActions: TableActionProp = undefined
   export let fields: TableField[] = []
   export let disableRowClick = false
-  export let freeWrap = false
   export let selectable = false
   export let selected = false
   export let selectionMode = 'keyboard'
@@ -85,7 +84,6 @@
       isFirst={i === 0}
       isLast={i === fields.length - 1}
       {field}
-      {freeWrap}
       {selectable}
       hasActions={!!actions.length}
       badge={field.helperBadge ? field.helperBadge(row) : null}

@@ -5,6 +5,9 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
+// Select provides a select element.
+// It provides an InputLabel component at the top if Label prop is present.
+// It provides an InputError component at the botton if Error prop is present.
 templ Select(p props.Select) {
 	<div class={ classes.SelectWrapper }>
 		if p.Label != "" {

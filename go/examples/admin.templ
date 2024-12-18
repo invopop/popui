@@ -100,13 +100,13 @@ templ Admin() {
 					}
 					@popui.PageSection(props.PageSection{Title: "Member information", Description: "Update a member’s job title within your organization"}) {
 						@popui.Form(props.Form{}) {
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								ID:       "name",
 								Label:    "Full name",
 								Value:    "Diego Fernández",
 								Disabled: true,
 							})
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								ID:    "JOB",
 								Label: "Job Title",
 								Value: "Finance",
@@ -117,32 +117,49 @@ templ Admin() {
 								Rows:  2,
 								Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
 							})
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								ID:       "email",
 								Type:     "email",
 								Label:    "Email",
 								Value:    "diego.fernandez@invopop.com",
 								Disabled: true,
 							})
-							@popui.Radio(props.Radio{
-								ID:          "sandbox",
-								Name:        "sandbox",
-								Label:       "Sandbox",
-								Description: "For testing, simulates invoices for free.",
-								Value:       "true",
-								Checked:     true,
+							@popui.InputRadioCard(props.Radio{
+								ID:      "sandbox",
+								Name:    "sandbox",
+								Label:   "Sandbox",
+								Value:   "true",
+								Checked: true,
 								Attrs: templ.Attributes{
 									"x-model":  "sandbox",
 									"@:change": "calculateSlug",
 								},
-							})
-							@popui.Radio(props.Radio{
-								ID:          "sandboxLive",
-								Name:        "sandbox",
-								Label:       "Live",
-								Description: "For production, issues valid invoices.",
-								Value:       "true",
-								Checked:     false,
+							}) {
+								@popui.Description() {
+									For testing, simulates invoices for free.
+								}
+							}
+							@popui.InputRadioCard(props.Radio{
+								ID:      "sandboxLive",
+								Name:    "sandbox",
+								Label:   "Live",
+								Value:   "true",
+								Checked: false,
+								Attrs: templ.Attributes{
+									"x-model":  "sandbox",
+									"@:change": "calculateSlug",
+								},
+							}) {
+								@popui.Description() {
+									For production, issues valid invoices.
+								}
+							}
+							@popui.InputRadio(props.Radio{
+								ID:      "regular",
+								Name:    "sandbox",
+								Label:   "Regular radio option. No card",
+								Value:   "regular",
+								Checked: false,
 								Attrs: templ.Attributes{
 									"x-model":  "sandbox",
 									"@:change": "calculateSlug",

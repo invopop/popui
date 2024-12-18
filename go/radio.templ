@@ -5,7 +5,26 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-templ Radio(p props.Radio) {
+// InputRadio provides an input type radio element. Label is optional.
+templ InputRadio(p props.Radio) {
+	if p.Label != "" {
+		<div class={ classes.CheckboxWrapper }>
+			@inputRadio(p)
+			<label
+				for={ p.ID }
+				class={ templ.KV(classes.CheckboxLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }
+			>
+				{ p.Label }
+			</label>
+		</div>
+	} else {
+		@inputRadio(p)
+	}
+}
+
+// InputRadioCard provides a wrapper for the Radio component.
+// Content passed by slot will be rendered as a description.
+templ InputRadioCard(p props.Radio) {
 	<label
 		for={ p.ID }
 		class={ classes.RadioWrapper }
@@ -13,29 +32,33 @@ templ Radio(p props.Radio) {
 		<div class={ classes.RadioWrapperInner }>
 			<div class={ classes.RadioLabelWrapper }>
 				<span class={ classes.RadioLabel }>{ p.Label }</span>
-				<span class={ classes.RadioDescription }>{ p.Description }</span>
+				{ children... }
 			</div>
-			<input
-				type="radio"
-				id={ p.ID }
-				class={ templ.KV(classes.Radio, p.Class == ""), templ.KV(p.Class, p.Class != "") }
-				if p.Name != "" {
-					name={ p.Name }
-				}
-				if p.Value != "" {
-					value={ p.Value }
-				}
-				if p.Checked {
-					checked
-				}
-				if p.Autofocus {
-					autofocus
-				}
-				if p.Required {
-					required
-				}
-				{ p.Attrs... }
-			/>
+			@inputRadio(p)
 		</div>
 	</label>
+}
+
+templ inputRadio(p props.Radio) {
+	<input
+		type="radio"
+		id={ p.ID }
+		class={ templ.KV(classes.Radio, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
+		if p.Checked {
+			checked
+		}
+		if p.Autofocus {
+			autofocus
+		}
+		if p.Required {
+			required
+		}
+		{ p.Attrs... }
+	/>
 }

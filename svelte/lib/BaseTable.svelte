@@ -239,13 +239,13 @@
   <table class="hidden md:table w-full">
     <colgroup>
       {#if selectable}
-        <col />
+        <col style="width: 56px" />
       {/if}
       {#each fields as field, i (i)}
         <col style={field.style} />
       {/each}
       {#if addExtraCell}
-        <col />
+        <col style="width: 40px" />
       {/if}
     </colgroup>
     <thead>

@@ -7,30 +7,9 @@ const (
 	AvatarInitial = "popui-avatar--initial"
 )
 
-// Button related classes
-const (
-	ButtonBase        = "popui-button"
-	ButtonDanger      = "popui-button--danger"
-	ButtonPrimary     = "popui-button--primary"
-	ButtonTransparent = "popui-button--transparent"
-	ButtonSmall       = "popui-button--small"
-)
-
-// Checkbox styles
-const (
-	CheckboxWrapper = "popui-checkbox-wrapper"
-	CheckboxInput   = "popui-checkbox-input"
-	CheckboxLabel   = "popui-checkbox-label"
-)
-
 // Container classes
 const (
 	PopupConfigContainer = "popui-container-config"
-)
-
-// Form related classes
-const (
-	Form = "popui-form"
 )
 
 // Image related classes
@@ -38,13 +17,42 @@ const (
 	Image = "popui-image"
 )
 
-// Input classes
+// Form and input and related classes
 const (
-	InputTextWrapper = "popui-input-wrapper"
-	InputTextBase    = "popui-input"
-	InputTextError   = "popui-input--error"
-	Label            = "popui-label"
-	Error            = "popui-error"
+	Form = "popui-form"
+
+	InputTextWrapper = "popui-input-text-wrapper"
+	InputTextBase    = "popui-input-text"
+	InputTextError   = "popui-input-text--error"
+
+	CheckboxWrapper = "popui-checkbox-wrapper"
+	CheckboxInput   = "popui-checkbox-input"
+	CheckboxLabel   = "popui-checkbox-label"
+
+	ButtonBase        = "popui-button"
+	ButtonDanger      = "popui-button--danger"
+	ButtonPrimary     = "popui-button--primary"
+	ButtonTransparent = "popui-button--transparent"
+	ButtonSmall       = "popui-button--small"
+
+	Radio             = "popui-radio"
+	RadioWrapper      = "popui-radio-wrapper"
+	RadioWrapperInner = "popui-radio-wrapper__inner"
+	RadioLabel        = "popui-radio-label"
+	RadioLabelWrapper = "popui-radio-label__wrapper"
+	RadioDescription  = "popui-radio-description"
+
+	SelectWrapper = "popui-select-wrapper"
+	SelectBase    = "popui-select"
+	SelectError   = "popui-input--error"
+
+	TextareaWrapper    = "popui-textarea-wrapper"
+	TextareaBase       = "popui-textarea"
+	TextareaError      = "popui-input--error"
+	TextareaMonospaced = "popui-textarea--monospaced"
+
+	Label = "popui-label"
+	Error = "popui-error"
 )
 
 // Prose and general classes
@@ -81,23 +89,6 @@ const (
 	PopoverListItemTextLeft = "popui-popover-list-item__text-left"
 )
 
-// Radio classes
-const (
-	Radio             = "popui-radio"
-	RadioWrapper      = "popui-radio-wrapper"
-	RadioWrapperInner = "popui-radio-wrapper__inner"
-	RadioLabel        = "popui-radio-label"
-	RadioLabelWrapper = "popui-radio-label__wrapper"
-	RadioDescription  = "popui-radio-description"
-)
-
-// Select classes
-const (
-	SelectWrapper = "popui-select-wrapper"
-	SelectBase    = "popui-select"
-	SelectError   = "popui-input--error"
-)
-
 // Sidebar classes
 const (
 	Sidebar                  = "popui-admin-sidebar"
@@ -126,14 +117,6 @@ const (
 	TagButton    = "popui-tag-button"
 	TagAddButton = "popui-tag-add-button"
 	TagAddInput  = "popui-tag-add-input"
-)
-
-// Textarea classes
-const (
-	TextareaWrapper    = "popui-textarea-wrapper"
-	TextareaBase       = "popui-textarea"
-	TextareaError      = "popui-input--error"
-	TextareaMonospaced = "popui-textarea--monospaced"
 )
 
 // Upload classes

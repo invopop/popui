@@ -5,8 +5,11 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-// InputRadio provides an input type radio element. Label is optional.
-templ InputRadio(p props.Radio) {
+// InputRadio provides a simple input type radio element. Label is optional.
+// If no ID is provided, one will be generated to ensure
+// any label is correctly linked to the input element.
+templ InputRadio(p props.InputRadio) {
+	{{ p = p.GenerateID() }}
 	if p.Label != "" {
 		<div class={ classes.CheckboxWrapper }>
 			@inputRadio(p)
@@ -22,9 +25,10 @@ templ InputRadio(p props.Radio) {
 	}
 }
 
-// InputRadioCard provides a wrapper for the Radio component.
-// Content passed by slot will be rendered as a description.
-templ InputRadioCard(p props.Radio) {
+// InputRadioCard provides an alternative representation of a regular radio
+// button as a card with a description.
+templ InputRadioCard(p props.InputRadio) {
+	{{ p = p.GenerateID() }}
 	<label
 		for={ p.ID }
 		class={ classes.RadioWrapper }
@@ -32,14 +36,18 @@ templ InputRadioCard(p props.Radio) {
 		<div class={ classes.RadioWrapperInner }>
 			<div class={ classes.RadioLabelWrapper }>
 				<span class={ classes.RadioLabel }>{ p.Label }</span>
-				{ children... }
+				if p.Description != "" {
+					<p class={ classes.Description }>
+						{ p.Description }
+					</p>
+				}
 			</div>
 			@inputRadio(p)
 		</div>
 	</label>
 }
 
-templ inputRadio(p props.Radio) {
+templ inputRadio(p props.InputRadio) {
 	<input
 		type="radio"
 		id={ p.ID }

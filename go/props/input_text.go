@@ -2,15 +2,8 @@ package props
 
 import "github.com/a-h/templ"
 
-// Label Templ component props
-type Label struct {
-	ID    string
-	Class string
-	Attrs templ.Attributes
-}
-
-// Input Templ component props
-type Input struct {
+// InputText defines the properties that can be used with input text fields.
+type InputText struct {
 	ID          string
 	Placeholder string
 	Type        string

@@ -5,10 +5,24 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-// Input provides an input element. If Type prop is not present, it will use the "text" default.
-// It provides an InputLabel component at the top if Label prop is present.
-// It provides an InputError component at the botton if Error prop is present.
-templ Input(p props.Input) {
+// InputText provides a text input field. By default the type will be "text" but can
+// be overridden with any of the following types with a similar presentation to text
+// inputs:
+//
+//  * email
+//  * file
+//  * password
+//  * search
+//  * tel
+//  * url
+//  * date
+//  * time
+//  * week
+//  * month
+//
+// If the Label or Error properties are provided, they will be added alongside the
+// input box.
+templ InputText(p props.InputText) {
 	<div class={ classes.InputTextWrapper }>
 		if p.Label != "" {
 			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass}) {
@@ -17,12 +31,10 @@ templ Input(p props.Input) {
 		}
 		<input
 			id={ p.ID }
+			type={ cleanInputTextType(p.Type) }
 			class={ templ.KV(classes.InputTextBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 			if p.Placeholder != "" {
 				placeholder={ p.Placeholder }
-			}
-			if p.Type != "" {
-				type={ p.Type }
 			}
 			if p.Autofocus {
 				autofocus
@@ -48,4 +60,13 @@ templ Input(p props.Input) {
 			@InputError(p.Error)
 		}
 	</div>
+}
+
+func cleanInputTextType(typ string) string {
+	switch typ {
+	case "email", "file", "search", "password", "tel", "url", "date", "time", "week", "month":
+		return typ
+	default:
+		return "text"
+	}
 }

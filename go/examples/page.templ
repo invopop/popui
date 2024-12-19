@@ -152,8 +152,8 @@ templ Page() {
 				},
 			})
 			<div class="max-w-md">
-				@popui.Input(
-					props.Input{
+				@popui.InputText(
+					props.InputText{
 						Label: "Name",
 						Error: props.Error{Attrs: templ.Attributes{"x-text": "inputText.errorText"}},
 						Attrs: templ.Attributes{
@@ -169,8 +169,8 @@ templ Page() {
 				XModel: "checkbox.value",
 			})
 			<div class="max-w-md">
-				@popui.Checkbox(
-					props.Checkbox{
+				@popui.InputCheckbox(
+					props.InputCheckbox{
 						Label: "This is the label for the checbox",
 						Attrs: templ.Attributes{
 							"x-model": "checkbox.value",

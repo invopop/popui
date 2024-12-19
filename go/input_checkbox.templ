@@ -5,8 +5,9 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-// Checkbox provides a button element. Label class can be modified using the CheckboxLabel prop
-templ Checkbox(p props.Checkbox) {
+// InputCheckbox provides an input tag with the type set to checkbox and the appropriate
+// styling. Label class can be modified using the LabelClass property.
+templ InputCheckbox(p props.InputCheckbox) {
 	<div class={ classes.CheckboxWrapper }>
 		<input
 			id={ p.ID }

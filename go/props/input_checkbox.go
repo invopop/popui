@@ -2,8 +2,9 @@ package props
 
 import "github.com/a-h/templ"
 
-// Checkbox Templ component props
-type Checkbox struct {
+// InputCheckbox defines the properties that can be used when building
+// input checkboxes.
+type InputCheckbox struct {
 	ID         string
 	Class      string
 	Label      string

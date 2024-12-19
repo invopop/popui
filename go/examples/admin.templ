@@ -117,13 +117,15 @@ templ Admin() {
 								Rows:  2,
 								Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
 							})
-							@popui.InputText(props.InputText{
-								ID:       "email",
-								Type:     "email",
-								Label:    "Email",
-								Value:    "diego.fernandez@invopop.com",
-								Disabled: true,
-							})
+							@popui.Fieldset(props.Fieldset{Legend: "Fieldset"}) {
+								@popui.InputText(props.InputText{
+									ID:       "email",
+									Type:     "email",
+									Label:    "Email",
+									Value:    "diego.fernandez@invopop.com",
+									Disabled: true,
+								})
+							}
 							@popui.InputRadioCard(props.InputRadio{
 								Name:    "sandbox",
 								Label:   "Sandbox",

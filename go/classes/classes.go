@@ -21,6 +21,9 @@ const (
 const (
 	Form = "popui-form"
 
+	Fieldset       = "popui-fieldset"
+	FieldsetLegend = "popui-fieldset-legend"
+
 	InputTextWrapper = "popui-input-text-wrapper"
 	InputTextBase    = "popui-input-text"
 	InputTextError   = "popui-input-text--error"

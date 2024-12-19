@@ -3,8 +3,8 @@ package examples
 import (
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/classes"
-	"github.com/invopop/popui/go/icons"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
 )
 
 templ Admin() {
@@ -88,7 +88,7 @@ templ Admin() {
 													<span>Edit Member</span>
 												</li>
 												<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-													@icons.Trash()
+													@icons.Delete()
 													<span class="text-danger">Disable Access</span>
 												</li>
 											</ul>

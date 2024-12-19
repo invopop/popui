@@ -22,8 +22,8 @@ type InputRadio struct {
 	Attrs       templ.Attributes
 }
 
-// GetID returns the ID or generates a random one and
-// returns the properties object.
+// GenerateID returns a new InputRadio instance with either the existing ID
+// or a new randomly generated one.
 func (i InputRadio) GenerateID() InputRadio {
 	if i.ID != "" {
 		return i

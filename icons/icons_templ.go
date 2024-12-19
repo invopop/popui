@@ -8,7 +8,10 @@ package icons
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func Puzzle() templ.Component {
+// Show renders the icon specified directly as output. The default theme will be used.
+//
+//	@icons.Show("tag")
+func Show(filename string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,9 +32,24 @@ func Puzzle() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M2 5.21429C2 4.39375 2.65122 3.72857 3.45455 3.72857H5.81429C5.91685 3.72857 6 3.64543 6 3.54286V3.54286C6 2.41462 6.89543 1.5 8 1.5C9.10457 1.5 10 2.41462 10 3.54286V3.54286C10 3.64543 10.0831 3.72857 10.1857 3.72857H12.5455C13.3488 3.72857 14 4.39375 14 5.21429V6.88961C14 6.99003 13.9186 7.07143 13.8182 7.07143V7.07143C12.7136 7.07143 11.8182 7.98605 11.8182 9.11429C11.8182 10.2425 12.7136 11.1571 13.8182 11.1571V11.1571C13.9186 11.1571 14 11.2385 14 11.339V13.0143C14 13.8348 13.3488 14.5 12.5455 14.5H3.45455C2.65122 14.5 2 13.8348 2 13.0143V5.21429Z\" stroke=\"#6B7280\"></path></svg>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
+		if data, err := loadFile(ThemeDefault, filename); err == nil {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div style=\"width: 16px; height: 16px;\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templ.Raw(string(data)).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- err with icon -->")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 		}
 		return templ_7745c5c3_Err
 	})

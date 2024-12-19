@@ -11,8 +11,8 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/classes"
-	"github.com/invopop/popui/go/icons"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
 )
 
 func Admin() templ.Component {
@@ -360,7 +360,7 @@ func Admin() templ.Component {
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
-							templ_7745c5c3_Err = icons.Trash().Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = icons.Delete().Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}

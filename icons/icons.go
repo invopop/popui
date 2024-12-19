@@ -7,8 +7,10 @@ import (
 	"path/filepath"
 )
 
-//go:generate go run ./icons/generate.go
+//go:generate go run generate.go
 
+// Content provides a store of all the icons that can be used in applications.
+//
 //go:embed themes
 var Content embed.FS
 

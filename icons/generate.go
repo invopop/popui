@@ -77,7 +77,7 @@ func generate() error {
 	out := bytes.NewBuffer(nil)
 	tmpl.Execute(out, map[string]any{"Icons": icons})
 
-	f := filepath.Join("icons", "icons_list.templ")
+	f := filepath.Join("icons_list.templ")
 	if err := os.WriteFile(f, out.Bytes(), 0644); err != nil {
 		return err
 	}

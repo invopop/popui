@@ -11,3 +11,11 @@ type Form struct {
 	Class  string
 	Attrs  templ.Attributes
 }
+
+// Fieldset properties to configure a simple fieldset.
+type Fieldset struct {
+	Legend      string
+	Class       string
+	Attrs       templ.Attributes
+	LegendAttrs templ.Attributes
+}

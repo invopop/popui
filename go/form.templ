@@ -29,3 +29,22 @@ templ Form(p props.Form) {
 		{ children... }
 	</form>
 }
+
+// Fieldset helps group a set of form elements together with a
+// useful legend.
+templ Fieldset(p props.Fieldset) {
+	<fieldset
+		class={
+			templ.KV(classes.Fieldset, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		if p.Legend != "" {
+			<legend class={ classes.FieldsetLegend }>
+				{ p.Legend }
+			</legend>
+		}
+		{ children... }
+	</fieldset>
+}

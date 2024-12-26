@@ -2,7 +2,7 @@
   import type { DrawerOption } from './types.ts'
   import DrawerContextItem from './DrawerContextItem.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { AddCircle, Sidebar } from '@invopop/ui-icons'
+  import { AddCircle, ExternalLink, Sidebar } from '@invopop/ui-icons'
   import { createEventDispatcher } from 'svelte'
   import BaseCounter from './BaseCounter.svelte'
   import EmptyStateIcon from './EmptyStateIcon.svelte'
@@ -112,13 +112,18 @@
   <ul class="px-1 space-y-1 bg-neutral-50 rounded-b border-t border-neutral-100 py-1">
     <li class="pl-1.5 py-1.5 pr-2 hover:bg-neutral-100 rounded-sm">
       <button
-        class="flex items-center space-x-1.5 w-full"
+        class="flex items-center justify-between w-full"
         on:click={() => {
           dispatch('click', 'add')
         }}
       >
-        <Icon src={AddCircle} class="w-4 h-4 text-neutral-500 flex-shrink-0" />
-        <span class="text-neutral-800 tracking-tight text-base font-medium">Create workspace</span>
+        <div class="flex items-center space-x-1.5">
+          <Icon src={AddCircle} class="w-4 h-4 text-neutral-800 flex-shrink-0" />
+          <span class="text-neutral-800 tracking-tight text-base font-medium">Create workspace</span
+          >
+        </div>
+
+        <Icon src={ExternalLink} class="w-5 h-5 text-neutral-800 flex-shrink-0" />
       </button>
     </li>
   </ul>

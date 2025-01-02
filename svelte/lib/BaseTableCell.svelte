@@ -33,7 +33,7 @@
     { 'pl-3': !isFirst && !isSelectableFirst },
     { 'pr-5': isLast && !hasActions },
     { 'pr-3': !isLast || hasActions },
-    { 'px-3': (!isFirst || !selectable) && !field.noPadding },
+    { 'px-2': (!isFirst || !selectable) && !field.noPadding },
     { 'px-0': field.noPadding }
   )
   $: isMobile = Viewport.Width < 769

@@ -25,7 +25,7 @@
     ...companies.map((c) => ({
       value: c.id,
       label: c.name,
-      selected: c.slug === selectedCompany?.slug,
+      selected: c.slug === selectedCompany?.slug && !!c.sandbox === !!selectedCompany?.sandbox,
       country: c.country,
       picture: c.logo_url,
       sandbox: c.sandbox

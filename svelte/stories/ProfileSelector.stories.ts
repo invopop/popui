@@ -44,6 +44,16 @@ export const WithOrganizationName: Story = {
   }
 }
 
+export const WithLongName: Story = {
+  decorators: [() => DarkBackgroundDecorator],
+  args: {
+    name: 'Sam Lown and his very long name fellows',
+    orgName: 'Invopop Sociedad Limitada Unipersonal',
+    picture:
+      'https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg'
+  }
+}
+
 export const WithSwitchOrganization: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

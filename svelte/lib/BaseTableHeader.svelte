@@ -19,9 +19,9 @@
   $: headerStyles = clsx({
     'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable,
     'pl-5': isFirst && !selectable,
-    'pl-3': !isFirst,
+    'pl-2': !isFirst,
     'pr-5': isLast,
-    'pr-3': !isLast
+    'pr-2': !isLast
   })
 
   function handleSortBy(event: CustomEvent) {

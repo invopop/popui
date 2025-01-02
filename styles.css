@@ -305,7 +305,7 @@ div[contenteditable='true'] .tag {
 }
 .popui-table th,
 .popui-table td {
-  @apply text-left bg-white text-neutral-500 box-border p-3 font-sans text-base font-normal;
+  @apply text-left bg-white text-neutral-500 box-border p-2 font-sans text-base font-normal;
 }
 .popui-table-cell__right {
   @apply !text-right;

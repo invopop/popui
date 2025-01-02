@@ -60,10 +60,10 @@
   }}
 >
   {#if selectable}
-    <td>
+    <td class="relative">
       <button
         bind:this={checkboxButton}
-        class="px-5 h-[36px] flex items-center outline-none group cursor-default"
+        class="absolute inset-0 h-full px-5 flex items-center outline-none group cursor-default"
         on:click|stopPropagation={() => {
           dispatch('checked', !checked)
         }}

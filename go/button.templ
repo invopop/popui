@@ -13,6 +13,7 @@ templ Button(p props.Button) {
 			templ.KV(p.Class, p.Class != ""),
 			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
 			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),
+			templ.KV(classes.ButtonSecondary, p.Variant == "secondary"),
 			templ.KV(classes.ButtonTransparent, p.Variant == "transparent"),
 			templ.KV(classes.ButtonSmall, p.Small),
 		}

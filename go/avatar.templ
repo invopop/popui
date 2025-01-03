@@ -11,6 +11,7 @@ templ Avatar(p props.Avatar) {
 		class={
 			templ.KV(classes.AvatarBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
+			templ.KV(classes.AvatarLarge, p.Large),
 		}
 		{ p.Attrs... }
 	>

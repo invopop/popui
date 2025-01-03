@@ -4,6 +4,9 @@
 .popui-avatar {
   @apply h-5 w-5 bg-neutral-50 text-neutral-500 rounded flex items-center justify-center font-semibold relative font-sans;
 }
+.popui-avatar--large {
+  @apply !h-8 !w-8;
+}
 .popui-avatar--initial {
   @apply border border-neutral-100;
 }
@@ -20,6 +23,9 @@
 }
 .popui-button--primary {
   @apply border-0 bg-workspace-accent text-white;
+}
+.popui-button--secondary {
+  @apply border-0 bg-neutral-100;
 }
 .popui-button--small {
   @apply text-sm;
@@ -151,6 +157,9 @@ pre {
 .popui-popover-list-item {
   @apply font-sans pl-1.5 pr-2 py-1.5 font-medium text-base text-neutral-800 w-full rounded;
 }
+.popui-popover-list-item > button {
+  @apply flex items-center space-x-2 cursor-pointer whitespace-nowrap z-10;
+}
 .popui-popover-list-item:hover {
   @apply bg-neutral-100;
 }
@@ -248,6 +257,12 @@ div[contenteditable='true'] .tag {
 .popui-form {
   @apply w-[400px] space-y-4;
 }
+.popui-form__list-item {
+  @apply flex items-center space-x-3 text-base text-neutral-800;
+}
+.popui-form__list-item > *:nth-child(2) {
+  @apply flex-1 min-w-0 truncate font-semibold;
+}
 
 .popui-fieldset {
   @apply border border-gray-300 p-4 rounded-md;
@@ -279,6 +294,7 @@ div[contenteditable='true'] .tag {
   @apply my-2;
 }
 .popui-divider {
+  width: 100%;
   border-bottom: 1px solid transparent;
   border-image: repeating-linear-gradient(
     90deg,
@@ -289,19 +305,22 @@ div[contenteditable='true'] .tag {
   );
   border-image-slice: 1;
 }
+.popui-admin-page__content .popui-divider-wrapper {
+  @apply !mt-0 !mb-5;
+}
+.popui-admin-page__content > div:first-of-type .popui-divider-wrapper {
+  @apply hidden;
+}
 
 /* Table */
 .popui-table {
-  @apply font-sans text-base flex-1 rounded border border-separate border-neutral-100 bg-white;
+  @apply font-sans text-base flex-1 rounded border border-collapse border-neutral-100 bg-white;
 }
 .popui-table th {
   @apply border-b border-neutral-100;
 }
 .popui-table td > div {
   @apply flex items-center gap-2;
-}
-.popui-table tr:hover td {
-  @apply bg-neutral-50;
 }
 .popui-table th,
 .popui-table td {

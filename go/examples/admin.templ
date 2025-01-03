@@ -84,12 +84,16 @@ templ Admin() {
 										}) {
 											<ul>
 												<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-													@icons.Edit()
-													<span>Edit Member</span>
+													<button>
+														@icons.Edit()
+														<span>Edit Member</span>
+													</button>
 												</li>
 												<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-													@icons.Delete()
-													<span class="text-danger">Disable Access</span>
+													<button class="text-danger">
+														@icons.Delete()
+														<span>Disable Access</span>
+													</button>
 												</li>
 											</ul>
 										}

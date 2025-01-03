@@ -4,6 +4,7 @@ package classes
 // Avatar related classes
 const (
 	AvatarBase    = "popui-avatar"
+	AvatarLarge   = "popui-avatar--large"
 	AvatarInitial = "popui-avatar--initial"
 )
 
@@ -21,6 +22,8 @@ const (
 const (
 	Form = "popui-form"
 
+	FormListItem = "popui-form__list-item"
+
 	Fieldset       = "popui-fieldset"
 	FieldsetLegend = "popui-fieldset-legend"
 
@@ -35,6 +38,7 @@ const (
 	ButtonBase        = "popui-button"
 	ButtonDanger      = "popui-button--danger"
 	ButtonPrimary     = "popui-button--primary"
+	ButtonSecondary   = "popui-button--secondary"
 	ButtonTransparent = "popui-button--transparent"
 	ButtonSmall       = "popui-button--small"
 

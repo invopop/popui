@@ -33,21 +33,24 @@ templ PageContent() {
 // PageSection provides a wrapper for page sections.
 // Title and Description can be passed as prop
 templ PageSection(p props.PageSection) {
-	<div
-		class={
-			templ.KV(classes.PageSection, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
-		}
-		{ p.Attrs... }
-	>
-		<div class={ classes.PageSectionTitle }>
-			@Subtitle() {
-				{ p.Title }
+	<div class="w-full">
+		@HorizontalDivider()
+		<div
+			class={
+				templ.KV(classes.PageSection, p.Class == ""),
+				templ.KV(p.Class, p.Class != ""),
 			}
-			@Description() {
-				{ p.Description }
-			}
+			{ p.Attrs... }
+		>
+			<div class={ classes.PageSectionTitle }>
+				@Subtitle() {
+					{ p.Title }
+				}
+				@Description() {
+					{ p.Description }
+				}
+			</div>
+			{ children... }
 		</div>
-		{ children... }
 	</div>
 }

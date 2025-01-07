@@ -13,7 +13,7 @@
 </script>
 
 <button
-  class="{styles} text-white text-base flex items-center justify-between space-x-1 focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded text-left"
+  class="{styles} text-white border border-transparent text-base flex items-center justify-between space-x-1 focus:border-white-30 focus:bg-white-10 active:border-white-30 hover:bg-white-5 rounded text-left focus:ring-0"
   on:click
 >
   <span class="flex items-center justify-between w-full space-x-2">

@@ -4,6 +4,7 @@ import BaseCounter from './BaseCounter.svelte'
 import BaseDropdown from './BaseDropdown.svelte'
 import BaseFlag from './BaseFlag.svelte'
 import BaseTable from './BaseTable.svelte'
+import Breadcrumbs from './Breadcrumbs.svelte'
 import ButtonFile from './ButtonFile.svelte'
 import CardCheckbox from './CardCheckbox.svelte'
 import CardRelation from './CardRelation.svelte'
@@ -55,6 +56,7 @@ export {
   BaseDropdown,
   BaseFlag,
   BaseTable,
+  Breadcrumbs,
   ButtonFile,
   CardCheckbox,
   CardRelation,

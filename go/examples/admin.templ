@@ -42,10 +42,23 @@ templ Admin() {
 			}
 			<main class="popui-admin-page">
 				@popui.PageHeader(props.PageHeader{Title: "Organization Members"}) {
-					@popui.Button(props.Button{Variant: "primary"}) {
-						@icons.Envelope()
-						<span>Invite</span>
+					// First item is placed at the left
+					// It can be a breadcrumbs component
+					@popui.Breadcrumbs() {
+						<li><a href="#something">Workspaces</a></li>
+						<li>Create Workspace</li>
 					}
+					// Or a single Title
+					// @popui.PageTitle() {
+					// 	Workspaces
+					// }
+					// Second item is placed at the right
+					<div class={ classes.PageHeaderActions }>
+						@popui.Button(props.Button{Variant: "primary"}) {
+							@icons.Envelope()
+							<span>Invite</span>
+						}
+					</div>
 				}
 				@popui.PageContent() {
 					@popui.PageSection(props.PageSection{Title: "Active Members", Description: "People who have access to all the workspaces in your organization"}) {

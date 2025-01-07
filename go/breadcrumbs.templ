@@ -1,0 +1,10 @@
+package popui
+
+import "github.com/invopop/popui/go/classes"
+
+// Breadcrumbs provides a popui components to show navigation breadcrumbs. List items can be either links or text
+templ Breadcrumbs() {
+	<ul class={ classes.Breadcrumbs }>
+		{ children... }
+	</ul>
+}

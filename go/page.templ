@@ -14,12 +14,7 @@ templ PageHeader(p props.PageHeader) {
 		}
 		{ p.Attrs... }
 	>
-		@PageTitle() {
-			{ p.Title }
-		}
-		<div class={ classes.PageHeaderActions }>
-			{ children... }
-		</div>
+		{ children... }
 	</div>
 }
 

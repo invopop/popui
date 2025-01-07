@@ -161,3 +161,9 @@ export type DataListItem = {
   label: string
   value: string
 }
+
+export type Breadcrumb = {
+  label: string
+  url?: string
+  country?: string
+}

@@ -1,4 +1,4 @@
-// Package main provides the entry point for the appkit command-line tool.
+// Package main provides the entry point for the popui command-line tool.
 package main
 
 import (

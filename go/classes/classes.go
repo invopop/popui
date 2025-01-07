@@ -8,6 +8,11 @@ const (
 	AvatarInitial = "popui-avatar--initial"
 )
 
+// Breadcrumbs related classes
+const (
+	Breadcrumbs = "popui-breadcrumbs"
+)
+
 // Container classes
 const (
 	PopupConfigContainer = "popui-container-config"

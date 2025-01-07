@@ -45,3 +45,17 @@ templ PageSection(p props.PageSection) {
 		</div>
 	</div>
 }
+
+// PageBreadcrumbs provides a popui component to show navigation breadcrumbs. List items can be either links or text
+templ PageBreadcrumbs() {
+	<ul class={ classes.PageBreadcrumbs }>
+		{ children... }
+	</ul>
+}
+
+// PageActions provides a wrapper for displaying items such as buttons at the right of a PageHeader component
+templ PageActions() {
+	<div class={ classes.PageHeaderActions }>
+		{ children... }
+	</div>
+}

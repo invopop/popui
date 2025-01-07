@@ -44,7 +44,7 @@ templ Admin() {
 				@popui.PageHeader() {
 					// First item is placed at the left
 					// It can be a breadcrumbs component
-					@popui.Breadcrumbs() {
+					@popui.PageBreadcrumbs() {
 						<li><a href="#something">Workspaces</a></li>
 						<li>Create Workspace</li>
 					}
@@ -53,12 +53,12 @@ templ Admin() {
 					// 	Workspaces
 					// }
 					// Second item is placed at the right
-					<div class={ classes.PageHeaderActions }>
+					@popui.PageActions() {
 						@popui.Button(props.Button{Variant: "primary"}) {
 							@icons.Envelope()
 							<span>Invite</span>
 						}
-					</div>
+					}
 				}
 				@popui.PageContent() {
 					@popui.PageSection(props.PageSection{Title: "Active Members", Description: "People who have access to all the workspaces in your organization"}) {

@@ -11,22 +11,22 @@
   @apply border border-neutral-100;
 }
 
-.popui-breadcrumbs {
+.popui-admin-page__breadcrumbs {
   @apply flex items-center justify-start gap-1 text-lg;
 }
 
-.popui-breadcrumbs > *:not(:first-child)::before {
+.popui-admin-page__breadcrumbs > *:not(:first-child)::before {
   content: url('data:image/svg+xml;utf8,<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2L5.6466 10H4.5L6.3534 2H7.5Z" fill="%23D1D5DB"/></svg>');
   display: inline-block;
   margin-right: 4px;
   vertical-align: middle;
 }
 
-.popui-breadcrumbs > *:last-child {
+.popui-admin-page__breadcrumbs > *:last-child {
   @apply text-neutral-800 font-medium;
 }
 
-.popui-breadcrumbs > *:not(:last-child) {
+.popui-admin-page__breadcrumbs > *:not(:last-child) {
   @apply text-neutral-400;
 }
 

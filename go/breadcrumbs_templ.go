@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "github.com/invopop/popui/go/classes"
 
-// Breadcrumbs provides a popui components to show navigation breadcrumbs. List items can be either links or text
+// Breadcrumbs provides a popui component to show navigation breadcrumbs. List items can be either links or text
 func Breadcrumbs() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

@@ -6,13 +6,9 @@ import (
 )
 
 // PageHeader provides a wrapper for the page header
-templ PageHeader(p props.PageHeader) {
+templ PageHeader() {
 	<div
-		class={
-			templ.KV(classes.PageHeader, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
-		}
-		{ p.Attrs... }
+		class={ classes.PageHeader }
 	>
 		{ children... }
 	</div>

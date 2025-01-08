@@ -8,11 +8,6 @@ const (
 	AvatarInitial = "popui-avatar--initial"
 )
 
-// Breadcrumbs related classes
-const (
-	Breadcrumbs = "popui-breadcrumbs"
-)
-
 // Container classes
 const (
 	PopupConfigContainer = "popui-container-config"
@@ -72,7 +67,6 @@ const (
 	P                        = "popui-paragraph"
 	Title                    = "popui-title"
 	Subtitle                 = "popui-subtitle"
-	PageTitle                = "popui-page-title"
 	Description              = "popui-description"
 	Info                     = "popui-info"
 	InfoText                 = "popui-info-text"
@@ -88,6 +82,9 @@ const (
 	PageContent       = "popui-admin-page__content"
 	PageSection       = "popui-admin-page__section"
 	PageSectionTitle  = "popui-admin-page__section-title"
+	PageBreadcrumbs   = "popui-admin-page__breadcrumbs"
+	PageTitle         = "popui-admin-page-title"
+	PageTitleWrapper  = "popui-admin-page-title__wrapper"
 )
 
 // Popover classes

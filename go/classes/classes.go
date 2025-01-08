@@ -67,7 +67,6 @@ const (
 	P                        = "popui-paragraph"
 	Title                    = "popui-title"
 	Subtitle                 = "popui-subtitle"
-	PageTitle                = "popui-page-title"
 	Description              = "popui-description"
 	Info                     = "popui-info"
 	InfoText                 = "popui-info-text"
@@ -84,6 +83,8 @@ const (
 	PageSection       = "popui-admin-page__section"
 	PageSectionTitle  = "popui-admin-page__section-title"
 	PageBreadcrumbs   = "popui-admin-page__breadcrumbs"
+	PageTitle         = "popui-page-title"
+	PageTitleWrapper  = "popui-page-title__wrapper"
 )
 
 // Popover classes

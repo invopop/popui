@@ -41,18 +41,18 @@ templ Admin() {
 				}
 			}
 			<main class="popui-admin-page">
-				@popui.PageHeader() {
-					// First item is placed at the left
-					// It can be a breadcrumbs component
-					@popui.PageBreadcrumbs() {
-						<li><a href="#something">Workspaces</a></li>
-						<li>Create Workspace</li>
-					}
-					// Or a single Title
-					// @popui.PageTitle() {
-					// 	Workspaces
-					// }
-					// Second item is placed at the right
+				@popui.PageHeader(props.PageHeader{
+					Title: "Create Workspace",
+					Breadcrumbs: []props.PageBreadcrumb{
+						{
+							Name: "Workspaces",
+							URL:  "#something",
+						},
+						{
+							Name: "Non-navigable",
+						},
+					},
+				}) {
 					@popui.PageActions() {
 						@popui.Button(props.Button{Variant: "primary"}) {
 							@icons.Envelope()

@@ -6,11 +6,35 @@ import (
 )
 
 // PageHeader provides a wrapper for the page header
-templ PageHeader() {
+templ PageHeader(p props.PageHeader) {
 	<div
-		class={ classes.PageHeader }
+		class={
+			templ.KV(classes.PageHeader, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
 	>
-		{ children... }
+		<div class={ classes.PageTitleWrapper }>
+			if p.Breadcrumbs != nil {
+				@PageBreadcrumbs() {
+					for _, i := range p.Breadcrumbs {
+						<li>
+							if i.URL != "" {
+								<a href={ i.URL }>{ i.Name }</a>
+							} else {
+								<span>{ i.Name }</span>
+							}
+						</li>
+					}
+				}
+			}
+			@PageTitle() {
+				{ p.Title }
+			}
+		</div>
+		<div class={ classes.PageHeaderActions }>
+			{ children... }
+		</div>
 	</div>
 }
 
@@ -58,4 +82,11 @@ templ PageActions() {
 	<div class={ classes.PageHeaderActions }>
 		{ children... }
 	</div>
+}
+
+// PageTitle provides a h1 element used as Page title
+templ PageTitle() {
+	<h1 class={ classes.PageTitle }>
+		{ children... }
+	</h1>
 }

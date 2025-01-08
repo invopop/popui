@@ -53,11 +53,9 @@ templ Admin() {
 						},
 					},
 				}) {
-					@popui.PageActions() {
-						@popui.Button(props.Button{Variant: "primary"}) {
-							@icons.Envelope()
-							<span>Invite</span>
-						}
+					@popui.Button(props.Button{Variant: "primary"}) {
+						@icons.Envelope()
+						<span>Invite</span>
 					}
 				}
 				@popui.PageContent() {

@@ -12,8 +12,9 @@ type PageHeader struct {
 
 // PageBreadcrumb defines a Page Breadcrumb to be displayed on a PageHeader
 type PageBreadcrumb struct {
-	Name string
-	URL  templ.SafeURL
+	Name  string
+	URL   templ.SafeURL
+	Attrs templ.Attributes
 }
 
 // PageSection Templ component props

@@ -83,8 +83,8 @@ const (
 	PageSection       = "popui-admin-page__section"
 	PageSectionTitle  = "popui-admin-page__section-title"
 	PageBreadcrumbs   = "popui-admin-page__breadcrumbs"
-	PageTitle         = "popui-page-title"
-	PageTitleWrapper  = "popui-page-title__wrapper"
+	PageTitle         = "popui-admin-page-title"
+	PageTitleWrapper  = "popui-admin-page-title__wrapper"
 )
 
 // Popover classes

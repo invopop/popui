@@ -138,12 +138,6 @@
 .popui-title {
   @apply font-sans text-black text-2xl font-semibold;
 }
-.popui-page-title {
-  @apply font-sans text-neutral-800 text-lg font-medium;
-}
-.popui-page-title__wrapper {
-  @apply flex items-center gap-1;
-}
 .popui-subtitle {
   @apply font-sans text-base text-neutral-800 font-medium;
 }
@@ -328,6 +322,12 @@ div[contenteditable='true'] .tag {
 }
 .popui-admin-page__content > div:first-of-type .popui-divider-wrapper {
   @apply hidden;
+}
+.popui-admin-page-title {
+  @apply font-sans text-neutral-800 text-lg font-medium;
+}
+.popui-admin-page-title__wrapper {
+  @apply flex items-center gap-1;
 }
 
 /* Table */

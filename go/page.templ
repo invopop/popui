@@ -20,9 +20,9 @@ templ PageHeader(p props.PageHeader) {
 					for _, i := range p.Breadcrumbs {
 						<li>
 							if i.URL != "" {
-								<a href={ i.URL }>{ i.Name }</a>
+								<a href={ i.URL } { i.Attrs... }>{ i.Name }</a>
 							} else {
-								<span>{ i.Name }</span>
+								<span { i.Attrs... }>{ i.Name }</span>
 							}
 						</li>
 					}

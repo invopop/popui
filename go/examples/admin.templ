@@ -171,6 +171,25 @@ templ Admin() {
 							}
 						}
 					}
+					@popui.PageSection(props.PageSection{Title: "Readonly", Description: "This section is used to display a form in readonly mode for show views"}) {
+						@popui.DescList() {
+							@popui.DescRow() {
+								<dt>First name</dt>
+								<dd>Facundo</dd>
+							}
+							@popui.DescRow() {
+								<dt>Surname</dt>
+								<dd>Velazquez</dd>
+							}
+							@popui.DescRow() {
+								<dt>Hobbies</dt>
+								<dd>I like to write long texts so they can not fit on different popui layouts</dd>
+							}
+							@popui.Button(props.Button{Variant: "secondary"}) {
+								Modify
+							}
+						}
+					}
 				}
 			</main>
 		</body>

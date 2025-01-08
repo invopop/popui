@@ -72,6 +72,14 @@
   @apply text-neutral-800;
 }
 
+/* Description List */
+.popui-desc-list > div {
+  @apply space-y-2;
+}
+.popui-desc-list dd {
+  @apply text-base text-neutral-800 font-medium;
+}
+
 /* Radio */
 .popui-radio {
   @apply form-radio h-5 w-5 border-neutral-200 hover:border-neutral-300 text-workspace-accent focus:ring-0 focus:ring-offset-0;
@@ -122,7 +130,8 @@
 .popui-input-text--error {
   @apply !text-danger-500 !border-danger-400 !outline-none !caret-danger-500;
 }
-.popui-label {
+.popui-label,
+.popui-desc-list dt {
   @apply font-sans text-sm font-medium text-neutral-500;
 }
 .popui-error {
@@ -266,7 +275,8 @@ div[contenteditable='true'] .tag {
 }
 
 /* Form */
-.popui-form {
+.popui-form,
+.popui-desc-list {
   @apply w-[400px] space-y-4;
 }
 .popui-form__list-item {

@@ -63,3 +63,17 @@ templ HorizontalDivider() {
 		<div class={ classes.HorizontalDivider }></div>
 	</div>
 }
+
+// DescList provides a wrapper for Description Lists
+templ DescList() {
+	<dl class={ classes.DescList }>
+		{ children... }
+	</dl>
+}
+
+// DescRow provides a wrapper for DescList children. Expects a term (dt) nd description (dd)
+templ DescRow() {
+	<div>
+		{ children... }
+	</div>
+}

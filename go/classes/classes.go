@@ -73,6 +73,7 @@ const (
 	Prose                    = "popui-prose"
 	HorizontalDividerWrapper = "popui-divider-wrapper"
 	HorizontalDivider        = "popui-divider"
+	DescList                 = "popui-desc-list"
 )
 
 // Page classes

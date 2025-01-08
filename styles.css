@@ -1,5 +1,10 @@
 @tailwind base;
 
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* Avatar */
 .popui-avatar {
   @apply h-5 w-5 bg-neutral-50 text-neutral-500 rounded flex items-center justify-center font-semibold relative font-sans;

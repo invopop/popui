@@ -11,6 +11,17 @@ module.exports = {
     require('@tailwindcss/typography')
   ],
   theme: {
-    extend: { ...twTheme.extend }
+    extend: {
+      ...twTheme.extend,
+      typography: ({ theme }) => ({
+        popui: {
+          css: {
+            '--tw-prose-body': theme('colors.neutral[800]'),
+            'font-size': '14px',
+            'line-height': '20px'
+          }
+        }
+      })
+    }
   }
 }

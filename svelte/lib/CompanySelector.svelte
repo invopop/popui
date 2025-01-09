@@ -35,7 +35,7 @@
   $: styles = clsx(
     { 'p-1': collapsed },
     { 'space-x-2 w-full p-[7px]': !collapsed },
-    { 'border-white-10 bg-white-5': isOpen },
+    { 'border-white-30 bg-white-10': isOpen },
     { 'border-transparent': !isOpen }
   )
 
@@ -61,7 +61,7 @@
   <span
     slot="trigger"
     title={name}
-    class="{styles} text-white text-base font-semibold flex items-center justify-between border focus:border-white-10 active:border-white-10 hover:bg-white-5 rounded"
+    class="{styles} text-white text-base font-semibold flex items-center justify-between border hover:bg-white-5 rounded"
   >
     <span class:space-x-2={!collapsed} class="flex items-center">
       <ProfileAvatar {name} {picture} {country} dark large />

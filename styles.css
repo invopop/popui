@@ -84,6 +84,9 @@ body {
 .popui-desc-list dd {
   @apply text-base text-neutral-800 font-medium;
 }
+.popui-desc-list dd > .prose {
+  @apply font-normal;
+}
 
 /* Radio */
 .popui-radio {
@@ -314,7 +317,7 @@ div[contenteditable='true'] .tag {
 }
 
 .popui-prose {
-  @apply prose prose-slate mx-auto lg:prose-lg;
+  @apply prose prose-popui mx-auto;
 }
 
 .popui-divider-wrapper {

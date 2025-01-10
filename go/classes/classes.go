@@ -35,6 +35,10 @@ const (
 	CheckboxInput   = "popui-checkbox-input"
 	CheckboxLabel   = "popui-checkbox-label"
 
+	SwitchWrapper = "popui-switch__wrapper"
+	SwitchInput   = "popui-switch__input"
+	SwitchLabel   = "popui-switch__label"
+
 	ButtonBase        = "popui-button"
 	ButtonDanger      = "popui-button--danger"
 	ButtonPrimary     = "popui-button--primary"

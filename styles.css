@@ -77,6 +77,45 @@ body {
   @apply text-neutral-800;
 }
 
+/* Chechbox type switch */
+.popui-switch__label {
+  @apply flex items-center gap-2 text-neutral-500 text-base;
+}
+.popui-switch__wrapper {
+  @apply relative inline-block w-8 h-5;
+}
+
+.popui-switch__wrapper input {
+  @apply opacity-0 w-0 h-0;
+}
+
+.popui-switch__input {
+  @apply absolute cursor-pointer inset-0 bg-neutral-300 rounded-md;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.popui-switch__input:before {
+  @apply absolute h-4 w-4 left-0.5 bottom-0.5 bg-white rounded;
+  content: '';
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .popui-switch__input {
+  @apply bg-workspace-accent-500;
+}
+
+input:focus + .popui-switch__input {
+  box-shadow: 0 0 1px #169958;
+}
+
+input:checked + .popui-switch__input:before {
+  -webkit-transform: translateX(12px);
+  -ms-transform: translateX(12px);
+  transform: translateX(12px);
+}
+
 /* Description List */
 .popui-desc-list > div {
   @apply space-y-2;

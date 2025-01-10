@@ -166,6 +166,10 @@ templ Admin() {
 								Value:   "regular-2",
 								Checked: false,
 							})
+							@popui.Switch(props.InputCheckbox{
+								Label: "Generate PDF (1 pop)",
+								Value: "true",
+							})
 							@popui.Button(props.Button{Variant: "primary"}) {
 								Update
 							}

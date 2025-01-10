@@ -562,8 +562,9 @@ func Admin() templ.Component {
 						return templ_7745c5c3_Err
 					}
 					templ_7745c5c3_Err = popui.Switch(props.InputCheckbox{
-						Label: "Generate PDF (1 pop)",
-						Value: "true",
+						Label:   "Generate PDF (1 pop)",
+						Value:   "generate-pdf",
+						Checked: true,
 					}).Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err

@@ -11,6 +11,7 @@ type InputCheckbox struct {
 	LabelClass string
 	Autofocus  bool
 	Checked    bool
+	Switch     bool
 	Name       string
 	Value      string
 	Attrs      templ.Attributes

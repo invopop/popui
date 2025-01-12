@@ -166,10 +166,16 @@ templ Admin() {
 								Value:   "regular-2",
 								Checked: false,
 							})
-							@popui.Switch(props.InputCheckbox{
-								Label:   "Generate PDF (1 pop)",
-								Value:   "generate-pdf",
+							@popui.InputCheckbox(props.InputCheckbox{
+								ID:    "checkbox-regular",
+								Label: "Checbox regular",
+								Value: "checkbox-regular",
+							})
+							@popui.InputCheckbox(props.InputCheckbox{
+								Label:   "Checkbox switch",
+								Value:   "checkbox-switch",
 								Checked: true,
+								Switch:  true,
 							})
 							@popui.Button(props.Button{Variant: "primary"}) {
 								Update

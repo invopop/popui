@@ -561,10 +561,23 @@ func Admin() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = popui.Switch(props.InputCheckbox{
-						Label:   "Generate PDF (1 pop)",
-						Value:   "generate-pdf",
+					templ_7745c5c3_Err = popui.InputCheckbox(props.InputCheckbox{
+						ID:    "checkbox-regular",
+						Label: "Checbox regular",
+						Value: "checkbox-regular",
+					}).Render(ctx, templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+					templ_7745c5c3_Err = popui.InputCheckbox(props.InputCheckbox{
+						Label:   "Checkbox switch",
+						Value:   "checkbox-switch",
 						Checked: true,
+						Switch:  true,
 					}).Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err

@@ -7,6 +7,7 @@ import (
 	"github.com/a-h/templ"
 )
 
+// RangeListOptions defines the datalist options displayed on a Input type range component
 type RangeListOptions struct {
 	Value string
 	Label string

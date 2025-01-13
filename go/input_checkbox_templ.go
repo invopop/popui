@@ -15,6 +15,8 @@ import (
 
 // InputCheckbox provides an input tag with the type set to checkbox and the appropriate
 // styling. Label class can be modified using the LabelClass property.
+// If no ID is provided, one will be generated to ensure
+// any label is correctly linked to the input element.
 // If switch property is passed as true it will be styled as a toggle switch.
 func InputCheckbox(p props.InputCheckbox) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -34,6 +36,7 @@ func InputCheckbox(p props.InputCheckbox) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p = p.GenerateID()
 		if p.Switch {
 			var templ_7745c5c3_Var2 = []any{templ.KV(classes.SwitchLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "")}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
@@ -109,7 +112,7 @@ func InputCheckbox(p props.InputCheckbox) templ.Component {
 				var templ_7745c5c3_Var8 string
 				templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(p.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 19, Col: 13}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 22, Col: 13}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 				if templ_7745c5c3_Err != nil {
@@ -164,7 +167,7 @@ func InputCheckbox(p props.InputCheckbox) templ.Component {
 			var templ_7745c5c3_Var12 string
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 28, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 31, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 			if templ_7745c5c3_Err != nil {
@@ -191,7 +194,7 @@ func InputCheckbox(p props.InputCheckbox) templ.Component {
 				var templ_7745c5c3_Var14 string
 				templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(p.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 32, Col: 14}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 35, Col: 14}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 				if templ_7745c5c3_Err != nil {
@@ -242,7 +245,7 @@ func inputCheckbox(p props.InputCheckbox) templ.Component {
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 43, Col: 11}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 46, Col: 11}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 		if templ_7745c5c3_Err != nil {
@@ -289,7 +292,7 @@ func inputCheckbox(p props.InputCheckbox) templ.Component {
 			var templ_7745c5c3_Var19 string
 			templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 54, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 57, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 			if templ_7745c5c3_Err != nil {
@@ -308,7 +311,7 @@ func inputCheckbox(p props.InputCheckbox) templ.Component {
 			var templ_7745c5c3_Var20 string
 			templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(p.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 57, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 60, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 			if templ_7745c5c3_Err != nil {

@@ -7,8 +7,11 @@ import (
 
 // InputCheckbox provides an input tag with the type set to checkbox and the appropriate
 // styling. Label class can be modified using the LabelClass property.
+// If no ID is provided, one will be generated to ensure
+// any label is correctly linked to the input element.
 // If switch property is passed as true it will be styled as a toggle switch.
 templ InputCheckbox(p props.InputCheckbox) {
+	{{ p = p.GenerateID() }}
 	if p.Switch {
 		<label class={ templ.KV(classes.SwitchLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }>
 			<div class={ classes.SwitchWrapper }>

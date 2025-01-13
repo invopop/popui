@@ -156,6 +156,68 @@ input:checked + .popui-switch__input:before {
   @apply text-sm text-neutral-500;
 }
 
+/* Range */
+.popui-range__input {
+  --c: #008852;
+  width: 100%;
+  --_c: color-mix(in srgb, var(--c), #000 var(--p, 0%));
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+.popui-range__input::-webkit-slider-thumb {
+  height: 12px;
+  width: 12px;
+  background: var(--_c);
+  border-radius: 50%;
+  border-image: linear-gradient(90deg, var(--_c) 50%, #f3f4f6 0) 0 1 / calc(50% - 4px / 2) 100vw/0
+    100vw;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: 0.3s;
+}
+.popui-range__input::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  background: var(--_c);
+  border-radius: 50%;
+  border-image: linear-gradient(90deg, var(--_c) 50%, #f3f4f6 0) 0 1 / calc(50% - 4px / 2) 100vw/0
+    100vw;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: 0.3s;
+}
+@supports not (color: color-mix(in srgb, red, red)) {
+  input {
+    --_c: var(--c);
+  }
+}
+.popui-range__input ~ datalist > option {
+  color: var(--Neutral-Solid-40, #9ca3af);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  display: inline-block;
+  width: calc((100% - 12px) / var(--list-length));
+  text-align: center;
+}
+.popui-range__input ~ datalist > option:first-child {
+  width: calc((100% - 12px) / (var(--list-length) * 2) + 6px);
+  text-align: left;
+}
+.popui-range__input ~ datalist > option:last-child {
+  width: calc((100% - 12px) / (var(--list-length) * 2) + 6px);
+  text-align: right;
+}
+
 /* Image */
 .popui-image {
   @apply h-full w-full rounded object-cover;
@@ -521,6 +583,9 @@ div[contenteditable='true'] .tag {
 }
 .popui-admin-page__section-title {
   @apply flex w-[340px] flex-col items-start gap-0.5;
+}
+.popui-admin-page__section-content {
+  @apply flex flex-col space-y-2;
 }
 
 /* Demo Page */

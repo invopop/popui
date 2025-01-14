@@ -65,7 +65,9 @@ templ PageSection(p props.PageSection) {
 					{ p.Description }
 				}
 			</div>
-			{ children... }
+			<div class={ classes.PageSectionContent }>
+				{ children... }
+			</div>
 		</div>
 	</div>
 }

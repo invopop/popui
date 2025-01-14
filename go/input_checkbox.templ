@@ -7,35 +7,57 @@ import (
 
 // InputCheckbox provides an input tag with the type set to checkbox and the appropriate
 // styling. Label class can be modified using the LabelClass property.
+// If no ID is provided, one will be generated to ensure
+// any label is correctly linked to the input element.
+// If switch property is passed as true it will be styled as a toggle switch.
 templ InputCheckbox(p props.InputCheckbox) {
-	<div class={ classes.CheckboxWrapper }>
-		<input
-			id={ p.ID }
-			type="checkbox"
-			class={ templ.KV(classes.CheckboxInput, p.Class == ""), templ.KV(p.Class, p.Class != "") }
-			{ p.Attrs... }
-			if p.Checked {
-				checked
-			}
-			if p.Autofocus {
-				autofocus
-			}
-			if p.Name != "" {
-				name={ p.Name }
-			}
-			if p.Value != "" {
-				value={ p.Value }
-			}
-		/>
-		<label
-			for={ p.ID }
-			class={ templ.KV(classes.CheckboxLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }
-		>
+	{{ p = p.GenerateID() }}
+	if p.Switch {
+		<label class={ templ.KV(classes.SwitchLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }>
+			<div class={ classes.SwitchWrapper }>
+				@inputCheckbox(p)
+				<span class={ classes.SwitchInput }></span>
+			</div>
 			if (p.Label != "") {
 				{ p.Label }
 			} else {
 				{ children... }
 			}
 		</label>
-	</div>
+	} else {
+		<div class={ classes.CheckboxWrapper }>
+			@inputCheckbox(p)
+			<label
+				for={ p.ID }
+				class={ templ.KV(classes.CheckboxLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }
+			>
+				if (p.Label != "") {
+					{ p.Label }
+				} else {
+					{ children... }
+				}
+			</label>
+		</div>
+	}
+}
+
+templ inputCheckbox(p props.InputCheckbox) {
+	<input
+		id={ p.ID }
+		type="checkbox"
+		class={ templ.KV(classes.CheckboxInput, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+		{ p.Attrs... }
+		if p.Checked {
+			checked
+		}
+		if p.Autofocus {
+			autofocus
+		}
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
+	/>
 }

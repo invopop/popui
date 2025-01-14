@@ -35,6 +35,12 @@ const (
 	CheckboxInput   = "popui-checkbox-input"
 	CheckboxLabel   = "popui-checkbox-label"
 
+	RangeInput = "popui-range__input"
+
+	SwitchWrapper = "popui-switch__wrapper"
+	SwitchInput   = "popui-switch__input"
+	SwitchLabel   = "popui-switch__label"
+
 	ButtonBase        = "popui-button"
 	ButtonDanger      = "popui-button--danger"
 	ButtonPrimary     = "popui-button--primary"
@@ -78,14 +84,15 @@ const (
 
 // Page classes
 const (
-	PageHeader        = "popui-admin-page__header"
-	PageHeaderActions = "popui-admin-page__header-actions"
-	PageContent       = "popui-admin-page__content"
-	PageSection       = "popui-admin-page__section"
-	PageSectionTitle  = "popui-admin-page__section-title"
-	PageBreadcrumbs   = "popui-admin-page__breadcrumbs"
-	PageTitle         = "popui-admin-page-title"
-	PageTitleWrapper  = "popui-admin-page-title__wrapper"
+	PageHeader         = "popui-admin-page__header"
+	PageHeaderActions  = "popui-admin-page__header-actions"
+	PageContent        = "popui-admin-page__content"
+	PageSection        = "popui-admin-page__section"
+	PageSectionTitle   = "popui-admin-page__section-title"
+	PageSectionContent = "popui-admin-page__section-content"
+	PageBreadcrumbs    = "popui-admin-page__breadcrumbs"
+	PageTitle          = "popui-admin-page-title"
+	PageTitleWrapper   = "popui-admin-page-title__wrapper"
 )
 
 // Popover classes

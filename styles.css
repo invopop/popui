@@ -17,7 +17,7 @@ body {
 }
 
 .popui-admin-page__breadcrumbs {
-  @apply flex items-center justify-start gap-1 text-lg;
+  @apply flex items-center justify-start gap-1 text-base md:text-lg;
 }
 
 .popui-admin-page__breadcrumbs > li::after {
@@ -399,11 +399,11 @@ div[contenteditable='true'] .tag {
 }
 
 .popui-fieldset {
-  @apply border border-gray-300 p-4 rounded-md;
+  @apply border border-neutral-200 pt-8 px-4 pb-4 rounded-md space-y-4 relative;
 }
 
 .popui-fieldset-legend {
-  @apply block text-sm font-medium text-gray-700;
+  @apply absolute top-4 text-sm font-medium text-neutral-800;
 }
 
 /* SVG */
@@ -446,7 +446,7 @@ div[contenteditable='true'] .tag {
   @apply hidden;
 }
 .popui-admin-page-title {
-  @apply font-sans text-neutral-800 text-lg font-medium;
+  @apply font-sans text-neutral-800 text-base md:text-lg font-medium;
 }
 .popui-admin-page-title__wrapper {
   @apply flex items-center gap-1;
@@ -537,7 +537,16 @@ div[contenteditable='true'] .tag {
   @apply flex h-screen bg-neutral-50 p-1;
 }
 .popui-admin-sidebar {
-  @apply h-full w-[240px] bg-neutral-50 flex flex-col items-center gap-4;
+  @apply h-full w-[240px] bg-neutral-50 hidden md:flex flex-col items-center gap-4;
+}
+.popui-admin-sidebar__mobile {
+  @apply block md:hidden;
+}
+.popui-admin-sidebar__mobile > button {
+  @apply absolute top-5 left-[26px] rounded p-1 border border-neutral-200 bg-white;
+}
+.popui-admin-sidebar__mobile > div {
+  @apply absolute top-[50px] left-[26px] bg-neutral-50 p-2 z-50 border border-neutral-200 shadow rounded;
 }
 .popui-admin-page {
   @apply flex-1 rounded-md border border-neutral-100 bg-white overflow-y-auto;
@@ -573,19 +582,19 @@ div[contenteditable='true'] .tag {
   @apply border-neutral-800/10 bg-neutral-800/5 backdrop-blur-[20px];
 }
 .popui-admin-page__header {
-  @apply flex pl-6 pr-4 py-[15px] justify-between items-center border-b border-neutral-100;
+  @apply flex pl-[52px] md:pl-6 pr-4 py-[15px] justify-between items-center border-b border-neutral-100;
 }
 .popui-admin-page__content {
   @apply flex p-6 flex-col items-center gap-6;
 }
 .popui-admin-page__section {
-  @apply w-full flex items-start gap-6;
+  @apply w-full flex flex-col lg:flex-row items-start gap-6;
 }
 .popui-admin-page__section-title {
   @apply flex w-[340px] flex-col items-start gap-0.5;
 }
 .popui-admin-page__section-content {
-  @apply flex flex-col space-y-2;
+  @apply flex flex-col space-y-2 items-start;
 }
 
 /* Demo Page */

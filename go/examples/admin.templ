@@ -14,6 +14,7 @@ templ Admin() {
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			@popui.EmbeddedCSS()
+			@popui.AlpineJS()
 		</head>
 		<body class="popui-admin-wrapper">
 			@popui.Sidebar(props.Sidebar{Title: "Cyberdyne Enterprises "}) {
@@ -132,14 +133,23 @@ templ Admin() {
 								Rows:  2,
 								Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
 							})
-							@popui.Fieldset(props.Fieldset{Legend: "Fieldset"}) {
-								@popui.InputText(props.InputText{
-									ID:       "email",
-									Type:     "email",
-									Label:    "Email",
-									Value:    "diego.fernandez@invopop.com",
-									Disabled: true,
+							@popui.Fieldset(props.Fieldset{Legend: "Sudo"}) {
+								<input type="hidden" name="type" value=""/>
+								@popui.InputCheckbox(props.InputCheckbox{
+									ID:      "enterprise",
+									Label:   "Enterprise",
+									Name:    "type",
+									Value:   "thing",
+									Checked: true,
 								})
+								@popui.InputText(props.InputText{
+									Label: "Stripe ID",
+									Name:  "stripe_id",
+								})
+								@popui.Info() {
+									Remove the Stripe ID to force the creation of a new Stripe
+									customer, thus allowing a new Tax ID to be uploaded.
+								}
 							}
 							@popui.InputRadioCard(props.InputRadio{
 								Name:    "sandbox",

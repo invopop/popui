@@ -554,8 +554,8 @@ div[contenteditable='true'] .tag {
 .popui-admin-page {
   @apply flex-1 rounded-md border border-neutral-100 bg-white overflow-y-auto;
 }
-.popui-admin-page.menu--active {
-  @apply opacity-30 overflow-hidden flex-shrink-0;
+.popui-admin-page.menu--active > * {
+  @apply opacity-30 pointer-events-none;
 }
 .popui-admin-sidebar__header {
   @apply w-full flex pl-4 pr-3 py-[18px] items-center gap-2.5 border-b border-neutral-50 text-sherwood-700 font-sans text-base font-semibold whitespace-nowrap;

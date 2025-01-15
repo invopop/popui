@@ -120,10 +120,6 @@ templ hamburgerButton() {
 
 				const showSidebar = (e) => {
 					e.stopPropagation()
-					if (page.classList.contains('menu--active')) {
-						hideSidebar()
-						return
-					}
 					sidebar.classList.add('menu--active')
 					page.classList.add('menu--active')
 				}

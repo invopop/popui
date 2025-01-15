@@ -14,7 +14,6 @@ templ Admin() {
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			@popui.EmbeddedCSS()
-			@popui.AlpineJS()
 		</head>
 		<body class="popui-admin-wrapper">
 			@popui.Sidebar(props.Sidebar{Title: "Cyberdyne Enterprises "}) {
@@ -41,7 +40,7 @@ templ Admin() {
 					</li>
 				}
 			}
-			<main class="popui-admin-page">
+			<main class={ classes.Page }>
 				@popui.PageHeader(props.PageHeader{
 					Title: "Create Workspace",
 					Breadcrumbs: []props.PageBreadcrumb{

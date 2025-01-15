@@ -3,7 +3,10 @@ package popui
 import (
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
 )
+
+var hamburgerHandle = templ.NewOnceHandle()
 
 // PageHeader provides a wrapper for the page header
 templ PageHeader(p props.PageHeader) {
@@ -15,6 +18,7 @@ templ PageHeader(p props.PageHeader) {
 		{ p.Attrs... }
 	>
 		<div class={ classes.PageTitleWrapper }>
+			@hamburgerButton()
 			if p.Breadcrumbs != nil {
 				@PageBreadcrumbs() {
 					for _, i := range p.Breadcrumbs {
@@ -91,4 +95,52 @@ templ PageTitle() {
 	<h1 class={ classes.PageTitle }>
 		{ children... }
 	</h1>
+}
+
+templ hamburgerButton() {
+	@templ.JSONScript("querySelectors", struct {
+		Button  string
+		Sidebar string
+		Page    string
+	}{
+		Button:  "." + classes.PageTitleWrapper + " > button",
+		Sidebar: "." + classes.Sidebar,
+		Page:    "." + classes.Page,
+	})
+	@Button(props.Button{}) {
+		@icons.Menu()
+	}
+	@hamburgerHandle.Once() {
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const selectors = JSON.parse(document.getElementById('querySelectors').textContent)
+				const button = document.querySelector(selectors.Button)
+				const sidebar = document.querySelector(selectors.Sidebar)
+				const page = document.querySelector(selectors.Page)
+
+				const showSidebar = (e) => {
+					e.stopPropagation()
+					if (page.classList.contains('menu--active')) {
+						hideSidebar()
+						return
+					}
+					sidebar.classList.add('menu--active')
+					page.classList.add('menu--active')
+				}
+
+				const hideSidebar = () => {
+					sidebar.classList.remove('menu--active')
+					page.classList.remove('menu--active')
+				}
+
+				if (button) {
+					button.addEventListener('click', showSidebar)
+				}
+
+				if (page) {
+					page.addEventListener('click', hideSidebar)
+				}
+			});
+		</script>
+	}
 }

@@ -84,6 +84,7 @@ const (
 
 // Page classes
 const (
+	Page               = "popui-admin-page"
 	PageHeader         = "popui-admin-page__header"
 	PageHeaderActions  = "popui-admin-page__header-actions"
 	PageContent        = "popui-admin-page__content"

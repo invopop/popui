@@ -17,7 +17,7 @@ body {
 }
 
 .popui-admin-page__breadcrumbs {
-  @apply flex items-center justify-start gap-1 text-lg;
+  @apply hidden md:flex items-center justify-start gap-1 text-lg;
 }
 
 .popui-admin-page__breadcrumbs > li::after {
@@ -399,11 +399,11 @@ div[contenteditable='true'] .tag {
 }
 
 .popui-fieldset {
-  @apply border border-gray-300 p-4 rounded-md;
+  @apply border border-neutral-200 pt-8 px-4 pb-4 rounded-md space-y-4 relative;
 }
 
 .popui-fieldset-legend {
-  @apply block text-sm font-medium text-gray-700;
+  @apply absolute top-4 text-sm font-medium text-neutral-800;
 }
 
 /* SVG */
@@ -446,10 +446,13 @@ div[contenteditable='true'] .tag {
   @apply hidden;
 }
 .popui-admin-page-title {
-  @apply font-sans text-neutral-800 text-lg font-medium;
+  @apply font-sans text-neutral-800 text-base md:text-lg font-medium;
 }
 .popui-admin-page-title__wrapper {
   @apply flex items-center gap-1;
+}
+.popui-admin-page-title__wrapper > button {
+  @apply block p-[5px] mr-2 md:hidden;
 }
 
 /* Table */
@@ -537,13 +540,25 @@ div[contenteditable='true'] .tag {
   @apply flex h-screen bg-neutral-50 p-1;
 }
 .popui-admin-sidebar {
-  @apply h-full w-[240px] bg-neutral-50 flex flex-col items-center gap-4;
+  @apply h-full w-0 md:w-[240px] invisible md:visible bg-neutral-50 flex flex-col items-center gap-4 transition-[width] ease-in-out duration-300;
+}
+.popui-admin-sidebar.menu--active {
+  @apply w-[240px] visible;
+}
+.popui-admin-sidebar__mobile {
+  @apply block md:hidden;
+}
+.popui-admin-sidebar__mobile > div {
+  @apply absolute top-[50px] left-[26px] bg-neutral-50 p-2 z-50 border border-neutral-200 shadow rounded;
 }
 .popui-admin-page {
   @apply flex-1 rounded-md border border-neutral-100 bg-white overflow-y-auto;
 }
+.popui-admin-page.menu--active > * {
+  @apply opacity-30 pointer-events-none;
+}
 .popui-admin-sidebar__header {
-  @apply w-full flex pl-4 pr-3 py-[18px] items-center gap-2.5 border-b border-neutral-50 text-sherwood-700 font-sans text-base font-semibold;
+  @apply w-full flex pl-4 pr-3 py-[18px] items-center gap-2.5 border-b border-neutral-50 text-sherwood-700 font-sans text-base font-semibold whitespace-nowrap;
 }
 .popui-admin-page__header-actions {
   @apply flex items-center gap-2;
@@ -579,13 +594,13 @@ div[contenteditable='true'] .tag {
   @apply flex p-6 flex-col items-center gap-6;
 }
 .popui-admin-page__section {
-  @apply w-full flex items-start gap-6;
+  @apply w-full flex flex-col lg:flex-row items-start gap-6;
 }
 .popui-admin-page__section-title {
   @apply flex w-[340px] flex-col items-start gap-0.5;
 }
 .popui-admin-page__section-content {
-  @apply flex flex-col space-y-2;
+  @apply flex flex-col space-y-2 items-start;
 }
 
 /* Demo Page */

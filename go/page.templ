@@ -3,6 +3,7 @@ package popui
 import (
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
 )
 
 // PageHeader provides a wrapper for the page header
@@ -15,6 +16,9 @@ templ PageHeader(p props.PageHeader) {
 		{ p.Attrs... }
 	>
 		<div class={ classes.PageTitleWrapper }>
+			@Button(props.Button{}) {
+				@icons.Menu()
+			}
 			if p.Breadcrumbs != nil {
 				@PageBreadcrumbs() {
 					for _, i := range p.Breadcrumbs {

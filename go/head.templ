@@ -24,6 +24,13 @@ templ EmbeddedCSS() {
 	<link href={ path.Join(AssetPath, Versioned("assets", "popui.css")) } rel="stylesheet"/>
 }
 
+// EmbeddedJS provides the JS to include in the `<head>` section of an HTML
+// document that will load the Javascript code needed for dynamic components
+// such as Hamburger menu to function
+templ EmbeddedJS() {
+	<script src={ path.Join(AssetPath, Versioned("assets", "popui.js")) }></script>
+}
+
 // DefaultPopupScripts provides the scripts to include in `<head>` section of an HTML
 // document to enable the Invopop Console UI SDK and AlpineJS config.
 templ DefaultPopupScripts() {

@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/invopop/gobl v0.207.0 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect

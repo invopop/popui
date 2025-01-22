@@ -4,6 +4,41 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* Accordion */
+.popui-accordion {
+  @apply rounded-md border border-neutral-200 bg-neutral-50 pt-2 pb-4 px-4 overflow-hidden;
+  backdrop-filter: blur(2px);
+}
+
+details.popui-accordion summary {
+  @apply cursor-pointer list-none relative pl-6 text-neutral-800 text-sm font-medium;
+}
+
+details.popui-accordion summary::-webkit-details-marker {
+  @apply hidden;
+}
+
+details.popui-accordion summary::before {
+  @apply absolute left-0 top-[50%] w-4 h-4;
+  content: '';
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.3s ease;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYuMDAwMDUgMTJMMTAgNy45OTk5NEw2IDQiIHN0cm9rZT0iIzZCNzI4MCIvPjwvc3ZnPg==');
+}
+
+details[open].popui-accordion summary::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+details.popui-accordion .popui-accordion__content {
+  @apply max-h-0 overflow-hidden mt-4 w-full flex flex-col gap-4;
+  transition: max-height 1s ease-out;
+}
+
+details[open].popui-accordion .popui-accordion__content {
+  @apply overflow-auto max-h-[100vh];
+}
 
 /* Avatar */
 .popui-avatar {
@@ -55,6 +90,66 @@ body {
 }
 .popui-button:active {
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.32);
+}
+
+/* Card */
+.popui-card {
+  @apply flex flex-col p-4 rounded-lg border border-neutral-100 bg-white w-full gap-3;
+}
+.popui-card__header {
+  @apply flex items-center gap-3;
+}
+.popui-card__header-title {
+  @apply flex flex-col gap-0.5 min-w-0;
+}
+.popui-card__header-title > p {
+  @apply truncate;
+}
+.popui-card__header-title > p:nth-child(1) {
+  @apply text-neutral-800 text-base font-semibold;
+}
+.popui-card__header-title > p:nth-child(2) {
+  @apply text-neutral-500 text-sm;
+}
+.popui-card__header-flag {
+  @apply absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-white;
+}
+
+/* Card Progress Bar */
+.popui-card-progress-bar {
+  @apply w-full flex flex-col justify-center items-start gap-2 rounded-md pt-2.5 pb-3 px-3 border border-neutral-100 bg-neutral-50;
+}
+.popui-card-progress-bar__header {
+  @apply w-full flex justify-between items-center;
+}
+.popui-card-progress-bar__header-title {
+  @apply text-neutral-800 text-base;
+}
+.popui-card-progress-bar__header-subtitle {
+  @apply text-neutral-500 text-sm;
+}
+.popui-card-progress-bar__header-amount {
+  @apply flex text-neutral-400 text-sm font-medium;
+}
+.popui-card-progress-bar__header-amount_current {
+  @apply text-neutral-500;
+}
+.popui-card-progress-bar__progress {
+  @apply w-full h-1 flex-shrink-0 rounded-[1px] bg-neutral-200;
+}
+
+/* Card Dashboard */
+.popui-card-dashboard {
+  @apply grid grid-cols-3 gap-x-3;
+}
+.popui-card-dashboard__item {
+  @apply flex flex-col items-center py-2 px-0 rounded-md border border-neutral-100 bg-neutral-50;
+}
+.popui-card-dashboard__item-label {
+  @apply text-neutral-500 text-sm;
+}
+.popui-card-dashboard__item-value {
+  @apply text-neutral-700 text-xl font-medium;
 }
 
 /* Checkbox */
@@ -280,6 +375,11 @@ pre {
   @apply text-neutral-500 font-sans text-sm;
 }
 
+/* Option Group */
+.popui-option-group {
+  @apply flex flex-col gap-2;
+}
+
 /* Popover */
 .popui-popover-wrapper {
   @apply relative inline-block;
@@ -399,11 +499,15 @@ div[contenteditable='true'] .tag {
 }
 
 .popui-fieldset {
-  @apply border border-neutral-200 pt-8 px-4 pb-4 rounded-md space-y-4 relative;
+  @apply border border-neutral-200 p-4 rounded-md space-y-4 relative w-full bg-white;
 }
 
 .popui-fieldset-legend {
   @apply absolute top-4 text-sm font-medium text-neutral-800;
+}
+
+.popui-fieldset:has(> legend) {
+  @apply pt-8;
 }
 
 /* SVG */

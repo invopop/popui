@@ -1,11 +1,38 @@
 // Package classes contains the available default css classes for components.
 package classes
 
+// Accordion related classes
+const (
+	Accordion        = "popui-accordion"
+	AccordionContent = "popui-accordion__content"
+)
+
 // Avatar related classes
 const (
 	AvatarBase    = "popui-avatar"
 	AvatarLarge   = "popui-avatar--large"
 	AvatarInitial = "popui-avatar--initial"
+)
+
+// Card related classes
+const (
+	Card            = "popui-card"
+	CardHeader      = "popui-card__header"
+	CardHeaderFlag  = "popui-card__header-flag"
+	CardHeaderTitle = "popui-card__header-title"
+
+	CardProgressBar                    = "popui-card-progress-bar"
+	CardProgressBarProgress            = "popui-card-progress-bar__progress"
+	CardProgressBarHeader              = "popui-card-progress-bar__header"
+	CardProgressBarHeaderTitle         = "popui-card-progress-bar__header-title"
+	CardProgressBarHeaderSubtitle      = "popui-card-progress-bar__header-subtitle"
+	CardProgressBarHeaderAmount        = "popui-card-progress-bar__header-amount"
+	CardProgressBarHeaderAmountCurrent = "popui-card-progress-bar__header-amount_current"
+
+	CardDashboard          = "popui-card-dashboard"
+	CardDashboardItem      = "popui-card-dashboard__item"
+	CardDashboardItemLabel = "popui-card-dashboard__item-label"
+	CardDashboardItemValue = "popui-card-dashboard__item-value"
 )
 
 // Container classes
@@ -26,6 +53,8 @@ const (
 
 	Fieldset       = "popui-fieldset"
 	FieldsetLegend = "popui-fieldset-legend"
+
+	OptionGroup = "popui-option-group"
 
 	InputTextWrapper = "popui-input-text-wrapper"
 	InputTextBase    = "popui-input-text"

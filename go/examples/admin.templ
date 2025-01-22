@@ -151,6 +151,17 @@ templ Admin() {
 									customer, thus allowing a new Tax ID to be uploaded.
 								}
 							}
+							@popui.Accordion(props.Accordion{Title: "Help me select a plan"}) {
+								@popui.Fieldset(props.Fieldset{}) {
+									@popui.Select(props.Select{}) {
+										<option disabled selected value="">Select a type of document...</option>
+									}
+									@popui.OptionGroup(props.OptionGroup{Label: "Actions performed on each document"}) {
+										@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"})
+										@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"})
+									}
+								}
+							}
 							@popui.InputRadioCard(props.InputRadio{
 								Name:    "sandbox",
 								Label:   "Sandbox",
@@ -244,6 +255,102 @@ templ Admin() {
 						@popui.Button(props.Button{Variant: "secondary"}) {
 							Modify
 						}
+					}
+					@popui.PageSection(props.PageSection{Title: "Cards", Description: "We are displaying different type of cards here"}) {
+						<div class={ classes.Form }>
+							@popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop"}})
+							@popui.Card(props.Card{
+								Header: props.CardHeader{
+									Title:  "Invopop with logo",
+									ImgSrc: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
+								},
+							})
+							@popui.Card(props.Card{
+								Header: props.CardHeader{
+									Title:   "Invopop with flag",
+									FlagISO: "es",
+								},
+							})
+							@popui.Card(props.Card{
+								Header: props.CardHeader{
+									Title:   "Invopop with logo and Flag",
+									ImgSrc:  "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
+									FlagISO: "fr",
+								},
+							})
+							@popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop with link"}, URL: "#something"})
+							@popui.Card(props.Card{Header: props.CardHeader{Title: "Cyberdyne enterprises for World Global Domination INC"}})
+							@popui.Card(props.Card{
+								Header: props.CardHeader{
+									Title:    "Invopop with subtitle",
+									Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+								},
+								URL:   "https://invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+								Attrs: templ.Attributes{"target": "_blank"},
+							})
+							<a href="#something" style="padding: 16px; display: block;">
+								@popui.CardHeader(props.CardHeader{
+									Title:    "CardHeader without card",
+									Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+								})
+							</a>
+							@popui.Card(props.Card{}) {
+								@popui.CardHeader(props.CardHeader{
+									Title:    "Complex card with header slot and more items",
+									Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+									ImgSrc:   "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
+									FlagISO:  "pt",
+								}) {
+									@popui.Popover(props.Popover{
+										ID:            "popover-card",
+										ButtonLabel:   "···",
+										ButtonVariant: "transparent",
+										RightAlign:    true,
+										Stretch:       true,
+									}) {
+										<ul>
+											<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
+												<button>
+													@icons.Billing()
+													<span>Change Plan</span>
+												</button>
+											</li>
+											<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
+												<button>
+													@icons.Edit()
+													<span>Modify Workspace</span>
+												</button>
+											</li>
+										</ul>
+									}
+								}
+								@popui.CardProgressBar(props.CardProgressBar{
+									Title:    "Pops",
+									Subtitle: "Refills Dec 1, 2024",
+									Current:  1200,
+									Total:    1000,
+								})
+								@popui.Select(props.Select{}) {
+									<option>Last 30 days</option>
+								}
+								@popui.CardDashboard(props.CardDashboard{
+									Items: []props.CardDashboardItem{
+										{
+											Label: "Documents",
+											Value: "10.5K",
+										},
+										{
+											Label: "Workflows",
+											Value: "10",
+										},
+										{
+											Label: "Parties",
+											Value: "123",
+										},
+									},
+								})
+							}
+						</div>
 					}
 				}
 			</main>

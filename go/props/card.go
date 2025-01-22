@@ -45,6 +45,7 @@ type CardDashboardItem struct {
 	Attrs templ.Attributes
 }
 
+// PercentValue returns the progress percentage, capped at 100.
 func (p CardProgressBar) PercentValue() int64 {
 	percent := int64((float64(p.Current) / float64(p.Total)) * 100)
 
@@ -55,6 +56,7 @@ func (p CardProgressBar) PercentValue() int64 {
 	return percent
 }
 
+// PercentColor returns the expected progress bar color based on PercentValue
 func (p CardProgressBar) PercentColor() string {
 
 	if p.PercentValue() == 100 {
@@ -64,6 +66,7 @@ func (p CardProgressBar) PercentColor() string {
 	return "#008852"
 }
 
+// EmptyHeader returns true if all the Header properties has zero value
 func (c Card) EmptyHeader() bool {
 	return c.Header.Title == "" && c.Header.Subtitle == "" && c.Header.ImgSrc == ""
 }

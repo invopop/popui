@@ -633,7 +633,7 @@ div[contenteditable='true'] .tag {
   text-transform: uppercase;
 }
 .w-full {
-  width: 100%;
+  width: 100% !important;
 }
 .text-danger {
   @apply text-danger-500;
@@ -701,10 +701,10 @@ div[contenteditable='true'] .tag {
   @apply w-full flex flex-col lg:flex-row items-start gap-6;
 }
 .popui-admin-page__section-title {
-  @apply flex w-[340px] flex-col items-start gap-0.5;
+  @apply flex w-[340px] flex-col items-start gap-0.5 flex-shrink-0;
 }
 .popui-admin-page__section-content {
-  @apply flex flex-col space-y-2 items-start;
+  @apply flex flex-col space-y-2 items-start w-[400px];
 }
 
 /* Demo Page */

@@ -22,12 +22,13 @@ type CardHeader struct {
 
 // CardProgressBar Templ component props
 type CardProgressBar struct {
-	Class    string
-	Title    string
-	Subtitle string
-	Total    int64
-	Current  int64
-	Attrs    templ.Attributes
+	Class       string
+	Title       string
+	Subtitle    string
+	Total       int64
+	Current     int64
+	HideCounter bool
+	Attrs       templ.Attributes
 }
 
 // CardDashboard Templ component props

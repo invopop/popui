@@ -98,11 +98,13 @@ templ CardProgressBar(p props.CardProgressBar) {
 					<span class={ classes.CardProgressBarHeaderSubtitle }>{ p.Subtitle }</span>
 				}
 			</p>
-			<div class={ classes.CardProgressBarHeaderAmount }>
-				@icons.Invopop()
-				<span class={ classes.CardProgressBarHeaderAmountCurrent }>{ humanize.Comma(p.Current) }</span>
-				<span>/{ humanize.Comma(p.Total) }</span>
-			</div>
+			if !p.HideCounter {
+				<div class={ classes.CardProgressBarHeaderAmount }>
+					@icons.Invopop()
+					<span class={ classes.CardProgressBarHeaderAmountCurrent }>{ humanize.Comma(p.Current) }</span>
+					<span>/{ humanize.Comma(p.Total) }</span>
+				</div>
+			}
 		</div>
 		<div class={ classes.CardProgressBarProgress }>
 			<div class={ percentage(p.PercentValue(), p.PercentColor()) }></div>

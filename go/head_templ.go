@@ -34,7 +34,7 @@ func DefaultCSS() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<link href=\"https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.52/dist/popui.css\" rel=\"stylesheet\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<link href=\"https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.64/dist/popui.css\" rel=\"stylesheet\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

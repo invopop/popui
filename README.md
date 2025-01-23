@@ -77,18 +77,7 @@ Air will also watch for changes and re-run everything for you, with the exceptio
 
 There are two options for incorporating the Popui styles.
 
-**Option 1**: loading assets from the CDN:
-
-```go
-templ Head() {
-  <head>
-    <title>Title</title>
-    @popui.DefaultCSS()
-  </head>
-}
-```
-
-**Option 2**: using the stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
+**Option 1**: using the stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
 
 ```go
 e.StaticFS(popui.AssetPath, popui.Assets)
@@ -105,7 +94,16 @@ templ Head() {
 }
 ```
 
-Either option is valid, but Option 2 will allow you to use development versions or branches of the popui packages.
+**Option 1 (Deprecated)**: loading assets from the CDN:
+
+```go
+templ Head() {
+  <head>
+    <title>Title</title>
+    @popui.DefaultCSS()
+  </head>
+}
+```
 
 ### Use the Go Templ Components
 

@@ -2,8 +2,7 @@ package popui
 
 import "path"
 
-// DefaultCSS provides the default CSS to include in the `<head>` section of an HTML
-// document with the popui styles.
+// Deprecated: Use EmbeddedCSS instead. This method will be removed in future versions.
 templ DefaultCSS() {
 	@FontInterLinks()
 	<link href="https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.64/dist/popui.css" rel="stylesheet"/>

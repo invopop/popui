@@ -94,7 +94,7 @@ templ Head() {
 }
 ```
 
-**Option 1 (Deprecated)**: loading assets from the CDN:
+**Option 2 (Deprecated)**: loading assets from the CDN:
 
 ```go
 templ Head() {

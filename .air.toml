@@ -7,7 +7,7 @@ args_bin = ["serve", "-p", "3000"]
 bin = "./popui"
 cmd = "TEMPL_EXPERIMENT=rawgo templ generate && go build ./go/cmd/popui"
 delay = 1000
-exclude_dir = ["tmp", "vendor", "testdata", "node_modules", "dist", "svelte", "web-components", "html"]
+exclude_dir = ["tmp", "vendor", "testdata", "node_modules", "dist", "svelte", "web-components", "html", "public"]
 exclude_file = ["popui"]
 exclude_regex = ["_test.go", "_templ.go"]
 exclude_unchanged = false

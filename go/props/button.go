@@ -14,3 +14,16 @@ type Button struct {
 	Value     string
 	Attrs     templ.Attributes
 }
+
+// AnchorButton Templ component props
+type AnchorButton struct {
+	Type     string
+	Variant  string
+	Class    string
+	Small    bool
+	Href     templ.SafeURL
+	Target   string
+	Rel      string
+	Download bool
+	Attrs    templ.Attributes
+}

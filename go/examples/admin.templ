@@ -277,7 +277,11 @@ templ readonlySection() {
 			</dd>
 		}
 	}
-	@popui.Button(props.Button{Variant: "secondary"}) {
+	@popui.AnchorButton(props.AnchorButton{
+		Variant: "secondary",
+		Href:    "https://www.invopop.com",
+		Target:  "_blank",
+	}) {
 		Modify
 	}
 }

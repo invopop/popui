@@ -1105,7 +1105,11 @@ func readonlySection() templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = popui.Button(props.Button{Variant: "secondary"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var40), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+			Variant: "secondary",
+			Href:    "https://www.invopop.com",
+			Target:  "_blank",
+		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var40), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -39,15 +39,13 @@ func main() {
 	err = copyFile(assetsPath+"/popui.css", publicAssetPath+"/popui.css")
 	if err != nil {
 		log.Fatalf("Error: %v", err)
-	} else {
-		log.Printf("CSS file publissed")
 	}
+	log.Printf("CSS file publissed")
 	err = copyFile(assetsPath+"/popui.js", publicAssetPath+"/popui.js")
 	if err != nil {
 		log.Fatalf("Error: %v", err)
-	} else {
-		log.Printf("JS file publissed")
 	}
+	log.Printf("JS file publissed")
 }
 
 // copyFile copies a file from source to destination path

@@ -284,6 +284,12 @@ func inputCheckbox(p props.InputCheckbox) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
+		if p.Disabled {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" disabled")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
 		if p.Name != "" {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" name=\"")
 			if templ_7745c5c3_Err != nil {
@@ -292,7 +298,7 @@ func inputCheckbox(p props.InputCheckbox) templ.Component {
 			var templ_7745c5c3_Var19 string
 			templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 57, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 60, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 			if templ_7745c5c3_Err != nil {
@@ -311,7 +317,7 @@ func inputCheckbox(p props.InputCheckbox) templ.Component {
 			var templ_7745c5c3_Var20 string
 			templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(p.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 60, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/input_checkbox.templ`, Line: 63, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 			if templ_7745c5c3_Err != nil {

@@ -27,3 +27,10 @@ type OptionGroup struct {
 	Attrs      templ.Attributes
 	LabelAttrs templ.Attributes
 }
+
+// InputTitle Templ component props.
+type InputTitle struct {
+	Title string
+	Class string
+	Attrs templ.Attributes
+}

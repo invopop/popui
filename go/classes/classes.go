@@ -56,6 +56,8 @@ const (
 
 	OptionGroup = "popui-option-group"
 
+	InputTitle = "popui-input-title"
+
 	InputTextWrapper = "popui-input-text-wrapper"
 	InputTextBase    = "popui-input-text"
 	InputTextError   = "popui-input-text--error"

@@ -67,3 +67,13 @@ templ OptionGroup(p props.OptionGroup) {
 		{ children... }
 	</div>
 }
+
+// InputTitle provides a title for a form element
+templ InputTitle(p props.InputTitle) {
+	<div class={ classes.InputTitle }>
+		@Subtitle() {
+			<span { p.Attrs... }>{ p.Title }</span>
+		}
+		{ children... }
+	</div>
+}

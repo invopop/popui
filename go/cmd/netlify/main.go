@@ -1,3 +1,4 @@
+// Package main provides the entry point for building a preview on Netlify.
 package main
 
 import (

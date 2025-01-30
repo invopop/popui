@@ -18,7 +18,7 @@
   export let placeholder = ''
   export let multiple = false
   export let fullWidth = false
-  export let widthClass = 'max-w-[420px]'
+  export let widthClass = 'min-w-[160px] max-w-[420px]'
 
   let selectDropdown: BaseDropdown
   let resolvedIcon: IconSource | undefined

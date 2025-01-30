@@ -33,7 +33,7 @@
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
     { 'tracking-tight max-w-[200px]': workspace },
-    { 'tracking-normal max-w-40': !workspace }
+    { 'tracking-normal': !workspace }
   )
 
   onMount(() => {

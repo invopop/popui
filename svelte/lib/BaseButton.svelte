@@ -116,7 +116,7 @@
       {/if}
       {#if notification}
         <span
-          class="absolute top-0 right-0 -mt-0.5 -mr-0.5 w-1.5 h-1.5 bg-danger-500 rounded-full z-20"
+          class="absolute top-0 right-0 w-1.5 h-1.5 bg-danger-500 rounded-full z-20"
         />
       {/if}
     </div>

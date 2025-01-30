@@ -92,3 +92,19 @@ export const Multiple: Story = {
     multiple: true
   }
 }
+
+export const WithLongText: Story = {
+  args: {
+    icon: Flag,
+    placeholder: 'Label',
+    options: [
+      {
+        value: 1,
+        label:
+          'Option one is a super long text that should be truncated on the button at 420px and on the item list with the parent current width',
+        color: 'blue'
+      },
+      { value: 2, label: 'Option Two', color: 'green' }
+    ]
+  }
+}

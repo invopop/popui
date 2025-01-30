@@ -1,16 +1,32 @@
 <script lang="ts">
-  import { offset, flip, shift, type Placement } from 'svelte-floating-ui/dom'
+  import { offset, flip, shift, size, type Placement } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import { clickOutside } from './clickOutside.js'
 
   export let isOpen = false
   export let fullWidth = false
   export let placement: Placement = 'bottom-end'
+  export let matchParentWidth = false
+
+  const middleware = [offset(6), flip(), shift()]
+
+  if (matchParentWidth) {
+    middleware.push(
+      size({
+        apply({ rects, elements }) {
+          Object.assign(elements.floating.style, {
+            minWidth: `${rects.reference.width}px`,
+            maxWidth: `${rects.reference.width}px`
+          })
+        }
+      })
+    )
+  }
 
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: 'absolute',
     placement,
-    middleware: [offset(6), flip(), shift()]
+    middleware
   })
 
   let closedFromClickOutside = false

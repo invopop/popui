@@ -33,6 +33,7 @@ import InputText from './InputText.svelte'
 import InputTextarea from './InputTextarea.svelte'
 import InputToggle from './InputToggle.svelte'
 import MenuItem from './MenuItem.svelte'
+import MenuItemCollapsible from './MenuItemCollapsible.svelte'
 import ProfileAvatar from './ProfileAvatar.svelte'
 import ProfileSelector from './ProfileSelector.svelte'
 import SectionLayout from './SectionLayout.svelte'
@@ -85,6 +86,7 @@ export {
   InputTextarea,
   InputToggle,
   MenuItem,
+  MenuItemCollapsible,
   ProfileAvatar,
   ProfileSelector,
   SectionLayout,

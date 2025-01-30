@@ -19,6 +19,7 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Calendar } from '@invopop/ui-icons'
   import clsx from 'clsx'
+  import { clickOutside } from './clickOutside.js'
 
   const dispatch = createEventDispatcher()
 
@@ -33,7 +34,7 @@
 
   $: styles = clsx({
     'border-workspace-accent focus:border-workspace-accent shadow-active': isOpen,
-    'border-neutral-200': !isOpen
+    'border-neutral-200 hover:border-neutral-300': !isOpen
   })
 
   let datePickerEl: HTMLElement
@@ -204,8 +205,10 @@
 <div>
   <div class="relative">
     <button
-      on:click={() => (isOpen = !isOpen)}
-      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border hover:border-neutral-300 rounded-md text-neutral-800 placeholder-neutral-800 text-base"
+      on:click={() => {
+        isOpen = !isOpen
+      }}
+      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-md text-neutral-800 placeholder-neutral-800 text-base"
     >
       {selectedLabel}
     </button>
@@ -222,10 +225,13 @@
       leaveFrom="transform opacity-100 scale-100"
       leaveTo="transform opacity-0 scale-95"
     >
+      <!-- @ts-ignore -->
       <div
         class:left-0={position === 'left'}
         class:right-0={position === 'right'}
         class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-40"
+        use:clickOutside
+        on:click_outside={cancel}
       >
         <div class="flex border-b border-neutral-100 h-[300px]">
           <div class="flex flex-col space-y-2 items-start p-3 border-r border-neutral-100">

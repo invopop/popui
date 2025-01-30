@@ -23,7 +23,7 @@
 
   $: styles = clsx(
     { 'py-1 space-x-3': workspace },
-    { 'py-1.5 space-x-2': !workspace },
+    { 'py-1.5 space-x-1': !workspace },
     { 'px-1.5': hasIcon },
     { 'px-2': !hasIcon },
     { 'bg-workspace-accent-100': item.selected && !multiple },
@@ -65,7 +65,7 @@
       class="w-4 h-4 {item.destructive ? 'text-danger-500' : 'text-neutral-500'}"
     />
   {/if}
-  <div class="whitespace-nowrap flex-1 text-left flex flex-col" title={item.label}>
+  <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" title={item.label}>
     <span class="flex items-center space-x-1.5">
       {#if item.color}
         <TagStatus status={item.color} dot />

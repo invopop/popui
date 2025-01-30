@@ -13,6 +13,7 @@
   export let dangerIcon = false
   export let shortcut = false
   export let fullwidth = false
+  export let notification = false
 </script>
 
 {#if slot}
@@ -26,6 +27,7 @@
     {big}
     {shortcut}
     {fullwidth}
+    {notification}
   >
     {slot}
   </BaseButton>
@@ -40,5 +42,6 @@
     {big}
     {shortcut}
     {fullwidth}
+    {notification}
   />
 {/if}

@@ -231,7 +231,10 @@
         class:right-0={position === 'right'}
         class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-40"
         use:clickOutside
-        on:click_outside={cancel}
+        on:click_outside={() => {
+          if (!isOpen) return
+          cancel()
+        }}
       >
         <div class="flex border-b border-neutral-100 h-[300px]">
           <div class="flex flex-col space-y-2 items-start p-3 border-r border-neutral-100">

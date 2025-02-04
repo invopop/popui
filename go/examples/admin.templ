@@ -60,193 +60,331 @@ templ Admin() {
 					}
 				}
 				@popui.PageContent() {
-					@popui.PageSection(props.PageSection{Title: "Active Members", Description: "People who have access to all the workspaces in your organization"}) {
-						@popui.Table(props.Table{}) {
-							<col style="width: 30%"/>
-							<col style="width: 30%"/>
-							<col style="width: 30%"/>
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Job Title</th>
-									<th>Email</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									@popui.TableCell(props.TableCell{Content: "Marta García", UseInitial: true, Bold: true})
-									@popui.TableCell(props.TableCell{Content: "Finance"})
-									<td>
-										<a href="mailto:marga.garcia@invopop.com">marga.garcia@invopop.com</a>
-									</td>
-									@popui.TableCell(props.TableCell{Content: "Account owner", RightAlign: true})
-								</tr>
-								<tr>
-									@popui.TableCell(props.TableCell{Content: "Alejandro Lopez", UseInitial: true, Bold: true})
-									@popui.TableCell(props.TableCell{Content: "Finance"})
-									@popui.TableCell(props.TableCell{Content: "alejandro.lopez@invopop.com"})
-									@popui.TableCell(props.TableCell{RightAlign: true}) {
-										@popui.Popover(props.Popover{
-											ID:            "popover",
-											ButtonLabel:   "···",
-											ButtonVariant: "transparent",
-											RightAlign:    true,
-											Stretch:       true,
-										}) {
-											<ul>
-												<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-													<button>
-														@icons.Edit()
-														<span>Edit Member</span>
-													</button>
-												</li>
-												<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-													<button class="text-danger">
-														@icons.Delete()
-														<span>Disable Access</span>
-													</button>
-												</li>
-											</ul>
-										}
-									}
-								</tr>
-							</tbody>
-						}
+					@popui.PageSection(props.PageSection{
+						Title:            "Active Members",
+						Description:      "People who have access to all the workspaces in your organization",
+						FullWidthContent: true,
+					}) {
+						@tableSection()
 					}
 					@popui.PageSection(props.PageSection{Title: "Member information", Description: "Update a member’s job title within your organization"}) {
-						@popui.Form(props.Form{}) {
-							@popui.InputText(props.InputText{
-								ID:       "name",
-								Label:    "Full name",
-								Value:    "Diego Fernández",
-								Disabled: true,
-							})
-							@popui.InputText(props.InputText{
-								ID:    "JOB",
-								Label: "Job Title",
-								Value: "Finance",
-							})
-							@popui.Textarea(props.Textarea{
-								ID:    "desc",
-								Label: "Description",
-								Rows:  2,
-								Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
-							})
-							@popui.Fieldset(props.Fieldset{Legend: "Sudo"}) {
-								<input type="hidden" name="type" value=""/>
-								@popui.InputCheckbox(props.InputCheckbox{
-									ID:      "enterprise",
-									Label:   "Enterprise",
-									Name:    "type",
-									Value:   "thing",
-									Checked: true,
-								})
-								@popui.InputText(props.InputText{
-									Label: "Stripe ID",
-									Name:  "stripe_id",
-								})
-								@popui.Info() {
-									Remove the Stripe ID to force the creation of a new Stripe
-									customer, thus allowing a new Tax ID to be uploaded.
-								}
-							}
-							@popui.InputRadioCard(props.InputRadio{
-								Name:    "sandbox",
-								Label:   "Sandbox",
-								Value:   "true",
-								Checked: true,
-							})
-							@popui.InputRadioCard(props.InputRadio{
-								Name:        "sandbox",
-								Label:       "Live",
-								Value:       "true",
-								Checked:     false,
-								Description: "For production, issues valid invoices.",
-							})
-							@popui.InputRadio(props.InputRadio{
-								Name:    "sandbox",
-								Label:   "Regular radio option 1",
-								Value:   "regular-1",
-								Checked: false,
-							})
-							@popui.InputRadio(props.InputRadio{
-								Name:    "sandbox",
-								Label:   "Regular radio option 2",
-								Value:   "regular-2",
-								Checked: false,
-							})
-							@popui.InputCheckbox(props.InputCheckbox{
-								Label: "Checbox regular",
-								Value: "checkbox-regular",
-							})
-							@popui.InputCheckbox(props.InputCheckbox{
-								Label:   "Checkbox switch",
-								Value:   "checkbox-switch",
-								Checked: true,
-								Switch:  true,
-							})
-							@popui.InputRange(props.InputRange{
-								Label: "Docs per month (1 pop)",
-								Min:   "1",
-								Max:   "9",
-								Step:  "1",
-								ListOptions: []props.RangeListOptions{
-									{Value: "40", Label: "40"},
-									{Value: "100", Label: "100"},
-									{Value: "200", Label: "200"},
-									{Value: "400", Label: "400"},
-									{Value: "1000", Label: "1K"},
-									{Value: "2000", Label: "2K"},
-									{Value: "4000", Label: "4K"},
-									{Value: "10000", Label: "10K"},
-									{Value: "100000", Label: "20K+"},
-								},
-							})
-							@popui.Button(props.Button{Variant: "primary"}) {
-								Update
-							}
-						}
+						@formSection()
 					}
 					@popui.PageSection(props.PageSection{Title: "Readonly", Description: "This section is used to display a form in readonly mode for show views"}) {
-						@popui.DescList() {
-							@popui.DescRow() {
-								<dt>First name</dt>
-								<dd>Facundo</dd>
-							}
-							@popui.DescRow() {
-								<dt>Surname</dt>
-								<dd>Velazquez</dd>
-							}
-							@popui.DescRow() {
-								<dt>Hobbies</dt>
-								<dd>I like to write long texts so they can not fit on different popui layouts</dd>
-							}
-							@popui.DescRow() {
-								<dt>Rich text</dt>
-								<dd>
-									@popui.Prose() {
-										Here goes some <strong>bold sentence</strong> and some list
-										<ul>
-											<li>One</li>
-											<li>Two</li>
-											<li>Three</li>
-										</ul>
-										<blockquote>
-											<p>
-												And this is a quote to finish.
-											</p>
-										</blockquote>
-									}
-								</dd>
-							}
-						}
-						@popui.Button(props.Button{Variant: "secondary"}) {
-							Modify
-						}
+						@readonlySection()
+					}
+					@popui.PageSection(props.PageSection{Title: "Cards", Description: "We are displaying different type of cards here"}) {
+						@cardsSection()
 					}
 				}
 			</main>
 		</body>
 	</html>
+}
+
+// Sections
+templ tableSection() {
+	@popui.Table(props.Table{}) {
+		<col style="width: 30%"/>
+		<col style="width: 30%"/>
+		<col style="width: 30%"/>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Job Title</th>
+				<th>Email</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				@popui.TableCell(props.TableCell{Content: "Marta García", UseInitial: true, Bold: true})
+				@popui.TableCell(props.TableCell{Content: "Finance"})
+				<td>
+					<a href="mailto:marga.garcia@invopop.com">marga.garcia@invopop.com</a>
+				</td>
+				@popui.TableCell(props.TableCell{Content: "Account owner", RightAlign: true})
+			</tr>
+			<tr>
+				@popui.TableCell(props.TableCell{Content: "Alejandro Lopez", UseInitial: true, Bold: true})
+				@popui.TableCell(props.TableCell{Content: "Finance"})
+				@popui.TableCell(props.TableCell{Content: "alejandro.lopez@invopop.com"})
+				@popui.TableCell(props.TableCell{RightAlign: true}) {
+					@popui.Popover(props.Popover{
+						ID:            "popover",
+						ButtonLabel:   "···",
+						ButtonVariant: "transparent",
+						RightAlign:    true,
+						Stretch:       true,
+					}) {
+						<ul>
+							<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
+								<button>
+									@icons.Edit()
+									<span>Edit Member</span>
+								</button>
+							</li>
+							<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
+								<button class="text-danger">
+									@icons.Delete()
+									<span>Disable Access</span>
+								</button>
+							</li>
+						</ul>
+					}
+				}
+			</tr>
+		</tbody>
+	}
+}
+
+templ formSection() {
+	@popui.Form(props.Form{}) {
+		@popui.InputText(props.InputText{
+			ID:       "name",
+			Label:    "Full name",
+			Value:    "Diego Fernández",
+			Disabled: true,
+		})
+		@popui.InputText(props.InputText{
+			ID:    "JOB",
+			Label: "Job Title",
+			Value: "Finance",
+		})
+		@popui.Textarea(props.Textarea{
+			ID:    "desc",
+			Label: "Description",
+			Rows:  2,
+			Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
+		})
+		@popui.Fieldset(props.Fieldset{Legend: "Sudo"}) {
+			<input type="hidden" name="type" value=""/>
+			@popui.InputCheckbox(props.InputCheckbox{
+				ID:      "enterprise",
+				Label:   "Enterprise",
+				Name:    "type",
+				Value:   "thing",
+				Checked: true,
+			})
+			@popui.InputText(props.InputText{
+				Label: "Stripe ID",
+				Name:  "stripe_id",
+			})
+			@popui.Info() {
+				Remove the Stripe ID to force the creation of a new Stripe
+				customer, thus allowing a new Tax ID to be uploaded.
+			}
+		}
+		@popui.Accordion(props.Accordion{Title: "Help me select a plan"}) {
+			@popui.Fieldset(props.Fieldset{}) {
+				@popui.Select(props.Select{}) {
+					<option disabled selected value="">Select a type of document...</option>
+				}
+				@popui.OptionGroup(props.OptionGroup{Label: "Actions performed on each document"}) {
+					@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"})
+					@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"})
+				}
+			}
+		}
+		@popui.InputRadioCard(props.InputRadio{
+			Name:    "sandbox",
+			Label:   "Sandbox",
+			Value:   "true",
+			Checked: true,
+		})
+		@popui.InputRadioCard(props.InputRadio{
+			Name:        "sandbox",
+			Label:       "Live",
+			Value:       "true",
+			Checked:     false,
+			Description: "For production, issues valid invoices.",
+		})
+		@popui.InputRadio(props.InputRadio{
+			Name:    "sandbox",
+			Label:   "Regular radio option 1",
+			Value:   "regular-1",
+			Checked: false,
+		})
+		@popui.InputRadio(props.InputRadio{
+			Name:    "sandbox",
+			Label:   "Regular radio option 2",
+			Value:   "regular-2",
+			Checked: false,
+		})
+		@popui.InputCheckbox(props.InputCheckbox{
+			Label: "Checbox regular",
+			Value: "checkbox-regular",
+		})
+		@popui.InputCheckbox(props.InputCheckbox{
+			Label:   "Checkbox switch",
+			Value:   "checkbox-switch",
+			Checked: true,
+			Switch:  true,
+		})
+		@popui.InputRange(props.InputRange{
+			Label: "Docs per month (1 pop)",
+			Min:   "1",
+			Max:   "9",
+			Step:  "1",
+			ListOptions: []props.RangeListOptions{
+				{Value: "40", Label: "40"},
+				{Value: "100", Label: "100"},
+				{Value: "200", Label: "200"},
+				{Value: "400", Label: "400"},
+				{Value: "1000", Label: "1K"},
+				{Value: "2000", Label: "2K"},
+				{Value: "4000", Label: "4K"},
+				{Value: "10000", Label: "10K"},
+				{Value: "100000", Label: "20K+"},
+			},
+		})
+		@popui.Button(props.Button{Variant: "primary"}) {
+			Update
+		}
+	}
+}
+
+templ readonlySection() {
+	@popui.DescList() {
+		@popui.DescRow() {
+			<dt>First name</dt>
+			<dd>Facundo</dd>
+		}
+		@popui.DescRow() {
+			<dt>Surname</dt>
+			<dd>Velazquez</dd>
+		}
+		@popui.DescRow() {
+			<dt>Hobbies</dt>
+			<dd>I like to write long texts so they can not fit on different popui layouts</dd>
+		}
+		@popui.DescRow() {
+			<dt>Rich text</dt>
+			<dd>
+				@popui.Prose() {
+					Here goes some <strong>bold sentence</strong> and some list
+					<ul>
+						<li>One</li>
+						<li>Two</li>
+						<li>Three</li>
+					</ul>
+					<blockquote>
+						<p>
+							And this is a quote to finish.
+						</p>
+					</blockquote>
+				}
+			</dd>
+		}
+	}
+	@popui.AnchorButton(props.AnchorButton{
+		Variant: "secondary",
+		Href:    "https://www.invopop.com",
+		Target:  "_blank",
+	}) {
+		Modify
+	}
+}
+
+templ cardsSection() {
+	@popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop"}})
+	@popui.Card(props.Card{
+		Header: props.CardHeader{
+			Title:  "Invopop with logo",
+			ImgSrc: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
+		},
+	})
+	@popui.Card(props.Card{
+		Header: props.CardHeader{
+			Title:   "Invopop with flag",
+			FlagISO: "es",
+		},
+	})
+	@popui.Card(props.Card{
+		Header: props.CardHeader{
+			Title:   "Invopop with logo and Flag",
+			ImgSrc:  "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
+			FlagISO: "fr",
+		},
+	})
+	@popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop with link"}, URL: "#something"})
+	@popui.Card(props.Card{Header: props.CardHeader{Title: "Cyberdyne enterprises for World Global Domination INC"}})
+	@popui.Card(props.Card{
+		Header: props.CardHeader{
+			Title:    "Invopop with subtitle",
+			Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+		},
+		URL:   "https://invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+		Attrs: templ.Attributes{"target": "_blank"},
+	})
+	<a href="#something" style="padding: 16px; display: block; width: 100%;">
+		@popui.CardHeader(props.CardHeader{
+			Title:    "CardHeader without card",
+			Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+		})
+	</a>
+	@complexCard()
+}
+
+templ complexCard() {
+	@popui.Card(props.Card{}) {
+		@popui.CardHeader(props.CardHeader{
+			Title:    "Complex card with header slot and more items",
+			Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+			ImgSrc:   "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
+			FlagISO:  "pt",
+		}) {
+			@popoverForCard()
+		}
+		@popui.CardProgressBar(props.CardProgressBar{
+			Title:    "Pops",
+			Subtitle: "Refills Dec 1, 2024",
+			Current:  1200,
+			Total:    1000,
+		})
+		@popui.Select(props.Select{}) {
+			<option>Last 30 days</option>
+		}
+		@popui.CardDashboard(props.CardDashboard{
+			Items: []props.CardDashboardItem{
+				{
+					Label: "Documents",
+					Value: "10.5K",
+				},
+				{
+					Label: "Workflows",
+					Value: "10",
+				},
+				{
+					Label: "Parties",
+					Value: "123",
+				},
+			},
+		})
+	}
+}
+
+templ popoverForCard() {
+	@popui.Popover(props.Popover{
+		ID:            "popover-card",
+		ButtonLabel:   "···",
+		ButtonVariant: "transparent",
+		RightAlign:    true,
+		Stretch:       true,
+	}) {
+		<ul>
+			<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
+				<button>
+					@icons.Billing()
+					<span>Change Plan</span>
+				</button>
+			</li>
+			<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
+				<button>
+					@icons.Edit()
+					<span>Modify Workspace</span>
+				</button>
+			</li>
+		</ul>
+	}
 }

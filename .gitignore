@@ -15,3 +15,4 @@ vite.config.ts.timestamp-*
 /storybook-static
 /popui
 /tmp
+/public

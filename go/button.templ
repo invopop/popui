@@ -5,7 +5,8 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-// Button provides a button element. Supports small size and different variants: "primary", "danger" and "transparent"
+// Button provides a button element.
+// Supports small size and different variants: "primary", "secondary", "danger" and "transparent"
 templ Button(p props.Button) {
 	<button
 		class={
@@ -36,4 +37,38 @@ templ Button(p props.Button) {
 	>
 		{ children... }
 	</button>
+}
+
+// AnchorButton provides an anchor element styled as a button.
+// Supports small size and different variants: "primary", "secondary", "danger" and "transparent"
+templ AnchorButton(p props.AnchorButton) {
+	<a
+		class={
+			templ.KV(classes.ButtonBase, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
+			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),
+			templ.KV(classes.ButtonSecondary, p.Variant == "secondary"),
+			templ.KV(classes.ButtonTransparent, p.Variant == "transparent"),
+			templ.KV(classes.ButtonSmall, p.Small),
+		}
+		if p.Href != "" {
+			href={ p.Href }
+		}
+		if p.Target != "" {
+			target={ p.Target }
+		}
+		if p.Rel != "" {
+			rel={ p.Rel }
+		}
+		if p.Download {
+			download
+		}
+		if p.Type != "" {
+			type={ p.Type }
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</a>
 }

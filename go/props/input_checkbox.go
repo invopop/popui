@@ -16,6 +16,7 @@ type InputCheckbox struct {
 	LabelClass string
 	Autofocus  bool
 	Checked    bool
+	Disabled   bool
 	Switch     bool
 	Name       string
 	Value      string

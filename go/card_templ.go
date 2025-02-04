@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"fmt"
-	"github.com/dustin/go-humanize"
+	"github.com/invopop/gobl/num"
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
 	"github.com/invopop/popui/icons"
@@ -363,6 +363,7 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 			templ_7745c5c3_Var18 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		f := p.Formatter()
 		var templ_7745c5c3_Var19 = []any{
 			templ.KV(classes.CardProgressBar, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
@@ -443,7 +444,7 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 		var templ_7745c5c3_Var25 string
 		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(p.Title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 92, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 93, Col: 20}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 		if templ_7745c5c3_Err != nil {
@@ -489,7 +490,7 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 			var templ_7745c5c3_Var28 string
 			templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(p.Subtitle)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 98, Col: 71}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 99, Col: 71}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 			if templ_7745c5c3_Err != nil {
@@ -554,9 +555,9 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var33 string
-			templ_7745c5c3_Var33, templ_7745c5c3_Err = templ.JoinStringErrs(humanize.Comma(p.Current))
+			templ_7745c5c3_Var33, templ_7745c5c3_Err = templ.JoinStringErrs(f.Amount(num.MakeAmount(p.Current, 0)))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 104, Col: 91}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 105, Col: 104}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var33))
 			if templ_7745c5c3_Err != nil {
@@ -567,9 +568,9 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var34 string
-			templ_7745c5c3_Var34, templ_7745c5c3_Err = templ.JoinStringErrs(humanize.Comma(p.Total))
+			templ_7745c5c3_Var34, templ_7745c5c3_Err = templ.JoinStringErrs(f.Amount(num.MakeAmount(p.Total, 0)))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 105, Col: 37}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 106, Col: 50}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var34))
 			if templ_7745c5c3_Err != nil {
@@ -735,7 +736,7 @@ func CardDashboard(p props.CardDashboard) templ.Component {
 			var templ_7745c5c3_Var46 string
 			templ_7745c5c3_Var46, templ_7745c5c3_Err = templ.JoinStringErrs(i.Label)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 126, Col: 57}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 127, Col: 57}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var46))
 			if templ_7745c5c3_Err != nil {
@@ -770,7 +771,7 @@ func CardDashboard(p props.CardDashboard) templ.Component {
 			var templ_7745c5c3_Var49 string
 			templ_7745c5c3_Var49, templ_7745c5c3_Err = templ.JoinStringErrs(i.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 127, Col: 57}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 128, Col: 57}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var49))
 			if templ_7745c5c3_Err != nil {

@@ -2,7 +2,7 @@ package popui
 
 import (
 	"fmt"
-	"github.com/dustin/go-humanize"
+	"github.com/invopop/gobl/num"
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
 	"github.com/invopop/popui/icons"
@@ -79,6 +79,7 @@ templ CardHeader(h props.CardHeader) {
 
 // CardProgressBar provides a UI element for wrapping info with a progress bar.
 templ CardProgressBar(p props.CardProgressBar) {
+	{{ f := p.Formatter() }}
 	<div
 		class={
 			templ.KV(classes.CardProgressBar, p.Class == ""),
@@ -101,8 +102,8 @@ templ CardProgressBar(p props.CardProgressBar) {
 			if !p.HideCounter {
 				<div class={ classes.CardProgressBarHeaderAmount }>
 					@icons.Invopop()
-					<span class={ classes.CardProgressBarHeaderAmountCurrent }>{ humanize.Comma(p.Current) }</span>
-					<span>/{ humanize.Comma(p.Total) }</span>
+					<span class={ classes.CardProgressBarHeaderAmountCurrent }>{ f.Amount(num.MakeAmount(p.Current, 0)) }</span>
+					<span>/{ f.Amount(num.MakeAmount(p.Total, 0)) }</span>
 				</div>
 			}
 		</div>

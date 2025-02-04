@@ -1,6 +1,9 @@
 package props
 
-import "github.com/a-h/templ"
+import (
+	"github.com/a-h/templ"
+	"github.com/invopop/gobl/num"
+)
 
 // Card Templ component props
 type Card struct {
@@ -22,13 +25,14 @@ type CardHeader struct {
 
 // CardProgressBar Templ component props
 type CardProgressBar struct {
-	Class       string
-	Title       string
-	Subtitle    string
-	Total       int64
-	Current     int64
-	HideCounter bool
-	Attrs       templ.Attributes
+	Class        string
+	Title        string
+	Subtitle     string
+	Total        int64
+	Current      int64
+	HideCounter  bool
+	NumFormatter num.Formatter
+	Attrs        templ.Attributes
 }
 
 // CardDashboard Templ component props
@@ -65,6 +69,17 @@ func (p CardProgressBar) PercentColor() string {
 	}
 
 	return "#008852"
+}
+
+// Formatter returns the number formatter for the progress bar
+func (p CardProgressBar) Formatter() num.Formatter {
+
+	if p.NumFormatter.ThousandsSeparator != "" {
+		return p.NumFormatter
+	}
+
+	p.NumFormatter.ThousandsSeparator = ","
+	return p.NumFormatter
 }
 
 // EmptyHeader returns true if all the Header properties has zero value

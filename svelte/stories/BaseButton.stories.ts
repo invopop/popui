@@ -60,6 +60,14 @@ export const DefaultBigOnlyIcon: Story = {
   }
 }
 
+export const DefaultOnlyIconNotification: Story = {
+  args: {
+    big: true,
+    icon: Close,
+    notification: true
+  }
+}
+
 export const DefaultWithLeftIcon: Story = {
   args: {
     slot: 'Button',

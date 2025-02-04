@@ -18,7 +18,7 @@
   export let placeholder = ''
   export let multiple = false
   export let fullWidth = false
-  export let widthClass = 'w-60'
+  export let widthClass = 'min-w-[160px] max-w-[420px]'
 
   let selectDropdown: BaseDropdown
   let resolvedIcon: IconSource | undefined
@@ -69,7 +69,7 @@
 
 <BaseDropdown bind:isOpen placement="bottom-start" {fullWidth} bind:this={selectDropdown}>
   <div
-    class="{styles} dropdown-select flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1 bg-white whitespace-nowrap"
+    class="{styles} dropdown-select max-w-[420px] flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1 bg-white whitespace-nowrap"
     slot="trigger"
   >
     {#if resolvedIcon && !selectedColor}
@@ -78,7 +78,7 @@
     {#if selectedColor}
       <TagStatus dot status={selectedColor} />
     {/if}
-    <span class="w-full pr-8 text-neutral-800 placeholder-neutral-800 text-base">
+    <span class="w-full pr-8 text-neutral-800 placeholder-neutral-800 text-base truncate">
       {selectedLabel}
     </span>
   </div>

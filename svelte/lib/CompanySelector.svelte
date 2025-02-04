@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { Icon } from '@steeze-ui/svelte-icon'
   import ProfileAvatar from './ProfileAvatar.svelte'
   import type { Company, DrawerOption } from './types.js'
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContextWorkspace from './DrawerContextWorkspace.svelte'
   import { createEventDispatcher } from 'svelte'
-  import clsx from 'clsx'
   import { DoubleArrow } from '@invopop/ui-icons'
+  import MenuItemCollapsible from './MenuItemCollapsible.svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -32,13 +31,6 @@
     }))
   ] as DrawerOption[]
 
-  $: styles = clsx(
-    { 'p-1': collapsed },
-    { 'space-x-2 w-full p-[7px]': !collapsed },
-    { 'border-white-30 bg-white-10': isOpen },
-    { 'border-transparent hover:bg-white-5': !isOpen }
-  )
-
   function selectCompany(event: CustomEvent) {
     companyDropdown.toggle()
 
@@ -58,25 +50,16 @@
   placement="bottom-start"
   fullWidth={!collapsed}
 >
-  <span
+  <MenuItemCollapsible
     slot="trigger"
+    {collapsed}
     title={name}
-    class="{styles} text-white text-base font-semibold flex items-center justify-between border rounded"
+    subtitle={isSandbox ? 'Sandbox' : ''}
+    icon={collapsed ? undefined : DoubleArrow}
+    active={isOpen}
+    bold
   >
-    <span class:space-x-2={!collapsed} class="flex items-center">
-      <ProfileAvatar {name} {picture} {country} dark large />
-      {#if !collapsed}
-        <div>
-          <div class="whitespace-nowrap max-w-[140px] truncate tracking-tight">{name}</div>
-          {#if isSandbox}
-            <div class="text-sm font-medium text-yellow-600">Sandbox</div>
-          {/if}
-        </div>
-      {/if}
-    </span>
-    {#if !collapsed}
-      <Icon src={DoubleArrow} class="h-4 w-4 text-white-40 mt-px" />
-    {/if}
-  </span>
+    <ProfileAvatar {name} {picture} {country} dark large />
+  </MenuItemCollapsible>
   <DrawerContextWorkspace {items} on:click={selectCompany} />
 </BaseDropdown>

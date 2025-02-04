@@ -54,7 +54,7 @@
     {#if liveOpen}
       <div transition:slide class="max-h-[475px] overflow-auto">
         {#if !liveItems.length}
-          <div class="h-[182px]">
+          <div class="h-[182px] overflow-x-hidden">
             <EmptyStateIcon
               icon={Sidebar}
               title="No workspaces here"
@@ -92,7 +92,7 @@
     {#if sandboxOpen}
       <div transition:slide class="max-h-[475px] overflow-auto">
         {#if !sandboxItems.length}
-          <div class="h-[182px]">
+          <div class="h-[182px] overflow-x-hidden">
             <EmptyStateIcon
               icon={Sidebar}
               title="No workspaces here"

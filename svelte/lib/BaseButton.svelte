@@ -20,6 +20,7 @@
   export let dangerIcon = false
   export let shortcut = false
   export let fullwidth = false
+  export let notification = false
 
   let resolvedIcon: IconSource | undefined
 
@@ -105,13 +106,20 @@
 >
   <span class="{overlayClasses} absolute inset-0" />
   {#if resolvedIcon}
-    {#if shortcut}
-      <ShortcutWrapper>
+    <div class="relative">
+      {#if shortcut}
+        <ShortcutWrapper>
+          <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
+        </ShortcutWrapper>
+      {:else}
         <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
-      </ShortcutWrapper>
-    {:else}
-      <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
-    {/if}
+      {/if}
+      {#if notification}
+        <span
+          class="absolute top-0 right-0 w-1.5 h-1.5 bg-danger-500 rounded-full z-20"
+        />
+      {/if}
+    </div>
   {/if}
   {#if $$slots.default}
     <span class="z-10"><slot /></span>

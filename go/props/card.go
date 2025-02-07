@@ -15,12 +15,13 @@ type Card struct {
 
 // CardHeader Templ component props
 type CardHeader struct {
-	Class    string
-	Title    string
-	Subtitle string
-	ImgSrc   string
-	FlagISO  string
-	Attrs    templ.Attributes
+	Class      string
+	Title      string
+	Subtitle   string
+	ImgSrc     string
+	FlagISO    string
+	HideAvatar bool
+	Attrs      templ.Attributes
 }
 
 // CardProgressBar Templ component props

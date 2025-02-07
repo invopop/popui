@@ -14,11 +14,19 @@ templ PopupLayout(p props.PopupLayout) {
 			@DefaultPopupScripts()
 		</head>
 		<body>
-			<main>
+			<main style="height: 100%;">
 				<!-- header pending -->
 				{ children... }
 				<!-- footer pending -->
 			</main>
 		</body>
 	</html>
+}
+
+// LayoutBetween provides a layout for elements that should be placed
+// with flex justify between
+templ LayoutBetween() {
+	<div class="popui-layout-between">
+		{ children... }
+	</div>
 }

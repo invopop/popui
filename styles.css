@@ -518,9 +518,20 @@ div[contenteditable='true'] .tag {
   @apply animate-pulse;
 }
 /* Layouts */
+.popui-layout-between {
+  @apply flex justify-between items-start;
+}
 
 .popui-container-config {
-  @apply flex flex-col gap-3 p-0.5;
+  @apply flex flex-col gap-3 p-0.5 h-full;
+}
+
+.popui-config-footer {
+  @apply flex-1 flex flex-col justify-end w-full;
+}
+
+.popui-config-footer__content {
+  @apply flex justify-end border-t border-neutral-100 gap-3 p-4;
 }
 
 .popui-form-section {

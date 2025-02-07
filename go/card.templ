@@ -55,18 +55,20 @@ templ CardHeader(h props.CardHeader) {
 		}
 		{ h.Attrs... }
 	>
-		<div style="position: relative;">
-			if h.ImgSrc != "" {
-				@Avatar(props.Avatar{Large: true}) {
-					@Image(props.Image{Src: h.ImgSrc})
+		if !h.HideAvatar {
+			<div style="position: relative;">
+				if h.ImgSrc != "" {
+					@Avatar(props.Avatar{Large: true}) {
+						@Image(props.Image{Src: h.ImgSrc})
+					}
+				} else if h.Title != "" {
+					@Avatar(props.Avatar{Large: true, Initial: string(h.Title[0])})
 				}
-			} else if h.Title != "" {
-				@Avatar(props.Avatar{Large: true, Initial: string(h.Title[0])})
-			}
-			if h.FlagISO != "" {
-				<img class={ classes.CardHeaderFlag } src={ flagProviderURL + h.FlagISO + ".svg" } width="12"/>
-			}
-		</div>
+				if h.FlagISO != "" {
+					<img class={ classes.CardHeaderFlag } src={ flagProviderURL + h.FlagISO + ".svg" } width="12"/>
+				}
+			</div>
+		}
 		if h.Title != "" {
 			<div class={ classes.CardHeaderTitle }>
 				<p>{ h.Title }</p>

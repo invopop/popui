@@ -323,7 +323,7 @@ input:checked + .popui-switch__input:before {
   @apply flex flex-col space-y-2;
 }
 .popui-input-text {
-  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
+  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight disabled:bg-neutral-50 border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
 }
 .popui-input-text:focus {
   @apply ring-0 ring-offset-0;

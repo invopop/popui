@@ -521,6 +521,9 @@ div[contenteditable='true'] .tag {
 .popui-layout-between {
   @apply flex justify-between items-start;
 }
+.popui-layout-center {
+  @apply w-full flex justify-center items-center;
+}
 
 .popui-container-config {
   @apply flex flex-col gap-3 p-0.5 h-full;
@@ -651,6 +654,9 @@ div[contenteditable='true'] .tag {
 }
 .text-danger {
   @apply text-danger-500;
+}
+.text-neutral {
+  @apply text-neutral-500;
 }
 
 /* Admin */

@@ -64,7 +64,7 @@ templ Contenteditable(p props.Textarea) {
 			role="textarea"
 			contenteditable="true"
 			id={ p.ID }
-			class={ templ.KV(classes.TextareaBase, p.Class == ""), "min-h-[80px]", templ.KV(p.Class, p.Class != "") }
+			class={ templ.KV(classes.TextareaBase, p.Class == ""), classes.TextareaContenteditable, templ.KV(p.Class, p.Class != "") }
 			{ p.Attrs... }
 		></div>
 		if !p.Error.Empty() {

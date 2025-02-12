@@ -30,6 +30,12 @@ templ EmbeddedJS() {
 	<script src={ path.Join(AssetPath, Versioned("assets", "popui.js")) }></script>
 }
 
+// AlpineStoreContenteditable provides the JS to include in an Alpine component
+// that wants to use the AlpineJS library to enable contenteditable functionality.
+templ AlpineStoreContenteditable() {
+	<script src={ path.Join(AssetPath, Versioned("assets", "contenteditable.js")) }></script>
+}
+
 // DefaultPopupScripts provides the scripts to include in `<head>` section of an HTML
 // document to enable the Invopop Console UI SDK and AlpineJS config.
 templ DefaultPopupScripts() {

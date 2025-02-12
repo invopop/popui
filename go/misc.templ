@@ -1,6 +1,7 @@
 package popui
 
 import "github.com/invopop/popui/go/classes"
+import "github.com/invopop/popui/go/props"
 
 // P provides a p element
 templ P() {
@@ -40,6 +41,23 @@ templ Info() {
 			{ children... }
 		</div>
 	</div>
+}
+
+// Notification provides a wrapper for a text to be shown as feedback.
+// Vaiid types are: info, warning, error, success
+templ Notification(p props.Notification) {
+	<p
+		class={
+			templ.KV(classes.Notification, p.Class == ""),
+			templ.KV(classes.NotificationWarning, p.Type == "warning"),
+			templ.KV(classes.NotificationInfo, p.Type == "info"),
+			templ.KV(classes.NotificationError, p.Type == "error"),
+			templ.KV(classes.NotificationSuccess, p.Type == "success"),
+			templ.KV(p.Class, p.Class != ""),
+		}
+	>
+		{ children... }
+	</p>
 }
 
 // Mark provides a mark element formatted as a highlighted text

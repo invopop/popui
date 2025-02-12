@@ -310,7 +310,7 @@ func Contenteditable(p props.Textarea) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		var templ_7745c5c3_Var18 = []any{templ.KV(classes.TextareaBase, p.Class == ""), "min-h-[80px]", templ.KV(p.Class, p.Class != "")}
+		var templ_7745c5c3_Var18 = []any{templ.KV(classes.TextareaBase, p.Class == ""), classes.TextareaContenteditable, templ.KV(p.Class, p.Class != "")}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var18...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

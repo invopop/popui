@@ -159,8 +159,14 @@ details[open].popui-accordion .popui-accordion__content {
 .popui-checkbox-input {
   @apply form-checkbox w-4 h-4 text-workspace-accent rounded border border-neutral-200 hover:border-neutral-300;
 }
-.popui-checkbox-input:hover + label {
+.popui-checkbox-input:hover:enabled + label {
   @apply text-neutral-800;
+}
+.popui-checkbox-input:disabled + label {
+  @apply opacity-30;
+}
+.popui-checkbox-input:disabled + label:hover {
+  @apply !text-neutral-500;
 }
 .popui-checkbox-input:focus {
   @apply text-workspace-accent ring-0 ring-offset-0;
@@ -378,7 +384,7 @@ pre {
   @apply text-neutral-500 font-sans text-sm;
 }
 .popui-notification {
-  @apply flex px-1 py-0.5 justify-center items-center gap-1 rounded text-sm font-medium;
+  @apply flex px-1 py-0.5 justify-center items-center gap-1 rounded text-sm font-medium self-start;
 }
 .popui-notification__info {
   @apply bg-blue-100 text-blue-500;
@@ -469,7 +475,7 @@ pre {
 
 /* Textarea */
 .popui-textarea-wrapper {
-  @apply flex flex-col space-y-2;
+  @apply flex flex-col gap-2;
 }
 .popui-textarea {
   @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight disabled:bg-neutral-50 border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;

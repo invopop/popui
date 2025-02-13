@@ -1,9 +1,7 @@
 document.addEventListener('alpine:init', () => {
   window.Alpine.store('contenteditable', {
     savedSelection: null,
-    textareaRef: null,
     variables: [],
-    message: '',
 
     saveSelection() {
       const selection = window.getSelection()
@@ -22,16 +20,15 @@ document.addEventListener('alpine:init', () => {
       selection.addRange(this.savedSelection)
     },
 
-    async focusTextarea() {
+    async focusTextarea(textarea) {
       this.saveSelection()
       await window.Alpine.nextTick()
-      const textarea = this.textareaRef
       textarea.focus()
       this.restoreSelection()
     },
 
-    async handleMessageInput() {
-      const rawText = this.textareaRef.innerHTML
+    async handleMessageInput(textarea) {
+      const rawText = textarea.innerHTML
 
       const parsedText = rawText
         .replace(/&nbsp;/g, ' ')
@@ -43,7 +40,8 @@ document.addEventListener('alpine:init', () => {
           return variable.value || label
         })
         .replace(/<span[^>]*>([\s\S]*?)<\/span>/g, '$1')
-      this.message = parsedText
+
+      const message = parsedText
 
       // If tag has been introduced manually we need to refresh the content
       if (rawText.match(/\{\{\.([^}]+?)\}\}/g)) {
@@ -51,9 +49,11 @@ document.addEventListener('alpine:init', () => {
         // there are different nodes and offsets does not match
         // we need to find a hack for this.
         this.saveSelection()
-        this.textareaRef.innerHTML = this.parseMessage(parsedText)
+        textarea.innerHTML = this.parseMessage(parsedText)
         this.restoreSelection()
       }
+
+      return message
     },
 
     parseMessage(message) {
@@ -65,9 +65,8 @@ document.addEventListener('alpine:init', () => {
       })
     },
 
-    insertVariable(variable) {
-      this.focusTextarea()
-      const textarea = this.textareaRef
+    async insertVariable(textarea, variable) {
+      await this.focusTextarea(textarea)
 
       // If saved selection is part of the textarea
       if (this.savedSelection && textarea.contains(this.savedSelection.commonAncestorContainer)) {
@@ -97,7 +96,7 @@ document.addEventListener('alpine:init', () => {
       sel.addRange(rang)
 
       // We update the parsed message
-      this.handleMessageInput()
+      return await this.handleMessageInput(textarea)
     }
   })
 })

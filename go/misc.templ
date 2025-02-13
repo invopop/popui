@@ -56,7 +56,11 @@ templ Notification(p props.Notification) {
 			templ.KV(p.Class, p.Class != ""),
 		}
 	>
-		{ children... }
+		if p.Text != "" {
+			{ p.Text }
+		} else {
+			{ children... }
+		}
 	</p>
 }
 

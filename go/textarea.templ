@@ -1,6 +1,7 @@
 package popui
 
 import (
+	"fmt"
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
 )
@@ -64,7 +65,8 @@ templ Contenteditable(p props.Textarea) {
 			role="textarea"
 			contenteditable="true"
 			id={ p.ID }
-			class={ templ.KV(classes.TextareaBase, p.Class == ""), classes.TextareaContenteditable, templ.KV(p.Class, p.Class != "") }
+			style={ "min-height: " + fmt.Sprintf("%d", p.Rows*34) + "px" }
+			class={ templ.KV(classes.TextareaBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
 			{ p.Attrs... }
 		></div>
 		if !p.Error.Empty() {

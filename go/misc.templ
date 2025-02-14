@@ -55,6 +55,7 @@ templ Notification(p props.Notification) {
 			templ.KV(classes.NotificationSuccess, p.Type == "success"),
 			templ.KV(p.Class, p.Class != ""),
 		}
+		{ p.Attrs... }
 	>
 		if p.Text != "" {
 			{ p.Text }

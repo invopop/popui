@@ -117,6 +117,7 @@ const (
 	HorizontalDividerWrapper = "popui-divider-wrapper"
 	HorizontalDivider        = "popui-divider"
 	DescList                 = "popui-desc-list"
+	EmptyState               = "popui-empty-state"
 )
 
 // Page classes

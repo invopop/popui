@@ -231,6 +231,11 @@ input:checked + .popui-switch__input:before {
   @apply font-normal;
 }
 
+/* Empty State */
+.popui-empty-state {
+  @apply flex flex-col items-center justify-center space-y-2 text-workspace-accent;
+}
+
 /* Radio */
 .popui-radio {
   @apply form-radio h-5 w-5 border-neutral-200 hover:border-neutral-300 text-workspace-accent focus:ring-0 focus:ring-offset-0;

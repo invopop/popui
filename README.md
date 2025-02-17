@@ -61,6 +61,12 @@ Go requires the CSS with all the Tailwind components to be built independently. 
 go generate ./...
 ```
 
+This will compile the admin templ and compile it to `public/index.html`
+
+```bash
+go run ./go/cmd/tmpl2html
+```
+
 ### Development server
 
 To run a development server for the Go library:

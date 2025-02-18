@@ -35,7 +35,7 @@ func Prose() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.DefaultCSS().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.EmbeddedCSS().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

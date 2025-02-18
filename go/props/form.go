@@ -19,3 +19,18 @@ type Fieldset struct {
 	Attrs       templ.Attributes
 	LegendAttrs templ.Attributes
 }
+
+// OptionGroup Templ component props.
+type OptionGroup struct {
+	Label      string
+	Class      string
+	Attrs      templ.Attributes
+	LabelAttrs templ.Attributes
+}
+
+// InputTitle Templ component props.
+type InputTitle struct {
+	Title string
+	Class string
+	Attrs templ.Attributes
+}

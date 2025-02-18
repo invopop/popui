@@ -53,6 +53,9 @@ templ inputCheckbox(p props.InputCheckbox) {
 		if p.Autofocus {
 			autofocus
 		}
+		if p.Disabled {
+			disabled
+		}
 		if p.Name != "" {
 			name={ p.Name }
 		}

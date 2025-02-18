@@ -1,6 +1,7 @@
 package popui
 
 import "github.com/invopop/popui/go/classes"
+import "github.com/invopop/popui/go/props"
 
 // P provides a p element
 templ P() {
@@ -42,6 +43,28 @@ templ Info() {
 	</div>
 }
 
+// Notification provides a wrapper for a text to be shown as feedback.
+// Vaiid types are: info, warning, error, success
+templ Notification(p props.Notification) {
+	<p
+		class={
+			templ.KV(classes.Notification, p.Class == ""),
+			templ.KV(classes.NotificationWarning, p.Type == "warning"),
+			templ.KV(classes.NotificationInfo, p.Type == "info"),
+			templ.KV(classes.NotificationError, p.Type == "error"),
+			templ.KV(classes.NotificationSuccess, p.Type == "success"),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		if p.Text != "" {
+			{ p.Text }
+		} else {
+			{ children... }
+		}
+	</p>
+}
+
 // Mark provides a mark element formatted as a highlighted text
 templ Mark() {
 	<mark>
@@ -74,6 +97,26 @@ templ DescList() {
 // DescRow provides a wrapper for DescList children. Expects a term (dt) nd description (dd)
 templ DescRow() {
 	<div>
+		{ children... }
+	</div>
+}
+
+// EmptyState provides a layout to displaying an empty state ilustration with some call to action
+templ EmptyState(p props.EmptyState) {
+	<div
+		class={
+			templ.KV(classes.EmptyState, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		@EmptyStateIcon()
+		@Subtitle() {
+			{ p.Title }
+		}
+		@Description() {
+			{ p.Description }
+		}
 		{ children... }
 	</div>
 }

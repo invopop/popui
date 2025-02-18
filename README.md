@@ -61,6 +61,12 @@ Go requires the CSS with all the Tailwind components to be built independently. 
 go generate ./...
 ```
 
+This will compile the admin templ and compile it to `public/index.html`
+
+```bash
+go run ./go/cmd/tmpl2html
+```
+
 ### Development server
 
 To run a development server for the Go library:
@@ -77,18 +83,7 @@ Air will also watch for changes and re-run everything for you, with the exceptio
 
 There are two options for incorporating the Popui styles.
 
-**Option 1**: loading assets from the CDN:
-
-```go
-templ Head() {
-  <head>
-    <title>Title</title>
-    @popui.DefaultCSS()
-  </head>
-}
-```
-
-**Option 2**: using the stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
+**Option 1**: using the stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
 
 ```go
 e.StaticFS(popui.AssetPath, popui.Assets)
@@ -105,7 +100,16 @@ templ Head() {
 }
 ```
 
-Either option is valid, but Option 2 will allow you to use development versions or branches of the popui packages.
+**Option 2 (Deprecated)**: loading assets from the CDN:
+
+```go
+templ Head() {
+  <head>
+    <title>Title</title>
+    @popui.DefaultCSS()
+  </head>
+}
+```
 
 ### Use the Go Templ Components
 

@@ -10,15 +10,31 @@ templ PopupLayout(p props.PopupLayout) {
 			<title>{ p.Title }</title>
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			@DefaultCSS()
+			@EmbeddedCSS()
 			@DefaultPopupScripts()
 		</head>
 		<body>
-			<main>
+			<main style="height: 100%;">
 				<!-- header pending -->
 				{ children... }
 				<!-- footer pending -->
 			</main>
 		</body>
 	</html>
+}
+
+// LayoutBetween provides a layout for elements that should be placed
+// with flex justify between
+templ LayoutBetween() {
+	<div class="popui-layout-between">
+		{ children... }
+	</div>
+}
+
+// LayoutCenter provides a layout for elements that should be placed
+// with flex justify center
+templ LayoutCenter() {
+	<div class="popui-layout-center">
+		{ children... }
+	</div>
 }

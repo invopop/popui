@@ -20,8 +20,9 @@ type PageBreadcrumb struct {
 
 // PageSection Templ component props
 type PageSection struct {
-	Title       string
-	Description string
-	Class       string
-	Attrs       templ.Attributes
+	Title            string
+	Description      string
+	Class            string
+	FullWidthContent bool
+	Attrs            templ.Attributes
 }

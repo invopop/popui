@@ -1,0 +1,141 @@
+package popui
+
+import (
+	"fmt"
+	"github.com/invopop/gobl/num"
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
+)
+
+const (
+	// https://github.com/HatScripts/circle-flags
+	flagProviderURL = "https://hatscripts.github.io/circle-flags/flags/"
+)
+
+// Card provides a UI element for wrapping general information.
+templ Card(p props.Card) {
+	if p.URL != "" {
+		<a
+			href={ p.URL }
+			class={
+				templ.KV(classes.Card, p.Class == ""),
+				templ.KV(p.Class, p.Class != ""),
+			}
+			{ p.Attrs... }
+		>
+			if !p.EmptyHeader() {
+				@CardHeader(p.Header)
+			}
+			{ children... }
+		</a>
+	} else {
+		<div
+			class={
+				templ.KV(classes.Card, p.Class == ""),
+				templ.KV(p.Class, p.Class != ""),
+			}
+			{ p.Attrs... }
+		>
+			if !p.EmptyHeader() {
+				@CardHeader(p.Header)
+			}
+			{ children... }
+		</div>
+	}
+}
+
+// CardHeader can be used as part of a Card component or standalone.
+// It provides an Avatar/Initial, Country Flag, Title and a free slot.
+templ CardHeader(h props.CardHeader) {
+	<div
+		class={
+			templ.KV(classes.CardHeader, h.Class == ""),
+			templ.KV(h.Class, h.Class != ""),
+		}
+		{ h.Attrs... }
+	>
+		if !h.HideAvatar {
+			<div style="position: relative;">
+				if h.ImgSrc != "" {
+					@Avatar(props.Avatar{Large: true}) {
+						@Image(props.Image{Src: h.ImgSrc})
+					}
+				} else if h.Title != "" {
+					@Avatar(props.Avatar{Large: true, Initial: string(h.Title[0])})
+				}
+				if h.FlagISO != "" {
+					<img class={ classes.CardHeaderFlag } src={ flagProviderURL + h.FlagISO + ".svg" } width="12"/>
+				}
+			</div>
+		}
+		if h.Title != "" {
+			<div class={ classes.CardHeaderTitle }>
+				<p>{ h.Title }</p>
+				<p>{ h.Subtitle }</p>
+			</div>
+		}
+		{ children... }
+	</div>
+}
+
+// CardProgressBar provides a UI element for wrapping info with a progress bar.
+templ CardProgressBar(p props.CardProgressBar) {
+	{{ f := p.Formatter() }}
+	<div
+		class={
+			templ.KV(classes.CardProgressBar, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		<div class={ classes.CardProgressBarHeader }>
+			<p>
+				<span class={ classes.CardProgressBarHeaderTitle }>
+					<span>{ p.Title }</span>
+					if p.Subtitle != "" {
+						<span>· </span>
+					}
+				</span>
+				if p.Subtitle != "" {
+					<span class={ classes.CardProgressBarHeaderSubtitle }>{ p.Subtitle }</span>
+				}
+			</p>
+			if !p.HideCounter {
+				<div class={ classes.CardProgressBarHeaderAmount }>
+					@icons.Invopop()
+					<span class={ classes.CardProgressBarHeaderAmountCurrent }>{ f.Amount(num.MakeAmount(p.Current, 0)) }</span>
+					<span>/{ f.Amount(num.MakeAmount(p.Total, 0)) }</span>
+				</div>
+			}
+		</div>
+		<div class={ classes.CardProgressBarProgress }>
+			<div class={ percentage(p.PercentValue(), p.PercentColor()) }></div>
+		</div>
+	</div>
+}
+
+// CardDashboard provides a grid of small info cards for showing dashboard-like information
+templ CardDashboard(p props.CardDashboard) {
+	<ul
+		class={
+			templ.KV(classes.CardDashboard, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		for _, i := range p.Items {
+			<li class={ classes.CardDashboardItem }>
+				<p class={ classes.CardDashboardItemLabel }>{ i.Label }</p>
+				<p class={ classes.CardDashboardItemValue }>{ i.Value }</p>
+			</li>
+		}
+	</ul>
+}
+
+css percentage(percent int64, color string) {
+	border-radius: 1px;
+	height: 4px;
+	width: { fmt.Sprintf("%d%%", percent) };
+	background: { color };
+}

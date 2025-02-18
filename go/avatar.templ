@@ -5,16 +5,22 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-// Avatar provides a popui component for displaying an image. Expects a @popui.Image as slot
+// Avatar provides a popui component for displaying either an image or an initial.
+// Expects a @popui.Image as slot
 templ Avatar(p props.Avatar) {
 	<div
 		class={
 			templ.KV(classes.AvatarBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 			templ.KV(classes.AvatarLarge, p.Large),
+			templ.KV(classes.AvatarInitial, p.Initial != ""),
 		}
 		{ p.Attrs... }
 	>
-		{ children... }
+		if p.Initial != "" {
+			{ p.Initial }
+		} else {
+			{ children... }
+		}
 	</div>
 }

@@ -1,0 +1,25 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+// Accordion provides a details html element with a fancy accordion transition
+templ Accordion(p props.Accordion) {
+	<details
+		if p.Open {
+			open
+		}
+		class={
+			templ.KV(classes.Accordion, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		<summary>{ p.Title }</summary>
+		<div class={ classes.AccordionContent }>
+			{ children... }
+		</div>
+	</details>
+}

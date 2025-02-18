@@ -69,7 +69,9 @@ templ PageSection(p props.PageSection) {
 					{ p.Description }
 				}
 			</div>
-			<div class={ classes.PageSectionContent }>
+			<div
+				class={ classes.PageSectionContent, templ.KV("w-full", p.FullWidthContent) }
+			>
 				{ children... }
 			</div>
 		</div>

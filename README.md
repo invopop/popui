@@ -64,7 +64,7 @@ go generate ./...
 This will compile the admin templ and compile it to `public/index.html`
 
 ```bash
-go run ./go/cmd/tmpl2html
+go run ./go/cmd/templ2html
 ```
 
 ### Development server

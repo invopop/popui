@@ -6,7 +6,7 @@ body {
 }
 /* Accordion */
 .popui-accordion {
-  @apply rounded-md border border-neutral-200 bg-neutral-50 pt-2 pb-4 px-4 overflow-hidden;
+  @apply rounded-md border border-neutral-200 bg-neutral-50 p-2 overflow-hidden;
   backdrop-filter: blur(2px);
 }
 
@@ -28,6 +28,10 @@ details.popui-accordion summary::before {
   background-image: url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYuMDAwMDUgMTJMMTAgNy45OTk5NEw2IDQiIHN0cm9rZT0iIzZCNzI4MCIvPjwvc3ZnPg==');
 }
 
+details[open].popui-accordion {
+  @apply pb-4;
+}
+
 details[open].popui-accordion summary::before {
   transform: translateY(-50%) rotate(90deg);
 }
@@ -37,7 +41,7 @@ details.popui-accordion .popui-accordion__content {
 }
 
 details[open].popui-accordion .popui-accordion__content {
-  @apply overflow-auto max-h-[100vh];
+  @apply overflow-y-auto max-h-[100vh];
 }
 
 /* Avatar */
@@ -186,7 +190,7 @@ details[open].popui-accordion .popui-accordion__content {
   @apply text-neutral-800;
 }
 .popui-switch__wrapper {
-  @apply relative inline-block w-8 h-5;
+  @apply relative inline-block w-8 h-5 flex-shrink-0;
 }
 
 .popui-switch__wrapper input {

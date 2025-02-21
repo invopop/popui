@@ -13,6 +13,7 @@ templ Accordion(p props.Accordion) {
 		}
 		class={
 			templ.KV(classes.Accordion, p.Class == ""),
+			templ.KV(classes.AccordionScrollable, p.Scrollable),
 			templ.KV(p.Class, p.Class != ""),
 		}
 		{ p.Attrs... }

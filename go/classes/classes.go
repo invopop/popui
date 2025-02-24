@@ -3,8 +3,9 @@ package classes
 
 // Accordion related classes
 const (
-	Accordion        = "popui-accordion"
-	AccordionContent = "popui-accordion__content"
+	Accordion           = "popui-accordion"
+	AccordionScrollable = "popui-accordion__scrollable"
+	AccordionContent    = "popui-accordion__content"
 )
 
 // Avatar related classes

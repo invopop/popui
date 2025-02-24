@@ -37,6 +37,7 @@ func Accordion(p props.Accordion) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		var templ_7745c5c3_Var2 = []any{
 			templ.KV(classes.Accordion, p.Class == ""),
+			templ.KV(classes.AccordionScrollable, p.Scrollable),
 			templ.KV(p.Class, p.Class != ""),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
@@ -81,7 +82,7 @@ func Accordion(p props.Accordion) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(p.Title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/accordion.templ`, Line: 20, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/accordion.templ`, Line: 21, Col: 20}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {

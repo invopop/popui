@@ -709,7 +709,7 @@ div[contenteditable='true'] .tag {
   @apply opacity-30 pointer-events-none;
 }
 .popui-admin-sidebar__header {
-  @apply w-full flex pl-4 pr-3 py-[18px] items-center gap-2.5 border-b border-neutral-50 text-sherwood-700 font-sans text-base font-semibold whitespace-nowrap;
+  @apply w-full flex pl-4 pr-3 pb-[17px] pt-[18px] items-center gap-2.5 border-b border-neutral-100 text-sherwood-700 font-sans text-lg font-semibold whitespace-nowrap;
 }
 .popui-admin-page__header-actions {
   @apply flex items-center gap-2;

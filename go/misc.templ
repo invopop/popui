@@ -100,3 +100,23 @@ templ DescRow() {
 		{ children... }
 	</div>
 }
+
+// EmptyState provides a layout to displaying an empty state ilustration with some call to action
+templ EmptyState(p props.EmptyState) {
+	<div
+		class={
+			templ.KV(classes.EmptyState, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		@EmptyStateIcon()
+		@Subtitle() {
+			{ p.Title }
+		}
+		@Description() {
+			{ p.Description }
+		}
+		{ children... }
+	</div>
+}

@@ -19,7 +19,7 @@
   {transitionConfig}
   {sideOffset}
   class={cn(
-    'bg-neutral-700 text-white-80 z-50 rounded-md p-3 text-base font-medium shadow-md',
+    'bg-neutral-700 text-white-80 z-50 rounded-md px-3 py-2 text-base font-medium shadow-md',
     className
   )}
   {...$$restProps}

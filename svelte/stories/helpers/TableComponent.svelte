@@ -33,7 +33,24 @@
         { name: 'Google Drive', url: 'https://gdrive.invopop.com/icon.svg' },
         { name: 'Update Chargebee', url: 'https://chargebee.invopop.com/icon.svg' },
         { name: 'Send CFDI to SAT (Mexico)', url: 'https://sat-mx.invopop.com/icon.png' },
-        { name: 'Send email', url: 'https://email.invopop.com/icon.png' }
+        { name: 'Send email', url: 'https://email.invopop.com/icon.png' },
+        { name: 'Add B2C to B2B link', url: 'https://portal.invopop.com/images/reissue.svg' },
+        { name: 'Send NFS-e (Brazil)', url: 'https://nfe-br.invopop.com/icon.svg' }
+      ]
+    },
+    {
+      name: 'Sign off expense',
+      description: 'Accept or deny an expense',
+      type: 'Invoice',
+      steps: [
+        { name: 'Google Drive', url: 'https://gdrive.invopop.com/icon.svg' },
+        { name: 'Update Chargebee', url: 'https://chargebee.invopop.com/icon.svg' },
+        { name: 'Send CFDI to SAT (Mexico)', url: 'https://sat-mx.invopop.com/icon.png' },
+        { name: 'Send email', url: 'https://email.invopop.com/icon.png' },
+        { name: 'Add B2C to B2B link', url: 'https://portal.invopop.com/images/reissue.svg' },
+        { name: 'Send NFS-e (Brazil)', url: 'https://nfe-br.invopop.com/icon.svg' },
+        { name: 'Google Drive', url: 'https://gdrive.invopop.com/icon.svg' },
+        { name: 'Update Chargebee', url: 'https://chargebee.invopop.com/icon.svg' }
       ]
     }
   ]
@@ -59,7 +76,7 @@
           <p class="text-neutral-800 font-medium">{row.name}</p>
           <p>{row.description}</p>
         </TableCell>
-        <TableCell>
+        <TableCell class="w-[317px]">
           <StepIconList icons={row.steps} />
         </TableCell>
         <TableCell>

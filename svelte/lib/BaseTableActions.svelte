@@ -23,8 +23,8 @@
   })) as DrawerOption[]
 
   $: overlayClasses = clsx({
-    'group-hover:bg-black/[.16]': !isOpen,
-    'bg-black/[.32]': isOpen
+    'group-hover:bg-neutral-800/[.05]': !isOpen,
+    'bg-neutral-800/[.1]': isOpen
   })
 
   export const toggle = () => {
@@ -34,7 +34,7 @@
 
 <BaseDropdown bind:isOpen bind:this={actionDropdown}>
   <div class="relative group flex justify-center items-center rounded p-1" slot="trigger">
-    <span class="{overlayClasses} absolute inset-0" />
+    <span class="{overlayClasses} absolute inset-0 rounded" />
     <Icon slot="trigger" src={Options} class="w-4 text-neutral-500" />
   </div>
   <DrawerContext

@@ -8,13 +8,15 @@
     TableGroupLabelProp,
     TableSortBy
   } from './types.js'
-  import BaseTableHeader from './BaseTableHeader.svelte'
   import { createEventDispatcher } from 'svelte'
   import BaseCounter from './BaseCounter.svelte'
   import BaseTableRow from './BaseTableRow.svelte'
-  import BaseTableCell from './BaseTableCell.svelte'
-  import InputCheckbox from './InputCheckbox.svelte'
   import { isInputFocused } from './helpers.js'
+  import BaseTableCellContent from './BaseTableCellContent.svelte'
+  import { Table, TableHead, TableHeader, TableRow } from './table/index.js'
+  import BaseTableCheckbox from './BaseTableCheckbox.svelte'
+  import BaseTableHeaderContent from './BaseTableHeaderContent.svelte'
+  import TableBody from './table/table-body.svelte'
 
   const dispatch = createEventDispatcher()
   const callback = (entry: IntersectionObserverEntry) => {
@@ -235,56 +237,40 @@
   }}
 />
 
-<div class="w-full font-sans">
-  <table class="hidden md:table w-full">
+<div class="w-full font-sans border rounded-md border-neutral-100">
+  <Table class="hidden md:table">
     <colgroup>
       {#if selectable}
-        <col style="width: 56px" />
+        <col style="width: 38px" />
       {/if}
       {#each fields as field, i (i)}
         <col style={field.style} />
       {/each}
       {#if addExtraCell}
-        <col style="width: 40px" />
+        <col style="width: 38px" />
       {/if}
     </colgroup>
-    <thead>
-      <tr class="relative">
+    <TableHeader>
+      <TableRow>
         {#if selectable}
           <!-- if table is selectable we need to add an extra header with a checkbox -->
-          <th scope="col" class="bg-white sticky top-0 z-10 p-0">
-            <div class="border-b border-neutral-100">
-              {#if !hideSelectAll}
-                <button
-                  class="px-5 h-[36px] flex items-center outline-none group cursor-default"
-                  on:click|stopPropagation={() => {
-                    toggleAllSelected(!selectedRows.length)
-                  }}
-                >
-                  <div class:invisible={!selectedRows.length} class="group-hover:visible">
-                    <InputCheckbox
-                      checked={allChecked}
-                      {indeterminate}
-                      on:change={(event) => {
-                        toggleAllSelected(event.detail)
-                      }}
-                    />
-                  </div>
-                </button>
-              {/if}
-            </div>
-          </th>
+          <TableHead class="bg-white sticky top-0 z-10 p-0 h-9">
+            {#if !hideSelectAll}
+              <BaseTableCheckbox
+                hidden={!selectedRows.length}
+                {indeterminate}
+                checked={allChecked}
+                on:checked={() => {
+                  toggleAllSelected(!selectedRows.length)
+                }}
+              />
+            {/if}
+          </TableHead>
         {/if}
         {#each fields as field, i (i)}
-          <BaseTableHeader
-            isFirst={i === 0}
-            isLast={!addExtraCell && i === fields.length - 1}
-            {sortBy}
-            {sortDirection}
-            {field}
-            {selectable}
-            on:orderBy
-          />
+          <TableHead class="bg-white group sticky z-10 top-0 p-0">
+            <BaseTableHeaderContent {sortBy} {sortDirection} {field} on:orderBy />
+          </TableHead>
         {/each}
         {#if addExtraCell}
           <!-- if table has actions cell we need to add an extra header -->
@@ -292,21 +278,21 @@
             <div class="border-b border-neutral-100 h-9" />
           </th>
         {/if}
-      </tr>
-    </thead>
-    <tbody>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
       {#each groupedData as group, i (i)}
         {#if group.label}
           <tr>
             <th
               scope="colgroup"
               colspan={fields.length + (selectable ? 2 : 1)}
-              class="bg-white text-left text-sm font-medium text-neutral-500 sticky top-9 tracking-normal h-8"
+              class="bg-white text-left text-sm font-medium text-neutral-500 sticky top-9 tracking-normal h-8 z-10"
             >
               <span
                 class:border-t={i > 0}
-                class:pl-14={selectable}
-                class:pl-5={!selectable}
+                class:pl-12={selectable}
+                class:pl-3={!selectable}
                 class="flex items-center space-x-1 box-border border-b border-neutral-100 h-8"
               >
                 <span>{group.label}</span>
@@ -363,8 +349,8 @@
           />
         {/each}
       {/each}
-    </tbody>
-  </table>
+    </TableBody>
+  </Table>
   <div class="md:hidden space-y-3">
     {#each groupedData as group}
       {#each group.rows as row}
@@ -382,14 +368,15 @@
           }}
         >
           {#each fields as field, i (i)}
-            <BaseTableCell
-              tag="div"
-              {field}
-              badge={field.helperBadge ? field.helperBadge(row) : null}
-              status={field.helperStatus ? field.helperStatus(row) : null}
-              data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
-              on:copied
-            />
+            <div class="text-base tracking-normal py-2">
+              <BaseTableCellContent
+                {field}
+                badge={field.helperBadge ? field.helperBadge(row) : null}
+                status={field.helperStatus ? field.helperStatus(row) : null}
+                data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
+                on:copied
+              />
+            </div>
           {/each}
         </button>
       {/each}

@@ -167,3 +167,8 @@ export type Breadcrumb = {
   url?: string
   country?: string
 }
+
+export type StepIcon = {
+  name: string
+  url: string
+}

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { cn } from '$lib/utils'
   import type { HTMLAttributes } from 'svelte/elements'
 
   type $$Props = HTMLAttributes<HTMLTableSectionElement>
@@ -7,6 +8,6 @@
   export { className as class }
 </script>
 
-<tbody class={className} {...$$restProps}>
+<tbody class={cn('[&_tr:hover]:bg-neutral-50', className)} {...$$restProps}>
   <slot />
 </tbody>

@@ -11,8 +11,12 @@
 </script>
 
 <tr
-  class={cn('hover:bg-neutral-50 data-[state=selected]:bg-neutral-50 transition-colors', className)}
+  class={cn(
+    'data-[state=selected]:bg-neutral-50 data-[state=checked]:bg-workspace-accent-50 transition-colors',
+    className
+  )}
   {...$$restProps}
+  on:contextmenu|preventDefault
   on:click
   on:keydown
 >

@@ -10,7 +10,7 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <thead
-  class={cn('[&_tr]:border-b [&_tr]:border-neutral-50 bg-white', className)}
+  class={cn('[&_tr]:border-b [&_tr]:border-neutral-100 bg-white', className)}
   {...$$restProps}
   on:click
   on:keydown

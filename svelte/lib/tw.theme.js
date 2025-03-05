@@ -124,7 +124,8 @@ export default {
 
     boxShadow: {
       active:
-        '0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958))'
+        '0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958))',
+      warning: '0px 0px 0px 2px rgba(215, 135, 0, 0.12)' 
     },
 
     letterSpacing: {

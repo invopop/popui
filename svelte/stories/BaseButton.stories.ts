@@ -166,6 +166,28 @@ export const DangerWithOnlyIcon: Story = {
   }
 }
 
+export const Warning: Story = {
+  args: {
+    slot: 'Warning Button',
+    variant: 'warning'
+  }
+}
+
+export const WarningWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'warning'
+  }
+}
+
+export const WarningWithOnlyIcon: Story = {
+  args: {
+    icon: Cog6Tooth,
+    variant: 'warning'
+  }
+}
+
 export const Dark: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {

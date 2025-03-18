@@ -38,6 +38,7 @@
     { 'bg-workspace-accent': variant === 'primary' },
     { 'bg-neutral-100 hover:bg-neutral-200 focus:bg-neutral-300': variant === 'secondary' },
     { 'bg-danger-500': variant === 'danger' },
+    { 'bg-warning-500': variant === 'warning' },
     { 'text-sm rounded': small },
     { 'text-base rounded-md': !small },
     { 'p-1': small && !$$slots.default },
@@ -51,7 +52,7 @@
     { 'pl-2 pr-1.5': !small && !big && $$slots.default && icon && iconPosition === 'right' },
     { 'py-1.5': big && $$slots.default },
     { 'py-1': !big && $$slots.default },
-    { 'text-white': ['primary', 'danger', 'dark'].includes(variant) },
+    { 'text-white': ['primary', 'danger', 'dark', 'warning'].includes(variant) },
     { 'text-neutral-800': ['default', 'secondary'].includes(variant) },
     { 'border border-white-10 hover:border-white-20 focus:border-white-40': variant === 'dark' },
     {
@@ -82,9 +83,11 @@
   $: overlayClasses = clsx({
     'rounded-md': !small,
     rounded: small,
-    'group-hover:bg-black/[.16] group-active:bg-black/[.32]': ['primary', 'danger'].includes(
-      variant
-    )
+    'group-hover:bg-black/[.16] group-active:bg-black/[.32]': [
+      'primary',
+      'danger',
+      'warning'
+    ].includes(variant)
   })
 
   function handleClick(event: unknown) {
@@ -109,15 +112,13 @@
     <div class="relative">
       {#if shortcut}
         <ShortcutWrapper>
-          <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
+          <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-3 w-3 z-10" />
         </ShortcutWrapper>
       {:else}
         <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
       {/if}
       {#if notification}
-        <span
-          class="absolute top-0 right-0 w-1.5 h-1.5 bg-danger-500 rounded-full z-20"
-        />
+        <span class="absolute top-0 right-0 w-1.5 h-1.5 bg-danger-500 rounded-full z-20" />
       {/if}
     </div>
   {/if}

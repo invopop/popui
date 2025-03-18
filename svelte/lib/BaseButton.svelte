@@ -112,7 +112,7 @@
     <div class="relative">
       {#if shortcut}
         <ShortcutWrapper>
-          <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
+          <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-3 w-3 z-10" />
         </ShortcutWrapper>
       {:else}
         <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />

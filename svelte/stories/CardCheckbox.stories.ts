@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/svelte'
-
+import { CodeFork, Workflow } from '@invopop/ui-icons'
 import CardCheckbox from '../lib/CardCheckbox.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 
@@ -26,5 +26,13 @@ export const Checked: Story = {
     title: 'Production',
     description: 'A live workspace which produces valid invoices',
     checked: true
+  }
+}
+export const WithIcons: Story = {
+  args: {
+    title: 'Production',
+    description: 'A live workspace which produces valid invoices',
+    checked: true,
+    icon: CodeFork
   }
 }

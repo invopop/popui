@@ -1,3 +1,4 @@
+import AlertDialog from './AlertDialog.svelte'
 import BaseButton from './BaseButton.svelte'
 import BaseCard from './BaseCard.svelte'
 import BaseCounter from './BaseCounter.svelte'
@@ -41,7 +42,7 @@ import SectionLayout from './SectionLayout.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import StatusLabel from './StatusLabel.svelte'
-import Tabs from './Tabs.svelte'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
 import TagBeta from './TagBeta.svelte'
 import TagSearch from './TagSearch.svelte'
 import TagStatus from './TagStatus.svelte'
@@ -52,6 +53,7 @@ import twTheme from './tw.theme.js'
 import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
 
 export {
+  AlertDialog,
   BaseButton,
   BaseCard,
   BaseCounter,
@@ -96,6 +98,9 @@ export {
   ShortcutWrapper,
   StatusLabel,
   Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
   TagBeta,
   TagSearch,
   TagStatus,

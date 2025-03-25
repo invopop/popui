@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.0.74",
+  "version": "0.0.75-beta",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -103,6 +103,7 @@
     "svelte-intersection-observer-action": "^0.0.4",
     "svelte-transition": "^0.0.10",
     "svelte-viewport-info": "^1.0.2",
+    "tailwind-variants": "^1.0.0",
     "twind": "^0.16.19"
   }
 }

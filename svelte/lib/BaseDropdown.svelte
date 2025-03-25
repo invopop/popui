@@ -36,7 +36,7 @@
   }
 </script>
 
-<div class="inline-flex" class:w-full={fullWidth}>
+<div class="inline-flex" class:w-full={fullWidth} role="menu">
   <button
     class="text-left"
     use:floatingRef

@@ -1,15 +1,18 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import BaseTableActions from './BaseTableActions.svelte'
-  import BaseTableCell from './BaseTableCell.svelte'
   import type { TableActionProp, TableDataRow, TableField } from './types.js'
-  import InputCheckbox from './InputCheckbox.svelte'
   import { scrollIntoTableView } from './helpers.js'
+  import { TableCell, TableRow } from './table'
+  import clsx from 'clsx'
+  import BaseTableCellContent from './BaseTableCellContent.svelte'
+  import BaseTableCheckbox from './BaseTableCheckbox.svelte'
 
   const dispatch = createEventDispatcher()
 
   let actionsDropdown: BaseTableActions
   let checkboxButton: HTMLButtonElement
+  let dataState: 'selected' | 'checked' | undefined = undefined
 
   export let row: TableDataRow
   export let getActions: TableActionProp = undefined
@@ -38,15 +41,28 @@
   function scrollIntoView() {
     scrollIntoTableView(checkboxButton)
   }
+
+  $: rowClass = clsx({
+    'cursor-pointer': !disableRowClick,
+    '!hover:bg-transparent': disableRowClick
+  })
+
+  $: {
+    if (selected) {
+      dataState = 'selected'
+    } else if (checked) {
+      dataState = 'checked'
+    } else {
+      dataState = undefined
+    }
+  }
 </script>
 
-<tr
-  class:cursor-pointer={!disableRowClick}
-  class:bg-neutral-50={selected}
-  class:hover:bg-neutral-50={!disableRowClick}
-  class:bg-workspace-accent-50={checked && !selected}
+<TableRow
+  data-state={dataState}
+  class={rowClass}
   on:click
-  on:contextmenu|preventDefault={() => {
+  on:contextmenu={() => {
     if (!actionsDropdown) return
 
     actionsDropdown.toggle()
@@ -60,41 +76,29 @@
   }}
 >
   {#if selectable}
-    <td class="relative">
-      <button
-        bind:this={checkboxButton}
-        class="absolute inset-0 h-full px-5 flex items-center outline-none group cursor-default"
-        on:click|stopPropagation={() => {
-          dispatch('checked', !checked)
-        }}
-      >
-        <div class:invisible={selectedRows.length === 0} class="group-hover:visible">
-          <InputCheckbox
-            {checked}
-            on:change={(event) => {
-              dispatch('checked', event.detail)
-            }}
-          />
-        </div>
-      </button>
-    </td>
+    <TableCell>
+      <BaseTableCheckbox
+        bind:checkboxButton
+        {checked}
+        hidden={selectedRows.length === 0}
+        on:checked
+      />
+    </TableCell>
   {/if}
   {#each fields as field, i (i)}
-    <BaseTableCell
-      isFirst={i === 0}
-      isLast={i === fields.length - 1}
-      {field}
-      {selectable}
-      hasActions={!!actions.length}
-      badge={field.helperBadge ? field.helperBadge(row) : null}
-      status={field.helperStatus ? field.helperStatus(row) : null}
-      icons={field.helperIcons ? field.helperIcons(row) : null}
-      data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
-      on:copied
-    />
+    <TableCell>
+      <BaseTableCellContent
+        {field}
+        badge={field.helperBadge ? field.helperBadge(row) : null}
+        status={field.helperStatus ? field.helperStatus(row) : null}
+        icons={field.helperIcons ? field.helperIcons(row) : null}
+        data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
+        on:copied
+      />
+    </TableCell>
   {/each}
   {#if actions.length}
-    <td class="pl-1 pr-5">
+    <TableCell>
       <BaseTableActions
         bind:this={actionsDropdown}
         {actions}
@@ -102,6 +106,6 @@
           dispatch('action', { row, action: event.detail })
         }}
       />
-    </td>
+    </TableCell>
   {/if}
-</tr>
+</TableRow>

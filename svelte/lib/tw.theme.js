@@ -29,7 +29,9 @@ export default {
           50: 'color-mix(in lab, transparent 95%, var(--workspace-accent-color, #169958))',
           100: 'color-mix(in lab, transparent 90%, var(--workspace-accent-color, #169958))',
           200: 'color-mix(in lab, transparent 80%, var(--workspace-accent-color, #169958))',
-          500: 'var(--workspace-accent-color, #169958)'
+          500: 'var(--workspace-accent-color, #169958)',
+          600: 'color-mix(in lab, black 16%, var(--workspace-accent-color, #169958))',
+          700: 'color-mix(in lab, black 32%, var(--workspace-accent-color, #169958))'
         }
       },
       positive: {
@@ -46,7 +48,9 @@ export default {
         200: 'rgba(201, 45, 69, 0.2)',
         300: 'rgba(201, 45, 69, 0.3)',
         400: 'rgba(201, 45, 69, 0.4)',
-        500: '#C92D45'
+        500: '#C92D45',
+        600: '#A9263A',
+        700: '#891F2F'
       },
       neutral: {
         50: '#F9FAFB',
@@ -125,7 +129,7 @@ export default {
     boxShadow: {
       active:
         '0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958))',
-      warning: '0px 0px 0px 2px rgba(215, 135, 0, 0.12)' 
+      warning: '0px 0px 0px 2px rgba(215, 135, 0, 0.12)'
     },
 
     letterSpacing: {

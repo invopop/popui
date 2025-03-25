@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/svelte'
 
-import TabsComponent from './helpers/TabsComponent.svelte'
+import TableComponent from './helpers/TableComponent.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Components/Tabs',
-  component: TabsComponent,
+  title: 'Components/BaseTableNew',
+  component: TableComponent,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator]
-} satisfies Meta<TabsComponent>
+} satisfies Meta<TableComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>

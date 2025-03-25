@@ -39,6 +39,7 @@
 
   $: selectedItems = items.filter((i) => i.selected)
   $: selectedColor = !multiple && items.find((i) => i.selected)?.color
+  $: selectedIcon = !multiple && items.find((i) => i.selected)?.icon
   $: selectedLabel =
     `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more...' : ''}` ||
     placeholder
@@ -72,12 +73,14 @@
     class="{styles} dropdown-select max-w-[420px] flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1 bg-white whitespace-nowrap"
     slot="trigger"
   >
-    {#if resolvedIcon && !selectedColor}
-      <Icon src={resolvedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 flex-shrink-0" />
-    {/if}
     {#if selectedColor}
       <TagStatus dot status={selectedColor} />
+    {:else if selectedIcon}
+      <Icon src={selectedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 flex-shrink-0" />
+    {:else if resolvedIcon}
+      <Icon src={resolvedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 flex-shrink-0" />
     {/if}
+
     <span class="w-full pr-8 text-neutral-800 placeholder-neutral-800 text-base truncate">
       {selectedLabel}
     </span>

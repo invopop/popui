@@ -101,6 +101,7 @@
     "inter-ui": "^3.19.3",
     "svelte-floating-ui": "^1.5.8",
     "svelte-intersection-observer-action": "^0.0.4",
+    "svelte-portal": "^2.2.1",
     "svelte-transition": "^0.0.10",
     "svelte-viewport-info": "^1.0.2",
     "tailwind-variants": "^1.0.0",

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import clsx from 'clsx'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import InputRadio from './InputRadio.svelte'
 
@@ -6,15 +7,15 @@
   export let title = ''
   export let description = ''
   export let checked = false
+
+  $: styles = clsx(
+    { 'border-workspace-accent shadow-active': checked },
+    { 'border-neutral-200 hover:bg-neutral-100': !checked }
+  )
   export let icon: IconSource | undefined = undefined
 </script>
 
-<label
-  for={id}
-  class="{checked
-    ? 'border-workspace-accent shadow-active'
-    : 'border-neutral-200'} border rounded-lg w-full text-left cursor-pointer block"
->
+<label for={id} class="{styles} border rounded-lg w-full text-left cursor-pointer block">
   <div class="py-2 pr-2 pl-3 flex items-start justify-between">
     <div class="flex space-x-2">
       {#if icon}

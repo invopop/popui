@@ -9,6 +9,7 @@
 
   let className: $$Props['class'] = undefined
   let destructive: $$Props['destructive'] = false
+  let el: $$Props['el']
 
   export { className as class, destructive }
 
@@ -16,6 +17,7 @@
 </script>
 
 <AlertDialogPrimitive.Action
+  bind:el
   class={cn(buttonVariants({ variant }), className)}
   {...$$restProps}
   on:click

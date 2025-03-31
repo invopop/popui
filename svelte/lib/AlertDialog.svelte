@@ -10,6 +10,9 @@
     AlertDialogCancel,
     AlertDialogAction
   } from '$lib/alert-dialog'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 
   export let open = false
   export let destructive = false
@@ -17,6 +20,8 @@
   export let description = ''
   export let cancelText = 'Cancel'
   export let actionText = 'OK'
+  export let cancelActionEl: HTMLButtonElement | undefined
+  export let okActionEl: HTMLButtonElement | undefined
 </script>
 
 <AlertDialog openFocus="[data-alert-dialog-action]" bind:open>
@@ -31,8 +36,29 @@
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
-      <AlertDialogCancel>{cancelText}</AlertDialogCancel>
-      <AlertDialogAction {destructive} on:click>
+      <AlertDialogCancel
+        bind:el={cancelActionEl}
+        on:click={() => {
+          dispatch('cancel')
+        }}
+        on:keydown={(e) => {
+          if (e.detail.originalEvent.key === 'Enter') {
+            dispatch('cancel')
+          }
+        }}>{cancelText}</AlertDialogCancel
+      >
+      <AlertDialogAction
+        bind:el={okActionEl}
+        {destructive}
+        on:click={() => {
+          dispatch('confirm')
+        }}
+        on:keydown={(e) => {
+          if (e.detail.originalEvent.key === 'Enter') {
+            dispatch('confirm')
+          }
+        }}
+      >
         {actionText}
       </AlertDialogAction>
     </AlertDialogFooter>

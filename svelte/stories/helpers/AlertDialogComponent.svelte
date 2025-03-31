@@ -12,7 +12,20 @@
 
 <div>
   {open}
-  <AlertDialog bind:open {title} {description} {cancelText} {actionText} {destructive}>
+  <AlertDialog
+    on:cancel={() => {
+      console.log('Canceled')
+    }}
+    on:confirm={() => {
+      console.log('Confirmed')
+    }}
+    bind:open
+    {title}
+    {description}
+    {cancelText}
+    {actionText}
+    {destructive}
+  >
     {#if withSlot}
       Open
     {/if}

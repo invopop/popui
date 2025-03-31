@@ -20,8 +20,8 @@
   export let description = ''
   export let cancelText = 'Cancel'
   export let actionText = 'OK'
-  export let cancelActionEl: HTMLButtonElement | undefined
-  export let okActionEl: HTMLButtonElement | undefined
+  export let cancelActionEl: HTMLButtonElement | undefined = undefined
+  export let okActionEl: HTMLButtonElement | undefined = undefined
 </script>
 
 <AlertDialog openFocus="[data-alert-dialog-action]" bind:open>

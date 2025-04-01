@@ -24,7 +24,7 @@
   export let okActionEl: HTMLButtonElement | undefined = undefined
 </script>
 
-<AlertDialog openFocus="[data-alert-dialog-action]" bind:open>
+<AlertDialog openFocus="[data-alert-dialog-action]:nth-of-type(2)" bind:open>
   <AlertDialogTrigger>
     <slot />
   </AlertDialogTrigger>

@@ -9,9 +9,9 @@
 
   let className: $$Props['class'] = undefined
   let destructive: $$Props['destructive'] = false
-  let el: $$Props['el']
+  let el: $$Props['el'] = undefined
 
-  export { className as class, destructive }
+  export { className as class, destructive, el }
 
   $: variant = (destructive ? 'destructive' : 'primary') as Variant
 </script>

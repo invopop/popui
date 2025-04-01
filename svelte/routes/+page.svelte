@@ -1,19 +1,18 @@
 <script lang="ts">
-  // import '../app.css'
-  import BaseButton from '$lib/BaseButton.svelte'
-  import InputSelect from '$lib/InputSelect.svelte'
-  import InputSearch from '$lib/InputSearch.svelte'
+  import 'inter-ui/inter.css'
+  import { install } from '@twind/core'
+  import twconfig from '../twind.config.js'
+  import AlertDialogComponent from '../stories/helpers/AlertDialogComponent.svelte'
+
+  install(twconfig)
 </script>
 
 <div class="p-4 space-y-4">
-  <h1 class="text-xl">Invopop UI Kit</h1>
+  <h1 class="text-xl">Popui</h1>
   <p>Library of shared, re-usable UI components for Invopop projects</p>
 
-  <BaseButton label="Hey There" />
-  <div>
-    <InputSelect label="This is the label" />
-  </div>
-  <div>
-    <InputSearch placeholder="Search" shortcut="⌘K" />
-  </div>
+  <AlertDialogComponent
+    description="Restoring V3 as draft will discard your current changes, are you sure you want to continue?"
+    withSlot
+  />
 </div>

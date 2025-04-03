@@ -42,6 +42,7 @@ import SectionLayout from './SectionLayout.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import StatusLabel from './StatusLabel.svelte'
+import { Table, TableHeader, TableRow, TableHead, TableCell } from './table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
 import TagBeta from './TagBeta.svelte'
 import TagSearch from './TagSearch.svelte'
@@ -97,6 +98,11 @@ export {
   SeparatorHorizontal,
   ShortcutWrapper,
   StatusLabel,
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableCell,
   Tabs,
   TabsContent,
   TabsList,

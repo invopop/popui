@@ -10,7 +10,7 @@
 
   $: styles = clsx(
     { 'border-workspace-accent shadow-active': checked },
-    { 'border-neutral-200 hover:bg-neutral-100': !checked }
+    { 'border-neutral-200 hover:border-neutral-300': !checked }
   )
   export let icon: IconSource | undefined = undefined
 </script>

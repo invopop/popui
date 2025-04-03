@@ -42,6 +42,7 @@ import SectionLayout from './SectionLayout.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import StatusLabel from './StatusLabel.svelte'
+import StepIconList from './StepIconList.svelte'
 import {
   Table,
   TableHeader,
@@ -58,6 +59,8 @@ import TagSearch from './TagSearch.svelte'
 import TagStatus from './TagStatus.svelte'
 import TitleMain from './TitleMain.svelte'
 import TitleSection from './TitleSection.svelte'
+import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
+
 import UuidCopy from './UuidCopy.svelte'
 import twTheme from './tw.theme.js'
 import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
@@ -107,6 +110,7 @@ export {
   SeparatorHorizontal,
   ShortcutWrapper,
   StatusLabel,
+  StepIconList,
   Table,
   TableBody,
   TableCaption,
@@ -124,6 +128,9 @@ export {
   TagStatus,
   TitleMain,
   TitleSection,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
   UuidCopy,
   twTheme,
   resolveIcon,

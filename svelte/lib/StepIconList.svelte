@@ -6,7 +6,7 @@
 
   $: maxItems = icons.length > 6 ? 5 : 6
   $: mainIcons = icons.slice(0, maxItems)
-  $: restIcons = icons.slice(maxItems + 1, icons.length)
+  $: restIcons = icons.slice(maxItems, icons.length)
 </script>
 
 <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 items-center overflow-x-auto">

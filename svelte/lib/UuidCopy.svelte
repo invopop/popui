@@ -10,8 +10,8 @@
   export let small = false
   export let dark = false
   export let rightAlign = false
-  export let prefixLength = 7
-  export let suffixLength = 12
+  export let prefixLength = 4
+  export let suffixLength = 4
   export let full = false
   export let compact = false
   export let link = false
@@ -29,18 +29,20 @@
 
   $: formattedUuid = full ? uuid : shortenString(uuid, prefixLength, suffixLength)
   $: styles = clsx({
-    'justify-end w-full': rightAlign,
+    'justify-end': rightAlign,
     'text-sm': small,
     'text-base': !small,
     'text-neutral-800': dark,
     'text-neutral-500': !dark,
-    'justify-between': !compact
+    'justify-between': !compact,
+    'w-full': full,
+    'border border-neutral-800/10 rounded-md pl-2.5 pr-2 py-[5px]': !full
   })
 </script>
 
-<div class="{styles} relative flex items-center w-full space-x-2 text-left whitespace-nowrap">
+<div class="{styles} relative inline-flex items-center space-x-1 text-left whitespace-nowrap">
   <button
-    class="tracking-wide font-mono"
+    class="tracking-wide font-mono text-base"
     on:click|stopPropagation={async () => {
       await navigator.clipboard.writeText(uuid)
       dispatch('copied', uuid)

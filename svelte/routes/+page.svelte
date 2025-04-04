@@ -3,6 +3,10 @@
   import { install } from '@twind/core'
   import twconfig from '../twind.config.js'
   import AlertDialogComponent from '../stories/helpers/AlertDialogComponent.svelte'
+  import CardCheckbox from '$lib/CardCheckbox.svelte'
+  import { CodeFork } from '@invopop/ui-icons'
+  import UuidCopy from '$lib/UuidCopy.svelte'
+  import StepIconList from '$lib/StepIconList.svelte'
 
   install(twconfig)
 </script>
@@ -15,4 +19,29 @@
     description="Restoring V3 as draft will discard your current changes, are you sure you want to continue?"
     withSlot
   />
+  <CardCheckbox
+    id="something"
+    title="Some Title"
+    description="This is a description"
+    icon={CodeFork}
+  />
+  <div>
+    <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" full compact />
+  </div>
+  <div>
+    <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" compact />
+  </div>
+  <div>
+    <StepIconList
+      icons={[
+        { name: 'Google Drive', url: 'https://gdrive.invopop.com/icon.svg' },
+        { name: 'Update Chargebee', url: 'https://chargebee.invopop.com/icon.svg' },
+        { name: 'Send CFDI to SAT (Mexico)', url: 'https://sat-mx.invopop.com/icon.png' },
+        { name: 'Send email', url: 'https://email.invopop.com/icon.png' },
+        { name: 'Add B2C to B2B link', url: 'https://portal.invopop.com/images/reissue.svg' },
+        { name: 'Send NFS-e (Brazil)', url: 'https://nfe-br.invopop.com/icon.svg' },
+        { name: 'Send NFS-o (Uruguay)', url: 'https://nfe-br.invopop.com/icon.svg' }
+      ]}
+    />
+  </div>
 </div>

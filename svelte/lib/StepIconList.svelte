@@ -9,12 +9,12 @@
   $: restIcons = icons.slice(maxItems, icons.length)
 </script>
 
-<div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 items-center overflow-x-auto">
+<div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 items-center">
   {#each mainIcons as icon, i (i)}
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger class="flex-shrink-0">
         <div
-          class="p-1.5 border rounded-md border-neutral-200 flex items-center space-x-1 bg-white text-neutral-800 flex-shrink-0"
+          class="p-1.5 border rounded-md border-neutral-200 flex items-center space-x-1 bg-white text-neutral-800"
         >
           <img src={icon.url} alt={icon.name} class="w-4 h-4" />
         </div>
@@ -29,7 +29,7 @@
   {#if restIcons.length}
     <div class="hidden sm:block h-px w-3 border border-neutral-200 mx-px flex-shrink-0" />
     <Tooltip>
-      <TooltipTrigger>
+      <TooltipTrigger class="flex-shrink-0">
         <div
           class="flex items-center justify-center text-neutral-500 font-medium text-base h-7 w-7"
         >

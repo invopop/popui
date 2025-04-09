@@ -9,6 +9,7 @@ import BaseTableActions from './BaseTableActions.svelte'
 import BaseTableHeaderContent from './BaseTableHeaderContent.svelte'
 import Breadcrumbs from './Breadcrumbs.svelte'
 import ButtonFile from './ButtonFile.svelte'
+import ButtonUuidCopy from './ButtonUuidCopy.svelte'
 import CardCheckbox from './CardCheckbox.svelte'
 import CardRelation from './CardRelation.svelte'
 import CompanySelector from './CompanySelector.svelte'
@@ -79,6 +80,7 @@ export {
   BaseTableHeaderContent,
   Breadcrumbs,
   ButtonFile,
+  ButtonUuidCopy,
   CardCheckbox,
   CardRelation,
   CompanySelector,

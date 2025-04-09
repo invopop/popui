@@ -6,6 +6,7 @@
   import CardCheckbox from '$lib/CardCheckbox.svelte'
   import { CodeFork } from '@invopop/ui-icons'
   import UuidCopy from '$lib/UuidCopy.svelte'
+  import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import StepIconList from '$lib/StepIconList.svelte'
 
   install(twconfig)
@@ -22,11 +23,15 @@
   <CardCheckbox
     id="something"
     title="Some Title"
-    description="This is a description"
+    description="this is a description"
+    accentText="Live"
     icon={CodeFork}
   />
   <div>
     <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" full compact />
+  </div>
+  <div>
+    <ButtonUuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" />
   </div>
   <div>
     <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" compact />

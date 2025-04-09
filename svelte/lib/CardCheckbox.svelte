@@ -6,6 +6,7 @@
   export let id
   export let title = ''
   export let description = ''
+  export let accentText = ''
   export let checked = false
 
   $: styles = clsx(
@@ -24,7 +25,14 @@
       <div class="flex flex-col space-y-0.5">
         <span class="text-base text-neutral-800 font-medium">{title}</span>
         {#if description}
-          <span class="text-sm text-neutral-500">{description}</span>
+          <span class="flex items-center space-x-1">
+            {#if accentText}
+              <p class="text-workspace-accent text-sm font-bold">{accentText}</p>
+            {/if}
+            <p class="text-sm text-neutral-500" class:first-letter:uppercase={!accentText}>
+              {description}
+            </p>
+          </span>
         {:else}
           <span class="text-sm text-neutral-300">No description</span>
         {/if}

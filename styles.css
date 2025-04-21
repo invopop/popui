@@ -424,10 +424,10 @@ pre {
   @apply hidden absolute left-0 top-7 popover-menu border border-neutral-200 rounded-md p-1 w-full bg-white z-10;
 }
 .popui-popover-list-item {
-  @apply font-sans pl-1.5 pr-2 py-1.5 font-medium text-base text-neutral-800 w-full rounded;
+  @apply font-sans font-medium text-base text-neutral-800 w-full rounded;
 }
 .popui-popover-list-item > button {
-  @apply flex items-center space-x-2 cursor-pointer whitespace-nowrap z-10;
+  @apply w-full pl-1.5 pr-2 py-1.5 flex items-center space-x-2 cursor-pointer whitespace-nowrap z-10;
 }
 .popui-popover-list-item:hover {
   @apply bg-neutral-100;

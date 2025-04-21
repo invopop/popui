@@ -2,6 +2,7 @@
   import { offset, flip, shift, size, type Placement } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import { clickOutside } from './clickOutside.js'
+  import { portal } from 'svelte-portal'
 
   export let isOpen = false
   export let fullWidth = false
@@ -36,7 +37,7 @@
   }
 </script>
 
-<div class="inline-flex" class:w-full={fullWidth}>
+<div class="inline-flex" class:w-full={fullWidth} role="menu">
   <button
     class="text-left"
     use:floatingRef
@@ -51,6 +52,7 @@
   {#if isOpen}
     <div
       class="max-h-40 absolute z-40"
+      use:portal
       use:floatingContent
       use:clickOutside
       on:click_outside={() => {

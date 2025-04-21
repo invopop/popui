@@ -5,12 +5,14 @@
   import { createEventDispatcher } from 'svelte'
   import DrawerContext from './DrawerContext.svelte'
   import { Options } from '@invopop/ui-icons'
+  import clsx from 'clsx'
 
   const dispatch = createEventDispatcher()
 
   export let actions: TableAction[]
 
   let actionDropdown: BaseDropdown
+  let isOpen = false
 
   $: items = actions.map((a) => ({
     label: a.label,
@@ -20,13 +22,21 @@
     destructive: a.destructive
   })) as DrawerOption[]
 
+  $: overlayClasses = clsx({
+    'group-hover:bg-neutral-800/[.05]': !isOpen,
+    'bg-neutral-800/[.1]': isOpen
+  })
+
   export const toggle = () => {
     actionDropdown.toggle()
   }
 </script>
 
-<BaseDropdown bind:this={actionDropdown}>
-  <Icon slot="trigger" src={Options} class="w-4 mt-1 text-neutral-500" />
+<BaseDropdown bind:isOpen bind:this={actionDropdown}>
+  <div class="relative group flex justify-center items-center rounded p-1" slot="trigger">
+    <span class="{overlayClasses} absolute inset-0 rounded" />
+    <Icon slot="trigger" src={Options} class="w-4 text-neutral-500" />
+  </div>
   <DrawerContext
     {items}
     on:click={(e) => {

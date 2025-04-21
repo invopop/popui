@@ -1,19 +1,52 @@
 <script lang="ts">
-  // import '../app.css'
-  import BaseButton from '$lib/BaseButton.svelte'
-  import InputSelect from '$lib/InputSelect.svelte'
-  import InputSearch from '$lib/InputSearch.svelte'
+  import 'inter-ui/inter.css'
+  import { install } from '@twind/core'
+  import twconfig from '../twind.config.js'
+  import AlertDialogComponent from '../stories/helpers/AlertDialogComponent.svelte'
+  import CardCheckbox from '$lib/CardCheckbox.svelte'
+  import { CodeFork } from '@invopop/ui-icons'
+  import UuidCopy from '$lib/UuidCopy.svelte'
+  import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
+  import StepIconList from '$lib/StepIconList.svelte'
+
+  install(twconfig)
 </script>
 
 <div class="p-4 space-y-4">
-  <h1 class="text-xl">Invopop UI Kit</h1>
+  <h1 class="text-xl">Popui</h1>
   <p>Library of shared, re-usable UI components for Invopop projects</p>
 
-  <BaseButton label="Hey There" />
+  <AlertDialogComponent
+    description="Restoring V3 as draft will discard your current changes, are you sure you want to continue?"
+    withSlot
+  />
+  <CardCheckbox
+    id="something"
+    title="Some Title"
+    description="this is a description"
+    accentText="Live"
+    icon={CodeFork}
+  />
   <div>
-    <InputSelect label="This is the label" />
+    <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" full compact />
   </div>
   <div>
-    <InputSearch placeholder="Search" shortcut="⌘K" />
+    <ButtonUuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" />
+  </div>
+  <div>
+    <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" compact />
+  </div>
+  <div>
+    <StepIconList
+      icons={[
+        { name: 'Google Drive', url: 'https://gdrive.invopop.com/icon.svg' },
+        { name: 'Update Chargebee', url: 'https://chargebee.invopop.com/icon.svg' },
+        { name: 'Send CFDI to SAT (Mexico)', url: 'https://sat-mx.invopop.com/icon.png' },
+        { name: 'Send email', url: 'https://email.invopop.com/icon.png' },
+        { name: 'Add B2C to B2B link', url: 'https://portal.invopop.com/images/reissue.svg' },
+        { name: 'Send NFS-e (Brazil)', url: 'https://nfe-br.invopop.com/icon.svg' },
+        { name: 'Send NFS-o (Uruguay)', url: 'https://nfe-br.invopop.com/icon.svg' }
+      ]}
+    />
   </div>
 </div>

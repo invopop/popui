@@ -1,11 +1,15 @@
+import AlertDialog from './AlertDialog.svelte'
 import BaseButton from './BaseButton.svelte'
 import BaseCard from './BaseCard.svelte'
 import BaseCounter from './BaseCounter.svelte'
 import BaseDropdown from './BaseDropdown.svelte'
 import BaseFlag from './BaseFlag.svelte'
 import BaseTable from './BaseTable.svelte'
+import BaseTableActions from './BaseTableActions.svelte'
+import BaseTableHeaderContent from './BaseTableHeaderContent.svelte'
 import Breadcrumbs from './Breadcrumbs.svelte'
 import ButtonFile from './ButtonFile.svelte'
+import ButtonUuidCopy from './ButtonUuidCopy.svelte'
 import CardCheckbox from './CardCheckbox.svelte'
 import CardRelation from './CardRelation.svelte'
 import CompanySelector from './CompanySelector.svelte'
@@ -13,6 +17,7 @@ import CounterWorkflow from './CounterWorkflow.svelte'
 import DataListItem from './DataListItem.svelte'
 import DatePicker from './DatePicker.svelte'
 import DrawerContext from './DrawerContext.svelte'
+import DrawerContextItem from './DrawerContextItem.svelte'
 import DropdownSelect from './DropdownSelect.svelte'
 import EmptyStateIcon from './EmptyStateIcon.svelte'
 import EmptyStateIllustration from './EmptyStateIllustration.svelte'
@@ -40,25 +45,42 @@ import SectionLayout from './SectionLayout.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import StatusLabel from './StatusLabel.svelte'
-import Tabs from './Tabs.svelte'
+import StepIconList from './StepIconList.svelte'
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableBody,
+  TableCaption,
+  TableFooter
+} from './table'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
 import TagBeta from './TagBeta.svelte'
 import TagSearch from './TagSearch.svelte'
 import TagStatus from './TagStatus.svelte'
 import TitleMain from './TitleMain.svelte'
 import TitleSection from './TitleSection.svelte'
+import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
+
 import UuidCopy from './UuidCopy.svelte'
 import twTheme from './tw.theme.js'
 import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
 
 export {
+  AlertDialog,
   BaseButton,
   BaseCard,
   BaseCounter,
   BaseDropdown,
   BaseFlag,
   BaseTable,
+  BaseTableActions,
+  BaseTableHeaderContent,
   Breadcrumbs,
   ButtonFile,
+  ButtonUuidCopy,
   CardCheckbox,
   CardRelation,
   CompanySelector,
@@ -66,6 +88,7 @@ export {
   DataListItem,
   DatePicker,
   DrawerContext,
+  DrawerContextItem,
   DropdownSelect,
   EmptyStateIcon,
   EmptyStateIllustration,
@@ -93,12 +116,27 @@ export {
   SeparatorHorizontal,
   ShortcutWrapper,
   StatusLabel,
+  StepIconList,
+  Table,
+  TableBody,
+  TableCaption,
+  TableFooter,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableCell,
   Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
   TagBeta,
   TagSearch,
   TagStatus,
   TitleMain,
   TitleSection,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
   UuidCopy,
   twTheme,
   resolveIcon,

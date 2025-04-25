@@ -87,8 +87,8 @@
   {/if}
   {#each fields as field, i (i)}
     <TableCell
-      class="{i === 0 && !selectable ? 'pl-3' : ''}  {i === fields.length - 1 && !actions.length
-        ? 'pr-3'
+      class="{i === 0 && !selectable ? 'pl-6' : ''}  {i === fields.length - 1 && !actions.length
+        ? 'pr-6'
         : 'pr-0'}"
     >
       <BaseTableCellContent

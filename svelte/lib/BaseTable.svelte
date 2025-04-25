@@ -268,7 +268,11 @@
           </TableHead>
         {/if}
         {#each fields as field, i (i)}
-          <TableHead class="bg-white group sticky z-10 top-0 p-0">
+          <TableHead
+            class="bg-white group sticky z-10 top-0 py-0 {i === 0 && !selectable
+              ? 'pl-3'
+              : 'pl-0'} {i === fields.length - 1 && !addExtraCell ? 'pr-3' : 'pr-0'}"
+          >
             <BaseTableHeaderContent {sortBy} {sortDirection} {field} on:orderBy />
           </TableHead>
         {/each}

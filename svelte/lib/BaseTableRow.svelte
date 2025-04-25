@@ -86,7 +86,11 @@
     </TableCell>
   {/if}
   {#each fields as field, i (i)}
-    <TableCell>
+    <TableCell
+      class="{i === 0 && !selectable ? 'pl-3' : ''}  {i === fields.length - 1 && !actions.length
+        ? 'pr-3'
+        : 'pr-0'}"
+    >
       <BaseTableCellContent
         {field}
         badge={field.helperBadge ? field.helperBadge(row) : null}

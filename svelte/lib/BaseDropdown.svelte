@@ -51,7 +51,7 @@
   </button>
   {#if isOpen}
     <div
-      class="max-h-40 absolute z-40"
+      class="max-h-40 absolute z-[1001]"
       use:portal
       use:floatingContent
       use:clickOutside

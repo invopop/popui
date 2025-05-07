@@ -22,10 +22,38 @@
   export let actionText = 'OK'
   export let cancelActionEl: HTMLButtonElement | undefined = undefined
   export let okActionEl: HTMLButtonElement | undefined = undefined
+
+  let recentAction = false
+
+  function cancel() {
+    recentAction = true
+    dispatch('cancel')
+    setTimeout(() => {
+      recentAction = false
+    }, 10)
+  }
+
+  function confirm() {
+    recentAction = true
+    dispatch('confirm')
+    setTimeout(() => {
+      recentAction = false
+    }, 10)
+  }
+
+  $: if (!open) {
+    cancelByEsc()
+  }
+
+  function cancelByEsc() {
+    if (recentAction) return
+
+    dispatch('cancel')
+  }
 </script>
 
 <AlertDialog openFocus="[data-alert-dialog-action]:nth-of-type(2)" bind:open>
-  <AlertDialogTrigger>
+  <AlertDialogTrigger class={$$slots.default ? '' : 'hidden'}>
     <slot />
   </AlertDialogTrigger>
   <AlertDialogContent>
@@ -39,11 +67,11 @@
       <AlertDialogCancel
         bind:el={cancelActionEl}
         on:click={() => {
-          dispatch('cancel')
+          cancel()
         }}
         on:keydown={(e) => {
           if (e.detail.originalEvent.key === 'Enter') {
-            dispatch('cancel')
+            cancel()
           }
         }}>{cancelText}</AlertDialogCancel
       >
@@ -51,11 +79,11 @@
         bind:el={okActionEl}
         {destructive}
         on:click={() => {
-          dispatch('confirm')
+          confirm()
         }}
         on:keydown={(e) => {
           if (e.detail.originalEvent.key === 'Enter') {
-            dispatch('confirm')
+            confirm()
           }
         }}
       >

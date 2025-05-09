@@ -40,6 +40,8 @@
   $: selectedItems = items.filter((i) => i.selected)
   $: selectedColor = !multiple && items.find((i) => i.selected)?.color
   $: selectedIcon = !multiple && items.find((i) => i.selected)?.icon
+  $: selectedIconColor =
+    (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-neutral-500'
   $: selectedLabel =
     `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more...' : ''}` ||
     placeholder
@@ -76,7 +78,7 @@
     {#if selectedColor}
       <TagStatus dot status={selectedColor} />
     {:else if selectedIcon}
-      <Icon src={selectedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 flex-shrink-0" />
+      <Icon src={selectedIcon} {iconTheme} class="{selectedIconColor} h-4 w-4 flex-shrink-0" />
     {:else if resolvedIcon}
       <Icon src={resolvedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 flex-shrink-0" />
     {/if}

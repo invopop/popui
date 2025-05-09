@@ -62,7 +62,7 @@
   {:else if item.icon}
     <Icon
       src={item.icon}
-      class="w-4 h-4 {item.destructive ? 'text-danger-500' : 'text-neutral-500'}"
+      class="w-4 h-4 {item.destructive ? 'text-danger-500' : item.iconClass || 'text-neutral-500'}"
     />
   {/if}
   <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" title={item.label}>

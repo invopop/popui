@@ -42,6 +42,7 @@ export type DrawerOption = SelectOption & {
   color?: StatusType
   picture?: string
   sandbox?: boolean
+  iconClass?: string
 }
 
 export type Company = {

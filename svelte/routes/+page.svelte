@@ -8,6 +8,8 @@
   import UuidCopy from '$lib/UuidCopy.svelte'
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import StepIconList from '$lib/StepIconList.svelte'
+  import InputSelect from '$lib/InputSelect.svelte'
+  import ComboBox from '$lib/ComboBox.svelte'
 
   install(twconfig)
 </script>
@@ -46,6 +48,20 @@
         { name: 'Add B2C to B2B link', url: 'https://portal.invopop.com/images/reissue.svg' },
         { name: 'Send NFS-e (Brazil)', url: 'https://nfe-br.invopop.com/icon.svg' },
         { name: 'Send NFS-o (Uruguay)', url: 'https://nfe-br.invopop.com/icon.svg' }
+      ]}
+    />
+  </div>
+  <div>
+    <InputSelect
+      options={[
+        { label: 'Thing', value: 'thing' },
+        { label: 'Thing 2', value: 'thing 2' }
+      ]}
+    />
+    <ComboBox
+      options={[
+        { label: 'Thing', value: 'thing' },
+        { label: 'Thing 2', value: 'thing2' }
       ]}
     />
   </div>

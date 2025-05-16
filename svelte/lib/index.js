@@ -12,6 +12,7 @@ import ButtonFile from './ButtonFile.svelte'
 import ButtonUuidCopy from './ButtonUuidCopy.svelte'
 import CardCheckbox from './CardCheckbox.svelte'
 import CardRelation from './CardRelation.svelte'
+import ComboBox from './ComboBox.svelte'
 import CompanySelector from './CompanySelector.svelte'
 import CounterWorkflow from './CounterWorkflow.svelte'
 import DataListItem from './DataListItem.svelte'
@@ -83,6 +84,7 @@ export {
   ButtonUuidCopy,
   CardCheckbox,
   CardRelation,
+  ComboBox,
   CompanySelector,
   CounterWorkflow,
   DataListItem,

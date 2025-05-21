@@ -9,7 +9,10 @@
 </script>
 
 <AlertDialogPrimitive.Description
-  class={cn('text-neutral-500 text-base', className)}
+  class={cn(
+    'text-neutral-500 text-base flex flex-col space-y-2 justify-start items-start !mt-2',
+    className
+  )}
   {...$$restProps}
 >
   <slot />

@@ -60,7 +60,10 @@
     <AlertDialogHeader>
       <AlertDialogTitle>{title}</AlertDialogTitle>
       <AlertDialogDescription>
-        {description}
+        <slot name="description" />
+        {#if !$$slots.description}
+          {description}
+        {/if}
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>

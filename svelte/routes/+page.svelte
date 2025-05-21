@@ -19,6 +19,7 @@
   <p>Library of shared, re-usable UI components for Invopop projects</p>
 
   <AlertDialogComponent
+    title="Are you sure?"
     description="Restoring V3 as draft will discard your current changes, are you sure you want to continue?"
     withSlot
   />

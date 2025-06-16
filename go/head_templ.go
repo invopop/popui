@@ -234,7 +234,7 @@ func DefaultPopupScripts() templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<script>\n        const CONSOLE_SDK_URL = 'https://cdn.jsdelivr.net/npm/@invopop/console-ui-sdk@0.0.8/index.js'\n\n        window.onload = function() {\n            const urlParams = new URLSearchParams(window.location.search)\n            const accentColor = urlParams.get('accent')\n\n            if (accentColor) {\n                const root = document.querySelector(':root')\n                root.style.setProperty('--workspace-accent-color', accentColor)\n            }\n        }\n    </script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<script>\n        const CONSOLE_SDK_URL = 'https://cdn.jsdelivr.net/npm/@invopop/console-ui-sdk@0.0.9/index.js'\n\n        window.onload = function() {\n            const urlParams = new URLSearchParams(window.location.search)\n            const accentColor = urlParams.get('accent')\n\n            if (accentColor) {\n                const root = document.querySelector(':root')\n                root.style.setProperty('--workspace-accent-color', accentColor)\n            }\n        }\n    </script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

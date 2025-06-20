@@ -20,6 +20,7 @@ templ Card(p props.Card) {
 			href={ p.URL }
 			class={
 				templ.KV(classes.Card, p.Class == ""),
+				templ.KV(classes.CardDisabled, p.Disabled),
 				templ.KV(p.Class, p.Class != ""),
 			}
 			{ p.Attrs... }

@@ -9,15 +9,18 @@ import (
 // table with the structure you'd normally expect, including `<col />`, `<thead>` and
 // `<tbody>` sections.
 templ Table(p props.Table) {
-	<table
-		class={
-			templ.KV(classes.Table, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
-		}
-		{ p.Attrs... }
-	>
-		{ children... }
-	</table>
+	<div class={ classes.TableWrapper }>
+		<table
+			class={
+				templ.KV(classes.Table, p.Class == ""),
+				templ.KV(classes.TableClickable, p.Clickable),
+				templ.KV(p.Class, p.Class != ""),
+			}
+			{ p.Attrs... }
+		>
+			{ children... }
+		</table>
+	</div>
 }
 
 // TableCell optionally provides a convenience wrapper around the `<td>` element

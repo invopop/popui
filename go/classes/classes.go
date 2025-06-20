@@ -18,6 +18,7 @@ const (
 // Card related classes
 const (
 	Card            = "popui-card"
+	CardDisabled    = "popui-card--disabled"
 	CardHeader      = "popui-card__header"
 	CardHeaderFlag  = "popui-card__header-flag"
 	CardHeaderTitle = "popui-card__header-title"
@@ -163,6 +164,8 @@ const (
 // Table classes
 const (
 	Table          = "popui-table"
+	TableClickable = "popui-table--clickable"
+	TableWrapper   = "popui-table-wrapper"
 	TableCellRight = "popui-table-cell__right"
 )
 

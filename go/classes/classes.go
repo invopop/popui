@@ -54,6 +54,7 @@ const (
 	FormListItem = "popui-form__list-item"
 
 	Fieldset       = "popui-fieldset"
+	FieldsetGrayed = "popui-fieldset popui-fieldset__grayed"
 	FieldsetLegend = "popui-fieldset-legend"
 
 	OptionGroup = "popui-option-group"
@@ -61,6 +62,7 @@ const (
 	InputTitle = "popui-input-title"
 
 	InputTextWrapper = "popui-input-text-wrapper"
+	InputTextGroup   = "popui-input-text-group"
 	InputTextBase    = "popui-input-text"
 	InputTextError   = "popui-input-text--error"
 
@@ -110,6 +112,7 @@ const (
 	Description              = "popui-description"
 	Info                     = "popui-info"
 	InfoText                 = "popui-info-text"
+	WarningText              = "popui-warning-text"
 	Notification             = "popui-notification"
 	NotificationInfo         = "popui-notification__info"
 	NotificationWarning      = "popui-notification__warning"
@@ -152,6 +155,7 @@ const (
 	Sidebar                  = "popui-admin-sidebar"
 	SidebarHeader            = "popui-admin-sidebar__header"
 	SidebarContent           = "popui-admin-sidebar__content"
+	SidebarFooter            = "popui-admin-sidebar__footer"
 	SidebarSection           = "popui-admin-sidebar__section"
 	SidebarSectionItemActive = "popui-admin-sidebar__item-active"
 )
@@ -167,6 +171,16 @@ const (
 	TableClickable = "popui-table--clickable"
 	TableWrapper   = "popui-table-wrapper"
 	TableCellRight = "popui-table-cell__right"
+)
+
+// Tabs classes
+const (
+	Tabs        = "popui-tabs"
+	TabsPill    = "popui-tabs__pill"
+	Tab         = "popui-tab"
+	TabPill     = "popui-tab__pill"
+	TabActive   = "popui-tab--active"
+	TabDisabled = "popui-tab--disabled"
 )
 
 // Tags classes

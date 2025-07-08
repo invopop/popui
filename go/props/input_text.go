@@ -16,6 +16,7 @@ type InputText struct {
 	Class       string
 	Label       string
 	LabelClass  string
+	Prefix      string
 	Error       Error
 	Attrs       templ.Attributes
 }

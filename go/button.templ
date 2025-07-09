@@ -9,6 +9,9 @@ import (
 // Supports small size and different variants: "primary", "secondary", "danger" and "transparent"
 templ Button(p props.Button) {
 	<button
+		if p.ShowSpinnerOnClick {
+			onclick="this.classList.add('popui-button--loading');"
+		}
 		class={
 			templ.KV(classes.ButtonBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
@@ -36,6 +39,11 @@ templ Button(p props.Button) {
 		{ p.Attrs... }
 	>
 		{ children... }
+		if p.ShowSpinnerOnClick {
+			<div class={ classes.ButtonSpinner }>
+				@ButtonSpinner()
+			</div>
+		}
 	</button>
 }
 

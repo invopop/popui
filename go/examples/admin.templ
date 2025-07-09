@@ -92,16 +92,16 @@ templ Admin() {
 					}
 				}
 				@popui.PageContent() {
-					@popui.Tabs(props.Tabs{ Class: classes.TabsPill }) {
+					@popui.Tabs(props.Tabs{Class: classes.TabsPill}) {
 						@popui.Tab(props.Tab{Active: true, Class: classes.TabPill}) {
 							@icons.User()
 							<span>Members</span>
 						}
-						@popui.Tab(props.Tab{ Class: classes.TabPill }) {
+						@popui.Tab(props.Tab{Class: classes.TabPill}) {
 							@icons.Billing()
 							<span>Billing</span>
 						}
-						@popui.Tab(props.Tab{ Class: classes.TabPill }) {
+						@popui.Tab(props.Tab{Class: classes.TabPill}) {
 							@icons.Puzzle()
 							<span>Integrations</span>
 						}
@@ -298,9 +298,12 @@ templ formSection() {
 				{Value: "100000", Label: "20K+"},
 			},
 		})
-		@popui.Button(props.Button{Variant: "primary"}) {
-			Update
-		}
+		<div class="flex gap-2">
+			@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+				Update
+			}
+			@popui.FlashMessage(props.FlashMessage{Success: true, Message: "Saved"})
+		</div>
 	}
 }
 

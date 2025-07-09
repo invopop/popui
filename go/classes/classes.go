@@ -80,6 +80,8 @@ const (
 	ButtonDanger      = "popui-button--danger"
 	ButtonPrimary     = "popui-button--primary"
 	ButtonSecondary   = "popui-button--secondary"
+	ButtonLoading     = "popui-button--loading"
+	ButtonSpinner     = "popui-button-spinner"
 	ButtonTransparent = "popui-button--transparent"
 	ButtonSmall       = "popui-button--small"
 
@@ -112,6 +114,8 @@ const (
 	Description              = "popui-description"
 	Info                     = "popui-info"
 	InfoText                 = "popui-info-text"
+	FlashMessage             = "popui-form-message"
+	FlashMessageSuccess      = "popui-form-message--success"
 	WarningText              = "popui-warning-text"
 	Notification             = "popui-notification"
 	NotificationInfo         = "popui-notification__info"

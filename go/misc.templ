@@ -80,6 +80,27 @@ templ Notification(p props.Notification) {
 	</p>
 }
 
+// FlashMessage provides a toast message to be shown as feedback.
+templ FlashMessage(p props.FlashMessage) {
+	<div
+		class={
+			templ.KV(classes.FlashMessage, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+			templ.KV(classes.FlashMessageSuccess, p.Success),
+		}
+		{ p.Attrs... }
+	>
+		if p.Success {
+			@icons.Success()
+		}
+		if p.Message != "" {
+			{ p.Message }
+		} else {
+			{ children... }
+		}
+	</div>
+}
+
 // Mark provides a mark element formatted as a highlighted text
 templ Mark() {
 	<mark>

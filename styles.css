@@ -898,6 +898,77 @@ div[contenteditable='true'] .tag {
   @apply text-sm inline-flex items-center gap-2 whitespace-nowrap mr-2;
 }
 
+/* Button spinner */
+.popui-button--loading {
+  @apply text-transparent opacity-30 pointer-events-none;
+}
+.popui-button--loading .popui-button-spinner {
+  opacity: 1;
+}
+.popui-button-spinner {
+  @apply inset-0 fill-white absolute flex items-center justify-center opacity-0;
+}
+.spinner_jCIR {
+  animation: spinner_B8Vq 0.9s linear infinite;
+  animation-delay: -0.9s;
+}
+.spinner_upm8 {
+  animation-delay: -0.8s;
+}
+.spinner_2eL5 {
+  animation-delay: -0.7s;
+}
+.spinner_Rp9l {
+  animation-delay: -0.6s;
+}
+.spinner_dy3W {
+  animation-delay: -0.5s;
+}
+@keyframes spinner_B8Vq {
+  0%,
+  66.66% {
+    animation-timing-function: cubic-bezier(0.36, 0.61, 0.3, 0.98);
+    y: 6px;
+    height: 12px;
+  }
+  33.33% {
+    animation-timing-function: cubic-bezier(0.36, 0.61, 0.3, 0.98);
+    y: 1px;
+    height: 22px;
+  }
+}
+
+/* Flash message */
+.popui-form-message {
+  @apply text-sm font-semibold text-neutral-800 flex items-center gap-1 opacity-0;
+  animation: flashMessage 5.5s ease forwards;
+}
+.popui-form-message--success {
+  @apply text-workspace-accent-500;
+}
+
+/* Keyframes define the visible window of the message */
+@keyframes flashMessage {
+  0% {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+  9.09% {
+    /* 0.5s of 5.5s total */
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90.9% {
+    /* Stay visible till ~5s */
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+}
+
 @media (max-width: 500px) {
   .popui-desc-list,
   .popui-form {

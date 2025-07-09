@@ -54,7 +54,7 @@ func Button(p props.Button) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if p.ShowSpinnerOnClick {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " onclick=\"this.classList.add(&#39;popui-button--loading&#39;);\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " onclick=\"showButtonSpinner(this);\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

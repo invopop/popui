@@ -10,7 +10,7 @@ import (
 templ Button(p props.Button) {
 	<button
 		if p.ShowSpinnerOnClick {
-			onclick="this.classList.add('popui-button--loading');"
+			onclick="showButtonSpinner(this);"
 		}
 		class={
 			templ.KV(classes.ButtonBase, p.Class == ""),

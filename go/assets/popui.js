@@ -29,3 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     page.addEventListener('click', hideSidebar)
   }
 })
+
+// eslint-disable-next-line
+function showButtonSpinner(button) {
+  const LOADING_CLASS = 'popui-button--loading'
+  const form = button.form || button.closest('form')
+  if (form && form.checkValidity()) {
+    button.classList.add(LOADING_CLASS)
+  }
+}

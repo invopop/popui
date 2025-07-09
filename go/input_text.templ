@@ -29,33 +29,40 @@ templ InputText(p props.InputText) {
 				{ p.Label }
 			}
 		}
-		<input
-			id={ p.ID }
-			type={ cleanInputTextType(p.Type) }
-			class={ templ.KV(classes.InputTextBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
-			if p.Placeholder != "" {
-				placeholder={ p.Placeholder }
+		<div class={ classes.InputTextGroup }>
+			if p.Prefix != "" {
+				@Description() {
+					{ p.Prefix }
+				}
 			}
-			if p.Autofocus {
-				autofocus
-			}
-			if p.Disabled {
-				disabled
-			}
-			if p.Readonly {
-				readonly
-			}
-			if p.Required {
-				required
-			}
-			if p.Name != "" {
-				name={ p.Name }
-			}
-			if p.Value != "" {
-				value={ p.Value }
-			}
-			{ p.Attrs... }
-		/>
+			<input
+				id={ p.ID }
+				type={ cleanInputTextType(p.Type) }
+				class={ templ.KV(classes.InputTextBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+				if p.Placeholder != "" {
+					placeholder={ p.Placeholder }
+				}
+				if p.Autofocus {
+					autofocus
+				}
+				if p.Disabled {
+					disabled
+				}
+				if p.Readonly {
+					readonly
+				}
+				if p.Required {
+					required
+				}
+				if p.Name != "" {
+					name={ p.Name }
+				}
+				if p.Value != "" {
+					value={ p.Value }
+				}
+				{ p.Attrs... }
+			/>
+		</div>
 		if !p.Error.Empty() {
 			@InputError(p.Error)
 		}

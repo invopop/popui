@@ -262,7 +262,7 @@ func InputRadioCard(p props.InputRadio) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if p.Description != "" {
-			var templ_7745c5c3_Var19 = []any{classes.Description}
+			var templ_7745c5c3_Var19 = []any{classes.RadioDescription}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var19...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

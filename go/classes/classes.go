@@ -18,6 +18,7 @@ const (
 // Card related classes
 const (
 	Card            = "popui-card"
+	CardDisabled    = "popui-card--disabled"
 	CardHeader      = "popui-card__header"
 	CardHeaderFlag  = "popui-card__header-flag"
 	CardHeaderTitle = "popui-card__header-title"
@@ -53,6 +54,7 @@ const (
 	FormListItem = "popui-form__list-item"
 
 	Fieldset       = "popui-fieldset"
+	FieldsetGrayed = "popui-fieldset popui-fieldset__grayed"
 	FieldsetLegend = "popui-fieldset-legend"
 
 	OptionGroup = "popui-option-group"
@@ -60,6 +62,7 @@ const (
 	InputTitle = "popui-input-title"
 
 	InputTextWrapper = "popui-input-text-wrapper"
+	InputTextGroup   = "popui-input-text-group"
 	InputTextBase    = "popui-input-text"
 	InputTextError   = "popui-input-text--error"
 
@@ -77,6 +80,8 @@ const (
 	ButtonDanger      = "popui-button--danger"
 	ButtonPrimary     = "popui-button--primary"
 	ButtonSecondary   = "popui-button--secondary"
+	ButtonLoading     = "popui-button--loading"
+	ButtonSpinner     = "popui-button-spinner"
 	ButtonTransparent = "popui-button--transparent"
 	ButtonSmall       = "popui-button--small"
 
@@ -109,6 +114,9 @@ const (
 	Description              = "popui-description"
 	Info                     = "popui-info"
 	InfoText                 = "popui-info-text"
+	FlashMessage             = "popui-form-message"
+	FlashMessageSuccess      = "popui-form-message--success"
+	WarningText              = "popui-warning-text"
 	Notification             = "popui-notification"
 	NotificationInfo         = "popui-notification__info"
 	NotificationWarning      = "popui-notification__warning"
@@ -151,6 +159,7 @@ const (
 	Sidebar                  = "popui-admin-sidebar"
 	SidebarHeader            = "popui-admin-sidebar__header"
 	SidebarContent           = "popui-admin-sidebar__content"
+	SidebarFooter            = "popui-admin-sidebar__footer"
 	SidebarSection           = "popui-admin-sidebar__section"
 	SidebarSectionItemActive = "popui-admin-sidebar__item-active"
 )
@@ -163,7 +172,19 @@ const (
 // Table classes
 const (
 	Table          = "popui-table"
+	TableClickable = "popui-table--clickable"
+	TableWrapper   = "popui-table-wrapper"
 	TableCellRight = "popui-table-cell__right"
+)
+
+// Tabs classes
+const (
+	Tabs        = "popui-tabs"
+	TabsPill    = "popui-tabs__pill"
+	Tab         = "popui-tab"
+	TabPill     = "popui-tab__pill"
+	TabActive   = "popui-tab--active"
+	TabDisabled = "popui-tab--disabled"
 )
 
 // Tags classes

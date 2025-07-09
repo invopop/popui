@@ -46,6 +46,7 @@ func Card(p props.Card) templ.Component {
 		if p.URL != "" {
 			var templ_7745c5c3_Var2 = []any{
 				templ.KV(classes.Card, p.Class == ""),
+				templ.KV(classes.CardDisabled, p.Disabled),
 				templ.KV(p.Class, p.Class != ""),
 			}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
@@ -269,7 +270,7 @@ func CardHeader(h props.CardHeader) templ.Component {
 				var templ_7745c5c3_Var13 string
 				templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(flagProviderURL + h.FlagISO + ".svg")
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 68, Col: 85}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 69, Col: 85}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 				if templ_7745c5c3_Err != nil {
@@ -311,7 +312,7 @@ func CardHeader(h props.CardHeader) templ.Component {
 			var templ_7745c5c3_Var16 string
 			templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(h.Title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 74, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 75, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 			if templ_7745c5c3_Err != nil {
@@ -324,7 +325,7 @@ func CardHeader(h props.CardHeader) templ.Component {
 			var templ_7745c5c3_Var17 string
 			templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(h.Subtitle)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 75, Col: 19}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 76, Col: 19}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 			if templ_7745c5c3_Err != nil {
@@ -450,7 +451,7 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 		var templ_7745c5c3_Var25 string
 		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(p.Title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 95, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 96, Col: 20}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 		if templ_7745c5c3_Err != nil {
@@ -496,7 +497,7 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 			var templ_7745c5c3_Var28 string
 			templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(p.Subtitle)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 101, Col: 71}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 102, Col: 71}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 			if templ_7745c5c3_Err != nil {
@@ -563,7 +564,7 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 			var templ_7745c5c3_Var33 string
 			templ_7745c5c3_Var33, templ_7745c5c3_Err = templ.JoinStringErrs(f.Amount(num.MakeAmount(p.Current, 0)))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 107, Col: 104}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 108, Col: 104}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var33))
 			if templ_7745c5c3_Err != nil {
@@ -576,7 +577,7 @@ func CardProgressBar(p props.CardProgressBar) templ.Component {
 			var templ_7745c5c3_Var34 string
 			templ_7745c5c3_Var34, templ_7745c5c3_Err = templ.JoinStringErrs(f.Amount(num.MakeAmount(p.Total, 0)))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 108, Col: 50}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 109, Col: 50}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var34))
 			if templ_7745c5c3_Err != nil {
@@ -742,7 +743,7 @@ func CardDashboard(p props.CardDashboard) templ.Component {
 			var templ_7745c5c3_Var46 string
 			templ_7745c5c3_Var46, templ_7745c5c3_Err = templ.JoinStringErrs(i.Label)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 129, Col: 57}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 130, Col: 57}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var46))
 			if templ_7745c5c3_Err != nil {
@@ -777,7 +778,7 @@ func CardDashboard(p props.CardDashboard) templ.Component {
 			var templ_7745c5c3_Var49 string
 			templ_7745c5c3_Var49, templ_7745c5c3_Err = templ.JoinStringErrs(i.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 130, Col: 57}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/card.templ`, Line: 131, Col: 57}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var49))
 			if templ_7745c5c3_Err != nil {

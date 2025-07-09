@@ -75,7 +75,7 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 
 /* Button */
 .popui-button {
-  @apply flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base gap-1;
+  @apply inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base gap-1;
 }
 .popui-button--transparent {
   @apply border-0;
@@ -93,15 +93,30 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
   @apply text-sm;
 }
 .popui-button:hover {
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.16);
+  box-shadow: inset 0 0 0 100px rgba(0, 0, 0, 0.04);
 }
 .popui-button:active {
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.32);
+}
+.popui-button-spinner {
+  @apply inset-0 fill-white absolute flex items-center justify-center opacity-0;
+}
+.popui-button--loading {
+  @apply text-transparent;
+}
+.popui-button--loading .popui-button-spinner {
+  @apply opacity-100;
 }
 
 /* Card */
 .popui-card {
   @apply flex flex-col p-4 rounded-lg border border-neutral-100 bg-white w-full gap-3;
+}
+.popui-card:hover {
+  @apply border-neutral-200;
+}
+.popui-card--disabled {
+  @apply bg-neutral-50 pointer-events-none;
 }
 .popui-card__header {
   @apply flex items-center gap-3;
@@ -340,8 +355,11 @@ input:checked + .popui-switch__input:before {
 .popui-input-text-wrapper {
   @apply flex flex-col space-y-2;
 }
+.popui-input-text-group {
+  @apply flex items-center gap-2;
+}
 .popui-input-text {
-  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight disabled:bg-neutral-50 border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
+  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-400 text-base tracking-tight disabled:bg-neutral-50 border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
 }
 .popui-input-text:focus {
   @apply ring-0 ring-offset-0;
@@ -372,6 +390,9 @@ input:checked + .popui-switch__input:before {
 .popui-paragraph {
   @apply font-sans text-base text-neutral-800;
 }
+.popui-warning-text {
+  @apply font-sans text-base text-neutral-500;
+}
 .popui-title {
   @apply font-sans text-black text-2xl font-semibold;
 }
@@ -393,7 +414,7 @@ pre {
   @apply overflow-x-auto;
 }
 .popui-description {
-  @apply text-neutral-500 font-sans text-sm;
+  @apply text-neutral-500 font-sans text-base;
 }
 .popui-notification {
   @apply flex px-1 py-0.5 justify-center items-center gap-1 rounded text-sm font-medium self-start;
@@ -490,7 +511,7 @@ pre {
   @apply flex flex-col gap-2;
 }
 .popui-textarea {
-  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight disabled:bg-neutral-50 border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
+  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-400 text-base tracking-tight disabled:bg-neutral-50 border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
 }
 .popui-textarea__contenteditable {
   @apply min-h-[80px];
@@ -536,9 +557,20 @@ div[contenteditable='true'] .tag {
 .popui-form__list-item > *:nth-child(2) {
   @apply flex-1 min-w-0 truncate font-semibold;
 }
+.popui-form > .popui-input-text-wrapper:first-of-type {
+  @apply mt-0;
+}
+.popui-admin-wrapper .popui-desc-list,
+.popui-admin-wrapper .popui-form {
+  @apply flex flex-col gap-2;
+}
 
 .popui-fieldset {
   @apply border border-neutral-200 p-4 rounded-md space-y-4 relative w-full bg-white;
+}
+
+.popui-fieldset__grayed {
+  @apply bg-neutral-50;
 }
 
 .popui-fieldset-legend {
@@ -597,7 +629,7 @@ div[contenteditable='true'] .tag {
   border-image-slice: 1;
 }
 .popui-admin-page__content .popui-divider-wrapper {
-  @apply !mt-0 !mb-5;
+  @apply !mt-4 !mb-8;
 }
 .popui-admin-page__content > div:first-of-type .popui-divider-wrapper {
   @apply hidden;
@@ -614,7 +646,10 @@ div[contenteditable='true'] .tag {
 
 /* Table */
 .popui-table {
-  @apply font-sans text-base flex-1 rounded border border-collapse border-neutral-100 bg-white;
+  @apply table-fixed w-full border-collapse border-0 font-sans text-base flex-1 rounded bg-white;
+}
+.popui-table-wrapper {
+  @apply border border-neutral-100 rounded-md overflow-hidden;
 }
 .popui-table th {
   @apply border-b border-neutral-100;
@@ -628,6 +663,36 @@ div[contenteditable='true'] .tag {
 }
 .popui-table-cell__right {
   @apply !text-right;
+}
+.popui-table th:first-child,
+.popui-table td:first-child {
+  @apply pl-4;
+}
+.popui-table th:last-child,
+.popui-table td:last-child {
+  @apply pr-4;
+}
+.popui-table--clickable tr:hover td {
+  @apply bg-neutral-50 cursor-pointer;
+}
+.popui-table--clickable tr:hover .popui-button--secondary {
+  @apply bg-neutral-800/5;
+}
+.popui-table--clickable tr:hover .collapsed {
+  @apply opacity-100 pointer-events-auto translate-y-0;
+}
+
+.popui-tabs {
+  @apply inline-flex gap-6 w-full overflow-visible border-b border-neutral-100 mb-4;
+}
+.popui-tab {
+  @apply relative inline-flex items-center justify-center gap-2 whitespace-nowrap text-neutral-500 text-base pb-2 data-[state=active]:text-neutral-800 data-[state=active]:font-medium data-[state=active]:border-b data-[state=active]:border-black data-[state=active]:bottom-[-1px];
+}
+.popui-tabs__pill {
+  @apply bg-neutral-100 border border-neutral-200 text-base text-neutral-800 inline-flex h-7 items-center justify-center rounded-md p-0.5 w-full mb-4;
+}
+.popui-tab__pill {
+  @apply data-[state=active]:bg-white inline-flex items-center justify-center gap-2 whitespace-nowrap rounded px-3 py-0.5 text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm w-full;
 }
 
 /* Alpine */
@@ -673,11 +738,41 @@ div[contenteditable='true'] .tag {
 }
 
 /* Helpers */
+.flex {
+  display: flex;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.w-400 {
+  width: 400px;
+}
+.gap-1 {
+  gap: 4px;
+}
+.gap-2 {
+  gap: 8px;
+}
+.gap-4 {
+  gap: 16px;
+}
+.mb-4 {
+  margin-bottom: 16px !important;
+}
+.text-sm {
+  font-size: 12px;
+}
 .text-left {
   text-align: left;
+}
+.text-dimmed {
+  @apply text-neutral-400;
 }
 .max-w-md {
   max-width: 28rem;
@@ -700,10 +795,18 @@ div[contenteditable='true'] .tag {
 
 /* Admin */
 .popui-admin-wrapper {
-  @apply flex h-screen bg-neutral-50 p-1;
+  @apply flex h-screen bg-neutral-100 py-1 pr-1 pl-0;
 }
 .popui-admin-sidebar {
-  @apply h-full w-0 md:w-[240px] invisible md:visible bg-neutral-50 flex flex-col items-center gap-4 transition-[width] ease-in-out duration-300;
+  @apply h-full w-0 md:w-[240px] invisible md:visible bg-neutral-100 flex flex-col items-center gap-0 transition-[width] ease-in-out duration-300;
+}
+
+.popui-admin-sidebar ul li a {
+  @apply whitespace-nowrap overflow-hidden;
+}
+
+.popui-admin-sidebar ul li a > div {
+  @apply flex-shrink-0;
 }
 .popui-admin-sidebar.menu--active {
   @apply w-[240px] visible;
@@ -715,55 +818,70 @@ div[contenteditable='true'] .tag {
   @apply absolute top-[50px] left-[26px] bg-neutral-50 p-2 z-50 border border-neutral-200 shadow rounded;
 }
 .popui-admin-page {
-  @apply flex-1 rounded-md border border-neutral-100 bg-white overflow-y-auto;
+  @apply relative mt-[60px] border-t-0 flex-1 rounded-md border border-neutral-100 bg-white overflow-y-auto;
 }
 .popui-admin-page.menu--active > * {
   @apply opacity-30 pointer-events-none;
 }
 .popui-admin-sidebar__header {
-  @apply w-full flex pl-4 pr-3 pb-[17px] pt-[18px] items-center gap-2.5 border-b border-neutral-100 text-sherwood-700 font-sans text-lg font-semibold whitespace-nowrap;
+  @apply w-full flex pl-6 pr-3 py-[18px] items-start gap-2.5 border-b border-neutral-800/5 text-sherwood-700 font-sans text-lg font-semibold whitespace-nowrap h-[60px];
 }
 .popui-admin-page__header-actions {
   @apply flex items-center gap-2;
 }
 .popui-admin-sidebar__content {
-  @apply w-full flex p-4 flex-col items-center gap-5;
+  @apply w-full flex flex-grow p-4 flex-col items-center gap-5;
+}
+.popui-admin-sidebar__footer {
+  @apply grow-0 border-t border-neutral-200 py-2 px-4 w-full;
 }
 .popui-admin-sidebar__section {
   @apply w-full flex flex-col items-start gap-2;
+  text-indent: 8px;
 }
 .popui-admin-sidebar__section > p {
   @apply text-neutral-400 font-sans text-sm font-medium;
 }
 .popui-admin-sidebar__section > ul {
-  @apply flex flex-col items-start w-full gap-2;
+  @apply flex flex-col items-start w-full gap-1.5;
 }
 .popui-admin-sidebar__section > ul > li {
   @apply w-full;
 }
 .popui-admin-sidebar__section a {
-  @apply w-full flex py-[5px] pl-1.5 pr-2 items-center gap-1 rounded-md border border-transparent text-neutral-800 font-sans text-base font-medium;
+  @apply w-full flex py-[5px] pl-1.5 pr-2 items-center gap-2 rounded-md border border-transparent text-neutral-800 font-sans text-base font-medium;
 }
 .popui-admin-sidebar__section a:hover {
-  @apply border-neutral-800/10 bg-neutral-800/5 backdrop-blur-[20px];
+  @apply bg-white-60 text-black backdrop-blur-[20px];
+}
+.popui-admin-sidebar__section svg *[stroke] {
+  stroke: #6b7280;
+}
+
+.popui-admin-sidebar__section svg *[fill] {
+  fill: #6b7280;
 }
 .popui-admin-sidebar__item-active {
-  @apply border-neutral-800/10 bg-neutral-800/5 backdrop-blur-[20px];
+  @apply border-neutral-200 bg-white backdrop-blur-[20px] transition-[background] duration-[250ms] ease-in-out;
+}
+.popui-admin-sidebar__item-active:hover {
+  @apply border-neutral-300;
 }
 .popui-admin-page__header {
-  @apply flex pl-6 pr-4 py-[15px] justify-between items-center border-b border-neutral-100;
+  @apply bg-white z-[2] h-[60px] fixed left-0 right-1 top-1 rounded-t flex pl-6 pr-6 py-[15px] justify-between items-center border border-neutral-50 transition-[left] duration-300 ease-in-out;
 }
 .popui-admin-page__content {
   @apply flex p-6 flex-col items-center gap-6;
 }
 .popui-admin-page__section {
-  @apply w-full flex flex-col lg:flex-row items-start gap-6;
+  @apply w-full flex flex-col lg:flex-row items-start;
+  gap: max(1.5rem, 5vw);
 }
 .popui-admin-page__section-title {
-  @apply flex w-[340px] flex-col items-start gap-0.5 flex-shrink-0;
+  @apply flex w-[240px] flex-col items-start gap-0.5 flex-shrink-0;
 }
 .popui-admin-page__section-content {
-  @apply flex flex-col space-y-2 items-start w-[400px];
+  @apply flex flex-col space-y-2 items-start w-full max-w-[680px];
 }
 
 /* Demo Page */
@@ -778,4 +896,88 @@ div[contenteditable='true'] .tag {
 
 .popui-demo-label {
   @apply text-sm inline-flex items-center gap-2 whitespace-nowrap mr-2;
+}
+
+/* Button spinner */
+.popui-button--loading {
+  @apply text-transparent opacity-30 pointer-events-none;
+}
+.popui-button--loading .popui-button-spinner {
+  opacity: 1;
+}
+.popui-button-spinner {
+  @apply inset-0 fill-white absolute flex items-center justify-center opacity-0;
+}
+.spinner_jCIR {
+  animation: spinner_B8Vq 0.9s linear infinite;
+  animation-delay: -0.9s;
+}
+.spinner_upm8 {
+  animation-delay: -0.8s;
+}
+.spinner_2eL5 {
+  animation-delay: -0.7s;
+}
+.spinner_Rp9l {
+  animation-delay: -0.6s;
+}
+.spinner_dy3W {
+  animation-delay: -0.5s;
+}
+@keyframes spinner_B8Vq {
+  0%,
+  66.66% {
+    animation-timing-function: cubic-bezier(0.36, 0.61, 0.3, 0.98);
+    y: 6px;
+    height: 12px;
+  }
+  33.33% {
+    animation-timing-function: cubic-bezier(0.36, 0.61, 0.3, 0.98);
+    y: 1px;
+    height: 22px;
+  }
+}
+
+/* Flash message */
+.popui-form-message {
+  @apply text-sm font-semibold text-neutral-800 flex items-center gap-1 opacity-0;
+  animation: flashMessage 5.5s ease forwards;
+}
+.popui-form-message--success {
+  @apply text-workspace-accent-500;
+}
+
+/* Keyframes define the visible window of the message */
+@keyframes flashMessage {
+  0% {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+  9.09% {
+    /* 0.5s of 5.5s total */
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90.9% {
+    /* Stay visible till ~5s */
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+}
+
+@media (max-width: 500px) {
+  .popui-desc-list,
+  .popui-form {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .popui-admin-page__header {
+    left: 240px;
+  }
 }

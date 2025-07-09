@@ -33,14 +33,12 @@ templ Admin() {
 					</li>
 				}
 				@popui.SidebarSection(props.SidebarSection{Title: "Cyberdyne Enterprises"}) {
-
 					<li>
 						<a>
 							@icons.Dashboard()
 							<span>Dashboard</span>
 						</a>
-					</li>	
-
+					</li>
 					<li>
 						<a>
 							@icons.Workspace()
@@ -58,15 +56,13 @@ templ Admin() {
 							@icons.Team()
 							<span>Members</span>
 						</a>
-					</li>	
-
+					</li>
 					<li>
 						<a>
 							@icons.Org()
 							<span>Organization</span>
 						</a>
 					</li>
-
 				}
 				@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
 					<li>
@@ -96,6 +92,34 @@ templ Admin() {
 					}
 				}
 				@popui.PageContent() {
+					@popui.Tabs(props.Tabs{Class: classes.TabsPill}) {
+						@popui.Tab(props.Tab{Active: true, Class: classes.TabPill}) {
+							@icons.User()
+							<span>Members</span>
+						}
+						@popui.Tab(props.Tab{Class: classes.TabPill}) {
+							@icons.Billing()
+							<span>Billing</span>
+						}
+						@popui.Tab(props.Tab{Class: classes.TabPill}) {
+							@icons.Puzzle()
+							<span>Integrations</span>
+						}
+					}
+					@popui.Tabs(props.Tabs{}) {
+						@popui.Tab(props.Tab{Active: true}) {
+							@icons.User()
+							<span>Members</span>
+						}
+						@popui.Tab(props.Tab{}) {
+							@icons.Billing()
+							<span>Billing</span>
+						}
+						@popui.Tab(props.Tab{}) {
+							@icons.Puzzle()
+							<span>Integrations</span>
+						}
+					}
 					@popui.PageSection(props.PageSection{
 						Title:            "Active Members",
 						Description:      "People who have access to all the workspaces in your organization",
@@ -274,9 +298,12 @@ templ formSection() {
 				{Value: "100000", Label: "20K+"},
 			},
 		})
-		@popui.Button(props.Button{Variant: "primary"}) {
-			Update
-		}
+		<div class="flex gap-2">
+			@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+				Update
+			}
+			@popui.FlashMessage(props.FlashMessage{Success: true, Message: "Saved"})
+		</div>
 	}
 }
 

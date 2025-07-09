@@ -2,6 +2,7 @@ package popui
 
 import "github.com/invopop/popui/go/classes"
 import "github.com/invopop/popui/go/props"
+import "github.com/invopop/popui/icons"
 
 // P provides a p element
 templ P() {
@@ -43,6 +44,20 @@ templ Info() {
 	</div>
 }
 
+// Warning provides a nicely formatted info text with a warning icon
+templ Warning() {
+	<div class={ classes.Info }>
+		<div>
+			@icons.Alert()
+		</div>
+		<div class={ classes.InfoText }>
+			<p class={ classes.WarningText }>
+				{ children... }
+			</p>
+		</div>
+	</div>
+}
+
 // Notification provides a wrapper for a text to be shown as feedback.
 // Vaiid types are: info, warning, error, success
 templ Notification(p props.Notification) {
@@ -63,6 +78,27 @@ templ Notification(p props.Notification) {
 			{ children... }
 		}
 	</p>
+}
+
+// FlashMessage provides a toast message to be shown as feedback.
+templ FlashMessage(p props.FlashMessage) {
+	<div
+		class={
+			templ.KV(classes.FlashMessage, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+			templ.KV(classes.FlashMessageSuccess, p.Success),
+		}
+		{ p.Attrs... }
+	>
+		if p.Success {
+			@icons.Success()
+		}
+		if p.Message != "" {
+			{ p.Message }
+		} else {
+			{ children... }
+		}
+	</div>
 }
 
 // Mark provides a mark element formatted as a highlighted text

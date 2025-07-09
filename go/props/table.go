@@ -4,8 +4,9 @@ import "github.com/a-h/templ"
 
 // Table Templ component props
 type Table struct {
-	Class string
-	Attrs templ.Attributes
+	Class     string
+	Clickable bool
+	Attrs     templ.Attributes
 }
 
 // TableCell Templ component props

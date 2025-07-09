@@ -260,4 +260,33 @@ func EmptyStateIcon() templ.Component {
 	})
 }
 
+func ButtonSpinner() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var11 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var11 == nil {
+			templ_7745c5c3_Var11 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><rect class=\"spinner_jCIR\" x=\"1\" y=\"6\" width=\"2.8\" height=\"12\"></rect> <rect class=\"spinner_jCIR spinner_upm8\" x=\"5.8\" y=\"6\" width=\"2.8\" height=\"12\"></rect> <rect class=\"spinner_jCIR spinner_2eL5\" x=\"10.6\" y=\"6\" width=\"2.8\" height=\"12\"></rect> <rect class=\"spinner_jCIR spinner_Rp9l\" x=\"15.4\" y=\"6\" width=\"2.8\" height=\"12\"></rect> <rect class=\"spinner_jCIR spinner_dy3W\" x=\"20.2\" y=\"6\" width=\"2.8\" height=\"12\"></rect></svg>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
 var _ = templruntime.GeneratedTemplate

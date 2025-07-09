@@ -7,10 +7,11 @@ import (
 
 // Card Templ component props
 type Card struct {
-	Class  string
-	URL    templ.SafeURL
-	Header CardHeader
-	Attrs  templ.Attributes
+	Class    string
+	Disabled bool
+	URL      templ.SafeURL
+	Header   CardHeader
+	Attrs    templ.Attributes
 }
 
 // CardHeader Templ component props

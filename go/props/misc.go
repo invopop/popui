@@ -17,3 +17,11 @@ type EmptyState struct {
 	Description string
 	Attrs       templ.Attributes
 }
+
+// FlashMessage Templ component props
+type FlashMessage struct {
+	Class   string
+	Message string
+	Success bool
+	Attrs   templ.Attributes
+}

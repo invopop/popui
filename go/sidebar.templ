@@ -15,9 +15,14 @@ templ Sidebar(p props.Sidebar) {
 		{ p.Attrs... }
 	>
 		<div class={ classes.SidebarHeader }>{ p.Title }</div>
-		<div class={ classes.SidebarContent }>
-			{ children... }
-		</div>
+		{ children... }
+	</div>
+}
+
+// SidebarContent provides a wrapper for the content of the sidebar
+templ SidebarContent() {
+	<div class={ classes.SidebarContent }>
+		{ children... }
 	</div>
 }
 
@@ -31,9 +36,18 @@ templ SidebarSection(p props.SidebarSection) {
 		}
 		{ p.Attrs... }
 	>
-		<p>{ p.Title }</p>
+		if p.Title != "" {
+			<p>{ p.Title }</p>
+		}
 		<ul>
 			{ children... }
 		</ul>
+	</div>
+}
+
+// SidebarFooter provides a footer for the sidebar
+templ SidebarFooter() {
+	<div class={ classes.SidebarFooter }>
+		{ children... }
 	</div>
 }

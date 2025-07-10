@@ -18,59 +18,65 @@ templ Admin() {
 		</head>
 		<body class="popui-admin-wrapper">
 			@popui.Sidebar(props.Sidebar{Title: "Invopop Admin"}) {
-				@popui.SidebarSection(props.SidebarSection{Title: "Account"}) {
-					<li>
-						<a class={ classes.SidebarSectionItemActive }>
-							@icons.User()
-							<span>Profile</span>
-						</a>
-					</li>
-					<li>
-						<a>
-							@icons.Locked()
-							<span>Security</span>
-						</a>
-					</li>
+				@popui.SidebarHeader() {
+					@icons.Invopop()
+					Admin
 				}
-				@popui.SidebarSection(props.SidebarSection{Title: "Cyberdyne Enterprises"}) {
-					<li>
-						<a>
-							@icons.Dashboard()
-							<span>Dashboard</span>
-						</a>
-					</li>
-					<li>
-						<a>
-							@icons.Workspace()
-							<span>Workspaces</span>
-						</a>
-					</li>
-					<li>
-						<a>
-							@icons.Billing()
-							<span>Billing</span>
-						</a>
-					</li>
-					<li>
-						<a>
-							@icons.Team()
-							<span>Members</span>
-						</a>
-					</li>
-					<li>
-						<a>
-							@icons.Org()
-							<span>Organization</span>
-						</a>
-					</li>
-				}
-				@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
-					<li>
-						<a>
-							@icons.Puzzle()
-							<span>Applications</span>
-						</a>
-					</li>
+				@popui.SidebarContent() {
+					@popui.SidebarSection(props.SidebarSection{Title: "Account"}) {
+						<li>
+							<a class={ classes.SidebarSectionItemActive }>
+								@icons.User()
+								<span>Profile</span>
+							</a>
+						</li>
+						<li>
+							<a>
+								@icons.Locked()
+								<span>Security</span>
+							</a>
+						</li>
+					}
+					@popui.SidebarSection(props.SidebarSection{Title: "Cyberdyne Enterprises"}) {
+						<li>
+							<a>
+								@icons.Dashboard()
+								<span>Dashboard</span>
+							</a>
+						</li>
+						<li>
+							<a>
+								@icons.Workspace()
+								<span>Workspaces</span>
+							</a>
+						</li>
+						<li>
+							<a>
+								@icons.Billing()
+								<span>Billing</span>
+							</a>
+						</li>
+						<li>
+							<a>
+								@icons.Team()
+								<span>Members</span>
+							</a>
+						</li>
+						<li>
+							<a>
+								@icons.Org()
+								<span>Organization</span>
+							</a>
+						</li>
+					}
+					@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
+						<li>
+							<a>
+								@icons.Puzzle()
+								<span>Applications</span>
+							</a>
+						</li>
+					}
 				}
 			}
 			<main class={ classes.Page }>
@@ -300,6 +306,7 @@ templ formSection() {
 		})
 		<div class="flex gap-2">
 			@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+				@icons.AddCircle()
 				Update
 			}
 			@popui.FlashMessage(props.FlashMessage{Success: true, Message: "Saved"})

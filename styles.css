@@ -86,6 +86,10 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 .popui-button--primary {
   @apply border-0 bg-workspace-accent text-white;
 }
+.popui-button--primary svg,
+.popui-button--danger svg {
+  @apply text-white-70;
+}
 .popui-button--secondary {
   @apply border-0 bg-neutral-100;
 }
@@ -818,13 +822,17 @@ div[contenteditable='true'] .tag {
   @apply absolute top-[50px] left-[26px] bg-neutral-50 p-2 z-50 border border-neutral-200 shadow rounded;
 }
 .popui-admin-page {
-  @apply relative mt-[60px] border-t-0 flex-1 rounded-md border border-neutral-100 bg-white overflow-y-auto;
+  @apply relative mt-[60px] flex-1 rounded-b-md border-b border-neutral-100 bg-white overflow-y-auto;
 }
 .popui-admin-page.menu--active > * {
   @apply opacity-30 pointer-events-none;
 }
 .popui-admin-sidebar__header {
   @apply w-full flex pl-6 pr-3 py-[18px] items-start gap-2.5 border-b border-neutral-800/5 text-sherwood-700 font-sans text-lg font-semibold whitespace-nowrap h-[60px];
+}
+.popui-admin-sidebar__header svg,
+.popui-admin-sidebar__header div {
+  @apply !w-6 !h-6;
 }
 .popui-admin-page__header-actions {
   @apply flex items-center gap-2;
@@ -868,7 +876,7 @@ div[contenteditable='true'] .tag {
   @apply border-neutral-300;
 }
 .popui-admin-page__header {
-  @apply bg-white z-[2] h-[60px] fixed left-0 right-1 top-1 rounded-t flex pl-6 pr-6 py-[15px] justify-between items-center border border-neutral-50 transition-[left] duration-300 ease-in-out;
+  @apply bg-white z-[2] h-[60px] fixed left-0 right-1 top-1 rounded-t flex pl-6 pr-6 py-[15px] justify-between items-center border-b border-neutral-800/5 transition-[left] duration-300 ease-in-out;
 }
 .popui-admin-page__content {
   @apply flex p-6 flex-col items-center gap-6;

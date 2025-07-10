@@ -14,7 +14,13 @@ templ Sidebar(p props.Sidebar) {
 		}
 		{ p.Attrs... }
 	>
-		<div class={ classes.SidebarHeader }>{ p.Title }</div>
+		{ children... }
+	</div>
+}
+
+// SidebarHeader provides a header for the sidebar
+templ SidebarHeader() {
+	<div class={ classes.SidebarHeader }>
 		{ children... }
 	</div>
 }

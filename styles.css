@@ -287,6 +287,26 @@ input:checked + .popui-switch__input:before {
 .popui-radio-description {
   @apply text-sm text-neutral-500;
 }
+.popui-radio__theme {
+  @apply relative w-7 h-7 rounded-full border-[2px] border-transparent cursor-pointer p-0;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+}
+.popui-radio__theme:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5.10547L8.33333 14.5792L5 11.1841" stroke="white" stroke-width="1.1"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
 
 /* Range */
 .popui-range__input {
@@ -775,9 +795,13 @@ div[contenteditable='true'] .tag {
 .text-left {
   text-align: left;
 }
+.text-center {
+  text-align: center !important;
+}
 .text-dimmed {
   @apply text-neutral-400;
 }
+
 .max-w-md {
   max-width: 28rem;
 }

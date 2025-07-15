@@ -277,6 +277,19 @@ templ formSection() {
 			Value:   "regular-2",
 			Checked: false,
 		})
+		<div class={ classes.InputTextGroup }>
+			@popui.InputRadioTheme(props.InputRadioTheme{
+				Name:    "theme",
+				Value:   props.ColorSherwoodRGB,
+				Variant: props.ColorSherwood,
+				Checked: true,
+			})
+			@popui.InputRadioTheme(props.InputRadioTheme{
+				Name:    "theme",
+				Value:   props.ColorMetalRGB,
+				Variant: props.ColorMetal,
+			})
+		</div>
 		@popui.InputCheckbox(props.InputCheckbox{
 			Label: "Checbox regular",
 			Value: "checkbox-regular",

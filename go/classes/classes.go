@@ -91,6 +91,7 @@ const (
 	RadioLabel        = "popui-radio-label"
 	RadioLabelWrapper = "popui-radio-label__wrapper"
 	RadioDescription  = "popui-radio-description"
+	RadioTheme        = "popui-radio__theme"
 
 	SelectWrapper = "popui-select-wrapper"
 	SelectBase    = "popui-select"

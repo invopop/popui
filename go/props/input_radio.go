@@ -7,6 +7,7 @@ import (
 	"github.com/a-h/templ"
 )
 
+// Theme colors for radio inputs.
 const (
 	ColorSherwood    = "sherwood"
 	ColorOcean       = "ocean"

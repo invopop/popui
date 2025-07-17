@@ -2,21 +2,21 @@ package props
 
 import "github.com/a-h/templ"
 
-// AppHeader Templ component props
-type AppHeader struct {
+// WizardHeader Templ component props
+type WizardHeader struct {
 	Class string
 	Attrs templ.Attributes
 }
 
-// AppContent Templ component props
-type AppContent struct {
+// WizardContent Templ component props
+type WizardContent struct {
 	Class          string
 	CenterVertical bool
 	Attrs          templ.Attributes
 }
 
-// AppFooter Templ component props
-type AppFooter struct {
+// WizardFooter Templ component props
+type WizardFooter struct {
 	Class string
 	Attrs templ.Attributes
 }

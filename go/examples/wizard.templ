@@ -5,7 +5,7 @@ import "github.com/invopop/popui/go/props"
 import "github.com/invopop/popui/go/classes"
 import "github.com/invopop/popui/icons"
 
-templ appLayout() {
+templ wizardLayout() {
 	<html>
 		<head>
 			<title>Invopop - Wizard</title>
@@ -20,8 +20,8 @@ templ appLayout() {
 			@popui.EmbeddedJS()
 			@popui.AlpineJS()
 		</head>
-		<body class={ classes.AppPageWrapper }>
-			@popui.AppHeader(props.AppHeader{}) {
+		<body class={ classes.WizardPageWrapper }>
+			@popui.WizardHeader(props.WizardHeader{}) {
 				@popui.VeriFactuLogo()
 			}
 			{ children... }
@@ -30,8 +30,8 @@ templ appLayout() {
 }
 
 templ AppIndex() {
-	@appLayout() {
-		@popui.AppContent(props.AppContent{CenterVertical: true}) {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{CenterVertical: true}) {
 			@popui.Title() {
 				Registro VERI*FACTU
 			}
@@ -61,8 +61,8 @@ templ AppIndex() {
 }
 
 templ AppStepOne() {
-	@appLayout() {
-		@popui.AppContent(props.AppContent{}) {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{}) {
 			@popui.Title() {
 				Revisa y completa los datos
 			}
@@ -122,7 +122,7 @@ templ AppStepOne() {
 				}
 			</section>
 		}
-		@popui.AppFooter(props.AppFooter{}) {
+		@popui.WizardFooter(props.WizardFooter{}) {
 			<form action="/wizard" method="GET">
 				@popui.Button(props.Button{}) {
 					@icons.ArrowLeft()
@@ -140,8 +140,8 @@ templ AppStepOne() {
 }
 
 templ AppStepTwo() {
-	@appLayout() {
-		@popui.AppContent(props.AppContent{}) {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{}) {
 			@popui.Title() {
 				Descarga y firma el acuerdo
 			}
@@ -162,7 +162,7 @@ templ AppStepTwo() {
 				<iframe src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf" width="100%" height="600px"></iframe>
 			</div>
 		}
-		@popui.AppFooter(props.AppFooter{}) {
+		@popui.WizardFooter(props.WizardFooter{}) {
 			<form action="/wizard/step-one" method="GET">
 				@popui.Button(props.Button{}) {
 					@icons.ArrowLeft()
@@ -180,8 +180,8 @@ templ AppStepTwo() {
 }
 
 templ AppStepThree() {
-	@appLayout() {
-		@popui.AppContent(props.AppContent{}) {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{}) {
 			@popui.Title() {
 				Sube el acuerdo firmado
 			}
@@ -232,7 +232,7 @@ templ AppStepThree() {
 				}
 			</section>
 		}
-		@popui.AppFooter(props.AppFooter{}) {
+		@popui.WizardFooter(props.WizardFooter{}) {
 			<form action="/wizard/step-two" method="GET">
 				@popui.Button(props.Button{}) {
 					@icons.ArrowLeft()
@@ -250,8 +250,8 @@ templ AppStepThree() {
 }
 
 templ AppStepFour() {
-	@appLayout() {
-		@popui.AppContent(props.AppContent{}) {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{}) {
 			@popui.Title() {
 				Sube tu documento de identidad
 			}
@@ -304,7 +304,7 @@ templ AppStepFour() {
 				@popui.InputFile(props.InputFile{})
 			</section>
 		}
-		@popui.AppFooter(props.AppFooter{}) {
+		@popui.WizardFooter(props.WizardFooter{}) {
 			<form action="/wizard/step-three" method="GET">
 				@popui.Button(props.Button{}) {
 					@icons.ArrowLeft()
@@ -322,8 +322,8 @@ templ AppStepFour() {
 }
 
 templ ConfirmPage() {
-	@appLayout() {
-		@popui.AppContent(props.AppContent{}) {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{}) {
 			@popui.Title() {
 				Revisa tus datos
 			}
@@ -405,7 +405,7 @@ templ ConfirmPage() {
 				}
 			</section>
 		}
-		@popui.AppFooter(props.AppFooter{}) {
+		@popui.WizardFooter(props.WizardFooter{}) {
 			<form action="/wizard/step-four" method="GET">
 				@popui.Button(props.Button{}) {
 					@icons.ArrowLeft()
@@ -427,8 +427,8 @@ templ ConfirmPage() {
 }
 
 templ SuccessPage() {
-	@appLayout() {
-		@popui.AppContent(props.AppContent{CenterVertical: true}) {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{CenterVertical: true}) {
 			<div class="popui-layout-center flex-col">
 				@popui.SuccessIcon()
 				<div class="mt-3 mb-1">
@@ -445,8 +445,8 @@ templ SuccessPage() {
 }
 
 templ ErrorPage() {
-	@appLayout() {
-		@popui.AppContent(props.AppContent{CenterVertical: true}) {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{CenterVertical: true}) {
 			<div class="popui-layout-center flex-col">
 				@popui.ErrorIcon()
 				<div class="mt-3">

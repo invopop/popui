@@ -11,8 +11,8 @@ import templruntime "github.com/a-h/templ/runtime"
 import "github.com/invopop/popui/go/props"
 import "github.com/invopop/popui/go/classes"
 
-// AppHeader renders a header for the app
-func AppHeader(p props.AppHeader) templ.Component {
+// WizardHeader renders a header for the wizard app
+func WizardHeader(p props.WizardHeader) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -33,7 +33,7 @@ func AppHeader(p props.AppHeader) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{templ.KV(classes.AppHeader, p.Class == ""),
+		var templ_7745c5c3_Var2 = []any{templ.KV(classes.WizardHeader, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
@@ -47,7 +47,7 @@ func AppHeader(p props.AppHeader) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var2).String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/app.templ`, Line: 1, Col: 0}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/wizard.templ`, Line: 1, Col: 0}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -77,8 +77,8 @@ func AppHeader(p props.AppHeader) templ.Component {
 	})
 }
 
-// AppContent renders the main content area of the app
-func AppContent(p props.AppContent) templ.Component {
+// WizardContent renders the main content area of the wizard app
+func WizardContent(p props.WizardContent) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -99,9 +99,9 @@ func AppContent(p props.AppContent) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var5 = []any{templ.KV(classes.AppContent, p.Class == ""),
+		var templ_7745c5c3_Var5 = []any{templ.KV(classes.WizardContent, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
-			templ.KV(classes.AppContentCenterVertical, p.CenterVertical),
+			templ.KV(classes.WizardContentCenterVertical, p.CenterVertical),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var5...)
 		if templ_7745c5c3_Err != nil {
@@ -114,7 +114,7 @@ func AppContent(p props.AppContent) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var5).String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/app.templ`, Line: 1, Col: 0}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/wizard.templ`, Line: 1, Col: 0}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -144,8 +144,8 @@ func AppContent(p props.AppContent) templ.Component {
 	})
 }
 
-// AppFooter renders a footer for the app
-func AppFooter(p props.AppFooter) templ.Component {
+// WizardFooter renders a footer for the wizard app
+func WizardFooter(p props.WizardFooter) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -166,7 +166,7 @@ func AppFooter(p props.AppFooter) templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var8 = []any{templ.KV(classes.AppFooter, p.Class == ""),
+		var templ_7745c5c3_Var8 = []any{templ.KV(classes.WizardFooter, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var8...)
@@ -180,7 +180,7 @@ func AppFooter(p props.AppFooter) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var8).String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/app.templ`, Line: 1, Col: 0}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/wizard.templ`, Line: 1, Col: 0}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {

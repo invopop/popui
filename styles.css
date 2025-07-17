@@ -113,7 +113,7 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
   @apply opacity-100;
 }
 .popui-button-file {
-  @apply flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-dashed border-neutral-100 bg-white;
+  @apply flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-neutral-100 bg-white;
 }
 .popui-button-file--loading {
   @apply animate-pulse opacity-30 pointer-events-none;
@@ -597,10 +597,10 @@ form {
 .popui-desc-list {
   @apply w-[400px] space-y-4;
 }
-.popui-app-content > div {
+.popui-wizard-content > div {
   @apply lg:w-[840px];
 }
-.popui-app-content .popui-form {
+.popui-wizard-content .popui-form {
   @apply w-full  space-y-4;
 }
 .popui-form__list-item {
@@ -671,7 +671,7 @@ form {
   @apply my-2;
 }
 
-.popui-app-page .popui-divider-wrapper {
+.popui-wizard-page .popui-divider-wrapper {
   @apply my-6;
 }
 .popui-divider {
@@ -987,19 +987,19 @@ form {
 }
 
 /* App */
-.popui-app-page {
+.popui-wizard-page {
   @apply flex flex-col h-screen;
 }
-.popui-app-header {
+.popui-wizard-header {
   @apply flex items-center justify-between gap-2 p-6 border-b border-neutral-100 bg-white;
 }
-.popui-app-content {
+.popui-wizard-content {
   @apply flex-1 flex justify-center overflow-y-auto pb-6 pt-[40px] px-6 bg-white;
 }
-.popui-app-footer {
+.popui-wizard-footer {
   @apply flex items-center justify-end gap-5 px-6 py-4 border-t border-neutral-100 bg-white;
 }
-.popui-app-content__center-vertical {
+.popui-wizard-content__center-vertical {
   @apply items-center;
 }
 

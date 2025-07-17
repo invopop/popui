@@ -79,7 +79,7 @@ templ AppStepOne() {
 						Value:    "Proveedor S.A.",
 						Disabled: true,
 					})
-					<div class="flex gap-4 w-full">
+					<div class={ classes.FormCellGroup }>
 						@popui.InputText(props.InputText{
 							Label:    "Tipo de documento",
 							Value:    "CIF",
@@ -99,7 +99,7 @@ templ AppStepOne() {
 					@popui.Subtitle() {
 						Representante legal
 					}
-					<div class="flex gap-4 w-full">
+					<div class={ classes.FormCellGroup }>
 						@popui.InputText(props.InputText{
 							Label: "Nombre",
 							Value: "Juan",
@@ -109,7 +109,7 @@ templ AppStepOne() {
 							Value: "Perez",
 						})
 					</div>
-					<div class="flex gap-4 w-full">
+					<div class={ classes.FormCellGroup }>
 						@popui.InputText(props.InputText{
 							Label: "Tipo de documento",
 							Value: "NIF",

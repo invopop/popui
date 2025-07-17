@@ -616,7 +616,9 @@ form {
 .popui-admin-wrapper .popui-form {
   @apply flex flex-col gap-2;
 }
-
+.popui-form__cell-group {
+  @apply grid md:grid-cols-2 gap-4 w-full;
+}
 .popui-fieldset {
   @apply border border-neutral-200 p-4 rounded-md space-y-4 relative w-full bg-white;
 }

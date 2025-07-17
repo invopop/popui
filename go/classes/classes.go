@@ -49,8 +49,9 @@ const (
 
 // Form and input and related classes
 const (
-	Form         = "popui-form"
-	FormListItem = "popui-form__list-item"
+	Form          = "popui-form"
+	FormListItem  = "popui-form__list-item"
+	FormCellGroup = "popui-form__cell-group"
 
 	Fieldset       = "popui-fieldset"
 	FieldsetGrayed = "popui-fieldset popui-fieldset__grayed"

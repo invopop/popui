@@ -1,0 +1,25 @@
+package popui
+
+import "github.com/invopop/popui/go/props"
+import "github.com/invopop/popui/go/classes"
+
+templ InputFile(p props.InputFile) {
+	{{ p = p.GenerateID() }}
+	<div class={ classes.InputFile }>
+		<input
+			type="file"
+			id={ p.ID }
+			class={ templ.KV(p.Class, p.Class != "") }
+			if p.Autofocus {
+				autofocus
+			}
+			if p.Name != "" {
+				name={ p.Name }
+			}
+			if p.Value != "" {
+				value={ p.Value }
+			}
+			{ p.Attrs... }
+		/>
+	</div>
+}

@@ -49,9 +49,9 @@ const (
 
 // Form and input and related classes
 const (
-	Form = "popui-form"
-
-	FormListItem = "popui-form__list-item"
+	Form          = "popui-form"
+	FormListItem  = "popui-form__list-item"
+	FormCellGroup = "popui-form__cell-group"
 
 	Fieldset       = "popui-fieldset"
 	FieldsetGrayed = "popui-fieldset popui-fieldset__grayed"
@@ -65,6 +65,8 @@ const (
 	InputTextGroup   = "popui-input-text-group"
 	InputTextBase    = "popui-input-text"
 	InputTextError   = "popui-input-text--error"
+
+	InputFile = "popui-input-file"
 
 	CheckboxWrapper = "popui-checkbox-wrapper"
 	CheckboxInput   = "popui-checkbox-input"
@@ -84,6 +86,7 @@ const (
 	ButtonSpinner     = "popui-button-spinner"
 	ButtonTransparent = "popui-button--transparent"
 	ButtonSmall       = "popui-button--small"
+	ButtonFile        = "popui-button-file"
 
 	Radio             = "popui-radio"
 	RadioWrapper      = "popui-radio-wrapper"
@@ -142,6 +145,15 @@ const (
 	PageBreadcrumbs    = "popui-admin-page__breadcrumbs"
 	PageTitle          = "popui-admin-page-title"
 	PageTitleWrapper   = "popui-admin-page-title__wrapper"
+)
+
+// Page classes
+const (
+	AppPageWrapper           = "popui-app-page"
+	AppHeader                = "popui-app-header"
+	AppContent               = "popui-app-content"
+	AppFooter                = "popui-app-footer"
+	AppContentCenterVertical = "popui-app-content__center-vertical"
 )
 
 // Popover classes

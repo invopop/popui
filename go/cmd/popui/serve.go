@@ -46,6 +46,14 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/", s.index)
 	e.GET("/prose", s.prose)
 	e.GET("/admin", s.admin)
+	e.GET("/wizard", s.appIndex)
+	e.GET("/wizard/step-one", s.appStepOne)
+	e.GET("/wizard/step-two", s.appStepTwo)
+	e.GET("/wizard/step-three", s.appStepThree)
+	e.GET("/wizard/step-four", s.appStepFour)
+	e.GET("/wizard/confirm", s.confirm)
+	e.GET("/wizard/success", s.success)
+	e.GET("/wizard/error", s.error)
 
 	var startErr error
 	go func() {
@@ -79,6 +87,46 @@ func (s *serveOpts) prose(c echo.Context) error {
 // admin shows the admin panel example page
 func (s *serveOpts) admin(c echo.Context) error {
 	return render(c, http.StatusOK, examples.Admin())
+}
+
+// appIndex shows a welcome page for a fullscreen type app
+func (s *serveOpts) appIndex(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppIndex())
+}
+
+// appStepOne shows the first page for a wizard type app
+func (s *serveOpts) appStepOne(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppStepOne())
+}
+
+// appStepTwo shows the second page for a wizard type app
+func (s *serveOpts) appStepTwo(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppStepTwo())
+}
+
+// appStepThree shows the third page for a wizard type app
+func (s *serveOpts) appStepThree(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppStepThree())
+}
+
+// appStepFour shows the fourth page for a wizard type app
+func (s *serveOpts) appStepFour(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppStepFour())
+}
+
+// confirm shows the confirm page for a wizard type app
+func (s *serveOpts) confirm(c echo.Context) error {
+	return render(c, http.StatusOK, examples.ConfirmPage())
+}
+
+// success shows the success page for a wizard type app
+func (s *serveOpts) success(c echo.Context) error {
+	return render(c, http.StatusOK, examples.SuccessPage())
+}
+
+// error shows the success page for a wizard type app
+func (s *serveOpts) error(c echo.Context) error {
+	return render(c, http.StatusOK, examples.ErrorPage())
 }
 
 // render provides a wrapper around the component to make it nice to render.

@@ -80,3 +80,31 @@ templ AnchorButton(p props.AnchorButton) {
 		{ children... }
 	</a>
 }
+
+// FileButton provides a button element for displaying file details
+templ FileButton(p props.FileButton) {
+	<button
+		class={
+			templ.KV(classes.ButtonFile, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		if p.Disabled {
+			disabled
+		}
+		if p.Type != "" {
+			type={ p.Type }
+		}
+		if p.Autofocus {
+			autofocus
+		}
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</button>
+}

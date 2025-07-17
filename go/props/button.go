@@ -28,3 +28,14 @@ type AnchorButton struct {
 	Download bool
 	Attrs    templ.Attributes
 }
+
+// FileButton Templ component props
+type FileButton struct {
+	Type      string
+	Class     string
+	Disabled  bool
+	Autofocus bool
+	Name      string
+	Value     string
+	Attrs     templ.Attributes
+}

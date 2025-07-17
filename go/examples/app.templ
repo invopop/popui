@@ -1,0 +1,470 @@
+package examples
+
+import "github.com/invopop/popui/go"
+import "github.com/invopop/popui/go/props"
+import "github.com/invopop/popui/go/classes"
+import "github.com/invopop/popui/icons"
+
+templ appLayout() {
+	<html>
+		<head>
+			<title>Invopop - Wizard</title>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<style>
+				:root {
+					--workspace-accent-color: black;
+				}
+			</style>
+			@popui.EmbeddedCSS()
+			@popui.EmbeddedJS()
+			@popui.AlpineJS()
+		</head>
+		<body class={ classes.AppPageWrapper }>
+			@popui.AppHeader(props.AppHeader{}) {
+				@popui.VeriFactuLogo()
+			}
+			{ children... }
+		</body>
+	</html>
+}
+
+templ AppIndex() {
+	@appLayout() {
+		@popui.AppContent(props.AppContent{CenterVertical: true}) {
+			@popui.Title() {
+				Registro VERI*FACTU
+			}
+			@popui.Prose() {
+				<section>
+					<p>Firma el acuerdo para poder enviar tus facturas a la AEAT en tu nombre.</p>
+					<p>Para completar el proceso necesitarás:</p>
+					<ul>
+						<li>Descargar el acuerdo</li>
+						<li>Firmar el acuerdo (con firma digital o manuscrita)</li>
+					</ul>
+					<p>Si la firma es manuscrita, también necesitarás:</p>
+					<ul>
+						<li>Documento de representación legal</li>
+						<li>Tu DNI, NIF o Pasaporte</li>
+					</ul>
+				</section>
+			}
+			<form action="/wizard/step-one" method="GET" class="mt-8">
+				@popui.Button(props.Button{Variant: "primary"}) {
+					Comenzar
+					@icons.ArrowRight()
+				}
+			</form>
+		}
+	}
+}
+
+templ AppStepOne() {
+	@appLayout() {
+		@popui.AppContent(props.AppContent{}) {
+			@popui.Title() {
+				Revisa y completa los datos
+			}
+			@popui.Description() {
+				Rellena el formulario con los datos de tu empresa y su representante legal
+			}
+			<section class="mt-8">
+				@popui.Form(props.Form{}) {
+					@popui.Subtitle() {
+						Información de la empresa
+					}
+					@popui.InputText(props.InputText{
+						Label:    "Nombre",
+						Value:    "Proveedor S.A.",
+						Disabled: true,
+					})
+					<div class="flex gap-4 w-full">
+						@popui.InputText(props.InputText{
+							Label:    "Tipo de documento",
+							Value:    "CIF",
+							Disabled: true,
+						})
+						@popui.InputText(props.InputText{
+							Label:    "CIF",
+							Value:    "A12345678",
+							Disabled: true,
+						})
+					</div>
+				}
+			</section>
+			@popui.HorizontalDivider()
+			<section>
+				@popui.Form(props.Form{}) {
+					@popui.Subtitle() {
+						Representante legal
+					}
+					<div class="flex gap-4 w-full">
+						@popui.InputText(props.InputText{
+							Label: "Nombre",
+							Value: "Juan",
+						})
+						@popui.InputText(props.InputText{
+							Label: "Apellidos",
+							Value: "Perez",
+						})
+					</div>
+					<div class="flex gap-4 w-full">
+						@popui.InputText(props.InputText{
+							Label: "Tipo de documento",
+							Value: "NIF",
+						})
+						@popui.InputText(props.InputText{
+							Label: "NIF",
+							Value: "A12345678",
+						})
+					</div>
+				}
+			</section>
+		}
+		@popui.AppFooter(props.AppFooter{}) {
+			<form action="/wizard" method="GET">
+				@popui.Button(props.Button{}) {
+					@icons.ArrowLeft()
+					Atras
+				}
+			</form>
+			<form action="/wizard/step-two" method="GET">
+				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+					Continuar
+					@icons.ArrowRight()
+				}
+			</form>
+		}
+	}
+}
+
+templ AppStepTwo() {
+	@appLayout() {
+		@popui.AppContent(props.AppContent{}) {
+			@popui.Title() {
+				Descarga y firma el acuerdo
+			}
+			<div class="mt-1">
+				@popui.Description() {
+					En este acuerdo darás consentimiento a Invopop S.L. a emitir facturas en tu nombre.
+					<br/>
+					Para continuar descarga el acuerdo y fírmalo.
+				}
+			</div>
+			<div class="mt-8">
+				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+					@icons.Download()
+					Descargar acuerdo
+				}
+			</div>
+			<div class="mt-8">
+				<iframe src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf" width="100%" height="600px"></iframe>
+			</div>
+		}
+		@popui.AppFooter(props.AppFooter{}) {
+			<form action="/wizard/step-one" method="GET">
+				@popui.Button(props.Button{}) {
+					@icons.ArrowLeft()
+					Atras
+				}
+			</form>
+			<form action="/wizard/step-three" method="GET">
+				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+					Continuar
+					@icons.ArrowRight()
+				}
+			</form>
+		}
+	}
+}
+
+templ AppStepThree() {
+	@appLayout() {
+		@popui.AppContent(props.AppContent{}) {
+			@popui.Title() {
+				Sube el acuerdo firmado
+			}
+			@popui.Description() {
+				Si no lo has descargado, vuelve al paso anterior
+			}
+			<section class="mt-8">
+				@popui.Form(props.Form{}) {
+					@popui.Subtitle() {
+						1. ¿Cómo vas a firmar el acuerdo?
+					}
+					@popui.InputRadio(props.InputRadio{
+						Name:        "type",
+						Label:       "Firma digital con certificado de representación legal",
+						Description: "Recomendado. No necesitarás subir más información.",
+						Value:       "digital",
+						Checked:     true,
+					})
+					@popui.InputRadio(props.InputRadio{
+						Name:        "type",
+						Label:       "Firma manuscrita",
+						Description: "Necesitarás subir un documento de representación legal y tu documento de identidad.",
+						Value:       "hand",
+					})
+				}
+			</section>
+			<section class="mt-8">
+				@popui.Form(props.Form{}) {
+					@popui.Subtitle() {
+						2. Sube el acuerdo firmado
+					}
+					<div
+						x-data="{
+							loading: false,
+							showLoader() {
+								this.loading = true;
+								setTimeout(() => {
+									this.loading = false;
+								}, 2000)
+							}
+						}"
+						:class="{'popui-button-file--loading':  loading }"
+					>
+						@popui.InputFile(props.InputFile{Attrs: templ.Attributes{
+							"@change": "showLoader",
+						}})
+					</div>
+				}
+			</section>
+		}
+		@popui.AppFooter(props.AppFooter{}) {
+			<form action="/wizard/step-two" method="GET">
+				@popui.Button(props.Button{}) {
+					@icons.ArrowLeft()
+					Atras
+				}
+			</form>
+			<form action="/wizard/step-four" method="GET">
+				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+					Continuar
+					@icons.ArrowRight()
+				}
+			</form>
+		}
+	}
+}
+
+templ AppStepFour() {
+	@appLayout() {
+		@popui.AppContent(props.AppContent{}) {
+			@popui.Title() {
+				Sube tu documento de identidad
+			}
+			@popui.Description() {
+				Sube un DNI, NIE o Pasaporte para verificar tu identidad.
+			}
+			<section class="mt-8">
+				<div class="popui-layout-between mb-2 items-center">
+					<div class="flex gap-2 items-center">
+						// Quick hack to avoid the icon to be 16x16
+						<span class="popui-full-icon-size text-dimmed">
+							@icons.IdFront()
+						</span>
+						@popui.Subtitle() {
+							Frente o página principal
+						}
+					</div>
+					@popui.Description() {
+						PDF o JPG (tamaño máximo 10MB)
+					}
+				</div>
+				@popui.InputFile(props.InputFile{})
+			</section>
+			<section class="mt-8">
+				<div class="popui-layout-between mb-2 items-center">
+					<div class="flex gap-2 items-center">
+						// Quick hack to avoid the icon to be 16x16
+						<span class="popui-full-icon-size text-dimmed">
+							@icons.IdBack()
+						</span>
+						@popui.Subtitle() {
+							Reverso
+						}
+						@popui.Description() {
+							(Solo en caso de DNI o NIE)
+						}
+					</div>
+					@popui.Description() {
+						PDF o JPG (tamaño máximo 10MB)
+					}
+				</div>
+				<div class="mb-2">
+					@popui.FileButton(props.FileButton{}) {
+						<div class="flex gap-2 items-center">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
+							<p class={ classes.UploadFileText }>dni_back_already_stored.png</p>
+						</div>
+					}
+				</div>
+				@popui.InputFile(props.InputFile{})
+			</section>
+		}
+		@popui.AppFooter(props.AppFooter{}) {
+			<form action="/wizard/step-three" method="GET">
+				@popui.Button(props.Button{}) {
+					@icons.ArrowLeft()
+					Atras
+				}
+			</form>
+			<form action="/wizard/confirm" method="GET">
+				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+					Continuar
+					@icons.ArrowRight()
+				}
+			</form>
+		}
+	}
+}
+
+templ ConfirmPage() {
+	@appLayout() {
+		@popui.AppContent(props.AppContent{}) {
+			@popui.Title() {
+				Revisa tus datos
+			}
+			@popui.Description() {
+				Revisa que la información sea correcta. Una vez enviada no podrás editarla.
+			}
+			<section class="mt-8">
+				<div class="popui-layout-between mb-2 items-center">
+					<div class="flex gap-2 items-center">
+						@icons.Success()
+						@popui.Subtitle() {
+							Información fiscal
+						}
+					</div>
+					@popui.Button(props.Button{Variant: "secondary"}) {
+						@icons.Edit()
+						Editar
+					}
+				</div>
+			</section>
+			<section class="mt-8">
+				<div class="popui-layout-between mb-3 items-center">
+					<div class="flex gap-2 items-center">
+						@icons.Success()
+						@popui.Subtitle() {
+							Acuerdo firmado
+						}
+					</div>
+					@popui.Button(props.Button{Variant: "secondary"}) {
+						@icons.Edit()
+						Editar
+					}
+				</div>
+				@popui.FileButton(props.FileButton{}) {
+					<div class="flex gap-2 items-center">
+						@popui.IconFile()
+						<p class={ classes.UploadFileText }>acuerdo_veri*factu.pdf</p>
+					</div>
+					<div class="flex gap-2 items-center">
+						<p class={ classes.UploadFileText }>Ver</p>
+						@icons.ExternalLink()
+					</div>
+				}
+			</section>
+			<section class="mt-8">
+				<div class="popui-layout-between mb-3 items-center">
+					<div class="flex gap-2 items-center">
+						@icons.Success()
+						@popui.Subtitle() {
+							Documento de identidad
+						}
+					</div>
+					@popui.Button(props.Button{Variant: "secondary"}) {
+						@icons.Edit()
+						Editar
+					}
+				</div>
+				<div class="mb-3">
+					@popui.FileButton(props.FileButton{}) {
+						<div class="flex gap-2 items-center">
+							<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
+							<p class={ classes.UploadFileText }>dni_front.png</p>
+						</div>
+						<div class="flex gap-2 items-center">
+							<p class={ classes.UploadFileText }>Ver</p>
+							@icons.ExternalLink()
+						</div>
+					}
+				</div>
+				@popui.FileButton(props.FileButton{}) {
+					<div class="flex gap-2 items-center">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
+						<p class={ classes.UploadFileText }>dni_back.png</p>
+					</div>
+					<div class="flex gap-2 items-center">
+						<p class={ classes.UploadFileText }>Ver</p>
+						@icons.ExternalLink()
+					</div>
+				}
+			</section>
+		}
+		@popui.AppFooter(props.AppFooter{}) {
+			<form action="/wizard/step-four" method="GET">
+				@popui.Button(props.Button{}) {
+					@icons.ArrowLeft()
+					Atras
+				}
+			</form>
+			<form action="/wizard/success" method="GET">
+				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+					Confirmar
+				}
+			</form>
+			<form action="/wizard/error" method="GET">
+				@popui.Button(props.Button{Variant: "danger", ShowSpinnerOnClick: true}) {
+					Fallar
+				}
+			</form>
+		}
+	}
+}
+
+templ SuccessPage() {
+	@appLayout() {
+		@popui.AppContent(props.AppContent{CenterVertical: true}) {
+			<div class="popui-layout-center flex-col">
+				@popui.SuccessIcon()
+				<div class="mt-3 mb-1">
+					@popui.Subtitle() {
+						Información enviada
+					}
+				</div>
+				@popui.Description() {
+					Verificaremos la documentación enviada.
+				}
+			</div>
+		}
+	}
+}
+
+templ ErrorPage() {
+	@appLayout() {
+		@popui.AppContent(props.AppContent{CenterVertical: true}) {
+			<div class="popui-layout-center flex-col">
+				@popui.ErrorIcon()
+				<div class="mt-3">
+					@popui.Subtitle() {
+						Algo ha salido mal 
+					}
+				</div>
+				<div class="mt-1 mb-6">
+					@popui.Description() {
+						Por favor intenta de nuevo
+					}
+				</div>
+				<form action="/wizard/confirm" method="GET">
+					@popui.Button(props.Button{Variant: "primary"}) {
+						Enviar nuevamente
+					}
+				</form>
+			</div>
+		}
+	}
+}

@@ -9,6 +9,7 @@ import (
 // If no ID is provided, one will be generated to ensure
 // any label is correctly linked to the input element.
 templ InputRadio(p props.InputRadio) {
+	{{ p = p.GenerateID() }}
 	if p.Label != "" {
 		<div class={ classes.CheckboxWrapper }>
 			@inputRadio(p)
@@ -16,7 +17,12 @@ templ InputRadio(p props.InputRadio) {
 				for={ p.ID }
 				class={ templ.KV(classes.CheckboxLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }
 			>
-				{ p.Label }
+				if p.Description != "" {
+					<span class={ classes.RadioLabel }>{ p.Label }</span>
+					<p class={ classes.RadioDescription }>{ p.Description }</p>
+				} else {
+					{ p.Label }
+				}
 			</label>
 		</div>
 	} else {
@@ -27,6 +33,7 @@ templ InputRadio(p props.InputRadio) {
 // InputRadioCard provides an alternative representation of a regular radio
 // button as a card with a description.
 templ InputRadioCard(p props.InputRadio) {
+	{{ p = p.GenerateID() }}
 	<label
 		for={ p.ID }
 		class={ classes.RadioWrapper }
@@ -48,21 +55,11 @@ templ InputRadioCard(p props.InputRadio) {
 // InputRadioTheme is a wrapper for the InputRadio component that applies a theme
 templ InputRadioTheme(p props.InputRadioTheme) {
 	{{ p = p.GenerateVariant() }}
-	@inputRadio(props.InputRadio{
-		ID:        p.ID,
-		Name:      p.Name,
-		Value:     p.Value,
-		Checked:   p.Checked,
-		Autofocus: p.Autofocus,
-		Required:  p.Required,
-		Class:     classes.RadioTheme,
-		Attrs:     p.Attrs,
-	})
+	@inputRadio(p.ToRadioProp())
 }
 
 // Valid variants are "sherwood", "ocean", "grape", "metal" and "cosmos"
 templ inputRadio(p props.InputRadio) {
-	{{ p = p.GenerateID() }}
 	<input
 		type="radio"
 		id={ p.ID }

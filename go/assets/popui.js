@@ -4,6 +4,7 @@ const QUERY_SELECTORS = {
   page: '.popui-admin-page'
 }
 const ACTIVE_MENU_CLASS = 'menu--active'
+const LOADING_CLASS = 'popui-button--loading'
 
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector(QUERY_SELECTORS.hamburgerButton)
@@ -32,9 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // eslint-disable-next-line
 function showButtonSpinner(button) {
-  const LOADING_CLASS = 'popui-button--loading'
   const form = button.form || button.closest('form')
   if (form && form.checkValidity()) {
     button.classList.add(LOADING_CLASS)
   }
 }
+
+// Remove any loading class from buttons after browser buttons navigation
+window.addEventListener('visibilitychange', function () {
+  if (document.visibilityState !== 'visible') return
+  const loadingButtons = document.querySelectorAll(`.${LOADING_CLASS}`)
+  loadingButtons.forEach((button) => {
+    button.classList.remove(LOADING_CLASS)
+  })
+})

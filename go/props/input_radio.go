@@ -5,6 +5,7 @@ import (
 	"math/rand"
 
 	"github.com/a-h/templ"
+	"github.com/invopop/popui/go/classes"
 )
 
 // Theme colors for radio inputs.
@@ -73,22 +74,38 @@ func (i InputRadio) GenerateID() InputRadio {
 	return i
 }
 
-// GenerateVariant returns a new InputRadioTheme instance with the applied variant styles.
-func (i InputRadioTheme) GenerateVariant() InputRadioTheme {
-	if i.Variant == "" {
-		return i
+// ToRadioProp generates a InputRadio prop from an InputRadioTheme prop.
+func (it InputRadioTheme) ToRadioProp() InputRadio {
+	i := InputRadio{
+		ID:        it.ID,
+		Name:      it.Name,
+		Value:     it.Value,
+		Checked:   it.Checked,
+		Autofocus: it.Autofocus,
+		Required:  it.Required,
+		Class:     classes.RadioTheme,
+		Attrs:     it.Attrs,
 	}
 
-	if i.Attrs == nil {
-		i.Attrs = make(map[string]any)
+	return i.GenerateID()
+}
+
+// GenerateVariant returns a new InputRadioTheme instance with the applied variant styles.
+func (it InputRadioTheme) GenerateVariant() InputRadioTheme {
+	if it.Variant == "" {
+		return it
+	}
+
+	if it.Attrs == nil {
+		it.Attrs = make(map[string]any)
 	}
 
 	for _, c := range themeColorList {
-		if c.Name == i.Variant {
-			i.Attrs["style"] = fmt.Sprintf("background-color: %s;", c.RGB)
+		if c.Name == it.Variant {
+			it.Attrs["style"] = fmt.Sprintf("background-color: %s;", c.RGB)
 			break
 		}
 	}
 
-	return i
+	return it
 }

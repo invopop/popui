@@ -147,13 +147,13 @@ const (
 	PageTitleWrapper   = "popui-admin-page-title__wrapper"
 )
 
-// Page classes
+// Wizard classes
 const (
-	AppPageWrapper           = "popui-app-page"
-	AppHeader                = "popui-app-header"
-	AppContent               = "popui-app-content"
-	AppFooter                = "popui-app-footer"
-	AppContentCenterVertical = "popui-app-content__center-vertical"
+	WizardPageWrapper           = "popui-wizard-page"
+	WizardHeader                = "popui-wizard-header"
+	WizardContent               = "popui-wizard-content"
+	WizardFooter                = "popui-wizard-footer"
+	WizardContentCenterVertical = "popui-wizard-content__center-vertical"
 )
 
 // Popover classes

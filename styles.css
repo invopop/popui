@@ -460,19 +460,19 @@ pre {
   @apply text-neutral-500 font-sans text-base;
 }
 .popui-notification {
-  @apply flex px-1 py-0.5 justify-center items-center gap-1 rounded text-sm font-medium self-start;
+  @apply flex px-3 py-2 justify-start items-start gap-2 rounded-lg text-base;
 }
 .popui-notification__info {
-  @apply bg-blue-100 text-blue-500;
+  @apply bg-blue-50 text-blue-500;
 }
 .popui-notification__warning {
-  @apply bg-yellow-100 text-yellow-500;
+  @apply bg-yellow-50 text-yellow-500;
 }
 .popui-notification__success {
-  @apply bg-positive-100 text-positive-500;
+  @apply bg-positive-50 text-positive-500;
 }
-.popui-notification__errir {
-  @apply bg-danger-100 text-danger-500;
+.popui-notification__error {
+  @apply bg-danger-50 text-danger-500;
 }
 
 /* Option Group */
@@ -593,15 +593,15 @@ div[contenteditable='true'] .tag {
 form {
   margin-block-end: 0;
 }
-.popui-form,
+.popui-form__container,
 .popui-desc-list {
   @apply w-[400px] space-y-4;
 }
 .popui-wizard-content > div {
   @apply lg:w-[840px];
 }
-.popui-wizard-content .popui-form {
-  @apply w-full  space-y-4;
+.popui-form__nospacing {
+  @apply space-y-0;
 }
 .popui-form__list-item {
   @apply flex items-center space-x-3 text-base text-neutral-800;
@@ -613,7 +613,7 @@ form {
   @apply mt-0;
 }
 .popui-admin-wrapper .popui-desc-list,
-.popui-admin-wrapper .popui-form {
+.popui-admin-wrapper .popui-form__container {
   @apply flex flex-col gap-2;
 }
 .popui-form__cell-group {
@@ -621,6 +621,9 @@ form {
 }
 .popui-fieldset {
   @apply border border-neutral-200 p-4 rounded-md space-y-4 relative w-full bg-white;
+}
+.popui-fieldset__transparent {
+  @apply border-0 p-0 rounded-none bg-transparent;
 }
 
 .popui-fieldset__grayed {
@@ -672,7 +675,7 @@ form {
 }
 
 .popui-wizard-page .popui-divider-wrapper {
-  @apply my-6;
+  @apply !my-6;
 }
 .popui-divider {
   width: 100%;
@@ -864,6 +867,9 @@ form {
 }
 .text-dimmed {
   @apply text-neutral-400;
+}
+.font-medium {
+  font-weight: 500;
 }
 
 /* Let the svg icon to grow freely */
@@ -1090,7 +1096,7 @@ form {
 
 @media (max-width: 500px) {
   .popui-desc-list,
-  .popui-form {
+  .popui-form__container {
     width: 100%;
   }
 }

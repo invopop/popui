@@ -36,6 +36,9 @@ templ Button(p props.Button) {
 		if p.Value != "" {
 			value={ p.Value }
 		}
+		if p.Form != "" {
+			form={ p.Form }
+		}
 		{ p.Attrs... }
 	>
 		{ children... }

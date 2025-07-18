@@ -22,7 +22,7 @@ templ wizardLayout() {
 		</head>
 		<body class={ classes.WizardPageWrapper }>
 			@popui.WizardHeader(props.WizardHeader{}) {
-				@popui.VeriFactuLogo()
+				@VeriFactuLogo()
 			}
 			{ children... }
 		</body>
@@ -69,72 +69,94 @@ templ AppStepOne() {
 			@popui.Description() {
 				Rellena el formulario con los datos de tu empresa y su representante legal
 			}
-			<section class="mt-8">
-				@popui.Form(props.Form{}) {
-					@popui.Subtitle() {
-						Información de la empresa
-					}
-					@popui.InputText(props.InputText{
-						Label:    "Nombre",
-						Value:    "Proveedor S.A.",
-						Disabled: true,
-					})
-					<div class={ classes.FormCellGroup }>
+			@popui.Form(props.Form{
+				ID:     "party-form",
+				Class:  classes.FormNoSpacing,
+				Action: "/wizard/step-two",
+				Method: "GET",
+			}) {
+				<section class="mt-8">
+					<div class="mb-6">
+						@popui.Notification(props.Notification{
+							Text:        "Titulo error",
+							Description: "Descripción",
+							Type:        "error",
+						})
+						<div class="mt-3">
+							@popui.Notification(props.Notification{
+								Text:        "Titulo aviso",
+								Description: "Descripción",
+								Type:        "warning",
+							})
+						</div>
+					</div>
+					<div class={ classes.Form }>
+						@popui.Subtitle() {
+							Información de la empresa
+						}
 						@popui.InputText(props.InputText{
-							Label:    "Tipo de documento",
-							Value:    "CIF",
+							Label:    "Nombre",
+							Value:    "Proveedor S.A.",
 							Disabled: true,
 						})
-						@popui.InputText(props.InputText{
-							Label:    "CIF",
-							Value:    "A12345678",
-							Disabled: true,
-						})
+						<div class={ classes.FormCellGroup }>
+							@popui.InputText(props.InputText{
+								Label:    "Tipo de documento",
+								Value:    "CIF",
+								Disabled: true,
+							})
+							@popui.InputText(props.InputText{
+								Label:    "CIF",
+								Value:    "A12345678",
+								Disabled: true,
+							})
+						</div>
 					</div>
-				}
-			</section>
-			@popui.HorizontalDivider()
-			<section>
-				@popui.Form(props.Form{}) {
-					@popui.Subtitle() {
-						Representante legal
-					}
-					<div class={ classes.FormCellGroup }>
-						@popui.InputText(props.InputText{
-							Label: "Nombre",
-							Value: "Juan",
-						})
-						@popui.InputText(props.InputText{
-							Label: "Apellidos",
-							Value: "Perez",
-						})
+				</section>
+				@popui.HorizontalDivider()
+				<section>
+					<div class={ classes.Form }>
+						@popui.Subtitle() {
+							Representante legal
+						}
+						<div class={ classes.FormCellGroup }>
+							@popui.InputText(props.InputText{
+								Label: "Nombre",
+								Value: "Juan",
+								Error: props.Error{
+									Text: "This name is cooler than expected",
+								},
+							})
+							@popui.InputText(props.InputText{
+								Label: "Apellidos",
+								Value: "Perez",
+							})
+						</div>
+						<div class={ classes.FormCellGroup }>
+							@popui.InputText(props.InputText{
+								Label: "Tipo de documento",
+								Value: "NIF",
+							})
+							@popui.InputText(props.InputText{
+								Label: "NIF",
+								Value: "A12345678",
+							})
+						</div>
 					</div>
-					<div class={ classes.FormCellGroup }>
-						@popui.InputText(props.InputText{
-							Label: "Tipo de documento",
-							Value: "NIF",
-						})
-						@popui.InputText(props.InputText{
-							Label: "NIF",
-							Value: "A12345678",
-						})
-					</div>
-				}
-			</section>
+				</section>
+			}
 		}
 		@popui.WizardFooter(props.WizardFooter{}) {
-			<form action="/wizard" method="GET">
-				@popui.Button(props.Button{}) {
-					@icons.ArrowLeft()
-					Atras
-				}
-			</form>
-			<form action="/wizard/step-two" method="GET">
-				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
-					Continuar
-					@icons.ArrowRight()
-				}
-			</form>
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard",
+			}) {
+				@icons.ArrowLeft()
+				Atras
+			}
+			@popui.Button(props.Button{Form: "party-form", Variant: "primary", ShowSpinnerOnClick: true}) {
+				Continuar
+				@icons.ArrowRight()
+			}
 		}
 	}
 }

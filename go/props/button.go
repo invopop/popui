@@ -12,6 +12,7 @@ type Button struct {
 	Autofocus          bool
 	Name               string
 	Value              string
+	Form               string
 	ShowSpinnerOnClick bool
 	Attrs              templ.Attributes
 }

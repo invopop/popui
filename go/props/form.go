@@ -4,6 +4,7 @@ import "github.com/a-h/templ"
 
 // Form Templ component props
 type Form struct {
+	ID     string
 	Name   string
 	Action templ.SafeURL
 	Method string

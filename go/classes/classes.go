@@ -49,14 +49,15 @@ const (
 
 // Form and input and related classes
 const (
-	Form          = "popui-form"
+	FormContainer = "popui-form__container"
 	FormNoSpacing = "popui-form popui-form__nospacing"
 	FormListItem  = "popui-form__list-item"
 	FormCellGroup = "popui-form__cell-group"
 
-	Fieldset       = "popui-fieldset"
-	FieldsetGrayed = "popui-fieldset popui-fieldset__grayed"
-	FieldsetLegend = "popui-fieldset-legend"
+	Fieldset         = "popui-fieldset"
+	FieldsetGrayed   = "popui-fieldset popui-fieldset__grayed"
+	FieldsetUnstyled = "popui-fieldset popui-fieldset__transparent"
+	FieldsetLegend   = "popui-fieldset-legend"
 
 	OptionGroup = "popui-option-group"
 

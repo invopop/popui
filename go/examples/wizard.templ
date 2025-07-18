@@ -50,12 +50,12 @@ templ AppIndex() {
 					</ul>
 				</section>
 			}
-			<form action="/wizard/step-one" method="GET" class="mt-8">
-				@popui.Button(props.Button{Variant: "primary"}) {
+			<div class="mt-8">
+				@popui.AnchorButton(props.AnchorButton{Variant: "primary", Href: "/wizard/step-one"}) {
 					Comenzar
 					@icons.ArrowRight()
 				}
-			</form>
+			</div>
 		}
 	}
 }
@@ -69,12 +69,7 @@ templ AppStepOne() {
 			@popui.Description() {
 				Rellena el formulario con los datos de tu empresa y su representante legal
 			}
-			@popui.Form(props.Form{
-				ID:     "party-form",
-				Class:  classes.FormNoSpacing,
-				Action: "/wizard/step-two",
-				Method: "GET",
-			}) {
+			<form id="party-form" action="/wizard/step-two" method="get">
 				<section class="mt-8">
 					<div class="mb-6">
 						@popui.Notification(props.Notification{
@@ -90,7 +85,7 @@ templ AppStepOne() {
 							})
 						</div>
 					</div>
-					<div class={ classes.Form }>
+					@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
 						@popui.Subtitle() {
 							Información de la empresa
 						}
@@ -111,11 +106,11 @@ templ AppStepOne() {
 								Disabled: true,
 							})
 						</div>
-					</div>
+					}
 				</section>
 				@popui.HorizontalDivider()
 				<section>
-					<div class={ classes.Form }>
+					@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
 						@popui.Subtitle() {
 							Representante legal
 						}
@@ -142,9 +137,9 @@ templ AppStepOne() {
 								Value: "A12345678",
 							})
 						</div>
-					</div>
+					}
 				</section>
-			}
+			</form>
 		}
 		@popui.WizardFooter(props.WizardFooter{}) {
 			@popui.AnchorButton(props.AnchorButton{
@@ -185,18 +180,19 @@ templ AppStepTwo() {
 			</div>
 		}
 		@popui.WizardFooter(props.WizardFooter{}) {
-			<form action="/wizard/step-one" method="GET">
-				@popui.Button(props.Button{}) {
-					@icons.ArrowLeft()
-					Atras
-				}
-			</form>
-			<form action="/wizard/step-three" method="GET">
-				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
-					Continuar
-					@icons.ArrowRight()
-				}
-			</form>
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard/step-one",
+			}) {
+				@icons.ArrowLeft()
+				Atras
+			}
+			@popui.AnchorButton(props.AnchorButton{
+				Variant: "primary",
+				Href:    "/wizard/step-three",
+			}) {
+				Continuar
+				@icons.ArrowRight()
+			}
 		}
 	}
 }
@@ -210,33 +206,34 @@ templ AppStepThree() {
 			@popui.Description() {
 				Si no lo has descargado, vuelve al paso anterior
 			}
-			<section class="mt-8">
-				@popui.Form(props.Form{}) {
-					@popui.Subtitle() {
-						1. ¿Cómo vas a firmar el acuerdo?
+			<form id="step-four" action="/wizard/step-four" method="GET">
+				<section class="mt-8">
+					@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
+						@popui.Subtitle() {
+							1. ¿Cómo vas a firmar el acuerdo?
+						}
+						@popui.InputRadio(props.InputRadio{
+							Name:        "type",
+							Label:       "Firma digital con certificado de representación legal",
+							Description: "Recomendado. No necesitarás subir más información.",
+							Value:       "digital",
+							Checked:     true,
+						})
+						@popui.InputRadio(props.InputRadio{
+							Name:        "type",
+							Label:       "Firma manuscrita",
+							Description: "Necesitarás subir un documento de representación legal y tu documento de identidad.",
+							Value:       "hand",
+						})
 					}
-					@popui.InputRadio(props.InputRadio{
-						Name:        "type",
-						Label:       "Firma digital con certificado de representación legal",
-						Description: "Recomendado. No necesitarás subir más información.",
-						Value:       "digital",
-						Checked:     true,
-					})
-					@popui.InputRadio(props.InputRadio{
-						Name:        "type",
-						Label:       "Firma manuscrita",
-						Description: "Necesitarás subir un documento de representación legal y tu documento de identidad.",
-						Value:       "hand",
-					})
-				}
-			</section>
-			<section class="mt-8">
-				@popui.Form(props.Form{}) {
-					@popui.Subtitle() {
-						2. Sube el acuerdo firmado
-					}
-					<div
-						x-data="{
+				</section>
+				<section class="mt-8">
+					@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
+						@popui.Subtitle() {
+							2. Sube el acuerdo firmado
+						}
+						<div
+							x-data="{
 							loading: false,
 							showLoader() {
 								this.loading = true;
@@ -245,28 +242,27 @@ templ AppStepThree() {
 								}, 2000)
 							}
 						}"
-						:class="{'popui-button-file--loading':  loading }"
-					>
-						@popui.InputFile(props.InputFile{Attrs: templ.Attributes{
-							"@change": "showLoader",
-						}})
-					</div>
-				}
-			</section>
+							:class="{'popui-button-file--loading':  loading }"
+						>
+							@popui.InputFile(props.InputFile{Attrs: templ.Attributes{
+								"@change": "showLoader",
+							}})
+						</div>
+					}
+				</section>
+			</form>
 		}
 		@popui.WizardFooter(props.WizardFooter{}) {
-			<form action="/wizard/step-two" method="GET">
-				@popui.Button(props.Button{}) {
-					@icons.ArrowLeft()
-					Atras
-				}
-			</form>
-			<form action="/wizard/step-four" method="GET">
-				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
-					Continuar
-					@icons.ArrowRight()
-				}
-			</form>
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard/step-two",
+			}) {
+				@icons.ArrowLeft()
+				Atras
+			}
+			@popui.Button(props.Button{Form: "step-four", Variant: "primary", ShowSpinnerOnClick: true}) {
+				Continuar
+				@icons.ArrowRight()
+			}
 		}
 	}
 }
@@ -280,65 +276,65 @@ templ AppStepFour() {
 			@popui.Description() {
 				Sube un DNI, NIE o Pasaporte para verificar tu identidad.
 			}
-			<section class="mt-8">
-				<div class="popui-layout-between mb-2 items-center">
-					<div class="flex gap-2 items-center">
-						// Quick hack to avoid the icon to be 16x16
-						<span class="popui-full-icon-size text-dimmed">
-							@icons.IdFront()
-						</span>
-						@popui.Subtitle() {
-							Frente o página principal
-						}
-					</div>
-					@popui.Description() {
-						PDF o JPG (tamaño máximo 10MB)
-					}
-				</div>
-				@popui.InputFile(props.InputFile{})
-			</section>
-			<section class="mt-8">
-				<div class="popui-layout-between mb-2 items-center">
-					<div class="flex gap-2 items-center">
-						// Quick hack to avoid the icon to be 16x16
-						<span class="popui-full-icon-size text-dimmed">
-							@icons.IdBack()
-						</span>
-						@popui.Subtitle() {
-							Reverso
-						}
-						@popui.Description() {
-							(Solo en caso de DNI o NIE)
-						}
-					</div>
-					@popui.Description() {
-						PDF o JPG (tamaño máximo 10MB)
-					}
-				</div>
-				<div class="mb-2">
-					@popui.FileButton(props.FileButton{}) {
+			<form id="confirm" action="/wizard/confirm" method="GET">
+				<section class="mt-8">
+					<div class="popui-layout-between mb-2 items-center">
 						<div class="flex gap-2 items-center">
-							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
-							<p class={ classes.UploadFileText }>dni_back_already_stored.png</p>
+							// Quick hack to avoid the icon to be 16x16
+							<span class="popui-full-icon-size text-dimmed">
+								@icons.IdFront()
+							</span>
+							@popui.Subtitle() {
+								Frente o página principal
+							}
 						</div>
-					}
-				</div>
-				@popui.InputFile(props.InputFile{})
-			</section>
+						@popui.Description() {
+							PDF o JPG (tamaño máximo 10MB)
+						}
+					</div>
+					@popui.InputFile(props.InputFile{})
+				</section>
+				<section class="mt-8">
+					<div class="popui-layout-between mb-2 items-center">
+						<div class="flex gap-2 items-center">
+							// Quick hack to avoid the icon to be 16x16
+							<span class="popui-full-icon-size text-dimmed">
+								@icons.IdBack()
+							</span>
+							@popui.Subtitle() {
+								Reverso
+							}
+							@popui.Description() {
+								(Solo en caso de DNI o NIE)
+							}
+						</div>
+						@popui.Description() {
+							PDF o JPG (tamaño máximo 10MB)
+						}
+					</div>
+					<div class="mb-2">
+						@popui.FileButton(props.FileButton{}) {
+							<div class="flex gap-2 items-center">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
+								<p class={ classes.UploadFileText }>dni_back_already_stored.png</p>
+							</div>
+						}
+					</div>
+					@popui.InputFile(props.InputFile{})
+				</section>
+			</form>
 		}
 		@popui.WizardFooter(props.WizardFooter{}) {
-			<form action="/wizard/step-three" method="GET">
-				@popui.Button(props.Button{}) {
-					@icons.ArrowLeft()
-					Atras
-				}
-			</form>
-			<form action="/wizard/confirm" method="GET">
-				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
-					Continuar
-					@icons.ArrowRight()
-				}
-			</form>
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard/step-three",
+			}) {
+				@icons.ArrowLeft()
+				Atras
+			}
+			@popui.Button(props.Button{Form: "confirm", Variant: "primary", ShowSpinnerOnClick: true}) {
+				Continuar
+				@icons.ArrowRight()
+			}
 		}
 	}
 }
@@ -352,98 +348,99 @@ templ ConfirmPage() {
 			@popui.Description() {
 				Revisa que la información sea correcta. Una vez enviada no podrás editarla.
 			}
-			<section class="mt-8">
-				<div class="popui-layout-between mb-2 items-center">
-					<div class="flex gap-2 items-center">
-						@icons.Success()
-						@popui.Subtitle() {
-							Información fiscal
+			<form id="success" action="/wizard/success" method="GET">
+				<section class="mt-8">
+					<div class="popui-layout-between mb-2 items-center">
+						<div class="flex gap-2 items-center">
+							@icons.Success()
+							@popui.Subtitle() {
+								Información fiscal
+							}
+						</div>
+						@popui.Button(props.Button{Variant: "secondary"}) {
+							@icons.Edit()
+							Editar
 						}
 					</div>
-					@popui.Button(props.Button{Variant: "secondary"}) {
-						@icons.Edit()
-						Editar
-					}
-				</div>
-			</section>
-			<section class="mt-8">
-				<div class="popui-layout-between mb-3 items-center">
-					<div class="flex gap-2 items-center">
-						@icons.Success()
-						@popui.Subtitle() {
-							Acuerdo firmado
+				</section>
+				<section class="mt-8">
+					<div class="popui-layout-between mb-3 items-center">
+						<div class="flex gap-2 items-center">
+							@icons.Success()
+							@popui.Subtitle() {
+								Acuerdo firmado
+							}
+						</div>
+						@popui.Button(props.Button{Variant: "secondary"}) {
+							@icons.Edit()
+							Editar
 						}
 					</div>
-					@popui.Button(props.Button{Variant: "secondary"}) {
-						@icons.Edit()
-						Editar
-					}
-				</div>
-				@popui.FileButton(props.FileButton{}) {
-					<div class="flex gap-2 items-center">
-						@popui.IconFile()
-						<p class={ classes.UploadFileText }>acuerdo_veri*factu.pdf</p>
-					</div>
-					<div class="flex gap-2 items-center">
-						<p class={ classes.UploadFileText }>Ver</p>
-						@icons.ExternalLink()
-					</div>
-				}
-			</section>
-			<section class="mt-8">
-				<div class="popui-layout-between mb-3 items-center">
-					<div class="flex gap-2 items-center">
-						@icons.Success()
-						@popui.Subtitle() {
-							Documento de identidad
-						}
-					</div>
-					@popui.Button(props.Button{Variant: "secondary"}) {
-						@icons.Edit()
-						Editar
-					}
-				</div>
-				<div class="mb-3">
 					@popui.FileButton(props.FileButton{}) {
 						<div class="flex gap-2 items-center">
-							<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
-							<p class={ classes.UploadFileText }>dni_front.png</p>
+							@popui.IconFile()
+							<p class={ classes.UploadFileText }>acuerdo_veri*factu.pdf</p>
 						</div>
 						<div class="flex gap-2 items-center">
 							<p class={ classes.UploadFileText }>Ver</p>
 							@icons.ExternalLink()
 						</div>
 					}
-				</div>
-				@popui.FileButton(props.FileButton{}) {
-					<div class="flex gap-2 items-center">
-						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
-						<p class={ classes.UploadFileText }>dni_back.png</p>
+				</section>
+				<section class="mt-8">
+					<div class="popui-layout-between mb-3 items-center">
+						<div class="flex gap-2 items-center">
+							@icons.Success()
+							@popui.Subtitle() {
+								Documento de identidad
+							}
+						</div>
+						@popui.Button(props.Button{Variant: "secondary"}) {
+							@icons.Edit()
+							Editar
+						}
 					</div>
-					<div class="flex gap-2 items-center">
-						<p class={ classes.UploadFileText }>Ver</p>
-						@icons.ExternalLink()
+					<div class="mb-3">
+						@popui.FileButton(props.FileButton{}) {
+							<div class="flex gap-2 items-center">
+								<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
+								<p class={ classes.UploadFileText }>dni_front.png</p>
+							</div>
+							<div class="flex gap-2 items-center">
+								<p class={ classes.UploadFileText }>Ver</p>
+								@icons.ExternalLink()
+							</div>
+						}
 					</div>
-				}
-			</section>
+					@popui.FileButton(props.FileButton{}) {
+						<div class="flex gap-2 items-center">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
+							<p class={ classes.UploadFileText }>dni_back.png</p>
+						</div>
+						<div class="flex gap-2 items-center">
+							<p class={ classes.UploadFileText }>Ver</p>
+							@icons.ExternalLink()
+						</div>
+					}
+				</section>
+			</form>
 		}
 		@popui.WizardFooter(props.WizardFooter{}) {
-			<form action="/wizard/step-four" method="GET">
-				@popui.Button(props.Button{}) {
-					@icons.ArrowLeft()
-					Atras
-				}
-			</form>
-			<form action="/wizard/success" method="GET">
-				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
-					Confirmar
-				}
-			</form>
-			<form action="/wizard/error" method="GET">
-				@popui.Button(props.Button{Variant: "danger", ShowSpinnerOnClick: true}) {
-					Fallar
-				}
-			</form>
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard/step-four",
+			}) {
+				@icons.ArrowLeft()
+				Atras
+			}
+			@popui.Button(props.Button{Form: "success", Variant: "primary", ShowSpinnerOnClick: true}) {
+				Confirmar
+			}
+			@popui.AnchorButton(props.AnchorButton{
+				Href:    "/wizard/error",
+				Variant: "danger",
+			}) {
+				Fallar
+			}
 		}
 	}
 }

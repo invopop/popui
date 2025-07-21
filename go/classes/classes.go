@@ -87,6 +87,7 @@ const (
 	ButtonLoading     = "popui-button--loading"
 	ButtonSpinner     = "popui-button-spinner"
 	ButtonTransparent = "popui-button--transparent"
+	ButtonGhost       = "popui-button--ghost"
 	ButtonSmall       = "popui-button--small"
 	ButtonFile        = "popui-button-file"
 

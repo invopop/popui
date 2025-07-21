@@ -362,6 +362,56 @@ templ ConfirmPage() {
 							Editar
 						}
 					</div>
+					<div class="mt-4">
+						<div class="font-medium mb-4">
+							@popui.Description() {
+								Información de la empresa
+							}
+						</div>
+						@popui.Table(props.Table{}) {
+							<col style="width: 20%"/>
+							<col style="width: 80%"/>
+							<tbody>
+								<tr>
+									<td>Nombre</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "Proveedor S.A."})
+								</tr>
+								<tr>
+									<td>NIF</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "A87654321"})
+								</tr>
+								<tr>
+									<td>Calle</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "Calle de Eixample, 456, Barcelona, Cataluña, 08001, España"})
+								</tr>
+							</tbody>
+						}
+					</div>
+					<div class="mt-4">
+						<div class="font-medium mb-4">
+							@popui.Description() {
+								Representante legal
+							}
+						</div>
+						@popui.Table(props.Table{}) {
+							<col style="width: 20%"/>
+							<col style="width: 80%"/>
+							<tbody>
+								<tr>
+									<td>Nombre</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "Juan Perez"})
+								</tr>
+								<tr>
+									<td>NIF</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "A87654321"})
+								</tr>
+								<tr>
+									<td>Calle</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "Calle de Eixample, 456, Barcelona, Cataluña, 08001, España"})
+								</tr>
+							</tbody>
+						}
+					</div>
 				</section>
 				<section class="mt-8">
 					<div class="popui-layout-between mb-3 items-center">
@@ -381,10 +431,10 @@ templ ConfirmPage() {
 							@popui.IconFile()
 							<p class={ classes.UploadFileText }>acuerdo_veri*factu.pdf</p>
 						</div>
-						<div class="flex gap-2 items-center">
-							<p class={ classes.UploadFileText }>Ver</p>
+						@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+							Ver
 							@icons.ExternalLink()
-						</div>
+						}
 					}
 				</section>
 				<section class="mt-8">
@@ -406,10 +456,10 @@ templ ConfirmPage() {
 								<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
 								<p class={ classes.UploadFileText }>dni_front.png</p>
 							</div>
-							<div class="flex gap-2 items-center">
-								<p class={ classes.UploadFileText }>Ver</p>
+							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+								Ver
 								@icons.ExternalLink()
-							</div>
+							}
 						}
 					</div>
 					@popui.FileButton(props.FileButton{}) {
@@ -417,10 +467,10 @@ templ ConfirmPage() {
 							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
 							<p class={ classes.UploadFileText }>dni_back.png</p>
 						</div>
-						<div class="flex gap-2 items-center">
-							<p class={ classes.UploadFileText }>Ver</p>
+						@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+							Ver
 							@icons.ExternalLink()
-						</div>
+						}
 					}
 				</section>
 			</form>

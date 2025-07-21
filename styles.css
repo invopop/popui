@@ -440,7 +440,7 @@ input:checked + .popui-switch__input:before {
   @apply font-sans text-black text-2xl font-semibold;
 }
 .popui-subtitle {
-  @apply font-sans text-lg text-neutral-800 font-medium;
+  @apply font-sans text-base text-neutral-800 font-medium;
 }
 .popui-info {
   @apply font-sans text-sm text-neutral-500 flex items-center gap-1;

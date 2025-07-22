@@ -14,7 +14,8 @@ const (
 )
 
 // Card provides a UI element for wrapping general information.
-templ Card(p props.Card) {
+templ Card(opts ...props.Card) {
+	{{ p := props.First(opts) }}
 	if p.URL != "" {
 		<a
 			href={ p.URL }
@@ -48,32 +49,35 @@ templ Card(p props.Card) {
 
 // CardHeader can be used as part of a Card component or standalone.
 // It provides an Avatar/Initial, Country Flag, Title and a free slot.
-templ CardHeader(h props.CardHeader) {
+templ CardHeader(opts ...props.CardHeader) {
+	{{ p := props.First(opts) }}
 	<div
 		class={
-			templ.KV(classes.CardHeader, h.Class == ""),
-			templ.KV(h.Class, h.Class != ""),
+			templ.KV(classes.CardHeader, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
 		}
-		{ h.Attrs... }
+		{ p.Attrs... }
 	>
-		if !h.HideAvatar {
+		if !p.HideAvatar {
 			<div style="position: relative;">
-				if h.ImgSrc != "" {
+				if p.ImgSrc != "" {
 					@Avatar(props.Avatar{Large: true}) {
-						@Image(props.Image{Src: h.ImgSrc})
+						@Image(props.Image{Src: p.ImgSrc})
 					}
-				} else if h.Title != "" {
-					@Avatar(props.Avatar{Large: true, Initial: string(h.Title[0])})
+				} else if p.Title != "" {
+					@Avatar(props.Avatar{Large: true, Initial: string(p.Title[0])})
 				}
-				if h.FlagISO != "" {
-					<img class={ classes.CardHeaderFlag } src={ flagProviderURL + h.FlagISO + ".svg" } width="12"/>
+				if p.FlagISO != "" {
+					<img class={ classes.CardHeaderFlag } src={ flagProviderURL + p.FlagISO + ".svg" } width="12"/>
 				}
 			</div>
 		}
-		if h.Title != "" {
+		if p.Title != "" {
 			<div class={ classes.CardHeaderTitle }>
-				<p>{ h.Title }</p>
-				<p>{ h.Subtitle }</p>
+				<p>{ p.Title }</p>
+				if p.Subtitle != "" {
+					<p>{ p.Subtitle }</p>
+				}
 			</div>
 		}
 		{ children... }
@@ -81,7 +85,8 @@ templ CardHeader(h props.CardHeader) {
 }
 
 // CardProgressBar provides a UI element for wrapping info with a progress bar.
-templ CardProgressBar(p props.CardProgressBar) {
+templ CardProgressBar(opts ...props.CardProgressBar) {
+	{{ p := props.First(opts) }}
 	{{ f := p.Formatter() }}
 	<div
 		class={
@@ -135,7 +140,8 @@ templ CardDashboard(p props.CardDashboard) {
 }
 
 // CardFile provides a card for displaying file details
-templ CardFile(p props.CardFile) {
+templ CardFile(opts ...props.CardFile) {
+	{{ p := props.First(opts) }}
 	<div
 		class={
 			templ.KV(classes.CardFile, p.Class == ""),

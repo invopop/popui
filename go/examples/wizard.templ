@@ -21,7 +21,7 @@ templ wizardLayout() {
 			@popui.AlpineJS()
 		</head>
 		<body class={ classes.WizardPageWrapper }>
-			@popui.WizardHeader(props.WizardHeader{}) {
+			@popui.WizardHeader() {
 				@VeriFactuLogo()
 			}
 			{ children... }
@@ -62,7 +62,7 @@ templ AppIndex() {
 
 templ AppStepOne() {
 	@wizardLayout() {
-		@popui.WizardContent(props.WizardContent{}) {
+		@popui.WizardContent() {
 			@popui.Title() {
 				Revisa y completa los datos
 			}
@@ -85,7 +85,7 @@ templ AppStepOne() {
 							})
 						</div>
 					</div>
-					@popui.Fieldset(props.Fieldset{}) {
+					@popui.Fieldset() {
 						@popui.Subtitle() {
 							Información de la empresa
 						}
@@ -141,7 +141,7 @@ templ AppStepOne() {
 				</section>
 			</form>
 		}
-		@popui.WizardFooter(props.WizardFooter{}) {
+		@popui.WizardFooter() {
 			@popui.AnchorButton(props.AnchorButton{
 				Href: "/wizard",
 			}) {
@@ -524,7 +524,7 @@ templ ErrorPage() {
 				@popui.ErrorIcon()
 				<div class="mt-3">
 					@popui.Subtitle() {
-						Algo ha salido mal 
+						Algo ha salido mal
 					}
 				</div>
 				<div class="mt-1 mb-6">

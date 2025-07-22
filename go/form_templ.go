@@ -155,9 +155,8 @@ func Form(p props.Form) templ.Component {
 	})
 }
 
-// Fieldset helps group a set of form elements together with a
-// useful legend.
-func Fieldset(p props.Fieldset) templ.Component {
+// Fieldset groups a set of form fields together with correct vertical spacing.
+func Fieldset(opts ...props.Fieldset) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -178,6 +177,7 @@ func Fieldset(p props.Fieldset) templ.Component {
 			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var9 = []any{templ.KV(classes.Fieldset, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
@@ -260,7 +260,7 @@ func Fieldset(p props.Fieldset) templ.Component {
 }
 
 // FieldsetCard is a Fieldset styled as a Card.
-func FieldsetCard(p props.Fieldset) templ.Component {
+func FieldsetCard(opts ...props.Fieldset) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -281,6 +281,7 @@ func FieldsetCard(p props.Fieldset) templ.Component {
 			templ_7745c5c3_Var14 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 
 		c := classes.FieldsetCard
 		if p.Class != "" {
@@ -319,7 +320,7 @@ func FieldsetCard(p props.Fieldset) templ.Component {
 
 // OptionGroup helps group a set of form elements together
 // such as checkboxes and radio buttons with a useful label
-func OptionGroup(p props.OptionGroup) templ.Component {
+func OptionGroup(opts ...props.OptionGroup) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -340,6 +341,7 @@ func OptionGroup(p props.OptionGroup) templ.Component {
 			templ_7745c5c3_Var16 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var17 = []any{templ.KV(classes.OptionGroup, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
@@ -388,7 +390,7 @@ func OptionGroup(p props.OptionGroup) templ.Component {
 				var templ_7745c5c3_Var20 string
 				templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(p.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/form.templ`, Line: 82, Col: 13}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/form.templ`, Line: 84, Col: 13}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 				if templ_7745c5c3_Err != nil {
@@ -414,7 +416,7 @@ func OptionGroup(p props.OptionGroup) templ.Component {
 }
 
 // InputTitle provides a title for a form element
-func InputTitle(p props.InputTitle) templ.Component {
+func InputTitle(opts ...props.InputTitle) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -435,6 +437,7 @@ func InputTitle(p props.InputTitle) templ.Component {
 			templ_7745c5c3_Var21 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var22 = []any{classes.InputTitle}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var22...)
 		if templ_7745c5c3_Err != nil {
@@ -484,7 +487,7 @@ func InputTitle(p props.InputTitle) templ.Component {
 			var templ_7745c5c3_Var25 string
 			templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(p.Title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/form.templ`, Line: 93, Col: 33}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/form.templ`, Line: 96, Col: 33}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 			if templ_7745c5c3_Err != nil {

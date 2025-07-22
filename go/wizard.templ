@@ -4,7 +4,8 @@ import "github.com/invopop/popui/go/props"
 import "github.com/invopop/popui/go/classes"
 
 // WizardHeader renders a header for the wizard app
-templ WizardHeader(p props.WizardHeader) {
+templ WizardHeader(opts ...props.WizardHeader) {
+	{{ p := props.First(opts) }}
 	<header
 		class={
 			templ.KV(classes.WizardHeader, p.Class == ""),
@@ -17,7 +18,8 @@ templ WizardHeader(p props.WizardHeader) {
 }
 
 // WizardContent renders the main content area of the wizard app
-templ WizardContent(p props.WizardContent) {
+templ WizardContent(opts ...props.WizardContent) {
+	{{ p := props.First(opts) }}
 	<main
 		class={
 			templ.KV(classes.WizardContent, p.Class == ""),
@@ -33,7 +35,8 @@ templ WizardContent(p props.WizardContent) {
 }
 
 // WizardFooter renders a footer for the wizard app
-templ WizardFooter(p props.WizardFooter) {
+templ WizardFooter(opts ...props.WizardFooter) {
+	{{ p := props.First(opts) }}
 	<footer
 		class={
 			templ.KV(classes.WizardFooter, p.Class == ""),

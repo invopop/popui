@@ -14,7 +14,7 @@ import (
 )
 
 // Tabs provides the tabs container element
-func Tabs(p props.Tabs) templ.Component {
+func Tabs(opts ...props.Tabs) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -35,6 +35,7 @@ func Tabs(p props.Tabs) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var2 = []any{templ.KV(classes.Tabs, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
@@ -81,7 +82,7 @@ func Tabs(p props.Tabs) templ.Component {
 
 // Tab provides a single tab element
 // It is used inside a Tabs container.
-func Tab(p props.Tab) templ.Component {
+func Tab(opts ...props.Tab) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -102,6 +103,7 @@ func Tab(p props.Tab) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var5 = []any{templ.KV(classes.Tab, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}

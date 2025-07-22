@@ -14,7 +14,7 @@ import (
 )
 
 // Sidebar provides a wrapper for sidebars on admin panels
-func Sidebar(p props.Sidebar) templ.Component {
+func Sidebar(opts ...props.Sidebar) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -35,6 +35,7 @@ func Sidebar(p props.Sidebar) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var2 = []any{templ.KV(classes.Sidebar, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
@@ -193,7 +194,7 @@ func SidebarContent() templ.Component {
 
 // Sidebar provides a wrapper for a ul element used in Sidebar component
 // Expects a set of li elements as slot
-func SidebarSection(p props.SidebarSection) templ.Component {
+func SidebarSection(opts ...props.SidebarSection) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -214,6 +215,7 @@ func SidebarSection(p props.SidebarSection) templ.Component {
 			templ_7745c5c3_Var10 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var11 = []any{templ.KV(classes.SidebarSection, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
@@ -254,7 +256,7 @@ func SidebarSection(p props.SidebarSection) templ.Component {
 			var templ_7745c5c3_Var13 string
 			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(p.Title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/sidebar.templ`, Line: 46, Col: 15}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/sidebar.templ`, Line: 48, Col: 15}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 			if templ_7745c5c3_Err != nil {

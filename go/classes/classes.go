@@ -52,7 +52,6 @@ const (
 // Form and input and related classes
 const (
 	FormContainer = "popui-form__container"
-	FormNoSpacing = "popui-form popui-form__nospacing"
 	FormListItem  = "popui-form__list-item"
 	FormCellGroup = "popui-form__cell-group"
 

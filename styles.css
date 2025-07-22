@@ -593,15 +593,14 @@ div[contenteditable='true'] .tag {
 form {
   margin-block-end: 0;
 }
-.popui-form__container,
+.popui-form__container {
+  @apply w-[400px];
+}
 .popui-desc-list {
   @apply w-[400px] space-y-4;
 }
 .popui-wizard-content > div {
   @apply lg:w-[840px];
-}
-.popui-wizard-content .popui-form__container {
-  @apply w-full;
 }
 .popui-form__nospacing {
   @apply space-y-0;
@@ -623,10 +622,12 @@ form {
   @apply grid md:grid-cols-2 gap-4 w-full;
 }
 .popui-fieldset {
-  @apply border border-neutral-200 p-4 rounded-md space-y-4 relative w-full bg-white;
+  @apply space-y-4 relative w-full;
 }
-
-.popui-fieldset__grayed {
+.popui-fieldset__card {
+  @apply border border-neutral-200 p-4 rounded-md bg-white;
+}
+.popui-fieldset__card-grayed {
   @apply bg-neutral-50;
 }
 

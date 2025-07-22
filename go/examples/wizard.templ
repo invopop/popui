@@ -85,7 +85,7 @@ templ AppStepOne() {
 							})
 						</div>
 					</div>
-					@popui.FormContainer() {
+					@popui.Fieldset(props.Fieldset{}) {
 						@popui.Subtitle() {
 							Información de la empresa
 						}
@@ -110,7 +110,7 @@ templ AppStepOne() {
 				</section>
 				@popui.HorizontalDivider()
 				<section>
-					@popui.FormContainer() {
+					@popui.Fieldset(props.Fieldset{}) {
 						@popui.Subtitle() {
 							Representante legal
 						}
@@ -208,7 +208,7 @@ templ AppStepThree() {
 			}
 			<form id="step-four" action="/wizard/step-four" method="GET">
 				<section class="mt-8">
-					@popui.FormContainer() {
+					@popui.Fieldset(props.Fieldset{}) {
 						@popui.Subtitle() {
 							1. ¿Cómo vas a firmar el acuerdo?
 						}
@@ -228,7 +228,7 @@ templ AppStepThree() {
 					}
 				</section>
 				<section class="mt-8">
-					@popui.FormContainer() {
+					@popui.Fieldset(props.Fieldset{}) {
 						@popui.Subtitle() {
 							2. Sube el acuerdo firmado
 						}

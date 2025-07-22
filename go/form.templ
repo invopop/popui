@@ -30,13 +30,6 @@ templ Form(p props.Form) {
 	</form>
 }
 
-// FormContainer is a wrapper to propperly space the inputs inside a form
-templ FormContainer() {
-	<div class={ classes.FormContainer }>
-		{ children... }
-	</div>
-}
-
 // Fieldset helps group a set of form elements together with a
 // useful legend.
 templ Fieldset(p props.Fieldset) {
@@ -54,6 +47,24 @@ templ Fieldset(p props.Fieldset) {
 		}
 		{ children... }
 	</fieldset>
+}
+
+// FieldsetCard is a Fieldset styled as a Card.
+templ FieldsetCard(p props.Fieldset) {
+	{{
+		c := classes.FieldsetCard
+		if p.Class != "" {
+			c = p.Class
+		}
+	}}
+	@Fieldset(props.Fieldset{
+		Legend:      p.Legend,
+		Attrs:       p.Attrs,
+		Class:       c,
+		LegendAttrs: p.LegendAttrs,
+	}) {
+		{ children... }
+	}
 }
 
 // OptionGroup helps group a set of form elements together

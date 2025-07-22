@@ -55,9 +55,10 @@ const (
 	FormListItem  = "popui-form__list-item"
 	FormCellGroup = "popui-form__cell-group"
 
-	Fieldset       = "popui-fieldset"
-	FieldsetGrayed = "popui-fieldset popui-fieldset__grayed"
-	FieldsetLegend = "popui-fieldset-legend"
+	Fieldset           = "popui-fieldset"
+	FieldsetCard       = "popui-fieldset popui-fieldset__card"
+	FieldsetCardGrayed = "popui-fieldset popui-fieldset__card popui-fieldset__card-grayed"
+	FieldsetLegend     = "popui-fieldset-legend"
 
 	OptionGroup = "popui-option-group"
 

@@ -75,7 +75,7 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 
 /* Button */
 .popui-button {
-  @apply inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base gap-1;
+  @apply cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base gap-1;
 }
 .popui-button--transparent {
   @apply border-0;
@@ -112,12 +112,6 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 .popui-button--loading .popui-button-spinner {
   @apply opacity-100;
 }
-.popui-button-file {
-  @apply flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-neutral-100 bg-white;
-}
-.popui-button-file--loading {
-  @apply animate-pulse opacity-30 pointer-events-none;
-}
 
 /* Card */
 .popui-card {
@@ -146,6 +140,9 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 }
 .popui-card__header-flag {
   @apply absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-white;
+}
+.popui-card-file {
+  @apply flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-neutral-100 bg-white text-base text-neutral-800 font-medium;
 }
 
 /* Card Progress Bar */
@@ -428,6 +425,9 @@ input:checked + .popui-switch__input:before {
 .popui-input-file:has(input[type='file']:valid) span {
   color: green;
 }
+.popui-input-file--loading {
+  @apply animate-pulse opacity-30 pointer-events-none;
+}
 
 /* Text */
 .popui-paragraph {
@@ -600,6 +600,9 @@ form {
 .popui-wizard-content > div {
   @apply lg:w-[840px];
 }
+.popui-wizard-content .popui-form__container {
+  @apply w-full;
+}
 .popui-form__nospacing {
   @apply space-y-0;
 }
@@ -621,9 +624,6 @@ form {
 }
 .popui-fieldset {
   @apply border border-neutral-200 p-4 rounded-md space-y-4 relative w-full bg-white;
-}
-.popui-fieldset__transparent {
-  @apply border-0 p-0 rounded-none bg-transparent;
 }
 
 .popui-fieldset__grayed {

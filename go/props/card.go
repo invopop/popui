@@ -52,6 +52,12 @@ type CardDashboardItem struct {
 	Attrs templ.Attributes
 }
 
+// CardFile Templ component props
+type CardFile struct {
+	Class string
+	Attrs templ.Attributes
+}
+
 // PercentValue returns the progress percentage, capped at 100.
 func (p CardProgressBar) PercentValue() int64 {
 	percent := int64((float64(p.Current) / float64(p.Total)) * 100)

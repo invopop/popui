@@ -5,6 +5,38 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
+// Deprecated: Use HTML <form> instead. This method will be removed in future versions.
+templ Form(p props.Form) {
+	<form
+		class={
+			templ.KV(classes.FormContainer, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		if (p.Name != "") {
+			name={ p.Name }
+		}
+		if (p.Action != "") {
+			action={ p.Action }
+		}
+		if (p.Method != "") {
+			method={ p.Method }
+		}
+		if (p.Target != "") {
+			target={ p.Target }
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</form>
+}
+
+// FormContainer is a wrapper to propperly space the inputs inside a form
+templ FormContainer() {
+	<div class={ classes.FormContainer }>
+		{ children... }
+	</div>
+}
+
 // Fieldset helps group a set of form elements together with a
 // useful legend.
 templ Fieldset(p props.Fieldset) {

@@ -85,7 +85,7 @@ templ AppStepOne() {
 							})
 						</div>
 					</div>
-					@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
+					@popui.FormContainer() {
 						@popui.Subtitle() {
 							Información de la empresa
 						}
@@ -110,7 +110,7 @@ templ AppStepOne() {
 				</section>
 				@popui.HorizontalDivider()
 				<section>
-					@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
+					@popui.FormContainer() {
 						@popui.Subtitle() {
 							Representante legal
 						}
@@ -208,7 +208,7 @@ templ AppStepThree() {
 			}
 			<form id="step-four" action="/wizard/step-four" method="GET">
 				<section class="mt-8">
-					@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
+					@popui.FormContainer() {
 						@popui.Subtitle() {
 							1. ¿Cómo vas a firmar el acuerdo?
 						}
@@ -228,7 +228,7 @@ templ AppStepThree() {
 					}
 				</section>
 				<section class="mt-8">
-					@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
+					@popui.FormContainer() {
 						@popui.Subtitle() {
 							2. Sube el acuerdo firmado
 						}
@@ -242,7 +242,7 @@ templ AppStepThree() {
 								}, 2000)
 							}
 						}"
-							:class="{'popui-button-file--loading':  loading }"
+							:class="{'popui-input-file--loading':  loading }"
 						>
 							@popui.InputFile(props.InputFile{Attrs: templ.Attributes{
 								"@change": "showLoader",
@@ -313,11 +313,15 @@ templ AppStepFour() {
 						}
 					</div>
 					<div class="mb-2">
-						@popui.FileButton(props.FileButton{}) {
+						@popui.CardFile(props.CardFile{}) {
 							<div class="flex gap-2 items-center">
 								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
-								<p class={ classes.UploadFileText }>dni_back_already_stored.png</p>
+								<p>dni_back_already_stored.png</p>
 							</div>
+							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+								@icons.Download()
+								Descargar
+							}
 						}
 					</div>
 					@popui.InputFile(props.InputFile{})
@@ -426,10 +430,10 @@ templ ConfirmPage() {
 							Editar
 						}
 					</div>
-					@popui.FileButton(props.FileButton{}) {
+					@popui.CardFile(props.CardFile{}) {
 						<div class="flex gap-2 items-center">
 							@popui.IconFile()
-							<p class={ classes.UploadFileText }>acuerdo_veri*factu.pdf</p>
+							<p>acuerdo_veri*factu.pdf</p>
 						</div>
 						@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
 							Ver
@@ -451,10 +455,10 @@ templ ConfirmPage() {
 						}
 					</div>
 					<div class="mb-3">
-						@popui.FileButton(props.FileButton{}) {
+						@popui.CardFile(props.CardFile{}) {
 							<div class="flex gap-2 items-center">
 								<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
-								<p class={ classes.UploadFileText }>dni_front.png</p>
+								<p>dni_front.png</p>
 							</div>
 							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
 								Ver
@@ -462,10 +466,10 @@ templ ConfirmPage() {
 							}
 						}
 					</div>
-					@popui.FileButton(props.FileButton{}) {
+					@popui.CardFile(props.CardFile{}) {
 						<div class="flex gap-2 items-center">
 							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
-							<p class={ classes.UploadFileText }>dni_back.png</p>
+							<p>dni_back.png</p>
 						</div>
 						@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
 							Ver

@@ -205,8 +205,8 @@ templ tableSection() {
 }
 
 templ formSection() {
-	<form class={ classes.FormContainer }>
-		@popui.Fieldset(props.Fieldset{Class: classes.FieldsetUnstyled}) {
+	<form>
+		@popui.FormContainer() {
 			@popui.InputText(props.InputText{
 				ID:       "name",
 				Label:    "Full name",

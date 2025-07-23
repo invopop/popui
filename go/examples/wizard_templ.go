@@ -94,7 +94,7 @@ func wizardLayout() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = popui.WizardHeader(props.WizardHeader{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.WizardHeader().Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -468,7 +468,7 @@ func AppStepOne() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.Fieldset(props.Fieldset{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var16), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = popui.Fieldset().Render(templ.WithChildren(ctx, templ_7745c5c3_Var16), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -617,7 +617,7 @@ func AppStepOne() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = popui.WizardContent(props.WizardContent{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var13), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = popui.WizardContent().Render(templ.WithChildren(ctx, templ_7745c5c3_Var13), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -697,7 +697,7 @@ func AppStepOne() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = popui.WizardFooter(props.WizardFooter{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var26), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = popui.WizardFooter().Render(templ.WithChildren(ctx, templ_7745c5c3_Var26), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2570,7 +2570,7 @@ func ErrorPage() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 143, "Algo ha salido mal ")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 143, "Algo ha salido mal")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}

@@ -30,9 +30,9 @@ templ Form(p props.Form) {
 	</form>
 }
 
-// Fieldset helps group a set of form elements together with a
-// useful legend.
-templ Fieldset(p props.Fieldset) {
+// Fieldset groups a set of form fields together with correct vertical spacing.
+templ Fieldset(opts ...props.Fieldset) {
+	{{ p := props.First(opts) }}
 	<fieldset
 		class={
 			templ.KV(classes.Fieldset, p.Class == ""),
@@ -50,7 +50,8 @@ templ Fieldset(p props.Fieldset) {
 }
 
 // FieldsetCard is a Fieldset styled as a Card.
-templ FieldsetCard(p props.Fieldset) {
+templ FieldsetCard(opts ...props.Fieldset) {
+	{{ p := props.First(opts) }}
 	{{
 		c := classes.FieldsetCard
 		if p.Class != "" {
@@ -69,7 +70,8 @@ templ FieldsetCard(p props.Fieldset) {
 
 // OptionGroup helps group a set of form elements together
 // such as checkboxes and radio buttons with a useful label
-templ OptionGroup(p props.OptionGroup) {
+templ OptionGroup(opts ...props.OptionGroup) {
+	{{ p := props.First(opts) }}
 	<div
 		class={
 			templ.KV(classes.OptionGroup, p.Class == ""),
@@ -87,7 +89,8 @@ templ OptionGroup(p props.OptionGroup) {
 }
 
 // InputTitle provides a title for a form element
-templ InputTitle(p props.InputTitle) {
+templ InputTitle(opts ...props.InputTitle) {
+	{{ p := props.First(opts) }}
 	<div class={ classes.InputTitle }>
 		@Subtitle() {
 			<span { p.Attrs... }>{ p.Title }</span>

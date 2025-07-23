@@ -6,7 +6,8 @@ import (
 )
 
 // Sidebar provides a wrapper for sidebars on admin panels
-templ Sidebar(p props.Sidebar) {
+templ Sidebar(opts ...props.Sidebar) {
+	{{ p := props.First(opts) }}
 	<div
 		class={
 			templ.KV(classes.Sidebar, p.Class == ""),
@@ -34,7 +35,8 @@ templ SidebarContent() {
 
 // Sidebar provides a wrapper for a ul element used in Sidebar component
 // Expects a set of li elements as slot
-templ SidebarSection(p props.SidebarSection) {
+templ SidebarSection(opts ...props.SidebarSection) {
+	{{ p := props.First(opts) }}
 	<div
 		class={
 			templ.KV(classes.SidebarSection, p.Class == ""),

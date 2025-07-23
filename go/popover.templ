@@ -7,7 +7,8 @@ import (
 
 // Popopver provides a Button that can be clicked for displaying a context menu.
 // Menu content will render the html passed as slot.
-templ Popover(p props.Popover) {
+templ Popover(opts ...props.Popover) {
+	{{ p := props.First(opts) }}
 	<div class={ classes.PopoverWrapper, templ.KV(classes.PopoverWrapperRight, p.RightAlign) }>
 		@Button(props.Button{
 			Attrs:   templ.Attributes{"popovertarget": p.ID},

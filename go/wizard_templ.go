@@ -12,7 +12,7 @@ import "github.com/invopop/popui/go/props"
 import "github.com/invopop/popui/go/classes"
 
 // WizardHeader renders a header for the wizard app
-func WizardHeader(p props.WizardHeader) templ.Component {
+func WizardHeader(opts ...props.WizardHeader) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -33,6 +33,7 @@ func WizardHeader(p props.WizardHeader) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var2 = []any{templ.KV(classes.WizardHeader, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}
@@ -78,7 +79,7 @@ func WizardHeader(p props.WizardHeader) templ.Component {
 }
 
 // WizardContent renders the main content area of the wizard app
-func WizardContent(p props.WizardContent) templ.Component {
+func WizardContent(opts ...props.WizardContent) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -99,6 +100,7 @@ func WizardContent(p props.WizardContent) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var5 = []any{templ.KV(classes.WizardContent, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 			templ.KV(classes.WizardContentCenterVertical, p.CenterVertical),
@@ -145,7 +147,7 @@ func WizardContent(p props.WizardContent) templ.Component {
 }
 
 // WizardFooter renders a footer for the wizard app
-func WizardFooter(p props.WizardFooter) templ.Component {
+func WizardFooter(opts ...props.WizardFooter) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -166,6 +168,7 @@ func WizardFooter(p props.WizardFooter) templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var8 = []any{templ.KV(classes.WizardFooter, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 		}

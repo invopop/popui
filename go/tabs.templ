@@ -6,7 +6,8 @@ import (
 )
 
 // Tabs provides the tabs container element
-templ Tabs(p props.Tabs) {
+templ Tabs(opts ...props.Tabs) {
+	{{ p := props.First(opts) }}
 	<div
 		role="tablist"
 		class={
@@ -21,7 +22,8 @@ templ Tabs(p props.Tabs) {
 
 // Tab provides a single tab element
 // It is used inside a Tabs container.
-templ Tab(p props.Tab) {
+templ Tab(opts ...props.Tab) {
+	{{ p := props.First(opts) }}
 	<button
 		type="button"
 		role="tab"

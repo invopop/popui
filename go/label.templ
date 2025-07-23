@@ -6,7 +6,8 @@ import (
 )
 
 // InputLabel provides a label element
-templ InputLabel(p props.Label) {
+templ InputLabel(opts ...props.Label) {
+	{{ p := props.First(opts) }}
 	<label
 		for={ p.ID }
 		class={ templ.KV(classes.Label, p.Class == ""), templ.KV(p.Class, p.Class != "") }

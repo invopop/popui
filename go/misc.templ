@@ -61,7 +61,7 @@ templ Warning() {
 // Notification provides a wrapper for a text to be shown as feedback.
 // Vaiid types are: info, warning, error, success
 templ Notification(p props.Notification) {
-	<p
+	<div
 		class={
 			templ.KV(classes.Notification, p.Class == ""),
 			templ.KV(classes.NotificationWarning, p.Type == "warning"),
@@ -72,12 +72,24 @@ templ Notification(p props.Notification) {
 		}
 		{ p.Attrs... }
 	>
-		if p.Text != "" {
-			{ p.Text }
-		} else {
-			{ children... }
+		if p.Type != "" {
+			<div class="mt-1">
+				if p.Type == "error" {
+					@icons.Failure()
+				} else if p.Type == "warning" {
+					@icons.Alert()
+				}
+			</div>
 		}
-	</p>
+		<div>
+			if p.Text != "" || p.Description != "" {
+				<p class="font-medium">{ p.Text }</p>
+				<p class="text-dimmed">{ p.Description }</p>
+			} else {
+				{ children... }
+			}
+		</div>
+	</div>
 }
 
 // FlashMessage provides a toast message to be shown as feedback.

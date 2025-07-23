@@ -12,6 +12,7 @@ type Button struct {
 	Autofocus          bool
 	Name               string
 	Value              string
+	Form               string
 	ShowSpinnerOnClick bool
 	Attrs              templ.Attributes
 }
@@ -27,15 +28,4 @@ type AnchorButton struct {
 	Rel      string
 	Download bool
 	Attrs    templ.Attributes
-}
-
-// FileButton Templ component props
-type FileButton struct {
-	Type      string
-	Class     string
-	Disabled  bool
-	Autofocus bool
-	Name      string
-	Value     string
-	Attrs     templ.Attributes
 }

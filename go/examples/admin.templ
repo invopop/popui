@@ -205,126 +205,128 @@ templ tableSection() {
 }
 
 templ formSection() {
-	@popui.Form(props.Form{}) {
-		@popui.InputText(props.InputText{
-			ID:       "name",
-			Label:    "Full name",
-			Value:    "Diego Fernández",
-			Disabled: true,
-		})
-		@popui.InputText(props.InputText{
-			ID:    "JOB",
-			Label: "Job Title",
-			Value: "Finance",
-		})
-		@popui.Textarea(props.Textarea{
-			ID:    "desc",
-			Label: "Description",
-			Rows:  2,
-			Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
-		})
-		@popui.Fieldset(props.Fieldset{Legend: "Sudo"}) {
-			<input type="hidden" name="type" value=""/>
-			@popui.InputCheckbox(props.InputCheckbox{
-				ID:      "enterprise",
-				Label:   "Enterprise",
-				Name:    "type",
-				Value:   "thing",
-				Checked: true,
+	<form class={ classes.FormContainer }>
+		@popui.Fieldset(props.Fieldset{}) {
+			@popui.InputText(props.InputText{
+				ID:       "name",
+				Label:    "Full name",
+				Value:    "Diego Fernández",
+				Disabled: true,
 			})
 			@popui.InputText(props.InputText{
-				Label: "Stripe ID",
-				Name:  "stripe_id",
+				ID:    "JOB",
+				Label: "Job Title",
+				Value: "Finance",
 			})
-			@popui.Info() {
-				Remove the Stripe ID to force the creation of a new Stripe
-				customer, thus allowing a new Tax ID to be uploaded.
-			}
-		}
-		@popui.Accordion(props.Accordion{Title: "Help me select a plan"}) {
-			@popui.Fieldset(props.Fieldset{}) {
-				@popui.Select(props.Select{}) {
-					<option disabled selected value="">Select a type of document...</option>
+			@popui.Textarea(props.Textarea{
+				ID:    "desc",
+				Label: "Description",
+				Rows:  2,
+				Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
+			})
+			@popui.FieldsetCard(props.Fieldset{Legend: "Sudo", Class: classes.FieldsetCardGrayed}) {
+				<input type="hidden" name="type" value=""/>
+				@popui.InputCheckbox(props.InputCheckbox{
+					ID:      "enterprise",
+					Label:   "Enterprise",
+					Name:    "type",
+					Value:   "thing",
+					Checked: true,
+				})
+				@popui.InputText(props.InputText{
+					Label: "Stripe ID",
+					Name:  "stripe_id",
+				})
+				@popui.Info() {
+					Remove the Stripe ID to force the creation of a new Stripe
+					customer, thus allowing a new Tax ID to be uploaded.
 				}
-				@popui.OptionGroup(props.OptionGroup{Label: "Actions performed on each document"}) {
-					@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"})
-					@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"})
+			}
+			@popui.Accordion(props.Accordion{Title: "Help me select a plan"}) {
+				@popui.FieldsetCard(props.Fieldset{}) {
+					@popui.Select(props.Select{}) {
+						<option disabled selected value="">Select a type of document...</option>
+					}
+					@popui.OptionGroup(props.OptionGroup{Label: "Actions performed on each document"}) {
+						@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"})
+						@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"})
+					}
 				}
 			}
-		}
-		@popui.InputRadioCard(props.InputRadio{
-			Name:    "sandbox",
-			Label:   "Sandbox",
-			Value:   "true",
-			Checked: true,
-		})
-		@popui.InputRadioCard(props.InputRadio{
-			Name:        "sandbox",
-			Label:       "Live",
-			Value:       "true",
-			Checked:     false,
-			Description: "For production, issues valid invoices.",
-		})
-		@popui.InputRadio(props.InputRadio{
-			Name:    "sandbox",
-			Label:   "Regular radio option 1",
-			Value:   "regular-1",
-			Checked: false,
-		})
-		@popui.InputRadio(props.InputRadio{
-			Name:    "sandbox",
-			Label:   "Regular radio option 2",
-			Value:   "regular-2",
-			Checked: false,
-		})
-		<div class={ classes.InputTextGroup }>
-			@popui.InputRadioTheme(props.InputRadioTheme{
-				Name:    "theme",
-				Value:   props.ColorSherwoodRGB,
-				Variant: props.ColorSherwood,
+			@popui.InputRadioCard(props.InputRadio{
+				Name:    "sandbox",
+				Label:   "Sandbox",
+				Value:   "true",
 				Checked: true,
 			})
-			@popui.InputRadioTheme(props.InputRadioTheme{
-				Name:    "theme",
-				Value:   props.ColorMetalRGB,
-				Variant: props.ColorMetal,
+			@popui.InputRadioCard(props.InputRadio{
+				Name:        "sandbox",
+				Label:       "Live",
+				Value:       "true",
+				Checked:     false,
+				Description: "For production, issues valid invoices.",
 			})
-		</div>
-		@popui.InputCheckbox(props.InputCheckbox{
-			Label: "Checbox regular",
-			Value: "checkbox-regular",
-		})
-		@popui.InputCheckbox(props.InputCheckbox{
-			Label:   "Checkbox switch",
-			Value:   "checkbox-switch",
-			Checked: true,
-			Switch:  true,
-		})
-		@popui.InputRange(props.InputRange{
-			Label: "Docs per month (1 pop)",
-			Min:   "1",
-			Max:   "9",
-			Step:  "1",
-			ListOptions: []props.RangeListOptions{
-				{Value: "40", Label: "40"},
-				{Value: "100", Label: "100"},
-				{Value: "200", Label: "200"},
-				{Value: "400", Label: "400"},
-				{Value: "1000", Label: "1K"},
-				{Value: "2000", Label: "2K"},
-				{Value: "4000", Label: "4K"},
-				{Value: "10000", Label: "10K"},
-				{Value: "100000", Label: "20K+"},
-			},
-		})
-		<div class="flex gap-2">
-			@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
-				@icons.AddCircle()
-				Update
-			}
-			@popui.FlashMessage(props.FlashMessage{Success: true, Message: "Saved"})
-		</div>
-	}
+			@popui.InputRadio(props.InputRadio{
+				Name:    "sandbox",
+				Label:   "Regular radio option 1",
+				Value:   "regular-1",
+				Checked: false,
+			})
+			@popui.InputRadio(props.InputRadio{
+				Name:    "sandbox",
+				Label:   "Regular radio option 2",
+				Value:   "regular-2",
+				Checked: false,
+			})
+			<div class={ classes.InputTextGroup }>
+				@popui.InputRadioTheme(props.InputRadioTheme{
+					Name:    "theme",
+					Value:   props.ColorSherwoodRGB,
+					Variant: props.ColorSherwood,
+					Checked: true,
+				})
+				@popui.InputRadioTheme(props.InputRadioTheme{
+					Name:    "theme",
+					Value:   props.ColorMetalRGB,
+					Variant: props.ColorMetal,
+				})
+			</div>
+			@popui.InputCheckbox(props.InputCheckbox{
+				Label: "Checbox regular",
+				Value: "checkbox-regular",
+			})
+			@popui.InputCheckbox(props.InputCheckbox{
+				Label:   "Checkbox switch",
+				Value:   "checkbox-switch",
+				Checked: true,
+				Switch:  true,
+			})
+			@popui.InputRange(props.InputRange{
+				Label: "Docs per month (1 pop)",
+				Min:   "1",
+				Max:   "9",
+				Step:  "1",
+				ListOptions: []props.RangeListOptions{
+					{Value: "40", Label: "40"},
+					{Value: "100", Label: "100"},
+					{Value: "200", Label: "200"},
+					{Value: "400", Label: "400"},
+					{Value: "1000", Label: "1K"},
+					{Value: "2000", Label: "2K"},
+					{Value: "4000", Label: "4K"},
+					{Value: "10000", Label: "10K"},
+					{Value: "100000", Label: "20K+"},
+				},
+			})
+			<div class="flex gap-2">
+				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+					@icons.AddCircle()
+					Update
+				}
+				@popui.FlashMessage(props.FlashMessage{Success: true, Message: "Saved"})
+			</div>
+		}
+	</form>
 }
 
 templ readonlySection() {

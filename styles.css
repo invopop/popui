@@ -75,7 +75,7 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 
 /* Button */
 .popui-button {
-  @apply inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base gap-1;
+  @apply cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base gap-1;
 }
 .popui-button--transparent {
   @apply border-0;
@@ -112,12 +112,6 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 .popui-button--loading .popui-button-spinner {
   @apply opacity-100;
 }
-.popui-button-file {
-  @apply flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-neutral-100 bg-white;
-}
-.popui-button-file--loading {
-  @apply animate-pulse opacity-30 pointer-events-none;
-}
 
 /* Card */
 .popui-card {
@@ -146,6 +140,9 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 }
 .popui-card__header-flag {
   @apply absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-white;
+}
+.popui-card-file {
+  @apply flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-neutral-100 bg-white text-base text-neutral-800 font-medium;
 }
 
 /* Card Progress Bar */
@@ -428,6 +425,9 @@ input:checked + .popui-switch__input:before {
 .popui-input-file:has(input[type='file']:valid) span {
   color: green;
 }
+.popui-input-file--loading {
+  @apply animate-pulse opacity-30 pointer-events-none;
+}
 
 /* Text */
 .popui-paragraph {
@@ -440,7 +440,7 @@ input:checked + .popui-switch__input:before {
   @apply font-sans text-black text-2xl font-semibold;
 }
 .popui-subtitle {
-  @apply font-sans text-lg text-neutral-800 font-medium;
+  @apply font-sans text-base text-neutral-800 font-medium;
 }
 .popui-info {
   @apply font-sans text-sm text-neutral-500 flex items-center gap-1;
@@ -460,19 +460,19 @@ pre {
   @apply text-neutral-500 font-sans text-base;
 }
 .popui-notification {
-  @apply flex px-1 py-0.5 justify-center items-center gap-1 rounded text-sm font-medium self-start;
+  @apply flex px-3 py-2 justify-start items-start gap-2 rounded-lg text-base;
 }
 .popui-notification__info {
-  @apply bg-blue-100 text-blue-500;
+  @apply bg-blue-50 text-blue-500;
 }
 .popui-notification__warning {
-  @apply bg-yellow-100 text-yellow-500;
+  @apply bg-yellow-50 text-yellow-500;
 }
 .popui-notification__success {
-  @apply bg-positive-100 text-positive-500;
+  @apply bg-positive-50 text-positive-500;
 }
-.popui-notification__errir {
-  @apply bg-danger-100 text-danger-500;
+.popui-notification__error {
+  @apply bg-danger-50 text-danger-500;
 }
 
 /* Option Group */
@@ -593,15 +593,17 @@ div[contenteditable='true'] .tag {
 form {
   margin-block-end: 0;
 }
-.popui-form,
+.popui-form__container {
+  @apply w-[400px];
+}
 .popui-desc-list {
   @apply w-[400px] space-y-4;
 }
 .popui-wizard-content > div {
   @apply lg:w-[840px];
 }
-.popui-wizard-content .popui-form {
-  @apply w-full  space-y-4;
+.popui-form__nospacing {
+  @apply space-y-0;
 }
 .popui-form__list-item {
   @apply flex items-center space-x-3 text-base text-neutral-800;
@@ -613,17 +615,19 @@ form {
   @apply mt-0;
 }
 .popui-admin-wrapper .popui-desc-list,
-.popui-admin-wrapper .popui-form {
+.popui-admin-wrapper .popui-form__container {
   @apply flex flex-col gap-2;
 }
 .popui-form__cell-group {
   @apply grid md:grid-cols-2 gap-4 w-full;
 }
 .popui-fieldset {
-  @apply border border-neutral-200 p-4 rounded-md space-y-4 relative w-full bg-white;
+  @apply space-y-4 relative w-full;
 }
-
-.popui-fieldset__grayed {
+.popui-fieldset__card {
+  @apply border border-neutral-200 p-4 rounded-md bg-white;
+}
+.popui-fieldset__card-grayed {
   @apply bg-neutral-50;
 }
 
@@ -672,7 +676,7 @@ form {
 }
 
 .popui-wizard-page .popui-divider-wrapper {
-  @apply my-6;
+  @apply !my-6;
 }
 .popui-divider {
   width: 100%;
@@ -864,6 +868,9 @@ form {
 }
 .text-dimmed {
   @apply text-neutral-400;
+}
+.font-medium {
+  font-weight: 500;
 }
 
 /* Let the svg icon to grow freely */
@@ -1090,7 +1097,7 @@ form {
 
 @media (max-width: 500px) {
   .popui-desc-list,
-  .popui-form {
+  .popui-form__container {
     width: 100%;
   }
 }

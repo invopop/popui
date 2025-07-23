@@ -64,6 +64,7 @@
   class="{inputStyles} py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight"
   {placeholder}
   readonly={disabled}
+  {...$$restProps}
   on:input={handleInput}
   on:focus={() => dispatch('focus')}
   on:blur={(e) => dispatch('blur', e)}

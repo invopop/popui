@@ -35,6 +35,8 @@ const (
 	CardDashboardItem      = "popui-card-dashboard__item"
 	CardDashboardItemLabel = "popui-card-dashboard__item-label"
 	CardDashboardItemValue = "popui-card-dashboard__item-value"
+
+	CardFile = "popui-card-file"
 )
 
 // Container classes
@@ -49,13 +51,14 @@ const (
 
 // Form and input and related classes
 const (
-	Form          = "popui-form"
+	FormContainer = "popui-form__container"
 	FormListItem  = "popui-form__list-item"
 	FormCellGroup = "popui-form__cell-group"
 
-	Fieldset       = "popui-fieldset"
-	FieldsetGrayed = "popui-fieldset popui-fieldset__grayed"
-	FieldsetLegend = "popui-fieldset-legend"
+	Fieldset           = "popui-fieldset"
+	FieldsetCard       = "popui-fieldset popui-fieldset__card"
+	FieldsetCardGrayed = "popui-fieldset popui-fieldset__card popui-fieldset__card-grayed"
+	FieldsetLegend     = "popui-fieldset-legend"
 
 	OptionGroup = "popui-option-group"
 
@@ -86,7 +89,6 @@ const (
 	ButtonSpinner     = "popui-button-spinner"
 	ButtonTransparent = "popui-button--transparent"
 	ButtonSmall       = "popui-button--small"
-	ButtonFile        = "popui-button-file"
 
 	Radio             = "popui-radio"
 	RadioWrapper      = "popui-radio-wrapper"

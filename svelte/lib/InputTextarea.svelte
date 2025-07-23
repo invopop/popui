@@ -39,6 +39,7 @@
   class="{inputStyles} py-1.5 px-3 border w-full rounded placeholder-neutral-500 text-base tracking-tight"
   {disabled}
   {rows}
+  {...$$restProps}
   on:input={handleInput}
 />
 

@@ -134,6 +134,19 @@ templ CardDashboard(p props.CardDashboard) {
 	</ul>
 }
 
+// CardFile provides a card for displaying file details
+templ CardFile(p props.CardFile) {
+	<div
+		class={
+			templ.KV(classes.CardFile, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</div>
+}
+
 css percentage(percent int64, color string) {
 	border-radius: 1px;
 	height: 4px;

@@ -40,12 +40,13 @@
 <div class="inline-flex" class:w-full={fullWidth} role="menu">
   <button
     class="text-left"
+    class:w-full={fullWidth}
     use:floatingRef
+    {...$$restProps}
     on:click|stopPropagation={async () => {
       if (closedFromClickOutside) return
       isOpen = !isOpen
     }}
-    class:w-full={fullWidth}
   >
     <slot name="trigger" />
   </button>

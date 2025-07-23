@@ -61,6 +61,7 @@
     class="py-[5px] pl-7 border border-neutral-200 hover:border-neutral-300 w-full rounded-md text-neutral-800 placeholder-neutral-500 text-base outline-none tracking-tight caret-workspace-accent focus:border-workspace-accent focus:shadow-active"
     style:padding-right={`${shortcutKeys.length * 15 + 12}px`}
     {placeholder}
+    {...$$restProps}
     on:input={handleInput}
     on:focus={() => dispatch('focus')}
     on:blur={(e) => dispatch('blur', e)}

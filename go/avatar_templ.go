@@ -15,7 +15,7 @@ import (
 
 // Avatar provides a popui component for displaying either an image or an initial.
 // Expects a @popui.Image as slot
-func Avatar(p props.Avatar) templ.Component {
+func Avatar(opts ...props.Avatar) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -36,6 +36,7 @@ func Avatar(p props.Avatar) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		p := props.First(opts)
 		var templ_7745c5c3_Var2 = []any{templ.KV(classes.AvatarBase, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
 			templ.KV(classes.AvatarLarge, p.Large),
@@ -74,7 +75,7 @@ func Avatar(p props.Avatar) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(p.Initial)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 21, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 22, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {

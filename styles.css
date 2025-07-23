@@ -716,6 +716,9 @@ form {
 .popui-table th {
   @apply border-b border-neutral-100;
 }
+.popui-table tr {
+  @apply data-[state=disabled]:opacity-30;
+}
 .popui-table td > div {
   @apply flex items-center gap-2;
 }
@@ -871,6 +874,9 @@ form {
 }
 .font-medium {
   font-weight: 500;
+}
+.break-all {
+  word-break: break-all;
 }
 
 /* Let the svg icon to grow freely */

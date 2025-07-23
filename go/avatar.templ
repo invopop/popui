@@ -7,7 +7,8 @@ import (
 
 // Avatar provides a popui component for displaying either an image or an initial.
 // Expects a @popui.Image as slot
-templ Avatar(p props.Avatar) {
+templ Avatar(opts ...props.Avatar) {
+	{{ p := props.First(opts) }}
 	<div
 		class={
 			templ.KV(classes.AvatarBase, p.Class == ""),

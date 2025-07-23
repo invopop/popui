@@ -31,5 +31,6 @@
   {id}
   {checked}
   class="form-radio h-5 w-5 border-neutral-200 text-workspace-accent focus:ring-0 focus:ring-offset-0 cursor-pointer"
+  {...$$restProps}
   on:change={updateInput}
 />

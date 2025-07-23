@@ -238,7 +238,7 @@
 />
 
 <div class="w-full font-sans border rounded-md border-neutral-100">
-  <Table class="hidden md:table">
+  <Table class="hidden md:table" {...$$restProps}>
     <colgroup>
       {#if selectable}
         <col style="width: 38px" />

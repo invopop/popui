@@ -53,6 +53,7 @@
     class:pl-7={icon}
     class:pl-2={!icon}
     class="py-1.5 border border-neutral-200 hover:border-neutral-300 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight ui-select focus:border-workspace-accent focus:shadow-active"
+    {...$$restProps}
     on:change={handleChange}
   >
     <option value="" disabled={disablePlaceholder}>{placeholder}</option>

@@ -218,6 +218,27 @@ templ formSection() {
 				Label: "Job Title",
 				Value: "Finance",
 			})
+			<div class={ classes.InputTextWrapper }>
+				@popui.InputLabel() {
+					Avatar
+				}
+				@popui.InputFileAvatar(props.InputFileAvatar{
+					ID: "avatar",
+					// AvatarURL: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
+					AvatarAlt: "User Avatar",
+					Accept:    "image/*",
+					Attrs: templ.Attributes{
+						"onchange": "console.log('Send this form somewhere!')",
+					},
+				}) {
+					@popui.Button(props.Button{
+						Type:  "button",
+						Small: true,
+					}) {
+						Remove
+					}
+				}
+			</div>
 			@popui.Textarea(props.Textarea{
 				ID:    "desc",
 				Label: "Description",

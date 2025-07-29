@@ -1329,7 +1329,7 @@ func formSection() templ.Component {
 			}
 			templ_7745c5c3_Err = popui.InputRadioTheme(props.InputRadioTheme{
 				Name:    "theme",
-				Value:   props.ColorSherwoodRGB,
+				Value:   props.ColorSherwoodValue,
 				Variant: props.ColorSherwood,
 				Checked: true,
 			}).Render(ctx, templ_7745c5c3_Buffer)
@@ -1338,7 +1338,7 @@ func formSection() templ.Component {
 			}
 			templ_7745c5c3_Err = popui.InputRadioTheme(props.InputRadioTheme{
 				Name:    "theme",
-				Value:   props.ColorMetalRGB,
+				Value:   props.ColorMetalValue,
 				Variant: props.ColorMetal,
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {

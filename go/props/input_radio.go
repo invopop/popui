@@ -23,16 +23,16 @@ const (
 )
 
 type themeColor struct {
-	Name string
-	RGB  string
+	Name  string
+	Value string
 }
 
 var themeColorList = []themeColor{
-	{Name: ColorSherwood, RGB: ColorSherwoodValue},
-	{Name: ColorOcean, RGB: ColorOceanValue},
-	{Name: ColorGrape, RGB: ColorGrapeValue},
-	{Name: ColorMetal, RGB: ColorMetalValue},
-	{Name: ColorCosmos, RGB: ColorCosmosValue},
+	{Name: ColorSherwood, Value: ColorSherwoodValue},
+	{Name: ColorOcean, Value: ColorOceanValue},
+	{Name: ColorGrape, Value: ColorGrapeValue},
+	{Name: ColorMetal, Value: ColorMetalValue},
+	{Name: ColorCosmos, Value: ColorCosmosValue},
 }
 
 // InputRadio defines the properties that can be used for radio inputs.
@@ -102,7 +102,7 @@ func (it InputRadioTheme) GenerateVariant() InputRadioTheme {
 
 	for _, c := range themeColorList {
 		if c.Name == it.Variant {
-			it.Attrs["style"] = fmt.Sprintf("background-color: %s;", c.RGB)
+			it.Attrs["style"] = fmt.Sprintf("background-color: %s;", c.Value)
 			break
 		}
 	}

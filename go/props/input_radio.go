@@ -10,16 +10,16 @@ import (
 
 // Theme colors for radio inputs.
 const (
-	ColorSherwood    = "sherwood"
-	ColorOcean       = "ocean"
-	ColorGrape       = "grape"
-	ColorMetal       = "metal"
-	ColorCosmos      = "cosmos"
-	ColorSherwoodRGB = "rgb(25, 65, 54)"
-	ColorOceanRGB    = "rgb(48, 105, 148)"
-	ColorGrapeRGB    = "rgb(94, 71, 122)"
-	ColorMetalRGB    = "rgb(82, 108, 134)"
-	ColorCosmosRGB   = "rgb(13, 22, 37)"
+	ColorSherwood      = "sherwood"
+	ColorOcean         = "ocean"
+	ColorGrape         = "grape"
+	ColorMetal         = "metal"
+	ColorCosmos        = "cosmos"
+	ColorSherwoodValue = "#194136"
+	ColorOceanValue    = "#306994"
+	ColorGrapeValue    = "#5e477a"
+	ColorMetalValue    = "#526c86"
+	ColorCosmosValue   = "#0d1625"
 )
 
 type themeColor struct {
@@ -28,11 +28,11 @@ type themeColor struct {
 }
 
 var themeColorList = []themeColor{
-	{Name: ColorSherwood, RGB: ColorSherwoodRGB},
-	{Name: ColorOcean, RGB: ColorOceanRGB},
-	{Name: ColorGrape, RGB: ColorGrapeRGB},
-	{Name: ColorMetal, RGB: ColorMetalRGB},
-	{Name: ColorCosmos, RGB: ColorCosmosRGB},
+	{Name: ColorSherwood, RGB: ColorSherwoodValue},
+	{Name: ColorOcean, RGB: ColorOceanValue},
+	{Name: ColorGrape, RGB: ColorGrapeValue},
+	{Name: ColorMetal, RGB: ColorMetalValue},
+	{Name: ColorCosmos, RGB: ColorCosmosValue},
 }
 
 // InputRadio defines the properties that can be used for radio inputs.

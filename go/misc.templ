@@ -93,16 +93,17 @@ templ Notification(p props.Notification) {
 }
 
 // FlashMessage provides a toast message to be shown as feedback.
+// Valid types are: success
 templ FlashMessage(p props.FlashMessage) {
 	<div
 		class={
 			templ.KV(classes.FlashMessage, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
-			templ.KV(classes.FlashMessageSuccess, p.Success),
+			templ.KV(classes.FlashMessageSuccess, p.Type == "success"),
 		}
 		{ p.Attrs... }
 	>
-		if p.Success {
+		if p.Type == "success" {
 			@icons.Success()
 		}
 		if p.Message != "" {

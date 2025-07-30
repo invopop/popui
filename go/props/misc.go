@@ -23,6 +23,6 @@ type EmptyState struct {
 type FlashMessage struct {
 	Class   string
 	Message string
-	Success bool
+	Type    string
 	Attrs   templ.Attributes
 }

@@ -560,6 +560,7 @@ func Notification(p props.Notification) templ.Component {
 }
 
 // FlashMessage provides a toast message to be shown as feedback.
+// Valid types are: success
 func FlashMessage(p props.FlashMessage) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -583,7 +584,7 @@ func FlashMessage(p props.FlashMessage) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		var templ_7745c5c3_Var31 = []any{templ.KV(classes.FlashMessage, p.Class == ""),
 			templ.KV(p.Class, p.Class != ""),
-			templ.KV(classes.FlashMessageSuccess, p.Success),
+			templ.KV(classes.FlashMessageSuccess, p.Type == "success"),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var31...)
 		if templ_7745c5c3_Err != nil {
@@ -614,7 +615,7 @@ func FlashMessage(p props.FlashMessage) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if p.Success {
+		if p.Type == "success" {
 			templ_7745c5c3_Err = icons.Success().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -624,7 +625,7 @@ func FlashMessage(p props.FlashMessage) templ.Component {
 			var templ_7745c5c3_Var33 string
 			templ_7745c5c3_Var33, templ_7745c5c3_Err = templ.JoinStringErrs(p.Message)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/misc.templ`, Line: 109, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/misc.templ`, Line: 110, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var33))
 			if templ_7745c5c3_Err != nil {
@@ -976,7 +977,7 @@ func EmptyState(p props.EmptyState) templ.Component {
 			var templ_7745c5c3_Var51 string
 			templ_7745c5c3_Var51, templ_7745c5c3_Err = templ.JoinStringErrs(p.Title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/misc.templ`, Line: 163, Col: 12}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/misc.templ`, Line: 164, Col: 12}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var51))
 			if templ_7745c5c3_Err != nil {
@@ -1003,7 +1004,7 @@ func EmptyState(p props.EmptyState) templ.Component {
 			var templ_7745c5c3_Var53 string
 			templ_7745c5c3_Var53, templ_7745c5c3_Err = templ.JoinStringErrs(p.Description)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/misc.templ`, Line: 166, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/misc.templ`, Line: 167, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var53))
 			if templ_7745c5c3_Err != nil {

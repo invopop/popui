@@ -43,7 +43,11 @@ templ InputFileAvatar(p props.InputFileAvatar) {
 	{{ p = p.GenerateID() }}
 	<div class={ classes.UploadFile }>
 		if (p.AvatarURL != "") {
-			<img class={ classes.UploadFileImg } src={ p.AvatarURL } alt={ p.AvatarAlt }/>
+			<img
+				class={ classes.UploadFileImg, templ.KV(classes.UploadFileImgSquare, p.PreviewSquare) }
+				src={ p.AvatarURL }
+				alt={ p.AvatarAlt }
+			/>
 		} else {
 			<div class={ classes.UploadFilePlaceholder }></div>
 		}

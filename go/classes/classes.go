@@ -216,6 +216,7 @@ const (
 const (
 	UploadFile            = "popui-upload_file"
 	UploadFileImg         = "popui-upload_file-image"
+	UploadFileImgSquare   = "popui-upload_file-image_square"
 	UploadFilePlaceholder = "popui-upload_file-placeholder"
 	UploadFileText        = "popui-upload_file-text"
 )

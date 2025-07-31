@@ -23,19 +23,20 @@ type InputFile struct {
 
 // InputFileAvatar defines the properties for an avatar file input.
 type InputFileAvatar struct {
-	ID        string
-	Class     string
-	AvatarURL string
-	AvatarAlt string
-	Accept    string
-	Capture   string
-	Multiple  bool
-	Autofocus bool
-	Required  bool
-	Name      string
-	Value     string
-	Text      string
-	Attrs     templ.Attributes
+	ID            string
+	Class         string
+	AvatarURL     string
+	AvatarAlt     string
+	Accept        string
+	Capture       string
+	Multiple      bool
+	Autofocus     bool
+	Required      bool
+	Name          string
+	Value         string
+	Text          string
+	PreviewSquare bool
+	Attrs         templ.Attributes
 }
 
 // GenerateID returns a new InputFile instance with either the existing ID

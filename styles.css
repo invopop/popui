@@ -789,6 +789,9 @@ form {
 .popui-upload_file-image {
   @apply flex items-center justify-center w-10 rounded-md;
 }
+.popui-upload_file-image_square {
+  @apply h-10 object-cover;
+}
 .popui-upload_file-text {
   @apply flex-1 text-base text-neutral-800 font-medium;
 }

@@ -4,6 +4,7 @@ import "github.com/a-h/templ"
 
 // Button Templ component props
 type Button struct {
+	ID                 string
 	Type               string
 	Variant            string
 	Class              string
@@ -19,6 +20,7 @@ type Button struct {
 
 // AnchorButton Templ component props
 type AnchorButton struct {
+	ID       string
 	Type     string
 	Variant  string
 	Class    string

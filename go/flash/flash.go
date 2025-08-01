@@ -9,8 +9,9 @@ import (
 
 // Message represents a message to be displayed to the user.
 type Message struct {
-	Type string // e.g., "success", "error"
-	Text string
+	Type        string // e.g., "success", "error"
+	Text        string
+	Description string // Optional description for the message
 }
 
 type contextKey string

@@ -477,6 +477,9 @@ pre {
 .popui-notification__error {
   @apply bg-danger-50 text-danger-500;
 }
+.popui-notification__description {
+  @apply text-neutral-500;
+}
 
 /* Option Group */
 .popui-option-group {

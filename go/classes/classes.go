@@ -128,6 +128,7 @@ const (
 	NotificationWarning      = "popui-notification__warning"
 	NotificationSuccess      = "popui-notification__success"
 	NotificationError        = "popui-notification__error"
+	NotificationDescription  = "popui-notification__description"
 	Prose                    = "popui-prose"
 	HorizontalDividerWrapper = "popui-divider-wrapper"
 	HorizontalDivider        = "popui-divider"

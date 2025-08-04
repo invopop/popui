@@ -84,7 +84,7 @@ templ Notification(p props.Notification) {
 		<div>
 			if p.Text != "" || p.Description != "" {
 				<p class="font-medium">{ p.Text }</p>
-				<p class="text-dimmed">{ p.Description }</p>
+				<p class={ classes.NotificationDescription }>{ p.Description }</p>
 			} else {
 				{ children... }
 			}

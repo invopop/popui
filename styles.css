@@ -894,6 +894,9 @@ form {
 .break-all {
   word-break: break-all;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 
 /* Let the svg icon to grow freely */
 .popui-full-icon-size > div[style*='width: 16px'][style*='height: 16px'] {

@@ -1,12 +1,12 @@
-<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_8184_5611)">
-<path d="M8.08203 1C11.6719 1 14.582 3.91015 14.582 7.5C14.582 11.0899 11.6719 14 8.08203 14C5.63926 13.9999 3.51284 12.6515 2.40234 10.6592L3.14258 9.91895C4.03771 11.7434 5.91269 12.9999 8.08203 13C11.1196 13 13.582 10.5376 13.582 7.5C13.582 4.46243 11.1196 2 8.08203 2C6.09352 2.00007 4.35177 3.05558 3.38574 4.63672L2.66211 3.91309C3.82595 2.15796 5.81834 1.00007 8.08203 1Z" fill="currentColor"/>
-<path d="M2.05517 5.39669L5.99357 5.39158L5.99481 6.39138L1.05696 6.39907L1.04956 1.36892L2.04936 1.36768L2.05517 5.39669Z" fill="currentColor"/>
-<path d="M8 5V8.5L11 9.5" stroke="currentColor"/>
-</g>
-<defs>
-<clipPath id="clip0_8184_5611">
-<rect width="16" height="16" fill="white"/>
-</clipPath>
-</defs>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+  <g clip-path="url(#a)">
+    <path fill="currentColor" d="M8.082 1a6.5 6.5 0 1 1-5.68 9.66l.74-.741A5.5 5.5 0 0 0 13.583 7.5 5.5 5.5 0 0 0 3.386 4.637l-.724-.724A6.493 6.493 0 0 1 8.082 1Z"/>
+    <path fill="currentColor" d="m2.055 5.397 3.939-.005v1l-4.937.007-.007-5.03 1-.001.005 4.029Z"/>
+    <path stroke="currentColor" d="M8 5v3.5l3 1"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
 </svg>

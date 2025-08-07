@@ -17,3 +17,5 @@ vite.config.ts.timestamp-*
 /tmp
 /public
 /icons/dist
+# Local Netlify folder
+.netlify

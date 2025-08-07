@@ -2,35 +2,34 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import * as Icons from '$lib/index.js'
 
-  const icons: any = Icons
+  const icons: Record<string, Icons.IconSource> = Icons
 
   const themes = Object.keys(icons[Object.keys(icons)[0]])
-  const backgrounds = ["light", "dark"];
+  const backgrounds = ['light', 'dark']
 
   let theme = 'default'
   let background = 'light'
 </script>
-<div class={"icon-viewer " + background}>
-  <h1>Your Custom Iconpack</h1>
 
+<div class={'icon-viewer ' + background}>
+  <h1>Popui Iconpack</h1>
+  <div class="icon-viewer-settings-group">
+    <label for="theme-select">Theme</label>
+    <select id="theme-select" bind:value={theme}>
+      {#each themes as th}
+        <option value={th}>{th}</option>
+      {/each}
+    </select>
+  </div>
 
-    <div class="icon-viewer-settings-group">
-      <label for="theme-select">Theme</label>
-      <select id="theme-select" bind:value={theme}>
-        {#each themes as th}
-          <option value={th}>{th}</option>
-        {/each}
-      </select>
-    </div>
-
-    <div class="icon-viewer-settings-group">
-      <label for="background-select">Background</label>
-      <select id="theme-select" bind:value={background}>
-        {#each backgrounds as bg}
-          <option name="background" value={bg}>{bg}</option>
-        {/each}
-      </select>
-    </div>
+  <div class="icon-viewer-settings-group">
+    <label for="background-select">Background</label>
+    <select id="theme-select" bind:value={background}>
+      {#each backgrounds as bg}
+        <option value={bg}>{bg}</option>
+      {/each}
+    </select>
+  </div>
 
   <div class="icons">
     {#each Object.keys(icons) as Src}
@@ -40,7 +39,6 @@
 </div>
 
 <style>
-
   * {
     margin: 0;
   }

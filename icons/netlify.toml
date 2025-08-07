@@ -1,0 +1,7 @@
+[build]
+  base = "icons"
+  command = "npm run build"
+  publish = "icons/.svelte-kit/output/netlify"
+
+[functions]
+  directory = "icons/netlify/functions"

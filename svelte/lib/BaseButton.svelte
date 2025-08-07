@@ -59,6 +59,10 @@
       'border border-neutral-200 hover:bg-neutral-100 active:border-neutral-300 active:bg-neutral-200':
         variant === 'default'
     },
+    {
+      'border border-neutral-800/10 hover:bg-neutral-800/5 active:border-neutral-800/20 active:bg-neutral-800/10':
+        variant === 'outline'
+    },
     { 'gap-1': icon && $$slots.default }
   )
 

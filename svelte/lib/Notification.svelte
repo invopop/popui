@@ -9,9 +9,14 @@
 
   $: icon = getIcon(type)
   $: styles = clsx(
-    { 'text-positive-500 bg-positive-50': type === 'success' },
-    { 'text-danger-500 bg-danger-50': type === 'error' },
-    { 'text-yellow-500 bg-yellow-50': type === 'warning' }
+    { 'bg-positive-50': type === 'success' },
+    { 'bg-danger-50': type === 'error' },
+    { 'bg-yellow-50': type === 'warning' }
+  )
+  $: textStyles = clsx(
+    { 'text-positive-500': type === 'success' },
+    { 'text-danger-500': type === 'error' },
+    { 'text-yellow-500': type === 'warning' }
   )
 
   function getIcon(type: Status) {
@@ -32,6 +37,6 @@
   {#if icon}
     <Icon src={icon} class="h-4 w-4" />
   {/if}
-  <span class="flex-1">{message}</span>
+  <span class="{textStyles} flex-1">{message}</span>
   <slot />
 </div>

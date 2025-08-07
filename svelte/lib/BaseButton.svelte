@@ -53,7 +53,7 @@
     { 'py-1.5': big && $$slots.default },
     { 'py-1': !big && $$slots.default },
     { 'text-white': ['primary', 'danger', 'dark', 'warning'].includes(variant) },
-    { 'text-neutral-800': ['default', 'secondary'].includes(variant) },
+    { 'text-neutral-800': ['default', 'secondary', 'outline'].includes(variant) },
     { 'border border-white-10 hover:border-white-20 active:border-white-40': variant === 'dark' },
     {
       'border border-neutral-200 hover:bg-neutral-100 active:border-neutral-300 active:bg-neutral-200':

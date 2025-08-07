@@ -224,3 +224,10 @@ export const ShortcutIcon: Story = {
     shortcut: true
   }
 }
+
+export const Outline: Story = {
+  args: {
+    slot: 'Outline Button',
+    variant: 'outline'
+  }
+}

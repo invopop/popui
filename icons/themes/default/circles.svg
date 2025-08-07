@@ -1,7 +1,7 @@
-<svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M19 21.6389C20.4574 21.6389 21.6389 20.4574 21.6389 19C21.6389 17.5426 20.4574 16.3611 19 16.3611C17.5426 16.3611 16.3611 17.5426 16.3611 19C16.3611 20.4574 17.5426 21.6389 19 21.6389Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M19.0001 27.9722C23.9548 27.9722 27.9723 23.9548 27.9723 19C27.9723 14.0452 23.9548 10.0278 19.0001 10.0278C14.0453 10.0278 10.0278 14.0452 10.0278 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.6561 26.9272C13.5306 26.9272 14.2395 26.2184 14.2395 25.3439C14.2395 24.4695 13.5306 23.7606 12.6561 23.7606C11.7817 23.7606 11.0728 24.4695 11.0728 25.3439C11.0728 26.2184 11.7817 26.9272 12.6561 26.9272Z" fill="currentColor"/>
-<path d="M24.0139 4.55156C22.4411 4.00478 20.7586 3.69445 19 3.69445C10.5471 3.69445 3.69446 10.5471 3.69446 19C3.69446 27.4529 10.5471 34.3056 19 34.3056C27.4529 34.3056 34.3056 27.4529 34.3056 19C34.3056 17.2414 33.9931 15.5589 33.4485 13.9861" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M29.8237 9.75964C30.6982 9.75964 31.4071 9.05076 31.4071 8.17631C31.4071 7.30185 30.6982 6.59297 29.8237 6.59297C28.9493 6.59297 28.2404 7.30185 28.2404 8.17631C28.2404 9.05076 28.9493 9.75964 29.8237 9.75964Z" fill="currentColor"/>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 38 38">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21.639a2.639 2.639 0 1 0 0-5.278 2.639 2.639 0 0 0 0 5.278Z"/>
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 27.972A8.973 8.973 0 1 0 10.028 19"/>
+  <path fill="currentColor" d="M12.656 26.927a1.583 1.583 0 1 0 0-3.166 1.583 1.583 0 0 0 0 3.166Z"/>
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M24.014 4.552A15.228 15.228 0 0 0 19 3.694C10.547 3.694 3.694 10.547 3.694 19S10.547 34.306 19 34.306 34.306 27.453 34.306 19c0-1.759-.313-3.441-.857-5.014"/>
+  <path fill="currentColor" d="M29.824 9.76a1.583 1.583 0 1 0 0-3.167 1.583 1.583 0 0 0 0 3.167Z"/>
 </svg>

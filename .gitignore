@@ -16,3 +16,4 @@ vite.config.ts.timestamp-*
 /popui
 /tmp
 /public
+/icons/dist

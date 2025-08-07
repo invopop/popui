@@ -4,7 +4,14 @@ export type IconTheme = 'default' | 'solid' | 'mini'
 
 export type IconPosition = 'right' | 'left'
 
-export type ButtonVariant = 'default' | 'primary' | 'secondary' | 'warning' | 'danger' | 'dark'
+export type ButtonVariant =
+  | 'default'
+  | 'primary'
+  | 'secondary'
+  | 'warning'
+  | 'danger'
+  | 'dark'
+  | 'outline'
 
 export type StatusType =
   | 'grey'

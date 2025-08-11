@@ -1,1 +1,1 @@
-<li class="border-neutral-100" />
+<li class="bg-neutral-100 h-px w-full" />

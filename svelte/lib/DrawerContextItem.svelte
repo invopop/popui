@@ -27,7 +27,7 @@
     { 'pl-1.5': hasIcon },
     { 'pl-2': !hasIcon },
     { 'bg-workspace-accent-100': item.selected && !multiple },
-    { 'group-hover:bg-neutral-100 rounded': !item.selected }
+    { 'group-hover:bg-neutral-100': !item.selected || multiple }
   )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },

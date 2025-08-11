@@ -47,7 +47,8 @@
 
 <button
   bind:this={el}
-  class="{styles} border border-transparent rounded pr-2 flex items-center justify-start w-full"
+  class="{styles} border border-transparent rounded pr-2 flex items-center justify-start w-full disabled:opacity-30"
+  disabled={item.disabled}
   on:click|stopPropagation={() => {
     if (multiple) {
       item.selected = !item.selected

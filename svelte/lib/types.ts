@@ -40,7 +40,7 @@ export type SelectOption = {
 }
 
 export type DrawerOption = SelectOption & {
-  footer?: boolean
+  separator?: boolean
   destructive?: boolean
   selected?: boolean
   icon?: IconSource | undefined
@@ -50,6 +50,7 @@ export type DrawerOption = SelectOption & {
   picture?: string
   sandbox?: boolean
   iconClass?: string
+  disabled?: boolean
 }
 
 export type Company = {
@@ -115,9 +116,9 @@ export type TableDataRow = { [key: string]: unknown }
 
 export type TableAction = {
   icon?: IconSource
-  label: string
-  slug: string
-  footer?: boolean
+  label?: string
+  slug?: string
+  separator?: boolean
   destructive?: boolean
   value?: AnyProp
 }

@@ -26,12 +26,13 @@ export const SingleSelect: Story = {
   }
 }
 
-export const WithFooter: Story = {
+export const WithSeparator: Story = {
   args: {
     items: [
       { label: 'Cobee S.L.', value: 'cobee' },
       { label: 'Payflow S.L.', value: 'payflow' },
-      { label: 'Footer S.L.', value: 'footer', footer: true }
+      { separator: true },
+      { label: 'Footer S.L.', value: 'footer' }
     ]
   }
 }
@@ -61,8 +62,7 @@ export const WithIcon: Story = {
   args: {
     items: [
       { label: 'Cobee S.L.', value: 'cobee', icon: Close },
-      { label: 'Payflow S.L.', value: 'payflow', icon: Edit, rightIcon: Download },
-      { label: 'Footer S.L.', value: 'footer', footer: true }
+      { label: 'Payflow S.L.', value: 'payflow', icon: Edit, rightIcon: Download }
     ]
   }
 }
@@ -71,8 +71,7 @@ export const WithColor: Story = {
   args: {
     items: [
       { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
-      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
-      { label: 'Footer S.L.', value: 'footer', footer: true, color: 'orange' }
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' }
     ]
   }
 }

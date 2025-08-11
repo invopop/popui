@@ -114,7 +114,8 @@ export const WithActions: Story = {
         return [
           { icon: Settings, label: 'Configure', slug: 'config' },
           { icon: Edit, label: 'Edit', slug: 'edit' },
-          { icon: Delete, label: 'Delete', slug: 'delete', footer: true, destructive: true }
+          { separator: true },
+          { icon: Delete, label: 'Delete', slug: 'delete', destructive: true }
         ]
       }
 
@@ -122,7 +123,8 @@ export const WithActions: Story = {
         return [
           { icon: Settings, label: 'Configure', slug: 'config' },
           { icon: Edit, label: 'Edit', slug: 'edit' },
-          { icon: DocumentText, label: 'F2023-101.pdf', slug: 'config', footer: true }
+          { separator: true },
+          { icon: DocumentText, label: 'F2023-101.pdf', slug: 'config' }
         ]
       }
 
@@ -162,7 +164,8 @@ export const WithActionsAndGroups: Story = {
         return [
           { icon: Settings, label: 'Configure', slug: 'config' },
           { icon: Edit, label: 'Edit', slug: 'edit' },
-          { icon: Delete, label: 'Delete', slug: 'delete', footer: true, destructive: true }
+          { separator: true },
+          { icon: Delete, label: 'Delete', slug: 'delete', destructive: true }
         ]
       }
 
@@ -170,7 +173,8 @@ export const WithActionsAndGroups: Story = {
         return [
           { icon: Settings, label: 'Configure', slug: 'config' },
           { icon: Edit, label: 'Edit', slug: 'edit' },
-          { icon: DocumentText, label: 'F2023-101.pdf', slug: 'config', footer: true }
+          { separator: true },
+          { icon: DocumentText, label: 'F2023-101.pdf', slug: 'config' }
         ]
       }
 

@@ -56,7 +56,8 @@
   ]
   let actions: TableAction[] = [
     { icon: Duplicate, label: 'Copy JSON to clipboard', slug: 'duplicate' },
-    { icon: Archive, label: 'Archive', destructive: true, slug: 'archive', footer: true }
+    { separator: true },
+    { icon: Archive, label: 'Archive', destructive: true, slug: 'archive' }
   ]
 </script>
 

@@ -23,11 +23,11 @@
 
   $: styles = clsx(
     { 'py-1 space-x-3': workspace },
-    { 'py-1.5 space-x-1': !workspace },
-    { 'px-1.5': hasIcon },
-    { 'px-2': !hasIcon },
+    { 'py-1.5 space-x-1.5': !workspace },
+    { 'pl-1.5': hasIcon },
+    { 'pl-2': !hasIcon },
     { 'bg-workspace-accent-100': item.selected && !multiple },
-    { 'hover:bg-neutral-100 rounded': !item.selected }
+    { 'group-hover:bg-neutral-100': !item.selected || multiple }
   )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
@@ -47,7 +47,8 @@
 
 <button
   bind:this={el}
-  class="{styles} border border-transparent rounded pr-2 flex items-center justify-start w-full"
+  class="w-full px-1 py-0.5 disabled:opacity-30 group"
+  disabled={item.disabled}
   on:click|stopPropagation={() => {
     if (multiple) {
       item.selected = !item.selected
@@ -57,39 +58,45 @@
     }
   }}
 >
-  {#if workspace}
-    <ProfileAvatar name={item.label} picture={item.picture} large />
-  {:else if item.icon}
-    <Icon
-      src={item.icon}
-      class="w-4 h-4 {item.destructive ? 'text-danger-500' : item.iconClass || 'text-neutral-500'}"
-    />
-  {/if}
-  <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" title={item.label}>
-    <span class="flex items-center space-x-1.5">
-      {#if item.color}
-        <TagStatus status={item.color} dot />
-      {/if}
-      <span class="{labelStyles} text-base font-medium truncate">{item.label}</span>
-    </span>
-
-    {#if item.country}
-      <span class="flex space-x-1 items-center">
-        <BaseFlag country={item.country} width={10} />
-        <span class="text-sm text-neutral-500 tracking-normal">{getCountryName(item.country)}</span>
+  <div class="{styles} rounded pr-1.5 flex items-center justify-start w-full">
+    {#if workspace}
+      <ProfileAvatar name={item.label} picture={item.picture} large />
+    {:else if item.icon}
+      <Icon
+        src={item.icon}
+        class="w-4 h-4 {item.destructive
+          ? 'text-danger-500'
+          : item.iconClass || 'text-neutral-500'}"
+      />
+    {/if}
+    <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" title={item.label}>
+      <span class="flex items-center space-x-1.5">
+        {#if item.color}
+          <TagStatus status={item.color} dot />
+        {/if}
+        <span class="{labelStyles} text-base font-medium truncate">{item.label}</span>
       </span>
+
+      {#if item.country}
+        <span class="flex space-x-1 items-center">
+          <BaseFlag country={item.country} width={10} />
+          <span class="text-sm text-neutral-500 tracking-normal"
+            >{getCountryName(item.country)}</span
+          >
+        </span>
+      {/if}
+    </div>
+    {#if multiple}
+      <InputCheckbox
+        bind:checked={item.selected}
+        on:change={() => {
+          dispatch('change', item)
+        }}
+      />
+    {:else if item.selected}
+      <Icon src={Tick} class="w-5 h-5 text-workspace-accent text-neutral-500" />
+    {:else if item.rightIcon}
+      <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-800" />
     {/if}
   </div>
-  {#if multiple}
-    <InputCheckbox
-      bind:checked={item.selected}
-      on:change={() => {
-        dispatch('change', item)
-      }}
-    />
-  {:else if item.selected}
-    <Icon src={Tick} class="w-5 h-5 text-workspace-accent text-neutral-500" />
-  {:else if item.rightIcon}
-    <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-800" />
-  {/if}
 </button>

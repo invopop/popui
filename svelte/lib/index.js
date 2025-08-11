@@ -19,6 +19,7 @@ import DataListItem from './DataListItem.svelte'
 import DatePicker from './DatePicker.svelte'
 import DrawerContext from './DrawerContext.svelte'
 import DrawerContextItem from './DrawerContextItem.svelte'
+import DrawerContextSeparator from './DrawerContextSeparator.svelte'
 import DropdownSelect from './DropdownSelect.svelte'
 import EmptyStateIcon from './EmptyStateIcon.svelte'
 import EmptyStateIllustration from './EmptyStateIllustration.svelte'
@@ -92,6 +93,7 @@ export {
   DatePicker,
   DrawerContext,
   DrawerContextItem,
+  DrawerContextSeparator,
   DropdownSelect,
   EmptyStateIcon,
   EmptyStateIllustration,

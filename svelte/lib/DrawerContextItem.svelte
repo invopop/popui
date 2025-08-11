@@ -23,11 +23,11 @@
 
   $: styles = clsx(
     { 'py-1 space-x-3': workspace },
-    { 'py-0.5 space-x-1.5': !workspace },
+    { 'py-1.5 space-x-1.5': !workspace },
     { 'pl-1.5': hasIcon },
     { 'pl-2': !hasIcon },
     { 'bg-workspace-accent-100': item.selected && !multiple },
-    { 'hover:bg-neutral-100 rounded': !item.selected }
+    { 'group-hover:bg-neutral-100 rounded': !item.selected }
   )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
@@ -47,7 +47,7 @@
 
 <button
   bind:this={el}
-  class="w-full px-1 py-0.5 disabled:opacity-30"
+  class="w-full px-1 py-0.5 disabled:opacity-30 group"
   disabled={item.disabled}
   on:click|stopPropagation={() => {
     if (multiple) {

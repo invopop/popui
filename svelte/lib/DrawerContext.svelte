@@ -32,7 +32,7 @@
       <InputSearch placeholder="Search" />
     </div>
   {/if}
-  <ul class="space-y-1 max-h-80 overflow-y-auto">
+  <ul class="space-y-0.5 max-h-80 overflow-y-auto">
     {#each items as item}
       {#if item.separator}
         <DrawerContextSeparator />

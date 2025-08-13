@@ -3,7 +3,8 @@
   import { dispatchWcEvent } from './wcdispatch.js'
 
   export let checked = false
-  export let id = ''
+  export let id = Math.random().toString(36).slice(2, 7)
+  export let name = ''
 
   let el: HTMLInputElement
 
@@ -29,6 +30,7 @@
   bind:this={el}
   type="radio"
   {id}
+  {name}
   {checked}
   class="form-radio h-5 w-5 border-neutral-200 text-workspace-accent focus:ring-0 focus:ring-offset-0 cursor-pointer"
   {...$$restProps}

@@ -4,7 +4,7 @@
   import twconfig from '../twind.config.js'
   import AlertDialogComponent from '../stories/helpers/AlertDialogComponent.svelte'
   import CardCheckbox from '$lib/CardCheckbox.svelte'
-  import { CodeFork } from '@invopop/ui-icons'
+  import { CodeFork, Invoice } from '@invopop/ui-icons'
   import UuidCopy from '$lib/UuidCopy.svelte'
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import StepIconList from '$lib/StepIconList.svelte'
@@ -24,12 +24,13 @@
     withSlot
   />
   <CardCheckbox
-    id="something"
+    name="something"
     title="Some Title"
     description="this is a description"
     accentText="Live"
     icon={CodeFork}
   />
+  <CardCheckbox name="something" title="Invoice" icon={Invoice} hideRadio checked />
   <div>
     <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" full compact />
   </div>

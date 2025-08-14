@@ -1,7 +1,7 @@
 {
   "name": "@invopop/ui-icons",
   "description": "Icon Sources (based on template) built for @steeze-ui/icons",
-  "version": "0.0.65",
+  "version": "0.0.66",
   "scripts": {
     "dev": "vite dev",
     "build": "npm run package && vite build",

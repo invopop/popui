@@ -175,6 +175,7 @@ export type Breadcrumb = {
   label: string
   url?: string
   country?: string
+  copiable?: boolean
 }
 
 export type StepIcon = {

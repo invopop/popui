@@ -17,7 +17,7 @@
         <a href={breadcrumb.url}>
           <span class:text-neutral-400={i < breadcrumbs.length - 1}>{breadcrumb.label}</span>
         </a>
-      {:else}
+      {:else if breadcrumb.copiable}
         <button
           class={i < breadcrumbs.length - 1 ? 'text-neutral-400' : 'font-medium'}
           on:click|stopPropagation={async () => {
@@ -27,6 +27,10 @@
         >
           {breadcrumb.label}
         </button>
+      {:else}
+        <span class={i < breadcrumbs.length - 1 ? 'text-neutral-400' : 'font-medium'}>
+          {breadcrumb.label}
+        </span>
       {/if}
       {#if breadcrumb.country}
         <BaseFlag country={breadcrumb.country} width={14} />

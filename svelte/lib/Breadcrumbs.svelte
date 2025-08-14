@@ -3,8 +3,11 @@
   import { Slash } from '@invopop/ui-icons'
   import BaseFlag from './BaseFlag.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
+  import { createEventDispatcher } from 'svelte'
 
   export let breadcrumbs: Breadcrumb[] = []
+
+  const dispatch = createEventDispatcher()
 </script>
 
 <ul class="flex items-center justify-start text-neutral-800">
@@ -15,9 +18,15 @@
           <span class:text-neutral-400={i < breadcrumbs.length - 1}>{breadcrumb.label}</span>
         </a>
       {:else}
-        <span class={i < breadcrumbs.length - 1 ? 'text-neutral-400' : 'font-medium'}>
+        <button
+          class={i < breadcrumbs.length - 1 ? 'text-neutral-400' : 'font-medium'}
+          on:click|stopPropagation={async () => {
+            await navigator.clipboard.writeText(breadcrumb.label)
+            dispatch('copied', breadcrumb.label)
+          }}
+        >
           {breadcrumb.label}
-        </span>
+        </button>
       {/if}
       {#if breadcrumb.country}
         <BaseFlag country={breadcrumb.country} width={14} />

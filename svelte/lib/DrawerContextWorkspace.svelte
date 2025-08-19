@@ -2,7 +2,7 @@
   import type { DrawerOption } from './types.ts'
   import DrawerContextItem from './DrawerContextItem.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { AddCircle, ExternalLink, Sidebar } from '@invopop/ui-icons'
+  import { AddCircle, ExternalLink, Workspace } from '@invopop/ui-icons'
   import { createEventDispatcher } from 'svelte'
   import BaseCounter from './BaseCounter.svelte'
   import EmptyStateIcon from './EmptyStateIcon.svelte'
@@ -56,7 +56,7 @@
         {#if !liveItems.length}
           <div class="h-[182px] overflow-x-hidden">
             <EmptyStateIcon
-              icon={Sidebar}
+              icon={Workspace}
               title="No workspaces here"
               description="Create a workspace to start"
             />
@@ -94,7 +94,7 @@
         {#if !sandboxItems.length}
           <div class="h-[182px] overflow-x-hidden">
             <EmptyStateIcon
-              icon={Sidebar}
+              icon={Workspace}
               title="No workspaces here"
               description="Create a workspace to start"
             />

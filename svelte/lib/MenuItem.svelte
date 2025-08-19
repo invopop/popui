@@ -5,7 +5,7 @@
   import type { IconTheme, MenuItemProps, DrawerOption } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { ChevronDown, ChevronRight } from '@invopop/ui-icons'
-  import { SubFolder } from '@invopop/ui-icons'
+  import { FolderL } from '@invopop/ui-icons'
   import { createEventDispatcher } from 'svelte'
   import { resolveIcon } from './helpers.js'
   import DrawerContext from './DrawerContext.svelte'
@@ -64,7 +64,7 @@
       label: c.label || '',
       value: c.url || '',
       selected: c.active,
-      icon: SubFolder
+      icon: FolderL
     }))
   ] as DrawerOption[]
 

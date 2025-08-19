@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 import MenuItemWithChildren from './MenuItemWithChildren.svelte'
 import MarginDecorator from '../decorartors/MarginDecorator.svelte'
 import DarkBackgroundDecorator from '../decorartors/DarkBackgroundDecorator.svelte'
-import { DocumentText } from '@invopop/ui-icons'
+import { Invoice } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -62,7 +62,7 @@ export const ChildActive: Story = {
 
 export const CollapsedSidebarWithChild: Story = {
   args: {
-    icon: DocumentText,
+    icon: Invoice,
     collapsedSidebar: true,
     collapsable: true,
     open: true,
@@ -77,7 +77,7 @@ export const CollapsedSidebarWithChild: Story = {
 export const CollapsedSidebarParentSelected: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {
-    icon: DocumentText,
+    icon: Invoice,
     collapsedSidebar: true,
     collapsable: true,
     open: true,

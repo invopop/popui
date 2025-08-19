@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.0.97",
+  "version": "0.0.98",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -84,7 +84,7 @@
   "dependencies": {
     "@beyonk/svelte-datepicker": "^13.0.3",
     "@floating-ui/core": "^1.5.1",
-    "@invopop/ui-icons": "0.0.65",
+    "@invopop/ui-icons": "0.0.67",
     "@steeze-ui/heroicons": "^2.2.3",
     "@steeze-ui/svelte-icon": "^1.5.0",
     "@twind/core": "^1.1.3",

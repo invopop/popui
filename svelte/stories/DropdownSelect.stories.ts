@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/svelte'
 import DropdownSelect from '../lib/DropdownSelect.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
-import { Edit, Flag, Locked } from '@invopop/ui-icons'
+import { Edit, Flag, Lock } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -55,7 +55,7 @@ export const WithSelectedOption: Story = {
     value: 2,
     options: [
       { icon: Edit, value: 1, label: 'Option one' },
-      { icon: Locked, value: 2, label: 'Option Two' }
+      { icon: Lock, value: 2, label: 'Option Two' }
     ]
   }
 }
@@ -84,10 +84,10 @@ export const WithColorsAndIcon: Story = {
 export const Multiple: Story = {
   args: {
     placeholder: 'Label',
-    value: [{ icon: Locked, value: 2, label: 'Option Two' }],
+    value: [{ icon: Lock, value: 2, label: 'Option Two' }],
     options: [
       { icon: Edit, value: 1, label: 'Option one' },
-      { icon: Locked, value: 2, label: 'Option Two' }
+      { icon: Lock, value: 2, label: 'Option Two' }
     ],
     multiple: true
   }

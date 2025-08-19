@@ -1,12 +1,12 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import { DocumentText, Download } from '@invopop/ui-icons'
+  import { Invoice, Download } from '@invopop/ui-icons'
   import BaseButton from './BaseButton.svelte'
   import type { StatusType } from './types.js'
   import clsx from 'clsx'
 
-  export let icon: IconSource = DocumentText
+  export let icon: IconSource = Invoice
   export let name = ''
   export let disabled = false
   export let date = ''

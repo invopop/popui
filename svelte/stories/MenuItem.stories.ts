@@ -37,7 +37,7 @@ export const WithIconAsText: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {
     label: 'Item',
-    icon: 'document-text'
+    icon: 'invoice'
   }
 }
 

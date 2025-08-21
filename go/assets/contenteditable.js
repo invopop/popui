@@ -100,3 +100,34 @@ document.addEventListener('alpine:init', () => {
     }
   })
 })
+
+// Revove format from pasted text
+document.addEventListener('paste', function (e) {
+  const target = e.target
+
+  // Only run if the target is a contenteditable element
+  if (target && target.isContentEditable) {
+    e.preventDefault()
+    let clipboardEvent = e
+
+    if (!clipboardEvent.clipboardData) return
+
+    const target = e.target
+
+    if (!target) return
+
+    const pasteText = clipboardEvent.clipboardData.getData('text/plain')
+    const selection = window.getSelection()
+
+    if (!selection || !selection.rangeCount) return
+
+    const range = selection.getRangeAt(0)
+    range.deleteContents()
+    const textNode = document.createTextNode(pasteText)
+    range.insertNode(textNode)
+    range.setStartAfter(textNode)
+    range.collapse(true)
+    selection.removeAllRanges()
+    selection.addRange(range)
+  }
+})

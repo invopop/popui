@@ -406,7 +406,7 @@ input:checked + .popui-switch__input:before {
 }
 .popui-label,
 .popui-desc-list dt {
-  @apply font-sans text-sm font-medium text-neutral-500;
+  @apply font-sans text-sm font-medium text-neutral-500 flex items-center gap-0.5;
 }
 .popui-error {
   @apply font-sans text-sm text-danger-500 flex items-center space-x-1 pl-[20px] bg-no-repeat bg-left bg-[length:16px_16px];
@@ -902,6 +902,10 @@ form {
 .popui-full-icon-size > div[style*='width: 16px'][style*='height: 16px'] {
   width: auto !important;
   height: auto !important;
+}
+.popui-small-icon-size > div[style*='width: 16px'][style*='height: 16px'] {
+  width: 12px !important;
+  height: 12px !important;
 }
 
 .max-w-md {

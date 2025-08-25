@@ -413,9 +413,10 @@ func AppStepOne() templ.Component {
 						return templ_7745c5c3_Err
 					}
 					templ_7745c5c3_Err = popui.InputText(props.InputText{
-						Label:    "Nombre",
-						Value:    "Proveedor S.A.",
-						Disabled: true,
+						Label:     "Nombre",
+						LabelHint: "This is the name of the provider",
+						Value:     "Proveedor S.A.",
+						Disabled:  true,
 					}).Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err

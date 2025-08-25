@@ -19,6 +19,7 @@ type InputRange struct {
 	Class       string
 	LabelClass  string
 	Label       string
+	LabelHint   string
 	Min         string
 	Max         string
 	Step        string

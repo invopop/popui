@@ -11,7 +11,7 @@ import (
 templ Select(p props.Select) {
 	<div class={ classes.SelectWrapper }>
 		if p.Label != "" {
-			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass}) {
+			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass, Hint: p.LabelHint}) {
 				{ p.Label }
 			}
 		}

@@ -15,6 +15,7 @@ type Textarea struct {
 	Class       string
 	Label       string
 	LabelClass  string
+	LabelHint   string
 	Disabled    bool
 	Readonly    bool
 	Required    bool

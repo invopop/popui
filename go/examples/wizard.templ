@@ -90,9 +90,10 @@ templ AppStepOne() {
 							Información de la empresa
 						}
 						@popui.InputText(props.InputText{
-							Label:    "Nombre",
-							Value:    "Proveedor S.A.",
-							Disabled: true,
+							Label:     "Nombre",
+							LabelHint: "This is the name of the provider",
+							Value:     "Proveedor S.A.",
+							Disabled:  true,
 						})
 						<div class={ classes.FormCellGroup }>
 							@popui.InputText(props.InputText{

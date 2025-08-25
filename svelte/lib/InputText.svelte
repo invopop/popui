@@ -66,8 +66,9 @@
   readonly={disabled}
   {...$$restProps}
   on:input={handleInput}
-  on:focus={() => dispatch('focus')}
-  on:blur={(e) => dispatch('blur', e)}
+  on:focus
+  on:blur
+  on:keydown
 />
 {#if errorText}
   <InputError {errorText} />

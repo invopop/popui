@@ -9,6 +9,7 @@ type Select struct {
 	Class      string
 	Label      string
 	LabelClass string
+	LabelHint  string
 	Disabled   bool
 	Autofocus  bool
 	Multiple   bool

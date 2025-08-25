@@ -22,7 +22,7 @@
   <div class="py-2 pr-2 pl-3 flex items-start justify-between">
     <div class="flex space-x-2">
       {#if icon}
-        <Icon src={icon} class="h-5 w-5 mt-0.5 text-neutral-500 flex-shrink-0" />
+        <Icon src={icon} class="h-5 w-5 text-neutral-500 flex-shrink-0" />
       {/if}
       <div class="flex flex-col space-y-0.5">
         <span class="text-base text-neutral-800 font-medium">{title}</span>

@@ -27,7 +27,7 @@
     { 'pl-1.5': hasIcon },
     { 'pl-2': !hasIcon },
     { 'bg-workspace-accent-100': item.selected && !multiple },
-    { 'group-hover:bg-neutral-100': !item.selected || multiple }
+    { 'group-hover:bg-neutral-100': (!item.selected && !item.disabled) || multiple }
   )
   $: labelStyles = clsx(
     { 'text-danger-500': item.destructive },
@@ -35,6 +35,7 @@
     { 'tracking-tight max-w-[200px]': workspace },
     { 'tracking-normal': !workspace }
   )
+  $: title = item.label.length > 25 ? item.label : undefined
 
   onMount(() => {
     if (!scrollIfSelected) return
@@ -69,7 +70,7 @@
           : item.iconClass || 'text-neutral-500'}"
       />
     {/if}
-    <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" title={item.label}>
+    <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" {title}>
       <span class="flex items-center space-x-1.5">
         {#if item.color}
           <TagStatus status={item.color} dot />

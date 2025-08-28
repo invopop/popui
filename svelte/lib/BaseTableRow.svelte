@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { createEventDispatcher } from 'svelte'
   import BaseTableActions from './BaseTableActions.svelte'
   import type { TableActionProp, TableDataRow, TableField } from './types.js'
@@ -10,44 +12,60 @@
 
   const dispatch = createEventDispatcher()
 
-  let actionsDropdown: BaseTableActions
-  let checkboxButton: HTMLButtonElement
-  let dataState: 'selected' | 'checked' | undefined = undefined
+  let actionsDropdown: BaseTableActions = $state()
+  let checkboxButton: HTMLButtonElement = $state()
+  let dataState: 'selected' | 'checked' | undefined = $state(undefined)
 
-  export let row: TableDataRow
-  export let getActions: TableActionProp = undefined
-  export let fields: TableField[] = []
-  export let disableRowClick = false
-  export let selectable = false
-  export let selected = false
-  export let selectionMode = 'keyboard'
-  export let selectedTrackedBy = 'id'
-  export let selectedRows: TableDataRow[] = []
-
-  $: actions = getActions instanceof Function ? getActions(row) : []
-
-  $: checked = !!selectedRows.find((r) => {
-    const field = r[selectedTrackedBy]
-
-    if (field === undefined) return false
-
-    return field === row[selectedTrackedBy]
-  })
-
-  $: if (selectionMode === 'keyboard' && selected) {
-    scrollIntoView()
+  interface Props {
+    row: TableDataRow;
+    getActions?: TableActionProp;
+    fields?: TableField[];
+    disableRowClick?: boolean;
+    selectable?: boolean;
+    selected?: boolean;
+    selectionMode?: string;
+    selectedTrackedBy?: string;
+    selectedRows?: TableDataRow[];
   }
+
+  let {
+    row,
+    getActions = undefined,
+    fields = [],
+    disableRowClick = false,
+    selectable = false,
+    selected = false,
+    selectionMode = 'keyboard',
+    selectedTrackedBy = 'id',
+    selectedRows = []
+  }: Props = $props();
+
+
+
 
   function scrollIntoView() {
     scrollIntoTableView(checkboxButton)
   }
 
-  $: rowClass = clsx({
+
+  let actions = $derived(getActions instanceof Function ? getActions(row) : [])
+  let checked = $derived(!!selectedRows.find((r) => {
+    const field = r[selectedTrackedBy]
+
+    if (field === undefined) return false
+
+    return field === row[selectedTrackedBy]
+  }))
+  run(() => {
+    if (selectionMode === 'keyboard' && selected) {
+      scrollIntoView()
+    }
+  });
+  let rowClass = $derived(clsx({
     'cursor-pointer': !disableRowClick,
     '!hover:bg-transparent': disableRowClick
-  })
-
-  $: {
+  }))
+  run(() => {
     if (selected) {
       dataState = 'selected'
     } else if (checked) {
@@ -55,7 +73,7 @@
     } else {
       dataState = undefined
     }
-  }
+  });
 </script>
 
 <TableRow

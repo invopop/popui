@@ -1,16 +1,23 @@
 <script lang="ts">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import type { DataListItem } from './types.js'
   import { ChevronRight } from '@invopop/ui-icons'
   import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 
-  export let title = ''
-  export let icon: IconSource | undefined = undefined
-  export let items: DataListItem[] = []
+  interface Props {
+    title?: string;
+    icon?: IconSource | undefined;
+    items?: DataListItem[];
+  }
+
+  let { title = '', icon = undefined, items = [] }: Props = $props();
 </script>
 
 <div class="border rounded-lg">
-  <button class="pl-3 py-2 pr-2 flex items-center justify-between space-x-3 w-full" on:click>
+  <button class="pl-3 py-2 pr-2 flex items-center justify-between space-x-3 w-full" onclick={bubble('click')}>
     <div class="flex items-center space-x-1.5">
       {#if icon}
         <Icon src={icon} class="h-4 w-4 text-neutral-500" />

@@ -4,9 +4,12 @@
   import { Alert, Failure, Queue, Running, Success, CheckBadge, Skip } from '@invopop/ui-icons'
   import type { IconSource } from '@steeze-ui/heroicons'
 
-  export let status: FeedItemStatus
+  interface Props {
+    status: FeedItemStatus;
+  }
 
-  $: iconStatus = getIconStatus(status)
+  let { status }: Props = $props();
+
 
   function getIconStatus(status: FeedItemStatus): IconSource | undefined {
     const icons: Record<FeedItemStatus, IconSource> = {
@@ -21,6 +24,7 @@
 
     return icons[status]
   }
+  let iconStatus = $derived(getIconStatus(status))
 </script>
 
 {#if iconStatus}
@@ -28,5 +32,5 @@
     <Icon src={iconStatus} class="h-4 w-4 flex-shrink-0" />
   </div>
 {:else}
-  <div class="w-4 h-4 flex-shrink-0 bg-neutral-200 rounded-full" />
+  <div class="w-4 h-4 flex-shrink-0 bg-neutral-200 rounded-full"></div>
 {/if}

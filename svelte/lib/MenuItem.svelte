@@ -1,4 +1,7 @@
 <script lang="ts">
+  import MenuItem from './MenuItem.svelte';
+  import { stopPropagation } from 'svelte/legacy';
+
   import { flip, shift, offset } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import clsx from 'clsx'
@@ -16,31 +19,42 @@
     middleware: [offset(-4), flip(), shift()]
   })
 
-  export let label = ''
-  export let url = ''
-  export let isFolderItem = false
-  export let collapsable = false
-  export let open = false
-  export let active = false
-  export let collapsedSidebar = false
-  export let iconTheme: IconTheme = 'default'
-  export let icon: IconSource | string | undefined = undefined
-  export let children: MenuItemProps[] | undefined = undefined
+  interface Props {
+    label?: string;
+    url?: string;
+    isFolderItem?: boolean;
+    collapsable?: boolean;
+    open?: boolean;
+    active?: boolean;
+    collapsedSidebar?: boolean;
+    iconTheme?: IconTheme;
+    icon?: IconSource | string | undefined;
+    children?: MenuItemProps[] | undefined;
+  }
 
-  let resolvedIcon: IconSource | undefined
-  let hovered = false
-  let highlight = false
+  let {
+    label = '',
+    url = '',
+    isFolderItem = false,
+    collapsable = false,
+    open = $bindable(false),
+    active = false,
+    collapsedSidebar = false,
+    iconTheme = 'default',
+    icon = undefined,
+    children = undefined
+  }: Props = $props();
+
+  let resolvedIcon: IconSource | undefined = $derived(icon)
+  let hovered = $state(false)
+  let highlight = $state(false)
   let leaveHoverTimeout: ReturnType<typeof setTimeout> | null = null
 
   const dispatch = createEventDispatcher()
 
-  $: {
-    resolveIcon(icon).then((icon) => {
-      resolvedIcon = icon
-    })
-  }
+  
 
-  $: itemStyles = clsx(
+  let itemStyles = $derived(clsx(
     { 'text-white font-medium': !isFolderItem },
     { 'text-white-40': isFolderItem && !active },
     { 'bg-white-10': active },
@@ -50,15 +64,15 @@
       'bg-white-10 border-white-5 text-white': active
     },
     { 'hover:bg-white-5 focus:bg-white-10': !active }
-  )
+  ))
 
-  $: iconStyles = clsx({ 'group-hover:text-white': collapsedSidebar })
+  let iconStyles = $derived(clsx({ 'group-hover:text-white': collapsedSidebar }))
 
-  $: wrapperStyles = clsx({
+  let wrapperStyles = $derived(clsx({
     'ml-4 border-l border-white-10 pl-2 pt-0.5 relative': isFolderItem
-  })
+  }))
 
-  $: items = [
+  let items = $derived([
     { label, value: url, selected: active, icon: resolvedIcon },
     ...(children || []).map((c) => ({
       label: c.label || '',
@@ -66,7 +80,7 @@
       selected: c.active,
       icon: FolderL
     }))
-  ] as DrawerOption[]
+  ] as DrawerOption[])
 
   function handleClick() {
     if (!url && collapsable) {
@@ -99,13 +113,13 @@
 
 <div class={wrapperStyles}>
   {#if isFolderItem && (highlight || active)}
-    <div class="border-l border-white h-3 w-px absolute top-[14px] left-0 -m-px" />
+    <div class="border-l border-white h-3 w-px absolute top-[14px] left-0 -m-px"></div>
   {/if}
   <button
     use:floatingRef
-    on:mouseenter={handleHover}
-    on:mouseleave={handleBlur}
-    on:click={handleClick}
+    onmouseenter={handleHover}
+    onmouseleave={handleBlur}
+    onclick={handleClick}
     title={label}
     class="{itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-md"
   >
@@ -119,9 +133,9 @@
     </span>
     {#if collapsable && !collapsedSidebar}
       <button
-        on:click|stopPropagation={() => {
+        onclick={stopPropagation(() => {
           open = !open
-        }}
+        })}
       >
         <Icon src={open ? ChevronDown : ChevronRight} class="h-4 w-4 text-white-40" />
       </button>
@@ -133,8 +147,8 @@
         <div
           use:floatingContent
           role="contentinfo"
-          on:mouseenter={handleHover}
-          on:mouseleave={handleBlur}
+          onmouseenter={handleHover}
+          onmouseleave={handleBlur}
           class="pt-4 z-30"
         >
           <DrawerContext on:click={handleClickChild} {items} />
@@ -144,7 +158,7 @@
       <ul>
         {#each children as child}
           <li>
-            <svelte:self {...child} isFolderItem on:click />
+            <MenuItem {...child} isFolderItem on:click />
           </li>
         {/each}
       </ul>

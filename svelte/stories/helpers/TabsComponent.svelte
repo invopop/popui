@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../lib/tabs'
 
-  let value = 'password'
+  let value = $state('password')
 </script>
 
 <div class="flex flex-col max-h-[200px]">

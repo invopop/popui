@@ -6,13 +6,23 @@
   import { slide } from 'svelte/transition'
   import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 
-  export let status: FeedItemStatus | undefined = undefined
-  export let title = ''
-  export let uuid = ''
-  export let events: FeedEvent[] = []
-  export let idLabel = 'ID:'
+  interface Props {
+    status?: FeedItemStatus | undefined;
+    title?: string;
+    uuid?: string;
+    events?: FeedEvent[];
+    idLabel?: string;
+  }
 
-  let open = false
+  let {
+    status = undefined,
+    title = '',
+    uuid = '',
+    events = [],
+    idLabel = 'ID:'
+  }: Props = $props();
+
+  let open = $state(false)
 </script>
 
 <div class="w-full rounded-lg border border-neutral-100">
@@ -34,7 +44,7 @@
     <div class="px-3 py-2 text-sm text-neutral-500 flex items-center justify-between">
       <span>Logs</span>
       <button
-        on:click={() => {
+        onclick={() => {
           open = !open
         }}
       >

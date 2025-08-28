@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { stopPropagation } from 'svelte/legacy';
+
   import clsx from 'clsx'
   import type { ButtonVariant, IconPosition, IconTheme } from '$lib/types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
@@ -9,28 +11,45 @@
 
   const dispatch = createEventDispatcher()
 
-  export let icon: IconSource | string | undefined = undefined
-  export let iconTheme: IconTheme = 'default'
-  export let iconPosition: IconPosition = 'left'
-  export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button'
-  export let variant: ButtonVariant = 'default'
-  export let disabled = false
-  export let small = false
-  export let big = false
-  export let dangerIcon = false
-  export let shortcut = false
-  export let fullwidth = false
-  export let notification = false
-
-  let resolvedIcon: IconSource | undefined
-
-  $: {
-    resolveIcon(icon).then((icon) => {
-      resolvedIcon = icon
-    })
+  interface Props {
+    icon?: IconSource | string | undefined;
+    iconTheme?: IconTheme;
+    iconPosition?: IconPosition;
+    type?: 'button' | 'submit' | 'reset' | null | undefined;
+    variant?: ButtonVariant;
+    disabled?: boolean;
+    small?: boolean;
+    big?: boolean;
+    dangerIcon?: boolean;
+    shortcut?: boolean;
+    fullwidth?: boolean;
+    notification?: boolean;
+    children?: import('svelte').Snippet;
+    [key: string]: any
   }
 
-  $: buttonStyles = clsx(
+  let {
+    icon = undefined,
+    iconTheme = 'default',
+    iconPosition = 'left',
+    type = 'button',
+    variant = 'default',
+    disabled = false,
+    small = false,
+    big = false,
+    dangerIcon = false,
+    shortcut = false,
+    fullwidth = false,
+    notification = false,
+    children,
+    ...rest
+  }: Props = $props();
+
+  let resolvedIcon: IconSource | undefined = $derived(icon)
+
+  
+
+  let buttonStyles = $derived(clsx(
     { 'w-full': fullwidth },
     { 'opacity-30 pointer-events-none': disabled },
     { 'flex-row-reverse space-x-reverse': iconPosition === 'right' },
@@ -41,17 +60,17 @@
     { 'bg-warning-500': variant === 'warning' },
     { 'text-sm rounded': small },
     { 'text-base rounded-md': !small },
-    { 'p-1': small && !$$slots.default },
-    { 'p-1.5': !small && !big && !$$slots.default },
-    { 'p-2': big && !$$slots.default },
-    { 'px-3': big && $$slots.default && !icon },
-    { 'px-2': !big && $$slots.default && !icon },
-    { 'pl-2 pr-2.5': big && $$slots.default && icon && iconPosition === 'left' },
-    { 'pl-2.5 pr-2': big && $$slots.default && icon && iconPosition === 'right' },
-    { 'pl-1.5 pr-2': !small && !big && $$slots.default && icon && iconPosition === 'left' },
-    { 'pl-2 pr-1.5': !small && !big && $$slots.default && icon && iconPosition === 'right' },
-    { 'py-1.5': big && $$slots.default },
-    { 'py-1': !big && $$slots.default },
+    { 'p-1': small && !children },
+    { 'p-1.5': !small && !big && !children },
+    { 'p-2': big && !children },
+    { 'px-3': big && children && !icon },
+    { 'px-2': !big && children && !icon },
+    { 'pl-2 pr-2.5': big && children && icon && iconPosition === 'left' },
+    { 'pl-2.5 pr-2': big && children && icon && iconPosition === 'right' },
+    { 'pl-1.5 pr-2': !small && !big && children && icon && iconPosition === 'left' },
+    { 'pl-2 pr-1.5': !small && !big && children && icon && iconPosition === 'right' },
+    { 'py-1.5': big && children },
+    { 'py-1': !big && children },
     { 'text-white': ['primary', 'danger', 'dark', 'warning'].includes(variant) },
     { 'text-neutral-800': ['default', 'secondary', 'outline'].includes(variant) },
     { 'border border-white-10 hover:border-white-20 active:border-white-40': variant === 'dark' },
@@ -63,28 +82,28 @@
       'border border-neutral-800/10 hover:bg-neutral-800/5 active:border-neutral-800/20 active:bg-neutral-800/10':
         variant === 'outline'
     },
-    { 'gap-1': icon && $$slots.default }
-  )
+    { 'gap-1': icon && children }
+  ))
 
-  $: iconStyles = clsx(
+  let iconStyles = $derived(clsx(
     {
       'text-neutral-500':
-        ['default', 'secondary'].includes(variant) && $$slots.default && !dangerIcon
+        ['default', 'secondary'].includes(variant) && children && !dangerIcon
     },
     {
       'text-neutral-800':
-        ['default', 'secondary'].includes(variant) && !$$slots.default && !dangerIcon
+        ['default', 'secondary'].includes(variant) && !children && !dangerIcon
     },
     {
-      'text-white-70': !['default', 'secondary'].includes(variant) && $$slots.default && !dangerIcon
+      'text-white-70': !['default', 'secondary'].includes(variant) && children && !dangerIcon
     },
     {
-      'text-white': !['default', 'secondary'].includes(variant) && !$$slots.default && !dangerIcon
+      'text-white': !['default', 'secondary'].includes(variant) && !children && !dangerIcon
     },
     { 'text-danger-500': dangerIcon }
-  )
+  ))
 
-  $: overlayClasses = clsx({
+  let overlayClasses = $derived(clsx({
     'rounded-md': !small,
     rounded: small,
     'group-hover:bg-black/[.16] group-active:bg-black/[.32]': [
@@ -92,7 +111,7 @@
       'danger',
       'warning'
     ].includes(variant)
-  })
+  }))
 
   function handleClick(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
@@ -108,10 +127,10 @@
   {type}
   {disabled}
   class="{buttonStyles} flex items-center justify-center font-medium font-sans relative group tracking-tight"
-  {...$$restProps}
-  on:click|stopPropagation={handleClick}
+  {...rest}
+  onclick={stopPropagation(handleClick)}
 >
-  <span class="{overlayClasses} absolute inset-0" />
+  <span class="{overlayClasses} absolute inset-0"></span>
   {#if resolvedIcon}
     <div class="relative">
       {#if shortcut}
@@ -122,11 +141,11 @@
         <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 z-10" />
       {/if}
       {#if notification}
-        <span class="absolute top-0 right-0 w-1.5 h-1.5 bg-danger-500 rounded-full z-20" />
+        <span class="absolute top-0 right-0 w-1.5 h-1.5 bg-danger-500 rounded-full z-20"></span>
       {/if}
     </div>
   {/if}
-  {#if $$slots.default}
-    <span class="z-10"><slot /></span>
+  {#if children}
+    <span class="z-10">{@render children?.()}</span>
   {/if}
 </button>

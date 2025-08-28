@@ -3,16 +3,20 @@
   import FeedIconStatus from './FeedIconStatus.svelte'
   import type { FeedItemStatus } from './types.js'
 
-  export let status: FeedItemStatus
-  export let label = ''
+  interface Props {
+    status: FeedItemStatus;
+    label?: string;
+  }
 
-  $: styles = clsx({
+  let { status, label = '' }: Props = $props();
+
+  let styles = $derived(clsx({
     'text-positive-500': status === 'success',
     'text-neutral-500': status === 'queued',
     'text-warning-500': status === 'alert',
     'text-danger-500': status === 'failure',
     'text-yellow-500': status === 'run'
-  })
+  }))
 </script>
 
 <div class="flex items-center space-x-1">

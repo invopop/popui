@@ -5,7 +5,11 @@
 
   const dispatch = createEventDispatcher()
 
-  export let items: FeedItemProps[] = []
+  interface Props {
+    items?: FeedItemProps[];
+  }
+
+  let { items = [] }: Props = $props();
 </script>
 
 <div>

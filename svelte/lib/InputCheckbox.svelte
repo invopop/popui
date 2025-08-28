@@ -1,9 +1,17 @@
 <script lang="ts">
+  import { createBubbler, stopPropagation } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import { createEventDispatcher } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
 
-  export let checked = false
-  export let indeterminate = false
+  interface Props {
+    checked?: boolean;
+    indeterminate?: boolean;
+    [key: string]: any
+  }
+
+  let { checked = $bindable(false), indeterminate = false, ...rest }: Props = $props();
 
   const dispatch = createEventDispatcher()
 
@@ -26,7 +34,7 @@
   {checked}
   {indeterminate}
   class="form-checkbox w-4 h-4 text-workspace-accent focus:text-workspace-accent rounded border border-neutral-200 hover:border-neutral-300 group-hover:border-neutral-300 focus:ring-0 focus:ring-offset-0"
-  {...$$restProps}
-  on:change={updateInput}
-  on:click|stopPropagation
+  {...rest}
+  onchange={updateInput}
+  onclick={stopPropagation(bubble('click'))}
 />

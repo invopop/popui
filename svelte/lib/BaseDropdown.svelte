@@ -1,13 +1,30 @@
 <script lang="ts">
+  import { stopPropagation } from 'svelte/legacy';
+
   import { offset, flip, shift, size, type Placement } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import { clickOutside } from './clickOutside.js'
   import { portal } from 'svelte-portal'
 
-  export let isOpen = false
-  export let fullWidth = false
-  export let placement: Placement = 'bottom-end'
-  export let matchParentWidth = false
+  interface Props {
+    isOpen?: boolean;
+    fullWidth?: boolean;
+    placement?: Placement;
+    matchParentWidth?: boolean;
+    trigger?: import('svelte').Snippet;
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let {
+    isOpen = $bindable(false),
+    fullWidth = false,
+    placement = 'bottom-end',
+    matchParentWidth = false,
+    trigger,
+    children,
+    ...rest
+  }: Props = $props();
 
   const middleware = [offset(6), flip(), shift()]
 
@@ -30,7 +47,7 @@
     middleware
   })
 
-  let closedFromClickOutside = false
+  let closedFromClickOutside = $state(false)
 
   export const toggle = () => {
     isOpen = !isOpen
@@ -42,13 +59,13 @@
     class="text-left"
     class:w-full={fullWidth}
     use:floatingRef
-    {...$$restProps}
-    on:click|stopPropagation={async () => {
+    {...rest}
+    onclick={stopPropagation(async () => {
       if (closedFromClickOutside) return
       isOpen = !isOpen
-    }}
+    })}
   >
-    <slot name="trigger" />
+    {@render trigger?.()}
   </button>
   {#if isOpen}
     <div
@@ -56,7 +73,7 @@
       use:portal
       use:floatingContent
       use:clickOutside
-      on:click_outside={() => {
+      onclick_outside={() => {
         closedFromClickOutside = true
         setTimeout(() => {
           closedFromClickOutside = false
@@ -64,7 +81,7 @@
         isOpen = false
       }}
     >
-      <slot />
+      {@render children?.()}
     </div>
   {/if}
 </div>

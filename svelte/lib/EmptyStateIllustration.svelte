@@ -9,11 +9,20 @@
   import IconNoResults from './svg/IconNoResults.svelte'
   import type { SvelteComponent } from 'svelte'
 
-  export let icon: EmptyStateIcon | undefined = undefined
-  export let title = ''
-  export let description = ''
+  interface Props {
+    icon?: EmptyStateIcon | undefined;
+    title?: string;
+    description?: string;
+    children?: import('svelte').Snippet;
+  }
 
-  $: iconComponent = getComponent(icon)
+  let {
+    icon = undefined,
+    title = '',
+    description = '',
+    children
+  }: Props = $props();
+
 
   function getComponent(icon: EmptyStateIcon | undefined) {
     if (!icon) return undefined
@@ -29,6 +38,7 @@
 
     return icons[icon] as typeof SvelteComponent
   }
+  let iconComponent = $derived(getComponent(icon))
 </script>
 
 <div
@@ -36,22 +46,22 @@
   aria-label={title}
 >
   {#if iconComponent}
+    {@const SvelteComponent_1 = iconComponent}
+    {@const SvelteComponent_2 = iconComponent}
+    {@const SvelteComponent_3 = iconComponent}
     <div class="relative h-[120px] w-full max-w-sm">
       <div class="absolute top-0 left-0">
         <BgPattern />
       </div>
-      <svelte:component
-        this={iconComponent}
+      <SvelteComponent_1
         classes="text-neutral-400/40 absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] -ml-[40px] rotate-[-8deg] mt-0.5 z-20 w-[86px] h-[104px]"
       />
-      <svelte:component
-        this={iconComponent}
+      <SvelteComponent_2
         classes="{icon === 'no-results'
           ? 'text-neutral-400'
           : 'text-workspace-accent'} absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] z-30 w-[97px] h-[117px]"
       />
-      <svelte:component
-        this={iconComponent}
+      <SvelteComponent_3
         classes="text-neutral-400/40 absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] ml-[40px] rotate-[8deg] mt-0.5 z-20 w-[86px] h-[104px]"
       />
     </div>
@@ -59,6 +69,6 @@
   <div class="space-y-0.5">
     <h4 class="font-medium text-base text-neutral-800 text-base tracking-tight">{title}</h4>
     <p class="max-w-xs text-base text-neutral-500 tracking-normal">{description}</p>
-    <p><slot /></p>
+    <p>{@render children?.()}</p>
   </div>
 </div>

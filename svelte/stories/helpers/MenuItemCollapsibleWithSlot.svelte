@@ -3,9 +3,13 @@
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { Question } from '@invopop/ui-icons'
 
-  export let title = ''
-  export let collapsed = false
-  export let icon: IconSource | undefined = undefined
+  interface Props {
+    title?: string;
+    collapsed?: boolean;
+    icon?: IconSource | undefined;
+  }
+
+  let { title = '', collapsed = false, icon = undefined }: Props = $props();
 </script>
 
 <MenuItemCollapsible {title} {collapsed} {icon}>

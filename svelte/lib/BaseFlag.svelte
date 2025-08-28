@@ -1,8 +1,12 @@
 <script lang="ts">
-  export let country = ''
-  export let width = 12
+  interface Props {
+    country?: string;
+    width?: number;
+  }
 
-  $: iso = country.toLowerCase()
+  let { country = '', width = 12 }: Props = $props();
+
+  let iso = $derived(country.toLowerCase())
 </script>
 
 <!-- https://github.com/HatScripts/circle-flags -->

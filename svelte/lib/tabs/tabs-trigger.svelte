@@ -6,9 +6,15 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type $$Events = TabsPrimitive.TriggerEvents
 
-  let className: $$Props['class'] = undefined
-  export let value: $$Props['value']
-  export { className as class }
+  interface Props {
+    class?: $$Props['class'];
+    value: $$Props['value'];
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let { class: className = undefined, value, children, ...rest }: Props = $props();
+  
 </script>
 
 <TabsPrimitive.Trigger
@@ -17,8 +23,8 @@
     className
   )}
   {value}
-  {...$$restProps}
+  {...rest}
   on:click
 >
-  <slot />
+  {@render children?.()}
 </TabsPrimitive.Trigger>

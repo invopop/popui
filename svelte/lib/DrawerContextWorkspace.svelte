@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import type { DrawerOption } from './types.ts'
   import DrawerContextItem from './DrawerContextItem.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
@@ -9,32 +11,38 @@
   import { slide } from 'svelte/transition'
   import { ChevronRight } from '@steeze-ui/heroicons'
 
-  export let items: DrawerOption[] = []
-  export let multiple = false
+  interface Props {
+    items?: DrawerOption[];
+    multiple?: boolean;
+  }
+
+  let { items = [], multiple = false }: Props = $props();
 
   const dispatch = createEventDispatcher()
 
-  let liveOpen = false
-  let sandboxOpen = false
+  let liveOpen = $state(false)
+  let sandboxOpen = $state(false)
 
-  $: liveItems = items.filter((i) => !i.sandbox)
-  $: sandboxItems = items.filter((i) => i.sandbox)
+  let liveItems = $derived(items.filter((i) => !i.sandbox))
+  let sandboxItems = $derived(items.filter((i) => i.sandbox))
 
-  $: selectedItem = items.find((i) => i.selected)
-  $: if (selectedItem) {
-    if (selectedItem.sandbox) {
-      sandboxOpen = true
-    } else {
-      liveOpen = true
+  let selectedItem = $derived(items.find((i) => i.selected))
+  run(() => {
+    if (selectedItem) {
+      if (selectedItem.sandbox) {
+        sandboxOpen = true
+      } else {
+        liveOpen = true
+      }
     }
-  }
+  });
 </script>
 
 <div class="w-[300px] border border-neutral-200 rounded-md shadow-lg bg-white">
   <div class="max-h-[550px] overflow-hidden rounded-t-md">
     <button
       class="flex items-center justify-between bg-neutral-50 border-b border-neutral-200 rounded-t-sm h-9 py-2 pl-2.5 pr-3 text-base font-medium text-neutral-800 w-full"
-      on:click={() => {
+      onclick={() => {
         if (liveOpen) return
         liveOpen = true
         sandboxOpen = false
@@ -72,7 +80,7 @@
     <button
       class="flex items-center justify-between bg-neutral-50 border-b border-neutral-200 h-9 py-2 pl-2.5 pr-3 text-base font-medium text-neutral-800 w-full"
       class:border-t={liveOpen}
-      on:click={() => {
+      onclick={() => {
         if (sandboxOpen) return
         sandboxOpen = true
         liveOpen = false
@@ -113,7 +121,7 @@
     <li class="pl-1.5 py-1.5 pr-2 hover:bg-neutral-100 rounded-sm">
       <button
         class="flex items-center justify-between w-full"
-        on:click={() => {
+        onclick={() => {
           dispatch('click', 'add')
         }}
       >

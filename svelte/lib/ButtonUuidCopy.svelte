@@ -5,11 +5,21 @@
 
   const dispatch = createEventDispatcher()
 
-  export let uuid = ''
-  export let prefixLength = 4
-  export let suffixLength = 4
-  export let full = false
-  export let disabled = false
+  interface Props {
+    uuid?: string;
+    prefixLength?: number;
+    suffixLength?: number;
+    full?: boolean;
+    disabled?: boolean;
+  }
+
+  let {
+    uuid = '',
+    prefixLength = 4,
+    suffixLength = 4,
+    full = false,
+    disabled = false
+  }: Props = $props();
 
   function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
     if (inputString.length <= prefixLength + suffixLength) {
@@ -22,7 +32,7 @@
     return prefix + '...' + suffix
   }
 
-  $: formattedUuid = full ? uuid : shortenString(uuid, prefixLength, suffixLength)
+  let formattedUuid = $derived(full ? uuid : shortenString(uuid, prefixLength, suffixLength))
 </script>
 
 <BaseButton

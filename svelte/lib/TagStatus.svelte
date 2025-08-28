@@ -2,11 +2,15 @@
   import clsx from 'clsx'
   import type { StatusType } from './types.ts'
 
-  export let label = ''
-  export let status: StatusType = 'grey'
-  export let dot = false
+  interface Props {
+    label?: string;
+    status?: StatusType;
+    dot?: boolean;
+  }
 
-  $: tagStyles = clsx({
+  let { label = '', status = 'grey', dot = false }: Props = $props();
+
+  let tagStyles = $derived(clsx({
     'bg-positive-100 text-positive-500': status === 'green',
     'border border-positive-200': status === 'green' && dot,
     'bg-yellow-100 text-yellow-500': status === 'yellow',
@@ -25,9 +29,9 @@
     'pl-1.5 pr-[5px] py-0.5': dot && label,
     'p-0.5': dot && !label,
     'px-1 py-0.5': !dot
-  })
+  }))
 
-  $: dotStyles = clsx({
+  let dotStyles = $derived(clsx({
     'bg-positive-500': status === 'green',
     'bg-yellow-500': status === 'yellow',
     'bg-danger-500': status === 'red',
@@ -36,7 +40,7 @@
     'bg-purple-500': status === 'purple',
     'bg-neutral-300': status === 'empty',
     'bg-neutral-500': status === 'grey'
-  })
+  }))
 </script>
 
 <span
@@ -44,7 +48,7 @@
   class="{tagStyles} rounded text-sm inline-flex items-center font-medium gap-1 box-border"
 >
   {#if dot}
-    <span class="{dotStyles} w-2 h-2 rounded-sm" />
+    <span class="{dotStyles} w-2 h-2 rounded-sm"></span>
   {/if}
   {#if label}
     <span>{label}</span>

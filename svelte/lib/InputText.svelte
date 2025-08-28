@@ -1,19 +1,36 @@
 <script lang="ts">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import clsx from 'clsx'
   import { createEventDispatcher, onMount } from 'svelte'
   import InputLabel from './InputLabel.svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import InputError from './InputError.svelte'
 
-  export let id = Math.random().toString(36).slice(2, 7)
-  export let label = ''
-  export let placeholder = ''
-  export let errorText = ''
-  export let disabled = false
-  export let value: string | number = ''
-  export let focusOnLoad = false
+  interface Props {
+    id?: any;
+    label?: string;
+    placeholder?: string;
+    errorText?: string;
+    disabled?: boolean;
+    value?: string | number;
+    focusOnLoad?: boolean;
+    [key: string]: any
+  }
 
-  let inputEl: HTMLInputElement
+  let {
+    id = Math.random().toString(36).slice(2, 7),
+    label = '',
+    placeholder = '',
+    errorText = '',
+    disabled = false,
+    value = $bindable(''),
+    focusOnLoad = false,
+    ...rest
+  }: Props = $props();
+
+  let inputEl: HTMLInputElement = $state()
   let timer: ReturnType<typeof setTimeout>
 
   const dispatch = createEventDispatcher()
@@ -26,7 +43,7 @@
     }, 750)
   }
 
-  $: inputStyles = clsx(
+  let inputStyles = $derived(clsx(
     { 'pointer-events-none bg-neutral-50': disabled },
     {
       'text-danger-500 border-danger-400 outline-danger-400': errorText
@@ -35,7 +52,7 @@
       'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
         !errorText
     }
-  )
+  ))
 
   function handleInput(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
@@ -64,11 +81,11 @@
   class="{inputStyles} py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight"
   {placeholder}
   readonly={disabled}
-  {...$$restProps}
-  on:input={handleInput}
-  on:focus
-  on:blur
-  on:keydown
+  {...rest}
+  oninput={handleInput}
+  onfocus={bubble('focus')}
+  onblur={bubble('blur')}
+  onkeydown={bubble('keydown')}
 />
 {#if errorText}
   <InputError {errorText} />

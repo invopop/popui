@@ -4,15 +4,21 @@
 
   type $$Props = TabsPrimitive.Props
 
-  let className: $$Props['class'] = undefined
-  let value: $$Props['value'] = undefined
-  export { className as class, value }
+  interface Props {
+    class?: $$Props['class'];
+    value?: $$Props['value'];
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let { class: className = undefined, value = $bindable(undefined), children, ...rest }: Props = $props();
+  
 </script>
 
 <TabsPrimitive.Root
   bind:value
   class={cn('flex flex-col flex-1 min-h-0', className)}
-  {...$$restProps}
+  {...rest}
 >
-  <slot />
+  {@render children?.()}
 </TabsPrimitive.Root>

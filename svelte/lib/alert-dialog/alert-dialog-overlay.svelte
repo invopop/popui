@@ -5,17 +5,22 @@
 
   type $$Props = AlertDialogPrimitive.OverlayProps
 
-  let className: $$Props['class'] = undefined
-  export let transition: $$Props['transition'] = fade
-  export let transitionConfig: $$Props['transitionConfig'] = {
-    duration: 150
+  interface Props {
+    class?: $$Props['class'];
+    transition?: $$Props['transition'];
+    transitionConfig?: $$Props['transitionConfig'];
+    [key: string]: any
   }
-  export { className as class }
+
+  let { class: className = undefined, transition = fade, transitionConfig = {
+    duration: 150
+  }, ...rest }: Props = $props();
+  
 </script>
 
 <AlertDialogPrimitive.Overlay
   {transition}
   {transitionConfig}
   class={cn('bg-neutral-800/30 fixed inset-0 z-[1001]', className)}
-  {...$$restProps}
+  {...rest}
 />

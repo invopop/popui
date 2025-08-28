@@ -2,11 +2,21 @@
   import TagStatus from '../../lib/TagStatus.svelte'
   import DataListItem from '../../lib/DataListItem.svelte'
 
-  export let useSlot = false
-  export let label = ''
-  export let value = ''
-  export let monospaced = false
-  export let monospacedNums = false
+  interface Props {
+    useSlot?: boolean;
+    label?: string;
+    value?: string;
+    monospaced?: boolean;
+    monospacedNums?: boolean;
+  }
+
+  let {
+    useSlot = false,
+    label = '',
+    value = '',
+    monospaced = false,
+    monospacedNums = false
+  }: Props = $props();
 </script>
 
 {#if useSlot}

@@ -3,6 +3,8 @@
 </script>
 
 <BaseDropdown>
-  <button class="border p-4" slot="trigger">This is the trigger</button>
+  {#snippet trigger()}
+    <button class="border p-4" >This is the trigger</button>
+  {/snippet}
   <div class="border border-red-300 p-4">This is the content</div>
 </BaseDropdown>

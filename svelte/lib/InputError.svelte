@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let errorText = ''
+  interface Props {
+    errorText?: string;
+  }
+
+  let { errorText = '' }: Props = $props();
 </script>
 
 <p class="mt-2 text-sm text-danger-500 flex items-center space-x-1">

@@ -7,22 +7,38 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type $$Events = AlertDialogPrimitive.ActionEvents
 
-  let className: $$Props['class'] = undefined
-  let destructive: $$Props['destructive'] = false
-  let el: $$Props['el'] = undefined
+  interface Props {
+    class?: $$Props['class'];
+    destructive?: $$Props['destructive'];
+    el?: $$Props['el'];
+    children?: import('svelte').Snippet<[any]>;
+    [key: string]: any
+  }
 
-  export { className as class, destructive, el }
+  let {
+    class: className = undefined,
+    destructive = false,
+    el = $bindable(undefined),
+    children,
+    ...rest
+  }: Props = $props();
 
-  $: variant = (destructive ? 'destructive' : 'primary') as Variant
+  
+
+  let variant = $derived((destructive ? 'destructive' : 'primary') as Variant)
+
+  const children_render = $derived(children);
 </script>
 
 <AlertDialogPrimitive.Action
   bind:el
   class={cn(buttonVariants({ variant }), className)}
-  {...$$restProps}
+  {...rest}
   on:click
   on:keydown
-  let:builder
+  
 >
-  <slot {builder} />
+  {#snippet children({ builder })}
+    {@render children_render?.({ builder, })}
+  {/snippet}
 </AlertDialogPrimitive.Action>

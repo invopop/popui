@@ -1,14 +1,18 @@
 <script lang="ts">
   import clsx from 'clsx'
 
-  export let content: number
-  export let variant: 'default' | 'light' | 'dark' = 'default'
+  interface Props {
+    content: number;
+    variant?: 'default' | 'light' | 'dark';
+  }
 
-  $: styles = clsx(
+  let { content, variant = 'default' }: Props = $props();
+
+  let styles = $derived(clsx(
     { 'bg-neutral-100': variant === 'light' },
     { 'bg-neutral-200': variant === 'default' },
     { 'bg-neutral-300': variant === 'dark' }
-  )
+  ))
 </script>
 
 <div

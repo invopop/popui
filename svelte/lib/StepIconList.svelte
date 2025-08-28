@@ -2,11 +2,15 @@
   import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
   import type { StepIcon } from './types.js'
 
-  export let icons: StepIcon[] = []
+  interface Props {
+    icons?: StepIcon[];
+  }
 
-  $: maxItems = icons.length > 6 ? 5 : 6
-  $: mainIcons = icons.slice(0, maxItems)
-  $: restIcons = icons.slice(maxItems, icons.length)
+  let { icons = [] }: Props = $props();
+
+  let maxItems = $derived(icons.length > 6 ? 5 : 6)
+  let mainIcons = $derived(icons.slice(0, maxItems))
+  let restIcons = $derived(icons.slice(maxItems, icons.length))
 </script>
 
 <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 items-center">
@@ -23,11 +27,11 @@
     </Tooltip>
 
     {#if i < mainIcons.length - 1}
-      <div class="hidden sm:block h-px w-3 border border-neutral-200 mx-px flex-shrink-0" />
+      <div class="hidden sm:block h-px w-3 border border-neutral-200 mx-px flex-shrink-0"></div>
     {/if}
   {/each}
   {#if restIcons.length}
-    <div class="hidden sm:block h-px w-3 border border-neutral-200 mx-px flex-shrink-0" />
+    <div class="hidden sm:block h-px w-3 border border-neutral-200 mx-px flex-shrink-0"></div>
     <Tooltip>
       <TooltipTrigger class="flex-shrink-0">
         <div

@@ -1,13 +1,25 @@
 <script lang="ts">
   import AlertDialog from '../../lib/AlertDialog.svelte'
 
-  export let open = false
-  export let destructive = false
-  export let withSlot = false
-  export let title = ''
-  export let description = ''
-  export let cancelText = 'Cancel'
-  export let actionText = 'OK'
+  interface Props {
+    open?: boolean;
+    destructive?: boolean;
+    withSlot?: boolean;
+    title?: string;
+    description?: string;
+    cancelText?: string;
+    actionText?: string;
+  }
+
+  let {
+    open = $bindable(false),
+    destructive = false,
+    withSlot = false,
+    title = '',
+    description = '',
+    cancelText = 'Cancel',
+    actionText = 'OK'
+  }: Props = $props();
 </script>
 
 <div>

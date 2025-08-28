@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import Transition from 'svelte-transition'
   import flatpickr from 'flatpickr'
   import type { Instance } from 'flatpickr/dist/types/instance.js'
@@ -23,26 +25,28 @@
 
   const dispatch = createEventDispatcher()
 
-  export let label = 'Date'
-  export let position: 'left' | 'right' = 'left'
-  export let from = ''
-  export let to = ''
-
-  $: if (datepicker) {
-    setDates(from, to)
+  interface Props {
+    label?: string;
+    position?: 'left' | 'right';
+    from?: string;
+    to?: string;
   }
 
-  $: styles = clsx({
-    'border-workspace-accent focus:border-workspace-accent shadow-active': isOpen,
-    'border-neutral-200 hover:border-neutral-300': !isOpen
-  })
+  let {
+    label = 'Date',
+    position = 'left',
+    from = '',
+    to = ''
+  }: Props = $props();
 
-  let datePickerEl: HTMLElement
-  let selectedLabel = label
-  let datepicker: Instance
-  let selectedDates = { from: { value: '', display: '' }, to: { value: '', display: '' } }
-  let isOpen = false
-  let selectedPeriod = 'custom'
+
+
+  let datePickerEl: HTMLElement = $state()
+  let selectedLabel = $state(label)
+  let datepicker: Instance = $state()
+  let selectedDates = $state({ from: { value: '', display: '' }, to: { value: '', display: '' } })
+  let isOpen = $state(false)
+  let selectedPeriod = $state('custom')
 
   const today = new Date()
   const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 })
@@ -200,12 +204,21 @@
 
     return `${parts[2]}/${parts[1]}/${parts[0]}`
   }
+  run(() => {
+    if (datepicker) {
+      setDates(from, to)
+    }
+  });
+  let styles = $derived(clsx({
+    'border-workspace-accent focus:border-workspace-accent shadow-active': isOpen,
+    'border-neutral-200 hover:border-neutral-300': !isOpen
+  }))
 </script>
 
 <div>
   <div class="relative">
     <button
-      on:click={() => {
+      onclick={() => {
         isOpen = !isOpen
       }}
       class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-md text-neutral-800 placeholder-neutral-800 text-base"
@@ -231,7 +244,7 @@
         class:right-0={position === 'right'}
         class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-40"
         use:clickOutside
-        on:click_outside={() => {
+        onclick_outside={() => {
           if (!isOpen) return
           cancel()
         }}
@@ -240,7 +253,7 @@
           <div class="flex flex-col space-y-2 items-start p-3 border-r border-neutral-100">
             {#each periods as period}
               <button
-                on:click={period.action}
+                onclick={period.action}
                 class="{selectedPeriod === period.slug
                   ? 'selected-period text-workspace-accent border-workspace-accent-200 bg-workspace-accent-50'
                   : 'text-neutral-500 border-transparent'} whitespace-nowrap text-base px-2 py-1 tracking-normal border rounded"
@@ -249,7 +262,7 @@
               </button>
             {/each}
           </div>
-          <div bind:this={datePickerEl} />
+          <div bind:this={datePickerEl}></div>
         </div>
         <div class="p-3 flex justify-end items-center space-x-3">
           <BaseButton variant="secondary" on:click={cancel}>Cancel</BaseButton>

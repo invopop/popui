@@ -7,12 +7,23 @@
   import UuidCopy from './UuidCopy.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
 
-  export let field: TableField
-  export let data: unknown = ''
-  export let isMobile = false
-  export let badge: Badge | null = null
-  export let status: FeedItemStatus | null = null
-  export let icons: TableIcon[] | null = null
+  interface Props {
+    field: TableField;
+    data?: unknown;
+    isMobile?: boolean;
+    badge?: Badge | null;
+    status?: FeedItemStatus | null;
+    icons?: TableIcon[] | null;
+  }
+
+  let {
+    field,
+    data = '',
+    isMobile = false,
+    badge = null,
+    status = null,
+    icons = null
+  }: Props = $props();
 </script>
 
 <div class="flex flex-col">

@@ -1,7 +1,12 @@
 <script lang="ts">
-  export let title = ''
+  interface Props {
+    title?: string;
+    children?: import('svelte').Snippet;
+  }
+
+  let { title = '', children }: Props = $props();
 </script>
 
 <h1 class="text-neutral-800 font-medium text-lg font-sans tracking-tighter">
-  <slot>{title}</slot>
+  {#if children}{@render children()}{:else}{title}{/if}
 </h1>

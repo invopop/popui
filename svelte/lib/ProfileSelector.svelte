@@ -1,26 +1,39 @@
 <script lang="ts">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import clsx from 'clsx'
   import ProfileAvatar from './ProfileAvatar.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { ChevronUp } from '@invopop/ui-icons'
 
-  export let name = ''
-  export let orgName = ''
-  export let picture = ''
-  export let collapsed = false
-  export let isOpen = false
+  interface Props {
+    name?: string;
+    orgName?: string;
+    picture?: string;
+    collapsed?: boolean;
+    isOpen?: boolean;
+  }
 
-  $: styles = clsx(
+  let {
+    name = '',
+    orgName = '',
+    picture = '',
+    collapsed = false,
+    isOpen = false
+  }: Props = $props();
+
+  let styles = $derived(clsx(
     { 'p-[5px]': collapsed },
     { 'w-full pl-1.5 pr-2 py-[7px]': !collapsed },
     { 'border-white-30 bg-white-10': isOpen },
     { 'border-transparent hover:bg-white-5': !isOpen }
-  )
+  ))
 </script>
 
 <button
   class="{styles} text-white border border-transparent text-base flex items-center justify-between space-x-1 rounded text-left"
-  on:click
+  onclick={bubble('click')}
 >
   <span class="flex items-center justify-between w-full space-x-2">
     <ProfileAvatar {name} {picture} dark large />

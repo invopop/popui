@@ -9,25 +9,39 @@
 
   const dispatch = createEventDispatcher()
 
-  export let id = Math.random().toString(36).slice(2, 7)
-  export let name = ''
-  export let label = ''
-  export let disabled = false
-  export let value = ''
-  export let icon: IconSource | string | undefined = undefined
-  export let iconTheme: IconTheme = 'default'
-  export let options: SelectOption[] = []
-  export let placeholder = 'Select one...'
-  export let disablePlaceholder = true
-  export let errorText = ''
-
-  let resolvedIcon: IconSource | undefined
-
-  $: {
-    resolveIcon(icon).then((icon) => {
-      resolvedIcon = icon
-    })
+  interface Props {
+    id?: any;
+    name?: string;
+    label?: string;
+    disabled?: boolean;
+    value?: string;
+    icon?: IconSource | string | undefined;
+    iconTheme?: IconTheme;
+    options?: SelectOption[];
+    placeholder?: string;
+    disablePlaceholder?: boolean;
+    errorText?: string;
+    [key: string]: any
   }
+
+  let {
+    id = Math.random().toString(36).slice(2, 7),
+    name = '',
+    label = '',
+    disabled = false,
+    value = $bindable(''),
+    icon = undefined,
+    iconTheme = 'default',
+    options = [],
+    placeholder = 'Select one...',
+    disablePlaceholder = true,
+    errorText = '',
+    ...rest
+  }: Props = $props();
+
+  let resolvedIcon: IconSource | undefined = $derived(icon)
+
+  
 
   function handleChange(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
@@ -53,8 +67,8 @@
     class:pl-7={icon}
     class:pl-2={!icon}
     class="py-1.5 border border-neutral-200 hover:border-neutral-300 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight ui-select focus:border-workspace-accent focus:shadow-active"
-    {...$$restProps}
-    on:change={handleChange}
+    {...rest}
+    onchange={handleChange}
   >
     <option value="" disabled={disablePlaceholder}>{placeholder}</option>
     {#each options as option}

@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { createBubbler, preventDefault } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import type { HTMLAttributes } from 'svelte/elements'
   import { cn } from '$lib/utils.js'
 
@@ -6,8 +9,14 @@
     'data-state'?: unknown
   }
 
-  let className: $$Props['class'] = undefined
-  export { className as class }
+  interface Props {
+    class?: $$Props['class'];
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let { class: className = undefined, children, ...rest }: Props = $props();
+  
 </script>
 
 <tr
@@ -15,10 +24,10 @@
     'data-[state=selected]:bg-neutral-50 data-[state=checked]:bg-workspace-accent-50 transition-colors',
     className
   )}
-  {...$$restProps}
-  on:contextmenu|preventDefault
-  on:click
-  on:keydown
+  {...rest}
+  oncontextmenu={preventDefault(bubble('contextmenu'))}
+  onclick={bubble('click')}
+  onkeydown={bubble('keydown')}
 >
-  <slot />
+  {@render children?.()}
 </tr>

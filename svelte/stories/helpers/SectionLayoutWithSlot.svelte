@@ -1,7 +1,11 @@
 <script lang="ts">
   import SectionLayout from '$lib/SectionLayout.svelte'
 
-  export let title = ''
+  interface Props {
+    title?: string;
+  }
+
+  let { title = '' }: Props = $props();
 </script>
 
 <SectionLayout {title}>

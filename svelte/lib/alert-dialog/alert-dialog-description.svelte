@@ -4,8 +4,14 @@
 
   type $$Props = AlertDialogPrimitive.DescriptionProps
 
-  let className: $$Props['class'] = undefined
-  export { className as class }
+  interface Props {
+    class?: $$Props['class'];
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let { class: className = undefined, children, ...rest }: Props = $props();
+  
 </script>
 
 <AlertDialogPrimitive.Description
@@ -13,7 +19,7 @@
     'text-neutral-500 text-base flex flex-col space-y-2 justify-start items-start !mt-2',
     className
   )}
-  {...$$restProps}
+  {...rest}
 >
-  <slot />
+  {@render children?.()}
 </AlertDialogPrimitive.Description>

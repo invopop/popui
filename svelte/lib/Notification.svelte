@@ -4,20 +4,14 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import type { Status } from './types'
 
-  export let message = ''
-  export let type: Status = 'success'
+  interface Props {
+    message?: string;
+    type?: Status;
+    children?: import('svelte').Snippet;
+  }
 
-  $: icon = getIcon(type)
-  $: styles = clsx(
-    { 'bg-positive-50': type === 'success' },
-    { 'bg-danger-50': type === 'error' },
-    { 'bg-yellow-50': type === 'warning' }
-  )
-  $: textStyles = clsx(
-    { 'text-positive-500': type === 'success' },
-    { 'text-danger-500': type === 'error' },
-    { 'text-yellow-500': type === 'warning' }
-  )
+  let { message = '', type = 'success', children }: Props = $props();
+
 
   function getIcon(type: Status) {
     switch (type) {
@@ -31,6 +25,17 @@
         return null
     }
   }
+  let icon = $derived(getIcon(type))
+  let styles = $derived(clsx(
+    { 'bg-positive-50': type === 'success' },
+    { 'bg-danger-50': type === 'error' },
+    { 'bg-yellow-50': type === 'warning' }
+  ))
+  let textStyles = $derived(clsx(
+    { 'text-positive-500': type === 'success' },
+    { 'text-danger-500': type === 'error' },
+    { 'text-yellow-500': type === 'warning' }
+  ))
 </script>
 
 <div class="{styles} pl-3 pr-2 py-2 text-base font-medium rounded-lg flex items-center space-x-1">
@@ -38,5 +43,5 @@
     <Icon src={icon} class="h-4 w-4" />
   {/if}
   <span class="{textStyles} flex-1">{message}</span>
-  <slot />
+  {@render children?.()}
 </div>

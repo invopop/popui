@@ -9,18 +9,22 @@
 
   const dispatch = createEventDispatcher()
 
-  export let companies: Company[] = []
-  export let selectedCompany: Company | null = null
 
-  let companyDropdown: BaseDropdown
-  let isOpen = false
-  export let collapsed = false
+  let companyDropdown: BaseDropdown = $state()
+  let isOpen = $state(false)
+  interface Props {
+    companies?: Company[];
+    selectedCompany?: Company | null;
+    collapsed?: boolean;
+  }
 
-  $: name = selectedCompany?.name || ''
-  $: country = selectedCompany?.country || ''
-  $: picture = selectedCompany?.logo_url || ''
-  $: isSandbox = selectedCompany?.sandbox
-  $: items = [
+  let { companies = [], selectedCompany = $bindable(null), collapsed = false }: Props = $props();
+
+  let name = $derived(selectedCompany?.name || '')
+  let country = $derived(selectedCompany?.country || '')
+  let picture = $derived(selectedCompany?.logo_url || '')
+  let isSandbox = $derived(selectedCompany?.sandbox)
+  let items = $derived([
     ...companies.map((c) => ({
       value: c.id,
       label: c.name,
@@ -29,7 +33,7 @@
       picture: c.logo_url,
       sandbox: c.sandbox
     }))
-  ] as DrawerOption[]
+  ] as DrawerOption[])
 
   function selectCompany(event: CustomEvent) {
     companyDropdown.toggle()
@@ -50,16 +54,18 @@
   placement="bottom-start"
   fullWidth={!collapsed}
 >
-  <MenuItemCollapsible
-    slot="trigger"
-    {collapsed}
-    title={name}
-    subtitle={isSandbox ? 'Sandbox' : ''}
-    icon={collapsed ? undefined : DoubleArrow}
-    active={isOpen}
-    bold
-  >
-    <ProfileAvatar {name} {picture} {country} dark large />
-  </MenuItemCollapsible>
+  {#snippet trigger()}
+    <MenuItemCollapsible
+      
+      {collapsed}
+      title={name}
+      subtitle={isSandbox ? 'Sandbox' : ''}
+      icon={collapsed ? undefined : DoubleArrow}
+      active={isOpen}
+      bold
+    >
+      <ProfileAvatar {name} {picture} {country} dark large />
+    </MenuItemCollapsible>
+  {/snippet}
   <DrawerContextWorkspace {items} on:click={selectCompany} />
 </BaseDropdown>

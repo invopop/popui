@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import type { DrawerOption } from './types.ts'
   import DrawerContextItem from './DrawerContextItem.svelte'
   import InputSearch from './InputSearch.svelte'
@@ -7,13 +9,24 @@
 
   const dispatch = createEventDispatcher()
 
-  export let items: DrawerOption[] = []
-  export let multiple = false
-  export let searchable = false
-  export let widthClass = 'w-60'
+  interface Props {
+    items?: DrawerOption[];
+    multiple?: boolean;
+    searchable?: boolean;
+    widthClass?: string;
+  }
 
-  $: selectedItems = items.filter((i) => i.selected)
-  $: dispatch('selected', selectedItems)
+  let {
+    items = $bindable([]),
+    multiple = false,
+    searchable = false,
+    widthClass = 'w-60'
+  }: Props = $props();
+
+  let selectedItems = $derived(items.filter((i) => i.selected))
+  run(() => {
+    dispatch('selected', selectedItems)
+  });
 
   function updateItem(event: CustomEvent) {
     const item = event.detail as DrawerOption

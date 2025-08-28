@@ -7,17 +7,17 @@
 
   const dispatch = createEventDispatcher()
 
-  export let label = ''
-  export let icon: IconSource | string | undefined = undefined
-  export let iconTheme: IconTheme = 'default'
-
-  let resolvedIcon: IconSource | undefined
-
-  $: {
-    resolveIcon(icon).then((icon) => {
-      resolvedIcon = icon
-    })
+  interface Props {
+    label?: string;
+    icon?: IconSource | string | undefined;
+    iconTheme?: IconTheme;
   }
+
+  let { label = '', icon = undefined, iconTheme = 'default' }: Props = $props();
+
+  let resolvedIcon: IconSource | undefined = $derived(icon)
+
+  
 
   function handleClear(event: unknown) {
     const target = (event as PointerEvent).target
@@ -37,7 +37,7 @@
   <span class="py-1 pr-2 text-workspace-accent tracking-normal">{label}</span>
   <button
     class="py-1 border-l border-workspace-accent-100 pl-1 text-neutral-500"
-    on:click={handleClear}
+    onclick={handleClear}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

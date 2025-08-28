@@ -1,4 +1,4 @@
-<div class="border-b border-transparent hr-separator" />
+<div class="border-b border-transparent hr-separator"></div>
 
 <style>
   .hr-separator {

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { stopPropagation } from 'svelte/legacy';
+
   import type { DrawerOption } from './types.ts'
   import InputCheckbox from './InputCheckbox.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
@@ -12,30 +14,39 @@
 
   const dispatch = createEventDispatcher()
 
-  export let multiple = false
-  export let item: DrawerOption
-  export let scrollIfSelected = false
-  export let workspace = false
+  interface Props {
+    multiple?: boolean;
+    item: DrawerOption;
+    scrollIfSelected?: boolean;
+    workspace?: boolean;
+  }
 
-  let el: HTMLElement
+  let {
+    multiple = false,
+    item = $bindable(),
+    scrollIfSelected = false,
+    workspace = false
+  }: Props = $props();
 
-  $: hasIcon = item.icon || workspace
+  let el: HTMLElement = $state()
 
-  $: styles = clsx(
+  let hasIcon = $derived(item.icon || workspace)
+
+  let styles = $derived(clsx(
     { 'py-1 space-x-3': workspace },
     { 'py-1.5 space-x-1.5': !workspace },
     { 'pl-1.5': hasIcon },
     { 'pl-2': !hasIcon },
     { 'bg-workspace-accent-100': item.selected && !multiple },
     { 'group-hover:bg-neutral-100': (!item.selected && !item.disabled) || multiple }
-  )
-  $: labelStyles = clsx(
+  ))
+  let labelStyles = $derived(clsx(
     { 'text-danger-500': item.destructive },
     { 'text-neutral-800': !item.destructive },
     { 'tracking-tight max-w-[200px]': workspace },
     { 'tracking-normal': !workspace }
-  )
-  $: title = item.label.length > 25 ? item.label : undefined
+  ))
+  let title = $derived(item.label.length > 25 ? item.label : undefined)
 
   onMount(() => {
     if (!scrollIfSelected) return
@@ -50,14 +61,14 @@
   bind:this={el}
   class="w-full px-1 py-0.5 disabled:opacity-30 group"
   disabled={item.disabled}
-  on:click|stopPropagation={() => {
+  onclick={stopPropagation(() => {
     if (multiple) {
       item.selected = !item.selected
       dispatch('change', item)
     } else {
       dispatch('click', item.value)
     }
-  }}
+  })}
 >
   <div class="{styles} rounded pr-1.5 flex items-center justify-start w-full">
     {#if workspace}

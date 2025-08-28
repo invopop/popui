@@ -26,35 +26,47 @@
   }
   const intersectOptions = { callback }
 
-  let metaKeyPressed = false
-  let shiftKeyPressed = false
-  let lastSelected: TableDataRow = {}
+  let metaKeyPressed = $state(false)
+  let shiftKeyPressed = $state(false)
+  let lastSelected: TableDataRow = $state({})
   let lastSelectedForShift: TableDataRow = {}
-  let selectWithArrowPosition = -1
-  let selectionMode = 'keyboard'
+  let selectWithArrowPosition = $state(-1)
+  let selectionMode = $state('keyboard')
 
-  export let sortBy = ''
-  export let sortDirection: TableSortBy = ''
-  export let fields: TableField[] = []
-  export let data: TableDataRow[] = []
-  export let getActions: TableActionProp = undefined
-  export let groupLabel: TableGroupLabelProp = undefined
-  export let disableRowClick = false
-  export let hideCounter = false
-  export let selectable = false
-  export let selectedRows: TableDataRow[] = []
-  export let selectedTrackedBy = 'id'
-  export let hideSelectAll = false
-  export let disableKeyboardNavigation = false
+  interface Props {
+    sortBy?: string;
+    sortDirection?: TableSortBy;
+    fields?: TableField[];
+    data?: TableDataRow[];
+    getActions?: TableActionProp;
+    groupLabel?: TableGroupLabelProp;
+    disableRowClick?: boolean;
+    hideCounter?: boolean;
+    selectable?: boolean;
+    selectedRows?: TableDataRow[];
+    selectedTrackedBy?: string;
+    hideSelectAll?: boolean;
+    disableKeyboardNavigation?: boolean;
+    [key: string]: any
+  }
 
-  $: groupedData = groupData(data)
-  $: addExtraCell = getActions instanceof Function
-  $: indeterminate = selectedRows.length > 0 && selectedRows.length < data.length
-  $: allChecked = selectedRows.length === data.length
-  $: flattedData = groupedData.flatMap((d) => d.rows)
-  $: lastSelectedIndex = flattedData.findIndex(
-    (d) => d[selectedTrackedBy] === lastSelected[selectedTrackedBy]
-  )
+  let {
+    sortBy = '',
+    sortDirection = '',
+    fields = [],
+    data = [],
+    getActions = undefined,
+    groupLabel = undefined,
+    disableRowClick = false,
+    hideCounter = false,
+    selectable = false,
+    selectedRows = $bindable([]),
+    selectedTrackedBy = 'id',
+    hideSelectAll = false,
+    disableKeyboardNavigation = false,
+    ...rest
+  }: Props = $props();
+
 
   function groupData(rows: TableDataRow[]): TableGroup[] {
     if (rows.length === 0) return []
@@ -220,14 +232,22 @@
       lastSelected = to
     }
   }
+  let groupedData = $derived(groupData(data))
+  let addExtraCell = $derived(getActions instanceof Function)
+  let indeterminate = $derived(selectedRows.length > 0 && selectedRows.length < data.length)
+  let allChecked = $derived(selectedRows.length === data.length)
+  let flattedData = $derived(groupedData.flatMap((d) => d.rows))
+  let lastSelectedIndex = $derived(flattedData.findIndex(
+    (d) => d[selectedTrackedBy] === lastSelected[selectedTrackedBy]
+  ))
 </script>
 
 <svelte:window
-  on:mousemove={() => {
+  onmousemove={() => {
     selectionMode = 'mouse'
   }}
-  on:keydown={handleKeydown}
-  on:keyup={(event) => {
+  onkeydown={handleKeydown}
+  onkeyup={(event) => {
     metaKeyPressed = false
     shiftKeyPressed = false
 
@@ -238,7 +258,7 @@
 />
 
 <div class="w-full font-sans border rounded-md border-neutral-100">
-  <Table class="hidden md:table" {...$$restProps}>
+  <Table class="hidden md:table" {...rest}>
     <colgroup>
       {#if selectable}
         <col style="width: 38px" />
@@ -279,7 +299,7 @@
         {#if addExtraCell}
           <!-- if table has actions cell we need to add an extra header -->
           <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
-            <div class="border-b border-neutral-100 h-9" />
+            <div class="border-b border-neutral-100 h-9"></div>
           </th>
         {/if}
       </TableRow>
@@ -361,7 +381,7 @@
         <button
           class:cursor-default={disableRowClick}
           class="w-full text-left border border-neutral-200 rounded"
-          on:click={() => {
+          onclick={() => {
             if (disableRowClick) return
 
             if (metaKeyPressed) {
@@ -386,5 +406,5 @@
       {/each}
     {/each}
   </div>
-  <div use:intersect={intersectOptions} />
+  <div use:intersect={intersectOptions}></div>
 </div>

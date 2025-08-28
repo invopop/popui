@@ -3,19 +3,34 @@
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import InputRadio from './InputRadio.svelte'
 
-  export let id = Math.random().toString(36).slice(2, 7)
-  export let name = ''
-  export let title = ''
-  export let description = ''
-  export let accentText = ''
-  export let checked = false
-  export let icon: IconSource | undefined = undefined
-  export let hideRadio = false
+  interface Props {
+    id?: any;
+    name?: string;
+    title?: string;
+    description?: string;
+    accentText?: string;
+    checked?: boolean;
+    icon?: IconSource | undefined;
+    hideRadio?: boolean;
+    footer?: import('svelte').Snippet;
+  }
 
-  $: styles = clsx(
+  let {
+    id = Math.random().toString(36).slice(2, 7),
+    name = '',
+    title = '',
+    description = '',
+    accentText = '',
+    checked = false,
+    icon = undefined,
+    hideRadio = false,
+    footer
+  }: Props = $props();
+
+  let styles = $derived(clsx(
     { 'border-workspace-accent shadow-active': checked },
     { 'border-neutral-200 hover:border-neutral-300': !checked }
-  )
+  ))
 </script>
 
 <label for={id} class="{styles} border rounded-lg w-full text-left cursor-pointer block">
@@ -43,9 +58,9 @@
       <InputRadio {id} {name} {checked} on:change />
     </div>
   </div>
-  {#if !!$$slots.footer}
+  {#if !!footer}
     <div class="bg-neutral-50 rounded-b-lg px-3 py-2.5 border-t border-neutral-100">
-      <slot name="footer" />
+      {@render footer?.()}
     </div>
   {/if}
 </label>

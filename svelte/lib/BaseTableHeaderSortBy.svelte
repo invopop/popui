@@ -6,16 +6,20 @@
 
   const dispatch = createEventDispatcher()
 
-  export let isActive = false
-  export let sortDirection: TableSortBy
+  interface Props {
+    isActive?: boolean;
+    sortDirection: TableSortBy;
+  }
 
-  $: items = [
+  let { isActive = false, sortDirection }: Props = $props();
+
+  let items = $derived([
     { icon: SortAscending, label: 'Sort Ascending', value: 'asc' },
     { icon: SortDescending, label: 'Sort Descending', value: 'desc' }
   ].map((o) => ({
     ...o,
     selected: isActive && sortDirection === o.value
-  })) as DrawerOption[]
+  })) as DrawerOption[])
 </script>
 
 <DrawerContext

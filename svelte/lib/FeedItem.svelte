@@ -9,17 +9,33 @@
 
   const dispatch = createEventDispatcher()
 
-  export let status: FeedItemStatus | undefined = undefined
-  export let icon: IconSource | undefined = undefined
-  export let title = ''
-  export let date: Date | undefined = undefined
-  export let hasNext = false
-  export let slug = ''
-  export let viewable = false
-  export let viewableText = 'View'
-  export let user: FeedItemUser | undefined = undefined
-  export let type = ''
-  export let extraText = ''
+  interface Props {
+    status?: FeedItemStatus | undefined;
+    icon?: IconSource | undefined;
+    title?: string;
+    date?: Date | undefined;
+    hasNext?: boolean;
+    slug?: string;
+    viewable?: boolean;
+    viewableText?: string;
+    user?: FeedItemUser | undefined;
+    type?: string;
+    extraText?: string;
+  }
+
+  let {
+    status = undefined,
+    icon = undefined,
+    title = '',
+    date = undefined,
+    hasNext = false,
+    slug = '',
+    viewable = false,
+    viewableText = 'View',
+    user = undefined,
+    type = '',
+    extraText = ''
+  }: Props = $props();
 
   const dateOptions = {
     year: 'numeric',
@@ -33,7 +49,7 @@
 
 <div id={`feed-item-${slug}`} class="relative text-left w-full min-w-[344px]">
   {#if hasNext && icon}
-    <span class="absolute bottom-[-20px] left-2 border-l border-neutral-100 w-px h-[58px]" />
+    <span class="absolute bottom-[-20px] left-2 border-l border-neutral-100 w-px h-[58px]"></span>
   {/if}
   <div class="flex items-start justify-between space-x-2 py-3">
     <div class="relative">

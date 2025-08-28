@@ -1,13 +1,17 @@
 <script lang="ts">
   import clsx from 'clsx'
 
-  export let content: number | string
-  export let variant: 'default' | 'transparent' = 'default'
+  interface Props {
+    content: number | string;
+    variant?: 'default' | 'transparent';
+  }
 
-  $: styles = clsx({
+  let { content, variant = 'default' }: Props = $props();
+
+  let styles = $derived(clsx({
     'bg-white rounded-md': variant === 'default',
     rounded: variant === 'transparent'
-  })
+  }))
 </script>
 
 <div

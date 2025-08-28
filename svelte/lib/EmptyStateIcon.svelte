@@ -2,10 +2,21 @@
   import IconEmpty from './svg/IconEmpty.svelte'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
 
-  export let icon: IconSource | undefined = undefined
-  export let title = ''
-  export let description = ''
-  export let check = false
+  interface Props {
+    icon?: IconSource | undefined;
+    title?: string;
+    description?: string;
+    check?: boolean;
+    children?: import('svelte').Snippet;
+  }
+
+  let {
+    icon = undefined,
+    title = '',
+    description = '',
+    check = false,
+    children
+  }: Props = $props();
 </script>
 
 <div
@@ -43,6 +54,6 @@
   <div class="space-y-0.5">
     <h4 class="font-medium text-base text-neutral-800 tracking-tight">{title}</h4>
     <p class="max-w-xs text-base text-neutral-500 tracking-normal">{description}</p>
-    <p><slot /></p>
+    <p>{@render children?.()}</p>
   </div>
 </div>

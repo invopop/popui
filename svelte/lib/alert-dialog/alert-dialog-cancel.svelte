@@ -7,16 +7,26 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type $$Events = AlertDialogPrimitive.CancelEvents
 
-  let className: $$Props['class'] = undefined
-  export { className as class }
+  interface Props {
+    class?: $$Props['class'];
+    children?: import('svelte').Snippet<[any]>;
+    [key: string]: any
+  }
+
+  let { class: className = undefined, children, ...rest }: Props = $props();
+  
+
+  const children_render = $derived(children);
 </script>
 
 <AlertDialogPrimitive.Cancel
   class={cn(buttonVariants({ variant: 'secondary' }), 'mt-2 sm:mt-0', className)}
-  {...$$restProps}
+  {...rest}
   on:click
   on:keydown
-  let:builder
+  
 >
-  <slot {builder} />
+  {#snippet children({ builder })}
+    {@render children_render?.({ builder, })}
+  {/snippet}
 </AlertDialogPrimitive.Cancel>

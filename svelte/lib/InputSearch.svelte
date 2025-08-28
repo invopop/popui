@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import { createEventDispatcher, onMount } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
@@ -14,13 +17,25 @@
     }, 750)
   }
 
-  export let value = ''
-  export let shortcut = ''
-  export let placeholder = ''
-  export let icon: IconSource = Search
-  export let focusOnLoad = false
+  interface Props {
+    value?: string;
+    shortcut?: string;
+    placeholder?: string;
+    icon?: IconSource;
+    focusOnLoad?: boolean;
+    [key: string]: any
+  }
 
-  let input: HTMLInputElement
+  let {
+    value = $bindable(''),
+    shortcut = '',
+    placeholder = '',
+    icon = Search,
+    focusOnLoad = false,
+    ...rest
+  }: Props = $props();
+
+  let input: HTMLInputElement = $state()
   let timer: ReturnType<typeof setTimeout>
 
   export const focus = () => {
@@ -35,7 +50,7 @@
     value = ''
   }
 
-  $: shortcutKeys = shortcut.split('')
+  let shortcutKeys = $derived(shortcut.split(''))
 
   function handleInput(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
@@ -61,11 +76,11 @@
     class="py-[5px] pl-7 border border-neutral-200 hover:border-neutral-300 w-full rounded-md text-neutral-800 placeholder-neutral-500 text-base outline-none tracking-tight caret-workspace-accent focus:border-workspace-accent focus:shadow-active"
     style:padding-right={`${shortcutKeys.length * 15 + 12}px`}
     {placeholder}
-    {...$$restProps}
-    on:input={handleInput}
-    on:focus={() => dispatch('focus')}
-    on:blur={(e) => dispatch('blur', e)}
-    on:click
+    {...rest}
+    oninput={handleInput}
+    onfocus={() => dispatch('focus')}
+    onblur={(e) => dispatch('blur', e)}
+    onclick={bubble('click')}
   />
   <Icon src={icon} class="absolute text-neutral-500 w-4 h-4 left-2" />
 

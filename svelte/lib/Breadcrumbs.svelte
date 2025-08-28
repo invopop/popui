@@ -1,11 +1,17 @@
 <script lang="ts">
+  import { stopPropagation } from 'svelte/legacy';
+
   import type { Breadcrumb } from './types.js'
   import { Slash } from '@invopop/ui-icons'
   import BaseFlag from './BaseFlag.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { createEventDispatcher } from 'svelte'
 
-  export let breadcrumbs: Breadcrumb[] = []
+  interface Props {
+    breadcrumbs?: Breadcrumb[];
+  }
+
+  let { breadcrumbs = [] }: Props = $props();
 
   const dispatch = createEventDispatcher()
 </script>
@@ -20,10 +26,10 @@
       {:else if breadcrumb.copiable}
         <button
           class={i < breadcrumbs.length - 1 ? 'text-neutral-400' : 'font-medium'}
-          on:click|stopPropagation={async () => {
+          onclick={stopPropagation(async () => {
             await navigator.clipboard.writeText(breadcrumb.label)
             dispatch('copied', breadcrumb.label)
-          }}
+          })}
         >
           {breadcrumb.label}
         </button>

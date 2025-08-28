@@ -4,15 +4,21 @@
 
   type $$Props = AlertDialogPrimitive.TitleProps
 
-  let className: $$Props['class'] = undefined
-  export let level: $$Props['level'] = 'h3'
-  export { className as class }
+  interface Props {
+    class?: $$Props['class'];
+    level?: $$Props['level'];
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let { class: className = undefined, level = 'h3', children, ...rest }: Props = $props();
+  
 </script>
 
 <AlertDialogPrimitive.Title
   class={cn('text-lg font-semibold text-neutral-800', className)}
   {level}
-  {...$$restProps}
+  {...rest}
 >
-  <slot />
+  {@render children?.()}
 </AlertDialogPrimitive.Title>

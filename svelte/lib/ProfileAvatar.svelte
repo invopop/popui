@@ -2,14 +2,25 @@
   import clsx from 'clsx'
   import BaseFlag from './BaseFlag.svelte'
 
-  export let name = ''
-  export let small = false
-  export let large = false
-  export let dark = false
-  export let picture = ''
-  export let country = ''
+  interface Props {
+    name?: string;
+    small?: boolean;
+    large?: boolean;
+    dark?: boolean;
+    picture?: string;
+    country?: string;
+  }
 
-  $: avatarStyles = clsx(
+  let {
+    name = '',
+    small = false,
+    large = false,
+    dark = false,
+    picture = $bindable(''),
+    country = ''
+  }: Props = $props();
+
+  let avatarStyles = $derived(clsx(
     { 'text-sm': !large },
     { 'h-4 w-4': small },
     { 'h-5 w-5': !large && !small },
@@ -17,7 +28,7 @@
     { 'bg-neutral-50 border-neutral-100 text-neutral-500': !dark },
     { 'bg-white-5 border-white-10 text-white-70': dark },
     { border: !picture }
-  )
+  ))
 </script>
 
 <div class="{avatarStyles} rounded flex items-center justify-center font-semibold relative">
@@ -26,7 +37,7 @@
       class="h-full w-full rounded object-cover"
       src={picture}
       alt={name}
-      on:error={() => {
+      onerror={() => {
         picture = ''
       }}
     />

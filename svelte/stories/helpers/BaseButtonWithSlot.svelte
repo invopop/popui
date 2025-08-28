@@ -3,17 +3,33 @@
   import BaseButton from '$lib/BaseButton.svelte'
   import type { ButtonVariant, IconPosition } from '$lib/types.js'
 
-  export let slot = ''
-  export let disabled = false
-  export let icon: IconSource | undefined = undefined
-  export let iconPosition: IconPosition = 'left'
-  export let variant: ButtonVariant = 'default'
-  export let small = false
-  export let big = false
-  export let dangerIcon = false
-  export let shortcut = false
-  export let fullwidth = false
-  export let notification = false
+  interface Props {
+    slot?: string;
+    disabled?: boolean;
+    icon?: IconSource | undefined;
+    iconPosition?: IconPosition;
+    variant?: ButtonVariant;
+    small?: boolean;
+    big?: boolean;
+    dangerIcon?: boolean;
+    shortcut?: boolean;
+    fullwidth?: boolean;
+    notification?: boolean;
+  }
+
+  let {
+    slot = '',
+    disabled = false,
+    icon = undefined,
+    iconPosition = 'left',
+    variant = 'default',
+    small = false,
+    big = false,
+    dangerIcon = false,
+    shortcut = false,
+    fullwidth = false,
+    notification = false
+  }: Props = $props();
 </script>
 
 {#if slot}

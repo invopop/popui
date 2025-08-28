@@ -1,19 +1,37 @@
 <script lang="ts">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import TagBeta from './TagBeta.svelte'
 
-  export let imageUrl = ''
-  export let imageAlt = ''
-  export let title = ''
-  export let description = ''
-  export let type: 'default' | 'soon' | 'beta' = 'default'
-  export let enabled = false
+  interface Props {
+    imageUrl?: string;
+    imageAlt?: string;
+    title?: string;
+    description?: string;
+    type?: 'default' | 'soon' | 'beta';
+    enabled?: boolean;
+    footer?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let {
+    imageUrl = '',
+    imageAlt = '',
+    title = '',
+    description = '',
+    type = 'default',
+    enabled = false,
+    footer,
+    ...rest
+  }: Props = $props();
 </script>
 
 <button
   class="rounded-lg bg-white hover:bg-neutral-100 focus:bg-neutral-200 disabled:bg-neutral-50 disabled:pointer-events-none border border-neutral-100 p-3 flex flex-col min-w-[298px] min-h-[126px] text-left"
   disabled={type === 'soon'}
-  {...$$restProps}
-  on:click
+  {...rest}
+  onclick={bubble('click')}
 >
   <div class="flex flex-col items-start justify-center space-y-2 w-full">
     <div class="flex items-center justify-between w-full">
@@ -25,7 +43,7 @@
           <div
             class="flex items-center space-x-1 rounded bg-neutral-50 border border-neutral-100 py-0.5 pl-1.5 pr-[5px] text-sm text-neutral-500 font-medium"
           >
-            <div class="bg-positive-500 h-2 w-2 rounded-full" />
+            <div class="bg-positive-500 h-2 w-2 rounded-full"></div>
             <span>Enabled</span>
           </div>
         {/if}
@@ -45,9 +63,9 @@
   <p class="flex mt-0.5 text-base text-neutral-500 tracking-normal flex-1">
     {description}
   </p>
-  {#if $$slots.footer}
+  {#if footer}
     <div class="mt-5">
-      <slot name="footer" />
+      {@render footer?.()}
     </div>
   {/if}
 </button>

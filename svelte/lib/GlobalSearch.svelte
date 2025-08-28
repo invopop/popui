@@ -9,11 +9,15 @@
 
   const dispatch = createEventDispatcher()
 
-  export let collapsed = false
+  interface Props {
+    collapsed?: boolean;
+  }
 
-  $: styles = clsx({
+  let { collapsed = false }: Props = $props();
+
+  let styles = $derived(clsx({
     'space-x-1 w-full': !collapsed
-  })
+  }))
 
   function onKeyDown(event: KeyboardEvent) {
     if (event.key !== GLOBAL_SEARCH_KEY) {
@@ -43,7 +47,7 @@
 
 <button
   class="{styles} flex items-center border pl-1.5 py-1.5 pr-2 border-white-10 bg-neutral-800/10 rounded-md"
-  on:click={() => open()}
+  onclick={() => open()}
 >
   <Icon src={Search} class="w-4 h-4 text-white-70" />
   {#if !collapsed}

@@ -4,13 +4,25 @@
   import type { MenuItemProps } from '../../lib/types.ts'
   import ProfileAvatar from '../../lib/ProfileAvatar.svelte'
 
-  export let collapsable = false
-  export let collapsedSidebar = false
-  export let open = false
-  export let active = false
-  export let children: MenuItemProps[]
-  export let icon: IconSource | undefined = undefined
-  export let url = ''
+  interface Props {
+    collapsable?: boolean;
+    collapsedSidebar?: boolean;
+    open?: boolean;
+    active?: boolean;
+    children: MenuItemProps[];
+    icon?: IconSource | undefined;
+    url?: string;
+  }
+
+  let {
+    collapsable = false,
+    collapsedSidebar = false,
+    open = false,
+    active = false,
+    children,
+    icon = undefined,
+    url = ''
+  }: Props = $props();
 </script>
 
 <div class="h-full relative">

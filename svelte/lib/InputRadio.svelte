@@ -1,18 +1,27 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { createEventDispatcher } from 'svelte'
   import { dispatchWcEvent } from './wcdispatch.js'
 
-  export let checked = false
-  export let id = Math.random().toString(36).slice(2, 7)
-  export let name = ''
+  interface Props {
+    checked?: boolean;
+    id?: any;
+    name?: string;
+    [key: string]: any
+  }
 
-  let el: HTMLInputElement
+  let { checked = false, id = Math.random().toString(36).slice(2, 7), name = '', ...rest }: Props = $props();
+
+  let el: HTMLInputElement = $state()
 
   const dispatch = createEventDispatcher()
 
-  $: if (el && checked) {
-    el.focus()
-  }
+  run(() => {
+    if (el && checked) {
+      el.focus()
+    }
+  });
 
   function updateInput(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
@@ -33,6 +42,6 @@
   {name}
   {checked}
   class="form-radio h-5 w-5 border-neutral-200 text-workspace-accent focus:ring-0 focus:ring-offset-0 cursor-pointer"
-  {...$$restProps}
-  on:change={updateInput}
+  {...rest}
+  onchange={updateInput}
 />

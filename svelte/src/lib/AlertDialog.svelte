@@ -73,8 +73,8 @@
         on:click={() => {
           cancel()
         }}
-        on:keydown={(e) => {
-          if (e.detail.originalEvent.key === 'Enter') {
+        onkeydown={(e) => {
+          if (e.key === 'Enter') {
             cancel()
           }
         }}>{cancelText}</AlertDialogCancel

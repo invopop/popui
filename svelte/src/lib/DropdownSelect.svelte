@@ -1,5 +1,5 @@
 <script lang="ts">
-  import isEqual from 'lodash/isEqual.js'
+  import isEqual from 'lodash-es/isEqual'
   import type { AnyProp, DrawerOption, IconTheme } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { createEventDispatcher } from 'svelte'

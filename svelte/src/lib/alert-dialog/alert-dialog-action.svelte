@@ -1,0 +1,21 @@
+<script lang="ts">
+  import { AlertDialog as AlertDialogPrimitive } from 'bits-ui'
+  import { buttonVariants, type Variant } from '$lib/button/index.js'
+  import { cn } from '$lib/utils.js'
+  let {
+    ref = $bindable(null),
+    class: className,
+    destructive = false,
+    children
+  }: AlertDialogPrimitive.ActionProps & { destructive: boolean } = $props()
+
+  let variant = $derived((destructive ? 'destructive' : 'primary') as Variant)
+</script>
+
+<AlertDialogPrimitive.Action
+  bind:ref
+  data-slot="alert-dialog-action"
+  class={cn(buttonVariants({ variant }), className)}
+>
+  {@render children?.()}
+</AlertDialogPrimitive.Action>

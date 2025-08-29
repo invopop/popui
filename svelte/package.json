@@ -1,0 +1,101 @@
+{
+  "name": "@invopop/popui",
+  "license": "MIT",
+  "version": "0.1.1",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && npm run package",
+    "preview": "vite preview",
+    "package": "svelte-kit sync && svelte-package && npm run build:tailwind && publint",
+    "prepublishOnly": "npm run package",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test": "vitest",
+    "lint": "prettier --plugin-search-dir . --check . && eslint .",
+    "format": "prettier --plugin-search-dir . --write .",
+    "storybook": "storybook dev -p 6006",
+    "build:tailwind": "npx tailwindcss -i ./styles.css -o ./dist/popui.css --minify",
+    "build-storybook": "storybook build",
+    "build-web-components": "vite build --config vite.wbc.config.ts",
+    "publish-wbc": "npm run build-web-components && cp ./package-wbc.json ./dist/package.json && cd ./dist && npm run publish"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "default": "./dist/types.d.ts"
+    },
+    "./twTheme.js": "./dist/tw.theme.js",
+    "./package.json": "./dist/package.json"
+  },
+  "files": [
+    "dist",
+    "!dist/**/*.test.*",
+    "!dist/**/*.spec.*"
+  ],
+  "peerDependencies": {
+    "svelte": "^4.0.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^9.1.3",
+    "@storybook/addon-links": "^9.1.3",
+    "@storybook/sveltekit": "^9.1.3",
+    "@storybook/testing-library": "^0.2.2",
+    "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/kit": "^2.5.27",
+    "@sveltejs/package": "^2.3.7",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-storybook": "^9.1.3",
+    "eslint-plugin-svelte": "^2.45.1",
+    "prettier": "^3.1.0",
+    "prettier-plugin-svelte": "^3.2.6",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "publint": "^0.1.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^9.1.3",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0",
+    "svelte-headlessui": "^0.0.32",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss": "^4.0.0",
+    "tslib": "^2.4.1",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.4",
+    "vitest": "^1.0.0"
+  },
+  "svelte": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "dependencies": {
+    "@beyonk/svelte-datepicker": "^13.0.3",
+    "@floating-ui/core": "^1.5.1",
+    "@invopop/ui-icons": "0.0.67",
+    "@steeze-ui/heroicons": "^2.2.3",
+    "@steeze-ui/svelte-icon": "^1.6.2",
+    "@tailwindcss/vite": "^4.1.12",
+    "@types/flatpickr": "^3.1.2",
+    "bits-ui": "^2.9.4",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
+    "flatpickr": "^4.6.13",
+    "inter-ui": "^3.19.3",
+    "lodash-es": "^4.17.21",
+    "svelte-floating-ui": "^1.5.8",
+    "svelte-intersection-observer-action": "^0.0.4",
+    "svelte-portal": "^2.2.1",
+    "svelte-transition": "^0.0.17",
+    "svelte-viewport-info": "^1.0.2",
+    "tailwind-variants": "^1.0.0"
+  }
+}

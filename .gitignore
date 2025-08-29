@@ -2,7 +2,7 @@
 node_modules
 /build
 /dist
-/.svelte-kit
+svelte/.svelte-kit
 /icons/.svelte-kit
 /icons/src/lib
 /package

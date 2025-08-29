@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/svelte'
+import type { Meta, StoryObj } from '@storybook/sveltekit'
 import { CodeFork } from '@invopop/ui-icons'
 import CardCheckbox from '../lib/CardCheckbox.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'

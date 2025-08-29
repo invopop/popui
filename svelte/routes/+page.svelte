@@ -9,7 +9,6 @@
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import StepIconList from '$lib/StepIconList.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
-  import ComboBox from '$lib/ComboBox.svelte'
 
   install(twconfig)
 </script>
@@ -58,12 +57,6 @@
       options={[
         { label: 'Thing', value: 'thing' },
         { label: 'Thing 2', value: 'thing 2' }
-      ]}
-    />
-    <ComboBox
-      options={[
-        { label: 'Thing', value: 'thing' },
-        { label: 'Thing 2', value: 'thing2' }
       ]}
     />
   </div>

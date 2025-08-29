@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/svelte'
+import type { Preview } from '@storybook/sveltekit'
 import 'inter-ui/inter.css'
 import './variables.css'
 import { install } from '@twind/core'

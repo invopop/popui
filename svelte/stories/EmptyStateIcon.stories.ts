@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/svelte'
+import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import EmptyStateIcon from '../lib/EmptyStateIcon.svelte'
 import { Hashtag } from '@invopop/ui-icons'

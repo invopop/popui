@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/svelte'
+import type { Meta, StoryObj } from '@storybook/sveltekit'
 import { Cog6Tooth } from '@steeze-ui/heroicons'
 
 import TagSearch from '../lib/TagSearch.svelte'

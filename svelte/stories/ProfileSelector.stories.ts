@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/svelte'
+import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import ProfileSelector from '../lib/ProfileSelector.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/svelte'
+import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import FeedEvents from '../lib/FeedEvents.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'

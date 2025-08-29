@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/svelte'
+import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import GlobalSearch from '../lib/GlobalSearch.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'

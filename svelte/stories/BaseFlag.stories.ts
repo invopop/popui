@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/svelte'
+import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import BaseFlag from '../lib/BaseFlag.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'

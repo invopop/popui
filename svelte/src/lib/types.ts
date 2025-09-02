@@ -270,4 +270,102 @@ export interface AlertDialogProps {
     onRowClick?: (row: TableDataRow) => void;
     onRowRightClick?: (row: TableDataRow) => void;
     onRowNewTabClick?: (row: TableDataRow) => void;
+    onCopied?: (uuid: string) => void;
+    onOrderBy?: (field: string, direction: TableSortBy) => void;
+    onClickAction?: (args: {row: TableDataRow, action: AnyProp}) => void;
+  }
+
+  export interface BaseTableActionsProps {
+    actions: TableAction[];
+    onclick?: (value: AnyProp) => void;
+  }
+
+  export interface BaseTableCellContentProps {
+    field: TableField;
+    data?: unknown;
+    isMobile?: boolean;
+    badge?: Badge | null;
+    status?: FeedItemStatus | null;
+    icons?: TableIcon[] | null;
+    onCopied?: (uuid: string) => void;
+  }
+
+  export interface BaseTableCheckboxProps {
+    checkboxButton?: HTMLButtonElement | undefined;
+    checked?: boolean;
+    hidden?: boolean;
+    indeterminate?: boolean;
+    onChecked?: (checked: boolean) => void;
+  }
+
+  export interface BaseTableHeaderProps {
+    field: TableField;
+    sortBy?: string;
+    sortDirection: TableSortBy;
+    onOrderBy?: (field: string, direction: TableSortBy) => void;
+  }
+
+  export interface BaseTableHeaderOrderByProps {
+    isActive?: boolean;
+    sortDirection: TableSortBy;
+    onOrderBy?: (direction: TableSortBy) => void;
+  }
+
+  export interface BaseTableRowProps {
+    row: TableDataRow;
+    getActions?: TableActionProp;
+    fields?: TableField[];
+    disableRowClick?: boolean;
+    selectable?: boolean;
+    selected?: boolean;
+    selectionMode?: string;
+    selectedTrackedBy?: string;
+    selectedRows?: TableDataRow[];
+    onclick?: (event: MouseEvent) => void;
+    onmouseover?: () => void;
+    oncontextmenu?: () => void;
+    onfocus?: () => void;
+    onChecked?: (checked: boolean) => void;
+    onCopied?: (uuid: string) => void;
+    onClickAction?: (args: {row: TableDataRow, action: AnyProp}) => void;
+  }
+
+  export interface DrawerContextProps {
+    items?: DrawerOption[];
+    multiple?: boolean;
+    searchable?: boolean;
+    widthClass?: string;
+    onclick?: (value: AnyProp) => void;
+    onselect?: (selected: DrawerOption[]) => void;
+  }
+
+  export interface DrawerContextItemProps {
+    multiple?: boolean;
+    item: DrawerOption;
+    scrollIfSelected?: boolean;
+    workspace?: boolean;
+    onclick?: (value: AnyProp) => void;
+    onchange?: (item: DrawerOption) => void;
+  }
+
+  export interface InputCheckboxProps {
+    checked?: boolean;
+    indeterminate?: boolean;
+    onchange?: (checked: boolean) => void;
+    onclick?: (event: MouseEvent) => void;
+    [key: string]: any
+  }
+
+  export interface UuidCopyProps {
+    uuid?: string;
+    small?: boolean;
+    dark?: boolean;
+    rightAlign?: boolean;
+    prefixLength?: number;
+    suffixLength?: number;
+    full?: boolean;
+    compact?: boolean;
+    link?: boolean;
+    onCopied?: (uuid: string) => void;
+    onLinkClick?: (uuid: string) => void;
   }

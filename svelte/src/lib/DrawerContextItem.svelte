@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { stopPropagation } from 'svelte/legacy';
-
-  import type { DrawerOption } from './types.ts'
+  import type { DrawerContextItemProps } from './types.ts'
   import InputCheckbox from './InputCheckbox.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import { Tick } from '@invopop/ui-icons'
   import ProfileAvatar from './ProfileAvatar.svelte'
   import clsx from 'clsx'
@@ -12,63 +10,63 @@
   import { getCountryName } from './helpers.js'
   import TagStatus from './TagStatus.svelte'
 
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    multiple?: boolean;
-    item: DrawerOption;
-    scrollIfSelected?: boolean;
-    workspace?: boolean;
-  }
-
   let {
     multiple = false,
     item = $bindable(),
     scrollIfSelected = false,
-    workspace = false
-  }: Props = $props();
+    workspace = false,
+    onchange,
+    onclick
+  }: DrawerContextItemProps = $props()
 
-  let el: HTMLElement = $state()
+  let el: HTMLElement | undefined = $state()
 
   let hasIcon = $derived(item.icon || workspace)
 
-  let styles = $derived(clsx(
-    { 'py-1 space-x-3': workspace },
-    { 'py-1.5 space-x-1.5': !workspace },
-    { 'pl-1.5': hasIcon },
-    { 'pl-2': !hasIcon },
-    { 'bg-workspace-accent-100': item.selected && !multiple },
-    { 'group-hover:bg-neutral-100': (!item.selected && !item.disabled) || multiple }
-  ))
-  let labelStyles = $derived(clsx(
-    { 'text-danger-500': item.destructive },
-    { 'text-neutral-800': !item.destructive },
-    { 'tracking-tight max-w-[200px]': workspace },
-    { 'tracking-normal': !workspace }
-  ))
+  let styles = $derived(
+    clsx(
+      { 'py-1 space-x-3': workspace },
+      { 'py-1.5 space-x-1.5': !workspace },
+      { 'pl-1.5': hasIcon },
+      { 'pl-2': !hasIcon },
+      { 'bg-workspace-accent-100': item.selected && !multiple },
+      { 'group-hover:bg-neutral-100': (!item.selected && !item.disabled) || multiple }
+    )
+  )
+  let labelStyles = $derived(
+    clsx(
+      { 'text-danger-500': item.destructive },
+      { 'text-neutral-800': !item.destructive },
+      { 'tracking-tight max-w-[200px]': workspace },
+      { 'tracking-normal': !workspace }
+    )
+  )
   let title = $derived(item.label.length > 25 ? item.label : undefined)
 
   onMount(() => {
     if (!scrollIfSelected) return
 
     if (item.selected) {
-      el.scrollIntoView()
+      el?.scrollIntoView()
     }
   })
+
+  function handleClick(event: MouseEvent) {
+    event.stopPropagation()
+    if (multiple) {
+      item.selected = !item.selected
+      onchange?.(item)
+    } else {
+      onclick?.(item.value)
+    }
+  }
 </script>
 
 <button
   bind:this={el}
   class="w-full px-1 py-0.5 disabled:opacity-30 group"
   disabled={item.disabled}
-  onclick={stopPropagation(() => {
-    if (multiple) {
-      item.selected = !item.selected
-      dispatch('change', item)
-    } else {
-      dispatch('click', item.value)
-    }
-  })}
+  onclick={handleClick}
 >
   <div class="{styles} rounded pr-1.5 flex items-center justify-start w-full">
     {#if workspace}
@@ -102,11 +100,11 @@
       <InputCheckbox
         bind:checked={item.selected}
         on:change={() => {
-          dispatch('change', item)
+          onchange?.(item)
         }}
       />
     {:else if item.selected}
-      <Icon src={Tick} class="w-5 h-5 text-workspace-accent text-neutral-500" />
+      <Icon src={Tick} class="w-5 h-5 text-workspace-accent" />
     {:else if item.rightIcon}
       <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-800" />
     {/if}

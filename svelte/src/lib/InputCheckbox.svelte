@@ -1,19 +1,13 @@
 <script lang="ts">
-  import { createBubbler, stopPropagation } from 'svelte/legacy';
+  import type { InputCheckboxProps } from './types'
 
-  const bubble = createBubbler();
-  import { createEventDispatcher } from 'svelte'
-  import { dispatchWcEvent } from './wcdispatch.js'
-
-  interface Props {
-    checked?: boolean;
-    indeterminate?: boolean;
-    [key: string]: any
-  }
-
-  let { checked = $bindable(false), indeterminate = false, ...rest }: Props = $props();
-
-  const dispatch = createEventDispatcher()
+  let {
+    checked = $bindable(false),
+    indeterminate = false,
+    onchange,
+    onclick,
+    ...rest
+  }: InputCheckboxProps = $props()
 
   function updateInput(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
@@ -23,9 +17,7 @@
 
     checked = target.checked
 
-    dispatch('change', checked)
-
-    dispatchWcEvent(target, 'change', checked)
+    onchange?.(checked)
   }
 </script>
 
@@ -36,5 +28,5 @@
   class="form-checkbox w-4 h-4 text-workspace-accent focus:text-workspace-accent rounded border border-neutral-200 hover:border-neutral-300 group-hover:border-neutral-300 focus:ring-0 focus:ring-offset-0"
   {...rest}
   onchange={updateInput}
-  onclick={stopPropagation(bubble('click'))}
+  {onclick}
 />

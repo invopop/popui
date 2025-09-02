@@ -1,24 +1,8 @@
 <script lang="ts">
-  import { stopPropagation } from 'svelte/legacy';
-
   import { Duplicate, ExternalLink } from '@invopop/ui-icons'
   import { Icon } from '@steeze-ui/svelte-icon'
   import clsx from 'clsx'
-  import { createEventDispatcher } from 'svelte'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    uuid?: string;
-    small?: boolean;
-    dark?: boolean;
-    rightAlign?: boolean;
-    prefixLength?: number;
-    suffixLength?: number;
-    full?: boolean;
-    compact?: boolean;
-    link?: boolean;
-  }
+  import type { UuidCopyProps } from './types'
 
   let {
     uuid = '',
@@ -29,8 +13,10 @@
     suffixLength = 4,
     full = false,
     compact = false,
-    link = false
-  }: Props = $props();
+    link = false,
+    onCopied,
+    onLinkClick
+  }: UuidCopyProps = $props()
 
   function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
     if (inputString.length <= prefixLength + suffixLength) {
@@ -44,35 +30,41 @@
   }
 
   let formattedUuid = $derived(full ? uuid : shortenString(uuid, prefixLength, suffixLength))
-  let styles = $derived(clsx({
-    'justify-end': rightAlign,
-    'text-sm': small,
-    'text-base': !small,
-    'text-neutral-800': dark,
-    'text-neutral-500': !dark,
-    'justify-between': !compact,
-    'w-full': full,
-    'border border-neutral-800/10 rounded-md pl-2.5 pr-2 py-[5px]': !full
-  }))
+  let styles = $derived(
+    clsx({
+      'justify-end': rightAlign,
+      'text-sm': small,
+      'text-base': !small,
+      'text-neutral-800': dark,
+      'text-neutral-500': !dark,
+      'justify-between': !compact,
+      'w-full': full,
+      'border border-neutral-800/10 rounded-md pl-2.5 pr-2 py-[5px]': !full
+    })
+  )
+
+  async function handleClick(event: MouseEvent) {
+    event.stopPropagation()
+    await navigator.clipboard.writeText(uuid)
+    onCopied?.(uuid)
+  }
+
+  async function handleIconClick(event: MouseEvent) {
+    event.stopPropagation()
+    await navigator.clipboard.writeText(uuid)
+    if (link) {
+      onLinkClick?.(uuid)
+    } else {
+      onCopied?.(uuid)
+    }
+  }
 </script>
 
 <div class="{styles} relative inline-flex items-center space-x-1 text-left whitespace-nowrap">
-  <button
-    class="tracking-wide font-mono text-base"
-    onclick={stopPropagation(async () => {
-      await navigator.clipboard.writeText(uuid)
-      dispatch('copied', uuid)
-    })}
-  >
+  <button class="tracking-wide font-mono text-base" onclick={handleClick}>
     {formattedUuid}
   </button>
-  <button
-    class="p-1"
-    onclick={stopPropagation(async () => {
-      await navigator.clipboard.writeText(uuid)
-      dispatch(link ? 'link' : 'copied', uuid)
-    })}
-  >
+  <button class="p-1" onclick={handleIconClick}>
     <Icon src={link ? ExternalLink : Duplicate} class="w-4 h-4 text-neutral-500" />
   </button>
 </div>

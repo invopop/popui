@@ -1,24 +1,19 @@
 <script lang="ts">
-  import { stopPropagation } from 'svelte/legacy';
-
-  import { createEventDispatcher } from 'svelte'
   import InputCheckbox from './InputCheckbox.svelte'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    checkboxButton?: HTMLButtonElement | undefined;
-    checked?: boolean;
-    hidden?: boolean;
-    indeterminate?: boolean;
-  }
+  import type { BaseTableCheckboxProps } from './types'
 
   let {
     checkboxButton = $bindable(undefined),
     checked = false,
     hidden = false,
-    indeterminate = false
-  }: Props = $props();
+    indeterminate = false,
+    onChecked
+  }: BaseTableCheckboxProps = $props()
+
+  function handleClick(event: MouseEvent) {
+    event.stopPropagation()
+    onChecked?.(!checked)
+  }
 </script>
 
 <button
@@ -26,16 +21,14 @@
   aria-checked={checked}
   bind:this={checkboxButton}
   class="absolute inset-0 h-full w-full flex items-center justify-center outline-none group cursor-default"
-  onclick={stopPropagation(() => {
-    dispatch('checked', !checked)
-  })}
+  onclick={handleClick}
 >
   <div class:invisible={hidden} class="group-hover:visible">
     <InputCheckbox
       {checked}
       {indeterminate}
-      on:change={(event) => {
-        dispatch('checked', event.detail)
+      onchange={(changed) => {
+        onChecked?.(changed)
       }}
     />
   </div>

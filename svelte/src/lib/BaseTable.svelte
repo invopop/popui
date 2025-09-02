@@ -43,6 +43,9 @@
     onRowClick,
     onRowNewTabClick,
     onRowRightClick,
+    onCopied,
+    onOrderBy,
+    onClickAction,
     ...rest
   }: BaseTableProps = $props()
 
@@ -258,7 +261,7 @@
                 hidden={!selectedRows.length}
                 {indeterminate}
                 checked={allChecked}
-                on:checked={() => {
+                onChecked={() => {
                   toggleAllSelected(!selectedRows.length)
                 }}
               />
@@ -271,7 +274,7 @@
               ? 'pl-3'
               : 'pl-0'} {i === fields.length - 1 && !addExtraCell ? 'pr-3' : 'pr-0'}"
           >
-            <BaseTableHeaderContent {sortBy} {sortDirection} {field} on:orderBy />
+            <BaseTableHeaderContent {sortBy} {sortDirection} {field} {onOrderBy} />
           </TableHead>
         {/each}
         {#if addExtraCell}
@@ -318,7 +321,7 @@
             selected={selectable &&
               lastSelected &&
               row[selectedTrackedBy] === lastSelected[selectedTrackedBy]}
-            on:click={() => {
+            onclick={() => {
               if (disableRowClick) return
 
               if (metaKeyPressed) {
@@ -327,11 +330,11 @@
                 onRowClick?.(row)
               }
             }}
-            on:contextmenu={() => {
+            oncontextmenu={() => {
               onRowRightClick?.(row)
             }}
-            on:checked={(event) => {
-              if (event.detail) {
+            onChecked={(checked) => {
+              if (checked) {
                 if (shiftKeyPressed) {
                   selectRange(row)
                 } else {
@@ -342,12 +345,12 @@
                 unselectRow(row)
               }
             }}
-            on:hover={() => {
+            onmouseover={() => {
               if (shiftKeyPressed) return
               lastSelected = row
             }}
-            on:action
-            on:copied
+            {onClickAction}
+            {onCopied}
           />
         {/each}
       {/each}
@@ -376,7 +379,7 @@
                 badge={field.helperBadge ? field.helperBadge(row) : null}
                 status={field.helperStatus ? field.helperStatus(row) : null}
                 data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
-                on:copied
+                {onCopied}
               />
             </div>
           {/each}

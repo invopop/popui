@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Badge, FeedItemStatus, TableField, TableIcon } from './types'
+  import type { BaseTableCellContentProps } from './types'
   import TagStatus from './TagStatus.svelte'
   import FeedIconStatus from './FeedIconStatus.svelte'
   import BaseFlag from './BaseFlag.svelte'
@@ -7,23 +7,15 @@
   import UuidCopy from './UuidCopy.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
 
-  interface Props {
-    field: TableField;
-    data?: unknown;
-    isMobile?: boolean;
-    badge?: Badge | null;
-    status?: FeedItemStatus | null;
-    icons?: TableIcon[] | null;
-  }
-
   let {
     field,
     data = '',
     isMobile = false,
     badge = null,
     status = null,
-    icons = null
-  }: Props = $props();
+    icons = null,
+    onCopied
+  }: BaseTableCellContentProps = $props()
 </script>
 
 <div class="flex flex-col">
@@ -45,7 +37,7 @@
         full
         compact
         dark={isMobile}
-        on:copied
+        {onCopied}
       />
     {:else}
       <span class="hidden md:inline">{data}</span>

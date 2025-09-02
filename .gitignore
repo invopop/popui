@@ -2,9 +2,7 @@
 node_modules
 /build
 /dist
-svelte/.svelte-kit
-/icons/.svelte-kit
-svelte/storybook-static
+.svelte-kit
 /icons/src/lib
 /package
 .env
@@ -13,7 +11,7 @@ svelte/storybook-static
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 /src
-/storybook-static
+storybook-static
 /popui
 /tmp
 /public

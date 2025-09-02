@@ -1,35 +1,24 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
-  import type { DrawerOption } from './types.ts'
+  import type { DrawerContextProps, DrawerOption } from './types.ts'
   import DrawerContextItem from './DrawerContextItem.svelte'
   import InputSearch from './InputSearch.svelte'
-  import { createEventDispatcher } from 'svelte'
   import DrawerContextSeparator from './DrawerContextSeparator.svelte'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    items?: DrawerOption[];
-    multiple?: boolean;
-    searchable?: boolean;
-    widthClass?: string;
-  }
 
   let {
     items = $bindable([]),
     multiple = false,
     searchable = false,
-    widthClass = 'w-60'
-  }: Props = $props();
+    widthClass = 'w-60',
+    onclick,
+    onselect
+  }: DrawerContextProps = $props()
 
   let selectedItems = $derived(items.filter((i) => i.selected))
-  run(() => {
-    dispatch('selected', selectedItems)
-  });
+  $effect(() => {
+    onselect?.(selectedItems)
+  })
 
-  function updateItem(event: CustomEvent) {
-    const item = event.detail as DrawerOption
+  function updateItem(item: DrawerOption) {
     items = items.map((i) => {
       if (i.value === item.value) return item
       return i
@@ -50,7 +39,7 @@
       {#if item.separator}
         <DrawerContextSeparator />
       {:else}
-        <DrawerContextItem {item} {multiple} on:click on:change={updateItem} />
+        <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
       {/if}
     {/each}
   </ul>

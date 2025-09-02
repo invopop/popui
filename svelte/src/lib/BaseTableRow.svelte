@@ -1,32 +1,15 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
-  import { createEventDispatcher } from 'svelte'
   import BaseTableActions from './BaseTableActions.svelte'
-  import type { TableActionProp, TableDataRow, TableField } from './types.js'
+  import type { BaseTableRowProps } from './types.js'
   import { scrollIntoTableView } from './helpers.js'
   import { TableCell, TableRow } from './table'
   import clsx from 'clsx'
   import BaseTableCellContent from './BaseTableCellContent.svelte'
   import BaseTableCheckbox from './BaseTableCheckbox.svelte'
 
-  const dispatch = createEventDispatcher()
-
-  let actionsDropdown: BaseTableActions = $state()
-  let checkboxButton: HTMLButtonElement = $state()
+  let actionsDropdown: BaseTableActions | undefined = $state()
+  let checkboxButton: HTMLButtonElement | undefined = $state()
   let dataState: 'selected' | 'checked' | undefined = $state(undefined)
-
-  interface Props {
-    row: TableDataRow;
-    getActions?: TableActionProp;
-    fields?: TableField[];
-    disableRowClick?: boolean;
-    selectable?: boolean;
-    selected?: boolean;
-    selectionMode?: string;
-    selectedTrackedBy?: string;
-    selectedRows?: TableDataRow[];
-  }
 
   let {
     row,
@@ -37,35 +20,44 @@
     selected = false,
     selectionMode = 'keyboard',
     selectedTrackedBy = 'id',
-    selectedRows = []
-  }: Props = $props();
-
-
-
+    selectedRows = [],
+    onclick,
+    onfocus,
+    onmouseover,
+    oncontextmenu,
+    onChecked,
+    onCopied,
+    onClickAction
+  }: BaseTableRowProps = $props()
 
   function scrollIntoView() {
+    if (!checkboxButton) return
     scrollIntoTableView(checkboxButton)
   }
 
-
   let actions = $derived(getActions instanceof Function ? getActions(row) : [])
-  let checked = $derived(!!selectedRows.find((r) => {
-    const field = r[selectedTrackedBy]
+  let checked = $derived(
+    !!selectedRows.find((r) => {
+      const field = r[selectedTrackedBy]
 
-    if (field === undefined) return false
+      if (field === undefined) return false
 
-    return field === row[selectedTrackedBy]
-  }))
-  run(() => {
+      return field === row[selectedTrackedBy]
+    })
+  )
+
+  $effect(() => {
     if (selectionMode === 'keyboard' && selected) {
       scrollIntoView()
     }
-  });
-  let rowClass = $derived(clsx({
-    'cursor-pointer': !disableRowClick,
-    '!hover:bg-transparent': disableRowClick
-  }))
-  run(() => {
+  })
+  let rowClass = $derived(
+    clsx({
+      'cursor-pointer': !disableRowClick,
+      '!hover:bg-transparent': disableRowClick
+    })
+  )
+  $effect(() => {
     if (selected) {
       dataState = 'selected'
     } else if (checked) {
@@ -73,25 +65,25 @@
     } else {
       dataState = undefined
     }
-  });
+  })
 </script>
 
 <TableRow
   data-state={dataState}
   class={rowClass}
-  on:click
-  on:contextmenu={() => {
+  {onclick}
+  oncontextmenu={() => {
     if (!actionsDropdown) return
 
     actionsDropdown.toggle()
+
+    oncontextmenu?.()
   }}
-  on:mouseover={() => {
+  onmouseover={() => {
     if (selectionMode === 'keyboard') return
-    dispatch('hover')
+    onmouseover?.()
   }}
-  on:focus={() => {
-    dispatch('focus')
-  }}
+  {onfocus}
 >
   {#if selectable}
     <TableCell>
@@ -99,7 +91,7 @@
         bind:checkboxButton
         {checked}
         hidden={selectedRows.length === 0}
-        on:checked
+        {onChecked}
       />
     </TableCell>
   {/if}
@@ -115,7 +107,7 @@
         status={field.helperStatus ? field.helperStatus(row) : null}
         icons={field.helperIcons ? field.helperIcons(row) : null}
         data={field.formatter ? field.formatter(row) : row[field.slug] || ''}
-        on:copied
+        {onCopied}
       />
     </TableCell>
   {/each}
@@ -124,8 +116,8 @@
       <BaseTableActions
         bind:this={actionsDropdown}
         {actions}
-        on:clickAction={(event) => {
-          dispatch('action', { row, action: event.detail })
+        onclick={(action) => {
+          onClickAction?.({ row, action })
         }}
       />
     </TableCell>

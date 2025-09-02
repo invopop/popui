@@ -1,14 +1,6 @@
 <script lang="ts">
   import { intersect } from 'svelte-intersection-observer-action'
-  import type {
-    TableActionProp,
-    TableDataRow,
-    TableField,
-    TableGroup,
-    TableGroupLabelProp,
-    TableSortBy
-  } from './types.js'
-  import { createEventDispatcher } from 'svelte'
+  import type { BaseTableProps, TableDataRow, TableGroup } from './types.js'
   import BaseCounter from './BaseCounter.svelte'
   import BaseTableRow from './BaseTableRow.svelte'
   import { isInputFocused } from './helpers.js'
@@ -18,10 +10,9 @@
   import BaseTableHeaderContent from './BaseTableHeaderContent.svelte'
   import TableBody from './table/table-body.svelte'
 
-  const dispatch = createEventDispatcher()
   const callback = (entry: IntersectionObserverEntry) => {
     if (entry.intersectionRatio && entry.isIntersecting) {
-      dispatch('tableEndReached')
+      ontableEndReached?.()
     }
   }
   const intersectOptions = { callback }
@@ -32,23 +23,6 @@
   let lastSelectedForShift: TableDataRow = {}
   let selectWithArrowPosition = $state(-1)
   let selectionMode = $state('keyboard')
-
-  interface Props {
-    sortBy?: string;
-    sortDirection?: TableSortBy;
-    fields?: TableField[];
-    data?: TableDataRow[];
-    getActions?: TableActionProp;
-    groupLabel?: TableGroupLabelProp;
-    disableRowClick?: boolean;
-    hideCounter?: boolean;
-    selectable?: boolean;
-    selectedRows?: TableDataRow[];
-    selectedTrackedBy?: string;
-    hideSelectAll?: boolean;
-    disableKeyboardNavigation?: boolean;
-    [key: string]: any
-  }
 
   let {
     sortBy = '',
@@ -64,9 +38,13 @@
     selectedTrackedBy = 'id',
     hideSelectAll = false,
     disableKeyboardNavigation = false,
+    ontableEndReached,
+    onSelectAllRows,
+    onRowClick,
+    onRowNewTabClick,
+    onRowRightClick,
     ...rest
-  }: Props = $props();
-
+  }: BaseTableProps = $props()
 
   function groupData(rows: TableDataRow[]): TableGroup[] {
     if (rows.length === 0) return []
@@ -91,7 +69,7 @@
     selectedRows = []
     lastSelected = {}
 
-    dispatch('selectAll', selected)
+    onSelectAllRows?.(selected)
 
     if (!selected) return
 
@@ -165,7 +143,7 @@
     if (event.key === 'Enter') {
       if (lastSelectedIndex >= 0) {
         event.preventDefault()
-        dispatch('rowClick', lastSelected)
+        onRowClick?.(lastSelected)
       }
       return
     }
@@ -237,9 +215,9 @@
   let indeterminate = $derived(selectedRows.length > 0 && selectedRows.length < data.length)
   let allChecked = $derived(selectedRows.length === data.length)
   let flattedData = $derived(groupedData.flatMap((d) => d.rows))
-  let lastSelectedIndex = $derived(flattedData.findIndex(
-    (d) => d[selectedTrackedBy] === lastSelected[selectedTrackedBy]
-  ))
+  let lastSelectedIndex = $derived(
+    flattedData.findIndex((d) => d[selectedTrackedBy] === lastSelected[selectedTrackedBy])
+  )
 </script>
 
 <svelte:window
@@ -344,13 +322,13 @@
               if (disableRowClick) return
 
               if (metaKeyPressed) {
-                dispatch('rowNewTabClick', row)
+                onRowNewTabClick?.(row)
               } else {
-                dispatch('rowClick', row)
+                onRowClick?.(row)
               }
             }}
             on:contextmenu={() => {
-              dispatch('rowRightClick', row)
+              onRowRightClick?.(row)
             }}
             on:checked={(event) => {
               if (event.detail) {
@@ -385,9 +363,9 @@
             if (disableRowClick) return
 
             if (metaKeyPressed) {
-              dispatch('rowNewTabClick', row)
+              onRowNewTabClick?.(row)
             } else {
-              dispatch('rowClick', row)
+              onRowClick?.(row)
             }
           }}
         >

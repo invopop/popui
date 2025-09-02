@@ -6,11 +6,26 @@
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import StepIconList from '$lib/StepIconList.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
+  import BaseButton from '$lib/BaseButton.svelte'
+  import BaseCard from '$lib/BaseCard.svelte'
 </script>
 
 <div class="p-4 space-y-4">
   <h1 class="text-xl">Popui</h1>
   <p>Library of shared, re-usable UI components for Invopop projects</p>
+
+  <BaseButton onclick={() => console.log('clicked')}>Hola</BaseButton>
+
+  {#snippet footer()}
+    <div>I'm a footer</div>
+  {/snippet}
+
+  <BaseCard
+    title="This is a title"
+    description="hola"
+    imageUrl="https://email.invopop.com/icon.png"
+    {footer}
+  />
 
   <CardCheckbox
     name="something"

@@ -1,20 +1,9 @@
 <script lang="ts">
-  import { stopPropagation } from 'svelte/legacy';
-
-  import { offset, flip, shift, size, type Placement } from 'svelte-floating-ui/dom'
+  import { offset, flip, shift, size } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import { clickOutside } from './clickOutside.js'
   import { portal } from 'svelte-portal'
-
-  interface Props {
-    isOpen?: boolean;
-    fullWidth?: boolean;
-    placement?: Placement;
-    matchParentWidth?: boolean;
-    trigger?: import('svelte').Snippet;
-    children?: import('svelte').Snippet;
-    [key: string]: any
-  }
+  import type { BaseDropdownProps } from './types.js'
 
   let {
     isOpen = $bindable(false),
@@ -24,7 +13,7 @@
     trigger,
     children,
     ...rest
-  }: Props = $props();
+  }: BaseDropdownProps = $props()
 
   const middleware = [offset(6), flip(), shift()]
 
@@ -52,6 +41,12 @@
   export const toggle = () => {
     isOpen = !isOpen
   }
+
+  function handleClick(event: MouseEvent) {
+    event.stopPropagation()
+    if (closedFromClickOutside) return
+    isOpen = !isOpen
+  }
 </script>
 
 <div class="inline-flex" class:w-full={fullWidth} role="menu">
@@ -60,10 +55,7 @@
     class:w-full={fullWidth}
     use:floatingRef
     {...rest}
-    onclick={stopPropagation(async () => {
-      if (closedFromClickOutside) return
-      isOpen = !isOpen
-    })}
+    onclick={handleClick}
   >
     {@render trigger?.()}
   </button>

@@ -1,19 +1,6 @@
 <script lang="ts">
-  import { createBubbler } from 'svelte/legacy';
-
-  const bubble = createBubbler();
   import TagBeta from './TagBeta.svelte'
-
-  interface Props {
-    imageUrl?: string;
-    imageAlt?: string;
-    title?: string;
-    description?: string;
-    type?: 'default' | 'soon' | 'beta';
-    enabled?: boolean;
-    footer?: import('svelte').Snippet;
-    [key: string]: any
-  }
+  import type { BaseCardProps } from './types'
 
   let {
     imageUrl = '',
@@ -23,15 +10,16 @@
     type = 'default',
     enabled = false,
     footer,
+    onclick,
     ...rest
-  }: Props = $props();
+  }: BaseCardProps = $props()
 </script>
 
 <button
   class="rounded-lg bg-white hover:bg-neutral-100 focus:bg-neutral-200 disabled:bg-neutral-50 disabled:pointer-events-none border border-neutral-100 p-3 flex flex-col min-w-[298px] min-h-[126px] text-left"
   disabled={type === 'soon'}
   {...rest}
-  onclick={bubble('click')}
+  {onclick}
 >
   <div class="flex flex-col items-start justify-center space-y-2 w-full">
     <div class="flex items-center justify-between w-full">

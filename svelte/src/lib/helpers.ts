@@ -15,7 +15,7 @@ export async function resolveIcon(
   }
 
   try {
-    const { [toPascalCase(icon)]: i } = await import('@invopop/ui-icons')
+    const { [toPascalCase(icon)]: i } = await import('@invopop/ui-icons') as Record<string,IconSource>
     return i
   } catch (error) {
     console.log(error)

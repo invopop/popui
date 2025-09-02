@@ -1,4 +1,3 @@
-<!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot (description to description_1) making the component unusable -->
 <script lang="ts">
   import {
     AlertDialog,
@@ -11,24 +10,28 @@
     AlertDialogCancel,
     AlertDialogAction
   } from '$lib/alert-dialog'
-  import { createEventDispatcher } from 'svelte'
+  import type { AlertDialogProps } from './types'
 
-  const dispatch = createEventDispatcher()
+  let {
+    open = false,
+    destructive = false,
+    title = '',
+    descriptionText = '',
+    cancelText = 'Cancel',
+    actionText = 'OK',
+    cancelActionEl = $bindable(),
+    okActionEl = $bindable(),
+    oncancel,
+    onconfirm,
+    description,
+    children
+  }: AlertDialogProps = $props()
 
-  export let open = false
-  export let destructive = false
-  export let title = ''
-  export let description = ''
-  export let cancelText = 'Cancel'
-  export let actionText = 'OK'
-  export let cancelActionEl: HTMLButtonElement | undefined = undefined
-  export let okActionEl: HTMLButtonElement | undefined = undefined
-
-  let recentAction = false
+  let recentAction = $state(false)
 
   function cancel() {
     recentAction = true
-    dispatch('cancel')
+    oncancel?.()
     setTimeout(() => {
       recentAction = false
     }, 10)
@@ -36,57 +39,71 @@
 
   function confirm() {
     recentAction = true
-    dispatch('confirm')
+    onconfirm?.()
     setTimeout(() => {
       recentAction = false
     }, 10)
   }
 
-  $: if (!open) {
-    cancelByEsc()
-  }
+  $effect(() => {
+    if (!open) {
+      cancelByEsc()
+    }
+  })
 
   function cancelByEsc() {
     if (recentAction) return
 
-    dispatch('cancel')
+    oncancel?.()
+  }
+
+  function handleOpen(value: boolean) {
+    if (value) {
+      const focusEl = document.querySelector(
+        '[data-alert-dialog-action]:nth-of-type(2)'
+      ) as HTMLElement
+      focusEl?.focus()
+    }
   }
 </script>
 
-<AlertDialog openFocus="[data-alert-dialog-action]:nth-of-type(2)" bind:open>
-  <AlertDialogTrigger class={$$slots.default ? '' : 'hidden'}>
-    <slot />
+<AlertDialog onOpenChange={handleOpen} bind:open>
+  <AlertDialogTrigger class={children ? '' : 'hidden'}>
+    {@render children?.()}
   </AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>{title}</AlertDialogTitle>
       <AlertDialogDescription>
-        <slot name="description" />
-        {#if !$$slots.description}
-          {description}
+        {#if description}
+          {@render description()}
+        {:else}
+          {descriptionText}
         {/if}
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
       <AlertDialogCancel
-        bind:el={cancelActionEl}
-        on:click={() => {
+        bind:ref={cancelActionEl}
+        onclick={() => {
           cancel()
         }}
         onkeydown={(e) => {
           if (e.key === 'Enter') {
             cancel()
           }
-        }}>{cancelText}</AlertDialogCancel
+        }}
       >
+        {cancelText}
+      </AlertDialogCancel>
       <AlertDialogAction
-        bind:el={okActionEl}
+        bind:ref={okActionEl}
         {destructive}
-        on:click={() => {
+        onclick={() => {
           confirm()
         }}
-        on:keydown={(e) => {
-          if (e.detail.originalEvent.key === 'Enter') {
+        onkeydown={(e) => {
+          if (e.key === 'Enter') {
             confirm()
           }
         }}

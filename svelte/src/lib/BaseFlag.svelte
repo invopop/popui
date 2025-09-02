@@ -1,10 +1,7 @@
 <script lang="ts">
-  interface Props {
-    country?: string;
-    width?: number;
-  }
+  import type { BaseFlagProps } from './types'
 
-  let { country = '', width = 12 }: Props = $props();
+  let { country = '', width = 12 }: BaseFlagProps = $props()
 
   let iso = $derived(country.toLowerCase())
 </script>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { AlertDialog as AlertDialogPrimitive } from 'bits-ui'
-  import { buttonVariants, type Variant } from '$lib/button/index.js'
+  import { buttonVariants, type ButtonVariant } from '$lib/button/index.js'
   import { cn } from '$lib/utils.js'
   let {
     ref = $bindable(null),
@@ -9,7 +9,7 @@
     children
   }: AlertDialogPrimitive.ActionProps & { destructive: boolean } = $props()
 
-  let variant = $derived((destructive ? 'destructive' : 'primary') as Variant)
+  let variant = $derived((destructive ? 'destructive' : 'primary') as ButtonVariant)
 </script>
 
 <AlertDialogPrimitive.Action

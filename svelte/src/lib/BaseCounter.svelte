@@ -1,18 +1,16 @@
 <script lang="ts">
   import clsx from 'clsx'
+  import type { BaseCounterProps } from './types'
 
-  interface Props {
-    content: number;
-    variant?: 'default' | 'light' | 'dark';
-  }
+  let { content, variant = 'default' }: BaseCounterProps = $props()
 
-  let { content, variant = 'default' }: Props = $props();
-
-  let styles = $derived(clsx(
-    { 'bg-neutral-100': variant === 'light' },
-    { 'bg-neutral-200': variant === 'default' },
-    { 'bg-neutral-300': variant === 'dark' }
-  ))
+  let styles = $derived(
+    clsx(
+      { 'bg-neutral-100': variant === 'light' },
+      { 'bg-neutral-200': variant === 'default' },
+      { 'bg-neutral-300': variant === 'dark' }
+    )
+  )
 </script>
 
 <div

@@ -1,4 +1,6 @@
+import type { Placement } from '@floating-ui/dom'
 import type { IconSource } from '@steeze-ui/svelte-icon'
+import type { Snippet } from 'svelte'
 
 export type IconTheme = 'default' | 'solid' | 'mini'
 
@@ -182,3 +184,90 @@ export type StepIcon = {
   name: string
   url: string
 }
+
+// Component props
+export interface AlertDialogProps {
+    open?: boolean
+    destructive?: boolean
+    title?: string
+    descriptionText?: string
+    cancelText?: string
+    actionText?: string
+    cancelActionEl?: HTMLButtonElement
+    okActionEl?: HTMLButtonElement
+    oncancel?: () => void
+    onconfirm?: () => void
+    description?: Snippet
+    children?: Snippet
+  }
+  export interface BaseButtonProps {
+    icon?: IconSource;
+    iconTheme?: IconTheme;
+    iconPosition?: IconPosition;
+    type?: 'button' | 'submit' | 'reset' | null;
+    variant?: ButtonVariant;
+    disabled?: boolean;
+    small?: boolean;
+    big?: boolean;
+    dangerIcon?: boolean;
+    shortcut?: boolean;
+    fullwidth?: boolean;
+    notification?: boolean;
+    children?: import('svelte').Snippet;
+    [key: string]: any
+    onclick?: (event: MouseEvent) => void;
+  }
+
+  export interface BaseCardProps {
+    imageUrl?: string;
+    imageAlt?: string;
+    title?: string;
+    description?: string;
+    type?: 'default' | 'soon' | 'beta';
+    enabled?: boolean;
+    footer?: Snippet;
+    [key: string]: any;
+    onclick?: (event: MouseEvent) => void;
+  }
+
+  export interface BaseCounterProps {
+    content: number;
+    variant?: 'default' | 'light' | 'dark';
+  }
+
+  export interface BaseDropdownProps {
+    isOpen?: boolean;
+    fullWidth?: boolean;
+    placement?: Placement;
+    matchParentWidth?: boolean;
+    trigger?: Snippet;
+    children?: Snippet;
+    [key: string]: any
+  }
+
+  export interface BaseFlagProps {
+    country?: string;
+    width?: number;
+  }
+
+  export interface BaseTableProps {
+    sortBy?: string;
+    sortDirection?: TableSortBy;
+    fields?: TableField[];
+    data?: TableDataRow[];
+    getActions?: TableActionProp;
+    groupLabel?: TableGroupLabelProp;
+    disableRowClick?: boolean;
+    hideCounter?: boolean;
+    selectable?: boolean;
+    selectedRows?: TableDataRow[];
+    selectedTrackedBy?: string;
+    hideSelectAll?: boolean;
+    disableKeyboardNavigation?: boolean;
+    [key: string]: any
+    ontableEndReached?: () => void;
+    onSelectAllRows?: (selected: boolean) => void;
+    onRowClick?: (row: TableDataRow) => void;
+    onRowRightClick?: (row: TableDataRow) => void;
+    onRowNewTabClick?: (row: TableDataRow) => void;
+  }

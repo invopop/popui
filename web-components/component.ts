@@ -1,6 +1,6 @@
 import { detach, insert, noop, SvelteComponent } from 'svelte/internal'
 import install from '@twind/with-web-components'
-import config from '../svelte/twind.config.js'
+import config from './twind.config.js'
 const withTwind = install(config)
 
 export default class extends withTwind(HTMLElement) {

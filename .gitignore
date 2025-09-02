@@ -2,8 +2,9 @@
 node_modules
 /build
 /dist
-/.svelte-kit
+svelte/.svelte-kit
 /icons/.svelte-kit
+svelte/storybook-static
 /icons/src/lib
 /package
 .env

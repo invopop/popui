@@ -10,8 +10,11 @@
   import StepIconList from '$lib/StepIconList.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
   import ComboBox from '$lib/ComboBox.svelte'
+  import InputCheckbox from '$lib/InputCheckbox.svelte'
 
   install(twconfig)
+
+  let checkboxValue = true
 </script>
 
 <div class="p-4 space-y-4">
@@ -31,6 +34,8 @@
     icon={CodeFork}
   />
   <CardCheckbox name="something" title="Invoice" icon={Invoice} hideRadio checked />
+  {checkboxValue}
+  <InputCheckbox bind:checked={checkboxValue} label="This is a checkbox" />
   <div>
     <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" full compact />
   </div>

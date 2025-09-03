@@ -11,6 +11,7 @@
   import InputSelect from '$lib/InputSelect.svelte'
   import ComboBox from '$lib/ComboBox.svelte'
   import InputCheckbox from '$lib/InputCheckbox.svelte'
+  import InputToggle from '$lib/InputToggle.svelte'
 
   install(twconfig)
 
@@ -36,6 +37,7 @@
   <CardCheckbox name="something" title="Invoice" icon={Invoice} hideRadio checked />
   {checkboxValue}
   <InputCheckbox bind:checked={checkboxValue} label="This is a checkbox" />
+  <InputToggle bind:checked={checkboxValue} label="End workflow after this block" />
   <div>
     <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" full compact />
   </div>

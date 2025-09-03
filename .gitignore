@@ -2,7 +2,7 @@
 node_modules
 /build
 /dist
-/.svelte-kit
+.svelte-kit
 /icons/.svelte-kit
 /icons/src/lib
 /package
@@ -12,7 +12,7 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 /src
-/storybook-static
+storybook-static
 /popui
 /tmp
 /public

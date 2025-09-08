@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { EmptyStateIcon } from './types.js'
+  import type { EmptyStateIcon, EmptyStateIllustrationProps } from './types.js'
   import BgPattern from './svg/BgPattern.svelte'
   import IconContact from './svg/IconContact.svelte'
   import IconInvoice from './svg/IconInvoice.svelte'
@@ -9,20 +9,12 @@
   import IconNoResults from './svg/IconNoResults.svelte'
   import type { SvelteComponent } from 'svelte'
 
-  interface Props {
-    icon?: EmptyStateIcon | undefined;
-    title?: string;
-    description?: string;
-    children?: import('svelte').Snippet;
-  }
-
   let {
     icon = undefined,
     title = '',
     description = '',
     children
-  }: Props = $props();
-
+  }: EmptyStateIllustrationProps = $props()
 
   function getComponent(icon: EmptyStateIcon | undefined) {
     if (!icon) return undefined
@@ -67,7 +59,7 @@
     </div>
   {/if}
   <div class="space-y-0.5">
-    <h4 class="font-medium text-base text-neutral-800 text-base tracking-tight">{title}</h4>
+    <h4 class="font-medium text-neutral-800 text-base tracking-tight">{title}</h4>
     <p class="max-w-xs text-base text-neutral-500 tracking-normal">{description}</p>
     <p>{@render children?.()}</p>
   </div>

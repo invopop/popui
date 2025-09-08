@@ -74,38 +74,11 @@ export type FeedEvent = {
   message?: string
 }
 
-export type MenuItemProps = {
-  label?: string
-  isFolderItem?: boolean
-  collapsable?: boolean
-  open?: boolean
-  url?: string
-  active?: boolean
-  icon?: IconSource | string
-  iconTheme?: IconTheme
-  children?: MenuItemProps[]
-  collapsedSidebar?: boolean
-}
-
 export type FeedItemStatus = 'success' | 'failure' | 'run' | 'queued' | 'alert' | 'skip' | 'signed'
 
 export type FeedItemUser = {
   name: string
   picture?: string
-}
-
-export type FeedItemProps = {
-  status?: FeedItemStatus
-  icon?: IconSource
-  title?: string
-  date?: Date
-  hasNext?: boolean
-  slug?: string
-  viewable?: boolean
-  viewableText?: string
-  type?: string
-  user?: FeedItemUser
-  extraText?: string
 }
 
 export type Badge = {
@@ -213,7 +186,7 @@ export interface AlertDialogProps {
     shortcut?: boolean;
     fullwidth?: boolean;
     notification?: boolean;
-    children?: import('svelte').Snippet;
+    children?: Snippet;
     [key: string]: any
     onclick?: (event: MouseEvent) => void;
   }
@@ -330,6 +303,80 @@ export interface AlertDialogProps {
     onClickAction?: (args: {row: TableDataRow, action: AnyProp}) => void;
   }
 
+  export interface BreadcrumbsProps {
+    breadcrumbs?: Breadcrumb[];
+    oncopied?: (label: string) => void;
+  }
+
+  export interface ButtonFileProps {
+    icon?: IconSource;
+    name?: string;
+    disabled?: boolean;
+    date?: string;
+    iconColor?: StatusType;
+    onPreview?: () => void;
+    onDownload?: () => void;
+    [key: string]: any
+  }
+
+  export interface ButtonUuidCopyProps {
+    uuid?: string;
+    prefixLength?: number;
+    suffixLength?: number;
+    full?: boolean;
+    disabled?: boolean;
+    oncopied?: (label: string) => void;
+  }
+
+  export interface CardCheckboxProps {
+    id?: any;
+    name?: string;
+    title?: string;
+    description?: string;
+    accentText?: string;
+    checked?: boolean;
+    icon?: IconSource | undefined;
+    hideRadio?: boolean;
+    footer?: Snippet;
+  }
+
+  export interface CardRelationProps {
+    title?: string;
+    icon?: IconSource | undefined;
+    items?: DataListItem[];
+    onclick?: (event: MouseEvent) => void;
+  }
+
+  export interface CompanySelectorProps {
+    companies?: Company[];
+    selectedCompany?: Company | null;
+    collapsed?: boolean;
+    onAdd?: () => void;
+    onSelect?: (company: Company | null) => void;
+  }
+
+  export interface CounterWorkflowProps {
+    content: number | string;
+    variant?: 'default' | 'transparent';
+  }
+
+  export interface DataListItemProps {
+    label?: string;
+    value?: string;
+    monospaced?: boolean;
+    monospacedNums?: boolean;
+    fullWidth?: boolean;
+    children?: Snippet;
+  }
+
+  export interface DatePickerProps {
+    label?: string;
+    position?: 'left' | 'right';
+    from?: string;
+    to?: string;
+    onSelect?: (date: {from: string, to: string}) => void;
+  }
+
   export interface DrawerContextProps {
     items?: DrawerOption[];
     multiple?: boolean;
@@ -348,12 +395,265 @@ export interface AlertDialogProps {
     onchange?: (item: DrawerOption) => void;
   }
 
+  export interface DrawerContextWorkspaceProps {
+    items?: DrawerOption[];
+    multiple?: boolean;
+    onclick?: (value: AnyProp) => void;
+  }
+
+  export interface DropdownSelectProps {
+    value?: AnyProp;
+    icon?: IconSource | string | undefined;
+    iconTheme?: IconTheme;
+    options?: DrawerOption[];
+    placeholder?: string;
+    multiple?: boolean;
+    fullWidth?: boolean;
+    widthClass?: string;
+    onSelect?: (value: AnyProp) => void;
+  }
+
+  export interface EmptyStateIconProps {
+    icon?: IconSource | undefined;
+    title?: string;
+    description?: string;
+    check?: boolean;
+    children?: Snippet;
+  }
+
+  export interface EmptyStateIllustrationProps {
+    icon?: EmptyStateIcon | undefined;
+    title?: string;
+    description?: string;
+    children?: Snippet;
+  }
+
+  export interface FeedEventsProps {
+    events?: FeedEvent[];
+  }
+
+  export interface FeedIconEventProps {
+    icon?: IconSource | undefined;
+    iconTheme?: IconTheme;
+  }
+
+  export interface FeddIconStatusProps {
+    status: FeedItemStatus;
+  }
+
+  export interface FeedItemProps {
+    status?: FeedItemStatus | undefined;
+    icon?: IconSource | undefined;
+    title?: string;
+    date?: Date | undefined;
+    hasNext?: boolean;
+    slug?: string;
+    viewable?: boolean;
+    viewableText?: string;
+    user?: FeedItemUser | undefined;
+    type?: string;
+    extraText?: string;
+    onView?: (slug: string) => void;
+  }
+
+  export interface FeedItemDetailProps {
+    status?: FeedItemStatus | undefined;
+    title?: string;
+    uuid?: string;
+    events?: FeedEvent[];
+    idLabel?: string;
+    onCopied?: (uuid: string) => void;
+  }
+
+  export interface FeedViewerProps {
+    items?: FeedItemProps[];
+    onView?: (slug: string) => void;
+  }
+
+  export interface FormLayoutModalProps {
+    children?: Snippet;
+    footer?: Snippet;
+  }
+
+  export interface GlobalSearchProps {
+    collapsed?: boolean;
+    onOpen?: () => void;
+  }
+
   export interface InputCheckboxProps {
     checked?: boolean;
     indeterminate?: boolean;
     onchange?: (checked: boolean) => void;
     onclick?: (event: MouseEvent) => void;
     [key: string]: any
+  }
+
+  export interface InputErrorProps {
+    errorText?: string;
+  }
+
+  export interface InputLabelProps {
+    id?: string;
+    label?: string;
+    [key: string]: any
+  }
+
+  export interface InputRadioProps {
+    checked?: boolean;
+    id?: any;
+    name?: string;
+    onchange?: (checked: boolean) => void;
+    [key: string]: any
+  }
+
+  export interface InputSearchProps {
+    value?: string;
+    shortcut?: string;
+    placeholder?: string;
+    icon?: IconSource;
+    focusOnLoad?: boolean;
+    oninput?: (value: string) => void;
+    onclick?: (event: MouseEvent) => void;
+    onfocus?: (event: FocusEvent) => void;
+    onblur?: (event: FocusEvent) => void;
+    [key: string]: any
+  }
+
+  export interface InputSelectProps {
+    id?: any;
+    name?: string;
+    label?: string;
+    disabled?: boolean;
+    value?: string;
+    icon?: IconSource | string | undefined;
+    iconTheme?: IconTheme;
+    options?: SelectOption[];
+    placeholder?: string;
+    disablePlaceholder?: boolean;
+    errorText?: string;
+    onchange?: (value: string) => void;
+    [key: string]: any
+  }
+
+  export interface InputTextProps {
+    id?: any;
+    label?: string;
+    placeholder?: string;
+    errorText?: string;
+    disabled?: boolean;
+    value?: string | number;
+    focusOnLoad?: boolean;
+    oninput?: (value: string) => void;
+    onfocus?: (event: FocusEvent) => void;
+    onblur?: (event: FocusEvent) => void;
+    onkeydown?: (event: KeyboardEvent) => void;
+    [key: string]: any
+  }
+
+  export interface InputTextareaProps {
+    id?: any;
+    label?: string;
+    placeholder?: string;
+    errorText?: string;
+    disabled?: boolean;
+    value?: string | number;
+    rows?: number;
+    oninput?: (value: string) => void;
+    [key: string]: any
+  }
+
+  export interface InputToggleProps {
+    checked?: boolean;
+    onchange?: (checked: boolean) => void;
+  }
+
+  export interface MenuItemProps {
+    label?: string;
+    url?: string;
+    isFolderItem?: boolean;
+    collapsable?: boolean;
+    open?: boolean;
+    active?: boolean;
+    collapsedSidebar?: boolean;
+    iconTheme?: IconTheme;
+    icon?: IconSource | string | undefined;
+    children?: MenuItemProps[] | undefined;
+    onclick?: (url: string) => void;
+  }
+
+  export interface MenuItemCollapsibleProps {
+    collapsed?: boolean;
+    title?: string;
+    subtitle?: string;
+    active?: boolean;
+    bold?: boolean;
+    icon?: IconSource | undefined;
+    children?: Snippet;
+  }
+
+  export interface NotificationProps {
+    message?: string;
+    type?: Status;
+    children?: Snippet;
+  }
+
+  export interface ProfileAvatarProps {
+    name?: string;
+    small?: boolean;
+    large?: boolean;
+    dark?: boolean;
+    picture?: string;
+    country?: string;
+  }
+
+  export interface ProfileSelectorProps {
+    name?: string;
+    orgName?: string;
+    picture?: string;
+    collapsed?: boolean;
+    isOpen?: boolean;
+    onclick?: (event: MouseEvent) => void;
+  }
+
+  export interface SectionLayoutProps {
+    title?: string;
+    children?: Snippet;
+  }
+
+  export interface StatusLabelProps {
+    status: FeedItemStatus;
+    label?: string;
+  }
+
+  export interface StepIconListProps {
+    icons?: StepIcon[]
+  }
+
+  export interface TagSearchProps {
+    label?: string;
+    icon?: IconSource | string | undefined;
+    iconTheme?: IconTheme;
+    onclear?: () => void;
+  }
+
+  export interface TagStatusProps {
+    label?: string;
+    status?: StatusType;
+    dot?: boolean;
+  }
+
+  export interface TitleMainProps {
+    title?: string;
+    children?: Snippet;
+  }
+
+  export interface TitleSectionProps {
+    title?: string;
+    children?: Snippet;
+  }
+
+  export interface ShortcutWrapperProps {
+    children?: Snippet;
   }
 
   export interface UuidCopyProps {

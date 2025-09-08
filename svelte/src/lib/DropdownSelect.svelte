@@ -1,26 +1,12 @@
 <script lang="ts">
   import isEqual from 'lodash-es/isEqual'
-  import type { AnyProp, DrawerOption, IconTheme } from './types.ts'
+  import type { AnyProp, DrawerOption, DropdownSelectProps, IconTheme } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import { createEventDispatcher } from 'svelte'
-  import { resolveIcon } from './helpers.js'
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContext from './DrawerContext.svelte'
   import clsx from 'clsx'
   import TagStatus from './TagStatus.svelte'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    value?: AnyProp;
-    icon?: IconSource | string | undefined;
-    iconTheme?: IconTheme;
-    options?: DrawerOption[];
-    placeholder?: string;
-    multiple?: boolean;
-    fullWidth?: boolean;
-    widthClass?: string;
-  }
+  import { resolveIcon } from './helpers.js'
 
   let {
     value = $bindable(''),
@@ -30,52 +16,61 @@
     placeholder = '',
     multiple = false,
     fullWidth = false,
-    widthClass = 'min-w-[160px] max-w-[420px]'
-  }: Props = $props();
+    widthClass = 'min-w-[160px] max-w-[420px]',
+    onSelect
+  }: DropdownSelectProps = $props()
 
-  let selectDropdown: BaseDropdown = $state()
-  let resolvedIcon: IconSource | undefined = $derived(icon)
+  let selectDropdown: BaseDropdown | undefined = $state()
+  let resolvedIcon: IconSource | undefined = $state()
   let isOpen = $state(false)
 
-  
+  $effect(() => {
+    resolveIcon(icon).then((res) => (resolvedIcon = res))
+  })
 
-  let items = $derived(options.map((o) => ({
-    ...o,
-    selected: multiple
-      ? Boolean((value as DrawerOption[]).find((v) => v.value === o.value))
-      : o.value === value
-  })))
+  let items = $derived(
+    options.map((o) => ({
+      ...o,
+      selected: multiple
+        ? Boolean((value as DrawerOption[]).find((v) => v.value === o.value))
+        : o.value === value
+    }))
+  )
 
   let selectedItems = $derived(items.filter((i) => i.selected))
   let selectedColor = $derived(!multiple && items.find((i) => i.selected)?.color)
   let selectedIcon = $derived(!multiple && items.find((i) => i.selected)?.icon)
-  let selectedIconColor =
-    $derived((!multiple && items.find((i) => i.selected)?.iconClass) || 'text-neutral-500')
-  let selectedLabel =
-    $derived(`${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more...' : ''}` ||
-    placeholder)
+  let selectedIconColor = $derived(
+    (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-neutral-500'
+  )
+  let selectedLabel = $derived(
+    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more...' : ''}` ||
+      placeholder
+  )
 
-  let styles = $derived(clsx({
-    'shadow-active border-workspace-accent hover:border-workspace-accent': isOpen
-  }))
+  let styles = $derived(
+    clsx({
+      'shadow-active border-workspace-accent hover:border-workspace-accent': isOpen
+    })
+  )
 
-  function handleClick(e: CustomEvent) {
-    value = e.detail
+  function handleClick(val: AnyProp) {
+    value = val
 
-    dispatch('selected', value)
+    onSelect?.(value)
 
     if (multiple) return
 
-    selectDropdown.toggle()
+    selectDropdown?.toggle()
   }
 
-  function handleSelected(e: CustomEvent) {
+  function handleSelected(val: AnyProp) {
     if (!multiple) return
 
     // Avoid re-firing watcher
-    if (isEqual(value, e.detail)) return
+    if (isEqual(value, val)) return
 
-    value = e.detail
+    value = val
   }
 </script>
 
@@ -83,7 +78,6 @@
   {#snippet trigger()}
     <div
       class="{styles} dropdown-select max-w-[420px] flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1 bg-white whitespace-nowrap"
-      
     >
       {#if selectedColor}
         <TagStatus dot status={selectedColor} />
@@ -98,13 +92,7 @@
       </span>
     </div>
   {/snippet}
-  <DrawerContext
-    {widthClass}
-    {multiple}
-    {items}
-    on:click={handleClick}
-    on:selected={handleSelected}
-  />
+  <DrawerContext {widthClass} {multiple} {items} onclick={handleClick} onselect={handleSelected} />
 </BaseDropdown>
 
 <style>

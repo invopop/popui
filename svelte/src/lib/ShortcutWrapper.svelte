@@ -1,9 +1,7 @@
 <script lang="ts">
-  interface Props {
-    children?: import('svelte').Snippet;
-  }
+  import type { ShortcutWrapperProps } from './types'
 
-  let { children }: Props = $props();
+  let { children }: ShortcutWrapperProps = $props()
 </script>
 
 <div

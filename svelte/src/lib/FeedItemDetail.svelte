@@ -1,26 +1,19 @@
 <script lang="ts">
-  import type { FeedEvent, FeedItemStatus } from './types.ts'
+  import type { FeedItemDetailProps } from './types.ts'
   import FeedIconStatus from './FeedIconStatus.svelte'
   import UuidCopy from './UuidCopy.svelte'
   import FeedEvents from './FeedEvents.svelte'
   import { slide } from 'svelte/transition'
   import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 
-  interface Props {
-    status?: FeedItemStatus | undefined;
-    title?: string;
-    uuid?: string;
-    events?: FeedEvent[];
-    idLabel?: string;
-  }
-
   let {
     status = undefined,
     title = '',
     uuid = '',
     events = [],
-    idLabel = 'ID:'
-  }: Props = $props();
+    idLabel = 'ID:',
+    onCopied
+  }: FeedItemDetailProps = $props()
 
   let open = $state(false)
 </script>
@@ -36,7 +29,7 @@
   <div class="pl-3 py-1 pr-2.5 flex items-center space-x-0.5">
     <span class="text-sm text-neutral-500 whitespace-nowrap">{idLabel}</span>
     {#if uuid}
-      <UuidCopy {uuid} full small on:copied />
+      <UuidCopy {uuid} full small {onCopied} />
     {/if}
   </div>
   {#if events.length}
@@ -44,6 +37,7 @@
     <div class="px-3 py-2 text-sm text-neutral-500 flex items-center justify-between">
       <span>Logs</span>
       <button
+        aria-label="Toggle details"
         onclick={() => {
           open = !open
         }}

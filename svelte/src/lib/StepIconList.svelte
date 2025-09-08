@@ -1,12 +1,8 @@
 <script lang="ts">
   import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from './tooltip'
-  import type { StepIcon } from './types.js'
+  import type { StepIconListProps } from './types.js'
 
-  interface Props {
-    icons?: StepIcon[]
-  }
-
-  let { icons = [] }: Props = $props()
+  let { icons = [] }: StepIconListProps = $props()
 
   let maxItems = $derived(icons.length > 6 ? 5 : 6)
   let mainIcons = $derived(icons.slice(0, maxItems))

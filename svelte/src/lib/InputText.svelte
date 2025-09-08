@@ -1,23 +1,9 @@
 <script lang="ts">
-  import { createBubbler } from 'svelte/legacy';
-
-  const bubble = createBubbler();
   import clsx from 'clsx'
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import InputLabel from './InputLabel.svelte'
-  import { dispatchWcEvent } from './wcdispatch.js'
   import InputError from './InputError.svelte'
-
-  interface Props {
-    id?: any;
-    label?: string;
-    placeholder?: string;
-    errorText?: string;
-    disabled?: boolean;
-    value?: string | number;
-    focusOnLoad?: boolean;
-    [key: string]: any
-  }
+  import { InputTextProps } from './types'
 
   let {
     id = Math.random().toString(36).slice(2, 7),
@@ -27,32 +13,35 @@
     disabled = false,
     value = $bindable(''),
     focusOnLoad = false,
+    oninput,
+    onkeydown,
+    onfocus,
+    onblur,
     ...rest
-  }: Props = $props();
+  }: InputTextProps = $props()
 
-  let inputEl: HTMLInputElement = $state()
+  let inputEl: HTMLInputElement | undefined = $state()
   let timer: ReturnType<typeof setTimeout>
-
-  const dispatch = createEventDispatcher()
 
   const debounce = (target: HTMLInputElement) => {
     clearTimeout(timer)
     timer = setTimeout(() => {
-      dispatch('input', target.value)
-      dispatchWcEvent(target, 'input', target.value)
+      oninput?.(target.value)
     }, 750)
   }
 
-  let inputStyles = $derived(clsx(
-    { 'pointer-events-none bg-neutral-50': disabled },
-    {
-      'text-danger-500 border-danger-400 outline-danger-400': errorText
-    },
-    {
-      'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
-        !errorText
-    }
-  ))
+  let inputStyles = $derived(
+    clsx(
+      { 'pointer-events-none bg-neutral-50': disabled },
+      {
+        'text-danger-500 border-danger-400 outline-danger-400': errorText
+      },
+      {
+        'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
+          !errorText
+      }
+    )
+  )
 
   function handleInput(event: unknown) {
     // If event is not a native event we skip the dispatch to avoid infinite loop
@@ -66,7 +55,7 @@
   onMount(() => {
     if (!focusOnLoad) return
 
-    inputEl.focus()
+    inputEl?.focus()
   })
 </script>
 
@@ -83,9 +72,9 @@
   readonly={disabled}
   {...rest}
   oninput={handleInput}
-  onfocus={bubble('focus')}
-  onblur={bubble('blur')}
-  onkeydown={bubble('keydown')}
+  {onfocus}
+  {onblur}
+  {onkeydown}
 />
 {#if errorText}
   <InputError {errorText} />

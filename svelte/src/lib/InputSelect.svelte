@@ -1,28 +1,9 @@
 <script lang="ts">
-  import type { IconTheme, SelectOption } from './types.ts'
+  import type { InputSelectProps } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import InputLabel from './InputLabel.svelte'
-  import { createEventDispatcher } from 'svelte'
   import { resolveIcon } from './helpers.js'
-  import { dispatchWcEvent } from './wcdispatch.js'
   import InputError from './InputError.svelte'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    id?: any;
-    name?: string;
-    label?: string;
-    disabled?: boolean;
-    value?: string;
-    icon?: IconSource | string | undefined;
-    iconTheme?: IconTheme;
-    options?: SelectOption[];
-    placeholder?: string;
-    disablePlaceholder?: boolean;
-    errorText?: string;
-    [key: string]: any
-  }
 
   let {
     id = Math.random().toString(36).slice(2, 7),
@@ -36,22 +17,20 @@
     placeholder = 'Select one...',
     disablePlaceholder = true,
     errorText = '',
+    onchange,
     ...rest
-  }: Props = $props();
+  }: InputSelectProps = $props()
 
-  let resolvedIcon: IconSource | undefined = $derived(icon)
+  let resolvedIcon: IconSource | undefined = $state()
 
-  
+  $effect(() => {
+    resolveIcon(icon).then((res) => (resolvedIcon = res))
+  })
 
-  function handleChange(event: unknown) {
-    // If event is not a native event we skip the dispatch to avoid infinite loop
-    if (event instanceof CustomEvent) return
-
+  function handleChange(event: Event) {
     const target = (event as PointerEvent).target as HTMLSelectElement
 
-    dispatch('change', target.value)
-
-    dispatchWcEvent(target, 'change', target.value)
+    onchange?.(target.value)
   }
 </script>
 

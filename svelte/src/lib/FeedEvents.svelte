@@ -1,12 +1,8 @@
 <script lang="ts">
   import TagStatus from './TagStatus.svelte'
-  import type { FeedEvent } from './types.js'
+  import type { FeedEventsProps } from './types.js'
 
-  interface Props {
-    events?: FeedEvent[];
-  }
-
-  let { events = [] }: Props = $props();
+  let { events = [] }: FeedEventsProps = $props()
 </script>
 
 <div class="border border-neutral-100 bg-neutral-50 rounded">

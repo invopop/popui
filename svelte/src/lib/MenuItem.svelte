@@ -1,15 +1,12 @@
 <script lang="ts">
-  import MenuItem from './MenuItem.svelte';
-  import { stopPropagation } from 'svelte/legacy';
-
+  import MenuItem from './MenuItem.svelte'
   import { flip, shift, offset } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import clsx from 'clsx'
-  import type { IconTheme, MenuItemProps, DrawerOption } from './types.ts'
+  import type { MenuItemProps, DrawerOption, AnyProp } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { ChevronDown, ChevronRight } from '@invopop/ui-icons'
   import { FolderL } from '@invopop/ui-icons'
-  import { createEventDispatcher } from 'svelte'
   import { resolveIcon } from './helpers.js'
   import DrawerContext from './DrawerContext.svelte'
 
@@ -18,19 +15,6 @@
     placement: 'bottom-start',
     middleware: [offset(-4), flip(), shift()]
   })
-
-  interface Props {
-    label?: string;
-    url?: string;
-    isFolderItem?: boolean;
-    collapsable?: boolean;
-    open?: boolean;
-    active?: boolean;
-    collapsedSidebar?: boolean;
-    iconTheme?: IconTheme;
-    icon?: IconSource | string | undefined;
-    children?: MenuItemProps[] | undefined;
-  }
 
   let {
     label = '',
@@ -42,36 +26,33 @@
     collapsedSidebar = false,
     iconTheme = 'default',
     icon = undefined,
-    children = undefined
-  }: Props = $props();
+    children = undefined,
+    onclick
+  }: MenuItemProps = $props()
 
-  let resolvedIcon: IconSource | undefined = $derived(icon)
+  let resolvedIcon: IconSource | undefined = $state()
   let hovered = $state(false)
   let highlight = $state(false)
   let leaveHoverTimeout: ReturnType<typeof setTimeout> | null = null
-
-  const dispatch = createEventDispatcher()
-
-  
-
-  let itemStyles = $derived(clsx(
-    { 'text-white font-medium': !isFolderItem },
-    { 'text-white-40': isFolderItem && !active },
-    { 'bg-white-10': active },
-    { 'border border-transparent hover:border-white-5 group p-2': collapsedSidebar },
-    { 'w-full px-2 py-1.5': !collapsedSidebar },
-    {
-      'bg-white-10 border-white-5 text-white': active
-    },
-    { 'hover:bg-white-5 focus:bg-white-10': !active }
-  ))
-
+  let itemStyles = $derived(
+    clsx(
+      { 'text-white font-medium': !isFolderItem },
+      { 'text-white-40': isFolderItem && !active },
+      { 'bg-white-10': active },
+      { 'border border-transparent hover:border-white-5 group p-2': collapsedSidebar },
+      { 'w-full px-2 py-1.5': !collapsedSidebar },
+      {
+        'bg-white-10 border-white-5 text-white': active
+      },
+      { 'hover:bg-white-5 focus:bg-white-10': !active }
+    )
+  )
   let iconStyles = $derived(clsx({ 'group-hover:text-white': collapsedSidebar }))
-
-  let wrapperStyles = $derived(clsx({
-    'ml-4 border-l border-white-10 pl-2 pt-0.5 relative': isFolderItem
-  }))
-
+  let wrapperStyles = $derived(
+    clsx({
+      'ml-4 border-l border-white-10 pl-2 pt-0.5 relative': isFolderItem
+    })
+  )
   let items = $derived([
     { label, value: url, selected: active, icon: resolvedIcon },
     ...(children || []).map((c) => ({
@@ -82,17 +63,21 @@
     }))
   ] as DrawerOption[])
 
+  $effect(() => {
+    resolveIcon(icon).then((res) => (resolvedIcon = res))
+  })
+
   function handleClick() {
     if (!url && collapsable) {
       open = !open
     }
 
-    dispatch('click', url)
+    onclick?.(url)
   }
 
-  function handleClickChild(event: CustomEvent) {
+  function handleClickChild(value: AnyProp) {
     hovered = false
-    dispatch('click', event.detail)
+    onclick?.(value as string)
   }
 
   function handleHover() {
@@ -133,9 +118,10 @@
     </span>
     {#if collapsable && !collapsedSidebar}
       <button
-        onclick={stopPropagation(() => {
+        onclick={(e) => {
+          e.stopPropagation()
           open = !open
-        })}
+        }}
       >
         <Icon src={open ? ChevronDown : ChevronRight} class="h-4 w-4 text-white-40" />
       </button>
@@ -151,7 +137,7 @@
           onmouseleave={handleBlur}
           class="pt-4 z-30"
         >
-          <DrawerContext on:click={handleClickChild} {items} />
+          <DrawerContext onclick={handleClickChild} {items} />
         </div>
       {/if}
     {:else if open || !collapsable}

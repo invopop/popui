@@ -1,14 +1,7 @@
 <script lang="ts">
   import IconEmpty from './svg/IconEmpty.svelte'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-
-  interface Props {
-    icon?: IconSource | undefined;
-    title?: string;
-    description?: string;
-    check?: boolean;
-    children?: import('svelte').Snippet;
-  }
+  import { EmptyStateIconProps } from './types'
 
   let {
     icon = undefined,
@@ -16,7 +9,7 @@
     description = '',
     check = false,
     children
-  }: Props = $props();
+  }: EmptyStateIconProps = $props()
 </script>
 
 <div

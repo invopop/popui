@@ -1,15 +1,7 @@
 <script lang="ts">
   import clsx from 'clsx'
   import BaseFlag from './BaseFlag.svelte'
-
-  interface Props {
-    name?: string;
-    small?: boolean;
-    large?: boolean;
-    dark?: boolean;
-    picture?: string;
-    country?: string;
-  }
+  import { ProfileAvatarProps } from './types'
 
   let {
     name = '',
@@ -18,17 +10,19 @@
     dark = false,
     picture = $bindable(''),
     country = ''
-  }: Props = $props();
+  }: ProfileAvatarProps = $props()
 
-  let avatarStyles = $derived(clsx(
-    { 'text-sm': !large },
-    { 'h-4 w-4': small },
-    { 'h-5 w-5': !large && !small },
-    { 'h-8 w-8': large },
-    { 'bg-neutral-50 border-neutral-100 text-neutral-500': !dark },
-    { 'bg-white-5 border-white-10 text-white-70': dark },
-    { border: !picture }
-  ))
+  let avatarStyles = $derived(
+    clsx(
+      { 'text-sm': !large },
+      { 'h-4 w-4': small },
+      { 'h-5 w-5': !large && !small },
+      { 'h-8 w-8': large },
+      { 'bg-neutral-50 border-neutral-100 text-neutral-500': !dark },
+      { 'bg-white-5 border-white-10 text-white-70': dark },
+      { border: !picture }
+    )
+  )
 </script>
 
 <div class="{avatarStyles} rounded flex items-center justify-center font-semibold relative">

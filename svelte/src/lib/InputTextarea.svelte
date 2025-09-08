@@ -1,21 +1,8 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
   import InputLabel from './InputLabel.svelte'
   import InputError from './InputError.svelte'
   import clsx from 'clsx'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    id?: any;
-    label?: string;
-    placeholder?: string;
-    errorText?: string;
-    disabled?: boolean;
-    value?: string | number;
-    rows?: number;
-    [key: string]: any
-  }
+  import { InputTextareaProps } from './types'
 
   let {
     id = Math.random().toString(36).slice(2, 7),
@@ -25,23 +12,26 @@
     disabled = false,
     value = $bindable(''),
     rows = 4,
+    oninput,
     ...rest
-  }: Props = $props();
+  }: InputTextareaProps = $props()
 
-  let inputStyles = $derived(clsx(
-    { 'pointer-events-none bg-neutral-50': disabled },
-    {
-      'text-danger-500 border-danger-400 outline-danger-400': errorText
-    },
-    {
-      'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
-        !errorText
-    }
-  ))
+  let inputStyles = $derived(
+    clsx(
+      { 'pointer-events-none bg-neutral-50': disabled },
+      {
+        'text-danger-500 border-danger-400 outline-danger-400': errorText
+      },
+      {
+        'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
+          !errorText
+      }
+    )
+  )
 
   function handleInput(event: Event) {
     value = (event.target as HTMLInputElement).value
-    dispatch('input', value)
+    oninput?.(value)
   }
 </script>
 

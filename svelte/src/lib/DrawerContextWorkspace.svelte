@@ -1,33 +1,22 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
-  import type { DrawerOption } from './types.ts'
+  import type { DrawerContextWorkspaceProps } from './types.ts'
   import DrawerContextItem from './DrawerContextItem.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { AddCircle, ExternalLink, Workspace } from '@invopop/ui-icons'
-  import { createEventDispatcher } from 'svelte'
   import BaseCounter from './BaseCounter.svelte'
   import EmptyStateIcon from './EmptyStateIcon.svelte'
   import { slide } from 'svelte/transition'
   import { ChevronRight } from '@steeze-ui/heroicons'
 
-  interface Props {
-    items?: DrawerOption[];
-    multiple?: boolean;
-  }
-
-  let { items = [], multiple = false }: Props = $props();
-
-  const dispatch = createEventDispatcher()
+  let { items = [], multiple = false, onclick }: DrawerContextWorkspaceProps = $props()
 
   let liveOpen = $state(false)
   let sandboxOpen = $state(false)
-
   let liveItems = $derived(items.filter((i) => !i.sandbox))
   let sandboxItems = $derived(items.filter((i) => i.sandbox))
-
   let selectedItem = $derived(items.find((i) => i.selected))
-  run(() => {
+
+  $effect(() => {
     if (selectedItem) {
       if (selectedItem.sandbox) {
         sandboxOpen = true
@@ -35,7 +24,7 @@
         liveOpen = true
       }
     }
-  });
+  })
 </script>
 
 <div class="w-[300px] border border-neutral-200 rounded-md shadow-lg bg-white">
@@ -72,7 +61,7 @@
         {/if}
         <ul class="p-1 space-y-1">
           {#each liveItems as item}
-            <DrawerContextItem {item} {multiple} workspace on:click />
+            <DrawerContextItem {item} {multiple} workspace {onclick} />
           {/each}
         </ul>
       </div>
@@ -110,7 +99,7 @@
         {/if}
         <ul class="p-1 space-y-1">
           {#each sandboxItems as item}
-            <DrawerContextItem {item} {multiple} workspace on:click />
+            <DrawerContextItem {item} {multiple} workspace {onclick} />
           {/each}
         </ul>
       </div>
@@ -122,7 +111,7 @@
       <button
         class="flex items-center justify-between w-full"
         onclick={() => {
-          dispatch('click', 'add')
+          onclick?.('add')
         }}
       >
         <div class="flex items-center space-x-1.5">

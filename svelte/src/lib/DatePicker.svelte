@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import Transition from 'svelte-transition'
   import flatpickr from 'flatpickr'
   import type { Instance } from 'flatpickr/dist/types/instance.js'
   import 'flatpickr/dist/flatpickr.min.css'
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import BaseButton from './BaseButton.svelte'
   import {
     startOfWeek,
@@ -22,28 +20,19 @@
   import { Calendar } from '@invopop/ui-icons'
   import clsx from 'clsx'
   import { clickOutside } from './clickOutside.js'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    label?: string;
-    position?: 'left' | 'right';
-    from?: string;
-    to?: string;
-  }
+  import { DatePickerProps } from './types'
 
   let {
     label = 'Date',
     position = 'left',
     from = '',
-    to = ''
-  }: Props = $props();
+    to = '',
+    onSelect
+  }: DatePickerProps = $props()
 
-
-
-  let datePickerEl: HTMLElement = $state()
+  let datePickerEl: HTMLElement | undefined = $state()
   let selectedLabel = $state(label)
-  let datepicker: Instance = $state()
+  let datepicker: Instance | undefined = $state()
   let selectedDates = $state({ from: { value: '', display: '' }, to: { value: '', display: '' } })
   let isOpen = $state(false)
   let selectedPeriod = $state('custom')
@@ -68,8 +57,8 @@
       label: 'This Week',
       action: () => {
         selectedPeriod = 'this-week'
-        datepicker.setDate([startOfThisWeek, endOfThisWeek], true)
-        datepicker.jumpToDate(startOfThisWeek)
+        datepicker?.setDate([startOfThisWeek, endOfThisWeek], true)
+        datepicker?.jumpToDate(startOfThisWeek)
       }
     },
     {
@@ -77,8 +66,8 @@
       label: 'Last Week',
       action: () => {
         selectedPeriod = 'last-week'
-        datepicker.setDate([startOfLastWeek, endOfLastWeek], true)
-        datepicker.jumpToDate(startOfLastWeek)
+        datepicker?.setDate([startOfLastWeek, endOfLastWeek], true)
+        datepicker?.jumpToDate(startOfLastWeek)
       }
     },
     {
@@ -86,8 +75,8 @@
       label: 'This month',
       action: () => {
         selectedPeriod = 'this-month'
-        datepicker.setDate([startOfThisMonth, endOfThisMonth], true)
-        datepicker.jumpToDate(startOfThisMonth)
+        datepicker?.setDate([startOfThisMonth, endOfThisMonth], true)
+        datepicker?.jumpToDate(startOfThisMonth)
       }
     },
     {
@@ -95,8 +84,8 @@
       label: 'Last month',
       action: () => {
         selectedPeriod = 'last-month'
-        datepicker.setDate([startOfLastMonth, endOfLastMonth], true)
-        datepicker.jumpToDate(startOfLastMonth)
+        datepicker?.setDate([startOfLastMonth, endOfLastMonth], true)
+        datepicker?.jumpToDate(startOfLastMonth)
       }
     },
     {
@@ -104,8 +93,8 @@
       label: 'This quarter',
       action: () => {
         selectedPeriod = 'this-quarter'
-        datepicker.setDate([startOfThisQuarter, endOfThisQuarter], true)
-        datepicker.jumpToDate(startOfThisQuarter)
+        datepicker?.setDate([startOfThisQuarter, endOfThisQuarter], true)
+        datepicker?.jumpToDate(startOfThisQuarter)
       }
     },
     {
@@ -113,21 +102,22 @@
       label: 'Last quarter',
       action: () => {
         selectedPeriod = 'last-quarter'
-        datepicker.setDate([startOfLastQuarter, endOfLastQuarter], true)
-        datepicker.jumpToDate(startOfLastQuarter)
+        datepicker?.setDate([startOfLastQuarter, endOfLastQuarter], true)
+        datepicker?.jumpToDate(startOfLastQuarter)
       }
     },
     {
       slug: 'custom',
       label: 'Custom',
       action: () => {
-        datepicker.clear()
+        datepicker?.clear()
         selectedPeriod = 'custom'
       }
     }
   ]
 
   onMount(() => {
+    if (!datePickerEl) return
     datepicker = flatpickr(datePickerEl, {
       onChange: function (dates: Date[]) {
         if (dates.length === 0) {
@@ -169,15 +159,15 @@
 
   function cancel() {
     isOpen = false
-    datepicker.clear()
-    dispatch('selected', { from: '', to: '' })
+    datepicker?.clear()
+    onSelect?.({ from: '', to: '' })
   }
 
   function confirm() {
     isOpen = false
     selectedLabel = getLabel()
 
-    dispatch('selected', { from: selectedDates.from.value, to: selectedDates.to.value })
+    onSelect?.({ from: selectedDates.from.value, to: selectedDates.to.value })
   }
 
   function getLabel() {
@@ -189,7 +179,7 @@
   }
 
   function setDates(from: string, to: string) {
-    datepicker.setDate([from, to])
+    datepicker?.setDate([from, to])
     selectedDates = {
       from: { value: from, display: getDisplayFromValue(from) },
       to: { value: to, display: getDisplayFromValue(to) }
@@ -204,15 +194,17 @@
 
     return `${parts[2]}/${parts[1]}/${parts[0]}`
   }
-  run(() => {
+  $effect(() => {
     if (datepicker) {
       setDates(from, to)
     }
-  });
-  let styles = $derived(clsx({
-    'border-workspace-accent focus:border-workspace-accent shadow-active': isOpen,
-    'border-neutral-200 hover:border-neutral-300': !isOpen
-  }))
+  })
+  let styles = $derived(
+    clsx({
+      'border-workspace-accent focus:border-workspace-accent shadow-active': isOpen,
+      'border-neutral-200 hover:border-neutral-300': !isOpen
+    })
+  )
 </script>
 
 <div>
@@ -373,10 +365,10 @@
       color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958)) !important;
   }
   :global(
-      .flatpickr-day.selected:hover,
-      .flatpickr-day.startRange:hover,
-      .flatpickr-day.endRange:hover
-    ) {
+    .flatpickr-day.selected:hover,
+    .flatpickr-day.startRange:hover,
+    .flatpickr-day.endRange:hover
+  ) {
     border: 0;
   }
   :global(.flatpickr-day.inRange) {

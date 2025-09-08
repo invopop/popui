@@ -1,24 +1,21 @@
 <script lang="ts">
   import ProfileAvatar from './ProfileAvatar.svelte'
-  import type { Company, DrawerOption } from './types.js'
+  import type { Company, CompanySelectorProps, DrawerOption } from './types.js'
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContextWorkspace from './DrawerContextWorkspace.svelte'
-  import { createEventDispatcher } from 'svelte'
   import { DoubleArrow } from '@invopop/ui-icons'
   import MenuItemCollapsible from './MenuItemCollapsible.svelte'
 
-  const dispatch = createEventDispatcher()
-
-
-  let companyDropdown: BaseDropdown = $state()
+  let companyDropdown: BaseDropdown | undefined = $state()
   let isOpen = $state(false)
-  interface Props {
-    companies?: Company[];
-    selectedCompany?: Company | null;
-    collapsed?: boolean;
-  }
 
-  let { companies = [], selectedCompany = $bindable(null), collapsed = false }: Props = $props();
+  let {
+    companies = [],
+    selectedCompany = $bindable(null),
+    collapsed = false,
+    onAdd,
+    onSelect
+  }: CompanySelectorProps = $props()
 
   let name = $derived(selectedCompany?.name || '')
   let country = $derived(selectedCompany?.country || '')
@@ -36,15 +33,15 @@
   ] as DrawerOption[])
 
   function selectCompany(event: CustomEvent) {
-    companyDropdown.toggle()
+    companyDropdown?.toggle()
 
     if (event.detail === 'add') {
-      dispatch('add')
+      onAdd?.()
       return
     }
 
     selectedCompany = companies.find((c) => c.id === event.detail) || null
-    dispatch('select', selectedCompany)
+    onSelect?.(selectedCompany)
   }
 </script>
 
@@ -56,7 +53,6 @@
 >
   {#snippet trigger()}
     <MenuItemCollapsible
-      
       {collapsed}
       title={name}
       subtitle={isSandbox ? 'Sandbox' : ''}

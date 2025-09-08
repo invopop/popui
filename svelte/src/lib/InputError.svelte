@@ -1,9 +1,7 @@
 <script lang="ts">
-  interface Props {
-    errorText?: string;
-  }
+  import type { InputErrorProps } from './types'
 
-  let { errorText = '' }: Props = $props();
+  let { errorText = '' }: InputErrorProps = $props()
 </script>
 
 <p class="mt-2 text-sm text-danger-500 flex items-center space-x-1">

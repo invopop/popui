@@ -1,22 +1,19 @@
 <script lang="ts">
   import clsx from 'clsx'
   import FeedIconStatus from './FeedIconStatus.svelte'
-  import type { FeedItemStatus } from './types.js'
+  import type { StatusLabelProps } from './types.js'
 
-  interface Props {
-    status: FeedItemStatus;
-    label?: string;
-  }
+  let { status, label = '' }: StatusLabelProps = $props()
 
-  let { status, label = '' }: Props = $props();
-
-  let styles = $derived(clsx({
-    'text-positive-500': status === 'success',
-    'text-neutral-500': status === 'queued',
-    'text-warning-500': status === 'alert',
-    'text-danger-500': status === 'failure',
-    'text-yellow-500': status === 'run'
-  }))
+  let styles = $derived(
+    clsx({
+      'text-positive-500': status === 'success',
+      'text-neutral-500': status === 'queued',
+      'text-warning-500': status === 'alert',
+      'text-danger-500': status === 'failure',
+      'text-yellow-500': status === 'run'
+    })
+  )
 </script>
 
 <div class="flex items-center space-x-1">

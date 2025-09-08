@@ -1,28 +1,19 @@
 <script lang="ts">
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import type { IconTheme } from './types.ts'
-  import { createEventDispatcher } from 'svelte'
-  import { dispatchWcEvent } from './wcdispatch.js'
+  import type { TagSearchProps } from './types.ts'
   import { resolveIcon } from './helpers.js'
 
-  const dispatch = createEventDispatcher()
+  let { label = '', icon = undefined, iconTheme = 'default', onclear }: TagSearchProps = $props()
 
-  interface Props {
-    label?: string;
-    icon?: IconSource | string | undefined;
-    iconTheme?: IconTheme;
-  }
+  let resolvedIcon: IconSource | undefined = $state()
 
-  let { label = '', icon = undefined, iconTheme = 'default' }: Props = $props();
-
-  let resolvedIcon: IconSource | undefined = $derived(icon)
-
-  
+  $effect(() => {
+    resolveIcon(icon).then((res) => (resolvedIcon = res))
+  })
 
   function handleClear(event: unknown) {
     const target = (event as PointerEvent).target
-    dispatch('clear')
-    dispatchWcEvent(target, 'clear')
+    onclear?.()
   }
 </script>
 
@@ -36,6 +27,7 @@
   {/if}
   <span class="py-1 pr-2 text-workspace-accent tracking-normal">{label}</span>
   <button
+    aria-label="Clear"
     class="py-1 border-l border-workspace-accent-100 pl-1 text-neutral-500"
     onclick={handleClear}
   >

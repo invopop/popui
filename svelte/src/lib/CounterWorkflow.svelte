@@ -1,17 +1,15 @@
 <script lang="ts">
   import clsx from 'clsx'
+  import { CounterWorkflowProps } from './types'
 
-  interface Props {
-    content: number | string;
-    variant?: 'default' | 'transparent';
-  }
+  let { content, variant = 'default' }: CounterWorkflowProps = $props()
 
-  let { content, variant = 'default' }: Props = $props();
-
-  let styles = $derived(clsx({
-    'bg-white rounded-md': variant === 'default',
-    rounded: variant === 'transparent'
-  }))
+  let styles = $derived(
+    clsx({
+      'bg-white rounded-md': variant === 'default',
+      rounded: variant === 'transparent'
+    })
+  )
 </script>
 
 <div

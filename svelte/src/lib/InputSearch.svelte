@@ -1,29 +1,14 @@
 <script lang="ts">
-  import { createBubbler } from 'svelte/legacy';
-
-  const bubble = createBubbler();
-  import { createEventDispatcher, onMount } from 'svelte'
-  import { dispatchWcEvent } from './wcdispatch.js'
-  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
+  import { onMount } from 'svelte'
+  import { Icon } from '@steeze-ui/svelte-icon'
   import { Search } from '@invopop/ui-icons'
-
-  const dispatch = createEventDispatcher()
+  import { InputSearchProps } from './types.js'
 
   const debounce = (target: HTMLInputElement) => {
     clearTimeout(timer)
     timer = setTimeout(() => {
-      dispatch('input', target.value)
-      dispatchWcEvent(target, 'input', target.value)
+      oninput?.(target.value)
     }, 750)
-  }
-
-  interface Props {
-    value?: string;
-    shortcut?: string;
-    placeholder?: string;
-    icon?: IconSource;
-    focusOnLoad?: boolean;
-    [key: string]: any
   }
 
   let {
@@ -32,18 +17,26 @@
     placeholder = '',
     icon = Search,
     focusOnLoad = false,
+    oninput,
+    onclick,
+    onfocus,
+    onblur,
     ...rest
-  }: Props = $props();
+  }: InputSearchProps = $props()
 
-  let input: HTMLInputElement = $state()
+  let input: HTMLInputElement | undefined = $state()
   let timer: ReturnType<typeof setTimeout>
 
   export const focus = () => {
-    input.focus()
+    input?.focus()
+  }
+
+  export const blur = () => {
+    input?.blur()
   }
 
   export const toggle = () => {
-    input === document.activeElement ? input.blur() : input.focus()
+    input === document.activeElement ? blur() : focus()
   }
 
   export const clear = () => {
@@ -64,7 +57,7 @@
   onMount(() => {
     if (!focusOnLoad) return
 
-    input.focus()
+    focus()
   })
 </script>
 
@@ -78,9 +71,9 @@
     {placeholder}
     {...rest}
     oninput={handleInput}
-    onfocus={() => dispatch('focus')}
-    onblur={(e) => dispatch('blur', e)}
-    onclick={bubble('click')}
+    {onfocus}
+    {onblur}
+    {onclick}
   />
   <Icon src={icon} class="absolute text-neutral-500 w-4 h-4 left-2" />
 

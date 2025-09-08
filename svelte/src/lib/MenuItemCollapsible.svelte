@@ -1,15 +1,7 @@
 <script lang="ts">
-  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
+  import { Icon } from '@steeze-ui/svelte-icon'
   import clsx from 'clsx'
-  interface Props {
-    collapsed?: boolean;
-    title?: string;
-    subtitle?: string;
-    active?: boolean;
-    bold?: boolean;
-    icon?: IconSource | undefined;
-    children?: import('svelte').Snippet;
-  }
+  import { MenuItemCollapsibleProps } from './types'
 
   let {
     collapsed = false,
@@ -19,15 +11,17 @@
     bold = false,
     icon = undefined,
     children
-  }: Props = $props();
+  }: MenuItemCollapsibleProps = $props()
 
-  let styles = $derived(clsx(
-    { 'p-1': collapsed },
-    { 'space-x-2 w-full p-[7px]': !collapsed },
-    { 'border-white-30 bg-white-10': active },
-    { 'border-transparent hover:bg-white-5': !active },
-    { 'font-semibold': bold }
-  ))
+  let styles = $derived(
+    clsx(
+      { 'p-1': collapsed },
+      { 'space-x-2 w-full p-[7px]': !collapsed },
+      { 'border-white-30 bg-white-10': active },
+      { 'border-transparent hover:bg-white-5': !active },
+      { 'font-semibold': bold }
+    )
+  )
 </script>
 
 <span

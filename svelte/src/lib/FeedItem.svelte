@@ -1,27 +1,9 @@
 <script lang="ts">
-  import type { IconSource } from '@steeze-ui/svelte-icon'
-  import type { FeedItemStatus, FeedItemUser } from './types.ts'
+  import type { FeedItemProps } from './types.ts'
   import FeedIconEvent from './FeedIconEvent.svelte'
   import FeedIconStatus from './FeedIconStatus.svelte'
-  import { createEventDispatcher } from 'svelte'
   import BaseButton from './BaseButton.svelte'
   import ProfileAvatar from './ProfileAvatar.svelte'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    status?: FeedItemStatus | undefined;
-    icon?: IconSource | undefined;
-    title?: string;
-    date?: Date | undefined;
-    hasNext?: boolean;
-    slug?: string;
-    viewable?: boolean;
-    viewableText?: string;
-    user?: FeedItemUser | undefined;
-    type?: string;
-    extraText?: string;
-  }
 
   let {
     status = undefined,
@@ -34,8 +16,9 @@
     viewableText = 'View',
     user = undefined,
     type = '',
-    extraText = ''
-  }: Props = $props();
+    extraText = '',
+    onView
+  }: FeedItemProps = $props()
 
   const dateOptions = {
     year: 'numeric',
@@ -98,8 +81,8 @@
       <BaseButton
         small
         variant="secondary"
-        on:click={() => {
-          dispatch('view', type)
+        onclick={() => {
+          onView?.(type)
         }}
       >
         {viewableText}

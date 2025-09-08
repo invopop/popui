@@ -1,25 +1,16 @@
 <script lang="ts">
   import { Duplicate } from '@invopop/ui-icons'
-  import { createEventDispatcher } from 'svelte'
   import BaseButton from './BaseButton.svelte'
-
-  const dispatch = createEventDispatcher()
-
-  interface Props {
-    uuid?: string;
-    prefixLength?: number;
-    suffixLength?: number;
-    full?: boolean;
-    disabled?: boolean;
-  }
+  import type { ButtonUuidCopyProps } from './types'
 
   let {
     uuid = '',
     prefixLength = 4,
     suffixLength = 4,
     full = false,
-    disabled = false
-  }: Props = $props();
+    disabled = false,
+    oncopied
+  }: ButtonUuidCopyProps = $props()
 
   function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
     if (inputString.length <= prefixLength + suffixLength) {
@@ -40,9 +31,9 @@
   big
   icon={Duplicate}
   iconPosition="right"
-  on:click={async () => {
+  onclick={async () => {
     await navigator.clipboard.writeText(uuid)
-    dispatch('copied', uuid)
+    oncopied?.(uuid)
   }}
 >
   <span class="font-mono text-neutral-500">{formattedUuid}</span>

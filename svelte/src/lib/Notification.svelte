@@ -2,16 +2,9 @@
   import clsx from 'clsx'
   import { Alert, Failure, Success } from '@invopop/ui-icons'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import type { Status } from './types'
+  import type { NotificationProps, Status } from './types'
 
-  interface Props {
-    message?: string;
-    type?: Status;
-    children?: import('svelte').Snippet;
-  }
-
-  let { message = '', type = 'success', children }: Props = $props();
-
+  let { message = '', type = 'success', children }: NotificationProps = $props()
 
   function getIcon(type: Status) {
     switch (type) {
@@ -26,16 +19,20 @@
     }
   }
   let icon = $derived(getIcon(type))
-  let styles = $derived(clsx(
-    { 'bg-positive-50': type === 'success' },
-    { 'bg-danger-50': type === 'error' },
-    { 'bg-yellow-50': type === 'warning' }
-  ))
-  let textStyles = $derived(clsx(
-    { 'text-positive-500': type === 'success' },
-    { 'text-danger-500': type === 'error' },
-    { 'text-yellow-500': type === 'warning' }
-  ))
+  let styles = $derived(
+    clsx(
+      { 'bg-positive-50': type === 'success' },
+      { 'bg-danger-50': type === 'error' },
+      { 'bg-yellow-50': type === 'warning' }
+    )
+  )
+  let textStyles = $derived(
+    clsx(
+      { 'text-positive-500': type === 'success' },
+      { 'text-danger-500': type === 'error' },
+      { 'text-yellow-500': type === 'warning' }
+    )
+  )
 </script>
 
 <div class="{styles} pl-3 pr-2 py-2 text-base font-medium rounded-lg flex items-center space-x-1">

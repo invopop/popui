@@ -2,18 +2,7 @@
   import clsx from 'clsx'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import InputRadio from './InputRadio.svelte'
-
-  interface Props {
-    id?: any;
-    name?: string;
-    title?: string;
-    description?: string;
-    accentText?: string;
-    checked?: boolean;
-    icon?: IconSource | undefined;
-    hideRadio?: boolean;
-    footer?: import('svelte').Snippet;
-  }
+  import type { CardCheckboxProps } from './types'
 
   let {
     id = Math.random().toString(36).slice(2, 7),
@@ -25,12 +14,14 @@
     icon = undefined,
     hideRadio = false,
     footer
-  }: Props = $props();
+  }: CardCheckboxProps = $props()
 
-  let styles = $derived(clsx(
-    { 'border-workspace-accent shadow-active': checked },
-    { 'border-neutral-200 hover:border-neutral-300': !checked }
-  ))
+  let styles = $derived(
+    clsx(
+      { 'border-workspace-accent shadow-active': checked },
+      { 'border-neutral-200 hover:border-neutral-300': !checked }
+    )
+  )
 </script>
 
 <label for={id} class="{styles} border rounded-lg w-full text-left cursor-pointer block">
@@ -58,7 +49,7 @@
       <InputRadio {id} {name} {checked} on:change />
     </div>
   </div>
-  {#if !!footer}
+  {#if footer}
     <div class="bg-neutral-50 rounded-b-lg px-3 py-2.5 border-t border-neutral-100">
       {@render footer?.()}
     </div>

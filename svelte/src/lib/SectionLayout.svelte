@@ -1,11 +1,8 @@
 <script lang="ts">
   import TitleSection from './TitleSection.svelte'
-  interface Props {
-    title?: string;
-    children?: import('svelte').Snippet;
-  }
+  import { SectionLayoutProps } from './types'
 
-  let { title = '', children }: Props = $props();
+  let { title = '', children }: SectionLayoutProps = $props()
 </script>
 
 <div class="py-5">

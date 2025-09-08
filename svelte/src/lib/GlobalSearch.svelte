@@ -1,23 +1,20 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Search, Slash } from '@invopop/ui-icons'
-  import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import clsx from 'clsx'
   import ShortcutWrapper from './ShortcutWrapper.svelte'
   import { GLOBAL_SEARCH_KEY } from './constants.js'
   import { isInputFocused } from './helpers.js'
+  import { GlobalSearchProps } from './types'
 
-  const dispatch = createEventDispatcher()
+  let { collapsed = false, onOpen }: GlobalSearchProps = $props()
 
-  interface Props {
-    collapsed?: boolean;
-  }
-
-  let { collapsed = false }: Props = $props();
-
-  let styles = $derived(clsx({
-    'space-x-1 w-full': !collapsed
-  }))
+  let styles = $derived(
+    clsx({
+      'space-x-1 w-full': !collapsed
+    })
+  )
 
   function onKeyDown(event: KeyboardEvent) {
     if (event.key !== GLOBAL_SEARCH_KEY) {
@@ -29,11 +26,7 @@
       return
     }
 
-    open()
-  }
-
-  function open() {
-    dispatch('open')
+    onOpen?.()
   }
 
   onMount(() => {
@@ -47,7 +40,7 @@
 
 <button
   class="{styles} flex items-center border pl-1.5 py-1.5 pr-2 border-white-10 bg-neutral-800/10 rounded-md"
-  onclick={() => open()}
+  onclick={() => onOpen?.()}
 >
   <Icon src={Search} class="w-4 h-4 text-white-70" />
   {#if !collapsed}

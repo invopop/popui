@@ -1,10 +1,7 @@
 <script lang="ts">
-  interface Props {
-    children?: import('svelte').Snippet;
-    footer?: import('svelte').Snippet;
-  }
+  import { FormLayoutModalProps } from './types'
 
-  let { children, footer }: Props = $props();
+  let { children, footer }: FormLayoutModalProps = $props()
 </script>
 
 <div class="flex flex-col max-w-lg w-128 py-8 px-6 gap-4">

@@ -482,8 +482,10 @@ export interface AlertDialogProps {
   }
 
   export interface InputCheckboxProps {
+    id?: string;
     checked?: boolean;
     indeterminate?: boolean;
+    label?: string;
     onchange?: (checked: boolean) => void;
     onclick?: (event: MouseEvent) => void;
     [key: string]: any
@@ -564,7 +566,9 @@ export interface AlertDialogProps {
   }
 
   export interface InputToggleProps {
+    id?: string;
     checked?: boolean;
+    label?: string;
     onchange?: (checked: boolean) => void;
   }
 

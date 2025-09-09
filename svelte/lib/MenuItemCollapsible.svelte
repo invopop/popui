@@ -25,7 +25,7 @@
     <slot />
     {#if !collapsed}
       <div>
-        <div class="whitespace-nowrap max-w-[140px] truncate tracking-tight">{title}</div>
+        <div class="whitespace-nowrap max-w-[118px] truncate tracking-tight">{title}</div>
         {#if subtitle}
           <div class="text-sm font-medium text-yellow-600">{subtitle}</div>
         {/if}

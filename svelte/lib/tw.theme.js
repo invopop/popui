@@ -123,6 +123,11 @@ export default {
         300: 'rgba(136, 74, 190, 0.3)',
         400: 'rgba(136, 74, 190, 0.4)',
         500: '#884ABE'
+      },
+      banner: {
+        sandbox: '#D2F7CB',
+        warning: '#A04A12',
+        danger: '#B32530',
       }
     },
 

@@ -195,9 +195,8 @@
     return `${parts[2]}/${parts[1]}/${parts[0]}`
   }
   $effect(() => {
-    if (datepicker) {
-      setDates(from, to)
-    }
+    if (!datepicker) return
+    setDates(from, to)
   })
   let styles = $derived(
     clsx({

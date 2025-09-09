@@ -67,7 +67,7 @@
         src={item.icon}
         class="w-4 h-4 {item.destructive
           ? 'text-danger-500'
-          : item.iconClass || 'text-neutral-500'}"
+          : item.iconClass || 'text-neutral-800/5'}"
       />
     {/if}
     <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" {title}>
@@ -97,7 +97,7 @@
     {:else if item.selected}
       <Icon src={Tick} class="w-5 h-5 text-workspace-accent text-neutral-500" />
     {:else if item.rightIcon}
-      <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-800" />
+      <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-500" />
     {/if}
   </div>
 </button>

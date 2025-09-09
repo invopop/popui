@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.0.102",
+  "version": "0.0.103",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",

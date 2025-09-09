@@ -4,7 +4,7 @@
   import twconfig from '../twind.config.js'
   import AlertDialogComponent from '../stories/helpers/AlertDialogComponent.svelte'
   import CardCheckbox from '$lib/CardCheckbox.svelte'
-  import { CodeFork, Invoice } from '@invopop/ui-icons'
+  import { Any, CodeFork, ExternalLink, Invoice, Lock, Success } from '@invopop/ui-icons'
   import UuidCopy from '$lib/UuidCopy.svelte'
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import StepIconList from '$lib/StepIconList.svelte'
@@ -12,15 +12,37 @@
   import ComboBox from '$lib/ComboBox.svelte'
   import InputCheckbox from '$lib/InputCheckbox.svelte'
   import InputToggle from '$lib/InputToggle.svelte'
+  import DrawerContext from '$lib/DrawerContext.svelte'
+  import ProgressBar from '$lib/ProgressBar.svelte'
+  import type { DrawerOption } from '$lib/types.js'
 
   install(twconfig)
 
   let checkboxValue = true
+
+  const items: DrawerOption[] = [
+    { label: 'Get started in your sandbox', value: 'edit', icon: Success },
+    { label: 'Create billing account', value: 'billing', icon: Any, rightIcon: ExternalLink },
+    {
+      label: 'Create a live workspace',
+      value: 'live',
+      icon: Lock,
+      rightIcon: ExternalLink,
+      disabled: true
+    }
+  ]
 </script>
 
 <div class="p-4 space-y-4">
   <h1 class="text-xl">Popui</h1>
   <p>Library of shared, re-usable UI components for Invopop projects</p>
+
+  <DrawerContext widthClass="w-[312px]" {items}>
+    <div class="p-3 space-y-3">
+      <p class="text-base font-semibold text-neutral-800">How to go live</p>
+      <ProgressBar percentage={33} />
+    </div>
+  </DrawerContext>
 
   <AlertDialogComponent
     title="Are you sure?"

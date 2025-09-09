@@ -338,6 +338,7 @@ export interface AlertDialogProps {
     icon?: IconSource | undefined;
     hideRadio?: boolean;
     footer?: Snippet;
+    onchange?: (checked: boolean) => void;
   }
 
   export interface CardRelationProps {

@@ -99,7 +99,7 @@
     {#if multiple}
       <InputCheckbox
         bind:checked={item.selected}
-        on:change={() => {
+        onchange={() => {
           onchange?.(item)
         }}
       />

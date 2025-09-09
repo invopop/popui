@@ -2,7 +2,7 @@
   import InputLabel from './InputLabel.svelte'
   import InputError from './InputError.svelte'
   import clsx from 'clsx'
-  import { InputTextareaProps } from './types'
+  import type { InputTextareaProps } from './types'
 
   let {
     id = Math.random().toString(36).slice(2, 7),

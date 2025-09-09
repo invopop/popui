@@ -3,7 +3,7 @@
   import { onMount } from 'svelte'
   import InputLabel from './InputLabel.svelte'
   import InputError from './InputError.svelte'
-  import { InputTextProps } from './types'
+  import type { InputTextProps } from './types'
 
   let {
     id = Math.random().toString(36).slice(2, 7),

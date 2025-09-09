@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
   import clsx from 'clsx'
-  import { MenuItemCollapsibleProps } from './types'
+  import type { MenuItemCollapsibleProps } from './types'
 
   let {
     collapsed = false,

@@ -1,6 +1,6 @@
 <script lang="ts">
   import TitleSection from './TitleSection.svelte'
-  import { SectionLayoutProps } from './types'
+  import type { SectionLayoutProps } from './types'
 
   let { title = '', children }: SectionLayoutProps = $props()
 </script>

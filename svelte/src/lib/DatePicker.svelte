@@ -20,7 +20,7 @@
   import { Calendar } from '@invopop/ui-icons'
   import clsx from 'clsx'
   import { clickOutside } from './clickOutside.js'
-  import { DatePickerProps } from './types'
+  import type { DatePickerProps } from './types'
 
   let {
     label = 'Date',
@@ -257,8 +257,8 @@
           <div bind:this={datePickerEl}></div>
         </div>
         <div class="p-3 flex justify-end items-center space-x-3">
-          <BaseButton variant="secondary" on:click={cancel}>Cancel</BaseButton>
-          <BaseButton variant="primary" on:click={confirm} disabled={!selectedDates.to.value}>
+          <BaseButton variant="secondary" onclick={cancel}>Cancel</BaseButton>
+          <BaseButton variant="primary" onclick={confirm} disabled={!selectedDates.to.value}>
             Confirm
           </BaseButton>
         </div>

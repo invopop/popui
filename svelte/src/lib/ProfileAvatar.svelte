@@ -1,7 +1,7 @@
 <script lang="ts">
   import clsx from 'clsx'
   import BaseFlag from './BaseFlag.svelte'
-  import { ProfileAvatarProps } from './types'
+  import type { ProfileAvatarProps } from './types'
 
   let {
     name = '',

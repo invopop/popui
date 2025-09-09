@@ -2,13 +2,13 @@
   import AlertDialog from '../../lib/AlertDialog.svelte'
 
   interface Props {
-    open?: boolean;
-    destructive?: boolean;
-    withSlot?: boolean;
-    title?: string;
-    description?: string;
-    cancelText?: string;
-    actionText?: string;
+    open?: boolean
+    destructive?: boolean
+    withSlot?: boolean
+    title?: string
+    description?: string
+    cancelText?: string
+    actionText?: string
   }
 
   let {
@@ -19,21 +19,21 @@
     description = '',
     cancelText = 'Cancel',
     actionText = 'OK'
-  }: Props = $props();
+  }: Props = $props()
 </script>
 
 <div>
   {open}
   <AlertDialog
-    on:cancel={() => {
+    oncancel={() => {
       console.log('Canceled')
     }}
-    on:confirm={() => {
+    onconfirm={() => {
       console.log('Confirmed')
     }}
     bind:open
     {title}
-    {description}
+    descriptionText={description}
     {cancelText}
     {actionText}
     {destructive}

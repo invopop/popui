@@ -1,7 +1,7 @@
 <script lang="ts">
   import clsx from 'clsx'
   import { createSwitch } from 'svelte-headlessui'
-  import { InputToggleProps } from './types'
+  import type { InputToggleProps } from './types'
   const sw = createSwitch({ label: 'Set Preference' })
 
   let { checked = $bindable(false), onchange }: InputToggleProps = $props()

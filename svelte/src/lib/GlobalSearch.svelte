@@ -6,7 +6,7 @@
   import ShortcutWrapper from './ShortcutWrapper.svelte'
   import { GLOBAL_SEARCH_KEY } from './constants.js'
   import { isInputFocused } from './helpers.js'
-  import { GlobalSearchProps } from './types'
+  import type { GlobalSearchProps } from './types'
 
   let { collapsed = false, onOpen }: GlobalSearchProps = $props()
 

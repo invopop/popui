@@ -1,7 +1,7 @@
 <script lang="ts">
   import IconEmpty from './svg/IconEmpty.svelte'
-  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
-  import { EmptyStateIconProps } from './types'
+  import { Icon } from '@steeze-ui/svelte-icon'
+  import type { EmptyStateIconProps } from './types'
 
   let {
     icon = undefined,

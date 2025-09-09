@@ -144,7 +144,7 @@
       <ul>
         {#each children as child}
           <li>
-            <MenuItem {...child} isFolderItem on:click />
+            <MenuItem {...child} isFolderItem {onclick} />
           </li>
         {/each}
       </ul>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import { CounterWorkflowProps } from './types'
+  import type { CounterWorkflowProps } from './types'
 
   let { content, variant = 'default' }: CounterWorkflowProps = $props()
 

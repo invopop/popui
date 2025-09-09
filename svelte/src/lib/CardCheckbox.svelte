@@ -1,6 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
+  import { Icon } from '@steeze-ui/svelte-icon'
   import InputRadio from './InputRadio.svelte'
   import type { CardCheckboxProps } from './types'
 
@@ -13,7 +13,8 @@
     checked = false,
     icon = undefined,
     hideRadio = false,
-    footer
+    footer,
+    onchange
   }: CardCheckboxProps = $props()
 
   let styles = $derived(
@@ -46,7 +47,7 @@
     </div>
 
     <div class:hidden={hideRadio}>
-      <InputRadio {id} {name} {checked} on:change />
+      <InputRadio {id} {name} {checked} {onchange} />
     </div>
   </div>
   {#if footer}

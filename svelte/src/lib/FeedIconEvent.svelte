@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
-  import type { FeedIconEventProps, IconTheme } from './types.js'
+  import type { FeedIconEventProps } from './types.js'
 
   let { icon = undefined, iconTheme = 'default' }: FeedIconEventProps = $props()
 </script>

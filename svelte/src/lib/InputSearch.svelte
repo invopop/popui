@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Search } from '@invopop/ui-icons'
-  import { InputSearchProps } from './types.js'
+  import type { InputSearchProps } from './types.js'
 
   const debounce = (target: HTMLInputElement) => {
     clearTimeout(timer)

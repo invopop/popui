@@ -9,7 +9,6 @@
   import { ChevronRight } from '@steeze-ui/heroicons'
 
   let { items = [], multiple = false, onclick }: DrawerContextWorkspaceProps = $props()
-
   let liveOpen = $state(false)
   let sandboxOpen = $state(false)
   let liveItems = $derived(items.filter((i) => !i.sandbox))

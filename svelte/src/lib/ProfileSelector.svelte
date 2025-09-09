@@ -3,7 +3,7 @@
   import ProfileAvatar from './ProfileAvatar.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { ChevronUp } from '@invopop/ui-icons'
-  import { ProfileSelectorProps } from './types'
+  import type { ProfileSelectorProps } from './types'
 
   let {
     name = '',

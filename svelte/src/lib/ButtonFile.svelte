@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
+  import { Icon } from '@steeze-ui/svelte-icon'
   import { Invoice, Download } from '@invopop/ui-icons'
   import BaseButton from './BaseButton.svelte'
-  import type { ButtonFileProps, StatusType } from './types.js'
+  import type { ButtonFileProps } from './types.js'
   import clsx from 'clsx'
 
   let {
@@ -56,7 +56,7 @@
   <BaseButton
     {disabled}
     icon={Download}
-    on:click={() => {
+    onclick={() => {
       onDownload?.()
     }}
   />

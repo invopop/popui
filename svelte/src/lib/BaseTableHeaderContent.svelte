@@ -1,9 +1,8 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import type { BaseTableHeaderProps, TableField, TableSortBy } from './types.js'
+  import type { BaseTableHeaderProps, TableSortBy } from './types.js'
   import BaseDropdown from './BaseDropdown.svelte'
   import BaseTableHeaderOrderBy from './BaseTableHeaderOrderBy.svelte'
-  import { on } from 'svelte/events'
 
   let sortDropdown: BaseDropdown | undefined = $state()
 

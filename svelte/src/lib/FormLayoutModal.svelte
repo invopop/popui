@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { FormLayoutModalProps } from './types'
+  import type { FormLayoutModalProps } from './types'
 
   let { children, footer }: FormLayoutModalProps = $props()
 </script>

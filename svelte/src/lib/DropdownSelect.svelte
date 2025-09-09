@@ -1,6 +1,6 @@
 <script lang="ts">
   import isEqual from 'lodash-es/isEqual'
-  import type { AnyProp, DrawerOption, DropdownSelectProps, IconTheme } from './types.ts'
+  import type { AnyProp, DrawerOption, DropdownSelectProps } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContext from './DrawerContext.svelte'

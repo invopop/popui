@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TitleSectionProps } from './types'
+  import type { TitleSectionProps } from './types'
 
   let { title = '', children }: TitleSectionProps = $props()
 </script>

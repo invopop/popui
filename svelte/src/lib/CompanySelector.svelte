@@ -1,6 +1,6 @@
 <script lang="ts">
   import ProfileAvatar from './ProfileAvatar.svelte'
-  import type { Company, CompanySelectorProps, DrawerOption } from './types.js'
+  import type { AnyProp, CompanySelectorProps, DrawerOption } from './types.js'
   import BaseDropdown from './BaseDropdown.svelte'
   import DrawerContextWorkspace from './DrawerContextWorkspace.svelte'
   import { DoubleArrow } from '@invopop/ui-icons'
@@ -32,15 +32,15 @@
     }))
   ] as DrawerOption[])
 
-  function selectCompany(event: CustomEvent) {
+  function selectCompany(value: AnyProp) {
     companyDropdown?.toggle()
 
-    if (event.detail === 'add') {
+    if (value === 'add') {
       onAdd?.()
       return
     }
 
-    selectedCompany = companies.find((c) => c.id === event.detail) || null
+    selectedCompany = companies.find((c) => c.id === value) || null
     onSelect?.(selectedCompany)
   }
 </script>
@@ -63,5 +63,5 @@
       <ProfileAvatar {name} {picture} {country} dark large />
     </MenuItemCollapsible>
   {/snippet}
-  <DrawerContextWorkspace {items} on:click={selectCompany} />
+  <DrawerContextWorkspace {items} onclick={selectCompany} />
 </BaseDropdown>

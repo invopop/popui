@@ -1,6 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import { DataListItemProps } from './types'
+  import type { DataListItemProps } from './types'
 
   let {
     label = '',

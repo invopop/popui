@@ -13,7 +13,7 @@
   import type { AlertDialogProps } from './types'
 
   let {
-    open = false,
+    open = $bindable(false),
     destructive = false,
     title = '',
     descriptionText = '',

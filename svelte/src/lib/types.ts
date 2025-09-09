@@ -166,8 +166,8 @@ export interface AlertDialogProps {
     descriptionText?: string
     cancelText?: string
     actionText?: string
-    cancelActionEl?: HTMLButtonElement
-    okActionEl?: HTMLButtonElement
+    cancelActionEl?: HTMLButtonElement | null
+    okActionEl?: HTMLButtonElement | null
     oncancel?: () => void
     onconfirm?: () => void
     description?: Snippet

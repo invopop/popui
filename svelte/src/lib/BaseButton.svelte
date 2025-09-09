@@ -99,7 +99,7 @@
 <button
   {type}
   {disabled}
-  class="{buttonStyles} flex items-center justify-center font-medium font-sans relative group tracking-tight"
+  class="{buttonStyles} flex items-center justify-center font-medium font-sans relative group tracking-tight cursor-pointer"
   {...rest}
   onclick={handleClick}
 >

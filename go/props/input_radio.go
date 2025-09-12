@@ -15,7 +15,7 @@ const (
 	ColorGrape         = "grape"
 	ColorMetal         = "metal"
 	ColorCosmos        = "cosmos"
-	ColorSherwoodValue = "#194136"
+	ColorSherwoodValue = "#018551"
 	ColorOceanValue    = "#306994"
 	ColorGrapeValue    = "#5e477a"
 	ColorMetalValue    = "#526c86"

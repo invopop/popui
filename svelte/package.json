@@ -78,7 +78,6 @@
   "types": "./dist/index.d.ts",
   "type": "module",
   "dependencies": {
-    "@beyonk/svelte-datepicker": "^13.0.3",
     "@floating-ui/core": "^1.5.1",
     "@invopop/ui-icons": "0.0.67",
     "@steeze-ui/heroicons": "^2.2.3",

@@ -7,7 +7,7 @@
   let { title = '', icon = undefined, items = [], onclick }: CardRelationProps = $props()
 </script>
 
-<div class="border rounded-lg">
+<div class="border border-neutral-100 rounded-lg">
   <button class="pl-3 py-2 pr-2 flex items-center justify-between space-x-3 w-full" {onclick}>
     <div class="flex items-center space-x-1.5">
       {#if icon}

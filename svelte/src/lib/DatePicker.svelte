@@ -221,7 +221,7 @@
               <button
                 onclick={period.action}
                 class="{selectedPeriod === period.slug
-                  ? 'selected-period text-[#017044] bg-workspace-accent-100'
+                  ? 'selected-period text-workspace-accent-600 bg-workspace-accent-100'
                   : 'text-neutral-500'} whitespace-nowrap text-base px-2 py-1 tracking-normal rounded cursor-pointer"
               >
                 {period.label}

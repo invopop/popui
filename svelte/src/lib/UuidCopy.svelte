@@ -61,10 +61,10 @@
 </script>
 
 <div class="{styles} relative inline-flex items-center space-x-1 text-left whitespace-nowrap">
-  <button class="tracking-wide font-mono text-base" onclick={handleClick}>
+  <button class="tracking-wide font-mono text-base cursor-pointer" onclick={handleClick}>
     {formattedUuid}
   </button>
-  <button class="p-1" onclick={handleIconClick}>
+  <button class="p-1 cursor-pointer" onclick={handleIconClick}>
     <Icon src={link ? ExternalLink : Duplicate} class="w-4 h-4 text-neutral-500" />
   </button>
 </div>

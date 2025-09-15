@@ -3,7 +3,7 @@
   import InputCheckbox from './InputCheckbox.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { onMount } from 'svelte'
-  import { Tick } from '@invopop/ui-icons'
+  import { Success, Tick } from '@invopop/ui-icons'
   import ProfileAvatar from './ProfileAvatar.svelte'
   import clsx from 'clsx'
   import BaseFlag from './BaseFlag.svelte'
@@ -27,8 +27,8 @@
     clsx(
       { 'py-1 space-x-3': workspace },
       { 'py-1.5 space-x-1.5': !workspace },
-      { 'pl-1.5': hasIcon },
-      { 'pl-2': !hasIcon },
+      { 'pl-1.5': !hasIcon },
+      { 'pl-2': hasIcon },
       { 'bg-workspace-accent-100': item.selected && !multiple },
       { 'group-hover:bg-neutral-100': (!item.selected && !item.disabled) || multiple }
     )
@@ -68,7 +68,7 @@
   disabled={item.disabled}
   onclick={handleClick}
 >
-  <div class="{styles} rounded pr-1.5 flex items-center justify-start w-full">
+  <div class="{styles} rounded pr-2 flex items-center justify-start w-full">
     {#if workspace}
       <ProfileAvatar name={item.label} picture={item.picture} large />
     {:else if item.icon}
@@ -104,9 +104,9 @@
         }}
       />
     {:else if item.selected}
-      <Icon src={Tick} class="w-5 h-5 text-workspace-accent" />
+      <Icon src={Success} class="w-4 h-4 text-workspace-accent" />
     {:else if item.rightIcon}
-      <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-800" />
+      <Icon src={item.rightIcon} class="w-4 h-4 text-neutral-400" />
     {/if}
   </div>
 </button>

@@ -50,7 +50,8 @@
 
   let styles = $derived(
     clsx({
-      'shadow-active border-workspace-accent hover:border-workspace-accent': isOpen
+      'shadow-active border-workspace-accent hover:border-workspace-accent': isOpen,
+      'border-neutral-100': !isOpen
     })
   )
 

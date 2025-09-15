@@ -34,7 +34,7 @@
 </script>
 
 {#snippet trigger()}
-  <div class="relative group flex justify-center items-center rounded p-1">
+  <div class="relative group flex justify-center items-center rounded p-1 cursor-pointer">
     <span class="{overlayClasses} absolute inset-0 rounded"></span>
     <Icon src={Options} class="w-4 text-neutral-500" />
   </div>

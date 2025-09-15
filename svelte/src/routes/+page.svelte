@@ -9,6 +9,7 @@
   import BaseButton from '$lib/BaseButton.svelte'
   import BaseCard from '$lib/BaseCard.svelte'
   import DatePicker from '$lib/DatePicker.svelte'
+  import BaseDropdown from '$lib/BaseDropdown.svelte'
 </script>
 
 <div class="p-4 space-y-4">
@@ -23,6 +24,12 @@
       }}
     />
   </div>
+  <BaseDropdown>
+    {#snippet trigger()}
+      <div class="border p-4">This is the trigger</div>
+    {/snippet}
+    <div class="border border-red-300 p-4 bg-white">This is the content</div>
+  </BaseDropdown>
 
   <BaseButton onclick={() => console.log('clicked')}>Hola</BaseButton>
 

@@ -8,11 +8,21 @@
   import InputSelect from '$lib/InputSelect.svelte'
   import BaseButton from '$lib/BaseButton.svelte'
   import BaseCard from '$lib/BaseCard.svelte'
+  import DatePicker from '$lib/DatePicker.svelte'
 </script>
 
 <div class="p-4 space-y-4">
   <h1 class="text-xl">Popui</h1>
   <p>Library of shared, re-usable UI components for Invopop projects</p>
+  <div class="flex">
+    <DatePicker
+      from="2025-09-08"
+      to="2025-09-18"
+      onSelect={(date) => {
+        console.log(date)
+      }}
+    />
+  </div>
 
   <BaseButton onclick={() => console.log('clicked')}>Hola</BaseButton>
 

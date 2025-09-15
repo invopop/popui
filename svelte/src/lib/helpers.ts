@@ -1,5 +1,17 @@
 import type { IconSource } from '@steeze-ui/svelte-icon'
-import type { FeedItemStatus } from './types.js'
+import type { DatesFromToday, FeedItemStatus } from './types.js'
+import { CalendarDate, type DateValue } from '@internationalized/date'
+import {
+    startOfWeek,
+    endOfWeek,
+    subWeeks,
+    endOfMonth,
+    startOfMonth,
+    subMonths,
+    startOfQuarter,
+    endOfQuarter,
+    subQuarters
+  } from 'date-fns'
 
 export function toPascalCase(text: string) {
   return text.replace(/(^\w|-\w)/g, (text) => text.replace(/-/, '').toUpperCase())
@@ -106,4 +118,40 @@ export function isInputFocused() {
   const isTextArea = activeElement.tagName === 'TEXTAREA' || activeElement.isContentEditable
 
   return isInputText || isTextArea
+}
+
+export function toCalendarDate(date: Date): DateValue {
+  return new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate())
+}
+
+export function datesFromToday(): DatesFromToday {
+  const today = new Date()
+  const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 })
+  const endOfThisWeek = endOfWeek(today, { weekStartsOn: 1 })
+  const startOfLastWeek = subWeeks(startOfThisWeek, 1)
+  const endOfLastWeek = endOfWeek(startOfLastWeek, { weekStartsOn: 1 })
+  const startOfThisMonth = startOfMonth(today)
+  const endOfThisMonth = endOfMonth(today)
+  const startOfLastMonth = subMonths(startOfThisMonth, 1)
+  const endOfLastMonth = endOfMonth(startOfLastMonth)
+  const startOfThisQuarter = startOfQuarter(today)
+  const endOfThisQuarter = endOfQuarter(today)
+  const startOfLastQuarter = subQuarters(startOfThisQuarter, 1)
+  const endOfLastQuarter = endOfQuarter(startOfLastQuarter)
+
+  return {
+    today,
+    startOfThisWeek,
+    endOfThisWeek,
+    startOfLastWeek,
+    endOfLastWeek,
+    startOfThisMonth,
+    endOfThisMonth,
+    startOfLastMonth,
+    endOfLastMonth,
+    startOfThisQuarter,
+    endOfThisQuarter,
+    startOfLastQuarter,
+    endOfLastQuarter
+  }
 }

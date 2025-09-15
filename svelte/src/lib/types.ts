@@ -146,6 +146,22 @@ export type DataListItem = {
   value: string
 }
 
+export type DatesFromToday = {
+  today: Date
+  startOfThisWeek: Date
+  endOfThisWeek: Date
+  startOfLastWeek: Date
+  endOfLastWeek: Date
+  startOfThisMonth: Date
+  endOfThisMonth: Date
+  startOfLastMonth: Date
+  endOfLastMonth: Date
+  startOfThisQuarter: Date
+  endOfThisQuarter: Date
+  startOfLastQuarter: Date
+  endOfLastQuarter: Date
+}
+
 export type Breadcrumb = {
   label: string
   url?: string

@@ -1,26 +1,111 @@
 <script lang="ts">
-  import Transition from 'svelte-transition'
-  import flatpickr from 'flatpickr'
-  import type { Instance } from 'flatpickr/dist/types/instance.js'
-  import 'flatpickr/dist/flatpickr.min.css'
-  import { onMount } from 'svelte'
-  import BaseButton from './BaseButton.svelte'
-  import {
-    startOfWeek,
-    endOfWeek,
-    subWeeks,
-    endOfMonth,
-    startOfMonth,
-    subMonths,
-    startOfQuarter,
-    endOfQuarter,
-    subQuarters
-  } from 'date-fns'
+  import clsx from 'clsx'
+  import RangeCalendar from '$lib/range-calendar/range-calendar.svelte'
+  import { parseDate, type DateValue } from '@internationalized/date'
+  import type { DateRange } from 'bits-ui'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Calendar } from '@invopop/ui-icons'
-  import clsx from 'clsx'
-  import { clickOutside } from './clickOutside.js'
+  import Transition from 'svelte-transition'
   import type { DatePickerProps } from './types'
+  import { clickOutside } from './clickOutside'
+  import BaseButton from './BaseButton.svelte'
+  import { datesFromToday, toCalendarDate } from './helpers'
+
+  const {
+    startOfThisWeek,
+    endOfThisWeek,
+    startOfLastWeek,
+    endOfLastWeek,
+    startOfThisMonth,
+    endOfThisMonth,
+    startOfLastMonth,
+    endOfLastMonth,
+    startOfThisQuarter,
+    endOfThisQuarter,
+    startOfLastQuarter,
+    endOfLastQuarter,
+    today
+  } = datesFromToday()
+
+  const periods = [
+    {
+      slug: 'this-week',
+      label: 'This Week',
+      action: () => {
+        value = {
+          start: toCalendarDate(startOfThisWeek),
+          end: toCalendarDate(endOfThisWeek)
+        }
+        selectedPeriod = 'this-week'
+      }
+    },
+    {
+      slug: 'last-week',
+      label: 'Last Week',
+      action: () => {
+        value = {
+          start: toCalendarDate(startOfLastWeek),
+          end: toCalendarDate(endOfLastWeek)
+        }
+        selectedPeriod = 'last-week'
+      }
+    },
+    {
+      slug: 'this-month',
+      label: 'This month',
+      action: () => {
+        value = {
+          start: toCalendarDate(startOfThisMonth),
+          end: toCalendarDate(endOfThisMonth)
+        }
+        selectedPeriod = 'this-month'
+      }
+    },
+    {
+      slug: 'last-month',
+      label: 'Last month',
+      action: () => {
+        value = {
+          start: toCalendarDate(startOfLastMonth),
+          end: toCalendarDate(endOfLastMonth)
+        }
+        selectedPeriod = 'last-month'
+      }
+    },
+    {
+      slug: 'this-quarter',
+      label: 'This quarter',
+      action: () => {
+        value = {
+          start: toCalendarDate(startOfThisQuarter),
+          end: toCalendarDate(endOfThisQuarter)
+        }
+        selectedPeriod = 'this-quarter'
+      }
+    },
+    {
+      slug: 'last-quarter',
+      label: 'Last quarter',
+      action: () => {
+        value = {
+          start: toCalendarDate(startOfLastQuarter),
+          end: toCalendarDate(endOfLastQuarter)
+        }
+        selectedPeriod = 'last-quarter'
+      }
+    },
+    {
+      slug: 'custom',
+      label: 'Custom',
+      action: () => {
+        value = {
+          start: toCalendarDate(today),
+          end: undefined
+        }
+        selectedPeriod = 'custom'
+      }
+    }
+  ]
 
   let {
     label = 'Date',
@@ -30,180 +115,70 @@
     onSelect
   }: DatePickerProps = $props()
 
-  let datePickerEl: HTMLElement | undefined = $state()
-  let selectedLabel = $state(label)
-  let datepicker: Instance | undefined = $state()
-  let selectedDates = $state({ from: { value: '', display: '' }, to: { value: '', display: '' } })
+  let selectedPeriod = $state('this-week')
+  let value = $state<DateRange>({
+    start: undefined,
+    end: undefined
+  })
   let isOpen = $state(false)
-  let selectedPeriod = $state('custom')
-
-  const today = new Date()
-  const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 })
-  const endOfThisWeek = endOfWeek(today, { weekStartsOn: 1 })
-  const startOfLastWeek = subWeeks(startOfThisWeek, 1)
-  const endOfLastWeek = endOfWeek(startOfLastWeek, { weekStartsOn: 1 })
-  const startOfThisMonth = startOfMonth(today)
-  const endOfThisMonth = endOfMonth(today)
-  const startOfLastMonth = subMonths(startOfThisMonth, 1)
-  const endOfLastMonth = endOfMonth(startOfLastMonth)
-  const startOfThisQuarter = startOfQuarter(today)
-  const endOfThisQuarter = endOfQuarter(today)
-  const startOfLastQuarter = subQuarters(startOfThisQuarter, 1)
-  const endOfLastQuarter = endOfQuarter(startOfLastQuarter)
-
-  const periods = [
-    {
-      slug: 'this-week',
-      label: 'This Week',
-      action: () => {
-        selectedPeriod = 'this-week'
-        datepicker?.setDate([startOfThisWeek, endOfThisWeek], true)
-        datepicker?.jumpToDate(startOfThisWeek)
-      }
-    },
-    {
-      slug: 'last-week',
-      label: 'Last Week',
-      action: () => {
-        selectedPeriod = 'last-week'
-        datepicker?.setDate([startOfLastWeek, endOfLastWeek], true)
-        datepicker?.jumpToDate(startOfLastWeek)
-      }
-    },
-    {
-      slug: 'this-month',
-      label: 'This month',
-      action: () => {
-        selectedPeriod = 'this-month'
-        datepicker?.setDate([startOfThisMonth, endOfThisMonth], true)
-        datepicker?.jumpToDate(startOfThisMonth)
-      }
-    },
-    {
-      slug: 'last-month',
-      label: 'Last month',
-      action: () => {
-        selectedPeriod = 'last-month'
-        datepicker?.setDate([startOfLastMonth, endOfLastMonth], true)
-        datepicker?.jumpToDate(startOfLastMonth)
-      }
-    },
-    {
-      slug: 'this-quarter',
-      label: 'This quarter',
-      action: () => {
-        selectedPeriod = 'this-quarter'
-        datepicker?.setDate([startOfThisQuarter, endOfThisQuarter], true)
-        datepicker?.jumpToDate(startOfThisQuarter)
-      }
-    },
-    {
-      slug: 'last-quarter',
-      label: 'Last quarter',
-      action: () => {
-        selectedPeriod = 'last-quarter'
-        datepicker?.setDate([startOfLastQuarter, endOfLastQuarter], true)
-        datepicker?.jumpToDate(startOfLastQuarter)
-      }
-    },
-    {
-      slug: 'custom',
-      label: 'Custom',
-      action: () => {
-        datepicker?.clear()
-        selectedPeriod = 'custom'
-      }
-    }
-  ]
-
-  onMount(() => {
-    if (!datePickerEl) return
-    datepicker = flatpickr(datePickerEl, {
-      onChange: function (dates: Date[]) {
-        if (dates.length === 0) {
-          selectedLabel = label
-          return
-        }
-
-        if (dates.length === 1) {
-          selectedPeriod = 'custom'
-          return
-        }
-
-        const from = getDate(dates[0])
-        const to = getDate(dates[1])
-
-        selectedDates = { from, to }
-      },
-      locale: {
-        firstDayOfWeek: 1,
-        weekdays: {
-          shorthand: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-          longhand: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        }
-      },
-      inline: true,
-      mode: 'range',
-      dateFormat: 'Y-m-d',
-      showMonths: 2
-    })
-  })
-
-  function getDate(date: Date) {
-    const year = date.getFullYear()
-    const month = ('0' + (date.getMonth() + 1)).slice(-2)
-    const day = ('0' + date.getDate()).slice(-2)
-
-    return { value: `${year}-${month}-${day}`, display: `${day}/${month}/${year}` }
-  }
-
-  function cancel() {
-    isOpen = false
-    datepicker?.clear()
-    onSelect?.({ from: '', to: '' })
-  }
-
-  function confirm() {
-    isOpen = false
-    selectedLabel = getLabel()
-
-    onSelect?.({ from: selectedDates.from.value, to: selectedDates.to.value })
-  }
-
-  function getLabel() {
-    if (!selectedDates.from.value) return label
-
-    if (selectedDates.from.value === selectedDates.to.value) return selectedDates.from.display
-
-    return `${selectedDates.from.display} → ${selectedDates.to.display}`
-  }
-
-  function setDates(from: string, to: string) {
-    datepicker?.setDate([from, to])
-    selectedDates = {
-      from: { value: from, display: getDisplayFromValue(from) },
-      to: { value: to, display: getDisplayFromValue(to) }
-    }
-    selectedLabel = getLabel()
-  }
-
-  function getDisplayFromValue(value: string) {
-    if (!value) return ''
-
-    const parts = value.split('-')
-
-    return `${parts[2]}/${parts[1]}/${parts[0]}`
-  }
-  $effect(() => {
-    if (!datepicker) return
-    setDates(from, to)
-  })
   let styles = $derived(
     clsx({
       'border-workspace-accent focus:border-workspace-accent shadow-active': isOpen,
       'border-neutral-200 hover:border-neutral-300': !isOpen
     })
   )
+  let selectedLabel = $state(label)
+
+  $effect(() => {
+    if (!value.end) {
+      selectedPeriod = 'custom'
+    }
+  })
+
+  $effect(() => {
+    if (from) {
+      value = {
+        start: parseDate(from),
+        end: to ? parseDate(to) : undefined
+      }
+      return
+    }
+    value = {
+      start: toCalendarDate(startOfThisWeek),
+      end: toCalendarDate(endOfThisWeek)
+    }
+    selectedPeriod = 'this-week'
+  })
+
+  function cancel() {
+    isOpen = false
+    onSelect?.({ from: '', to: '' })
+  }
+
+  function getDisplayFromValue(value: DateValue | undefined) {
+    if (!value) return ''
+
+    const date = value.toString()
+
+    const parts = date.split('-')
+
+    return `${parts[2]}/${parts[1]}/${parts[0]}`
+  }
+
+  function getLabel() {
+    if (!value.start) return label
+
+    if (value.start === value.end) return getDisplayFromValue(value.start)
+
+    return `${getDisplayFromValue(value.start)} → ${getDisplayFromValue(value.end)}`
+  }
+
+  function confirm() {
+    isOpen = false
+    selectedLabel = getLabel()
+
+    onSelect?.({ from: value.start?.toString() || '', to: value.end?.toString() || '' })
+  }
 </script>
 
 <div>
@@ -212,7 +187,7 @@
       onclick={() => {
         isOpen = !isOpen
       }}
-      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-md text-neutral-800 placeholder-neutral-800 text-base"
+      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-md text-neutral-800 placeholder-neutral-800 text-base cursor-pointer"
     >
       {selectedLabel}
     </button>
@@ -240,225 +215,26 @@
           cancel()
         }}
       >
-        <div class="flex border-b border-neutral-100 h-[300px]">
+        <div class="flex border-b border-neutral-100 min-h-[300px] rounded-lg shadow-calendar">
           <div class="flex flex-col space-y-2 items-start p-3 border-r border-neutral-100">
             {#each periods as period}
               <button
                 onclick={period.action}
                 class="{selectedPeriod === period.slug
-                  ? 'selected-period text-workspace-accent border-workspace-accent-200 bg-workspace-accent-50'
-                  : 'text-neutral-500 border-transparent'} whitespace-nowrap text-base px-2 py-1 tracking-normal border rounded"
+                  ? 'selected-period text-[#017044] bg-workspace-accent-100'
+                  : 'text-neutral-500'} whitespace-nowrap text-base px-2 py-1 tracking-normal rounded cursor-pointer"
               >
                 {period.label}
               </button>
             {/each}
           </div>
-          <div bind:this={datePickerEl}></div>
+          <RangeCalendar bind:value numberOfMonths={2} />
         </div>
         <div class="p-3 flex justify-end items-center space-x-3">
           <BaseButton variant="secondary" onclick={cancel}>Cancel</BaseButton>
-          <BaseButton variant="primary" onclick={confirm} disabled={!selectedDates.to.value}>
-            Confirm
-          </BaseButton>
+          <BaseButton variant="primary" onclick={confirm} disabled={!value.end}>Confirm</BaseButton>
         </div>
       </div>
     </Transition>
   </div>
 </div>
-
-<style>
-  :global(.flatpickr-calendar) {
-    width: 508px !important;
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 4px;
-    padding-bottom: 8px;
-    font-family: 'Inter' !important;
-    top: 0 !important;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  :global(.flatpickr-weekdaycontainer:nth-child(2)) {
-    margin-left: 28px;
-  }
-  :global(.dayContainer:nth-child(1)) {
-    margin-right: 28px;
-  }
-  :global(.flatpickr-months) {
-    padding-top: 8px;
-    padding-bottom: 12px;
-  }
-  :global(.flatpickr-current-month) {
-    padding-top: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    height: 24px !important;
-    letter-spacing: -0.07px;
-  }
-  :global(.flatpickr-monthDropdown-months) {
-    font-weight: 500 !important;
-    height: 22px !important;
-    color: #09101c !important;
-  }
-  :global(.cur-month:hover) {
-    background-color: transparent !important;
-  }
-  :global(.numInputWrapper:hover) {
-    background-color: #fafbfb !important;
-    border: 1px solid #f3f5f5 !important;
-  }
-  :global(.numInputWrapper span.arrowUp) {
-    right: -4px;
-    border: 0;
-    background-color: transparent;
-  }
-  :global(.numInputWrapper span.arrowDown) {
-    right: -4px;
-    border: 0;
-    background-color: transparent;
-  }
-  :global(.cur-year, .cur-month) {
-    font-weight: 600 !important;
-    color: #09101c !important;
-  }
-  :global(.numInputWrapper) {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    height: 22px;
-  }
-  :global(.flatpickr-next-month) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px !important;
-    width: 24px !important;
-    border: 1px solid #e9ebeb;
-    right: 12px !important;
-    top: 12px !important;
-    padding: 0 !important;
-    border-radius: 4px;
-  }
-  :global(.flatpickr-prev-month) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px !important;
-    width: 24px !important;
-    border: 1px solid #e9ebeb;
-    left: 12px !important;
-    top: 12px !important;
-    padding: 0 !important;
-    border-radius: 4px;
-  }
-  :global(.flatpickr-weekdays) {
-    height: 32px;
-  }
-  :global(.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange) {
-    background-color: var(--workspace-accent-color, #169958) !important;
-    border: 0;
-    border-radius: 4px !important;
-    box-shadow: 0px 0px 0px 2px
-      color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958)) !important;
-  }
-  :global(
-    .flatpickr-day.selected:hover,
-    .flatpickr-day.startRange:hover,
-    .flatpickr-day.endRange:hover
-  ) {
-    border: 0;
-  }
-  :global(.flatpickr-day.inRange) {
-    background-color: #f4f5f5;
-    border: 1px solid #f4f5f5;
-    box-shadow: none !important;
-  }
-  :global(.prevMonthDay, .nextMonthDay) {
-    color: #cccece !important;
-    font-weight: 500;
-    font-size: 13px;
-  }
-  :global(.prevMonthDay.inRange, .nextMonthDay.inRange) {
-    background-color: #f4f5f5 !important;
-    border: 1px solid #f4f5f5 !important;
-  }
-  :global(.flatpickr-weekday) {
-    width: 32px;
-    height: 32px;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400 !important;
-    color: #9ca3af !important;
-    font-size: 12px !important;
-  }
-  :global(.flatpickr-weekdaycontainer) {
-    flex: 0 !important;
-    border-bottom: 1px solid #f3f5f5 !important;
-  }
-  :global(.flatpickr-prev-month svg) {
-    fill: #0a0a0a;
-    height: 10px !important;
-    width: 10px !important;
-  }
-  :global(.flatpickr-next-month svg) {
-    fill: #0a0a0a;
-    height: 10px !important;
-    width: 10px !important;
-  }
-  :global(.flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg) {
-    fill: #0a0a0a !important;
-  }
-  :global(.flatpickr-days) {
-    width: 496px !important;
-  }
-  :global(.dayContainer) {
-    width: 224px;
-    min-width: 224px;
-    max-width: 224px;
-    justify-content: start;
-    box-shadow: none !important;
-  }
-  :global(.flatpickr-day) {
-    margin-top: 2px !important;
-    border-radius: 4px;
-    width: 32px;
-    max-width: 32px;
-    height: 32px;
-    line-height: 32px;
-    display: flex !important;
-    font-weight: 500 !important;
-    align-items: center;
-    justify-content: center;
-    color: #0a0a0a;
-  }
-  :global(.flatpickr-day.today) {
-    border: 0;
-    border-bottom: 1px solid var(--workspace-accent-color, #169958);
-    border-radius: 0;
-  }
-  :global(.flatpickr-day.today:hover) {
-    background-color: #fafbfb !important;
-    border: 1px solid #f3f5f5 !important;
-    color: #0a0a0a;
-    border-radius: 4px;
-  }
-  :global(.flatpickr-day:hover) {
-    background-color: #fafbfb;
-    border: 1px solid #f3f5f5;
-  }
-  :global(.prevMonthDay:hover, .nextMonthDay:hover) {
-    background-color: #fafbfb !important;
-    border: 1px solid #f3f5f5 !important;
-  }
-  .datepicker-trigger {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0YzRjRGNiIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwMzA3MTIiIHN0cm9rZS13aWR0aD0iMS4xIi8+Cjwvc3ZnPg==');
-    background-repeat: no-repeat;
-    background-position: center right 8px;
-  }
-</style>

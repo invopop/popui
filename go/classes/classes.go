@@ -163,7 +163,7 @@ const (
 const (
 	PopoverWrapper          = "popui-popover-wrapper"
 	PopoverWrapperRight     = "popui-popover-wrapper__right"
-	PopoverList             = "popui-popover-list"
+	PopoverList             = "popui-popover-list popover-menu"
 	PopoverListRight        = "popui-popover-list__right"
 	PopoverListStretch      = "popui-popover-list__stretch"
 	PopoverListItem         = "popui-popover-list-item"

@@ -1,4 +1,4 @@
-@tailwind base;
+@reference "./svelte/src/app.css";
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -491,7 +491,7 @@ pre {
   @apply relative inline-block;
 }
 .popui-popover-list {
-  @apply hidden absolute left-0 top-7 popover-menu border border-neutral-200 rounded-md p-1 w-full bg-white z-10;
+  @apply hidden absolute left-0 top-7 border border-neutral-200 rounded-md p-1 w-full bg-white z-10;
 }
 .popui-popover-list-item {
   @apply font-sans font-medium text-base text-neutral-800 w-full rounded;

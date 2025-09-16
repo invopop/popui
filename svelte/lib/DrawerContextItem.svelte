@@ -95,9 +95,9 @@
         }}
       />
     {:else if item.selected}
-      <Icon src={Tick} class="w-5 h-5 text-workspace-accent" />
+      <Icon src={Tick} class="w-4 h-4 text-workspace-accent" />
     {:else if item.rightIcon}
-      <Icon src={item.rightIcon} class="w-5 h-5 text-neutral-400" />
+      <Icon src={item.rightIcon} class="w-4 h-4 text-neutral-400" />
     {/if}
   </div>
 </button>

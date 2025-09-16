@@ -15,6 +15,7 @@
     "format": "prettier --plugin-search-dir . --write .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "build:tailwind": "tailwindcss -i ./styles.css -o ./dist/popui.css --minify",
     "build-web-components": "vite build --config vite.wbc.config.ts",
     "publish-wbc": "npm run build-web-components && cp ./package-wbc.json ./dist/package.json && cd ./dist && npm run publish"
   },

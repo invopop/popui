@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -37,7 +37,7 @@
     "!dist/**/*.spec.*"
   ],
   "peerDependencies": {
-    "svelte": "^4.0.0"
+    "svelte": "^5.0.0"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^9.1.3",

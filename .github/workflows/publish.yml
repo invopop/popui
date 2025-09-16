@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
-      - run: cd svelte && npm ci && npx tailwindcss -i ./styles.css -o ./dist/popui.css --minify
+      - run: cd svelte && npm install && npx tailwindcss -i ./styles.css -o ./dist/popui.css --minify
       - uses: JS-DevTools/npm-publish@v3
         with:
           package: svelte

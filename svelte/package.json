@@ -6,7 +6,7 @@
     "dev": "vite dev",
     "build": "vite build && npm run package",
     "preview": "vite preview",
-    "package": "svelte-kit sync && svelte-package && npm run build:tailwind && publint",
+    "package": "svelte-kit sync && svelte-package && publint",
     "prepublishOnly": "npm run package",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -14,7 +14,6 @@
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
     "storybook": "storybook dev -p 6006",
-    "build:tailwind": "npx svelte/tailwindcss -i ./styles.css -o ./dist/popui.css --minify",
     "build-storybook": "storybook build",
     "build-web-components": "vite build --config vite.wbc.config.ts",
     "publish-wbc": "npm run build-web-components && cp ./package-wbc.json ./dist/package.json && cd ./dist && npm run publish"

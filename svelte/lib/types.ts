@@ -164,7 +164,16 @@ export type TabItem = {
   warning?: boolean
 }
 
-export type EmptyStateIcon = 'invoices' | 'contacts' | 'products' | 'pdf' | 'file' | 'no-results'
+export type EmptyStateIcon =
+  | 'invoices'
+  | 'contacts'
+  | 'products'
+  | 'deliveries'
+  | 'orders'
+  | 'payments'
+  | 'pdf'
+  | 'file'
+  | 'no-results'
 
 export type DataListItem = {
   label: string

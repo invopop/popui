@@ -21,6 +21,9 @@ export type StatusType =
   | 'orange'
   | 'blue'
   | 'purple'
+  | 'olive'
+  | 'turquoise'
+  | 'tomato'
   | 'empty'
 
 export type AnyProp = string | number | object | boolean

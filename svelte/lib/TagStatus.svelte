@@ -19,6 +19,12 @@
     'border border-blue-200': status === 'blue' && dot,
     'bg-purple-100 text-purple-500': status === 'purple',
     'border border-purple-200': status === 'purple' && dot,
+    'bg-[rgba(128,128,0,0.1)] text-[olive]': status === 'olive',
+    'border border-[olive]': status === 'olive' && dot,
+    'bg-[rgba(64,224,208,0.1)] text-[turquoise]': status === 'turquoise',
+    'border border-[turquoise]': status === 'turquoise' && dot,
+    'bg-[rgba(255,99,71,0.1)] text-[tomato]': status === 'tomato',
+    'border border-[tomato]': status === 'tomato' && dot,
     'border border-dashed border-neutral-200 text-neutral-400': status === 'empty',
     'bg-neutral-100 text-neutral-500': status === 'grey',
     'border border-neutral-200': status === 'grey' && dot,
@@ -34,6 +40,9 @@
     'bg-warning-500': status === 'orange',
     'bg-blue-500': status === 'blue',
     'bg-purple-500': status === 'purple',
+    'bg-[olive]': status === 'olive',
+    'bg-[turquoise]': status === 'turquoise',
+    'bg-[tomato]': status === 'tomato',
     'bg-neutral-300': status === 'empty',
     'bg-neutral-500': status === 'grey'
   })

@@ -48,7 +48,7 @@ templ Info() {
 templ Warning() {
 	<div class={ classes.Info }>
 		<div>
-			@icons.Alert()
+			@icons.Warning()
 		</div>
 		<div class={ classes.InfoText }>
 			<p class={ classes.WarningText }>
@@ -77,7 +77,7 @@ templ Notification(p props.Notification) {
 				if p.Type == "error" {
 					@icons.Failure()
 				} else if p.Type == "warning" {
-					@icons.Alert()
+					@icons.Warning()
 				}
 			</div>
 		}

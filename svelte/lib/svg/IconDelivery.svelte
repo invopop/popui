@@ -9,13 +9,13 @@
     </foreignObject>
     <g data-figma-bg-blur-radius="20">
       <rect width="57" height="79" x="20" y="18" fill="#fff" rx="6" />
-      <rect width="57" height="79" x="20" y="18" fill="#169958" fill-opacity=".02" rx="6" />
+      <rect width="57" height="79" x="20" y="18" fill="currentColor" fill-opacity=".02" rx="6" />
       <rect
         width="56.2"
         height="78.2"
         x="20.4"
         y="18.4"
-        stroke="#169958"
+        stroke="currentColor"
         stroke-opacity=".6"
         stroke-width=".8"
         rx="5.6"
@@ -26,30 +26,30 @@
       height="72.4"
       x="23.3"
       y="21.3"
-      stroke="#018551"
+      stroke="currentColor"
       stroke-opacity=".2"
       stroke-width=".6"
       rx="3.7"
     />
-    <rect width="19" height="2" x="28" y="45" fill="#018551" rx="1" />
-    <rect width="15" height="2" x="28" y="68" fill="#018551" rx="1" />
-    <rect width="10" height="2" x="59" y="50" fill="#018551" rx="1" />
-    <rect width="12" height="2" x="57" y="73" fill="#018551" rx="1" />
-    <rect width="14" height="2" x="55" y="54" fill="#018551" rx="1" />
-    <rect width="14" height="2" x="55" y="77" fill="#018551" rx="1" />
-    <rect width="10" height="2" x="59" y="58" fill="#018551" rx="1" />
-    <rect width="12" height="2" x="57" y="62" fill="#018551" rx="1" />
-    <rect width="8" height="2" x="61" y="81" fill="#018551" rx="1" />
-    <rect width="16" height="2" x="28" y="50" fill="#018551" fill-opacity=".2" rx="1" />
-    <rect width="12" height="2" x="28" y="73" fill="#018551" fill-opacity=".2" rx="1" />
-    <rect width="11" height="2" x="28" y="54" fill="#018551" fill-opacity=".2" rx="1" />
-    <rect width="16" height="2" x="28" y="77" fill="#018551" fill-opacity=".2" rx="1" />
-    <rect width="14" height="2" x="28" y="58" fill="#018551" fill-opacity=".2" rx="1" />
-    <rect width="18" height="2" x="28" y="81" fill="#018551" fill-opacity=".2" rx="1" />
-    <rect width="16" height="2" x="28" y="62" fill="#018551" fill-opacity=".2" rx="1" />
+    <rect width="19" height="2" x="28" y="45" fill="currentColor" rx="1" />
+    <rect width="15" height="2" x="28" y="68" fill="currentColor" rx="1" />
+    <rect width="10" height="2" x="59" y="50" fill="currentColor" rx="1" />
+    <rect width="12" height="2" x="57" y="73" fill="currentColor" rx="1" />
+    <rect width="14" height="2" x="55" y="54" fill="currentColor" rx="1" />
+    <rect width="14" height="2" x="55" y="77" fill="currentColor" rx="1" />
+    <rect width="10" height="2" x="59" y="58" fill="currentColor" rx="1" />
+    <rect width="12" height="2" x="57" y="62" fill="currentColor" rx="1" />
+    <rect width="8" height="2" x="61" y="81" fill="currentColor" rx="1" />
+    <rect width="16" height="2" x="28" y="50" fill="currentColor" fill-opacity=".2" rx="1" />
+    <rect width="12" height="2" x="28" y="73" fill="currentColor" fill-opacity=".2" rx="1" />
+    <rect width="11" height="2" x="28" y="54" fill="currentColor" fill-opacity=".2" rx="1" />
+    <rect width="16" height="2" x="28" y="77" fill="currentColor" fill-opacity=".2" rx="1" />
+    <rect width="14" height="2" x="28" y="58" fill="currentColor" fill-opacity=".2" rx="1" />
+    <rect width="18" height="2" x="28" y="81" fill="currentColor" fill-opacity=".2" rx="1" />
+    <rect width="16" height="2" x="28" y="62" fill="currentColor" fill-opacity=".2" rx="1" />
     <g clip-path="url(#c)">
       <path
-        fill="#018551"
+        fill="currentColor"
         d="M34.973 26.556a2.14 2.14 0 0 1 2.138 2.138v.195h1.131c.465 0 .894.235 1.145.626l1.397 2.171c.142.22.217.476.217.737v1.716a2.14 2.14 0 0 1-2.139 2.138h-.43a1.948 1.948 0 0 1-1.905 1.556c-.938 0-1.723-.67-1.904-1.556h-2.218a1.948 1.948 0 0 1-1.905 1.556 1.947 1.947 0 0 1-1.918-1.63A2.14 2.14 0 0 1 27 34.138v-5.445a2.14 2.14 0 0 1 2.139-2.138h5.834ZM30.5 35.11a.778.778 0 0 0 0 1.556.778.778 0 0 0 0-1.556Zm6.027 0a.779.779 0 0 0 0 1.556.78.78 0 0 0 .779-.778.78.78 0 0 0-.779-.778Zm.584-3.5h2.237l-.943-1.466a.193.193 0 0 0-.163-.09h-1.13v1.556Z"
       />
     </g>

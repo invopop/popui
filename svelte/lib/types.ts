@@ -167,6 +167,7 @@ export type TabItem = {
 export type EmptyStateIcon =
   | 'invoices'
   | 'contacts'
+  | 'parties'
   | 'products'
   | 'deliveries'
   | 'orders'

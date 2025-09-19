@@ -24,6 +24,7 @@
     const icons: Record<EmptyStateIcon, unknown> = {
       invoices: IconInvoice,
       contacts: IconContact,
+      parties: IconContact,
       products: IconProduct,
       deliveries: IconDelivery,
       orders: IconOrder,

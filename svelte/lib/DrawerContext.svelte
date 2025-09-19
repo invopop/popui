@@ -23,7 +23,7 @@
 </script>
 
 <div
-  class="{widthClass} border border-neutral-200 py-1 rounded-2xl shadow-lg space-y-0.5 bg-white max-h-80 overflow-y-auto"
+  class="{widthClass} border border-neutral-200 py-0.5 rounded-2xl shadow-lg space-y-0.5 bg-white max-h-80 overflow-y-auto"
 >
   <slot />
   <ul class="space-y-0.5 max-h-80 overflow-y-auto">

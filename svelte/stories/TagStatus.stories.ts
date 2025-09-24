@@ -134,31 +134,31 @@ export const OliveWithDot: Story = {
   }
 }
 
-export const Turquoise: Story = {
+export const Teal: Story = {
   args: {
-    label: 'Turquoise',
-    status: 'turquoise'
+    label: 'Teal',
+    status: 'teal'
   }
 }
 
-export const TurquoiseWithDot: Story = {
+export const TealWithDot: Story = {
   args: {
-    label: 'Turquoise',
-    status: 'turquoise',
+    label: 'Teal',
+    status: 'teal',
     dot: true
   }
 }
-export const Tomato: Story = {
+export const Crimson: Story = {
   args: {
-    label: 'Tomato',
-    status: 'tomato'
+    label: 'Crimson',
+    status: 'crimson'
   }
 }
 
-export const TomatoWithDot: Story = {
+export const CrimsonWithDot: Story = {
   args: {
-    label: 'Tomato',
-    status: 'tomato',
+    label: 'Crimson',
+    status: 'crimson',
     dot: true
   }
 }

@@ -4,9 +4,6 @@
 
 <svg class={classes} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 97 117">
   <g filter="url(#a)">
-    <foreignObject width="97" height="119" x="0" y="-2">
-      <div style="backdrop-filter:blur(10px);clip-path:url(#b);height:100%;width:100%" />
-    </foreignObject>
     <g data-figma-bg-blur-radius="20">
       <rect width="57" height="79" x="20" y="18" fill="#fff" rx="6" />
       <rect width="57" height="79" x="20" y="18" fill="currentColor" fill-opacity=".02" rx="6" />

@@ -25,6 +25,10 @@
     'border border-teal-200': status === 'teal' && dot,
     'bg-crimson-100 text-crimson-500': status === 'crimson',
     'border border-crimson-200': status === 'crimson' && dot,
+    'bg-blue-violet-100 text-blue-violet-500': status === 'blueViolet',
+    'border border-blue-violet-200': status === 'blueViolet' && dot,
+    'bg-steel-blue-100 text-steel-blue-500': status === 'steelBlue',
+    'border border-steel-blue-200': status === 'steelBlue' && dot,
     'border border-dashed border-neutral-200 text-neutral-400': status === 'empty',
     'bg-neutral-100 text-neutral-500': status === 'grey',
     'border border-neutral-200': status === 'grey' && dot,
@@ -43,6 +47,7 @@
     'bg-olive-500': status === 'olive',
     'bg-teal-500': status === 'teal',
     'bg-crimson-500': status === 'crimson',
+    'bg-blue-violet-500': status === 'blueViolet',
     'bg-neutral-300': status === 'empty',
     'bg-neutral-500': status === 'grey'
   })

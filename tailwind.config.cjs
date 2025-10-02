@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import twTheme from './svelte/lib/tw.theme'
+import safelist from './tailwind.safelist'
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -10,6 +11,7 @@ module.exports = {
     }),
     require('@tailwindcss/typography')
   ],
+  safelist,
   theme: {
     extend: {
       ...twTheme.extend,

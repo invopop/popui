@@ -26,7 +26,7 @@
     {#if status}
       <FeedIconStatus {status} />
     {/if}
-    <span class="truncate font-medium text-neutral-800 text-base">{title}</span>
+    <span class="flex-1 truncate font-medium text-neutral-800 text-base">{title}</span>
     {#if cancelable}
       <BaseButton
         small

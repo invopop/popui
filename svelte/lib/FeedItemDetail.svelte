@@ -5,12 +5,18 @@
   import FeedEvents from './FeedEvents.svelte'
   import { slide } from 'svelte/transition'
   import SeparatorHorizontal from './SeparatorHorizontal.svelte'
+  import BaseButton from './BaseButton.svelte'
+  import { Close } from '@invopop/ui-icons'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 
   export let status: FeedItemStatus | undefined = undefined
   export let title = ''
   export let uuid = ''
   export let events: FeedEvent[] = []
   export let idLabel = 'ID:'
+  export let cancelable = false
 
   let open = false
 </script>
@@ -21,6 +27,18 @@
       <FeedIconStatus {status} />
     {/if}
     <span class="truncate font-medium text-neutral-800 text-base">{title}</span>
+    {#if cancelable}
+      <BaseButton
+        small
+        icon={Close}
+        variant="secondary"
+        on:click={() => {
+          dispatch('cancel')
+        }}
+      >
+        Cancel
+      </BaseButton>
+    {/if}
   </div>
   <SeparatorHorizontal />
   <div class="pl-3 py-1 pr-2.5 flex items-center space-x-0.5">

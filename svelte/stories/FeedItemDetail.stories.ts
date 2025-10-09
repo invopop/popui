@@ -72,3 +72,12 @@ export const WithLogs: Story = {
     ]
   }
 }
+
+export const Cancelable: Story = {
+  args: {
+    title: 'Series enumerator with a long text that does not fit',
+    uuid: '8ef5ac2a-1437-498b-a3d6-781234cf0ba1',
+    status: 'success',
+    cancelable: true
+  }
+}

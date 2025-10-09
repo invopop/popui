@@ -8,6 +8,9 @@
   import IconPdf from './svg/IconPdf.svelte'
   import IconNoResults from './svg/IconNoResults.svelte'
   import type { SvelteComponent } from 'svelte'
+  import IconDelivery from './svg/IconDelivery.svelte'
+  import IconOrder from './svg/IconOrder.svelte'
+  import IconPayment from './svg/IconPayment.svelte'
 
   export let icon: EmptyStateIcon | undefined = undefined
   export let title = ''
@@ -21,7 +24,11 @@
     const icons: Record<EmptyStateIcon, unknown> = {
       invoices: IconInvoice,
       contacts: IconContact,
+      parties: IconContact,
       products: IconProduct,
+      deliveries: IconDelivery,
+      orders: IconOrder,
+      payments: IconPayment,
       file: IconFile,
       pdf: IconPdf,
       'no-results': IconNoResults
@@ -57,7 +64,7 @@
     </div>
   {/if}
   <div class="space-y-0.5">
-    <h4 class="font-medium text-base text-neutral-800 text-base tracking-tight">{title}</h4>
+    <h4 class="font-medium text-neutral-800 text-base tracking-tight">{title}</h4>
     <p class="max-w-xs text-base text-neutral-500 tracking-normal">{description}</p>
     <p><slot /></p>
   </div>

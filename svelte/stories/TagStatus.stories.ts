@@ -119,6 +119,50 @@ export const PurpleWithDot: Story = {
   }
 }
 
+export const Olive: Story = {
+  args: {
+    label: 'Olive',
+    status: 'olive'
+  }
+}
+
+export const OliveWithDot: Story = {
+  args: {
+    label: 'Olive',
+    status: 'olive',
+    dot: true
+  }
+}
+
+export const Teal: Story = {
+  args: {
+    label: 'Teal',
+    status: 'teal'
+  }
+}
+
+export const TealWithDot: Story = {
+  args: {
+    label: 'Teal',
+    status: 'teal',
+    dot: true
+  }
+}
+export const Crimson: Story = {
+  args: {
+    label: 'Crimson',
+    status: 'crimson'
+  }
+}
+
+export const CrimsonWithDot: Story = {
+  args: {
+    label: 'Crimson',
+    status: 'crimson',
+    dot: true
+  }
+}
+
 export const Empty: Story = {
   args: {
     label: 'Tag',

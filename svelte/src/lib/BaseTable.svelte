@@ -26,7 +26,7 @@
 
   let {
     sortBy = '',
-    sortDirection = '',
+    sortDirection = $bindable(''),
     fields = [],
     data = [],
     getActions = undefined,

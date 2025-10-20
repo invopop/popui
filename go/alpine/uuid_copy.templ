@@ -1,0 +1,101 @@
+package alpine
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
+)
+
+// UUIDCopy renders a UUID with a copy button.
+templ UUIDCopy(p props.UUIDCopy) {
+	<div
+		class={ classes.UUIDCopy }
+		x-data={ `{
+			uuid: '` + p.UUID + `',
+			showCopied: false,
+			hasPopover: ` + func() string {
+				if p.CopiedText != "" {
+					return "true"
+				}
+				return "false"
+			}() + `,
+			
+			async copyToClipboard() {
+				try {
+					await navigator.clipboard.writeText(this.uuid);
+					if (!this.hasPopover) return;
+                    this.showCopied = true;
+                    setTimeout(() => {
+                        this.showCopied = false;
+                    }, 2000);
+				} catch (err) {
+					console.error('Failed to copy text: ', err);
+				}
+			}
+		}` }
+		{ p.Attrs... }
+	>
+		<button
+			class={ classes.UUIDCopyText }
+			@click="copyToClipboard()"
+		>
+			{ formatUUID(p.UUID, p.PrefixLength, p.SuffixLength) }
+		</button>
+		<button
+			class={ classes.UUIDCopyButton }
+			@click="copyToClipboard()"
+		>
+			<div class={ classes.UUIDCopyIcon }>
+				@icons.Duplicate()
+			</div>
+		</button>
+		if p.CopiedText != "" {
+			<div
+				class={ classes.UUIDCopyPopover }
+				x-show="showCopied"
+				x-transition:enter="transition ease-out duration-200"
+				x-transition:enter-start="opacity-0 transform scale-95"
+				x-transition:enter-end="opacity-100 transform scale-100"
+				x-transition:leave="transition ease-in duration-150"
+				x-transition:leave-start="opacity-100 transform scale-100"
+				x-transition:leave-end="opacity-0 transform scale-95"
+			>
+				{ p.CopiedText }
+			</div>
+		}
+	</div>
+}
+
+// formatUUID formats the UUID string based on prefix and suffix lengths
+func formatUUID(uuid string, prefixLength, suffixLength int) string {
+	// If both prefix and suffix are 0, show full UUID
+	if prefixLength == 0 && suffixLength == 0 {
+		return uuid
+	}
+
+	// If UUID is shorter than prefix+suffix, show full
+	if len(uuid) <= prefixLength+suffixLength {
+		return uuid
+	}
+
+	// Show truncated version with ellipsis
+	prefix := ""
+	suffix := ""
+
+	if prefixLength > 0 {
+		prefix = uuid[:prefixLength]
+	}
+	if suffixLength > 0 {
+		suffix = uuid[len(uuid)-suffixLength:]
+	}
+
+	if prefix != "" && suffix != "" {
+		return prefix + "..." + suffix
+	} else if prefix != "" {
+		return prefix + "..."
+	} else if suffix != "" {
+		return "..." + suffix
+	}
+
+	return uuid
+}

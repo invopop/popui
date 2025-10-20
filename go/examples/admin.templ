@@ -142,6 +142,9 @@ templ Admin() {
 					@popui.PageSection(props.PageSection{Title: "Cards", Description: "We are displaying different type of cards here"}) {
 						@cardsSection()
 					}
+					@popui.PageSection(props.PageSection{Title: "Tag Status", Description: "Status indicators with optional dots and different color variants"}) {
+						@tagStatusSection()
+					}
 				}
 			</main>
 		</body>
@@ -493,4 +496,54 @@ templ popoverForCard() {
 			</li>
 		</ul>
 	}
+}
+
+templ tagStatusSection() {
+	<div class="space-y-6">
+		<div class="flex flex-wrap gap-2">
+			@popui.TagStatus(props.TagStatus{Label: "Grey", Status: "grey"})
+			@popui.TagStatus(props.TagStatus{Label: "Green", Status: "green"})
+			@popui.TagStatus(props.TagStatus{Label: "Yellow", Status: "yellow"})
+			@popui.TagStatus(props.TagStatus{Label: "Red", Status: "red"})
+			@popui.TagStatus(props.TagStatus{Label: "Orange", Status: "orange"})
+			@popui.TagStatus(props.TagStatus{Label: "Blue", Status: "blue"})
+			@popui.TagStatus(props.TagStatus{Label: "Purple", Status: "purple"})
+			@popui.TagStatus(props.TagStatus{Label: "Olive", Status: "olive"})
+			@popui.TagStatus(props.TagStatus{Label: "Teal", Status: "teal"})
+			@popui.TagStatus(props.TagStatus{Label: "Crimson", Status: "crimson"})
+			@popui.TagStatus(props.TagStatus{Label: "Blue Violet", Status: "blueViolet"})
+			@popui.TagStatus(props.TagStatus{Label: "Steel Blue", Status: "steelBlue"})
+			@popui.TagStatus(props.TagStatus{Label: "Empty", Status: "empty"})
+		</div>
+		<div class="flex flex-wrap gap-2 mt-4">
+			@popui.TagStatus(props.TagStatus{Label: "Grey", Status: "grey", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Green", Status: "green", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Yellow", Status: "yellow", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Red", Status: "red", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Orange", Status: "orange", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Blue", Status: "blue", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Purple", Status: "purple", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Olive", Status: "olive", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Teal", Status: "teal", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Crimson", Status: "crimson", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Blue Violet", Status: "blueViolet", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Steel Blue", Status: "steelBlue", Dot: true})
+			@popui.TagStatus(props.TagStatus{Label: "Empty", Status: "empty", Dot: true})
+		</div>
+		<div class="flex flex-wrap gap-2 mt-4">
+			@popui.TagStatus(props.TagStatus{Status: "grey", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "green", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "yellow", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "red", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "orange", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "blue", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "purple", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "olive", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "teal", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "crimson", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "blueViolet", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "steelBlue", Dot: true})
+			@popui.TagStatus(props.TagStatus{Status: "empty", Dot: true})
+		</div>
+	</div>
 }

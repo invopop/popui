@@ -789,6 +789,61 @@ form {
   @apply flex items-start gap-2 w-full;
 }
 
+.popui-tag-status {
+  @apply rounded text-sm inline-flex items-center font-medium gap-1 box-border px-1 py-0.5;
+}
+.popui-tag-status:has([data-dot]):not(:has([data-label])) {
+  @apply p-0.5 border;
+}
+.popui-tag-status:has([data-dot]):has([data-label]) {
+  @apply pl-1.5 pr-[5px] py-0.5;
+}
+.popui-tag-status:has([data-label]) {
+  @apply h-5;
+}
+.popui-tag-status__dot {
+  @apply w-2 h-2 rounded-sm;
+}
+.popui-tag-status--green {
+  @apply bg-positive-100 text-positive-500 [&>[data-dot]]:border-positive-200 [&>[data-dot]]:bg-positive-500;
+}
+.popui-tag-status--yellow {
+  @apply bg-yellow-100 text-yellow-500 [&>[data-dot]]:border-yellow-200 [&>[data-dot]]:bg-yellow-500;
+}
+.popui-tag-status--red {
+  @apply bg-danger-100 text-danger-500 [&>[data-dot]]:border-danger-200 [&>[data-dot]]:bg-danger-500;
+}
+.popui-tag-status--orange {
+  @apply bg-warning-100 text-warning-500 [&>[data-dot]]:border-warning-200 [&>[data-dot]]:bg-warning-500;
+}
+.popui-tag-status--blue {
+  @apply bg-blue-100 text-blue-500 [&>[data-dot]]:border-blue-200 [&>[data-dot]]:bg-blue-500;
+}
+.popui-tag-status--purple {
+  @apply bg-purple-100 text-purple-500 [&>[data-dot]]:border-purple-200 [&>[data-dot]]:bg-purple-500;
+}
+.popui-tag-status--olive {
+  @apply bg-olive-100 text-olive-500 [&>[data-dot]]:border-olive-200 [&>[data-dot]]:bg-olive-500;
+}
+.popui-tag-status--teal {
+  @apply bg-teal-100 text-teal-500 [&>[data-dot]]:border-teal-200 [&>[data-dot]]:bg-teal-500;
+}
+.popui-tag-status--crimson {
+  @apply bg-crimson-100 text-crimson-500 [&>[data-dot]]:border-crimson-200 [&>[data-dot]]:bg-crimson-500;
+}
+.popui-tag-status--blue-violet {
+  @apply bg-blue-violet-100 text-blue-violet-500 [&>[data-dot]]:border-blue-violet-200 [&>[data-dot]]:bg-blue-violet-500;
+}
+.popui-tag-status--steel-blue {
+  @apply bg-steel-blue-100 text-steel-blue-500 [&>[data-dot]]:border-steel-blue-200 [&>[data-dot]]:bg-steel-blue-500;
+}
+.popui-tag-status--empty {
+  @apply border border-dashed border-neutral-200 text-neutral-400 [&>[data-dot]]:bg-neutral-300;
+}
+.popui-tag-status--grey {
+  @apply bg-neutral-100 text-neutral-500 [&>[data-dot]]:border-neutral-200 [&>[data-dot]]:bg-neutral-500;
+}
+
 /* Upload File */
 .popui-upload_file {
   @apply flex items-center gap-2 rounded-lg border border-neutral-200 pl-1 py-1 pr-3 relative;

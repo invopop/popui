@@ -300,5 +300,16 @@ export default [
   'place-self-start',
   'place-self-end',
   'place-self-center',
-  'place-self-stretch'
+  'place-self-stretch',
+  // Alpine.js transition classes
+  'transition',
+  'ease-out',
+  'ease-in',
+  'duration-200',
+  'duration-150',
+  'opacity-0',
+  'opacity-100',
+  'transform',
+  'scale-95',
+  'scale-100'
 ]

@@ -4,6 +4,7 @@ import (
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
 	"github.com/invopop/popui/icons"
+	"strconv"
 )
 
 // UUIDCopy renders a UUID with a copy button.
@@ -11,7 +12,8 @@ templ UUIDCopy(p props.UUIDCopy) {
 	<div
 		class={ classes.UUIDCopy }
 		x-data={ `{
-			uuid: '` + p.UUID + `',
+			prefixLength: ` + strconv.Itoa(p.PrefixLength) + `,
+			suffixLength: ` + strconv.Itoa(p.SuffixLength) + `,
 			showCopied: false,
 			hasPopover: ` + func() string {
 				if p.CopiedText != "" {
@@ -19,6 +21,23 @@ templ UUIDCopy(p props.UUIDCopy) {
 				}
 				return "false"
 			}() + `,
+			
+			get uuid() {
+				` + func() string {
+				if p.XModel != "" {
+					return `return ` + p.XModel + ` || '';`
+				}
+				return `return '` + p.UUID + `';`
+			}() + `
+			},
+			
+			get formattedUuid() {
+				if (!this.prefixLength && !this.suffixLength) return this.uuid;
+				if (!this.uuid || this.uuid.length <= this.prefixLength + this.suffixLength) return this.uuid;
+				const prefix = this.uuid.substring(0, this.prefixLength);
+				const suffix = this.uuid.substring(this.uuid.length - this.suffixLength);
+				return prefix + '...' + suffix;
+			},
 			
 			async copyToClipboard() {
 				try {
@@ -38,9 +57,8 @@ templ UUIDCopy(p props.UUIDCopy) {
 		<button
 			class={ classes.UUIDCopyText }
 			@click="copyToClipboard()"
-		>
-			{ formatUUID(p.UUID, p.PrefixLength, p.SuffixLength) }
-		</button>
+			x-text="formattedUuid"
+		></button>
 		<button
 			class={ classes.UUIDCopyButton }
 			@click="copyToClipboard()"
@@ -64,38 +82,4 @@ templ UUIDCopy(p props.UUIDCopy) {
 			</div>
 		}
 	</div>
-}
-
-// formatUUID formats the UUID string based on prefix and suffix lengths
-func formatUUID(uuid string, prefixLength, suffixLength int) string {
-	// If both prefix and suffix are 0, show full UUID
-	if prefixLength == 0 && suffixLength == 0 {
-		return uuid
-	}
-
-	// If UUID is shorter than prefix+suffix, show full
-	if len(uuid) <= prefixLength+suffixLength {
-		return uuid
-	}
-
-	// Show truncated version with ellipsis
-	prefix := ""
-	suffix := ""
-
-	if prefixLength > 0 {
-		prefix = uuid[:prefixLength]
-	}
-	if suffixLength > 0 {
-		suffix = uuid[len(uuid)-suffixLength:]
-	}
-
-	if prefix != "" && suffix != "" {
-		return prefix + "..." + suffix
-	} else if prefix != "" {
-		return prefix + "..."
-	} else if suffix != "" {
-		return "..." + suffix
-	}
-
-	return uuid
 }

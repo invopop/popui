@@ -6,7 +6,8 @@
     ref = $bindable(null),
     class: className,
     destructive = false,
-    children
+    children,
+    ...restProps
   }: AlertDialogPrimitive.ActionProps & { destructive: boolean } = $props()
 
   let variant = $derived((destructive ? 'destructive' : 'primary') as ButtonVariant)
@@ -16,6 +17,7 @@
   bind:ref
   data-slot="alert-dialog-action"
   class={cn(buttonVariants({ variant }), className)}
+  {...restProps}
 >
   {@render children?.()}
 </AlertDialogPrimitive.Action>

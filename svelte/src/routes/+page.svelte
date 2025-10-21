@@ -10,6 +10,9 @@
   import BaseCard from '$lib/BaseCard.svelte'
   import DatePicker from '$lib/DatePicker.svelte'
   import BaseDropdown from '$lib/BaseDropdown.svelte'
+  import AlertDialog from '$lib/AlertDialog.svelte'
+
+  let openDialog = $state(false)
 </script>
 
 <div class="p-4 space-y-4">
@@ -82,4 +85,24 @@
       ]}
     />
   </div>
+  <button
+    onclick={() => {
+      openDialog = !openDialog
+    }}
+  >
+    Toggle Alert Dialog
+  </button>
 </div>
+<AlertDialog
+  onconfirm={async () => {
+    console.log('confirmed')
+  }}
+  oncancel={async () => {
+    console.log('cancelled')
+  }}
+  bind:open={openDialog}
+  title="There are unsaved changes!"
+  descriptionText="Do you want to exit and discard the changes?"
+  actionText="Discard & Exit"
+  cancelText="Stay"
+/>

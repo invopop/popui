@@ -5,7 +5,8 @@
   let {
     ref = $bindable(null),
     class: className,
-    children
+    children,
+    ...restProps
   }: AlertDialogPrimitive.CancelProps = $props()
 </script>
 
@@ -14,6 +15,7 @@
   data-slot="alert-dialog-cancel"
   class={cn(buttonVariants({ variant: 'secondary' }), 'mt-2 sm:mt-0', className)}
   {onkeydown}
+  {...restProps}
 >
   {@render children?.()}
 </AlertDialogPrimitive.Cancel>

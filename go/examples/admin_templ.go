@@ -10,7 +10,6 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	popui "github.com/invopop/popui/go"
-	"github.com/invopop/popui/go/alpine"
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
 	"github.com/invopop/popui/icons"
@@ -734,13 +733,13 @@ func Admin() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = uuidCopySection().Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = buttonCopySection().Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = popui.PageSection(props.PageSection{Title: "UUID Copy", Description: "Components for displaying and copying UUIDs with different formats"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var28), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = popui.PageSection(props.PageSection{Title: "Button Copy", Description: "Components for displaying and copying text with different formats"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var28), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2233,7 +2232,7 @@ func tagStatusSection() templ.Component {
 	})
 }
 
-func uuidCopySection() templ.Component {
+func buttonCopySection() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -2258,7 +2257,7 @@ func uuidCopySection() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = alpine.UUIDCopy(props.UUIDCopy{UUID: "e73d5d20834934588127389172381789bc2f275460", CopiedText: "Copied!"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{Value: "e73d5d20834934588127389172381789bc2f275460", CopiedText: "Copied!"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -2266,7 +2265,7 @@ func uuidCopySection() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = alpine.UUIDCopy(props.UUIDCopy{UUID: "e73d5d20834934588127389172381789bc2f275460", PrefixLength: 4, SuffixLength: 4}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{Value: "e73d5d20834934588127389172381789bc2f275460", PrefixLength: 4, SuffixLength: 4}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -2274,54 +2273,34 @@ func uuidCopySection() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = alpine.UUIDCopy(props.UUIDCopy{UUID: "e73d5d20834934588127389172381789bc2f275460", PrefixLength: 6, SuffixLength: 6, CopiedText: "Done ✓"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{Value: "e73d5d20834934588127389172381789bc2f275460", PrefixLength: 6, SuffixLength: 6, CopiedText: "Done ✓"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 114, "</div><div class=\"mt-4\"><h3 class=\"popui-subtitle mb-2\">XModel Example (Dynamic UUID)</h3><p class=\"popui-description mb-4\">Select a UUID from the dropdown to see it update dynamically:</p><div x-data=\"{ selectedUuid: '123e4567-e89b-12d3-a456-426614174000', uuids: [\n\t\t\t{ id: '123e4567-e89b-12d3-a456-426614174000', label: 'User UUID' },\n\t\t\t{ id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890', label: 'Product UUID' },\n\t\t\t{ id: '98765432-1234-5678-90ab-cdef12345678', label: 'Order UUID' }\n\t\t] }\"><div class=\"mb-4\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 114, "</div><div class=\"mt-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var76 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
-			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
-			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
-			if !templ_7745c5c3_IsBuffer {
-				defer func() {
-					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
-					if templ_7745c5c3_Err == nil {
-						templ_7745c5c3_Err = templ_7745c5c3_BufErr
-					}
-				}()
-			}
-			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 115, "<option value=\"123e4567-e89b-12d3-a456-426614174000\">User UUID</option> <option value=\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\">Product UUID</option> <option value=\"98765432-1234-5678-90ab-cdef12345678\">Order UUID</option>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			return nil
-		})
-		templ_7745c5c3_Err = popui.Select(props.Select{
-			Attrs: templ.Attributes{
-				"x-model": "selectedUuid",
-			},
-		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var76), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{Value: "123e4567-e89b-12d3-a456-426614174000", PrefixLength: 8, SuffixLength: 4, CopiedText: "Copied to clipboard!"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 116, "</div><div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 115, "</div><div class=\"mt-4\"><p class=\"popui-description mb-4\">Value can also be set via the value attribute in Attrs:</p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = alpine.UUIDCopy(props.UUIDCopy{
-			XModel:       "selectedUuid",
+		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{
 			PrefixLength: 8,
 			SuffixLength: 4,
-			CopiedText:   "UUID Copied!",
+			CopiedText:   "Success!",
+			Attrs: templ.Attributes{
+				"value": "set-via-attrs-example-uuid-98765432",
+			},
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 117, "</div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 116, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

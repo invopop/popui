@@ -1123,32 +1123,33 @@ form {
   }
 }
 
-/* UUID Copy */
-.popui-uuid-copy {
+/* Button Copy */
+.popui-button-copy {
   @apply inline-flex items-center gap-2 bg-neutral-50 border border-neutral-200 rounded-md px-2 py-1 relative;
 }
 
-.popui-uuid-copy__text {
-  @apply font-mono text-sm text-neutral-700 hover:text-neutral-900 transition-colors border-0 bg-transparent p-0 m-0 cursor-pointer;
-  user-select: none;
-  outline: none;
+.popui-button-copy__text {
+  @apply font-mono text-sm text-neutral-700 hover:text-neutral-900 transition-colors border-0 bg-transparent p-0 m-0 cursor-pointer select-none outline-none;
 }
 
-.popui-uuid-copy__text:focus {
-  @apply outline-none;
-  box-shadow: none;
+.popui-button-copy__text:focus {
+  @apply outline-none shadow-none;
 }
 
-.popui-uuid-copy__button {
+.popui-button-copy__button {
   @apply p-1 rounded text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 transition-colors cursor-pointer;
 }
 
-.popui-uuid-copy__icon {
+.popui-button-copy__icon {
   @apply w-4 h-4;
 }
 
-.popui-uuid-copy__popover {
-  @apply absolute -top-6 left-1/2 transform -translate-x-1/2 bg-neutral-800 text-white text-xs py-0.5 px-1.5 rounded text-center;
+.popui-button-copy__popover {
+  @apply absolute -top-6 left-1/2 transform -translate-x-1/2 bg-neutral-800 text-white text-xs py-0.5 px-1.5 rounded text-center opacity-0 transition-opacity duration-200 pointer-events-none;
+}
+
+.popui-button-copy__popover--visible {
+  @apply opacity-100;
 }
 
 /* Flash message */

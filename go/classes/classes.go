@@ -234,13 +234,13 @@ const (
 	TagStatusGrey       = "popui-tag-status--grey"
 )
 
-// UUIDCopy component classes
+// ButtonCopy component classes
 const (
-	UUIDCopy        = "popui-uuid-copy"
-	UUIDCopyText    = "popui-uuid-copy__text"
-	UUIDCopyButton  = "popui-uuid-copy__button"
-	UUIDCopyIcon    = "popui-uuid-copy__icon"
-	UUIDCopyPopover = "popui-uuid-copy__popover"
+	ButtonCopy        = "popui-button-copy"
+	ButtonCopyText    = "popui-button-copy__text"
+	ButtonCopyButton  = "popui-button-copy__button"
+	ButtonCopyIcon    = "popui-button-copy__icon"
+	ButtonCopyPopover = "popui-button-copy__popover"
 )
 
 // Upload classes

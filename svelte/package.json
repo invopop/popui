@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -91,10 +91,12 @@
     "flatpickr": "^4.6.13",
     "inter-ui": "^3.19.3",
     "lodash-es": "^4.17.21",
+    "mode-watcher": "^1.1.0",
     "svelte-floating-ui": "^1.5.8",
     "svelte-headlessui": "^0.0.46",
     "svelte-intersection-observer-action": "^0.0.4",
     "svelte-portal": "^2.2.1",
+    "svelte-sonner": "^1.0.5",
     "svelte-transition": "^0.0.17",
     "svelte-viewport-info": "^1.0.2",
     "tailwind-variants": "^1.0.0"

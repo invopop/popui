@@ -64,8 +64,8 @@ import TagSearch from './TagSearch.svelte'
 import TagStatus from './TagStatus.svelte'
 import TitleMain from './TitleMain.svelte'
 import TitleSection from './TitleSection.svelte'
+import { Toaster } from './sonner'
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
-
 import UuidCopy from './UuidCopy.svelte'
 import twTheme from './tw.theme.js'
 import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
@@ -138,6 +138,7 @@ export {
   TagStatus,
   TitleMain,
   TitleSection,
+  Toaster,
   Tooltip,
   TooltipContent,
   TooltipTrigger,

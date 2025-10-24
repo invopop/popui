@@ -10,5 +10,24 @@
 		"sourceMap": true,
 		"strict": true,
 		"moduleResolution": "bundler"
-	}
+	},
+	"include": [
+		"svelte/**/*.d.ts",
+		"svelte/**/*.ts",
+		"svelte/**/*.js",
+		"svelte/**/*.svelte",
+		"web-components/**/*.ts"
+	],
+	"exclude": [
+		"node_modules",
+		".svelte-kit",
+		"dist",
+		"tmp",
+		"go",
+		"html",
+		"icons/node_modules",
+		"icons/dist",
+		"**/_templ.go",
+		"**/*.templ"
+	]
 }

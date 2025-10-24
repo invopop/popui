@@ -4,12 +4,11 @@
   import FeedIconStatus from './FeedIconStatus.svelte'
   import BaseFlag from './BaseFlag.svelte'
   import { getCountryName } from './helpers.js'
-  import UuidCopy from './UuidCopy.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
+  import ButtonUuidCopy from './ButtonUuidCopy.svelte'
 
   export let field: TableField
   export let data: unknown = ''
-  export let isMobile = false
   export let badge: Badge | null = null
   export let status: FeedItemStatus | null = null
   export let icons: TableIcon[] | null = null
@@ -26,16 +25,7 @@
         <span>{getCountryName(String(data))}</span>
       </span>
     {:else if field.copy && data}
-      <UuidCopy
-        rightAlign={isMobile ? false : field.rightAlign}
-        uuid={String(data)}
-        prefixLength={4}
-        suffixLength={4}
-        full
-        compact
-        dark={isMobile}
-        on:copied
-      />
+      <ButtonUuidCopy uuid={String(data)} full on:copied />
     {:else}
       <span class="hidden md:inline">{data}</span>
       <span class="md:hidden">{data ? data : badge || status ? '' : '-'}</span>

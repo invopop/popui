@@ -1,15 +1,15 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import twTheme from './svelte/lib/tw.theme'
-import safelist from './tailwind.safelist'
+import twTheme from './svelte/lib/tw.theme.js'
+import safelist from './tailwind.safelist.js'
+import forms from '@tailwindcss/forms'
+import typography from '@tailwindcss/typography'
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   plugins: [
-    /* tslint:disable no-var-requires */
-    require('@tailwindcss/forms')({
+    forms({
       strategy: 'class'
     }),
-    require('@tailwindcss/typography')
+    typography
   ],
   safelist,
   theme: {

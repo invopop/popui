@@ -15,7 +15,6 @@
     viewable = false,
     viewableText = 'View',
     user = undefined,
-    type = '',
     extraText = '',
     onView
   }: FeedItemProps = $props()
@@ -82,7 +81,7 @@
         small
         variant="secondary"
         onclick={() => {
-          onView?.(type)
+          onView?.(slug)
         }}
       >
         {viewableText}

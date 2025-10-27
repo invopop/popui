@@ -39,6 +39,14 @@ export const DefaultSmall: Story = {
   }
 }
 
+export const DefaultSmallWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    small: true,
+    icon: Close
+  }
+}
+
 export const DefaultBig: Story = {
   args: {
     slot: 'Button',

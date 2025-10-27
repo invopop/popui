@@ -1,0 +1,35 @@
+{
+	"compilerOptions": {
+		"target": "ES2020",
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"skipLibCheck": true,
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"sourceMap": true,
+		"strict": true
+	},
+	"include": [
+		"svelte/**/*.d.ts",
+		"svelte/**/*.ts",
+		"svelte/**/*.js",
+		"svelte/**/*.svelte",
+		"web-components/**/*.ts"
+	],
+	"exclude": [
+		"node_modules",
+		".svelte-kit",
+		"dist",
+		"tmp",
+		"go",
+		"html",
+		"icons/node_modules",
+		"icons/dist",
+		"**/_templ.go",
+		"**/*.templ"
+	]
+}

@@ -413,10 +413,10 @@ export interface AlertDialogProps {
   export interface DrawerContextProps {
     items?: DrawerOption[];
     multiple?: boolean;
-    searchable?: boolean;
     widthClass?: string;
     onclick?: (value: AnyProp) => void;
     onselect?: (selected: DrawerOption[]) => void;
+    children?: Snippet;
   }
 
   export interface DrawerContextItemProps {

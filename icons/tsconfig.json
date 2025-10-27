@@ -11,5 +11,10 @@
 		"strict": true,
 		"moduleResolution": "NodeNext",
 		"ignoreDeprecations": "5.0"
-	}
+	},
+	"exclude": [
+		"node_modules",
+		".svelte-kit",
+		"dist"
+	]
 }

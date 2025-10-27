@@ -1,3 +1,37 @@
 {
-    "templ.experiments": "rawgo"
+    "templ.experiments": "rawgo",
+    // Svelte Language Server optimizations
+    "svelte.plugin.svelte.compilerWarnings": {
+        "css-unused-selector": "ignore"
+    },
+    "svelte.plugin.svelte.defaultScriptLanguage": "ts",
+    // Exclude patterns to reduce file watching
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true,
+        "**/.svelte-kit/**": true,
+        "**/dist/**": true,
+        "**/tmp/**": true,
+        "**/_templ.go": true,
+        "**/go/assets/**": true,
+        "**/icons/dist/**": true,
+        "**/package-lock.json": true,
+        "**/.storybook-static/**": true
+    },
+    // Exclude from search to improve performance
+    "search.exclude": {
+        "**/.svelte-kit": true,
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/tmp": true,
+        "**/_templ.go": true,
+        "**/package-lock.json": true,
+        "**/.storybook-static": true
+    },
+    // Use workspace TypeScript
+    "typescript.tsdk": "node_modules/typescript/lib",
+    // Disable certain TypeScript features for better performance
+    "typescript.surveys.enabled": false,
+    "typescript.disableAutomaticTypeAcquisition": true
 }

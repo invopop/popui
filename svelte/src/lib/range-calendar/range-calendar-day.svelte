@@ -28,9 +28,6 @@
     'data-[disabled]:text-muted-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
     // Unavailable
     'data-[unavailable]:line-through',
-    'dark:data-[range-middle]:hover:bg-accent/0',
-    // hover
-    'dark:hover:text-accent-foreground',
     // focus
     'focus:border-ring focus:ring-ring/50 focus:relative',
     // inner spans

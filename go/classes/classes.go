@@ -213,6 +213,35 @@ const (
 	TagAddInput  = "popui-tag-add-input"
 )
 
+// TagStatus classes
+const (
+	TagStatusBase       = "popui-tag-status"
+	TagStatusDot        = "popui-tag-status__dot"
+	TagStatusLabel      = "popui-tag-status__label"
+	TagStatusGreen      = "popui-tag-status--green"
+	TagStatusYellow     = "popui-tag-status--yellow"
+	TagStatusRed        = "popui-tag-status--red"
+	TagStatusOrange     = "popui-tag-status--orange"
+	TagStatusBlue       = "popui-tag-status--blue"
+	TagStatusPurple     = "popui-tag-status--purple"
+	TagStatusOlive      = "popui-tag-status--olive"
+	TagStatusTeal       = "popui-tag-status--teal"
+	TagStatusCrimson    = "popui-tag-status--crimson"
+	TagStatusBlueViolet = "popui-tag-status--blue-violet"
+	TagStatusSteelBlue  = "popui-tag-status--steel-blue"
+	TagStatusEmpty      = "popui-tag-status--empty"
+	TagStatusGrey       = "popui-tag-status--grey"
+)
+
+// ButtonCopy component classes
+const (
+	ButtonCopy        = "popui-button-copy"
+	ButtonCopyText    = "popui-button-copy__text"
+	ButtonCopyButton  = "popui-button-copy__button"
+	ButtonCopyIcon    = "popui-button-copy__icon"
+	ButtonCopyPopover = "popui-button-copy__popover"
+)
+
 // Upload classes
 const (
 	UploadFile            = "popui-upload_file"

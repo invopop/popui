@@ -40,7 +40,7 @@
   {id}
   {placeholder}
   {value}
-  class="{inputStyles} py-1.5 px-3 border w-full rounded placeholder-neutral-500 text-base tracking-tight"
+  class="{inputStyles} py-1.5 px-3 border w-full rounded placeholder-neutral-500 text-base tracking-tight bg-white"
   {disabled}
   {rows}
   {...rest}

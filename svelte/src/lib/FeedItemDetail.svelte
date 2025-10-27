@@ -23,7 +23,7 @@
     {#if status}
       <FeedIconStatus {status} />
     {/if}
-    <span class="truncate font-medium text-neutral-800 text-base">{title}</span>
+    <span class="flex-1 truncate font-medium text-neutral-800 text-base">{title}</span>
   </div>
   <SeparatorHorizontal />
   <div class="pl-3 py-1 pr-2.5 flex items-center space-x-0.5">

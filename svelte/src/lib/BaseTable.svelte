@@ -127,7 +127,10 @@
       return
     }
 
-    selectionMode = 'keyboard'
+    // Only set keyboard mode if it's not just the Shift key alone
+    if (event.key !== 'Shift') {
+      selectionMode = 'keyboard'
+    }
 
     if (event.key === 'Escape' || event.key === 'Esc') {
       event.preventDefault()

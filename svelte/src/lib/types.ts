@@ -23,6 +23,11 @@ export type StatusType =
   | 'orange'
   | 'blue'
   | 'purple'
+  | 'olive'
+  | 'teal'
+  | 'crimson'
+  | 'blueViolet'
+  | 'steelBlue'
   | 'empty'
 
 export type AnyProp = string | number | object | boolean
@@ -142,12 +147,14 @@ export type TabItem = {
 export type EmptyStateIcon =
   | 'invoices'
   | 'contacts'
+  | 'parties'
   | 'products'
   | 'deliveries'
   | 'orders'
   | 'payments'
   | 'pdf'
   | 'file'
+  | 'no-results'
   | 'no-results'
 
 export type DataListItem = {
@@ -489,6 +496,8 @@ export interface AlertDialogProps {
     events?: FeedEvent[];
     idLabel?: string;
     onCopied?: (uuid: string) => void;
+    cancelable?: boolean;
+    onCancel?: () => void;
   }
 
   export interface FeedViewerProps {

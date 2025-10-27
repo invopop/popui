@@ -8,6 +8,9 @@
   import IconPdf from './svg/IconPdf.svelte'
   import IconNoResults from './svg/IconNoResults.svelte'
   import type { SvelteComponent } from 'svelte'
+  import IconDelivery from './svg/IconDelivery.svelte'
+  import IconOrder from './svg/IconOrder.svelte'
+  import IconPayment from './svg/IconPayment.svelte'
 
   let {
     icon = undefined,
@@ -23,6 +26,9 @@
       invoices: IconInvoice,
       contacts: IconContact,
       products: IconProduct,
+      deliveries: IconDelivery,
+      orders: IconOrder,
+      payments: IconPayment,
       file: IconFile,
       pdf: IconPdf,
       'no-results': IconNoResults

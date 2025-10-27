@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
   import type { FeddIconStatusProps, FeedItemStatus } from './types.ts'
-  import { Alert, Failure, Queue, Running, Success, CheckBadge, Skip } from '@invopop/ui-icons'
+  import { Warning, Failure, Queue, Running, Success, CheckBadge, Skip } from '@invopop/ui-icons'
   import type { IconSource } from '@steeze-ui/heroicons'
 
   let { status }: FeddIconStatusProps = $props()
@@ -12,7 +12,7 @@
       success: Success,
       run: Running,
       queued: Queue,
-      alert: Alert,
+      alert: Warning,
       skip: Skip,
       signed: CheckBadge
     }
@@ -24,8 +24,8 @@
 
 {#if iconStatus}
   <div title={status}>
-    <Icon src={iconStatus} class="h-4 w-4 flex-shrink-0" />
+    <Icon src={iconStatus} class="h-4 w-4 shrink-0" />
   </div>
 {:else}
-  <div class="w-4 h-4 flex-shrink-0 bg-neutral-200 rounded-full"></div>
+  <div class="w-4 h-4 shrink-0 bg-neutral-200 rounded-full"></div>
 {/if}

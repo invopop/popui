@@ -1,6 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import { Alert, Failure, Success } from '@invopop/ui-icons'
+  import { Warning, Failure, Success } from '@invopop/ui-icons'
   import { Icon } from '@steeze-ui/svelte-icon'
   import type { NotificationProps, Status } from './types'
 
@@ -13,7 +13,7 @@
       case 'error':
         return Failure
       case 'warning':
-        return Alert
+        return Warning
       default:
         return null
     }

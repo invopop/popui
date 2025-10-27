@@ -79,7 +79,7 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/core": "^1.5.1",
-    "@invopop/ui-icons": "0.0.67",
+    "@invopop/ui-icons": "0.0.71",
     "@steeze-ui/heroicons": "^2.2.3",
     "@steeze-ui/svelte-icon": "^1.6.2",
     "@tailwindcss/vite": "^4.1.12",

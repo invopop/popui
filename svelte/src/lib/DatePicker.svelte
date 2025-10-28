@@ -115,7 +115,7 @@
     onSelect
   }: DatePickerProps = $props()
 
-  let selectedPeriod = $state('this-week')
+  let selectedPeriod = $state('custom')
   let value = $state<DateRange>({
     start: undefined,
     end: undefined
@@ -143,14 +143,15 @@
       }
       return
     }
-    value = {
-      start: toCalendarDate(startOfThisWeek),
-      end: toCalendarDate(endOfThisWeek)
-    }
-    selectedPeriod = 'this-week'
   })
 
   function cancel() {
+    value = {
+      start: undefined,
+      end: undefined
+    }
+    selectedPeriod = 'custom'
+    selectedLabel = label
     isOpen = false
     onSelect?.({ from: '', to: '' })
   }

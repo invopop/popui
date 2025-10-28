@@ -15,7 +15,7 @@
     buttonVariants({ variant: 'ghost' }),
     'size-(--cell-size) flex select-none flex-col items-center justify-center gap-1 whitespace-nowrap p-0 font-normal leading-none',
     // today
-    '[&[data-today]:not([data-selected])]:border-b [&[data-today]:not([data-selected])]:border-workspace-accent [&[data-today]:not([data-selected])]:rounded-none',
+    '[&[data-today]:not([data-selected]):not([data-outside-month])]:border-b [&[data-today]:not([data-selected]):not([data-outside-month])]:border-workspace-accent [&[data-today]:not([data-selected]):not([data-outside-month])]:rounded-none',
     // range Start
     'data-[range-start]:bg-workspace-accent data-[range-start]:text-white data-[range-start]:font-semibold data-[range-start]:shadow-active',
     // range middle

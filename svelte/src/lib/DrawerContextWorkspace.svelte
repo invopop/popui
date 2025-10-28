@@ -114,12 +114,12 @@
         }}
       >
         <div class="flex items-center space-x-1.5">
-          <Icon src={AddCircle} class="w-4 h-4 text-neutral-800 flex-shrink-0" />
+          <Icon src={AddCircle} class="w-4 h-4 text-neutral-800 shrink-0" />
           <span class="text-neutral-800 tracking-tight text-base font-medium">Create workspace</span
           >
         </div>
 
-        <Icon src={ExternalLink} class="w-5 h-5 text-neutral-800 flex-shrink-0" />
+        <Icon src={ExternalLink} class="w-4 h-4 text-neutral-400 shrink-0" />
       </button>
     </li>
   </ul>

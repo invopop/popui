@@ -241,7 +241,7 @@
   }}
 />
 
-<div class="w-full font-sans border rounded-md border-neutral-100">
+<div class="h-full w-full font-sans border rounded-md border-neutral-100 overflow-auto">
   <Table class="hidden md:table" {...rest}>
     <colgroup>
       {#if selectable}

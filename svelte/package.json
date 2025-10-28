@@ -1,9 +1,11 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "scripts": {
     "dev": "vite dev",
+    "dev:clean": "npm run clean && vite dev",
+    "clean": "rm -rf .svelte-kit node_modules/.vite node_modules/.cache",
     "build": "vite build && npm run package",
     "preview": "vite preview",
     "package": "svelte-kit sync && svelte-package && publint",

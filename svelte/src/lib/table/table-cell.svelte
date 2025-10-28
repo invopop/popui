@@ -15,7 +15,7 @@
   bind:this={ref}
   data-slot="table-cell"
   class={cn(
-    'py-3 pl-3 pr-3 align-middle text-neutral-500 font-normal text-base [&:has([role=checkbox])]:pr-2 [&:has([role=menu])]:pl-1 relative',
+    'py-3 pl-3 pr-3 align-middle text-neutral-500 font-normal text-base [&:has([role=checkbox])]:pr-2 [&:has([role=menu])]:pl-1 relative z-1',
     className
   )}
   onclick={bubble('click')}

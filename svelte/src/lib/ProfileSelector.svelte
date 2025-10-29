@@ -25,7 +25,7 @@
 </script>
 
 <button
-  class="{styles} text-white border border-transparent text-base flex items-center justify-between space-x-1 rounded text-left"
+  class="cursor-pointer {styles} text-white border border-transparent text-base flex items-center justify-between space-x-1 rounded text-left"
   {onclick}
 >
   <span class="flex items-center justify-between w-full space-x-2">

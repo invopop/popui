@@ -16,7 +16,7 @@
 </script>
 
 <button
-  class="rounded-lg bg-white hover:bg-neutral-100 focus:bg-neutral-200 disabled:bg-neutral-50 disabled:pointer-events-none border border-neutral-100 p-3 flex flex-col min-w-[298px] min-h-[126px] text-left"
+  class="cursor-pointer rounded-lg bg-white hover:bg-neutral-100 focus:bg-neutral-200 disabled:bg-neutral-50 disabled:pointer-events-none border border-neutral-100 p-3 flex flex-col min-w-[298px] min-h-[126px] text-left"
   disabled={type === 'soon'}
   {...rest}
   {onclick}
@@ -24,7 +24,7 @@
   <div class="flex flex-col items-start justify-center space-y-2 w-full">
     <div class="flex items-center justify-between w-full">
       <div class="rounded-md bg-white border border-neutral-100 p-1.5">
-        <img class="h-5 w-5 flex-shrink-0" src={imageUrl} alt={imageAlt} />
+        <img class="h-5 w-5 shrink-0" src={imageUrl} alt={imageAlt} />
       </div>
       <div class="flex items-center space-x-2">
         {#if enabled}

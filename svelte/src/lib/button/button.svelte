@@ -3,7 +3,7 @@
   import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements'
   import { type VariantProps, tv } from 'tailwind-variants'
   export const buttonVariants = tv({
-    base: 'ring-workspace-accent-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 flex items-center justify-center font-medium font-sans relative group tracking-tight rounded-md text-base text-neutral-800 box-border',
+    base: 'cursor-pointer ring-workspace-accent-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 flex items-center justify-center font-medium font-sans relative group tracking-tight rounded-md text-base text-neutral-800 box-border',
     variants: {
       variant: {
         default: 'bg-white text-neutral-800 hover:bg-primary/90',

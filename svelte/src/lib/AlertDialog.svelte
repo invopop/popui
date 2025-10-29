@@ -27,6 +27,7 @@
     children
   }: AlertDialogProps = $props()
 
+  let previousOpen = $state(open)
   let recentAction = $state(false)
 
   function cancel() {
@@ -46,16 +47,12 @@
   }
 
   $effect(() => {
-    if (!open) {
-      cancelByEsc()
+    // Only fire oncancel when transitioning from true to false (ESC or backdrop click)
+    if (previousOpen && !open && !recentAction) {
+      oncancel?.()
     }
+    previousOpen = open
   })
-
-  function cancelByEsc() {
-    if (recentAction) return
-
-    oncancel?.()
-  }
 
   function handleOpen(value: boolean) {
     if (value) {

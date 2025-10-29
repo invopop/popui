@@ -39,7 +39,7 @@
 </script>
 
 <button
-  class="{styles} flex items-center border pl-1.5 py-1.5 pr-2 border-white-10 bg-neutral-800/10 rounded-md"
+  class="cursor-pointer {styles} flex items-center border pl-1.5 py-1.5 pr-2 border-white-10 bg-neutral-800/10 rounded-md"
   onclick={() => onOpen?.()}
 >
   <Icon src={Search} class="w-4 h-4 text-white-70" />

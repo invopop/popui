@@ -28,7 +28,7 @@
   <span class="py-1 pr-2 text-workspace-accent tracking-normal">{label}</span>
   <button
     aria-label="Clear"
-    class="py-1 border-l border-workspace-accent-100 pl-1 text-neutral-500"
+    class="cursor-pointer py-1 border-l border-workspace-accent-100 pl-1 text-neutral-500"
     onclick={handleClear}
   >
     <svg

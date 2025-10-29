@@ -22,7 +22,7 @@
         </a>
       {:else if breadcrumb.copiable}
         <button
-          class={i < breadcrumbs.length - 1 ? 'text-neutral-400' : 'font-medium'}
+          class="cursor-pointer {i < breadcrumbs.length - 1 ? 'text-neutral-400' : 'font-medium'}"
           onclick={(e) => handleClick(e, breadcrumb.label)}
         >
           {breadcrumb.label}

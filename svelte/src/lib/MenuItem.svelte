@@ -106,7 +106,7 @@
     onmouseleave={handleBlur}
     onclick={handleClick}
     title={label}
-    class="{itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-md"
+    class="cursor-pointer {itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-md"
   >
     <span class="flex items-center space-x-2">
       {#if resolvedIcon}
@@ -118,6 +118,7 @@
     </span>
     {#if collapsable && !collapsedSidebar}
       <button
+        class="cursor-pointer"
         onclick={(e) => {
           e.stopPropagation()
           open = !open

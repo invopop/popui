@@ -8,7 +8,10 @@
 </script>
 
 <div class="border border-neutral-100 rounded-lg">
-  <button class="pl-3 py-2 pr-2 flex items-center justify-between space-x-3 w-full" {onclick}>
+  <button
+    class="cursor-pointer pl-3 py-2 pr-2 flex items-center justify-between space-x-3 w-full"
+    {onclick}
+  >
     <div class="flex items-center space-x-1.5">
       {#if icon}
         <Icon src={icon} class="h-4 w-4 text-neutral-500" />

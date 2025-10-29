@@ -64,7 +64,7 @@
 
 <button
   bind:this={el}
-  class="w-full px-1 py-0.5 disabled:opacity-30 group"
+  class="cursor-pointer w-full px-1 py-0.5 disabled:opacity-30 group"
   disabled={item.disabled}
   onclick={handleClick}
 >

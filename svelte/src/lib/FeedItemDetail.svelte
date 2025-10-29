@@ -37,6 +37,7 @@
     <div class="px-3 py-2 text-sm text-neutral-500 flex items-center justify-between">
       <span>Logs</span>
       <button
+        class="cursor-pointer"
         aria-label="Toggle details"
         onclick={() => {
           open = !open

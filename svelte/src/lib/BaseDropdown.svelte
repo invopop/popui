@@ -51,7 +51,7 @@
 
 <div class="inline-flex" class:w-full={fullWidth} role="menu">
   <button
-    class="text-left"
+    class="cursor-pointer text-left"
     class:w-full={fullWidth}
     use:floatingRef
     {...rest}
@@ -61,7 +61,7 @@
   </button>
   {#if isOpen}
     <div
-      class="max-h-40 absolute z-[1001]"
+      class="max-h-40 absolute z-1001"
       use:portal
       use:floatingContent
       use:clickOutside

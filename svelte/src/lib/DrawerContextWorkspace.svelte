@@ -29,7 +29,7 @@
 <div class="w-[300px] border border-neutral-200 rounded-md shadow-lg bg-white">
   <div class="max-h-[550px] overflow-hidden rounded-t-md">
     <button
-      class="flex items-center justify-between bg-neutral-50 border-b border-neutral-200 rounded-t-sm h-9 py-2 pl-2.5 pr-3 text-base font-medium text-neutral-800 w-full"
+      class="cursor-pointer flex items-center justify-between bg-neutral-50 border-b border-neutral-200 rounded-t-sm h-9 py-2 pl-2.5 pr-3 text-base font-medium text-neutral-800 w-full"
       onclick={() => {
         if (liveOpen) return
         liveOpen = true
@@ -66,7 +66,7 @@
       </div>
     {/if}
     <button
-      class="flex items-center justify-between bg-neutral-50 border-b border-neutral-200 h-9 py-2 pl-2.5 pr-3 text-base font-medium text-neutral-800 w-full"
+      class="cursor-pointer flex items-center justify-between bg-neutral-50 border-b border-neutral-200 h-9 py-2 pl-2.5 pr-3 text-base font-medium text-neutral-800 w-full"
       class:border-t={liveOpen}
       onclick={() => {
         if (sandboxOpen) return
@@ -108,7 +108,7 @@
   <ul class="px-1 space-y-1 bg-neutral-50 rounded-b border-t border-neutral-100 py-1">
     <li class="pl-1.5 py-1.5 pr-2 hover:bg-neutral-100 rounded-sm">
       <button
-        class="flex items-center justify-between w-full"
+        class="cursor-pointer flex items-center justify-between w-full"
         onclick={() => {
           onclick?.('add')
         }}

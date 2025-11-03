@@ -31,7 +31,7 @@
       "types": "./dist/types.d.ts",
       "default": "./dist/types.d.ts"
     },
-    "./twTheme.js": "./dist/tw.theme.js",
+    "./tailwind.theme.css": "./dist/tailwind.theme.css",
     "./package.json": "./dist/package.json"
   },
   "files": [

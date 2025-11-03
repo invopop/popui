@@ -12,7 +12,7 @@
   bind:ref
   data-slot="alert-dialog-description"
   class={cn(
-    'text-neutral-500 text-base flex flex-col space-y-2 justify-start items-start !mt-2',
+    'text-base font-normal leading-5 tracking-tight text-foreground-default-secondary',
     className
   )}
 >

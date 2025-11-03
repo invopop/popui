@@ -154,6 +154,22 @@
   --color-teal-200: rgba(29, 142, 142, 0.25);
   --color-teal-500: rgba(29, 142, 142, 1);
 
+  /* Semantic Colors - Foreground */
+  --color-foreground-default-secondary: #6b727d;
+  --color-foreground-inverse-secondary: rgba(255, 255, 255, 0.7);
+  
+  /* Semantic Colors - Background */
+  --color-background-default-default: #ffffff;
+  --color-background-default-bold: #004235;
+  
+  /* Semantic Colors - Border */
+  --color-border-default-default: rgba(5, 5, 36, 0.06);
+  --color-border-inverse-default: rgba(255, 255, 255, 0.1);
+  
+  /* Semantic Colors - Icon */
+  --color-icon-default-default: rgba(4, 17, 37, 0.59);
+  --color-icon-inverse-default: rgba(255, 255, 255, 0.7);
+
   /* Box Shadow */
   --shadow-active: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, #169958));
   --shadow-warning: 0px 0px 0px 2px rgba(215, 135, 0, 0.12);

@@ -638,11 +638,11 @@ export interface AlertDialogProps {
 
   export interface ProfileAvatarProps {
     name?: string;
-    small?: boolean;
-    large?: boolean;
+    variant?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     dark?: boolean;
     picture?: string;
     country?: string;
+    icon?: IconSource;
   }
 
   export interface ProfileSelectorProps {

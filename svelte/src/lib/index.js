@@ -68,7 +68,6 @@ import TitleSection from './TitleSection.svelte'
 import { Toaster } from './sonner'
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
 import UuidCopy from './UuidCopy.svelte'
-import twTheme from './tw.theme.js'
 import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
 
 export {
@@ -145,7 +144,6 @@ export {
   TooltipContent,
   TooltipTrigger,
   UuidCopy,
-  twTheme,
   resolveIcon,
   getCountryName,
   getStatusType

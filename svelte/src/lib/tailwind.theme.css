@@ -695,7 +695,108 @@
   --color-icon-status-rejected: var(--color-personalization-magenta-50);
   --color-icon-status-void: var(--color-neutral-50);
 
-  @media (prefers-color-scheme: dark) {
+  /* ============================================
+     TOKEN ALIASES (default omitted)
+     ============================================ */
+  
+  /* Foreground */
+  --color-foreground: var(--color-foreground-default-default);
+  
+  --color-foreground-inverse: var(--color-foreground-inverse-default);
+  
+  --color-foreground-accent: var(--color-foreground-accent-default);
+  --color-foreground-accent-hover: var(--color-foreground-accent-default-hover);
+  
+  --color-foreground-selected: var(--color-foreground-selected-default);
+  --color-foreground-selected-hover: var(--color-foreground-selected-default-hover);
+  
+  --color-foreground-success: var(--color-foreground-success-default);
+  --color-foreground-info: var(--color-foreground-info-default);
+  --color-foreground-attention: var(--color-foreground-attention-default);
+  --color-foreground-warning: var(--color-foreground-warning-default);
+  --color-foreground-critical: var(--color-foreground-critical-default);
+  
+  /* Background */
+  --color-background: var(--color-background-default-default);
+  
+  --color-background-selected: var(--color-background-selected-default);
+  --color-background-selected-hover: var(--color-background-selected-default-hover);
+  --color-background-selected-press: var(--color-background-selected-default-press);
+  
+  --color-background-accent: var(--color-background-accent-default);
+  --color-background-accent-hover: var(--color-background-accent-default-hover);
+  --color-background-accent-press: var(--color-background-accent-default-press);
+  
+  --color-background-info: var(--color-background-info-default);
+  
+  --color-background-success: var(--color-background-success-default);
+  
+  --color-background-attention: var(--color-background-attention-default);
+  
+  --color-background-warning: var(--color-background-warning-default);
+  
+  --color-background-critical: var(--color-background-critical-default);
+  
+  /* Border */
+  --color-border: var(--color-border-default-default);
+  
+  --color-border-inverse: var(--color-border-inverse-default);
+  
+  --color-border-selected: var(--color-border-selected-default);
+  
+  --color-border-warning: var(--color-border-warning-default);
+  
+  /* Icon */
+  --color-icon: var(--color-icon-default-default);
+  
+  --color-icon-inverse: var(--color-icon-inverse-default);
+  
+  --color-icon-selected: var(--color-icon-selected-default);
+  --color-icon-success: var(--color-icon-success-default);
+  --color-icon-info: var(--color-icon-info-default);
+  --color-icon-attention: var(--color-icon-attention-default);
+  --color-icon-warning: var(--color-icon-warning-default);
+  --color-icon-critical: var(--color-icon-critical-default);
+
+  /* Font Sizes */
+  --text-xl: 20px;
+  --text-xl--line-height: 28px;
+  --text-lg: 16px;
+  --text-lg--line-height: 24px;
+  --text-base: 14px;
+  --text-base--line-height: 20px;
+  --text-sm: 12px;
+  --text-sm--line-height: 16px;
+
+  /* Spacing */
+  --spacing-1\.25: 5px;
+  --spacing-18: 4.5rem;
+  --spacing-128: 32rem;
+
+  /* Border Radius */
+  --radius-xl: 0.625rem;
+  --radius-2xl: 12px;
+
+  /* Box Shadow */
+  --shadow-active: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, var(--color-positive-50)));
+  --shadow-warning: 0px 0px 0px 2px rgba(215, 135, 0, 0.12);
+  --shadow-button-default: 0px -4px 4px 0px rgba(11, 11, 16, 0.12) inset, 0px 2px 1.5px 0px rgba(255, 255, 255, 0.16) inset;
+  --shadow-button-pressed: 0px 4px 4px -1px rgba(11, 11, 16, 0.2) inset;
+
+  /* Letter Spacing (tracking) */
+  --tracking-tightest: -0.567px;
+  --tracking-tighter: -0.304px;
+  --tracking-tight: -0.07px;
+  --tracking-normal: -0.039px;
+  --tracking-wide: 0.055px;
+
+  /* Font Family */
+  --font-sans: Inter, sans-serif;
+  --font-mono: CommitMono, ui-monospace, Menlo, Monaco, Consolas, "Ubuntu Mono", "Roboto Mono", "DejaVu Sans Mono", monospace;
+}
+
+@layer theme {
+  .dark {
     /* Foreground */
     --color-foreground-default-default: var(--color-white-90);
     --color-foreground-default-secondary: var(--color-neutral-white-alpha-50);
@@ -851,40 +952,4 @@
     --color-icon-status-rejected: var(--color-personalization-magenta-40);
     --color-icon-status-void: var(--color-neutral-40);
   }
-
-  /* Font Sizes */
-  --text-xl: 20px;
-  --text-xl--line-height: 28px;
-  --text-lg: 16px;
-  --text-lg--line-height: 24px;
-  --text-base: 14px;
-  --text-base--line-height: 20px;
-  --text-sm: 12px;
-  --text-sm--line-height: 16px;
-
-  /* Spacing */
-  --spacing-1\.25: 5px;
-  --spacing-18: 4.5rem;
-  --spacing-128: 32rem;
-
-  /* Border Radius */
-  --radius-xl: 0.625rem;
-  --radius-2xl: 12px;
-
-  /* Box Shadow */
-  --shadow-active: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, var(--color-positive-50)));
-  --shadow-warning: 0px 0px 0px 2px rgba(215, 135, 0, 0.12);
-  --shadow-button-default: 0px -4px 4px 0px rgba(11, 11, 16, 0.12) inset, 0px 2px 1.5px 0px rgba(255, 255, 255, 0.16) inset;
-  --shadow-button-pressed: 0px 4px 4px -1px rgba(11, 11, 16, 0.2) inset;
-
-  /* Letter Spacing (tracking) */
-  --tracking-tightest: -0.567px;
-  --tracking-tighter: -0.304px;
-  --tracking-tight: -0.07px;
-  --tracking-normal: -0.039px;
-  --tracking-wide: 0.055px;
-
-  /* Font Family */
-  --font-sans: Inter, sans-serif;
-  --font-mono: CommitMono, ui-monospace, Menlo, Monaco, Consolas, "Ubuntu Mono", "Roboto Mono", "DejaVu Sans Mono", monospace;
 }

@@ -18,7 +18,7 @@
     bind:ref
     data-slot="alert-dialog-content"
     class={cn(
-      'bg-background-default-default fixed left-1/2 top-1/2 z-[1002] flex flex-col w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl overflow-clip',
+      'bg-background fixed left-1/2 top-1/2 z-[1002] flex flex-col w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl overflow-clip',
       className
     )}
   >

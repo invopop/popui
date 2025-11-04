@@ -229,7 +229,6 @@ export interface AlertDialogProps {
     title?: string;
     description?: string;
     type?: 'default' | 'soon' | 'beta';
-    enabled?: boolean;
     footer?: Snippet;
     [key: string]: any;
     onclick?: (event: MouseEvent) => void;

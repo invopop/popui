@@ -9,7 +9,7 @@ const meta = {
   title: 'Components/BaseCard',
   component: BaseCard,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator]
 } satisfies Meta<BaseCard>
 
 export default meta
@@ -25,16 +25,6 @@ export const Default: Story = {
   }
 }
 
-export const Enabled: Story = {
-  args: {
-    imageUrl: 'https://picsum.photos/16',
-    imageAlt: 'Best pic ever',
-    title: 'Amazing Stuff',
-    description: 'This is incredible, trust me.',
-    enabled: true
-  }
-}
-
 export const Beta: Story = {
   args: {
     imageUrl: 'https://picsum.photos/16',
@@ -42,17 +32,6 @@ export const Beta: Story = {
     title: 'Amazing Stuff',
     description: 'This is incredible, trust me.',
     type: 'beta'
-  }
-}
-
-export const EnabledBeta: Story = {
-  args: {
-    imageUrl: 'https://picsum.photos/16',
-    imageAlt: 'Best pic ever',
-    title: 'Amazing Stuff',
-    description: 'This is incredible, trust me.',
-    type: 'beta',
-    enabled: true
   }
 }
 

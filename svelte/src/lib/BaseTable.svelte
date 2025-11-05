@@ -305,7 +305,7 @@
               >
                 <span>{group.label}</span>
                 {#if !hideCounter}
-                  <BaseCounter content={group.rows.length} />
+                  <BaseCounter value={group.rows.length} />
                 {/if}
               </span>
             </th>

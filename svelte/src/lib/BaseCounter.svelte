@@ -16,6 +16,8 @@
   )
 </script>
 
-<div class={styles}>
-  <p class="flex items-center justify-center min-w-2.5">{value}</p>
+<div class="p-0.5">
+  <div class={styles}>
+    <p class="flex items-center justify-center min-w-2.5">{value}</p>
+  </div>
 </div>

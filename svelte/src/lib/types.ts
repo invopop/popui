@@ -334,6 +334,12 @@ export interface AlertDialogProps {
     onClickAction?: (args: {row: TableDataRow, action: AnyProp}) => void;
   }
 
+  export interface BreadcrumbProps {
+    breadcrumb: Breadcrumb;
+    isLast: boolean;
+    oncopied?: (label: string) => void;
+  }
+
   export interface BreadcrumbsProps {
     breadcrumbs?: Breadcrumb[];
     oncopied?: (label: string) => void;

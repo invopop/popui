@@ -3,8 +3,10 @@
 
   let {
     checked = false,
+    disabled = false,
     id = Math.random().toString(36).slice(2, 7),
     name = '',
+    label,
     onchange,
     ...rest
   }: InputRadioProps = $props()
@@ -19,18 +21,33 @@
 
   function updateInput(event: Event) {
     const target = event.target as HTMLInputElement
-
     onchange?.(target.checked)
   }
 </script>
 
-<input
-  bind:this={el}
-  type="radio"
-  {id}
-  {name}
-  {checked}
-  class="form-radio h-5 w-5 border-neutral-200 text-workspace-accent focus:ring-0 focus:ring-offset-0 cursor-pointer"
-  {...rest}
-  onchange={updateInput}
-/>
+{#snippet radioInput()}
+  <input
+    bind:this={el}
+    type="radio"
+    {id}
+    {name}
+    {checked}
+    {disabled}
+    class="appearance-none size-4 rounded-full border checked:border-0 checked:bg-foreground-selected cursor-pointer focus:outline-none focus:ring-0 shrink-0 disabled:cursor-not-allowed disabled:border-border-default-secondary disabled:checked:bg-border-default-secondary disabled:checked:border"
+    {...rest}
+    onchange={updateInput}
+  />
+{/snippet}
+
+{#if label}
+  <label class="flex items-center gap-2 cursor-pointer">
+    {@render radioInput()}
+    <span
+      class="font-sans text-sm font-normal leading-5 tracking-[-0.07px] text-foreground whitespace-nowrap"
+    >
+      {label}
+    </span>
+  </label>
+{:else}
+  {@render radioInput()}
+{/if}

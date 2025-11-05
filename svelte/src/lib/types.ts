@@ -372,6 +372,7 @@ export interface AlertDialogProps {
     description?: string;
     accentText?: string;
     checked?: boolean;
+    disabled?: boolean;
     icon?: IconSource | undefined;
     hideRadio?: boolean;
     footer?: Snippet;
@@ -542,8 +543,10 @@ export interface AlertDialogProps {
 
   export interface InputRadioProps {
     checked?: boolean;
+    disabled?: boolean;
     id?: any;
     name?: string;
+    label?: string;
     onchange?: (checked: boolean) => void;
     [key: string]: any
   }

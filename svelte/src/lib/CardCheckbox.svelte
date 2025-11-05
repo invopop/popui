@@ -11,47 +11,52 @@
     description = '',
     accentText = '',
     checked = false,
+    disabled = false,
     icon = undefined,
     hideRadio = false,
     footer,
     onchange
   }: CardCheckboxProps = $props()
 
-  let styles = $derived(
-    clsx(
-      { 'border-workspace-accent shadow-active': checked },
-      { 'border-neutral-200 hover:border-neutral-300': !checked }
-    )
+  let containerStyles = $derived(
+    clsx('border gap-3 py-2 pr-2 pl-3 flex items-start rounded-[10px]', {
+      'border-foreground-selected': checked && !disabled,
+      'border-border bg-background-default-secondary': disabled
+    })
   )
 </script>
 
-<label for={id} class="{styles} border rounded-lg w-full text-left cursor-pointer block">
-  <div class="py-2 pr-2 pl-3 flex items-start justify-between">
-    <div class="flex space-x-2">
+<label for={id} class="cursor-pointer">
+  <div class={containerStyles}>
+    <div class="flex grow items-start gap-1 min-w-0">
       {#if icon}
-        <Icon src={icon} class="h-5 w-5 text-neutral-500 flex-shrink-0" />
+        <Icon src={icon} class="size-5 text-icon shrink-0" />
       {/if}
-      <div class="flex flex-col space-y-0.5">
-        <span class="text-base text-neutral-800 font-medium">{title}</span>
+      <div class="flex flex-col gap-1 min-w-0">
+        <span class="font-sans text-sm font-medium leading-5 tracking-[-0.07px] text-foreground">
+          {title}
+        </span>
         {#if description}
-          <span class="flex items-center space-x-1">
+          <span class="font-sans text-xs font-normal leading-4 text-foreground-default-secondary">
             {#if accentText}
-              <p class="text-workspace-accent text-sm font-bold">{accentText}</p>
+              <span class="font-medium text-foreground-accent">{accentText}</span>
+              {' · '}
             {/if}
-            <p class="text-sm text-neutral-500" class:first-letter:uppercase={!accentText}>
-              {description}
-            </p>
+            {description}
           </span>
         {/if}
       </div>
     </div>
-
-    <div class:hidden={hideRadio}>
-      <InputRadio {id} {name} {checked} {onchange} />
-    </div>
+    {#if !hideRadio}
+      <div class="flex items-center p-px">
+        <InputRadio {id} {name} {checked} {disabled} {onchange} />
+      </div>
+    {/if}
   </div>
   {#if footer}
-    <div class="bg-neutral-50 rounded-b-lg px-3 py-2.5 border-t border-neutral-100">
+    <div
+      class="border-t border-border bg-background-default-secondary rounded-b-[10px] px-3 pb-3 pt-2"
+    >
       {@render footer?.()}
     </div>
   {/if}

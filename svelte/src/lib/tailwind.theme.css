@@ -544,7 +544,7 @@
   --color-foreground-default-secondary: var(--color-neutral-50);
   --color-foreground-default-tertiary: var(--color-neutral-40);
 
-  --color-foreground-inverse-default: var(--color-white-100);
+  --color-foreground-inverse-default: var(--color-white);
   --color-foreground-inverse-secondary: var(--color-neutral-white-alpha-70);
 
   --color-foreground-accent-default: var(--color-accent-60);
@@ -802,7 +802,7 @@
     --color-foreground-default-secondary: var(--color-neutral-white-alpha-50);
     --color-foreground-default-tertiary: var(--color-neutral-white-alpha-40);
 
-    --color-foreground-inverse-default: var(--color-white-100);
+    --color-foreground-inverse-default: var(--color-white);
     --color-foreground-inverse-secondary: var(--color-neutral-alpha-70);
 
     --color-foreground-accent-default: var(--color-accent-60);

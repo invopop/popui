@@ -2,19 +2,20 @@
   import clsx from 'clsx'
   import type { BaseCounterProps } from './types'
 
-  let { content, variant = 'default' }: BaseCounterProps = $props()
+  let { value, theme = 'light' }: BaseCounterProps = $props()
 
   let styles = $derived(
     clsx(
-      { 'bg-neutral-100': variant === 'light' },
-      { 'bg-neutral-200': variant === 'default' },
-      { 'bg-neutral-300': variant === 'dark' }
+      'inline-flex items-center justify-center rounded px-[3px] pb-[1.5px] pt-[2.5px] font-mono font-medium text-xs leading-none',
+      {
+        'bg-background-default-tertiary text-foreground': theme === 'light',
+        'bg-background-accent text-foreground-inverse': theme === 'accent',
+        'bg-background-selected-inverse text-foreground-inverse': theme === 'navigation'
+      }
     )
   )
 </script>
 
-<div
-  class="{styles} inline-flex items-center justify-center rounded p-1 text-neutral-500 text-sm font-medium h-4 min-w-[16px] tracking-wide tabular-nums slashed-zero lining-nums box-border"
->
-  {content}
+<div class={styles}>
+  <p class="flex items-center justify-center min-w-2.5">{value}</p>
 </div>

@@ -1,49 +1,57 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import BaseCounter from '../lib/BaseCounter.svelte'
+import DarkBackgroundDecorator from './decorartors/DarkBackgroundDecorator.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 
-// More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/BaseCounter',
-  component: BaseCounter,
+  component: BaseCounter as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
 } satisfies Meta<BaseCounter>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-// More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
-export const OneFigure: Story = {
-  args: {
-    content: 0
-  }
-}
-
-export const TwoFigures: Story = {
-  args: {
-    content: 10
-  }
-}
-
-export const ThreeFigures: Story = {
-  args: {
-    content: 980
-  }
-}
-
 export const Light: Story = {
   args: {
-    content: 2,
-    variant: 'light'
+    value: 1,
+    theme: 'light'
   }
 }
 
-export const Dark: Story = {
+export const Accent: Story = {
   args: {
-    content: 2,
-    variant: 'dark'
+    value: 5,
+    theme: 'accent'
   }
 }
+
+export const Navigation: Story = {
+  args: {
+    value: 3,
+    theme: 'navigation'
+  },
+  decorators: [() => DarkBackgroundDecorator as any]
+}
+
+export const SingleDigit: Story = {
+  args: {
+    value: 2
+  }
+}
+
+export const DoubleDigit: Story = {
+  args: {
+    value: 42
+  }
+}
+
+export const TripleDigit: Story = {
+  args: {
+    value: 123
+  }
+}
+

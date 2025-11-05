@@ -235,8 +235,8 @@ export interface AlertDialogProps {
   }
 
   export interface BaseCounterProps {
-    content: number;
-    variant?: 'default' | 'light' | 'dark';
+    value: number;
+    theme?: 'light' | 'navigation' | 'accent';
   }
 
   export interface BaseDropdownProps {

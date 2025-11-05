@@ -19,8 +19,7 @@ import DrawerContext from './DrawerContext.svelte'
 import DrawerContextItem from './DrawerContextItem.svelte'
 import DrawerContextSeparator from './DrawerContextSeparator.svelte'
 import DropdownSelect from './DropdownSelect.svelte'
-import EmptyStateIcon from './EmptyStateIcon.svelte'
-import EmptyStateIllustration from './EmptyStateIllustration.svelte'
+import EmptyState from './EmptyState.svelte'
 import FeedEvents from './FeedEvents.svelte'
 import FeedIconEvent from './FeedIconEvent.svelte'
 import FeedIconStatus from './FeedIconStatus.svelte'
@@ -91,8 +90,7 @@ export {
   DrawerContextItem,
   DrawerContextSeparator,
   DropdownSelect,
-  EmptyStateIcon,
-  EmptyStateIllustration,
+  EmptyState,
   FeedEvents,
   FeedIconEvent,
   FeedIconStatus,

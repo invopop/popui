@@ -4,7 +4,7 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import { AddCircle, ExternalLink, Workspace } from '@invopop/ui-icons'
   import BaseCounter from './BaseCounter.svelte'
-  import EmptyStateIcon from './EmptyStateIcon.svelte'
+  import EmptyState from './EmptyState.svelte'
   import { slide } from 'svelte/transition'
   import { ChevronRight } from '@steeze-ui/heroicons'
 
@@ -44,15 +44,15 @@
         <span>Live</span>
       </div>
       {#if liveItems.length}
-        <BaseCounter content={liveItems.length} />
+        <BaseCounter value={liveItems.length} />
       {/if}
     </button>
     {#if liveOpen}
       <div transition:slide class="max-h-[475px] overflow-auto">
         {#if !liveItems.length}
           <div class="h-[182px] overflow-x-hidden">
-            <EmptyStateIcon
-              icon={Workspace}
+            <EmptyState
+              iconSource={Workspace}
               title="No workspaces here"
               description="Create a workspace to start"
             />
@@ -82,15 +82,15 @@
         <span>Sandbox</span>
       </div>
       {#if sandboxItems.length}
-        <BaseCounter content={sandboxItems.length} />
+        <BaseCounter value={sandboxItems.length} />
       {/if}
     </button>
     {#if sandboxOpen}
       <div transition:slide class="max-h-[475px] overflow-auto">
         {#if !sandboxItems.length}
           <div class="h-[182px] overflow-x-hidden">
-            <EmptyStateIcon
-              icon={Workspace}
+            <EmptyState
+              iconSource={Workspace}
               title="No workspaces here"
               description="Create a workspace to start"
             />

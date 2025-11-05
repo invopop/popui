@@ -1,0 +1,40 @@
+<script lang="ts">
+  import IconEmpty from './svg/IconEmpty.svelte'
+  import CheckBadge from './svg/CheckBadge.svelte'
+  import { Icon } from '@steeze-ui/svelte-icon'
+  import type { EmptyStateProps } from './types'
+
+  let {
+    icon,
+    iconSource,
+    title = '',
+    description = '',
+    check = false,
+    children
+  }: EmptyStateProps = $props()
+</script>
+
+<div class="flex flex-col items-center justify-center gap-4 py-4">
+  {#if icon}
+    <div class="relative h-[120px] w-[352px] max-w-sm flex items-center justify-center">
+      {@render icon()}
+    </div>
+  {:else if iconSource}
+    <div class="relative h-[120px] w-[352px] max-w-sm">
+      <IconEmpty />
+      <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+        <Icon src={iconSource} class="h-12 w-12 text-foreground-accent" />
+        {#if check}
+          <CheckBadge />
+        {/if}
+      </div>
+    </div>
+  {/if}
+  <div class="flex flex-col items-center gap-0.5 text-center">
+    <h4 class="font-medium text-foreground text-base">{title}</h4>
+    <p class="text-foreground-default-secondary text-base">{description}</p>
+  </div>
+  {#if children}
+    {@render children()}
+  {/if}
+</div>

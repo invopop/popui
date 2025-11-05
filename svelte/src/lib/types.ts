@@ -144,18 +144,6 @@ export type TabItem = {
   warning?: boolean
 }
 
-export type EmptyStateIcon =
-  | 'invoices'
-  | 'contacts'
-  | 'parties'
-  | 'products'
-  | 'deliveries'
-  | 'orders'
-  | 'payments'
-  | 'pdf'
-  | 'file'
-  | 'no-results'
-  | 'no-results'
 
 export type DataListItem = {
   label: string
@@ -447,18 +435,12 @@ export interface AlertDialogProps {
     onSelect?: (value: AnyProp) => void;
   }
 
-  export interface EmptyStateIconProps {
-    icon?: IconSource | undefined;
+  export interface EmptyStateProps {
+    icon?: Snippet;
+    iconSource?: IconSource;
     title?: string;
     description?: string;
     check?: boolean;
-    children?: Snippet;
-  }
-
-  export interface EmptyStateIllustrationProps {
-    icon?: EmptyStateIcon | undefined;
-    title?: string;
-    description?: string;
     children?: Snippet;
   }
 

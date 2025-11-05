@@ -4,18 +4,16 @@ import DataListItemWithSlot from './helpers/DataListItemWithSlot.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 
-// More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/DataListItem',
-  component: DataListItemWithSlot,
+  component: DataListItemWithSlot as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
-} satisfies Meta<DataListItemWithSlot>
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
+} satisfies Meta<typeof DataListItemWithSlot>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-// More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {
   args: {
     label: 'Customer',
@@ -36,6 +34,14 @@ export const MonospacedNums: Story = {
     label: 'Customer',
     monospacedNums: true,
     value: '1234-5678 012'
+  }
+}
+
+export const FullWidth: Story = {
+  args: {
+    label: 'Description',
+    fullWidth: true,
+    value: 'This is a long description that should take the full width available'
   }
 }
 

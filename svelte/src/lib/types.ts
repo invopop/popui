@@ -394,11 +394,6 @@ export interface AlertDialogProps {
     onSelect?: (company: Company | null) => void;
   }
 
-  export interface CounterWorkflowProps {
-    content: number | string;
-    variant?: 'default' | 'transparent';
-  }
-
   export interface DataListItemProps {
     label?: string;
     value?: string;

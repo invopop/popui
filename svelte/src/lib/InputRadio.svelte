@@ -42,9 +42,7 @@
 {#if label}
   <label class="flex items-center gap-2 cursor-pointer">
     {@render radioInput()}
-    <span
-      class="font-sans text-sm font-normal leading-5 tracking-[-0.07px] text-foreground whitespace-nowrap"
-    >
+    <span class="text-base text-foreground whitespace-nowrap">
       {label}
     </span>
   </label>

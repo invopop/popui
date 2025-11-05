@@ -15,7 +15,7 @@
 </script>
 
 <button
-  class="flex flex-col gap-4 p-3 w-[298px] bg-background border border-border rounded-[10px] cursor-pointer text-left transition-colors hover:border-border-default-secondary disabled:bg-background-default-secondary disabled:cursor-not-allowed disabled:pointer-events-none"
+  class="flex flex-col gap-4 p-3 w-[298px] bg-background border border-border rounded-xl cursor-pointer text-left transition-colors hover:border-border-default-secondary disabled:bg-background-default-secondary disabled:cursor-not-allowed disabled:pointer-events-none"
   disabled={type === 'soon'}
   {...rest}
   {onclick}

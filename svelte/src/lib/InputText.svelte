@@ -32,13 +32,19 @@
 
   let inputStyles = $derived(
     clsx(
-      { 'pointer-events-none bg-neutral-50': disabled },
+      'h-8 w-full rounded-lg border px-2 py-1 text-base tracking-tight bg-background-default-default backdrop-blur-[2px]',
+      'placeholder:text-foreground-default-tertiary',
+      'outline-none focus:ring-0',
       {
-        'text-danger-500 border-danger-400 outline-danger-400': errorText
+        'pointer-events-none bg-background-default-secondary border-border-default-default':
+          disabled
       },
       {
-        'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
-          !errorText
+        'text-foreground-critical border-border-critical-bold': errorText
+      },
+      {
+        'text-foreground border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active':
+          !errorText && !disabled
       }
     )
   )
@@ -59,23 +65,25 @@
   })
 </script>
 
-{#if label}
-  <InputLabel {id} {label} />
-{/if}
-<input
-  {id}
-  bind:this={inputEl}
-  bind:value
-  type="text"
-  class="{inputStyles} py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-500 text-base tracking-tight bg-white"
-  {placeholder}
-  readonly={disabled}
-  {...rest}
-  oninput={handleInput}
-  {onfocus}
-  {onblur}
-  {onkeydown}
-/>
-{#if errorText}
-  <InputError {errorText} />
-{/if}
+<div class="flex flex-col gap-2">
+  {#if label}
+    <InputLabel {id} {label} />
+  {/if}
+  <input
+    {id}
+    bind:this={inputEl}
+    bind:value
+    type="text"
+    class={inputStyles}
+    {placeholder}
+    readonly={disabled}
+    {...rest}
+    oninput={handleInput}
+    {onfocus}
+    {onblur}
+    {onkeydown}
+  />
+  {#if errorText}
+    <InputError {errorText} />
+  {/if}
+</div>

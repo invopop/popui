@@ -1,12 +1,21 @@
 <script lang="ts">
   import type { ShortcutWrapperProps } from './types'
+  import clsx from 'clsx'
 
-  let { children }: ShortcutWrapperProps = $props()
+  let { size = 'sm', theme = 'light', children }: ShortcutWrapperProps = $props()
+
+  const styles = $derived(
+    clsx('inline-flex items-center justify-center border', {
+      'size-4 rounded': size === 'sm',
+      'size-5 rounded-md': size === 'md',
+      'bg-background-default-secondary border-border-default-secondary shadow-[0px_1px_0px_rgba(0,0,0,0.06)] text-foreground-default-secondary':
+        theme === 'light',
+      'bg-background-inverse-secondary border-border-inverse-secondary shadow-[0px_1px_0px_rgba(255,255,255,0.25)] text-foreground-inverse-secondary':
+        theme === 'navigation'
+    })
+  )
 </script>
 
-<div
-  class="h-4 w-4 bg-white-5 rounded border border-white-20 inline-flex items-center justify-center"
-  style="box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25);"
->
+<div class={styles}>
   {@render children?.()}
 </div>

@@ -488,11 +488,6 @@ export interface AlertDialogProps {
     onView?: (slug: string) => void;
   }
 
-  export interface FormLayoutModalProps {
-    children?: Snippet;
-    footer?: Snippet;
-  }
-
   export interface GlobalSearchProps {
     collapsed?: boolean;
     onOpen?: () => void;
@@ -677,6 +672,8 @@ export interface AlertDialogProps {
   }
 
   export interface ShortcutWrapperProps {
+    size?: 'sm' | 'md';
+    theme?: 'light' | 'navigation';
     children?: Snippet;
   }
 

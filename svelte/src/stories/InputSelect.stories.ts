@@ -10,58 +10,64 @@ const meta = {
   title: 'Components/InputSelect',
   component: InputSelect,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
 } satisfies Meta<InputSelect>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
+const options = [
+  { value: 'draft', label: 'Draft' },
+  { value: 'active', label: 'Active' },
+  { value: 'archived', label: 'Archived' }
+]
+
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
-export const WithLabel: Story = {
+export const Placeholder: Story = {
   args: {
-    label: 'Label'
+    placeholder: 'Select an option',
+    options
   }
 }
 
-export const WithoutLabel: Story = {}
-
-export const WithNoSelectablePlaceholder: Story = {
+export const Selected: Story = {
   args: {
-    placeholder: 'This is a placeholder...',
-    options: [
-      { value: 1, label: 'Option one' },
-      { value: 2, label: 'Option Two' }
-    ]
-  }
-}
-
-export const WithSelectablePlaceholder: Story = {
-  args: {
-    placeholder: 'All options',
-    disablePlaceholder: false,
-    options: [
-      { value: 1, label: 'Option one' },
-      { value: 2, label: 'Option Two' }
-    ]
+    value: 'active',
+    placeholder: 'Select an option',
+    options
   }
 }
 
 export const WithIcon: Story = {
   args: {
-    placeholder: 'All options',
-    disablePlaceholder: false,
-    options: [
-      { value: 1, label: 'Option one' },
-      { value: 2, label: 'Option Two' }
-    ],
+    placeholder: 'Select an option',
+    options,
     icon: Cog6Tooth
+  }
+}
+
+export const WithIconSelected: Story = {
+  args: {
+    value: 'active',
+    placeholder: 'Select an option',
+    options,
+    icon: Cog6Tooth
+  }
+}
+
+export const WithLabel: Story = {
+  args: {
+    label: 'Status',
+    placeholder: 'Select an option',
+    options
   }
 }
 
 export const WithError: Story = {
   args: {
-    value: 'Wrong Thing',
-    placeholder: 'Placeholder',
-    errorText: 'Error label'
+    value: 'draft',
+    placeholder: 'Select an option',
+    options,
+    errorText: 'This field is required'
   }
 }

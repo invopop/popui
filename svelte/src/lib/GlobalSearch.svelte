@@ -45,7 +45,7 @@
 <button class={styles} onclick={() => onOpen?.()}>
   <Icon src={Search} class="size-4 text-foreground-inverse shrink-0" />
   {#if !collapsed}
-    <span class="text-foreground-inverse-secondary flex-1 text-left">Search</span>
+    <span class="text-foreground-inverse-secondary text-base flex-1 text-left">Search</span>
     <ShortcutWrapper theme="navigation">
       <Icon src={Slash} class="size-3" />
     </ShortcutWrapper>

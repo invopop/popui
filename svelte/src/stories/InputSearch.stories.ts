@@ -10,21 +10,14 @@ const meta = {
   title: 'Components/InputSearch',
   component: InputSearch,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
 } satisfies Meta<InputSearch>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
-export const WithDifferentIcon: Story = {
-  args: {
-    placeholder: 'Search',
-    icon: Hashtag
-  }
-}
-
-export const WithoutShortcut: Story = {
+export const Default: Story = {
   args: {
     placeholder: 'Search'
   }
@@ -33,20 +26,29 @@ export const WithoutShortcut: Story = {
 export const WithShortcut: Story = {
   args: {
     placeholder: 'Search',
+    shortcut: '⌘F'
+  }
+}
+
+export const WithSingleKeyShortcut: Story = {
+  args: {
+    placeholder: 'Search',
     shortcut: 'K'
   }
 }
 
-export const WithLongShortcut: Story = {
+export const WithValue: Story = {
   args: {
+    value: 'F2023-001',
     placeholder: 'Search',
-    shortcut: '⌘K'
+    shortcut: '⌘F'
   }
 }
 
-export const WithDefaultValue: Story = {
+export const WithDifferentIcon: Story = {
   args: {
-    value: 'This value',
-    placeholder: 'Search'
+    placeholder: 'Search',
+    icon: Hashtag,
+    shortcut: '⌘F'
   }
 }

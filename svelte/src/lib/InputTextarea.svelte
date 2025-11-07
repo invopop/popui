@@ -18,13 +18,16 @@
 
   let inputStyles = $derived(
     clsx(
-      { 'pointer-events-none bg-neutral-50': disabled },
+      'w-full rounded-lg border px-2 py-1.5 text-base tracking-tight bg-background backdrop-blur-[2px] placeholder:text-foreground-default-tertiary outline-none focus:ring-0',
       {
-        'text-danger-500 border-danger-400 outline-danger-400': errorText
+        'pointer-events-none bg-background-default-secondary border-border': disabled
       },
       {
-        'border-neutral-200 hover:border-neutral-300 text-neutral-800 outline-none caret-workspace-accent focus:border-workspace-accent focus:shadow-active':
-          !errorText
+        'text-foreground-critical border-border-critical-bold': errorText
+      },
+      {
+        'text-foreground border-border hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active':
+          !errorText && !disabled
       }
     )
   )
@@ -35,18 +38,21 @@
   }
 </script>
 
-<InputLabel {id} {label} />
-<textarea
-  {id}
-  {placeholder}
-  {value}
-  class="{inputStyles} py-1.5 px-3 border w-full rounded placeholder-neutral-500 text-base tracking-tight bg-white"
-  {disabled}
-  {rows}
-  {...rest}
-  oninput={handleInput}
-></textarea>
-
-{#if errorText}
-  <InputError {errorText} />
-{/if}
+<div class="flex flex-col gap-2">
+  {#if label}
+    <InputLabel {id} {label} />
+  {/if}
+  <textarea
+    {id}
+    {placeholder}
+    {value}
+    class={inputStyles}
+    {disabled}
+    {rows}
+    {...rest}
+    oninput={handleInput}
+  ></textarea>
+  {#if errorText}
+    <InputError {errorText} />
+  {/if}
+</div>

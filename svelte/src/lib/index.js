@@ -40,9 +40,7 @@ import MenuItem from './MenuItem.svelte'
 import MenuItemCollapsible from './MenuItemCollapsible.svelte'
 import Notification from './Notification.svelte'
 import ProfileAvatar from './ProfileAvatar.svelte'
-import ProfileSelector from './ProfileSelector.svelte'
 import ProgressBar from './ProgressBar.svelte'
-import SectionLayout from './SectionLayout.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import StatusLabel from './StatusLabel.svelte'
@@ -111,9 +109,7 @@ export {
   MenuItemCollapsible,
   Notification,
   ProfileAvatar,
-  ProfileSelector,
   ProgressBar,
-  SectionLayout,
   SeparatorHorizontal,
   ShortcutWrapper,
   StatusLabel,

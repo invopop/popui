@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from './tooltip'
-  import type { StepIconListProps } from './types.js'
+  import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '$lib/tooltip'
+  import type { StepIconListProps } from '$lib/types.js'
 
   let { icons = [] }: StepIconListProps = $props()
 
@@ -13,27 +13,25 @@
   <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 items-center">
     {#each mainIcons as icon, i (i)}
       <Tooltip>
-        <TooltipTrigger class="flex-shrink-0">
+        <TooltipTrigger class="shrink-0">
           <div
-            class="p-1.5 border rounded-md border-neutral-200 flex items-center space-x-1 bg-white text-neutral-800"
+            class="p-1.5 border rounded-md border-border flex items-center space-x-1 bg-background text-icon"
           >
-            <img src={icon.url} alt={icon.name} class="w-4 h-4" />
+            <img src={icon.url} alt={icon.name} class="size-4" />
           </div>
         </TooltipTrigger>
         <TooltipContent>{icon.name}</TooltipContent>
       </Tooltip>
 
       {#if i < mainIcons.length - 1}
-        <div class="hidden sm:block h-px w-3 border border-neutral-200 mx-px flex-shrink-0"></div>
+        <div class="hidden sm:block h-px w-3 border border-border mx-px shrink-0"></div>
       {/if}
     {/each}
     {#if restIcons.length}
-      <div class="hidden sm:block h-px w-3 border border-neutral-200 mx-px flex-shrink-0"></div>
+      <div class="hidden sm:block h-px w-3 border border-border mx-px shrink-0"></div>
       <Tooltip>
-        <TooltipTrigger class="flex-shrink-0">
-          <div
-            class="flex items-center justify-center text-neutral-500 font-medium text-base h-7 w-7"
-          >
+        <TooltipTrigger class="shrink-0">
+          <div class="flex items-center justify-center text-icon font-medium text-base size-7">
             +{restIcons.length}
           </div>
         </TooltipTrigger>

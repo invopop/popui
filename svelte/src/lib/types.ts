@@ -628,20 +628,6 @@ export interface AlertDialogProps {
     icon?: IconSource;
   }
 
-  export interface ProfileSelectorProps {
-    name?: string;
-    orgName?: string;
-    picture?: string;
-    collapsed?: boolean;
-    isOpen?: boolean;
-    onclick?: (event: MouseEvent) => void;
-  }
-
-  export interface SectionLayoutProps {
-    title?: string;
-    children?: Snippet;
-  }
-
   export interface StatusLabelProps {
     status: FeedItemStatus;
     label?: string;
@@ -649,6 +635,7 @@ export interface AlertDialogProps {
 
   export interface StepIconListProps {
     icons?: StepIcon[]
+    [key: string]: any
   }
 
   export interface TagSearchProps {

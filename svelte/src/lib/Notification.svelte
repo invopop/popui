@@ -1,12 +1,12 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import { Warning, Failure, Success } from '@invopop/ui-icons'
+  import { Warning, Failure, Success, Info } from '@invopop/ui-icons'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import type { NotificationProps, Status } from './types'
+  import type { NotificationProps } from './types'
 
-  let { message = '', type = 'success', children }: NotificationProps = $props()
+  let { title = '', description = '', type = 'neutral', children }: NotificationProps = $props()
 
-  function getIcon(type: Status) {
+  let icon = $derived.by(() => {
     switch (type) {
       case 'success':
         return Success
@@ -14,31 +14,62 @@
         return Failure
       case 'warning':
         return Warning
+      case 'info':
+        return Info
+      case 'neutral':
+        return Info
       default:
-        return null
+        return Info
     }
-  }
-  let icon = $derived(getIcon(type))
-  let styles = $derived(
-    clsx(
-      { 'bg-positive-50': type === 'success' },
-      { 'bg-danger-50': type === 'error' },
-      { 'bg-yellow-50': type === 'warning' }
-    )
+  })
+
+  let containerStyles = $derived(
+    clsx('flex items-center gap-1.5 px-3 py-2 rounded-xl', {
+      'bg-background border border-border': type === 'neutral',
+      'bg-background-info': type === 'info',
+      'bg-background-success': type === 'success',
+      'bg-background-warning': type === 'warning',
+      'bg-background-critical': type === 'error',
+      'min-h-9 rounded-[10px] pl-3 pr-1.5 py-1.5': !description
+    })
   )
-  let textStyles = $derived(
-    clsx(
-      { 'text-positive-500': type === 'success' },
-      { 'text-danger-500': type === 'error' },
-      { 'text-yellow-500': type === 'warning' }
-    )
+
+  let titleStyles = $derived(
+    clsx('text-base font-medium leading-5 tracking-tight', {
+      'text-foreground': type === 'neutral',
+      'text-foreground-info': type === 'info',
+      'text-foreground-success': type === 'success',
+      'text-foreground-warning': type === 'warning',
+      'text-foreground-critical': type === 'error'
+    })
+  )
+
+  let iconStyles = $derived(
+    clsx('size-4', {
+      'text-icon': type === 'neutral',
+      'text-icon-info': type === 'info',
+      'text-icon-success': type === 'success',
+      'text-icon-warning': type === 'warning',
+      'text-icon-critical': type === 'error'
+    })
   )
 </script>
 
-<div class="{styles} pl-3 pr-2 py-2 text-base font-medium rounded-lg flex items-center space-x-1">
-  {#if icon}
-    <Icon src={icon} class="h-4 w-4" />
-  {/if}
-  <span class="{textStyles} flex-1">{message}</span>
+<div class={containerStyles}>
+  <div class="flex items-start self-stretch">
+    <div class="relative size-4 shrink-0">
+      {#if icon}
+        <Icon src={icon} class={iconStyles} />
+      {/if}
+    </div>
+  </div>
+  <div class="flex flex-col gap-0.5 grow justify-center min-w-0">
+    <p class={titleStyles}>{title}</p>
+    {#if description}
+      <p class="text-sm text-foreground-default-secondary leading-5 tracking-tight">
+        {description}
+      </p>
+    {/if}
+  </div>
   {@render children?.()}
 </div>

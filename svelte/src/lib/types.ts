@@ -39,7 +39,7 @@ export type SidebarIcon = {
   iconTheme: IconTheme
 }
 
-export type Status = 'success' | 'warning' | 'error'
+export type Status = 'success' | 'warning' | 'error' | 'info' | 'neutral'
 
 export type SelectOption = {
   label: string
@@ -612,9 +612,11 @@ export interface AlertDialogProps {
   }
 
   export interface NotificationProps {
-    message?: string;
+    title?: string;
+    description?: string;
     type?: Status;
     children?: Snippet;
+    [key: string]: any
   }
 
   export interface ProfileAvatarProps {

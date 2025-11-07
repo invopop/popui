@@ -9,12 +9,12 @@ const meta = {
   title: 'Components/InputText',
   component: InputText,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
 } satisfies Meta<InputText>
 
 export default meta
 type Story = StoryObj<typeof meta>
-
+  
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const WithoutLabel: Story = {
   args: {

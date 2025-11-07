@@ -584,6 +584,7 @@ export interface AlertDialogProps {
     checked?: boolean;
     label?: string;
     onchange?: (checked: boolean) => void;
+    [key: string]: any
   }
 
   export interface MenuItemProps {

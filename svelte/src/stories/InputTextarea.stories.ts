@@ -9,7 +9,7 @@ const meta = {
   title: 'Components/InputTextarea',
   component: InputTextarea,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
 } satisfies Meta<InputTextarea>
 
 export default meta

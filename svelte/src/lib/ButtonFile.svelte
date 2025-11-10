@@ -1,32 +1,29 @@
 <script lang="ts">
-  import { Icon } from '@steeze-ui/svelte-icon'
-  import { Invoice, Download } from '@invopop/ui-icons'
-  import BaseButton from './BaseButton.svelte'
+  import { Download } from '@invopop/ui-icons'
+  import Button from './button/button.svelte'
   import type { ButtonFileProps } from './types.js'
-  import clsx from 'clsx'
+  import { cn } from './utils.js'
 
   let {
-    icon = Invoice,
     name = '',
     disabled = false,
     date = '',
-    iconColor = 'grey',
+    fileType = 'pdf',
     onPreview,
     onDownload,
+    class: className,
     ...rest
   }: ButtonFileProps = $props()
 
-  let iconStyles = $derived(
-    clsx({
-      'border-positive-100 bg-positive-50 text-positive-500': iconColor === 'green',
-      'border-yellow-100 bg-yellow-50 text-yellow-500': iconColor === 'yellow',
-      'border-red-100 bg-red-50 text-red-500': iconColor === 'red',
-      'border-warning-100 bg-warning-50 text-warning-500': iconColor === 'orange',
-      'border-blue-100 bg-blue-50 text-blue-500': iconColor === 'blue',
-      'border-purple-100 bg-purple-50 text-purple-500': iconColor === 'purple',
-      'border-dashed border-neutral-100 text-neutral-400': iconColor === 'empty',
-      'border-neutral-100 bg-neutral-50 text-neutral-500': iconColor === 'grey'
-    })
+  let fileAvatarStyles = $derived(
+    cn(
+      'size-8 rounded-md border border-border flex items-center justify-center text-xs font-black font-mono leading-4 uppercase',
+      {
+        'text-foreground-document-pdf': fileType === 'pdf',
+        'text-foreground-document-xml': fileType === 'xml',
+        'text-foreground-document-png': fileType === 'png'
+      }
+    )
   )
 
   function handleClick(event: MouseEvent) {
@@ -36,27 +33,35 @@
 </script>
 
 <button
-  class:opacity-40={disabled}
-  class="border border-neutral-100 hover:bg-neutral-50 active:bg-neutral-100 hover:border-neutral-200 active:border-neutral-300 rounded-lg flex items-center space-x-3 py-1.5 pr-3 pl-2.5 w-full cursor-pointer"
+  class={cn(
+    'flex items-center gap-3 px-2 py-1.5 rounded-[10px] w-full hover:bg-background-default-secondary',
+    disabled && 'opacity-30 pointer-events-none',
+    className
+  )}
   {disabled}
   {...rest}
   onclick={handleClick}
 >
-  <span class="flex items-center justify-start space-x-2.5 flex-1">
-    <div class="{iconStyles} p-2 border rounded">
-      <Icon src={icon} class="w-4 h-4" />
+  <div class="flex items-center gap-[10px] flex-1 min-w-0">
+    <div class={fileAvatarStyles}>
+      {fileType}
     </div>
-    <div class="flex flex-col items-start space-y-0.5">
-      <span class="text-base font-medium text-neutral-800 tracking-tight max-w-[174px] truncate">
+    <div class="flex flex-col text-start min-w-0 flex-1">
+      <div class="text-sm font-medium text-foreground truncate w-full">
         {name}
-      </span>
-      <span class="text-sm text-neutral-500">{date}</span>
+      </div>
+      <div class="text-xs text-foreground-default-secondary truncate w-full">
+        {date}
+      </div>
     </div>
-  </span>
-  <BaseButton
-    {disabled}
+  </div>
+  <Button
+    variant="secondary"
+    size="md"
     icon={Download}
-    onclick={() => {
+    {disabled}
+    onclick={(e) => {
+      e.stopPropagation()
       onDownload?.()
     }}
   />

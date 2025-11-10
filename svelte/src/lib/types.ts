@@ -333,13 +333,13 @@ export interface AlertDialogProps {
   }
 
   export interface ButtonFileProps {
-    icon?: IconSource;
     name?: string;
     disabled?: boolean;
     date?: string;
-    iconColor?: StatusType;
+    fileType?: 'pdf' | 'xml' | 'png';
     onPreview?: () => void;
     onDownload?: () => void;
+    class?: string;
     [key: string]: any
   }
 

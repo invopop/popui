@@ -3,50 +3,58 @@ import type { Meta, StoryObj } from '@storybook/sveltekit'
 import ButtonFile from '../lib/ButtonFile.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
-import { Code } from '@invopop/ui-icons'
 
-// More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/ButtonFile',
   component: ButtonFile,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
 } satisfies Meta<ButtonFile>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-// More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {
   args: {
-    name: 'File name'
+    name: 'File name',
+    fileType: 'pdf'
   }
 }
 
 export const WithDate: Story = {
   args: {
     name: 'File name',
-    date: 'Mar 06, 2024 · 09:48'
+    date: 'Mar 06, 2024 · 09:48',
+    fileType: 'pdf'
   }
 }
 
-export const WithDifferentIcon: Story = {
+export const XMLFile: Story = {
   args: {
-    icon: Code,
     name: 'File name',
-    iconColor: 'red'
+    fileType: 'xml'
+  }
+}
+
+export const PNGFile: Story = {
+  args: {
+    name: 'Image',
+    fileType: 'png'
   }
 }
 
 export const LongName: Story = {
   args: {
-    name: 'File name that is very very long and does not fit at all'
+    name: 'File name that is very very long and does not fit at all',
+    fileType: 'pdf'
   }
 }
 
 export const Disabled: Story = {
   args: {
     name: 'File name',
-    disabled: true
+    disabled: true,
+    fileType: 'pdf'
   }
 }
+

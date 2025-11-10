@@ -17,7 +17,7 @@
         ghost:
           'bg-transparent text-foreground hover:bg-background-default-secondary active:bg-background-default-tertiary [&_svg]:text-icon',
         secondary:
-          'bg-background-default-secondary text-foreground border border-border shadow-button-default hover:bg-background-default-tertiary active:bg-background-default-tertiary active:shadow-button-pressed [&_svg]:text-icon',
+          'bg-background-default-tertiary text-foreground border border-border shadow-button-default hover:bg-background-default-tertiary-hover active:bg-background-default-tertiary-press active:shadow-button-pressed [&_svg]:text-icon',
         default:
           'bg-background text-foreground border border-border shadow-button-default hover:bg-background-default-secondary active:bg-background-default-tertiary active:shadow-button-pressed [&_svg]:text-icon',
         dark: 'bg-transparent text-foreground-inverse border border-border-inverse hover:bg-background-inverse-secondary active:bg-background-inverse-tertiary [&_svg]:text-icon-inverse'
@@ -89,6 +89,22 @@
         iconOnly: false,
         hasIcon: true,
         class: 'pl-2 pr-3'
+      },
+      // Icon-only uses bold icon variants
+      {
+        variant: ['secondary', 'default', 'outline', 'ghost'],
+        iconOnly: true,
+        class: '[&_svg]:!text-icon-default-bold'
+      },
+      {
+        variant: 'primary',
+        iconOnly: true,
+        class: '[&_svg]:!text-icon-inverse-bold'
+      },
+      {
+        variant: 'dark',
+        iconOnly: true,
+        class: '[&_svg]:!text-icon-inverse-bold'
       }
     ],
     defaultVariants: {

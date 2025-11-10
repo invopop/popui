@@ -10,10 +10,10 @@ export type ButtonVariant =
   | 'default'
   | 'primary'
   | 'secondary'
-  | 'warning'
   | 'danger'
   | 'dark'
   | 'outline'
+  | 'ghost'
 
 export type StatusType =
   | 'grey'
@@ -200,8 +200,7 @@ export interface AlertDialogProps {
     type?: 'button' | 'submit' | 'reset' | null;
     variant?: ButtonVariant;
     disabled?: boolean;
-    small?: boolean;
-    big?: boolean;
+    size?: 'sm' | 'md' | 'lg';
     dangerIcon?: boolean;
     shortcut?: boolean;
     fullwidth?: boolean;

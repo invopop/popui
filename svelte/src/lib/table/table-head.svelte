@@ -12,7 +12,7 @@
   bind:this={ref}
   data-slot="table-head"
   class={cn(
-    'text-neutral-600 text-base font-normal p-3 text-left align-middle [&:has([role=checkbox])]:pr-0',
+    'text-neutral-60 text-base font-normal p-3 text-left align-middle [&:has([role=checkbox])]:pr-0',
     className
   )}
 >

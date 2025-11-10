@@ -23,8 +23,8 @@
 
   let overlayClasses = $derived(
     clsx({
-      'group-hover:bg-neutral-800/[.05]': !isOpen,
-      'bg-neutral-800/[.1]': isOpen
+      'group-hover:bg-foreground/[.05]': !isOpen,
+      'bg-foreground/[.1]': isOpen
     })
   )
 

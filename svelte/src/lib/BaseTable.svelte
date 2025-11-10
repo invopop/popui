@@ -241,7 +241,7 @@
   }}
 />
 
-<div class="h-full w-full font-sans border rounded-md border-neutral-100 overflow-auto">
+<div class="h-full w-full font-sans border rounded-md border-border overflow-auto">
   <Table class="hidden md:table" {...rest}>
     <colgroup>
       {#if selectable}
@@ -282,9 +282,7 @@
         {/each}
         {#if addExtraCell}
           <!-- if table has actions cell we need to add an extra header -->
-          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
-            <div class="border-b border-neutral-100 h-9"></div>
-          </th>
+          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md"> </th>
         {/if}
       </TableRow>
     </TableHeader>
@@ -295,13 +293,13 @@
             <th
               scope="colgroup"
               colspan={fields.length + (selectable ? 2 : 1)}
-              class="bg-white text-left text-sm font-medium text-neutral-500 sticky top-9 tracking-normal h-8 z-10"
+              class="bg-white text-left text-sm font-medium text-foreground-default-secondary sticky top-9 tracking-normal h-8 z-10"
             >
               <span
                 class:border-t={i > 0}
                 class:pl-12={selectable}
                 class:pl-3={!selectable}
-                class="flex items-center space-x-1 box-border border-b border-neutral-100 h-8"
+                class="flex items-center space-x-1 box-border border-b border-border h-8"
               >
                 <span>{group.label}</span>
                 {#if !hideCounter}
@@ -364,7 +362,7 @@
       {#each group.rows as row}
         <button
           class:cursor-default={disableRowClick}
-          class="w-full text-left border border-neutral-200 rounded"
+          class="w-full text-left border border-neutral-20 rounded"
           onclick={() => {
             if (disableRowClick) return
 

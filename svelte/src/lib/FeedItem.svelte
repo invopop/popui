@@ -49,7 +49,7 @@
       >
         {#if user}
           <div class="mr-0.5">
-            <ProfileAvatar small {...user} />
+            <ProfileAvatar variant="sm" {...user} />
           </div>
         {/if}
         <p class="truncate" {title}>{title}</p>
@@ -78,7 +78,7 @@
   {#if viewable}
     <span class="absolute top-5 right-2">
       <BaseButton
-        small
+        size="sm"
         variant="secondary"
         onclick={() => {
           onView?.(slug)

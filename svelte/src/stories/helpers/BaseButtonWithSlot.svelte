@@ -4,17 +4,16 @@
   import type { ButtonVariant, IconPosition } from '$lib/types.js'
 
   interface Props {
-    slot?: string;
-    disabled?: boolean;
-    icon?: IconSource | undefined;
-    iconPosition?: IconPosition;
-    variant?: ButtonVariant;
-    small?: boolean;
-    big?: boolean;
-    dangerIcon?: boolean;
-    shortcut?: boolean;
-    fullwidth?: boolean;
-    notification?: boolean;
+    slot?: string
+    disabled?: boolean
+    icon?: IconSource | undefined
+    iconPosition?: IconPosition
+    variant?: ButtonVariant
+    size?: 'sm' | 'md' | 'lg'
+    dangerIcon?: boolean
+    shortcut?: boolean
+    fullwidth?: boolean
+    notification?: boolean
   }
 
   let {
@@ -23,13 +22,12 @@
     icon = undefined,
     iconPosition = 'left',
     variant = 'default',
-    small = false,
-    big = false,
+    size = 'lg',
     dangerIcon = false,
     shortcut = false,
     fullwidth = false,
     notification = false
-  }: Props = $props();
+  }: Props = $props()
 </script>
 
 {#if slot}
@@ -39,8 +37,7 @@
     {icon}
     {iconPosition}
     {variant}
-    {small}
-    {big}
+    {size}
     {shortcut}
     {fullwidth}
     {notification}
@@ -54,8 +51,7 @@
     {icon}
     {iconPosition}
     {variant}
-    {small}
-    {big}
+    {size}
     {shortcut}
     {fullwidth}
     {notification}

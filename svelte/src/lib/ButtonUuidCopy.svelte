@@ -28,7 +28,7 @@
 
 <BaseButton
   {disabled}
-  big
+  size="lg"
   icon={Duplicate}
   iconPosition="right"
   onclick={async () => {
@@ -36,5 +36,5 @@
     oncopied?.(uuid)
   }}
 >
-  <span class="font-mono text-neutral-500">{formattedUuid}</span>
+  <span class="font-mono">{formattedUuid}</span>
 </BaseButton>

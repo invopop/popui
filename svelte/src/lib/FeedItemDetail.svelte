@@ -30,7 +30,7 @@
     <span class="flex-1 truncate font-medium text-neutral-800 text-base">{title}</span>
     {#if cancelable}
       <BaseButton
-        small
+        size="sm"
         icon={Close}
         variant="secondary"
         onclick={() => {

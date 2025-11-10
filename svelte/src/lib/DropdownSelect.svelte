@@ -49,9 +49,9 @@
   )
 
   let styles = $derived(
-    clsx({
-      'shadow-active border-workspace-accent hover:border-workspace-accent': isOpen,
-      'border-neutral-100': !isOpen
+    clsx('border backdrop-blur-sm backdrop-filter', {
+      'border-border-selected-bold shadow-active': isOpen,
+      'border-border hover:border-border-default-secondary-hover': !isOpen
     })
   )
 
@@ -78,19 +78,45 @@
 <BaseDropdown bind:isOpen placement="bottom-start" {fullWidth} bind:this={selectDropdown}>
   {#snippet trigger()}
     <div
-      class="{styles} dropdown-select max-w-[420px] flex items-center border hover:border-neutral-300 rounded-md py-1.25 pl-2 gap-1 bg-white whitespace-nowrap"
+      class="{styles} dropdown-select flex items-center rounded-lg py-1.5 px-2 bg-background whitespace-nowrap {fullWidth
+        ? 'w-full'
+        : widthClass}"
     >
       {#if selectedColor}
-        <TagStatus dot status={selectedColor} />
-      {:else if selectedIcon}
-        <Icon src={selectedIcon} {iconTheme} class="{selectedIconColor} h-4 w-4 flex-shrink-0" />
-      {:else if resolvedIcon}
-        <Icon src={resolvedIcon} {iconTheme} class="h-4 w-4 text-neutral-500 flex-shrink-0" />
+        <div class="flex items-center gap-1 flex-1 min-w-0">
+          <TagStatus dot status={selectedColor} />
+          <span
+            class="flex-1 text-sm truncate {selectedItems.length
+              ? 'text-foreground'
+              : 'text-foreground-default-secondary'}"
+          >
+            {selectedLabel}
+          </span>
+        </div>
+      {:else if selectedIcon || resolvedIcon}
+        <div class="flex items-center gap-1 flex-1 min-w-0">
+          {#if selectedIcon}
+            <Icon src={selectedIcon} {iconTheme} class="{selectedIconColor} size-4 flex-shrink-0" />
+          {:else if resolvedIcon}
+            <Icon src={resolvedIcon} {iconTheme} class="text-icon size-4 flex-shrink-0" />
+          {/if}
+          <span
+            class="flex-1 text-sm truncate {selectedItems.length
+              ? 'text-foreground'
+              : 'text-foreground-default-secondary'}"
+          >
+            {selectedLabel}
+          </span>
+        </div>
+      {:else}
+        <span
+          class="flex-1 text-sm truncate {selectedItems.length
+            ? 'text-foreground'
+            : 'text-foreground-default-secondary'}"
+        >
+          {selectedLabel}
+        </span>
       {/if}
-
-      <span class="w-full pr-8 text-neutral-800 placeholder-neutral-800 text-base truncate">
-        {selectedLabel}
-      </span>
     </div>
   {/snippet}
   <DrawerContext {widthClass} {multiple} {items} onclick={handleClick} onselect={handleSelected} />
@@ -98,7 +124,7 @@
 
 <style>
   .dropdown-select {
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0YzRjRGNiIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwMzA3MTIiIHN0cm9rZS13aWR0aD0iMS4xIi8+Cjwvc3ZnPg==');
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0icmdiYSg1LCA1LCAzNiwgMC4wNikiLz4KPHBhdGggZD0iTTQuNSA2LjVMOCAxMEwxMS41IDYuNSIgc3Ryb2tlPSIjMGIwYjEwIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==');
     background-repeat: no-repeat;
     background-position: center right 8px;
   }

@@ -7,11 +7,10 @@
 
   let styles = $derived(
     clsx({
-      'text-positive-500': status === 'success',
-      'text-neutral-500': status === 'queued',
-      'text-warning-500': status === 'alert',
-      'text-danger-500': status === 'failure',
-      'text-yellow-500': status === 'run'
+      'text-foreground-success': status === 'success',
+      'text-foreground-critical': status === 'failure',
+      'text-foreground-attention': ['run', 'alert'].includes(status),
+      'text-foreground-default-secondary': status === 'queued'
     })
   )
 </script>

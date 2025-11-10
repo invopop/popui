@@ -31,7 +31,7 @@
 
 <div id={`feed-item-${slug}`} class="relative text-left w-full min-w-[344px]">
   {#if hasNext && icon}
-    <span class="absolute bottom-[-20px] left-2 border-l border-neutral-100 w-px h-[58px]"></span>
+    <span class="absolute bottom-[-20px] left-2 border-l border-border w-px h-[58px]"></span>
   {/if}
   <div class="flex items-start justify-between space-x-2 py-3">
     <div class="relative">
@@ -39,11 +39,9 @@
         <FeedIconEvent {icon} />
       {/if}
     </div>
-    <div
-      class="flex-1 items-center justify-start pl-2.5 py-2 pr-2 rounded-lg border border-neutral-100"
-    >
+    <div class="flex-1 items-center justify-start pl-2.5 py-2 pr-2 rounded-lg">
       <div
-        class="text-base text-neutral-800 whitespace-nowrap tracking-normal font-medium flex items-center gap-1 {viewable
+        class="text-base text-foreground whitespace-nowrap tracking-normal font-medium flex items-center gap-1 {viewable
           ? 'max-w-[260px]'
           : 'max-w-[320px]'}"
       >
@@ -59,7 +57,9 @@
         {/if}
       </div>
       <p
-        class="mt-0.5 flex items-center space-x-2 text-sm text-neutral-500 whitespace-nowrap tabular-nums slashed-zero lining-nums tracking-normal"
+        class="mt-0.5 flex items-center space-x-2 text-sm text-foreground-default-secondary whitespace-nowrap tabular-nums slashed-zero lining-nums tracking-normal {user
+          ? 'ml-[26px]'
+          : ''}"
       >
         {#if date}
           <span>

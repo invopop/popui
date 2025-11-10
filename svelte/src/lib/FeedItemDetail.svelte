@@ -22,12 +22,12 @@
   let open = $state(false)
 </script>
 
-<div class="w-full rounded-lg border border-neutral-100">
+<div class="w-full rounded-lg border border-border">
   <div class="px-3 py-2.5 flex items-center space-x-1.5">
     {#if status}
       <FeedIconStatus {status} />
     {/if}
-    <span class="flex-1 truncate font-medium text-neutral-800 text-base">{title}</span>
+    <span class="flex-1 truncate font-medium text-foreground text-base">{title}</span>
     {#if cancelable}
       <BaseButton
         size="sm"
@@ -43,14 +43,16 @@
   </div>
   <SeparatorHorizontal />
   <div class="pl-3 py-1 pr-2.5 flex items-center space-x-0.5">
-    <span class="text-sm text-neutral-500 whitespace-nowrap">{idLabel}</span>
+    <span class="text-sm text-foreground-default-secondary whitespace-nowrap">{idLabel}</span>
     {#if uuid}
       <UuidCopy {uuid} full small {onCopied} />
     {/if}
   </div>
   {#if events.length}
     <SeparatorHorizontal />
-    <div class="px-3 py-2 text-sm text-neutral-500 flex items-center justify-between">
+    <div
+      class="px-3 py-2 text-sm text-foreground-default-secondary flex items-center justify-between"
+    >
       <span>Logs</span>
       <button
         class="cursor-pointer"

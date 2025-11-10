@@ -7,6 +7,6 @@
 
 <div class="relative py-0.5 mt-2">
   {#if icon}
-    <Icon src={icon} theme={iconTheme} class="h-4 w-4 text-neutral-500" />
+    <Icon src={icon} theme={iconTheme} class="size-4 text-icon-default-bold" />
   {/if}
 </div>

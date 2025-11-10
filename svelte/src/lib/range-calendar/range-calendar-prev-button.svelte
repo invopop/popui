@@ -21,8 +21,8 @@
 <RangeCalendarPrimitive.PrevButton
   bind:ref
   class={cn(
-    buttonVariants({ variant, size: 'icon-sm' }),
-    'select-none disabled:opacity-50 rtl:rotate-180',
+    buttonVariants({ variant, size: 'sm' }),
+    'group select-none disabled:opacity-50 rtl:rotate-180',
     className
   )}
   children={children || Fallback}

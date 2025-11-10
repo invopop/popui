@@ -770,8 +770,8 @@
   /* Box Shadow */
   --shadow-active: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, var(--color-positive-50)));
   --shadow-warning: 0px 0px 0px 2px rgba(215, 135, 0, 0.12);
-  --shadow-button-default: 0px -4px 4px 0px rgba(11, 11, 16, 0.12) inset, 0px 2px 1.5px 0px rgba(255, 255, 255, 0.16) inset;
-  --shadow-button-pressed: 0px 4px 4px -1px rgba(11, 11, 16, 0.2) inset;
+  --shadow-button-default: 0 2px 6px -1px rgba(11, 11, 16, 0.04), 0 -2px 4px 0 rgba(11, 11, 16, 0.04) inset;
+  --shadow-button-pressed: 0 4px 4px -1px rgba(11, 11, 16, 0.16) inset;
 
   /* Letter Spacing (tracking) */
   --tracking-tightest: -0.29px; /* -1.2% (text-2xl) */

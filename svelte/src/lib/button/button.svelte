@@ -11,16 +11,16 @@
         primary:
           'bg-background-accent text-foreground-inverse border border-border-accent shadow-button-default hover:bg-background-accent-hover active:bg-background-accent-press active:shadow-button-pressed [&_svg]:text-icon-inverse',
         danger:
-          'bg-background-default-tertiary text-foreground-critical border border-border shadow-[0px_-2px_4px_0px_inset_rgba(11,11,16,0.04)] hover:bg-background-critical-bold hover:text-foreground-inverse hover:border-0 hover:shadow-[0px_2px_6px_-1px_rgba(11,11,16,0.04),0px_-2px_4px_0px_inset_rgba(11,11,16,0.06)] active:bg-background-critical-bold active:text-foreground-inverse active:border-0 active:shadow-[0px_4px_4px_-1px_inset_rgba(11,11,16,0.16)] [&_svg]:text-icon-critical hover:[&_svg]:text-icon-inverse active:[&_svg]:text-icon-inverse',
+          'bg-background-default-tertiary text-foreground-critical border border-border shadow-button-default hover:bg-background-critical-bold hover:text-foreground-inverse hover:border-background-critical-bold active:bg-background-critical-bold active:text-foreground-inverse active:border-background-critical-bold active:shadow-[0px_4px_4px_-1px_inset_rgba(11,11,16,0.16)] [&_svg]:text-icon-critical hover:[&_svg]:text-icon-inverse active:[&_svg]:text-icon-inverse',
         outline:
-          'bg-background text-foreground border border-border hover:border-border-default-secondary-hover active:bg-background-default-secondary shadow-[0px_-2px_4px_0px_inset_rgba(11,11,16,0.04)] [&_svg]:text-icon',
+          'bg-background text-foreground border border-border shadow-button-default hover:border-border-default-secondary-hover active:bg-background-default-secondary active:shadow-button-pressed [&_svg]:text-icon',
         ghost:
           'bg-transparent text-foreground hover:bg-background-default-secondary active:bg-background-default-tertiary [&_svg]:text-icon',
         secondary:
-          'bg-background-default-secondary text-foreground border border-border hover:bg-background-default-tertiary active:bg-background-default-tertiary shadow-[0px_-2px_4px_0px_inset_rgba(11,11,16,0.04)] [&_svg]:text-icon',
+          'bg-background-default-secondary text-foreground border border-border shadow-button-default hover:bg-background-default-tertiary active:bg-background-default-tertiary active:shadow-button-pressed [&_svg]:text-icon',
         default:
-          'bg-background text-foreground border border-border hover:bg-background-default-secondary active:bg-background-default-tertiary shadow-[0px_-2px_4px_0px_inset_rgba(11,11,16,0.04)] [&_svg]:text-icon',
-        dark: 'bg-transparent text-foreground-inverse border border-border-inverse hover:bg-background-inverse-secondary active:bg-background-inverse-tertiary shadow-[0px_-2px_4px_0px_inset_rgba(255,255,255,0.04)] [&_svg]:text-icon-inverse'
+          'bg-background text-foreground border border-border shadow-button-default hover:bg-background-default-secondary active:bg-background-default-tertiary active:shadow-button-pressed [&_svg]:text-icon',
+        dark: 'bg-transparent text-foreground-inverse border border-border-inverse hover:bg-background-inverse-secondary active:bg-background-inverse-tertiary [&_svg]:text-icon-inverse'
       },
       size: {
         sm: 'h-6',

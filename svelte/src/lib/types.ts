@@ -46,6 +46,14 @@ export type SelectOption = {
   value: AnyProp
 }
 
+export type DrawerGroup = {
+  label: string
+  slug: string
+  emptyIcon?: IconSource
+  emptyTitle?: string
+  emptyDescription?: string
+}
+
 export type DrawerOption = SelectOption & {
   separator?: boolean
   destructive?: boolean
@@ -58,6 +66,7 @@ export type DrawerOption = SelectOption & {
   sandbox?: boolean
   iconClass?: string
   disabled?: boolean
+  groupBy?: string
 }
 
 export type Company = {
@@ -405,13 +414,13 @@ export interface AlertDialogProps {
     onclick?: (value: AnyProp) => void;
     onselect?: (selected: DrawerOption[]) => void;
     children?: Snippet;
+    groups?: DrawerGroup[];
   }
 
   export interface DrawerContextItemProps {
     multiple?: boolean;
     item: DrawerOption;
     scrollIfSelected?: boolean;
-    workspace?: boolean;
     onclick?: (value: AnyProp) => void;
     onchange?: (item: DrawerOption) => void;
   }

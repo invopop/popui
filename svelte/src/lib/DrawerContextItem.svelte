@@ -3,8 +3,7 @@
   import InputCheckbox from './InputCheckbox.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { onMount } from 'svelte'
-  import { Success, Tick } from '@invopop/ui-icons'
-  import ProfileAvatar from './ProfileAvatar.svelte'
+  import { Success } from '@invopop/ui-icons'
   import clsx from 'clsx'
   import BaseFlag from './BaseFlag.svelte'
   import { getCountryName } from './helpers.js'
@@ -14,32 +13,26 @@
     multiple = false,
     item = $bindable(),
     scrollIfSelected = false,
-    workspace = false,
     onchange,
     onclick
   }: DrawerContextItemProps = $props()
 
   let el: HTMLElement | undefined = $state()
 
-  let hasIcon = $derived(item.icon || workspace)
-
   let styles = $derived(
     clsx(
-      { 'py-1 space-x-3': workspace },
-      { 'py-1.5 space-x-1.5': !workspace },
-      { 'pl-1.5': !hasIcon },
-      { 'pl-2': hasIcon },
-      { 'bg-workspace-accent-100': item.selected && !multiple },
-      { 'group-hover:bg-neutral-100': (!item.selected && !item.disabled) || multiple }
+      'py-1.5 space-x-1.5',
+      { 'pl-1.5': !item.icon },
+      { 'pl-2': item.icon },
+      { 'bg-background-selected': item.selected && !multiple },
+      {
+        'group-hover:bg-background-default-secondary':
+          (!item.selected && !item.disabled) || multiple
+      }
     )
   )
   let labelStyles = $derived(
-    clsx(
-      { 'text-danger-500': item.destructive },
-      { 'text-neutral-800': !item.destructive },
-      { 'tracking-tight max-w-[200px]': workspace },
-      { 'tracking-normal': !workspace }
-    )
+    clsx({ 'text-danger-500': item.destructive }, { 'text-neutral-800': !item.destructive })
   )
   let title = $derived(item.label.length > 25 ? item.label : undefined)
 
@@ -64,19 +57,15 @@
 
 <button
   bind:this={el}
-  class="cursor-pointer w-full px-1 py-0.5 disabled:opacity-30 group"
+  class="cursor-pointer w-full py-0.5 disabled:opacity-30 group"
   disabled={item.disabled}
   onclick={handleClick}
 >
   <div class="{styles} rounded pr-2 flex items-center justify-start w-full">
-    {#if workspace}
-      <ProfileAvatar name={item.label} picture={item.picture} large />
-    {:else if item.icon}
+    {#if item.icon}
       <Icon
         src={item.icon}
-        class="w-4 h-4 {item.destructive
-          ? 'text-danger-500'
-          : item.iconClass || 'text-neutral-500'}"
+        class="w-4 h-4 {item.destructive ? 'text-icon-critical' : item.iconClass || 'text-icon'}"
       />
     {/if}
     <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" {title}>
@@ -90,7 +79,7 @@
       {#if item.country}
         <span class="flex space-x-1 items-center">
           <BaseFlag country={item.country} width={10} />
-          <span class="text-sm text-neutral-500 tracking-normal">
+          <span class="text-sm text-foreground-default-secondary">
             {getCountryName(item.country)}
           </span>
         </span>
@@ -98,15 +87,16 @@
     </div>
     {#if multiple}
       <InputCheckbox
-        bind:checked={item.selected}
-        onchange={() => {
+        checked={item.selected ?? false}
+        onchange={(value) => {
+          item.selected = value
           onchange?.(item)
         }}
       />
     {:else if item.selected}
-      <Icon src={Success} class="w-4 h-4 text-workspace-accent" />
+      <Icon src={Success} class="size-4 text-icon-selected" />
     {:else if item.rightIcon}
-      <Icon src={item.rightIcon} class="w-4 h-4 text-neutral-400" />
+      <Icon src={item.rightIcon} class="size-4 text-icon-default-secondary" />
     {/if}
   </div>
 </button>

@@ -869,8 +869,8 @@
     --color-background-selected-inverse-press: var(--color-neutral-alpha-30);
 
     --color-background-accent-default: var(--color-accent-60);
-    --color-background-accent-default-hover: var(--color-accent-60);
-    --color-background-accent-default-press: var(--color-accent-70);
+    --color-background-accent-default-hover: var(--color-accent-70);
+    --color-background-accent-default-press: var(--color-accent-80);
 
     --color-background-info-default: var(--color-info-alpha-20);
     --color-background-info-bold: var(--color-info-60);

@@ -123,8 +123,8 @@
   let isOpen = $state(false)
   let styles = $derived(
     clsx({
-      'border-workspace-accent focus:border-workspace-accent shadow-active': isOpen,
-      'border-neutral-200 hover:border-neutral-300': !isOpen
+      'border-border-selected-bold shadow-active': isOpen,
+      'border-border hover:border-border-default-secondary-hover': !isOpen
     })
   )
   let selectedLabel = $state(label)
@@ -188,11 +188,11 @@
       onclick={() => {
         isOpen = !isOpen
       }}
-      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-md text-neutral-800 placeholder-neutral-800 text-base cursor-pointer"
+      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-md text-foreground placeholder-foreground text-base cursor-pointer"
     >
       {selectedLabel}
     </button>
-    <Icon src={Calendar} class="h-4 w-4 absolute top-2 left-2 text-neutral-500" />
+    <Icon src={Calendar} class="h-4 w-4 absolute top-2 left-2 text-foreground-default-secondary" />
   </div>
 
   <div class="relative">
@@ -209,21 +209,21 @@
       <div
         class:left-0={position === 'left'}
         class:right-0={position === 'right'}
-        class="bg-white inline-flex flex-col shadow rounded-lg absolute right-0 top-2 z-40"
+        class="bg-white inline-flex flex-col shadow-md rounded-lg absolute right-0 top-2 z-40"
         use:clickOutside
         onclick_outside={() => {
           if (!isOpen) return
           cancel()
         }}
       >
-        <div class="flex border-b border-neutral-100 min-h-[300px] rounded-lg shadow-calendar">
-          <div class="flex flex-col space-y-2 items-start p-3 border-r border-neutral-100">
+        <div class="flex border-b border-border min-h-[300px] rounded-lg shadow-calendar">
+          <div class="flex flex-col space-y-2 items-start p-3 border-r border-border">
             {#each periods as period}
               <button
                 onclick={period.action}
                 class="{selectedPeriod === period.slug
-                  ? 'selected-period text-workspace-accent-600 bg-workspace-accent-100'
-                  : 'text-neutral-500'} whitespace-nowrap text-base px-2 py-1 tracking-normal rounded cursor-pointer"
+                  ? 'selected-period text-foreground-accent bg-foreground-accent/10'
+                  : 'text-foreground-default-secondary'} whitespace-nowrap text-base px-2 py-1 tracking-normal rounded cursor-pointer"
               >
                 {period.label}
               </button>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
-  import { Warning, Failure, Success, Info } from '@invopop/ui-icons'
+  import { Warning, Failure, Success, InfoBold } from '@invopop/ui-icons'
   import { Icon } from '@steeze-ui/svelte-icon'
   import type { NotificationProps } from './types'
 
@@ -15,11 +15,11 @@
       case 'warning':
         return Warning
       case 'info':
-        return Info
+        return InfoBold
       case 'neutral':
-        return Info
+        return InfoBold
       default:
-        return Info
+        return InfoBold
     }
   })
 
@@ -45,7 +45,7 @@
   )
 
   let iconStyles = $derived(
-    clsx('size-4', {
+    clsx('size-4 mt-0.5', {
       'text-icon': type === 'neutral',
       'text-icon-info': type === 'info',
       'text-icon-success': type === 'success',

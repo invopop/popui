@@ -20,8 +20,9 @@
 
   let containerStyles = $derived(
     clsx('border gap-3 py-2 pr-2 pl-3 flex items-start rounded-xl', {
-      'border-foreground-selected': checked && !disabled,
-      'border-border bg-background-default-secondary': disabled
+      'border-foreground-selected': checked,
+      'border-border': !checked,
+      'bg-background-default-secondary': disabled
     })
   )
 </script>

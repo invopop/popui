@@ -241,7 +241,7 @@
   }}
 />
 
-<div class="h-full w-full font-sans border rounded-md border-border overflow-auto">
+<div class="h-full w-full font-sans rounded-md overflow-auto">
   <Table class="hidden md:table" {...rest}>
     <colgroup>
       {#if selectable}
@@ -261,7 +261,6 @@
           <TableHead class="bg-white sticky top-0 z-10 p-0 h-9">
             {#if !hideSelectAll}
               <BaseTableCheckbox
-                hidden={!selectedRows.length}
                 {indeterminate}
                 checked={allChecked}
                 onChecked={() => {
@@ -293,13 +292,12 @@
             <th
               scope="colgroup"
               colspan={fields.length + (selectable ? 2 : 1)}
-              class="bg-white text-left text-sm font-medium text-foreground-default-secondary sticky top-9 tracking-normal h-8 z-10"
+              class="bg-white text-left text-base font-normal text-foreground-default-secondary sticky top-9 tracking-normal h-8 z-10"
             >
               <span
-                class:border-t={i > 0}
-                class:pl-12={selectable}
-                class:pl-3={!selectable}
-                class="flex items-center space-x-1 box-border border-b border-border h-8"
+                class:pl-13={selectable}
+                class:pl-6={!selectable}
+                class="flex items-center space-x-1 box-border border-b border-border h-9"
               >
                 <span>{group.label}</span>
                 {#if !hideCounter}

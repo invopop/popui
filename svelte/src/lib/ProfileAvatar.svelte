@@ -15,14 +15,16 @@
 
   let containerStyles = $derived(
     clsx(
-      'border overflow-clip relative flex items-center justify-center',
+      'overflow-clip relative flex items-center justify-center after:content-[""] after:absolute after:inset-0 after:pointer-events-none after:rounded-[inherit]',
       { 'size-4 rounded': variant === 'xs' },
       { 'size-5 rounded-md': variant === 'sm' },
       { 'size-7 rounded-md': variant === 'md' },
       { 'size-8 rounded-lg': variant === 'lg' },
       { 'size-10 rounded-lg': variant === 'xl' },
-      { 'bg-background-default-default border-border-default-default': !dark },
-      { 'border-border-inverse-default': dark }
+      {
+        'bg-background after:shadow-avatar': !dark
+      },
+      { 'border-border-inverse after:shadow-avatar-inverse': dark }
     )
   )
 

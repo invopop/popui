@@ -22,7 +22,7 @@
     icon = undefined,
     iconPosition = 'left',
     variant = 'default',
-    size = 'lg',
+    size = 'md',
     dangerIcon = false,
     shortcut = false,
     fullwidth = false,

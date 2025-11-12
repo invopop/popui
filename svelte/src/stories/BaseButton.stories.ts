@@ -178,7 +178,7 @@ export const SmallSize: Story = {
   args: {
     slot: 'Button',
     variant: 'primary',
-    small: true
+    size: 'sm'
   }
 }
 
@@ -187,7 +187,7 @@ export const SmallWithIcon: Story = {
     slot: 'Button',
     icon: Add,
     variant: 'primary',
-    small: true
+    size: 'sm'
   }
 }
 
@@ -195,7 +195,7 @@ export const SmallIconOnly: Story = {
   args: {
     icon: Add,
     variant: 'primary',
-    small: true
+    size: 'sm'
   }
 }
 
@@ -203,7 +203,7 @@ export const BigSize: Story = {
   args: {
     slot: 'Button',
     variant: 'primary',
-    big: true
+    size: 'lg'
   }
 }
 
@@ -212,7 +212,7 @@ export const BigWithIcon: Story = {
     slot: 'Button',
     icon: Add,
     variant: 'primary',
-    big: true
+    size: 'lg'
   }
 }
 
@@ -220,7 +220,7 @@ export const BigIconOnly: Story = {
   args: {
     icon: Add,
     variant: 'primary',
-    big: true
+    size: 'lg'
   }
 }
 

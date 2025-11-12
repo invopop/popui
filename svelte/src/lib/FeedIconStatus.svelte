@@ -24,7 +24,7 @@
 
 {#if iconStatus}
   <div title={status}>
-    <Icon src={iconStatus} class="h-4 w-4 shrink-0" />
+    <Icon src={iconStatus} class="h-4 w-4 shrink-0 text-icon" />
   </div>
 {:else}
   <div class="w-4 h-4 shrink-0 bg-neutral-200 rounded-full"></div>

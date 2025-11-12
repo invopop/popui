@@ -21,9 +21,7 @@
 
   let styles = $derived(
     clsx(
-      'py-1.5 space-x-1.5',
-      { 'pl-1.5': !item.icon },
-      { 'pl-2': item.icon },
+      'px-2 py-1.5 space-x-1.5',
       { 'bg-background-selected': item.selected && !multiple },
       {
         'group-hover:bg-background-default-secondary':
@@ -57,11 +55,11 @@
 
 <button
   bind:this={el}
-  class="cursor-pointer w-full py-0.5 disabled:opacity-30 group"
+  class="cursor-pointer w-full disabled:opacity-30 group"
   disabled={item.disabled}
   onclick={handleClick}
 >
-  <div class="{styles} rounded pr-2 flex items-center justify-start w-full">
+  <div class="{styles} rounded-md pr-2 flex items-center justify-start w-full">
     {#if item.icon}
       <Icon
         src={item.icon}

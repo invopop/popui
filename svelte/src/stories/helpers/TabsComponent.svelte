@@ -2,13 +2,15 @@
   import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../lib/tabs'
 
   let value = $state('password')
+
+  let { variant = 'md' }: { variant?: 'md' | 'lg' } = $props()
 </script>
 
 <div class="flex flex-col max-h-[200px]">
   <Tabs bind:value class="w-[400px]">
-    <TabsList>
-      <TabsTrigger value="account">Account</TabsTrigger>
-      <TabsTrigger value="password">Password</TabsTrigger>
+    <TabsList {variant} class="h-8">
+      <TabsTrigger {variant} value="account">Account</TabsTrigger>
+      <TabsTrigger {variant} value="password">Password</TabsTrigger>
     </TabsList>
     <TabsContent value="account">
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has

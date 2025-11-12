@@ -9,13 +9,17 @@
   let restIcons = $derived(icons.slice(maxItems, icons.length))
 </script>
 
+{#snippet separator()}
+  <div class="hidden sm:block h-px w-3 bg-border shrink-0"></div>
+{/snippet}
+
 <TooltipProvider>
   <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 items-center">
     {#each mainIcons as icon, i (i)}
       <Tooltip>
         <TooltipTrigger class="shrink-0">
           <div
-            class="p-1.5 border rounded-md border-border flex items-center space-x-1 bg-background text-icon"
+            class="p-1.5 rounded-md border border-border flex items-center space-x-1 bg-background text-icon"
           >
             <img src={icon.url} alt={icon.name} class="size-4" />
           </div>
@@ -24,11 +28,11 @@
       </Tooltip>
 
       {#if i < mainIcons.length - 1}
-        <div class="hidden sm:block h-px w-3 border border-border mx-px shrink-0"></div>
+        {@render separator()}
       {/if}
     {/each}
     {#if restIcons.length}
-      <div class="hidden sm:block h-px w-3 border border-border mx-px shrink-0"></div>
+      {@render separator()}
       <Tooltip>
         <TooltipTrigger class="shrink-0">
           <div class="flex items-center justify-center text-icon font-medium text-base size-7">

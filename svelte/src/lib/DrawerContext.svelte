@@ -68,8 +68,18 @@
   }
 </script>
 
+{#snippet drawerItem(item: DrawerOption)}
+  {#if item.separator}
+    <DrawerContextSeparator />
+  {:else}
+    <div class:px-1={!item.groupBy}>
+      <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
+    </div>
+  {/if}
+{/snippet}
+
 <div
-  class="{widthClass} border border-border rounded-2xl shadow-lg bg-white overflow-hidden flex flex-col"
+  class="{widthClass} border border-border rounded-2xl shadow-lg bg-white overflow-hidden flex flex-col py-1 max-h-[400px] overflow-y-auto"
 >
   {@render children?.()}
 
@@ -77,9 +87,9 @@
     {#each groups as group, index}
       {@const groupItems = groupedItems.get(group.slug) || []}
       {@const isLastGroup = index === groups!.length - 1}
-      <div class="flex-shrink-0 {!isLastGroup ? 'border-b border-border' : ''}">
+      <div class="flex-shrink-0 px-1">
         <button
-          class="cursor-pointer flex items-center justify-between h-9 pl-3 pr-2.5 py-2.5 text-sm font-medium text-foreground-default-secondary w-full hover:bg-background-default-secondary rounded-lg overflow-clip"
+          class="cursor-pointer flex items-center justify-between h-8 pl-2.5 pr-2.5 py-2.5 text-base font-medium text-foreground-default-secondary w-full hover:bg-background-default-secondary rounded-lg overflow-clip"
           onclick={() => toggleGroup(group.slug)}
         >
           <div class="flex items-center gap-1.5">
@@ -111,32 +121,23 @@
             {:else}
               <div class="max-h-[400px] overflow-y-auto">
                 {#each groupItems as item}
-                  {#if item.separator}
-                    <DrawerContextSeparator />
-                  {:else}
-                    <div class="px-1">
-                      <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
-                    </div>
-                  {/if}
+                  {@render drawerItem(item)}
                 {/each}
               </div>
             {/if}
           </div>
         {/if}
       </div>
+      {#if !isLastGroup}
+        <DrawerContextSeparator />
+      {/if}
     {/each}
   {/if}
 
   {#if ungroupedItems.length}
-    <div class="flex-shrink-0 max-h-[400px] overflow-y-auto">
+    <div class="flex-shrink-0">
       {#each ungroupedItems as item}
-        {#if item.separator}
-          <DrawerContextSeparator />
-        {:else}
-          <div class="px-1">
-            <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
-          </div>
-        {/if}
+        {@render drawerItem(item)}
       {/each}
     </div>
   {/if}

@@ -5,6 +5,7 @@
   import DrawerContext from './DrawerContext.svelte'
   import { Options } from '@invopop/ui-icons'
   import clsx from 'clsx'
+  import BaseButton from './BaseButton.svelte'
 
   let { actions, onclick }: BaseTableActionsProps = $props()
 
@@ -34,10 +35,7 @@
 </script>
 
 {#snippet trigger()}
-  <div class="relative group flex justify-center items-center rounded p-1 cursor-pointer">
-    <span class="{overlayClasses} absolute inset-0 rounded"></span>
-    <Icon src={Options} class="w-4 text-neutral-500" />
-  </div>
+  <BaseButton variant="ghost" aria-label="Row actions" icon={Options} />
 {/snippet}
 
 <BaseDropdown bind:isOpen bind:this={actionDropdown} {trigger}>

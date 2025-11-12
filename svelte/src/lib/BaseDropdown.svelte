@@ -10,6 +10,7 @@
     fullWidth = false,
     placement = 'bottom-end',
     matchParentWidth = false,
+    class: className = '',
     trigger,
     children,
     ...rest
@@ -49,10 +50,9 @@
   }
 </script>
 
-<div class="inline-flex" class:w-full={fullWidth} role="menu">
+<div class="flex {className}" class:w-full={fullWidth} role="menu">
   <button
-    class="cursor-pointer text-left"
-    class:w-full={fullWidth}
+    class="cursor-pointer text-left w-full min-w-0"
     use:floatingRef
     {...rest}
     onclick={handleClick}

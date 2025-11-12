@@ -34,7 +34,7 @@
 
 <button
   class={cn(
-    'flex items-center gap-3 px-2 py-1.5 rounded-[10px] w-full hover:bg-background-default-secondary',
+    'flex items-center gap-3 px-2 py-1.5 rounded-[10px] w-full hover:bg-background-default-secondary cursor-pointer',
     disabled && 'opacity-30 pointer-events-none',
     className
   )}

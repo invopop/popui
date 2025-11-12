@@ -120,7 +120,7 @@
     start: undefined,
     end: undefined
   })
-  let isOpen = $state(false)
+  let isOpen = $state(true)
   let styles = $derived(
     clsx({
       'border-border-selected-bold shadow-active': isOpen,
@@ -188,7 +188,7 @@
       onclick={() => {
         isOpen = !isOpen
       }}
-      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-md text-foreground placeholder-foreground text-base cursor-pointer"
+      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-lg text-foreground placeholder-foreground text-base cursor-pointer"
     >
       {selectedLabel}
     </button>
@@ -209,21 +209,21 @@
       <div
         class:left-0={position === 'left'}
         class:right-0={position === 'right'}
-        class="bg-white inline-flex flex-col shadow-md rounded-lg absolute right-0 top-2 z-40"
+        class="bg-white inline-flex flex-col shadow-lg rounded-xl absolute right-0 top-2 z-40 border border-border"
         use:clickOutside
         onclick_outside={() => {
           if (!isOpen) return
           cancel()
         }}
       >
-        <div class="flex border-b border-border min-h-[300px] rounded-lg shadow-calendar">
+        <div class="flex border-b border-border min-h-[300px] shadow-calendar">
           <div class="flex flex-col space-y-2 items-start p-3 border-r border-border">
             {#each periods as period}
               <button
                 onclick={period.action}
                 class="{selectedPeriod === period.slug
-                  ? 'selected-period text-foreground-accent bg-foreground-accent/10'
-                  : 'text-foreground-default-secondary'} whitespace-nowrap text-base px-2 py-1 tracking-normal rounded cursor-pointer"
+                  ? 'selected-period text-foreground-selected bg-background-selected font-medium'
+                  : 'text-foreground-default-secondary'} whitespace-nowrap text-base px-2 py-1 tracking-normal rounded-md cursor-pointer"
               >
                 {period.label}
               </button>
@@ -232,8 +232,10 @@
           <RangeCalendar bind:value numberOfMonths={2} />
         </div>
         <div class="p-3 flex justify-end items-center space-x-3">
-          <BaseButton variant="secondary" onclick={cancel}>Cancel</BaseButton>
-          <BaseButton variant="primary" onclick={confirm} disabled={!value.end}>Confirm</BaseButton>
+          <BaseButton variant="secondary" size="lg" onclick={cancel}>Cancel</BaseButton>
+          <BaseButton variant="primary" size="lg" onclick={confirm} disabled={!value.end}
+            >Confirm</BaseButton
+          >
         </div>
       </div>
     </Transition>

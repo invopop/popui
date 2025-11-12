@@ -28,9 +28,10 @@
 
 <BaseButton
   {disabled}
-  size="lg"
+  size="sm"
   icon={Duplicate}
   iconPosition="right"
+  variant="ghost"
   onclick={async () => {
     await navigator.clipboard.writeText(uuid)
     oncopied?.(uuid)

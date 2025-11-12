@@ -13,5 +13,5 @@
 </script>
 
 <Notification {title} {description} {type}>
-  <BaseButton variant="outline" size="sm">Button</BaseButton>
+  <BaseButton variant="outline">Button</BaseButton>
 </Notification>

@@ -67,7 +67,7 @@
     bind:this={input}
     bind:value
     type="search"
-    class="flex items-center gap-1 h-8 w-full px-2 py-1.5 pl-7 rounded-lg border bg-background-default-default text-base text-foreground-default-default placeholder:text-foreground-default-tertiary outline-none caret-workspace-accent focus:ring-0 border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active"
+    class="flex items-center gap-1 h-8 w-full px-2 py-1.5 pl-7 rounded-lg border bg-background-default-default text-base text-foreground-default-default placeholder:text-foreground-default-tertiary outline-none caret-foreground-accent focus:ring-0 border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active"
     style:padding-right={shortcut ? `${shortcutKeys.length * 20 + 12}px` : undefined}
     {placeholder}
     {...rest}

@@ -13,7 +13,7 @@
   bind:ref
   class={cn(
     buttonVariants({ variant: 'ghost' }),
-    'size-(--cell-size) flex select-none flex-col items-center justify-center gap-1 whitespace-nowrap p-0 font-medium leading-none rounded-[4px]',
+    'size-(--cell-size) flex select-none flex-col items-center justify-center gap-1 whitespace-nowrap p-0 font-medium leading-none rounded-lg',
     // today
     '[&[data-today]:not([data-selected]):not([data-outside-month])]:border-b [&[data-today]:not([data-selected]):not([data-outside-month])]:border-background-accent [&[data-today]:not([data-selected]):not([data-outside-month])]:rounded-none',
     // range Start

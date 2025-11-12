@@ -95,6 +95,14 @@
   --color-white-80: rgba(255, 255, 255, 0.8);
   --color-white-90: rgba(255, 255, 255, 0.9);
 
+  /* DEFAULT: 'var(--workspace-accent-color, #169958)',
+          50: 'color-mix(in lab, transparent 95%, var(--workspace-accent-color, #169958))',
+          100: 'color-mix(in lab, transparent 90%, var(--workspace-accent-color, #169958))',
+          200: 'color-mix(in lab, transparent 80%, var(--workspace-accent-color, #169958))',
+          500: 'var(--workspace-accent-color, #169958)',
+          600: 'color-mix(in lab, black 16%, var(--workspace-accent-color, #169958))',
+          700: 'color-mix(in lab, black 32%, var(--workspace-accent-color, #169958))' */
+
   /* Green */
   --color-green-10: #f5faf8;
   --color-green-20: #cce7dc;
@@ -366,7 +374,7 @@
      SEMANTIC COLORS
      ============================================ */
 
-  /* Accen */
+  /* Accent */
   --color-accent-40: var(--color-green-40);
   --color-accent-50: var(--color-green-50);
   --color-accent-60: var(--color-green-60);
@@ -771,10 +779,14 @@
   --shadow-sm:  0 2px 20px 0 rgba(10, 10, 10, 0.04);
   --shadow-lg:  0 8px 30px 0 rgba(10, 10, 10, 0.12);
   --shadow-xl:  0 8px 28px -6px rgba(10, 10, 10, 0.12), 0 18px 88px -4px rgba(10, 10, 10, 0.14);
-  --shadow-active: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--workspace-accent-color, var(--color-positive-50)));
+  --shadow-active: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--color-background-accent-default, var(--color-positive-50)));
   --shadow-warning: 0px 0px 0px 2px rgba(215, 135, 0, 0.12);
   --shadow-button-default: 0 2px 6px -1px rgba(11, 11, 16, 0.04), 0 -2px 4px 0 rgba(11, 11, 16, 0.04) inset;
-  --shadow-button-pressed: 0 4px 4px -1px rgba(11, 11, 16, 0.16) inset;
+  --shadow-button-primary: 0 -4px 4px 0 rgba(11, 11, 16, 0.12) inset, 0 1px 1.5px 0 rgba(255, 255, 255, 0.16) inset, 0 2px 4px -1px rgba(11, 11, 16, 0.08);
+  --shadow-button-pressed: 0 2px 6px 0 rgba(11, 11, 16, 0.16) inset, 0 -2px 5px -2px rgba(255, 255, 255, 0.25) inset;
+  --shadow-button-dark-pressed: 0 4px 4px -1px rgba(11, 11, 16, 0.16) inset;
+  --shadow-avatar: 0 0 0 1px rgba(5, 5, 36, 0.06) inset;
+  --shadow-avatar-inverse: 0 0 0 1px rgba(255, 255, 255, 0.10) inset;
 
   /* Letter Spacing (tracking) */
   --tracking-tightest: -0.29px; /* -1.2% (text-2xl) */
@@ -854,7 +866,7 @@
 
     /* Background */
     --color-background-default-default: var(--color-neutral-100);
-    --color-background-default-secondary: var(--color-neutral-white-alpha-10);
+    --color-background-default-secondary: var(--color-neutral-white-alpha-5);
     --color-background-default-tertiary: var(--color-neutral-white-alpha-10);
     --color-background-default-tertiary-hover: var(--color-neutral-white-alpha-20);
     --color-background-default-tertiary-press: var(--color-neutral-white-alpha-30);

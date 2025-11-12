@@ -44,7 +44,7 @@
     (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-neutral-500'
   )
   let selectedLabel = $derived(
-    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more...' : ''}` ||
+    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more and more and more and more and more and more' : ''}` ||
       placeholder
   )
 
@@ -75,23 +75,31 @@
   }
 </script>
 
-<BaseDropdown bind:isOpen placement="bottom-start" {fullWidth} bind:this={selectDropdown}>
+{#snippet label()}
+  <span
+    class="flex-1 text-base truncate {selectedItems.length
+      ? 'text-foreground'
+      : 'text-foreground-default-secondary'}"
+  >
+    {selectedLabel}
+  </span>
+{/snippet}
+
+<BaseDropdown
+  bind:isOpen
+  placement="bottom-start"
+  {fullWidth}
+  bind:this={selectDropdown}
+  class={fullWidth ? '' : widthClass}
+>
   {#snippet trigger()}
     <div
-      class="{styles} dropdown-select flex items-center rounded-lg py-1.5 px-2 bg-background whitespace-nowrap {fullWidth
-        ? 'w-full'
-        : widthClass}"
+      class="{styles} dropdown-select flex items-center rounded-lg py-1.5 pl-2 pr-[28px] bg-background overflow-hidden w-full h-8"
     >
       {#if selectedColor}
         <div class="flex items-center gap-1 flex-1 min-w-0">
           <TagStatus dot status={selectedColor} />
-          <span
-            class="flex-1 text-sm truncate {selectedItems.length
-              ? 'text-foreground'
-              : 'text-foreground-default-secondary'}"
-          >
-            {selectedLabel}
-          </span>
+          {@render label()}
         </div>
       {:else if selectedIcon || resolvedIcon}
         <div class="flex items-center gap-1 flex-1 min-w-0">
@@ -100,22 +108,10 @@
           {:else if resolvedIcon}
             <Icon src={resolvedIcon} {iconTheme} class="text-icon size-4 flex-shrink-0" />
           {/if}
-          <span
-            class="flex-1 text-sm truncate {selectedItems.length
-              ? 'text-foreground'
-              : 'text-foreground-default-secondary'}"
-          >
-            {selectedLabel}
-          </span>
+          {@render label()}
         </div>
       {:else}
-        <span
-          class="flex-1 text-sm truncate {selectedItems.length
-            ? 'text-foreground'
-            : 'text-foreground-default-secondary'}"
-        >
-          {selectedLabel}
-        </span>
+        {@render label()}
       {/if}
     </div>
   {/snippet}

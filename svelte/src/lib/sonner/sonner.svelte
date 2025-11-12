@@ -14,28 +14,26 @@
     unstyled: true,
     classes: {
       toast:
-        'group toast bg-neutral-800 border-0 rounded-lg text-white flex gap-2 items-start py-2 px-3 w-[336px]',
-      title: 'font-medium text-sm leading-5 tracking-tight text-white',
-      description: 'font-normal text-sm leading-5 tracking-tight text-white/70',
+        'group toast bg-background-default-negative border-0 rounded-lg text-foreground-inverse flex gap-2 items-start pl-3 pr-2 py-2 w-[336px] [&>[data-content]]:flex-1',
+      title: 'font-medium text-base text-foreground-inverse',
+      description: 'font-normal text-base text-foreground-inverse-secondary',
       actionButton:
-        'bg-white/10 rounded px-2 py-1 text-xs font-medium text-white leading-4 hover:bg-white/15 transition-colors',
-      cancelButton:
-        'bg-white/10 rounded px-2 py-1 text-xs font-medium text-white leading-4 hover:bg-white/15 transition-colors',
+        'bg-background-selected-inverse rounded px-2 py-1 text-xs font-medium text-foreground-inverse hover:bg-background-selected-inverse-hover transition-colors',
       closeButton: 'hidden'
     }
   }}
   {...restProps}
 >
   {#snippet successIcon()}
-    <Icon src={Success} class="w-4 h-4 text-positive-500" />
+    <Icon src={Success} class="size-4 mt-0.5" />
   {/snippet}
 
   {#snippet errorIcon()}
-    <Icon src={Failure} class="w-4 h-4 text-danger-500" />
+    <Icon src={Failure} class="size-4 mt-0.5" />
   {/snippet}
 
   {#snippet infoIcon()}
-    <Icon src={Info} class="w-4 h-4 text-white" />
+    <Icon src={Info} class="size-4 mt-0.5 text-icon-inverse" />
   {/snippet}
 </Sonner>
 

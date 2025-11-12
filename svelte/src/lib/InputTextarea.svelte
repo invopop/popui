@@ -18,12 +18,12 @@
 
   let inputStyles = $derived(
     clsx(
-      'w-full rounded-lg border px-2 py-1.5 text-base tracking-tight bg-background backdrop-blur-[2px] placeholder:text-foreground-default-tertiary outline-none focus:ring-0',
+      'w-full rounded-lg border px-2 py-1.5 text-base tracking-tight bg-background backdrop-blur-[2px] placeholder:text-foreground-default-tertiary outline-none focus:ring-0 caret-foreground-accent',
       {
         'pointer-events-none bg-background-default-secondary border-border': disabled
       },
       {
-        'text-foreground-critical border-border-critical-bold': errorText
+        'text-foreground-critical border-border-critical-bold caret-foreground-critical': errorText
       },
       {
         'text-foreground border-border hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active':

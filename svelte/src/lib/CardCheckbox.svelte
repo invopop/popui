@@ -31,7 +31,7 @@
   <div class={containerStyles}>
     <div class="flex grow items-start gap-1 min-w-0">
       {#if icon}
-        <Icon src={icon} class="size-5 text-icon shrink-0" />
+        <Icon src={icon} class="size-4 text-icon shrink-0 mt-0.5" />
       {/if}
       <div class="flex flex-col gap-1 min-w-0">
         <span class="text-base font-medium text-foreground">

@@ -14,7 +14,7 @@
   }: EmptyStateProps = $props()
 </script>
 
-<div class="flex flex-col items-center justify-center gap-4">
+<div class="flex flex-col items-center justify-center">
   {#if icon}
     <div class="relative h-[120px] w-[352px] max-w-sm flex items-center justify-center">
       {@render icon()}
@@ -35,6 +35,8 @@
     <p class="text-foreground-default-secondary text-base">{description}</p>
   </div>
   {#if children}
-    {@render children()}
+    <div class="mt-4">
+      {@render children()}
+    </div>
   {/if}
 </div>

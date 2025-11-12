@@ -24,13 +24,16 @@
   })
 
   let containerStyles = $derived(
-    clsx('flex items-center gap-1.5 px-3 py-2 rounded-xl', {
-      'bg-background border border-border': type === 'neutral',
+    clsx('flex items-center gap-1.5 pl-3 rounded-xl', {
+      'py-1.5': children,
+      'py-2': !children,
+      'bg-background border border-border shadow-sm': type === 'neutral',
       'bg-background-info': type === 'info',
       'bg-background-success': type === 'success',
       'bg-background-warning': type === 'warning',
       'bg-background-critical': type === 'error',
-      'min-h-9 rounded-[10px] pl-3 pr-1.5 py-1.5': !description
+      'pr-3': description,
+      'min-h-9 rounded-[10px] pl-3 py-1.5 pr-1.5': !description
     })
   )
 
@@ -45,7 +48,8 @@
   )
 
   let iconStyles = $derived(
-    clsx('size-4 mt-0.5', {
+    clsx('size-4', {
+      'mt-0.5': description,
       'text-icon': type === 'neutral',
       'text-icon-info': type === 'info',
       'text-icon-success': type === 'success',
@@ -56,7 +60,7 @@
 </script>
 
 <div class={containerStyles}>
-  <div class="flex items-start self-stretch">
+  <div class:items-start={description} class:items-center={!description} class="flex self-stretch">
     <div class="relative size-4 shrink-0">
       {#if icon}
         <Icon src={icon} class={iconStyles} />

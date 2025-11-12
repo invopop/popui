@@ -87,19 +87,21 @@
 >
   {#if selectable}
     <TableCell>
-      <BaseTableCheckbox
-        bind:checkboxButton
-        {checked}
-        hidden={selectedRows.length === 0}
-        {onChecked}
-      />
+      <BaseTableCheckbox bind:checkboxButton {checked} {onChecked} />
     </TableCell>
   {/if}
   {#each fields as field, i (i)}
+    {@const extraPaddingLeft = i === 0 && !selectable}
+    {@const extraPaddingRight = i === fields.length - 1 && !actions.length}
     <TableCell
-      class="{i === 0 && !selectable ? 'pl-6' : 'pl-3'}  {i === fields.length - 1 && !actions.length
-        ? 'pr-6'
-        : 'pr-3'}"
+      class={clsx({
+        'font-medium': i === 0,
+        'pl-6': extraPaddingLeft,
+        'pl-3': !extraPaddingLeft,
+        'pr-6': extraPaddingRight,
+        'pr-3': !extraPaddingRight,
+        'py-2': field.copy
+      })}
     >
       <BaseTableCellContent
         {field}
@@ -112,7 +114,7 @@
     </TableCell>
   {/each}
   {#if actions.length}
-    <TableCell>
+    <TableCell class="py-2">
       <BaseTableActions
         bind:this={actionsDropdown}
         {actions}

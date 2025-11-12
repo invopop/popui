@@ -64,7 +64,7 @@ import TitleSection from './TitleSection.svelte'
 import { Toaster } from './sonner'
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
 import UuidCopy from './UuidCopy.svelte'
-import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
+import { resolveIcon, getCountryName, getStatusType } from './helpers.ts'
 
 export {
   AlertDialog,

@@ -6,9 +6,9 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/Tabs',
-  component: TabsComponent,
+  component: TabsComponent as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator]
+  decorators: [() => MarginDecorator as any]
 } satisfies Meta<TabsComponent>
 
 export default meta
@@ -16,3 +16,9 @@ type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {}
+
+export const Large: StoryObj<typeof meta> = {
+  args: {
+    variant: 'lg'
+  }
+}

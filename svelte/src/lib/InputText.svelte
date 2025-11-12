@@ -32,7 +32,7 @@
 
   let inputStyles = $derived(
     clsx(
-      'h-8 w-full rounded-lg border px-2 py-1 text-base tracking-tight bg-background-default-default backdrop-blur-[2px]',
+      'h-8 w-full rounded-lg border px-2 py-1 text-base tracking-tight bg-background-default-default backdrop-blur-[2px] caret-foreground-accent',
       'placeholder:text-foreground-default-tertiary',
       'outline-none focus:ring-0',
       {
@@ -40,7 +40,7 @@
           disabled
       },
       {
-        'text-foreground-critical border-border-critical-bold': errorText
+        'text-foreground-critical border-border-critical-bold caret-foreground-critical': errorText
       },
       {
         'text-foreground border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active':

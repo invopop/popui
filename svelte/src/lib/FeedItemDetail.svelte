@@ -1,4 +1,5 @@
 <script lang="ts">
+  import clsx from 'clsx'
   import type { FeedItemDetailProps } from './types.ts'
   import FeedIconStatus from './FeedIconStatus.svelte'
   import UuidCopy from './UuidCopy.svelte'
@@ -20,10 +21,16 @@
   }: FeedItemDetailProps = $props()
 
   let open = $state(false)
+  let styles = $derived(
+    clsx('pl-3 flex items-center space-x-1.5', {
+      'pr-3 py-2.5': !cancelable,
+      'py-2 pr-2': cancelable
+    })
+  )
 </script>
 
 <div class="w-full rounded-lg border border-border">
-  <div class="px-3 py-2.5 flex items-center space-x-1.5">
+  <div class={styles}>
     {#if status}
       <FeedIconStatus {status} />
     {/if}

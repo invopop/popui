@@ -18,10 +18,10 @@
 </script>
 
 <div class="flex flex-col">
-  <span class="md:hidden text-sm text-neutral-60 font-normal">
+  <span class="md:hidden text-sm font-normal">
     {field.headerLabel}
   </span>
-  <span class="flex items-center" class:justify-end={field.rightAlign}>
+  <span class="flex items-center gap-2" class:justify-end={field.rightAlign}>
     {#if field.isCountry && data}
       <span class="flex items-center space-x-1">
         <BaseFlag country={String(data)} width={16} />
@@ -34,9 +34,7 @@
       <span class="md:hidden">{data ? data : badge || status ? '' : '-'}</span>
     {/if}
     {#if badge}
-      <span class:ml-2={!!data}>
-        <TagStatus label={badge.label} status={badge.status} dot={Boolean(badge.dot)} />
-      </span>
+      <TagStatus label={badge.label} status={badge.status} dot={Boolean(badge.dot)} />
     {/if}
     {#if status}
       <span class:ml-2={!!data}>

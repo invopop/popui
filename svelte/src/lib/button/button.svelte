@@ -5,27 +5,27 @@
   import type { IconSource } from '@steeze-ui/svelte-icon'
 
   export const buttonVariants = tv({
-    base: 'inline-flex items-center justify-center font-medium text-base whitespace-nowrap rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-workspace-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-30 relative overflow-hidden',
+    base: 'inline-flex items-center justify-center font-medium text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-workspace-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-30 relative overflow-hidden box-border cursor-pointer',
     variants: {
       variant: {
         primary:
-          'bg-background-accent text-foreground-inverse border border-border-accent shadow-button-default hover:bg-background-accent-hover active:bg-background-accent-press active:shadow-button-pressed [&_svg]:text-icon-inverse',
+          'bg-background-accent text-foreground-inverse border border-border shadow-button-primary hover:bg-background-accent-hover active:bg-background-accent-hover active:shadow-button-pressed [&_svg]:text-icon-inverse',
         danger:
           'bg-background-default-tertiary text-foreground-critical border border-border shadow-button-default hover:bg-background-critical-bold hover:text-foreground-inverse hover:border-background-critical-bold active:bg-background-critical-bold active:text-foreground-inverse active:border-background-critical-bold active:shadow-[0px_4px_4px_-1px_inset_rgba(11,11,16,0.16)] [&_svg]:text-icon-critical hover:[&_svg]:text-icon-inverse active:[&_svg]:text-icon-inverse',
         outline:
-          'bg-background text-foreground border border-border shadow-button-default hover:border-border-default-secondary-hover active:bg-background-default-secondary active:shadow-button-pressed [&_svg]:text-icon',
+          'bg-background text-foreground border border-border-default-secondary shadow-button-default hover:border-border-default-secondary-hover active:shadow-button-pressed [&_svg]:text-icon',
         ghost:
-          'bg-transparent text-foreground hover:bg-background-default-secondary active:bg-background-default-tertiary [&_svg]:text-icon',
+          'bg-transparent text-foreground hover:shadow-button-default active:shadow-button-pressed hover:bg-background-default-tertiary-hover active:bg-background-default-tertiary-hover [&_svg]:text-icon',
         secondary:
-          'bg-background-default-tertiary text-foreground border border-border shadow-button-default hover:bg-background-default-tertiary-hover active:bg-background-default-tertiary-press active:shadow-button-pressed [&_svg]:text-icon',
+          'bg-background-default-tertiary text-foreground shadow-button-default hover:bg-background-default-tertiary-hover active:bg-background-default-tertiary-hover active:shadow-button-pressed [&_svg]:text-icon',
         default:
           'bg-background text-foreground border border-border shadow-button-default hover:bg-background-default-secondary active:bg-background-default-tertiary active:shadow-button-pressed [&_svg]:text-icon',
-        dark: 'bg-transparent text-foreground-inverse border border-border-inverse hover:bg-background-inverse-secondary active:bg-background-inverse-tertiary [&_svg]:text-icon-inverse'
+        dark: 'bg-transparent text-foreground-inverse border border-border-inverse-secondary hover:bg-background-selected-inverse active:bg-background-inverse-tertiary active:shadow-button-dark-pressed [&_svg]:text-icon-inverse'
       },
       size: {
-        sm: 'h-6',
-        md: 'h-7',
-        lg: 'h-8'
+        sm: 'h-6 rounded-sm',
+        md: 'h-7 rounded-md',
+        lg: 'h-8 rounded-lg'
       },
       iconOnly: {
         true: '',
@@ -105,11 +105,26 @@
         variant: 'dark',
         iconOnly: true,
         class: '[&_svg]:!text-icon-inverse-bold'
+      },
+      {
+        size: 'sm',
+        iconOnly: true,
+        class: 'w-6'
+      },
+      {
+        size: 'md',
+        iconOnly: true,
+        class: 'w-7'
+      },
+      {
+        size: 'lg',
+        iconOnly: true,
+        class: 'w-8'
       }
     ],
     defaultVariants: {
       variant: 'primary',
-      size: 'lg',
+      size: 'md',
       iconOnly: false,
       hasIcon: false
     }

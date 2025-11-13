@@ -7,7 +7,7 @@ export type IconTheme = 'default' | 'solid' | 'mini'
 export type IconPosition = 'right' | 'left'
 
 export type ButtonVariant =
-  | 'default'
+  | 'warning'
   | 'primary'
   | 'secondary'
   | 'danger'
@@ -67,6 +67,7 @@ export type DrawerOption = SelectOption & {
   iconClass?: string
   disabled?: boolean
   groupBy?: string
+  useAvatar?: boolean
 }
 
 export type Company = {

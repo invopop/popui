@@ -65,9 +65,11 @@
 </script>
 
 <AlertDialog onOpenChange={handleOpen} bind:open>
-  <AlertDialogTrigger class={children ? '' : 'hidden'}>
-    {@render children?.()}
-  </AlertDialogTrigger>
+  {#if children}
+    <AlertDialogTrigger>
+      {@render children?.()}
+    </AlertDialogTrigger>
+  {/if}
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>{title}</AlertDialogTitle>

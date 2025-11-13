@@ -120,7 +120,7 @@
     start: undefined,
     end: undefined
   })
-  let isOpen = $state(true)
+  let isOpen = $state(false)
   let styles = $derived(
     clsx({
       'border-border-selected-bold shadow-active': isOpen,

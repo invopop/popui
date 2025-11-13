@@ -33,7 +33,7 @@
   {#if hasNext && icon}
     <span class="absolute bottom-[-20px] left-2 border-l border-border w-px h-[58px]"></span>
   {/if}
-  <div class="flex items-start justify-between space-x-2 py-3">
+  <div class="flex items-start justify-between space-x-2">
     <div class="relative">
       {#if icon}
         <FeedIconEvent {icon} />

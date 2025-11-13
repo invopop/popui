@@ -48,6 +48,37 @@ export const PrimaryDisabled: Story = {
   }
 }
 
+// Warning Variant
+export const Warning: Story = {
+  args: {
+    slot: 'Warning Button',
+    variant: 'warning'
+  }
+}
+
+export const WarningWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Add,
+    variant: 'warning'
+  }
+}
+
+export const WarningIconOnly: Story = {
+  args: {
+    icon: Add,
+    variant: 'warning'
+  }
+}
+
+export const WarningDisabled: Story = {
+  args: {
+    slot: 'Button',
+    variant: 'warning',
+    disabled: true
+  }
+}
+
 // Danger Variant
 export const Danger: Story = {
   args: {

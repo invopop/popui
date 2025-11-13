@@ -5,7 +5,6 @@
   let {
     checkboxButton = $bindable(undefined),
     checked = false,
-    hidden = false,
     indeterminate = false,
     onChecked
   }: BaseTableCheckboxProps = $props()
@@ -20,12 +19,13 @@
   role="checkbox"
   aria-checked={checked}
   bind:this={checkboxButton}
-  class="h-full w-full flex items-center justify-center outline-none group cursor-default"
+  class="pl-3 h-full w-full flex items-center justify-center outline-none group cursor-default"
   onclick={handleClick}
 >
   <InputCheckbox
     {checked}
     {indeterminate}
+    onclick={(e) => e.stopPropagation()}
     onchange={(changed) => {
       onChecked?.(changed)
     }}

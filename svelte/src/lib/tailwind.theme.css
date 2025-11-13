@@ -865,13 +865,14 @@
     --color-foreground-status-void: var(--color-neutral-white-alpha-70);
 
     /* Background */
-    --color-background-default-default: var(--color-neutral-100);
+    --color-background-default-default: var(--color-neutral-90);
     --color-background-default-secondary: var(--color-neutral-white-alpha-5);
     --color-background-default-tertiary: var(--color-neutral-white-alpha-10);
     --color-background-default-tertiary-hover: var(--color-neutral-white-alpha-20);
     --color-background-default-tertiary-press: var(--color-neutral-white-alpha-30);
-    --color-background-default-bold: var(--color-accent-60);
-    --color-background-default-negative: var(--color-neutral-white-alpha-10);
+    --color-background-default-bold: var(--color-neutral-100);
+    --color-background-default-accent: var(--color-neutral-white-alpha-10);
+    --color-background-default-negative: var(--color-neutral-100);
 
     --color-background-selected-default: var(--color-accent-alpha-20);
     --color-background-selected-default-hover: var(--color-accent-alpha-30);
@@ -905,7 +906,7 @@
     --color-background-document-png: var(--color-documents-img-alpha-10);
 
     --color-background-status-invalid: var(--color-critical-alpha-20);
-    --color-background-status-empty: var(--color-neutral-100);
+    --color-background-status-empty: var(--color-neutral-white-alpha-5);
     --color-background-status-draft: var(--color-warning-alpha-20);
     --color-background-status-processing: var(--color-attention-alpha-20);
     --color-background-status-registered: var(--color-personalization-alpha-30);

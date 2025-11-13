@@ -1,14 +1,13 @@
 <script lang="ts">
   import type { BaseButtonProps } from '$lib/types.ts'
   import Button from './button/button.svelte'
-  import type { ButtonSize } from './button/button.svelte'
 
   let {
     icon,
     iconTheme = 'default',
     iconPosition = 'left',
     type = 'button',
-    variant = 'default',
+    variant = 'outline',
     disabled = false,
     size = 'md',
     dangerIcon = false,

@@ -8,7 +8,7 @@
   let {
     isOpen = $bindable(false),
     fullWidth = false,
-    placement = 'bottom-end',
+    placement = 'bottom-start',
     matchParentWidth = false,
     class: className = '',
     trigger,

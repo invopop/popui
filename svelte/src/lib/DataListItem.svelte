@@ -20,7 +20,7 @@
   )
 </script>
 
-<div class="flex gap-6 items-center px-3 py-1.5 rounded-lg hover:bg-background-default-secondary">
+<div class="flex gap-6 items-center px-3 py-1 rounded-lg hover:bg-background-default-secondary">
   <div class="text-foreground-default-secondary text-base min-w-[125px]">
     {label}
   </div>

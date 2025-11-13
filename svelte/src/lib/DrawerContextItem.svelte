@@ -8,6 +8,7 @@
   import BaseFlag from './BaseFlag.svelte'
   import { getCountryName } from './helpers.js'
   import TagStatus from './TagStatus.svelte'
+  import ProfileAvatar from './ProfileAvatar.svelte'
 
   let {
     multiple = false,
@@ -30,7 +31,7 @@
     )
   )
   let labelStyles = $derived(
-    clsx({ 'text-danger-500': item.destructive }, { 'text-neutral-800': !item.destructive })
+    clsx({ 'text-foreground-critical': item.destructive }, { 'text-foreground': !item.destructive })
   )
   let title = $derived(item.label.length > 25 ? item.label : undefined)
 
@@ -60,7 +61,11 @@
   onclick={handleClick}
 >
   <div class="{styles} rounded-md pr-2 flex items-center justify-start w-full">
-    {#if item.icon}
+    {#if item.useAvatar}
+      <ProfileAvatar name={item.label} picture={item.picture || ''} variant="sm" />
+    {:else if item.picture}
+      <ProfileAvatar name={item.label} picture={item.picture} variant="sm" />
+    {:else if item.icon}
       <Icon
         src={item.icon}
         class="w-4 h-4 {item.destructive ? 'text-icon-critical' : item.iconClass || 'text-icon'}"

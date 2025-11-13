@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
-import { CodeFork } from '@invopop/ui-icons'
+import { CodeFork, CheckBadge } from '@invopop/ui-icons'
 import CardCheckbox from '../lib/CardCheckbox.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
+import MaxWidth80Decorator from './decorartors/MaxWidth80Decorator.svelte'
 
 const meta = {
   title: 'Components/CardCheckbox',
@@ -60,5 +61,14 @@ export const DisabledChecked: Story = {
     description: 'V1 · Workflow to send default invoices',
     disabled: true,
     checked: true
+  }
+}
+
+export const WithOkIconHideRadio: Story = {
+  decorators: [() => MaxWidth80Decorator as any],
+  args: {
+    title: 'OK',
+    icon: CheckBadge,
+    hideRadio: true
   }
 }

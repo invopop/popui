@@ -264,6 +264,7 @@
                 {indeterminate}
                 checked={allChecked}
                 onChecked={() => {
+                  console.log('toggle all')
                   toggleAllSelected(!selectedRows.length)
                 }}
               />

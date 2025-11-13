@@ -65,6 +65,7 @@ import { Toaster } from './sonner'
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
 import UuidCopy from './UuidCopy.svelte'
 import { resolveIcon, getCountryName, getStatusType } from './helpers.ts'
+import { buttonVariants } from './button/button.svelte' // Ensure button styles are included
 
 export {
   AlertDialog,
@@ -138,5 +139,6 @@ export {
   UuidCopy,
   resolveIcon,
   getCountryName,
-  getStatusType
+  getStatusType,
+  buttonVariants
 }

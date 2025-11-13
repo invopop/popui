@@ -10,6 +10,8 @@
       variant: {
         primary:
           'bg-background-accent text-foreground-inverse border border-border shadow-button-primary hover:bg-background-accent-hover active:bg-background-accent-hover active:shadow-button-pressed [&_svg]:text-icon-inverse',
+        warning:
+          'bg-background-warning-inverse text-foreground-inverse border border-border shadow-button-primary hover:bg-background-warning-bold active:bg-background-warning-bold active:shadow-button-pressed [&_svg]:text-icon-inverse',
         danger:
           'bg-background-default-tertiary text-foreground-critical border border-border shadow-button-default hover:bg-background-critical-bold hover:text-foreground-inverse hover:border-background-critical-bold active:bg-background-critical-bold active:text-foreground-inverse active:border-background-critical-bold active:shadow-[0px_4px_4px_-1px_inset_rgba(11,11,16,0.16)] [&_svg]:text-icon-critical hover:[&_svg]:text-icon-inverse active:[&_svg]:text-icon-inverse',
         outline:
@@ -18,9 +20,9 @@
           'bg-transparent text-foreground hover:shadow-button-default active:shadow-button-pressed hover:bg-background-default-tertiary-hover active:bg-background-default-tertiary-hover [&_svg]:text-icon',
         secondary:
           'bg-background-default-tertiary text-foreground shadow-button-default hover:bg-background-default-tertiary-hover active:bg-background-default-tertiary-hover active:shadow-button-pressed [&_svg]:text-icon',
-        default:
-          'bg-background text-foreground border border-border shadow-button-default hover:bg-background-default-secondary active:bg-background-default-tertiary active:shadow-button-pressed [&_svg]:text-icon',
-        dark: 'bg-transparent text-foreground-inverse border border-border-inverse-secondary hover:bg-background-selected-inverse active:bg-background-inverse-tertiary active:shadow-button-dark-pressed [&_svg]:text-icon-inverse'
+        dark: 'bg-transparent text-foreground-inverse border border-border-inverse-secondary hover:bg-background-selected-inverse active:bg-background-inverse-tertiary active:shadow-button-dark-pressed [&_svg]:text-icon-inverse',
+        'dark-ghost':
+          'bg-transparent text-foreground-inverse hover:bg-background-selected-inverse active:bg-background-inverse-tertiary active:shadow-button-dark-pressed [&_svg]:text-icon-inverse'
       },
       size: {
         sm: 'h-6 rounded-sm',
@@ -92,12 +94,12 @@
       },
       // Icon-only uses bold icon variants
       {
-        variant: ['secondary', 'default', 'outline', 'ghost'],
+        variant: ['secondary', 'outline', 'ghost'],
         iconOnly: true,
         class: '[&_svg]:!text-icon-default-bold'
       },
       {
-        variant: 'primary',
+        variant: ['primary', 'warning'],
         iconOnly: true,
         class: '[&_svg]:!text-icon-inverse-bold'
       },

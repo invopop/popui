@@ -21,7 +21,7 @@
     disabled = false,
     icon = undefined,
     iconPosition = 'left',
-    variant = 'default',
+    variant = 'outline',
     size = 'md',
     dangerIcon = false,
     shortcut = false,

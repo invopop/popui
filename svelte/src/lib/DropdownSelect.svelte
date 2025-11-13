@@ -44,8 +44,7 @@
     (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-neutral-500'
   )
   let selectedLabel = $derived(
-    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more and more and more and more and more and more' : ''}` ||
-      placeholder
+    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more' : ''}` || placeholder
   )
 
   let styles = $derived(

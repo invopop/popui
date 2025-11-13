@@ -48,7 +48,9 @@
       { 'hover:bg-background-selected-inverse': !active }
     )
   )
-  let iconStyles = $derived(clsx({ 'group-hover:text-white': collapsedSidebar }))
+  let iconStyles = $derived(
+    clsx({ 'group-hover:text-white text-icon-inverse-bold!': collapsedSidebar })
+  )
   let wrapperStyles = $derived(
     clsx({
       'ml-4 border-l border-white-10 pl-2 pt-0.5 relative': isFolderItem

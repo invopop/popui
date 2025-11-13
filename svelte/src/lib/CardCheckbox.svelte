@@ -19,10 +19,12 @@
   }: CardCheckboxProps = $props()
 
   let containerStyles = $derived(
-    clsx('border gap-3 py-2 pr-2 pl-3 flex items-start rounded-xl', {
+    clsx('border gap-3 flex items-start', {
       'border-foreground-selected': checked,
       'border-border': !checked,
-      'bg-background-default-secondary': disabled
+      'bg-background-default-secondary': disabled,
+      'px-2 py-1.5 rounded-lg': hideRadio,
+      'py-2 pr-2 pl-3 rounded-xl': !hideRadio
     })
   )
 </script>
@@ -53,10 +55,10 @@
         <InputRadio {id} {name} {checked} {disabled} {onchange} />
       </div>
     {/if}
+    {#if footer}
+      <div class="px-3 pb-3 pt-2">
+        {@render footer?.()}
+      </div>
+    {/if}
   </div>
-  {#if footer}
-    <div class="border-t border-border bg-background-default-secondary rounded-b-xl px-3 pb-3 pt-2">
-      {@render footer?.()}
-    </div>
-  {/if}
 </label>

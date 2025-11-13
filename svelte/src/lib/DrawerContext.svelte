@@ -79,7 +79,7 @@
 {/snippet}
 
 <div
-  class="{widthClass} border border-border rounded-2xl shadow-lg bg-white overflow-hidden flex flex-col py-1 max-h-[400px] overflow-y-auto"
+  class="{widthClass} border border-border rounded-2xl shadow-lg bg-white flex flex-col py-1 max-h-[480px] list-none"
 >
   {@render children?.()}
 
@@ -87,18 +87,25 @@
     {#each groups as group, index}
       {@const groupItems = groupedItems.get(group.slug) || []}
       {@const isLastGroup = index === groups!.length - 1}
-      <div class="flex-shrink-0 px-1">
+      {@const isOpen = openGroups[group.slug]}
+      {@const hasOpenGroup = Object.values(openGroups).some((v) => v)}
+      <div
+        class="px-1"
+        class:flex-1={isOpen}
+        class:flex={isOpen}
+        class:flex-col={isOpen}
+        class:min-h-0={isOpen}
+        class:flex-shrink-0={!isOpen && hasOpenGroup}
+      >
         <button
-          class="cursor-pointer flex items-center justify-between h-8 pl-2.5 pr-2.5 py-2.5 text-base font-medium text-foreground-default-secondary w-full hover:bg-background-default-secondary rounded-lg overflow-clip"
+          class="cursor-pointer flex items-center justify-between h-8 pl-2.5 pr-2.5 py-2.5 text-base font-medium text-foreground-default-secondary w-full hover:bg-background-default-secondary rounded-lg overflow-clip flex-shrink-0"
           onclick={() => toggleGroup(group.slug)}
         >
           <div class="flex items-center gap-1.5">
             <span>{group.label}</span>
             <Icon
               src={ChevronRight}
-              class="size-3 text-icon-default-secondary transition-all transform {openGroups[
-                group.slug
-              ]
+              class="size-3 text-icon-default-secondary transition-all transform {isOpen
                 ? 'rotate-90'
                 : ''}"
             />
@@ -108,8 +115,8 @@
           {/if}
         </button>
 
-        {#if openGroups[group.slug]}
-          <div transition:slide class="w-full">
+        {#if isOpen}
+          <div class="w-full overflow-y-auto flex-1 min-h-0" transition:slide={{ duration: 200 }}>
             {#if !groupItems.length}
               <div class="px-1 pt-1 pb-5">
                 <EmptyState
@@ -119,11 +126,9 @@
                 />
               </div>
             {:else}
-              <div class="max-h-[400px] overflow-y-auto">
-                {#each groupItems as item}
-                  {@render drawerItem(item)}
-                {/each}
-              </div>
+              {#each groupItems as item}
+                {@render drawerItem(item)}
+              {/each}
             {/if}
           </div>
         {/if}
@@ -135,7 +140,7 @@
   {/if}
 
   {#if ungroupedItems.length}
-    <div class="flex-shrink-0">
+    <div class="flex-shrink-0 overflow-y-auto max-h-[474px]">
       {#each ungroupedItems as item}
         {@render drawerItem(item)}
       {/each}

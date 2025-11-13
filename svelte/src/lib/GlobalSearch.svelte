@@ -11,13 +11,10 @@
   let { collapsed = false, onOpen }: GlobalSearchProps = $props()
 
   const styles = $derived(
-    clsx(
-      'cursor-pointer flex items-center border border-border-inverse-default rounded-lg backdrop-blur-[20px]',
-      {
-        'gap-1 px-2 py-1.5 w-full hover:bg-background-selected-inverse': !collapsed,
-        'p-1.5': collapsed
-      }
-    )
+    clsx('cursor-pointer flex items-center border border-border-inverse-default rounded-lg h-8', {
+      'gap-1 px-2 py-1.5 w-full hover:bg-background-selected-inverse': !collapsed,
+      'p-1.5': collapsed
+    })
   )
 
   function onKeyDown(event: KeyboardEvent) {

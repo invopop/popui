@@ -204,6 +204,32 @@ export const DarkIconOnly: Story = {
   }
 }
 
+// Dark Ghost Variant
+export const DarkGhost: Story = {
+  decorators: [() => DarkBackgroundDecorator as any],
+  args: {
+    slot: 'Dark Ghost Button',
+    variant: 'dark-ghost'
+  }
+}
+
+export const DarkGhostWithIcon: Story = {
+  decorators: [() => DarkBackgroundDecorator as any],
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'dark-ghost'
+  }
+}
+
+export const DarkGhostIconOnly: Story = {
+  decorators: [() => DarkBackgroundDecorator as any],
+  args: {
+    icon: Cog6Tooth,
+    variant: 'dark-ghost'
+  }
+}
+
 // Sizes
 export const SmallSize: Story = {
   args: {

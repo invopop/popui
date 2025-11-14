@@ -14,6 +14,7 @@ export type ButtonVariant =
   | 'dark'
   | 'outline'
   | 'ghost'
+  | 'dark-ghost'
 
 export type StatusType =
   | 'grey'
@@ -426,11 +427,6 @@ export interface AlertDialogProps {
     onchange?: (item: DrawerOption) => void;
   }
 
-  export interface DrawerContextWorkspaceProps {
-    items?: DrawerOption[];
-    multiple?: boolean;
-    onclick?: (value: AnyProp) => void;
-  }
 
   export interface DropdownSelectProps {
     value?: AnyProp;

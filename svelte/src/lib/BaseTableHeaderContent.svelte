@@ -15,7 +15,7 @@
 
   let headerStyles = $derived(
     clsx({
-      'hover:bg-neutral-5 focus:bg-neutral-10': field.sortable
+      'hover:bg-background-default-secondary focus:bg-background-default-tertiary': field.sortable
     })
   )
 
@@ -38,7 +38,7 @@
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             class:rotate-180={sortDirection === 'asc'}
-            class="mt-px text-neutral-40 h-3 w-3"
+            class="mt-px text-icon h-3 w-3"
           >
             <path
               fill-rule="evenodd"

@@ -2,7 +2,7 @@
   import type { InputRadioProps } from './types'
 
   let {
-    checked = false,
+    checked = $bindable(false),
     disabled = false,
     id = Math.random().toString(36).slice(2, 7),
     name = '',
@@ -21,7 +21,8 @@
 
   function updateInput(event: Event) {
     const target = event.target as HTMLInputElement
-    onchange?.(target.checked)
+    checked = target.checked
+    onchange?.(checked)
   }
 </script>
 

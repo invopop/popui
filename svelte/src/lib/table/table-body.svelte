@@ -8,6 +8,10 @@
   }: WithElementRef<HTMLAttributes<HTMLTableSectionElement>> = $props()
 </script>
 
-<tbody bind:this={ref} data-slot="table-body" class={cn('[&_tr:hover]:bg-neutral-5', className)}>
+<tbody
+  bind:this={ref}
+  data-slot="table-body"
+  class={cn('[&_tr:hover]:bg-background-default-secondary', className)}
+>
   {@render children?.()}
 </tbody>

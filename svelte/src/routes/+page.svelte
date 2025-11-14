@@ -32,7 +32,7 @@
     {#snippet trigger()}
       <div class="border p-4">This is the trigger</div>
     {/snippet}
-    <div class="border border-red-300 p-4 bg-white">This is the content</div>
+    <div class="border border-red-300 p-4 bg-background">This is the content</div>
   </BaseDropdown>
 
   <BaseButton onclick={() => console.log('clicked')}>Hola</BaseButton>

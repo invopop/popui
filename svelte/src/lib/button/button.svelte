@@ -5,7 +5,7 @@
   import type { IconSource } from '@steeze-ui/svelte-icon'
 
   export const buttonVariants = tv({
-    base: 'inline-flex items-center justify-center font-medium text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-workspace-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-30 relative overflow-hidden box-border cursor-pointer',
+    base: 'inline-flex items-center justify-center font-medium text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-selected focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-30 relative overflow-hidden box-border cursor-pointer',
     variants: {
       variant: {
         primary:

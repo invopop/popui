@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 import { CodeFork, CheckBadge } from '@invopop/ui-icons'
 import CardCheckbox from '../lib/CardCheckbox.svelte'
+import CardCheckboxWithFooter from './helpers/CardCheckboxWithFooter.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidth80Decorator from './decorartors/MaxWidth80Decorator.svelte'
 
@@ -69,6 +70,18 @@ export const WithOkIconHideRadio: Story = {
   args: {
     title: 'OK',
     icon: CheckBadge,
-    hideRadio: true
+    hideRadio: true,
+  }
+}
+
+export const WithFooterSlot: StoryObj<typeof CardCheckboxWithFooter> = {
+  render: (args) => ({
+    Component: CardCheckboxWithFooter,
+    props: args
+  }),
+  args: {
+    title: 'With Footer',
+    description: 'Workflow with step icons',
+    checked: false
   }
 }

@@ -10,7 +10,7 @@
     title = '',
     description = '',
     accentText = '',
-    checked = false,
+    checked = $bindable(false),
     disabled = false,
     icon = undefined,
     hideRadio = false,
@@ -19,44 +19,51 @@
   }: CardCheckboxProps = $props()
 
   let containerStyles = $derived(
-    clsx('border gap-3 flex items-start', {
+    clsx('border gap-3', {
       'border-foreground-selected': checked,
       'border-border': !checked,
       'bg-background-default-secondary': disabled,
-      'px-2 py-1.5 rounded-lg': hideRadio,
-      'py-2 pr-2 pl-3 rounded-xl': !hideRadio
+      'rounded-lg': hideRadio,
+      'rounded-xl': !hideRadio
+    })
+  )
+
+  let headerStyles = $derived(
+    clsx('flex items-start', {
+      'px-2 py-1.5': hideRadio,
+      'py-2 pr-2 pl-3': !hideRadio
     })
   )
 </script>
 
 <label for={id} class="cursor-pointer">
   <div class={containerStyles}>
-    <div class="flex grow items-start gap-1 min-w-0">
-      {#if icon}
-        <Icon src={icon} class="size-4 text-icon shrink-0 mt-0.5" />
-      {/if}
-      <div class="flex flex-col gap-1 min-w-0">
-        <span class="text-base font-medium text-foreground">
-          {title}
-        </span>
-        {#if description}
-          <span class="text-sm text-foreground-default-secondary">
-            {#if accentText}
-              <span class="font-medium text-foreground-accent">{accentText}</span>
-              {' · '}
-            {/if}
-            {description}
-          </span>
+    <div class={headerStyles}>
+      <div class="flex grow items-start gap-1 min-w-0">
+        {#if icon}
+          <Icon src={icon} class="size-4 text-icon shrink-0 mt-0.5" />
         {/if}
+        <div class="flex flex-col gap-1 min-w-0">
+          <span class="text-base font-medium text-foreground">
+            {title}
+          </span>
+          {#if description}
+            <span class="text-sm text-foreground-default-secondary">
+              {#if accentText}
+                <span class="font-medium text-foreground-accent">{accentText}</span>
+                {' · '}
+              {/if}
+              {description}
+            </span>
+          {/if}
+        </div>
+      </div>
+      <div class={clsx('flex items-center p-px', { 'sr-only': hideRadio })}>
+        <InputRadio {id} {name} bind:checked {disabled} {onchange} />
       </div>
     </div>
-    {#if !hideRadio}
-      <div class="flex items-center p-px">
-        <InputRadio {id} {name} {checked} {disabled} {onchange} />
-      </div>
-    {/if}
     {#if footer}
-      <div class="px-3 pb-3 pt-2">
+      <div class="pl-3 pr-2 pb-3 pt-2">
         {@render footer?.()}
       </div>
     {/if}

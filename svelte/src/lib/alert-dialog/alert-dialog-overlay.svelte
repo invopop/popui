@@ -8,7 +8,7 @@
   bind:ref
   data-slot="alert-dialog-overlay"
   class={cn(
-    'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 bg-neutral-800/30 fixed inset-0 z-[1001]',
+    'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 bg-neutral-80/30 fixed inset-0 z-[1001]',
     className
   )}
 />

@@ -124,7 +124,7 @@
   let styles = $derived(
     clsx({
       'border-border-selected-bold shadow-active': isOpen,
-      'border-border hover:border-border-default-secondary-hover': !isOpen
+      'border-border-secondary hover:border-border-default-secondary-hover': !isOpen
     })
   )
   let selectedLabel = $state(label)
@@ -209,7 +209,7 @@
       <div
         class:left-0={position === 'left'}
         class:right-0={position === 'right'}
-        class="bg-white inline-flex flex-col shadow-lg rounded-xl absolute right-0 top-2 z-40 border border-border"
+        class="bg-background inline-flex flex-col shadow-lg rounded-xl absolute right-0 top-2 z-40 border border-border"
         use:clickOutside
         onclick_outside={() => {
           if (!isOpen) return

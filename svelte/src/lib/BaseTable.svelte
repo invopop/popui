@@ -258,7 +258,7 @@
       <TableRow>
         {#if selectable}
           <!-- if table is selectable we need to add an extra header with a checkbox -->
-          <TableHead class="bg-white sticky top-0 z-10 p-0 h-9">
+          <TableHead class="bg-background sticky top-0 z-10 p-0 h-9">
             {#if !hideSelectAll}
               <BaseTableCheckbox
                 {indeterminate}
@@ -273,7 +273,7 @@
         {/if}
         {#each fields as field, i (i)}
           <TableHead
-            class="bg-white group sticky z-10 top-0 py-0 {i === 0 && !selectable
+            class="bg-background group sticky z-10 top-0 py-0 {i === 0 && !selectable
               ? 'pl-3'
               : 'pl-0'} {i === fields.length - 1 && !addExtraCell ? 'pr-3' : 'pr-0'}"
           >
@@ -282,7 +282,7 @@
         {/each}
         {#if addExtraCell}
           <!-- if table has actions cell we need to add an extra header -->
-          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md"> </th>
+          <th scope="col" class="bg-background sticky top-0 z-10 rounded-tr-md"> </th>
         {/if}
       </TableRow>
     </TableHeader>
@@ -293,10 +293,10 @@
             <th
               scope="colgroup"
               colspan={fields.length + (selectable ? 2 : 1)}
-              class="bg-white text-left text-base font-normal text-foreground-default-secondary sticky top-9 tracking-normal h-8 z-10"
+              class="bg-background text-left text-base font-normal text-foreground-default-secondary sticky top-9 tracking-normal h-8 z-10"
             >
               <span
-                class:pl-13={selectable}
+                class:pl-16={selectable}
                 class:pl-6={!selectable}
                 class="flex items-center space-x-1 box-border border-b border-border h-9"
               >
@@ -361,7 +361,7 @@
       {#each group.rows as row}
         <button
           class:cursor-default={disableRowClick}
-          class="w-full text-left border border-neutral-20 rounded"
+          class="w-full text-left border border-border rounded"
           onclick={() => {
             if (disableRowClick) return
 

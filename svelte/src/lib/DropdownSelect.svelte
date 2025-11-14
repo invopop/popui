@@ -41,7 +41,7 @@
   let selectedColor = $derived(!multiple && items.find((i) => i.selected)?.color)
   let selectedIcon = $derived(!multiple && items.find((i) => i.selected)?.icon)
   let selectedIconColor = $derived(
-    (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-neutral-500'
+    (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-foreground-default-secondary'
   )
   let selectedLabel = $derived(
     `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more' : ''}` || placeholder
@@ -50,7 +50,7 @@
   let styles = $derived(
     clsx('border backdrop-blur-sm backdrop-filter', {
       'border-border-selected-bold shadow-active': isOpen,
-      'border-border hover:border-border-default-secondary-hover': !isOpen
+      'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen
     })
   )
 

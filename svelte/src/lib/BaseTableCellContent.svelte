@@ -44,7 +44,7 @@
     {#if icons}
       <span class:ml-2={!!data} class="flex items-center gap-1 shrink-0">
         {#each icons as icon}
-          <div class="border border-neutral-20 rounded-md p-px">
+          <div class="border border-border rounded-md p-px">
             {#if typeof icon === 'string'}
               <img alt="icon" src={icon} class="h-4 w-4" />
             {:else}

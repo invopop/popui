@@ -5,13 +5,13 @@
   import ProfileAvatar from '../../lib/ProfileAvatar.svelte'
 
   interface Props {
-    collapsable?: boolean;
-    collapsedSidebar?: boolean;
-    open?: boolean;
-    active?: boolean;
-    children: MenuItemProps[];
-    icon?: IconSource | undefined;
-    url?: string;
+    collapsable?: boolean
+    collapsedSidebar?: boolean
+    open?: boolean
+    active?: boolean
+    children: MenuItemProps[]
+    icon?: IconSource | undefined
+    url?: string
   }
 
   let {
@@ -22,7 +22,7 @@
     children,
     icon = undefined,
     url = ''
-  }: Props = $props();
+  }: Props = $props()
 </script>
 
 <div class="h-full relative">
@@ -46,7 +46,7 @@
             <ProfileAvatar name="Sam Lown" />
           </div>
         </nav>
-        <div class="bg-white flex-1 h-full p-1">Content</div>
+        <div class="bg-background flex-1 h-full p-1">Content</div>
       </div>
     </div>
   </div>

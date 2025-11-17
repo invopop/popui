@@ -23,7 +23,7 @@
     <div class="relative h-[120px] w-[352px] max-w-sm">
       <IconEmpty />
       <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-        <Icon src={iconSource} class="size-10 text-foreground-accent" />
+        <Icon src={iconSource} class="size-10 text-icon-accent" />
         {#if check}
           <CheckBadge />
         {/if}

@@ -24,7 +24,7 @@
       {
         'bg-background after:shadow-avatar': !dark
       },
-      { 'border-border-inverse after:shadow-avatar-inverse': dark }
+      { 'bg-background-inverse after:shadow-avatar-inverse': dark }
     )
   )
 

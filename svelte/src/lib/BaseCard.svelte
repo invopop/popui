@@ -45,7 +45,7 @@
         </div>
       {/if}
     </div>
-    <div class="flex flex-col gap-0.5 w-full">
+    <div class="flex flex-col gap-0.5 w-full flex-1">
       <h3 class="font-medium text-sm leading-5 tracking-[-0.07px] text-foreground w-full">
         {title}
       </h3>

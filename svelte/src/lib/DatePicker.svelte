@@ -188,7 +188,7 @@
       onclick={() => {
         isOpen = !isOpen
       }}
-      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border rounded-lg text-foreground placeholder-foreground text-base cursor-pointer"
+      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-8 border border-border-default-secondary rounded-lg text-foreground placeholder-foreground text-base cursor-pointer"
     >
       {selectedLabel}
     </button>

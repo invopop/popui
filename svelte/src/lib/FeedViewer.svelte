@@ -5,7 +5,7 @@
   let { items = [], onView }: FeedViewerProps = $props()
 </script>
 
-<div>
+<div class="space-y-1">
   {#each items as item, i (i)}
     <FeedItem {...item} hasNext={i < items.length - 1} {onView} />
   {/each}

@@ -26,7 +26,7 @@
     type="checkbox"
     {checked}
     {indeterminate}
-    class="form-checkbox size-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-primary focus:ring-0 focus:ring-offset-0"
+    class="form-checkbox size-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-primary focus:ring-0 focus:ring-offset-0 bg-background"
     {...rest}
     onchange={updateInput}
     {onclick}

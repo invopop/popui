@@ -34,7 +34,7 @@
     {name}
     {checked}
     {disabled}
-    class="appearance-none size-4 rounded-full border checked:border-0 checked:bg-background-accent checked:border-0 checked:bg-background-accent cursor-pointer focus:outline-none focus:ring-0 shrink-0 disabled:cursor-not-allowed border-border-default-secondary disabled:checked:bg-border-default-secondary disabled:checked:border"
+    class="appearance-none size-4 rounded-full border checked:border-0 checked:bg-background-accent cursor-pointer focus:outline-none focus:ring-0 shrink-0 disabled:cursor-not-allowed border-border-default-secondary disabled:checked:bg-border-default-secondary disabled:checked:border bg-background"
     {...rest}
     onchange={updateInput}
   />

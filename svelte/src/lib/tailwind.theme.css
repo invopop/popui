@@ -673,6 +673,7 @@
   --color-icon-inverse-bold: var(--color-neutral-white-alpha-100);
 
   --color-icon-selected-default: var(--color-positive-50);
+  --color-icon-accent-default: var(--color-accent-50);
 
   --color-icon-success-default: var(--color-positive-50);
 
@@ -758,7 +759,7 @@
   --color-icon: var(--color-icon-default-default);
   
   --color-icon-inverse: var(--color-icon-inverse-default);
-  
+  --color-icon-accent: var(--color-icon-accent-default);
   --color-icon-selected: var(--color-icon-selected-default);
   --color-icon-success: var(--color-icon-success-default);
   --color-icon-info: var(--color-icon-info-default);
@@ -780,13 +781,14 @@
   --shadow-lg:  0 8px 30px 0 rgba(10, 10, 10, 0.12);
   --shadow-xl:  0 8px 28px -6px rgba(10, 10, 10, 0.12), 0 18px 88px -4px rgba(10, 10, 10, 0.14);
   --shadow-active: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--color-background-accent-default, var(--color-positive-50)));
-  --shadow-warning: 0px 0px 0px 2px rgba(215, 135, 0, 0.12);
   --shadow-button-default: 0 2px 6px -1px rgba(11, 11, 16, 0.04), 0 -2px 4px 0 rgba(11, 11, 16, 0.04) inset;
   --shadow-button-primary: 0 -4px 4px 0 rgba(11, 11, 16, 0.12) inset, 0 1px 1.5px 0 rgba(255, 255, 255, 0.16) inset, 0 2px 4px -1px rgba(11, 11, 16, 0.08);
   --shadow-button-pressed: 0 2px 6px 0 rgba(11, 11, 16, 0.16) inset, 0 -2px 5px -2px rgba(255, 255, 255, 0.25) inset;
   --shadow-button-dark-pressed: 0 4px 4px -1px rgba(11, 11, 16, 0.16) inset;
-  --shadow-avatar: 0 0 0 1px rgba(5, 5, 36, 0.06) inset;
-  --shadow-avatar-inverse: 0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+  --shadow-avatar: 0 0 0 1px var(--color-border-default-default) inset;
+  --shadow-avatar-inverse: 0 0 0 1px var(--color-border-inverse-default) inset;
+  --shadow-shortcut: 0 1px 0 0 var(--color-border-default-secondary);
+  --shadow-shortcut-inverse: 0 1px 0 0 var(--color-border-inverse-secondary);
 
   /* Letter Spacing (tracking) */
   --tracking-tightest: -0.29px; /* -1.2% (text-2xl) */
@@ -829,7 +831,7 @@
     --color-foreground-default-tertiary: var(--color-neutral-white-alpha-40);
 
     --color-foreground-inverse-default: var(--color-white);
-    --color-foreground-inverse-secondary: var(--color-neutral-alpha-70);
+    --color-foreground-inverse-secondary: var(--color-neutral-white-alpha-70);
 
     --color-foreground-accent-default: var(--color-accent-60);
     --color-foreground-accent-default-hover: var(--color-accent-70);
@@ -877,9 +879,9 @@
     --color-background-selected-default: var(--color-accent-alpha-20);
     --color-background-selected-default-hover: var(--color-accent-alpha-30);
     --color-background-selected-default-press: var(--color-accent-alpha-40);
-    --color-background-selected-inverse: var(--color-neutral-alpha-10);
-    --color-background-selected-inverse-hover: var(--color-neutral-alpha-20);
-    --color-background-selected-inverse-press: var(--color-neutral-alpha-30);
+    --color-background-selected-inverse: var(--color-white-10);
+    --color-background-selected-inverse-hover: var(--color-nwhite-20);
+    --color-background-selected-inverse-press: var(--color-white-30);
 
     --color-background-accent-default: var(--color-accent-60);
     --color-background-accent-default-hover: var(--color-accent-70);
@@ -949,7 +951,7 @@
     --color-icon-inverse-bold: var(--color-neutral-white-alpha-100);
 
     --color-icon-selected-default: var(--color-positive-50);
-
+    --color-icon-accent-default: var(--color-white);
     --color-icon-success-default: var(--color-positive-50);
 
     --color-icon-info-default: var(--color-info-50);

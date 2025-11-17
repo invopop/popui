@@ -20,7 +20,7 @@
   {...rest}
   {onclick}
 >
-  <div class="flex flex-col gap-2 w-full">
+  <div class="flex flex-col gap-2 w-full flex-1">
     <div class="flex items-start justify-between w-full">
       <div
         class="size-8 border border-border rounded-lg overflow-hidden flex items-center justify-center shrink-0"

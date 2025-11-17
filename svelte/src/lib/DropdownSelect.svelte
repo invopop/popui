@@ -44,7 +44,8 @@
     (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-foreground-default-secondary'
   )
   let selectedLabel = $derived(
-    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 ? ' and more' : ''}` || placeholder
+    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 && multiple ? ' and more' : ''}` ||
+      placeholder
   )
 
   let styles = $derived(
@@ -114,7 +115,13 @@
       {/if}
     </div>
   {/snippet}
-  <DrawerContext {widthClass} {multiple} {items} onclick={handleClick} onselect={handleSelected} />
+  <DrawerContext
+    widthClass="min-w-[256px]"
+    {multiple}
+    {items}
+    onclick={handleClick}
+    onselect={handleSelected}
+  />
 </BaseDropdown>
 
 <style>

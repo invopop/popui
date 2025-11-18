@@ -29,7 +29,7 @@
       </span>
     {:else if field.copy && data}
       <ButtonUuidCopy uuid={String(data)} full oncopied={onCopied} />
-    {:else}
+    {:else if data}
       <span class="hidden md:inline">{data}</span>
       <span class="md:hidden">{data ? data : badge || status ? '' : '-'}</span>
     {/if}

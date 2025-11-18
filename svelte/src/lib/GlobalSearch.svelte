@@ -13,7 +13,7 @@
   const styles = $derived(
     clsx('cursor-pointer flex items-center border border-border-inverse-default rounded-lg h-8', {
       'gap-1 px-2 py-1.5 w-full hover:bg-background-selected-inverse': !collapsed,
-      'p-1.5': collapsed
+      'p-2': collapsed
     })
   )
 

@@ -99,7 +99,7 @@
         class: '[&_svg]:!text-icon-default-bold'
       },
       {
-        variant: ['primary', 'warning'],
+        variant: ['primary', 'warning', 'dark-ghost'],
         iconOnly: true,
         class: '[&_svg]:!text-icon-inverse-bold'
       },

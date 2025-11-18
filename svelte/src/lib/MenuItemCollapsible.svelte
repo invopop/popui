@@ -26,7 +26,7 @@
 
 <span
   {title}
-  class="{styles} text-foreground-inverse text-base flex items-center justify-between rounded-lg h-8"
+  class="{styles} text-foreground-inverse text-base flex items-center justify-between rounded-lg h-8 font-medium"
 >
   <span class:space-x-2={!collapsed} class="flex items-center">
     {@render children?.()}
@@ -34,12 +34,12 @@
       <div>
         <div class="whitespace-nowrap max-w-[118px] truncate tracking-tight">{title}</div>
         {#if subtitle}
-          <div class="text-sm font-medium text-yellow-600">{subtitle}</div>
+          <div class="text-sm text-foreground-inverse-secondary">{subtitle}</div>
         {/if}
       </div>
     {/if}
   </span>
   {#if icon}
-    <Icon src={icon} class="h-4 w-4 text-white-40 mt-px" />
+    <Icon src={icon} class="h-4 w-4 text-icon-inverse" />
   {/if}
 </span>

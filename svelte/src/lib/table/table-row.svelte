@@ -18,7 +18,7 @@
   bind:this={ref}
   data-slot="table-row"
   class={cn(
-    'data-[state=selected]:bg-background-default-secondary data-[state=checked]:bg-background-selected transition-colors border-b border-border h-10',
+    'data-[state=selected]:bg-background-default-secondary data-[state=checked]:bg-background-selected transition-colors h-10',
     className
   )}
   {oncontextmenu}

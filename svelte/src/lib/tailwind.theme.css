@@ -375,16 +375,16 @@
      ============================================ */
 
   /* Accent */
-  --color-accent-40: var(--color-green-40);
-  --color-accent-50: var(--color-green-50);
-  --color-accent-60: var(--color-green-60);
-  --color-accent-70: var(--color-green-70);
-  --color-accent-80: var(--color-sherwood-50);
-  --color-accent-alpha-5: var(--color-green-alpha-5);
-  --color-accent-alpha-10: var(--color-green-alpha-10);
-  --color-accent-alpha-20: var(--color-green-alpha-20);
-  --color-accent-alpha-30: var(--color-green-alpha-30);
-  --color-accent-alpha-40: var(--color-green-alpha-40);
+  --color-accent-40: color-mix(in srgb, var(--color-accent-50) 72%, white);
+  --color-accent-50: var(--color-base-accent, var(--color-green-50));
+  --color-accent-60: color-mix(in srgb, var(--color-accent-50) 84%, black);
+  --color-accent-70: color-mix(in srgb, var(--color-accent-50) 68%, black);
+  --color-accent-80: color-mix(in srgb, var(--color-accent-50) 52%, black);
+  --color-accent-alpha-5: color-mix(in srgb, var(--color-accent-50) 5%, transparent);
+  --color-accent-alpha-10: color-mix(in srgb, var(--color-accent-50) 10%, transparent);
+  --color-accent-alpha-20: color-mix(in srgb, var(--color-accent-50) 20%, transparent);
+  --color-accent-alpha-30: color-mix(in srgb, var(--color-accent-50) 30%, transparent);
+  --color-accent-alpha-40: color-mix(in srgb, var(--color-accent-50) 40%, transparent);
 
   /* Neutral */
   --color-neutral-5: var(--color-grey-5);

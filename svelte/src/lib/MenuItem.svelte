@@ -113,7 +113,7 @@
   >
     <span class="flex items-center space-x-1.5">
       {#if resolvedIcon}
-        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 text-white-70" />
+        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 text-icon-inverse" />
       {/if}
       {#if !collapsedSidebar}
         <span class="whitespace-nowrap tracking-normal">{label}</span>

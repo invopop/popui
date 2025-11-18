@@ -39,9 +39,10 @@
       { 'text-foreground-inverse font-medium': !isFolderItem },
       { 'text-foreground-inverse-secondary': isFolderItem && !active },
       {
-        'border border-transparent hover:bg-background-selected-inverse group p-2': collapsedSidebar
+        'border border-transparent hover:bg-background-selected-inverse group p-2 size-8':
+          collapsedSidebar
       },
-      { 'w-full px-2 py-1.5': !collapsedSidebar },
+      { 'w-full px-2 py-1.5 h-8': !collapsedSidebar },
       {
         'bg-background-selected-inverse text-white': active
       },
@@ -109,7 +110,7 @@
     onmouseleave={handleBlur}
     onclick={handleClick}
     title={label}
-    class="cursor-pointer {itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-lg h-8"
+    class="cursor-pointer {itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-lg"
   >
     <span class="flex items-center space-x-1.5">
       {#if resolvedIcon}

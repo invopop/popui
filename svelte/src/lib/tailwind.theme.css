@@ -379,7 +379,7 @@
   --color-accent-50: var(--color-base-accent, var(--color-green-50));
   --color-accent-60: color-mix(in srgb, var(--color-accent-50) 84%, black);
   --color-accent-70: color-mix(in srgb, var(--color-accent-50) 68%, black);
-  --color-accent-80: color-mix(in srgb, var(--color-accent-50) 52%, black);
+  --color-accent-80: var(--color-base-accent-bg, color-mix(in srgb, var(--color-accent-50) 52%, black));
   --color-accent-alpha-5: color-mix(in srgb, var(--color-accent-50) 5%, transparent);
   --color-accent-alpha-10: color-mix(in srgb, var(--color-accent-50) 10%, transparent);
   --color-accent-alpha-20: color-mix(in srgb, var(--color-accent-50) 20%, transparent);

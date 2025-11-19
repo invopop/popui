@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/sveltekit'
 import DrawerContext from '../lib/DrawerContext.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
-import { Close, Delete, Download, Edit, Workspace } from '@invopop/ui-icons'
+import { Close, Delete, Download, Edit, Logout, Settings, Workspace } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -444,7 +444,14 @@ export const WithGroupsAndAvatars: Story = {
         value: 'manage',
         icon: Delete,
         destructive: true
-      }
+      },
+      {
+        label: 'Admin',
+        value: 'manage',
+        icon: Settings,
+      },
+      { separator: true },
+      { label: 'Logout', value: 'logout', destructive: true, icon: Logout }
     ]
   }
 }

@@ -10,16 +10,21 @@ import (
 
 // Theme colors for radio inputs.
 const (
-	ColorSherwood      = "sherwood"
-	ColorOcean         = "ocean"
-	ColorGrape         = "grape"
-	ColorMetal         = "metal"
-	ColorCosmos        = "cosmos"
-	ColorSherwoodValue = "#018551"
-	ColorOceanValue    = "#306994"
-	ColorGrapeValue    = "#5e477a"
-	ColorMetalValue    = "#526c86"
-	ColorCosmosValue   = "#0d1625"
+	ColorSherwood        = "sherwood"
+	ColorOcean           = "ocean"
+	ColorGrape           = "grape"
+	ColorMetal           = "metal"
+	ColorCosmos          = "cosmos"
+	ColorSherwoodValue   = "#018551"
+	ColorBgSherwoodValue = "#004235"
+	ColorOceanValue      = "#0C6598"
+	ColorBgOceanValue    = "#041E2D"
+	ColorGrapeValue      = "#A01A49"
+	ColorBgGrapeValue    = "#2F0816"
+	ColorMetalValue      = "#6B727D"
+	ColorBgMetalValue    = "#1A1C23"
+	ColorCosmosValue     = "#20222A"
+	ColorBgCosmosValue   = "#0B0B10"
 )
 
 type themeColor struct {

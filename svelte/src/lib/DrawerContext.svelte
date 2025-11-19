@@ -79,7 +79,7 @@
 {/snippet}
 
 <div
-  class="{widthClass} border border-border rounded-2xl shadow-lg bg-background flex flex-col py-1 max-h-[480px] list-none"
+  class="{widthClass} border border-border rounded-2xl shadow-lg bg-background flex flex-col py-1 max-h-[460px] list-none"
 >
   {@render children?.()}
 
@@ -140,7 +140,7 @@
   {/if}
 
   {#if ungroupedItems.length}
-    <div class="flex-shrink-0 overflow-y-auto max-h-[474px]">
+    <div class="flex-shrink-0 overflow-y-auto max-h-[454px]">
       {#each ungroupedItems as item}
         {@render drawerItem(item)}
       {/each}

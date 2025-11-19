@@ -39,7 +39,7 @@
       { 'text-foreground-inverse font-medium': !isFolderItem },
       { 'text-foreground-inverse-secondary': isFolderItem && !active },
       {
-        'border border-transparent hover:bg-background-selected-inverse group p-2 size-8':
+        'border border-transparent hover:bg-background-selected-inverse group p-[7px] size-8':
           collapsedSidebar
       },
       { 'w-full px-2 py-1.5 h-8': !collapsedSidebar },

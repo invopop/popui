@@ -415,7 +415,7 @@ export const WithGroupsAndAvatars: Story = {
         value: 'brian',
         groupBy: 'contractors',
         useAvatar: true,
-        picture: 'https://i.pravatar.cc/150?img=28'
+        picture: 'https://ams3.digitaloceanspaces.com/invopop-console-files-dev/20a12bc7ffdd27ea696c73aba4ba9bf98ea9d6cec5e442d31c1a4dfb9bf590f5'
       },
       {
         label: 'Chloe Wright',

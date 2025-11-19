@@ -343,11 +343,13 @@ export interface AlertDialogProps {
     oncopied?: (label: string) => void;
   }
 
+  export type ButtonFileType = 'pdf' | 'xml' | 'png' | 'generic';
+
   export interface ButtonFileProps {
     name?: string;
     disabled?: boolean;
     date?: string;
-    fileType?: 'pdf' | 'xml' | 'png';
+    fileType?: ButtonFileType;
     onPreview?: () => void;
     onDownload?: () => void;
     class?: string;

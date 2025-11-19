@@ -43,6 +43,14 @@ export const PNGFile: Story = {
   }
 }
 
+export const GenericFile: Story = {
+  args: {
+    name: 'Document.txt',
+    date: 'Mar 06, 2024 · 09:48',
+    fileType: 'generic'
+  }
+}
+
 export const LongName: Story = {
   args: {
     name: 'File name that is very very long and does not fit at all',

@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { Download } from '@invopop/ui-icons'
+  import { Download, Invoice } from '@invopop/ui-icons'
   import Button from './button/button.svelte'
   import type { ButtonFileProps } from './types.js'
   import { cn } from './utils.js'
+  import { Icon } from '@steeze-ui/svelte-icon'
 
   let {
     name = '',
@@ -34,7 +35,7 @@
 
 <button
   class={cn(
-    'flex items-center gap-3 px-2 py-1.5 rounded-[10px] w-full hover:bg-background-default-secondary cursor-pointer',
+    'flex items-center gap-3 p-2 rounded-[10px] w-full hover:bg-background-default-secondary cursor-pointer',
     disabled && 'opacity-30 pointer-events-none',
     className
   )}
@@ -44,7 +45,11 @@
 >
   <div class="flex items-center gap-[10px] flex-1 min-w-0">
     <div class={fileAvatarStyles}>
-      {fileType}
+      {#if fileType === 'generic'}
+        <Icon src={Invoice} class="size-4 text-icon" />
+      {:else}
+        {fileType}
+      {/if}
     </div>
     <div class="flex flex-col text-start min-w-0 flex-1">
       <div class="text-sm font-medium text-foreground truncate w-full">

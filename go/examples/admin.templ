@@ -309,13 +309,13 @@ templ formSection() {
 			<div class={ classes.InputTextGroup }>
 				@popui.InputRadioTheme(props.InputRadioTheme{
 					Name:    "theme",
-					Value:   props.ColorSherwoodValue,
+					Value:   props.ColorSherwoodValue + "," + props.ColorBgSherwoodValue,
 					Variant: props.ColorSherwood,
 					Checked: true,
 				})
 				@popui.InputRadioTheme(props.InputRadioTheme{
 					Name:    "theme",
-					Value:   props.ColorMetalValue,
+					Value:   props.ColorMetalValue + "," + props.ColorBgMetalValue,
 					Variant: props.ColorMetal,
 				})
 			</div>

@@ -83,6 +83,13 @@ export const WithMaxHeight: Story = {
       { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
       { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
       { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
+      { label: 'Payflow S.L.', value: 'payflow', color: 'red' },
+      { label: 'Cobee S.L.', value: 'cobee', color: 'empty' },
       { label: 'Payflow S.L.', value: 'payflow', color: 'red' }
     ]
   }

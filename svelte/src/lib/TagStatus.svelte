@@ -5,7 +5,7 @@
   let { label = '', status = 'grey', dot = false }: TagStatusProps = $props()
 
   let tagStyles = $derived(
-    clsx('rounded inline-flex items-center text-xs font-medium gap-1 box-border leading-4 py-0.5', {
+    clsx('rounded inline-flex items-center text-sm font-medium gap-1 box-border leading-4 py-0.5', {
       'bg-background-status-paid text-foreground-status-paid': status === 'green',
       'bg-background-status-processing text-foreground-status-processing': status === 'yellow',
       'bg-background-status-error text-foreground-status-error': status === 'red',

@@ -33,7 +33,7 @@
     // Default text color
     'text-foreground-default-primary',
     // inner spans
-    '[&>span]:text-xs [&>span]:opacity-70',
+    '[&>span]:text-sm [&>span]:opacity-70',
     className
   )}
   {...restProps}

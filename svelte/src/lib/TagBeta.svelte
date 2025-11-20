@@ -4,7 +4,7 @@
   >
     <div class="border-[0.5px] border-white-60 rounded-[3px] relative shrink-0">
       <div class="flex gap-2 items-start overflow-hidden px-1 py-px rounded-[inherit]">
-        <span class="font-medium text-xs leading-4 text-white whitespace-nowrap">Beta</span>
+        <span class="font-medium text-sm leading-4 text-white whitespace-nowrap">Beta</span>
       </div>
     </div>
     <div class="absolute h-5 left-0 right-0 top-0 pointer-events-none">

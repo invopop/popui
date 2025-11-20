@@ -6,7 +6,7 @@
   let { errorText = '' }: InputErrorProps = $props()
 </script>
 
-<p class="flex items-center gap-1 text-xs text-foreground-critical">
+<p class="flex items-center gap-1 text-sm text-foreground-critical">
   <Icon src={Alert} class="size-3 shrink-0" />
   <span>{errorText}</span>
 </p>

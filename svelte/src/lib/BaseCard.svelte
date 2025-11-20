@@ -36,7 +36,7 @@
               class="flex items-center gap-2 px-[5px] py-0.5 rounded bg-background-default-secondary border border-border"
             >
               <span
-                class="font-medium text-xs leading-4 text-foreground-default-tertiary whitespace-nowrap"
+                class="font-medium text-sm leading-4 text-foreground-default-tertiary whitespace-nowrap"
               >
                 Soon
               </span>

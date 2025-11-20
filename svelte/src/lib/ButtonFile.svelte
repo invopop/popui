@@ -18,7 +18,7 @@
 
   let fileAvatarStyles = $derived(
     cn(
-      'size-8 rounded-md border border-border flex items-center justify-center text-xs font-black font-mono leading-4 uppercase',
+      'size-8 rounded-md border border-border flex items-center justify-center text-sm font-black font-mono leading-4 uppercase',
       {
         'text-foreground-document-pdf': fileType === 'pdf',
         'text-foreground-document-xml': fileType === 'xml',
@@ -55,7 +55,7 @@
       <div class="text-sm font-medium text-foreground truncate w-full">
         {name}
       </div>
-      <div class="text-xs text-foreground-default-secondary truncate w-full">
+      <div class="text-sm text-foreground-default-secondary truncate w-full">
         {date}
       </div>
     </div>

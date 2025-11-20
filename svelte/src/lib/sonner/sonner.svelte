@@ -18,7 +18,7 @@
       title: 'font-medium text-base text-foreground-inverse',
       description: 'font-normal text-base text-foreground-inverse-secondary',
       actionButton:
-        'bg-background-selected-inverse rounded px-2 py-1 text-xs font-medium text-foreground-inverse hover:bg-background-selected-inverse-hover transition-colors',
+        'bg-background-selected-inverse rounded px-2 py-1 text-sm font-medium text-foreground-inverse hover:bg-background-selected-inverse-hover transition-colors',
       closeButton: 'hidden'
     }
   }}

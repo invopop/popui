@@ -82,7 +82,7 @@
     <div class="absolute right-2 flex items-center gap-1">
       {#each shortcutKeys as key}
         <ShortcutWrapper>
-          <span class="text-xs font-semibold">{key}</span>
+          <span class="text-sm font-semibold">{key}</span>
         </ShortcutWrapper>
       {/each}
     </div>

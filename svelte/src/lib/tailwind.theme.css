@@ -821,6 +821,10 @@
   --text-sm: 12px;
   --text-sm--line-height: 16px;
   --text-sm--letter-spacing: var(--tracking-wide);
+  
+  --text-xs: 10px;
+  --text-xs--line-height: 12px;
+  --text-xs--letter-spacing: var(--tracking-wide);
 }
 
 @layer theme {

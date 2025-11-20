@@ -201,6 +201,19 @@ export const WithPictures: Story = {
   }
 }
 
+export const WithCountries: Story = {
+  args: {
+    items: [
+      { label: 'Spain Office', value: 'es', country: 'ES', selected: true },
+      { label: 'United States Office', value: 'us', country: 'US' },
+      { label: 'Germany Office', value: 'de', country: 'DE' },
+      { label: 'France Office', value: 'fr', country: 'FR' },
+      { label: 'United Kingdom Office', value: 'gb', country: 'GB' },
+      { label: 'Italy Office', value: 'it', country: 'IT' }
+    ]
+  }
+}
+
 export const WithGroupsAndAvatars: Story = {
   args: {
     widthClass: 'w-[300px]',

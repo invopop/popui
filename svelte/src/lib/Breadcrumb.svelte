@@ -35,6 +35,6 @@
     </span>
   {/if}
   {#if breadcrumb.country}
-    <BaseFlag country={breadcrumb.country} width={14} />
+    <BaseFlag country={breadcrumb.country} />
   {/if}
 </li>

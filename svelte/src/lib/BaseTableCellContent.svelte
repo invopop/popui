@@ -24,7 +24,7 @@
   <span class="flex items-center gap-2" class:justify-end={field.rightAlign}>
     {#if field.isCountry && data}
       <span class="flex items-center space-x-1">
-        <BaseFlag country={String(data)} width={16} />
+        <BaseFlag country={String(data)} />
         <span>{getCountryName(String(data))}</span>
       </span>
     {:else if field.copy && data}

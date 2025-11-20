@@ -71,20 +71,16 @@
         class="w-4 h-4 {item.destructive ? 'text-icon-critical' : item.iconClass || 'text-icon'}"
       />
     {/if}
-    <div class="whitespace-nowrap flex-1 text-left flex flex-col truncate" {title}>
-      <span class="flex items-center space-x-1.5">
-        {#if item.color}
-          <TagStatus status={item.color} dot />
-        {/if}
-        <span class="{labelStyles} text-base font-medium truncate">{item.label}</span>
-      </span>
+    <div class="whitespace-nowrap flex-1 text-left flex items-center space-x-1.5 truncate" {title}>
+      {#if item.color}
+        <TagStatus status={item.color} dot />
+      {/if}
+      <span class="{labelStyles} text-base font-medium truncate">{item.label}</span>
 
       {#if item.country}
-        <span class="flex space-x-1 items-center">
-          <BaseFlag country={item.country} width={10} />
-          <span class="text-sm text-foreground-default-secondary">
-            {getCountryName(item.country)}
-          </span>
+        <BaseFlag country={item.country} />
+        <span class="text-xs font-medium text-foreground-default-secondary uppercase">
+          {item.country}
         </span>
       {/if}
     </div>

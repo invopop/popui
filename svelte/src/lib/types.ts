@@ -249,7 +249,6 @@ export interface AlertDialogProps {
 
   export interface BaseFlagProps {
     country?: string;
-    width?: number;
   }
 
   export interface BaseTableProps {

@@ -2,7 +2,6 @@
 @import "./svelte/src/lib/tailwind.theme.css";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
-@import "./svelte/src/app.css" layer(base);
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -10,12 +9,12 @@ body {
 }
 /* Accordion */
 .popui-accordion {
-  @apply rounded-md border border-neutral-200 bg-neutral-50 p-2 overflow-hidden;
+  @apply rounded-md border border-border-default-secondary bg-background-default-secondary p-2 overflow-hidden;
   backdrop-filter: blur(2px);
 }
 
 details.popui-accordion summary {
-  @apply cursor-pointer list-none relative pl-6 text-neutral-800 text-sm font-medium;
+  @apply cursor-pointer list-none relative pl-6 text-foreground text-sm font-medium;
 }
 
 details.popui-accordion summary::-webkit-details-marker {
@@ -53,13 +52,13 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 
 /* Avatar */
 .popui-avatar {
-  @apply h-5 w-5 bg-neutral-50 text-neutral-500 rounded flex items-center justify-center font-semibold relative font-sans;
+  @apply h-5 w-5 bg-background-default-secondary text-foreground-default-secondary rounded flex items-center justify-center font-semibold relative font-sans;
 }
 .popui-avatar--large {
-  @apply h-8! w-8!
+  @apply !h-8 !w-8
 }
 .popui-avatar--initial {
-  @apply border border-neutral-100;
+  @apply border border-border;
 }
 
 .popui-admin-page__breadcrumbs {
@@ -74,28 +73,28 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 }
 
 .popui-admin-page__breadcrumbs > li {
-  @apply text-neutral-400;
+  @apply text-foreground-default-tertiary;
 }
 
 /* Button */
 .popui-button {
-  @apply cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-neutral-200 text-base gap-1;
+  @apply cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1;
 }
 .popui-button--transparent {
   @apply border-0;
 }
 .popui-button--danger {
-  @apply border-0 bg-danger-500 text-white;
+  @apply border-0 bg-background-critical-bold text-foreground-inverse;
 }
 .popui-button--primary {
-  @apply border-0 bg-workspace-accent text-white;
+  @apply border-0 bg-background-accent text-foreground-inverse;
 }
 .popui-button--primary svg,
 .popui-button--danger svg {
   @apply text-white-70;
 }
 .popui-button--secondary {
-  @apply border-0 bg-neutral-100;
+  @apply border-0 bg-background-default-tertiary;
 }
 .popui-button--small {
   @apply text-sm;
@@ -122,13 +121,13 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 
 /* Card */
 .popui-card {
-  @apply flex flex-col p-4 rounded-lg border border-neutral-100 bg-white w-full gap-3;
+  @apply flex flex-col p-4 rounded-lg border border-border bg-background w-full gap-3;
 }
 .popui-card:hover {
-  @apply border-neutral-200;
+  @apply border-border-default-secondary;
 }
 .popui-card--disabled {
-  @apply bg-neutral-50 pointer-events-none;
+  @apply bg-background-default-secondary pointer-events-none;
 }
 .popui-card__header {
   @apply flex items-center gap-3;
@@ -140,39 +139,39 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
   @apply truncate;
 }
 .popui-card__header-title > p:nth-child(1) {
-  @apply text-neutral-800 text-base font-semibold;
+  @apply text-foreground text-base font-semibold;
 }
 .popui-card__header-title > p:nth-child(2) {
-  @apply text-neutral-500 text-sm;
+  @apply text-foreground-default-secondary text-sm;
 }
 .popui-card__header-flag {
-  @apply absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-white;
+  @apply absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-foreground-inverse;
 }
 .popui-card-file {
-  @apply flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-neutral-100 bg-white text-base text-neutral-800 font-medium;
+  @apply flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-border bg-background text-base text-foreground font-medium;
 }
 
 /* Card Progress Bar */
 .popui-card-progress-bar {
-  @apply w-full flex flex-col justify-center items-start gap-2 rounded-md pt-2.5 pb-3 px-3 border border-neutral-100 bg-neutral-50;
+  @apply w-full flex flex-col justify-center items-start gap-2 rounded-md pt-2.5 pb-3 px-3 border border-border bg-background-default-secondary;
 }
 .popui-card-progress-bar__header {
   @apply w-full flex justify-between items-center;
 }
 .popui-card-progress-bar__header-title {
-  @apply text-neutral-800 text-base;
+  @apply text-foreground text-base;
 }
 .popui-card-progress-bar__header-subtitle {
-  @apply text-neutral-500 text-sm;
+  @apply text-foreground-default-secondary text-sm;
 }
 .popui-card-progress-bar__header-amount {
-  @apply flex text-neutral-400 text-sm font-medium;
+  @apply flex text-foreground-default-tertiary text-sm font-medium;
 }
 .popui-card-progress-bar__header-amount_current {
-  @apply text-neutral-500;
+  @apply text-foreground-default-secondary;
 }
 .popui-card-progress-bar__progress {
-  @apply w-full h-1 shrink-0 rounded-[1px] bg-neutral-200;
+  @apply w-full h-1 shrink-0 rounded-[1px] bg-border-default-secondary;
 }
 
 /* Card Dashboard */
@@ -180,13 +179,13 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
   @apply grid grid-cols-3 gap-x-3;
 }
 .popui-card-dashboard__item {
-  @apply flex flex-col items-center py-2 px-0 rounded-md border border-neutral-100 bg-neutral-50;
+  @apply flex flex-col items-center py-2 px-0 rounded-md border border-border bg-background-default-secondary;
 }
 .popui-card-dashboard__item-label {
-  @apply text-neutral-500 text-sm;
+  @apply text-foreground-default-secondary text-sm;
 }
 .popui-card-dashboard__item-value {
-  @apply text-neutral-700 text-xl font-medium;
+  @apply text-foreground text-xl font-medium;
 }
 
 /* Checkbox */
@@ -194,33 +193,33 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
   @apply flex items-center gap-2;
 }
 .popui-checkbox-input {
-  @apply form-checkbox w-4 h-4 text-workspace-accent rounded border border-neutral-200 hover:border-neutral-300;
+  @apply form-checkbox w-4 h-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-secondary-hover;
 }
 .popui-checkbox-input:hover:enabled + label {
-  @apply text-neutral-800;
+  @apply text-foreground;
 }
 .popui-checkbox-input:disabled + label {
   @apply opacity-30;
 }
 .popui-checkbox-input:disabled + label:hover {
-  @apply text-neutral-500!;
+  @apply !text-foreground-default-secondary;
 }
 .popui-checkbox-input:focus {
-  @apply text-workspace-accent ring-0 ring-offset-0;
+  @apply text-background-accent ring-0 ring-offset-0;
 }
 .popui-checkbox-label {
-  @apply font-sans text-base text-neutral-500;
+  @apply font-sans text-base text-foreground-default-secondary;
 }
 .popui-checkbox-label:hover {
-  @apply text-neutral-800;
+  @apply text-foreground;
 }
 
 /* Chechbox type switch */
 .popui-switch__label {
-  @apply flex items-center gap-2 text-neutral-500 text-base;
+  @apply flex items-center gap-2 text-foreground-default-secondary text-base;
 }
 .popui-switch__label:hover {
-  @apply text-neutral-800;
+  @apply text-foreground;
 }
 .popui-switch__wrapper {
   @apply relative inline-block w-8 h-5 shrink-0;
@@ -231,20 +230,20 @@ details[open].popui-accordion__scrollable .popui-accordion__content {
 }
 
 .popui-switch__input {
-  @apply absolute cursor-pointer inset-0 bg-neutral-300 rounded-md;
+  @apply absolute cursor-pointer inset-0 bg-border-default-secondary-hover rounded-md;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 .popui-switch__input:before {
-  @apply absolute h-4 w-4 left-0.5 bottom-0.5 bg-white rounded;
+  @apply absolute h-4 w-4 left-0.5 bottom-0.5 bg-background rounded;
   content: '';
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .popui-switch__input {
-  @apply bg-workspace-accent-500;
+  @apply bg-background-accent;
 }
 
 input:focus + .popui-switch__input {
@@ -262,7 +261,7 @@ input:checked + .popui-switch__input:before {
   @apply space-y-2;
 }
 .popui-desc-list dd {
-  @apply text-base text-neutral-800 font-medium;
+  @apply text-base text-foreground font-medium;
 }
 .popui-desc-list dd > .prose {
   @apply font-normal;
@@ -270,18 +269,18 @@ input:checked + .popui-switch__input:before {
 
 /* Empty State */
 .popui-empty-state {
-  @apply flex flex-col items-center justify-center space-y-2 text-workspace-accent;
+  @apply flex flex-col items-center justify-center space-y-2 text-foreground-accent;
 }
 
 /* Radio */
 .popui-radio {
-  @apply form-radio h-5 w-5 border-neutral-200 hover:border-neutral-300 text-workspace-accent focus:ring-0 focus:ring-offset-0;
+  @apply form-radio h-5 w-5 border-border-default-secondary hover:border-border-default-secondary-hover text-background-accent focus:ring-0 focus:ring-offset-0;
 }
 .popui-radio:hover + label {
-  @apply text-neutral-800;
+  @apply text-foreground;
 }
 .popui-radio-wrapper {
-  @apply has-checked:border-workspace-accent has-checked:shadow-active has-[input:not(:checked)]:border-neutral-200 border rounded-lg w-full text-left cursor-pointer block;
+  @apply has-checked:border-border-selected-bold has-checked:shadow-active has-[input:not(:checked)]:border-border-default-secondary border rounded-lg w-full text-left cursor-pointer block;
 }
 .popui-radio-wrapper__inner {
   @apply py-2 pr-2 pl-3 flex items-start justify-between;
@@ -290,13 +289,13 @@ input:checked + .popui-switch__input:before {
   @apply flex flex-col space-y-0.5;
 }
 .popui-radio-label {
-  @apply text-base text-neutral-800 font-medium;
+  @apply text-base text-foreground font-medium;
 }
 .popui-radio-label:hover + input {
-  @apply border-neutral-300;
+  @apply border-border-default-secondary-hover;
 }
 .popui-radio-description {
-  @apply text-sm text-neutral-500;
+  @apply text-sm text-foreground-default-secondary;
 }
 .popui-radio__theme {
   @apply relative w-7 h-7 rounded-full border-2 border-transparent cursor-pointer p-0;
@@ -394,26 +393,26 @@ input:checked + .popui-switch__input:before {
   @apply flex items-center gap-2;
 }
 .popui-input-text {
-  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-400 text-base tracking-tight disabled:bg-neutral-50 border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
+  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-foreground-default-tertiary text-base tracking-tight disabled:bg-background-default-secondary border-border-default-secondary text-foreground outline-none caret-foreground-accent;
 }
 .popui-input-text:focus {
   @apply ring-0 ring-offset-0;
 }
 .popui-input-text:hover:enabled {
-  @apply border-neutral-300;
+  @apply border-border-default-secondary-hover;
 }
 .popui-input-text:not(.popui-input--error):focus {
-  @apply border-workspace-accent-500 shadow-active;
+  @apply border-border-selected-bold shadow-active;
 }
 .popui-input-text--error {
-  @apply text-danger-500! border-danger-400! outline-none! caret-danger-500!;
+  @apply !text-foreground-critical !border-border-critical-bold !outline-none !caret-foreground-critical;
 }
 .popui-label,
 .popui-desc-list dt {
-  @apply font-sans text-sm font-medium text-neutral-500 flex items-center gap-0.5;
+  @apply font-sans text-sm font-medium text-foreground-default-secondary flex items-center gap-0.5;
 }
 .popui-error {
-  @apply font-sans text-sm text-danger-500 flex items-center space-x-1 pl-[20px] bg-no-repeat bg-left bg-size-[16px_16px];
+  @apply font-sans text-sm text-foreground-critical flex items-center space-x-1 pl-[20px] bg-no-repeat bg-left bg-size-[16px_16px];
 
   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCQk8cGF0aAoJCQlmaWxsLXJ1bGU9ImV2ZW5vZGQiCgkJCWNsaXAtcnVsZT0iZXZlbm9kZCIKCQkJZD0iTTggMTQuNUMxMS41ODk5IDE0LjUgMTQuNSAxMS41ODk5IDE0LjUgOEMxNC41IDQuNDEwMTUgMTEuNTg5OSAxLjUgOCAxLjVDNC40MTAxNSAxLjUgMS41IDQuNDEwMTUgMS41IDhDMS41IDExLjU4OTkgNC40MTAxNSAxNC41IDggMTQuNVpNNy45OTk5OSA5LjM1QzcuNjY4NjIgOS4zNSA3LjM5OTk5IDkuMDgxMzcgNy4zOTk5OSA4Ljc1VjQuNzVDNy4zOTk5OSA0LjQxODYzIDcuNjY4NjIgNC4xNSA3Ljk5OTk5IDQuMTVDOC4zMzEzNyA0LjE1IDguNTk5OTkgNC40MTg2MyA4LjU5OTk5IDQuNzVMOC41OTk5OSA4Ljc1QzguNTk5OTkgOS4wODEzNyA4LjMzMTM2IDkuMzUgNy45OTk5OSA5LjM1Wk04Ljc1IDExQzguNzUgMTEuNDE0MiA4LjQxNDIxIDExLjc1IDggMTEuNzVDNy41ODU3OSAxMS43NSA3LjI1IDExLjQxNDIgNy4yNSAxMUM3LjI1IDEwLjU4NTggNy41ODU3OSAxMC4yNSA4IDEwLjI1QzguNDE0MjEgMTAuMjUgOC43NSAxMC41ODU4IDguNzUgMTFaIgoJCQlmaWxsPSIjQzkyRDQ1IgoJCT48L3BhdGg+Cgk8L3N2Zz4=');
 }
@@ -421,13 +420,13 @@ input:checked + .popui-switch__input:before {
   @apply flex items-center justify-between gap-2;
 }
 .popui-input-file {
-  @apply flex items-center justify-start h-16 p-4 gap-2 border border-dashed border-neutral-200 rounded-2xl;
+  @apply flex items-center justify-start h-16 p-4 gap-2 border border-dashed border-border-default-secondary rounded-2xl;
 }
 .popui-input-file input[type='file'] {
   @apply w-full text-base font-medium;
 }
 .popui-input-file input[type='file']::file-selector-button {
-  @apply px-2 py-1 bg-workspace-accent text-white rounded-md gap-0.5 mr-4 cursor-pointer;
+  @apply px-2 py-1 bg-background-accent text-foreground-inverse rounded-md gap-0.5 mr-4 cursor-pointer;
 }
 .popui-input-file:has(input[type='file']:valid) span {
   color: green;
@@ -438,19 +437,19 @@ input:checked + .popui-switch__input:before {
 
 /* Text */
 .popui-paragraph {
-  @apply font-sans text-base text-neutral-800;
+  @apply font-sans text-base text-foreground;
 }
 .popui-warning-text {
-  @apply font-sans text-base text-neutral-500;
+  @apply font-sans text-base text-foreground-default-secondary;
 }
 .popui-title {
-  @apply font-sans text-black text-2xl font-semibold;
+  @apply font-sans text-foreground text-2xl font-semibold;
 }
 .popui-subtitle {
-  @apply font-sans text-base text-neutral-800 font-medium;
+  @apply font-sans text-base text-foreground font-medium;
 }
 .popui-info {
-  @apply font-sans text-sm text-neutral-500 flex items-center gap-1;
+  @apply font-sans text-sm text-foreground-default-secondary flex items-center gap-1;
 }
 .popui-info-text {
   @apply flex-1;
@@ -458,31 +457,31 @@ input:checked + .popui-switch__input:before {
 mark,
 pre,
 p > code {
-  @apply font-sans border border-neutral-200 bg-neutral-50 rounded text-sm text-neutral-500 px-1 py-0.5 inline-flex;
+  @apply font-sans border border-border-default-secondary bg-background-default-secondary rounded text-sm text-foreground-default-secondary px-1 py-0.5 inline-flex;
 }
 pre {
   @apply overflow-x-auto;
 }
 .popui-description {
-  @apply text-neutral-500 font-sans text-base;
+  @apply text-foreground-default-secondary font-sans text-base;
 }
 .popui-notification {
   @apply flex px-3 py-2 justify-start items-start gap-2 rounded-lg text-base mb-4;
 }
 .popui-notification__info {
-  @apply bg-blue-50 text-blue-500;
+  @apply bg-background-info text-foreground-info;
 }
 .popui-notification__warning {
-  @apply bg-yellow-50 text-yellow-500;
+  @apply bg-background-warning text-foreground-warning;
 }
 .popui-notification__success {
-  @apply bg-positive-50 text-positive-500;
+  @apply bg-background-success text-foreground-success;
 }
 .popui-notification__error {
-  @apply bg-danger-50 text-danger-500;
+  @apply bg-background-critical text-foreground-critical;
 }
 .popui-notification__description {
-  @apply text-neutral-500;
+  @apply text-foreground-default-secondary;
 }
 
 /* Option Group */
@@ -495,16 +494,16 @@ pre {
   @apply relative inline-block;
 }
 .popui-popover-list {
-  @apply hidden absolute left-0 top-7 border border-neutral-200 rounded-md p-1 w-full bg-white z-10;
+  @apply hidden absolute left-0 top-7 border border-border-default-secondary rounded-md p-1 w-full bg-background z-10;
 }
 .popui-popover-list-item {
-  @apply font-sans font-medium text-base text-neutral-800 w-full rounded;
+  @apply font-sans font-medium text-base text-foreground w-full rounded;
 }
 .popui-popover-list-item > button {
   @apply w-full pl-1.5 pr-2 py-1.5 flex items-center space-x-2 cursor-pointer whitespace-nowrap z-10;
 }
 .popui-popover-list-item:hover {
-  @apply bg-neutral-100;
+  @apply bg-background-default-tertiary;
 }
 .popui-popover-wrapper__right {
   @apply justify-end;
@@ -541,7 +540,7 @@ pre {
   @apply flex flex-col space-y-2;
 }
 .popui-select {
-  @apply font-sans pl-2 py-1.5 border border-neutral-200 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight disabled:bg-neutral-50 box-border h-8;
+  @apply font-sans pl-2 py-1.5 border border-border-default-secondary w-full rounded-md text-foreground text-base pr-9 outline-none tracking-tight disabled:bg-background-default-secondary box-border h-8;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -550,13 +549,13 @@ pre {
   background-position: center right 6px;
 }
 .popui-select:hover:enabled {
-  @apply border-neutral-300;
+  @apply border-border-default-secondary-hover;
 }
 .popui-select:focus {
   @apply ring-0 ring-offset-0;
 }
 .popui-select:not(.popui-input--error):focus {
-  @apply border-workspace-accent-500 shadow-active;
+  @apply border-border-selected-bold shadow-active;
 }
 
 /* Textarea */
@@ -564,22 +563,22 @@ pre {
   @apply flex flex-col gap-2;
 }
 .popui-textarea {
-  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-neutral-400 text-base tracking-tight disabled:bg-neutral-50 border-neutral-200 text-neutral-800 outline-none caret-workspace-accent-500;
+  @apply font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-foreground-default-tertiary text-base tracking-tight disabled:bg-background-default-secondary border-border-default-secondary text-foreground outline-none caret-foreground-accent;
 }
 .popui-textarea__contenteditable {
   @apply min-h-[80px];
 }
 .popui-textarea--monospaced {
-  @apply font-mono!;
+  @apply !font-mono;
 }
 .popui-textarea:focus {
   @apply ring-0 ring-offset-0;
 }
 .popui-textarea:hover:enabled {
-  @apply border-neutral-300;
+  @apply border-border-default-secondary-hover;
 }
 .popui-textarea:not(.popui-input--error):focus {
-  @apply border-workspace-accent-500 shadow-active;
+  @apply border-border-selected-bold shadow-active;
 }
 div[contenteditable='true'] .tag {
   display: inline-flex;
@@ -616,7 +615,7 @@ form {
   @apply space-y-0;
 }
 .popui-form__list-item {
-  @apply flex items-center space-x-3 text-base text-neutral-800;
+  @apply flex items-center space-x-3 text-base text-foreground;
 }
 .popui-form__list-item > *:nth-child(2) {
   @apply flex-1 min-w-0 truncate font-semibold;
@@ -635,14 +634,14 @@ form {
   @apply space-y-4 relative w-full;
 }
 .popui-fieldset__card {
-  @apply border border-neutral-200 p-4 rounded-md bg-white;
+  @apply border border-border-default-secondary p-4 rounded-md bg-background;
 }
 .popui-fieldset__card-grayed {
-  @apply bg-neutral-50;
+  @apply bg-background-default-secondary;
 }
 
 .popui-fieldset-legend {
-  @apply absolute top-4 text-sm font-medium text-neutral-800;
+  @apply absolute top-4 text-sm font-medium text-foreground;
 }
 
 .popui-fieldset:has(> legend) {
@@ -670,7 +669,7 @@ form {
 }
 
 .popui-config-footer__content {
-  @apply flex justify-end border-t border-neutral-100 gap-3 p-4;
+  @apply flex justify-end border-t border-border gap-3 p-4;
 }
 
 .popui-form-section {
@@ -678,7 +677,7 @@ form {
 }
 
 .popui-prose {
-  @apply prose prose-popui;
+  @apply prose;
 }
 
 .popui-divider-wrapper {
@@ -686,7 +685,7 @@ form {
 }
 
 .popui-wizard-page .popui-divider-wrapper {
-  @apply my-6!;
+  @apply !my-6;
 }
 .popui-divider {
   width: 100%;
@@ -701,13 +700,13 @@ form {
   border-image-slice: 1;
 }
 .popui-admin-page__content .popui-divider-wrapper {
-  @apply mt-4! mb-8!;
+  @apply !mt-4 !mb-8;
 }
 .popui-admin-page__content > div:first-of-type .popui-divider-wrapper {
   @apply hidden;
 }
 .popui-admin-page-title {
-  @apply font-sans text-neutral-800 text-base md:text-lg font-medium;
+  @apply font-sans text-foreground text-base md:text-lg font-medium;
 }
 .popui-admin-page-title__wrapper {
   @apply flex items-center gap-1;
@@ -718,13 +717,13 @@ form {
 
 /* Table */
 .popui-table {
-  @apply table-fixed w-full border-collapse border-0 font-sans text-base flex-1 rounded bg-white;
+  @apply table-fixed w-full border-collapse border-0 font-sans text-base flex-1 rounded bg-background;
 }
 .popui-table-wrapper {
-  @apply border border-neutral-100 rounded-md overflow-hidden;
+  @apply border border-border rounded-md overflow-hidden;
 }
 .popui-table th {
-  @apply border-b border-neutral-100;
+  @apply border-b border-border;
 }
 .popui-table tr {
   @apply data-[state=disabled]:opacity-30;
@@ -734,10 +733,10 @@ form {
 }
 .popui-table th,
 .popui-table td {
-  @apply text-left bg-white text-neutral-500 box-border p-2 font-sans text-base font-normal;
+  @apply text-left bg-background text-foreground-default-secondary box-border p-2 font-sans text-base font-normal;
 }
 .popui-table-cell__right {
-  @apply text-right!;
+  @apply !text-right;
 }
 .popui-table th:first-child,
 .popui-table td:first-child {
@@ -748,26 +747,26 @@ form {
   @apply pr-4;
 }
 .popui-table--clickable tr:hover td {
-  @apply bg-neutral-50 cursor-pointer;
+  @apply bg-background-default-secondary cursor-pointer;
 }
 .popui-table--clickable tr:hover .popui-button--secondary {
-  @apply bg-neutral-800/5;
+  @apply bg-background-default-tertiary;
 }
 .popui-table--clickable tr:hover .collapsed {
   @apply opacity-100 pointer-events-auto translate-y-0;
 }
 
 .popui-tabs {
-  @apply inline-flex gap-6 w-full overflow-visible border-b border-neutral-100 mb-4;
+  @apply inline-flex gap-6 w-full overflow-visible border-b border-border mb-4;
 }
 .popui-tab {
-  @apply relative inline-flex items-center justify-center gap-2 whitespace-nowrap text-neutral-500 text-base pb-2 data-[state=active]:text-neutral-800 data-[state=active]:font-medium data-[state=active]:border-b data-[state=active]:border-black data-[state=active]:-bottom-px;
+  @apply relative inline-flex items-center justify-center gap-2 whitespace-nowrap text-foreground-default-secondary text-base pb-2 data-[state=active]:text-foreground data-[state=active]:font-medium data-[state=active]:border-b data-[state=active]:border-foreground data-[state=active]:-bottom-px;
 }
 .popui-tabs__pill {
-  @apply bg-neutral-100 border border-neutral-200 text-base text-neutral-800 inline-flex h-7 items-center justify-center rounded-md p-0.5 w-full mb-4;
+  @apply bg-background-default-tertiary border border-border-default-secondary text-base text-foreground inline-flex h-7 items-center justify-center rounded-md p-0.5 w-full mb-4;
 }
 .popui-tab__pill {
-  @apply data-[state=active]:bg-white inline-flex items-center justify-center gap-2 whitespace-nowrap rounded px-3 py-0.5 text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm w-full;
+  @apply data-[state=active]:bg-background inline-flex items-center justify-center gap-2 whitespace-nowrap rounded px-3 py-0.5 text-base font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm w-full;
 }
 
 /* Alpine */
@@ -780,10 +779,10 @@ form {
   @apply flex items-center gap-2 flex-wrap;
 }
 .popui-tag {
-  @apply inline-flex items-center gap-1 rounded border border-positive-200 bg-positive-100 text-positive-500 py-1 pl-1.5 pr-[5px] lining-nums tabular-nums text-sm font-medium;
+  @apply inline-flex items-center gap-1 rounded border border-border bg-background-success-default text-foreground-success-default py-1 pl-1.5 pr-[5px] lining-nums tabular-nums text-sm font-medium;
 }
 .popui-tag-button {
-  @apply text-positive-300;
+  @apply text-foreground-success-default;
 }
 .popui-tag-add-button {
   @apply mt-0.5;
@@ -808,48 +807,48 @@ form {
   @apply w-2 h-2 rounded-sm;
 }
 .popui-tag-status--green {
-  @apply bg-positive-100 text-positive-500 [&>[data-dot]]:border-positive-200 [&>[data-dot]]:bg-positive-500;
+  @apply bg-background-status-paid text-foreground-status-paid [&>[data-dot]]:bg-icon-status-paid;
 }
 .popui-tag-status--yellow {
-  @apply bg-yellow-100 text-yellow-500 [&>[data-dot]]:border-yellow-200 [&>[data-dot]]:bg-yellow-500;
+  @apply bg-background-status-processing text-foreground-status-processing [&>[data-dot]]:bg-icon-status-processing;
 }
 .popui-tag-status--red {
-  @apply bg-danger-100 text-danger-500 [&>[data-dot]]:border-danger-200 [&>[data-dot]]:bg-danger-500;
+  @apply bg-background-status-error text-foreground-status-error [&>[data-dot]]:bg-icon-status-error;
 }
 .popui-tag-status--orange {
-  @apply bg-warning-100 text-warning-500 [&>[data-dot]]:border-warning-200 [&>[data-dot]]:bg-warning-500;
+  @apply bg-background-status-draft text-foreground-status-draft [&>[data-dot]]:bg-icon-status-draft;
 }
 .popui-tag-status--blue {
-  @apply bg-blue-100 text-blue-500 [&>[data-dot]]:border-blue-200 [&>[data-dot]]:bg-blue-500;
+  @apply bg-background-status-sent text-foreground-status-sent [&>[data-dot]]:bg-icon-status-sent;
 }
 .popui-tag-status--purple {
-  @apply bg-purple-100 text-purple-500 [&>[data-dot]]:border-purple-200 [&>[data-dot]]:bg-purple-500;
+  @apply bg-background-status-registered text-foreground-status-registered [&>[data-dot]]:bg-icon-status-registered;
 }
 .popui-tag-status--olive {
-  @apply bg-olive-100 text-olive-500 [&>[data-dot]]:border-olive-200 [&>[data-dot]]:bg-olive-500;
+  @apply bg-sherwood-alpha-10 text-sherwood-60 [&>[data-dot]]:bg-sherwood-50;
 }
 .popui-tag-status--teal {
-  @apply bg-teal-100 text-teal-500 [&>[data-dot]]:border-teal-200 [&>[data-dot]]:bg-teal-500;
+  @apply bg-background-status-completed text-foreground-status-completed [&>[data-dot]]:bg-icon-status-completed;
 }
 .popui-tag-status--crimson {
-  @apply bg-crimson-100 text-crimson-500 [&>[data-dot]]:border-crimson-200 [&>[data-dot]]:bg-crimson-500;
+  @apply bg-background-status-rejected text-foreground-status-rejected [&>[data-dot]]:bg-icon-status-rejected;
 }
 .popui-tag-status--blue-violet {
-  @apply bg-blue-violet-100 text-blue-violet-500 [&>[data-dot]]:border-blue-violet-200 [&>[data-dot]]:bg-blue-violet-500;
+  @apply bg-background-status-registered text-foreground-status-registered [&>[data-dot]]:bg-icon-status-registered;
 }
 .popui-tag-status--steel-blue {
-  @apply bg-steel-blue-100 text-steel-blue-500 [&>[data-dot]]:border-steel-blue-200 [&>[data-dot]]:bg-steel-blue-500;
+  @apply bg-background-status-received text-foreground-status-received [&>[data-dot]]:bg-icon-status-received;
 }
 .popui-tag-status--empty {
-  @apply border border-dashed border-neutral-200 text-neutral-400 [&>[data-dot]]:bg-neutral-300;
+  @apply border border-dashed border-border-default-secondary text-foreground-default-tertiary [&>[data-dot]]:bg-icon-status-empty;
 }
 .popui-tag-status--grey {
-  @apply bg-neutral-100 text-neutral-500 [&>[data-dot]]:border-neutral-200 [&>[data-dot]]:bg-neutral-500;
+  @apply bg-background-default-tertiary text-foreground-default-secondary [&>[data-dot]]:border-border-default-secondary [&>[data-dot]]:bg-icon-status-void;
 }
 
 /* Upload File */
 .popui-upload_file {
-  @apply flex items-center gap-2 rounded-lg border border-neutral-200 pl-1 py-1 pr-3 relative;
+  @apply flex items-center gap-2 rounded-lg border border-border-default-secondary pl-1 py-1 pr-3 relative;
 }
 .popui-upload_file-image {
   @apply flex items-center justify-center w-10 rounded-md;
@@ -858,14 +857,14 @@ form {
   @apply h-10 object-cover;
 }
 .popui-upload_file-text {
-  @apply flex-1 text-base text-neutral-800 font-medium;
+  @apply flex-1 text-base text-foreground font-medium;
 }
 .popui-upload_file .htmx-request {
-  @apply absolute inset-0 flex items-center justify-center text-sm pointer-events-none rounded-md text-neutral-500 fill-neutral-500;
+  @apply absolute inset-0 flex items-center justify-center text-sm pointer-events-none rounded-md text-foreground-default-secondary fill-foreground-default-secondary;
   background-color: rgba(255, 255, 255, 0.7);
 }
 .popui-upload_file-placeholder {
-  @apply flex h-10 w-10 items-center justify-center rounded-md bg-neutral-50 border border-dashed border-neutral-200;
+  @apply flex h-10 w-10 items-center justify-center rounded-md bg-background-default-secondary border border-dashed border-border-default-secondary;
   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zLjI0ODUgMy4yNDg3NUMzLjA3ODY4IDMuNDE4NTggMi45NDk5NSAzLjcxMzkzIDIuOTQ5OTUgNC4yMzAyVjExLjc5MDJDMi45NDk5NSAxMi4yODc2IDMuMDY5NDYgMTIuNTggMy4yMzAwOSAxMi43NTI2TDguMzk2MDQgNy41NzcwM0w4LjM5NjEgNy41NzY5OEM4LjYwNzg3IDcuMzY0NzYgOC44NTk0MSA3LjE5NjQgOS4xMzYzMyA3LjA4MTUyQzkuNDEzMjcgNi45NjY2NCA5LjcxMDE1IDYuOTA3NSAxMC4wMSA2LjkwNzVDMTAuMzA5OCA2LjkwNzUgMTAuNjA2NyA2Ljk2NjY0IDEwLjg4MzYgNy4wODE1MkMxMS4xNjA2IDcuMTk2NDEgMTEuNDEyMSA3LjM2NDc5IDExLjYyMzkgNy41NzcwM0wxMy4wNyA5LjAyMzA3VjQuMjMwMkMxMy4wNyAzLjcxMzkzIDEyLjk0MTIgMy40MTg1OCAxMi43NzE0IDMuMjQ4NzVDMTIuNjAxNiAzLjA3ODkyIDEyLjMwNjIgMi45NTAyIDExLjc5IDIuOTUwMkg0LjIyOTk1QzMuNzEzNjkgMi45NTAyIDMuNDE4MzMgMy4wNzg5MiAzLjI0ODUgMy4yNDg3NVpNMTEuNzkgMTMuMDcwMkg0LjMyNTk0TDkuMTAzODYgOC4yODM0M0w5LjEwMzkxIDguMjgzMzhDOS4yMjI4IDguMTY0MjMgOS4zNjQwMyA4LjA2OTcgOS41MTk1MSA4LjAwNTJDOS42NzQ5OCA3Ljk0MDcgOS44NDE2NSA3LjkwNzUgMTAuMDEgNy45MDc1QzEwLjE3ODMgNy45MDc1IDEwLjM0NSA3Ljk0MDcgMTAuNTAwNCA4LjAwNTJDMTAuNjU1OSA4LjA2OTcgMTAuNzk3MSA4LjE2NDIzIDEwLjkxNiA4LjI4MzM4TDEwLjkxNjQgOC4yODM3NkwxMy4wNyAxMC40MzczVjExLjc5MDJDMTMuMDcgMTIuMzA2NSAxMi45NDEyIDEyLjYwMTggMTIuNzcxNCAxMi43NzE2QzEyLjYwMTYgMTIuOTQxNSAxMi4zMDYyIDEzLjA3MDIgMTEuNzkgMTMuMDcwMlpNMTQuMDcgMTEuNzkwMlYxMC4yMzUxVjEwLjIyNTNWNC4yMzAyQzE0LjA3IDMuNTU5NzkgMTMuOTAyIDIuOTY1MTUgMTMuNDc4NSAyLjU0MTY0QzEzLjA1NSAyLjExODE0IDEyLjQ2MDQgMS45NTAyIDExLjc5IDEuOTUwMkg0LjIyOTk1QzMuNTU5NTUgMS45NTAyIDIuOTY0OSAyLjExODE0IDIuNTQxNCAyLjU0MTY0QzIuMTE3ODkgMi45NjUxNSAxLjk0OTk1IDMuNTU5NzkgMS45NDk5NSA0LjIzMDJWMTEuNzkwMkMxLjk0OTk1IDEyLjQ2MDYgMi4xMTc4OSAxMy4wNTUyIDIuNTQxNCAxMy40Nzg3QzIuOTY0OSAxMy45MDIzIDMuNTU5NTUgMTQuMDcwMiA0LjIyOTk1IDE0LjA3MDJIMTEuNzlDMTIuNDYwNCAxNC4wNzAyIDEzLjA1NSAxMy45MDIzIDEzLjQ3ODUgMTMuNDc4N0MxMy45MDIgMTMuMDU1MiAxNC4wNyAxMi40NjA2IDE0LjA3IDExLjc5MDJaTTQuNzcxNTIgNS42NjY3N0M0Ljk4MDYzIDUuNDU3NjcgNS4yNjQyMyA1LjM0MDE5IDUuNTU5OTUgNS4zNDAxOUM1Ljg1NTY2IDUuMzQwMTkgNi4xMzkyNyA1LjQ1NzY3IDYuMzQ4MzcgNS42NjY3N0M2LjU1NzQ3IDUuODc1ODcgNi42NzQ5NSA2LjE1OTQ4IDYuNjc0OTUgNi40NTUxOUM2LjY3NDk1IDYuNzUwOTEgNi41NTc0NyA3LjAzNDUyIDYuMzQ4MzcgNy4yNDM2MkM2LjEzOTI3IDcuNDUyNzIgNS44NTU2NiA3LjU3MDE5IDUuNTU5OTUgNy41NzAxOUM1LjI2NDIzIDcuNTcwMTkgNC45ODA2MyA3LjQ1MjcyIDQuNzcxNTIgNy4yNDM2MkM0LjU2MjQyIDcuMDM0NTIgNC40NDQ5NSA2Ljc1MDkxIDQuNDQ0OTUgNi40NTUxOUM0LjQ0NDk1IDYuMTU5NDggNC41NjI0MiA1Ljg3NTg3IDQuNzcxNTIgNS42NjY3N1oiIGZpbGw9IiMwMzA3MTIiLz4KPC9zdmc+Cg==');
   background-repeat: no-repeat;
   background-position: center center;
@@ -876,11 +875,11 @@ form {
 
 /* Button Copy */
 .popui-button-copy {
-  @apply inline-flex items-center gap-2 bg-neutral-50 border border-neutral-200 rounded-md px-2 py-1 relative;
+  @apply inline-flex items-center gap-2 bg-background-default-secondary border border-border-default-secondary rounded-md px-2 py-1 relative;
 }
 
 .popui-button-copy__text {
-  @apply font-mono text-sm text-neutral-700 hover:text-neutral-900 transition-colors border-0 bg-transparent p-0 m-0 cursor-pointer select-none outline-none;
+  @apply font-mono text-sm text-foreground hover:text-foreground transition-colors border-0 bg-transparent p-0 m-0 cursor-pointer select-none outline-none;
 }
 
 .popui-button-copy__text:focus {
@@ -888,7 +887,7 @@ form {
 }
 
 .popui-button-copy__button {
-  @apply p-1 rounded text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 transition-colors cursor-pointer;
+  @apply p-1 rounded text-foreground-default-secondary hover:text-foreground hover:bg-background-default-tertiary transition-colors cursor-pointer;
 }
 
 .popui-button-copy__icon {
@@ -896,7 +895,7 @@ form {
 }
 
 .popui-button-copy__popover {
-  @apply absolute -top-6 left-1/2 transform -translate-x-1/2 bg-neutral-800 text-white text-xs py-0.5 px-1.5 rounded text-center opacity-0 transition-opacity duration-200 pointer-events-none;
+  @apply absolute -top-6 left-1/2 transform -translate-x-1/2 bg-background-default-negative text-foreground-inverse text-xs py-0.5 px-1.5 rounded text-center opacity-0 transition-opacity duration-200 pointer-events-none;
 }
 
 .popui-button-copy__popover--visible {
@@ -974,7 +973,7 @@ form {
   text-align: center !important;
 }
 .text-dimmed {
-  @apply text-neutral-400;
+  @apply text-foreground-default-tertiary;
 }
 .font-medium {
   font-weight: 500;
@@ -1009,18 +1008,18 @@ form {
   height: 100% !important;
 }
 .text-danger {
-  @apply text-danger-500;
+  @apply text-foreground-critical;
 }
 .text-neutral {
-  @apply text-neutral-500;
+  @apply text-foreground-default-secondary;
 }
 
 /* Admin */
 .popui-admin-wrapper {
-  @apply flex h-screen bg-neutral-100 py-1 pr-1 pl-0;
+  @apply flex h-screen py-1 pr-1 pl-0;
 }
 .popui-admin-sidebar {
-  @apply h-full w-0 md:w-[240px] invisible md:visible bg-neutral-100 flex flex-col items-center gap-0 transition-[width] ease-in-out duration-300;
+  @apply h-full w-0 md:w-[240px] invisible md:visible bg-background-default-secondary flex flex-col items-center gap-0 transition-[width] ease-in-out duration-300;
 }
 
 .popui-admin-sidebar ul li a {
@@ -1037,20 +1036,20 @@ form {
   @apply block md:hidden;
 }
 .popui-admin-sidebar__mobile > div {
-  @apply absolute top-[50px] left-[26px] bg-neutral-50 p-2 z-50 border border-neutral-200 shadow rounded;
+  @apply absolute top-[50px] left-[26px] bg-background-default-secondary p-2 z-50 border border-border-default-secondary shadow rounded;
 }
 .popui-admin-page {
-  @apply relative mt-[60px] flex-1 rounded-b-md border-b border-neutral-100 bg-white overflow-y-auto;
+  @apply relative mt-[60px] flex-1 rounded-b-md border-b border-border bg-background overflow-y-auto;
 }
 .popui-admin-page.menu--active > * {
   @apply opacity-30 pointer-events-none;
 }
 .popui-admin-sidebar__header {
-  @apply w-full flex pl-6 pr-3 py-[18px] items-start gap-2.5 border-b border-neutral-800/5 text-sherwood-700 font-sans text-lg font-semibold whitespace-nowrap h-[60px];
+  @apply w-full flex pl-6 pr-3 py-[18px] items-start gap-2.5 border-b border-border text-sherwood-70 font-sans text-lg font-semibold whitespace-nowrap h-[60px];
 }
 .popui-admin-sidebar__header svg,
 .popui-admin-sidebar__header div {
-  @apply w-6! h-6!;
+  @apply !w-6 !h-6;
 }
 .popui-admin-page__header-actions {
   @apply flex items-center gap-2;
@@ -1059,14 +1058,14 @@ form {
   @apply w-full flex grow p-4 flex-col items-center gap-5;
 }
 .popui-admin-sidebar__footer {
-  @apply grow-0 border-t border-neutral-200 py-2 px-4 w-full;
+  @apply grow-0 border-t border-border-default-secondary py-2 px-4 w-full;
 }
 .popui-admin-sidebar__section {
   @apply w-full flex flex-col items-start gap-2;
   text-indent: 8px;
 }
 .popui-admin-sidebar__section > p {
-  @apply text-neutral-400 font-sans text-sm font-medium;
+  @apply text-foreground-default-tertiary font-sans text-sm font-medium;
 }
 .popui-admin-sidebar__section > ul {
   @apply flex flex-col items-start w-full gap-1.5;
@@ -1075,7 +1074,7 @@ form {
   @apply w-full;
 }
 .popui-admin-sidebar__section a {
-  @apply w-full flex py-[5px] pl-1.5 pr-2 items-center gap-2 rounded-md border border-transparent text-neutral-800 font-sans text-base font-medium;
+  @apply w-full flex py-[5px] pl-1.5 pr-2 items-center gap-2 rounded-md border border-transparent text-foreground font-sans text-base font-medium;
 }
 .popui-admin-sidebar__section a:hover {
   @apply bg-white-60 text-black backdrop-blur-[20px];
@@ -1088,13 +1087,13 @@ form {
   fill: #6b7280;
 }
 .popui-admin-sidebar__item-active {
-  @apply border-neutral-200 bg-white backdrop-blur-[20px] transition-[background] duration-250 ease-in-out;
+  @apply border-border-default-secondary bg-background backdrop-blur-[20px] transition-[background] duration-250 ease-in-out;
 }
 .popui-admin-sidebar__item-active:hover {
-  @apply border-neutral-300;
+  @apply border-border-default-secondary-hover;
 }
 .popui-admin-page__header {
-  @apply bg-white z-2 h-[60px] fixed left-0 right-1 top-1 rounded-t flex pl-6 pr-6 py-[15px] justify-between items-center border-b border-neutral-800/5 transition-[left] duration-300 ease-in-out;
+  @apply bg-background z-2 h-[60px] fixed left-0 right-1 top-1 rounded-t flex pl-6 pr-6 py-[15px] justify-between items-center border-b border-border transition-[left] duration-300 ease-in-out;
 }
 .popui-admin-page__content {
   @apply flex p-6 flex-col items-center gap-6;
@@ -1115,13 +1114,13 @@ form {
   @apply flex flex-col h-screen;
 }
 .popui-wizard-header {
-  @apply flex items-center justify-between gap-2 p-6 border-b border-neutral-100 bg-white;
+  @apply flex items-center justify-between gap-2 p-6 border-b border-border bg-background;
 }
 .popui-wizard-content {
-  @apply flex-1 flex justify-center overflow-y-auto pb-6 pt-[40px] px-6 bg-white;
+  @apply flex-1 flex justify-center overflow-y-auto pb-6 pt-[40px] px-6 bg-background;
 }
 .popui-wizard-footer {
-  @apply flex items-center justify-end gap-5 px-6 py-4 border-t border-neutral-100 bg-white;
+  @apply flex items-center justify-end gap-5 px-6 py-4 border-t border-border bg-background;
 }
 .popui-wizard-content__center-vertical {
   @apply items-center;
@@ -1181,11 +1180,11 @@ form {
 
 /* Flash message */
 .popui-form-message {
-  @apply text-sm font-semibold text-neutral-800 flex items-center gap-1 opacity-0;
+  @apply text-sm font-semibold text-foreground flex items-center gap-1 opacity-0;
   animation: flashMessage 5.5s ease forwards;
 }
 .popui-form-message--success {
-  @apply text-workspace-accent-500;
+  @apply text-foreground-accent;
 }
 
 /* Keyframes define the visible window of the message */

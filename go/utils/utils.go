@@ -1,3 +1,4 @@
+// Package utils provides utility functions for PopUI components.
 package utils
 
 import (

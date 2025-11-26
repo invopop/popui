@@ -9,10 +9,10 @@ import (
 // Menu content will render the html passed as slot.
 templ Popover(opts ...props.Popover) {
 	{{ p := props.First(opts) }}
-	<div class={ classes.PopoverWrapper, templ.KV(classes.PopoverWrapperRight, p.RightAlign) }>
+	<div role="menu" class={ classes.PopoverWrapper, templ.KV(classes.PopoverWrapperRight, p.RightAlign) }>
 		@Button(props.Button{
 			Attrs:   templ.Attributes{"popovertarget": p.ID},
-			Small:   true,
+			Square:  true,
 			Variant: p.ButtonVariant,
 		}) {
 			{ p.ButtonLabel }

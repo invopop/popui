@@ -274,14 +274,19 @@ templ formSection() {
 					customer, thus allowing a new Tax ID to be uploaded.
 				}
 			}
-			@popui.Accordion(props.Accordion{Title: "Help me select a plan"}) {
-				@popui.FieldsetCard(props.Fieldset{}) {
-					@popui.Select(props.Select{}) {
-						<option disabled selected value="">Select a type of document...</option>
-					}
-					@popui.OptionGroup(props.OptionGroup{Label: "Actions performed on each document"}) {
-						@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"})
-						@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"})
+			@popui.Accordion() {
+				@popui.AccordionTrigger() {
+					Help me select a plan
+				}
+				@popui.AccordionContent() {
+					@popui.FieldsetCard(props.Fieldset{}) {
+						@popui.Select(props.Select{}) {
+							<option disabled selected value="">Select a type of document...</option>
+						}
+						@popui.OptionGroup(props.OptionGroup{Label: "Actions performed on each document"}) {
+							@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"})
+							@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"})
+						}
 					}
 				}
 			}

@@ -1,0 +1,10 @@
+package modules
+
+type CodeBlockProps struct {
+	Code     string
+	Language string
+}
+
+templ CodeBlock(props CodeBlockProps) {
+	<pre class="w-full p-4 overflow-x-auto m-0 rounded-md bg-background-default-secondary border border-border-default-secondary"><code class={ "text-sm language-" + props.Language }>{ props.Code }</code></pre>
+}

@@ -9,6 +9,7 @@ import (
 	"github.com/a-h/templ"
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/examples"
+	"github.com/invopop/popui/go/internal/ui/pages"
 	"github.com/labstack/echo/v4"
 	"github.com/spf13/cobra"
 )
@@ -54,6 +55,10 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/wizard/confirm", s.confirm)
 	e.GET("/wizard/success", s.success)
 	e.GET("/wizard/error", s.error)
+
+	// Documentation routes
+	e.GET("/docs", s.docsHome)
+	e.GET("/docs/components/accordion", s.docsAccordion)
 
 	var startErr error
 	go func() {
@@ -127,6 +132,16 @@ func (s *serveOpts) success(c echo.Context) error {
 // error shows the success page for a wizard type app
 func (s *serveOpts) error(c echo.Context) error {
 	return render(c, http.StatusOK, examples.ErrorPage())
+}
+
+// docsHome shows the documentation home page
+func (s *serveOpts) docsHome(c echo.Context) error {
+	return render(c, http.StatusOK, pages.DocsHome())
+}
+
+// docsAccordion shows the accordion component documentation
+func (s *serveOpts) docsAccordion(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Accordion())
 }
 
 // render provides a wrapper around the component to make it nice to render.

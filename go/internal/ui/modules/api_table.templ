@@ -1,0 +1,67 @@
+package modules
+
+type APITableItem struct {
+	Name        string
+	Type        string
+	Default     string
+	Description string
+	Required    bool
+}
+
+type APITableProps struct {
+	Title       string
+	Description string
+	Items       []APITableItem
+}
+
+templ APITable(props APITableProps) {
+	<div class="mb-8">
+		if props.Title != "" {
+			<h3 class="text-xl font-semibold mb-2">{ props.Title }</h3>
+		}
+		if props.Description != "" {
+			<p class="text-sm text-foreground-default-secondary mb-4">{ props.Description }</p>
+		}
+		<div class="overflow-x-auto">
+			<table class="w-full text-sm">
+				<thead>
+					<tr class="border-b border-border-default-secondary">
+						<th class="text-left py-3 px-4 font-semibold">Name</th>
+						<th class="text-left py-3 px-4 font-semibold">Type</th>
+						<th class="text-left py-3 px-4 font-semibold">Default</th>
+						<th class="text-left py-3 px-4 font-semibold">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					for _, item := range props.Items {
+						<tr class="border-b border-border-default-secondary">
+							<td class="py-3 px-4">
+								<code class="text-xs bg-background-default-secondary px-2 py-1 rounded">{ item.Name }</code>
+								if item.Required {
+									<span class="ml-2 text-xs text-red-500">*</span>
+								}
+							</td>
+							<td class="py-3 px-4">
+								<code class="text-xs text-foreground-default-secondary">{ item.Type }</code>
+							</td>
+							<td class="py-3 px-4">
+								if item.Default != "" {
+									<code class="text-xs text-foreground-default-secondary">{ item.Default }</code>
+								} else {
+									<span class="text-foreground-default-secondary">-</span>
+								}
+							</td>
+							<td class="py-3 px-4 text-sm text-foreground-default-secondary">
+								if item.Description != "" {
+									{ item.Description }
+								} else {
+									<span class="text-foreground-default-secondary">-</span>
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}

@@ -61,11 +61,11 @@ templ CardHeader(opts ...props.CardHeader) {
 		if !p.HideAvatar {
 			<div style="position: relative;">
 				if p.ImgSrc != "" {
-					@Avatar(props.Avatar{Large: true}) {
+					@Avatar(props.Avatar{Size: "lg"}) {
 						@Image(props.Image{Src: p.ImgSrc})
 					}
 				} else if p.Title != "" {
-					@Avatar(props.Avatar{Large: true, Initial: string(p.Title[0])})
+					@Avatar(props.Avatar{Size: "lg", Initial: string(p.Title[0])})
 				}
 				if p.FlagISO != "" {
 					<img class={ classes.CardHeaderFlag } src={ flagProviderURL + p.FlagISO + ".svg" } width="12"/>

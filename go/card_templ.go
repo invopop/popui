@@ -237,12 +237,12 @@ func CardHeader(opts ...props.CardHeader) templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = Avatar(props.Avatar{Large: true}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var10), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = Avatar(props.Avatar{Size: "lg"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var10), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			} else if p.Title != "" {
-				templ_7745c5c3_Err = Avatar(props.Avatar{Large: true, Initial: string(p.Title[0])}).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = Avatar(props.Avatar{Size: "lg", Initial: string(p.Title[0])}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

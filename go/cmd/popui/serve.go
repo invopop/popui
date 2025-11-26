@@ -59,6 +59,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	// Documentation routes
 	e.GET("/docs", s.docsHome)
 	e.GET("/docs/components/accordion", s.docsAccordion)
+	e.GET("/docs/components/avatar", s.docsAvatar)
 
 	var startErr error
 	go func() {
@@ -142,6 +143,11 @@ func (s *serveOpts) docsHome(c echo.Context) error {
 // docsAccordion shows the accordion component documentation
 func (s *serveOpts) docsAccordion(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Accordion())
+}
+
+// docsAvatar shows the avatar component documentation
+func (s *serveOpts) docsAvatar(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Avatar())
 }
 
 // render provides a wrapper around the component to make it nice to render.

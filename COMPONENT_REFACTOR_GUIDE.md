@@ -25,52 +25,101 @@ type ComponentProps struct {
 - Example: `Accordion`, `AccordionTrigger`, `AccordionContent` all have separate structs
 
 ### Component Implementation
+Use the `props.First()` helper to get the first prop or a zero value:
+
 ```go
-templ Component(props ...ComponentProps) {
-    {{ var p ComponentProps }}
-    if len(props) > 0 {
-        {{ p = props[0] }}
-    }
+templ Component(p ...ComponentProps) {
+    {{ prp := props.First(p) }}
     
     <element
-        if p.ID != "" {
-            id={ p.ID }
+        if prp.ID != "" {
+            id={ prp.ID }
         }
-        class={ utils.TwMerge("base-classes", p.Class) }
-        { p.Attributes... }
+        class={ utils.TwMerge("base-classes", prp.Class) }
+        { prp.Attributes... }
     >
         { children... }
     </element>
 }
 ```
 
+**Key Pattern:**
+- Variadic parameter: `p ...ComponentProps`
+- Use `props.First(p)` instead of manual `if len(p) > 0` check
+- The `First()` helper is generic and returns zero value if array is empty
+
 ---
 
 ## CSS Classes
 
-### Use PopUI's Own Classes
+### ⚠️ CRITICAL: Source of Truth is components.css
+- **ALWAYS** use `components.css` as the single source of truth
+- **NEVER** invent or guess CSS classes
 - **NEVER** use external CSS classes directly
-- Always reference `go/assets/components.css` for PopUI's design tokens
-- Convert CSS classes to inline Tailwind utilities
+- **Extract @apply classes and use them inline** in the templ component
+
+### How to Extract Classes from components.css
+1. Find the component class in `components.css` (e.g., `.popui-avatar`)
+2. Look at the `@apply` directive
+3. Copy those exact classes into your templ component
+4. Handle variants (like `--large`, `--initial`) with conditional logic
+
+**Example from components.css:**
+```css
+.popui-avatar {
+  @apply h-5 w-5 bg-background text-foreground-default-secondary rounded-md flex items-center justify-center font-semibold relative font-sans;
+}
+.popui-avatar--large {
+  @apply !h-8 !w-8 rounded-lg;
+}
+.popui-avatar--initial {
+  @apply border border-border;
+}
+```
+
+**Becomes in templ:**
+```templ
+templ Avatar(p ...props.Avatar) {
+    {{ avatar := props.First(p) }}
+    {{
+        var sizeClasses string
+        var borderClasses string
+        if avatar.Size == "lg" {
+            sizeClasses = "!h-8 !w-8 rounded-lg"
+        } else {
+            sizeClasses = "h-5 w-5 rounded-md"
+        }
+        if avatar.Initial != "" {
+            borderClasses = "border border-border"
+        }
+    }}
+    <div class={
+        utils.TwMerge(
+            "bg-background text-foreground-default-secondary flex items-center justify-center font-semibold relative font-sans",
+            sizeClasses,
+            borderClasses,
+            avatar.Class,
+        ),
+    }>
+        { children... }
+    </div>
+}
+```
 
 ### Class Organization
 ```templ
 class={ utils.TwMerge(
-    // Base styles (first line)
     "flex items-center justify-between px-4 py-3",
-    // Background and borders (grouped)
     "bg-background border border-border-default-secondary",
-    // Interactive states (grouped)
     "hover:bg-background-default-secondary",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground",
-    // Disabled states (if applicable)
     "disabled:opacity-50 disabled:pointer-events-none",
-    // Animations and transitions (last)
     "transition-colors duration-200",
-    // User's custom classes (always last)
     p.Class,
 ) }
 ```
+
+**Important:** Never add comments inside `utils.TwMerge()` calls. Keep the class strings clean and uncommented.
 
 ### Using TwMerge
 - Import: `"github.com/Oudwins/tailwind-merge-go"`

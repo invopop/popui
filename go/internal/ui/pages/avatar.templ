@@ -1,0 +1,122 @@
+package pages
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/layouts"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Avatar() {
+	@layouts.DocsLayout("Avatar", "Display user profile images or initials in circular containers.") {
+		<div class="space-y-8">
+			<div>
+				<h1 class="text-4xl font-bold mb-4">Avatar</h1>
+				<p class="text-lg text-foreground-default-secondary">
+					Display user profile images or initials in circular containers.
+				</p>
+			</div>
+			@modules.Section("Preview", "preview") {
+				<div class="p-6 rounded-lg border border-border-default-secondary bg-background-default-secondary">
+					<div class="flex items-center gap-4">
+						@popui.Avatar(props.Avatar{Initial: "JD"})
+						@popui.Avatar(props.Avatar{Size: "lg", Initial: "XY"})
+					</div>
+				</div>
+			}
+			@modules.Section("Usage", "usage") {
+				@modules.CodeBlock(modules.CodeBlockProps{
+					Language: "go",
+					Code: `package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ AvatarDefault() {
+	<div class="flex items-center gap-4">
+		@popui.Avatar(props.Avatar{Initial: "JD"})
+		@popui.Avatar(props.Avatar{Size: "lg", Initial: "XY"})
+	</div>
+}`,
+				})
+			}
+			@modules.Section("Sizes", "sizes") {
+				<p class="mb-4 text-foreground-default-secondary">
+					Avatar comes in two sizes: default (small) and large (lg).
+				</p>
+				<div class="p-6 rounded-lg border border-border-default-secondary bg-background-default-secondary">
+					<div class="flex items-center gap-4">
+						@popui.Avatar(props.Avatar{Initial: "D"})
+						@popui.Avatar(props.Avatar{Size: "lg", Initial: "L"})
+					</div>
+				</div>
+				@modules.CodeBlock(modules.CodeBlockProps{
+					Language: "go",
+					Code: `package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ AvatarSizes() {
+	<div class="flex items-center gap-4">
+		@popui.Avatar(props.Avatar{Initial: "D"})
+		@popui.Avatar(props.Avatar{Size: "lg", Initial: "L"})
+	</div>
+}`,
+				})
+			}
+			@modules.Section("With Images", "images") {
+				<p class="mb-4 text-foreground-default-secondary">
+					You can pass an Image component as a child instead of using the Initial prop.
+				</p>
+				<div class="p-6 rounded-lg border border-border-default-secondary bg-background-default-secondary">
+					<div class="flex items-center gap-4">
+						@popui.Avatar(props.Avatar{}) {
+							@popui.Image(props.Image{Src: "https://i.pravatar.cc/150?img=1"})
+						}
+						@popui.Avatar(props.Avatar{Size: "lg"}) {
+							@popui.Image(props.Image{Src: "https://i.pravatar.cc/150?img=3"})
+						}
+					</div>
+				</div>
+				@modules.CodeBlock(modules.CodeBlockProps{
+					Language: "go",
+					Code: `package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ AvatarWithImages() {
+	<div class="flex items-center gap-4">
+		@popui.Avatar(props.Avatar{}) {
+			@popui.Image(props.Image{Src: "https://i.pravatar.cc/150?img=1"})
+		}
+		@popui.Avatar(props.Avatar{Size: "lg"}) {
+			@popui.Image(props.Image{Src: "https://i.pravatar.cc/150?img=3"})
+		}
+	</div>
+}`,
+				})
+			}
+			@modules.Section("API Reference", "api") {
+				@modules.APITable(modules.APITableProps{
+					Title:       "Avatar",
+					Description: "Displays a user avatar with an image or initials in a circular container.",
+					Items: []modules.APITableItem{
+						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the avatar element"},
+						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the div element"},
+						{Name: "Initial", Type: "string", Default: "", Description: "Text to display (typically initials) when no image is provided"},
+						{Name: "Size", Type: "string", Default: "\"\" (default)", Description: "Size variant: \"lg\" for large (8x8), default is small (5x5)"},
+					},
+				})
+			}
+		</div>
+	}
+}

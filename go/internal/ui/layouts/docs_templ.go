@@ -8,8 +8,6 @@ package layouts
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import popui "github.com/invopop/popui/go"
-
 func DocsLayout(title, description string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -43,15 +41,7 @@ func DocsLayout(title, description string) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex flex-col min-h-screen\"><nav class=\"border-b border-border-default-secondary bg-background-default-secondary backdrop-blur-[2px]\"><div class=\"container mx-auto px-4 py-4\"><div class=\"flex items-center justify-between\"><a href=\"/\" class=\"flex items-center gap-2\">")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = popui.InvopopLogo().Render(ctx, templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<span class=\"text-xl font-semibold\">PopUI</span></a><div class=\"flex gap-4\"><a href=\"/docs/components/accordion\" class=\"text-sm hover:text-foreground-default-secondary\">Components</a></div></div></div></nav><div class=\"flex flex-1\"><aside class=\"hidden lg:block w-64 border-r border-border-default-secondary overflow-y-auto\"><div class=\"p-6\"><nav class=\"space-y-1\"><div class=\"mb-4\"><h3 class=\"text-xs font-semibold text-foreground-default-secondary uppercase tracking-wider mb-2\">Components</h3><a href=\"/docs/components/accordion\" class=\"block px-3 py-2 text-sm rounded-md hover:bg-background-default-secondary\">Accordion</a></div></nav></div></aside><main class=\"flex-1 overflow-y-auto\"><div class=\"container mx-auto px-4 py-8 max-w-4xl\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex flex-col min-h-screen\"><nav class=\"sticky top-0 z-10 border-b border-border-default-secondary bg-background-default-secondary backdrop-blur-[2px]\"><div class=\"px-6 py-4\"><div class=\"flex items-center justify-between\"><a href=\"/docs\" class=\"flex items-center gap-2 hover:opacity-80 transition-opacity\"><span class=\"text-xl font-semibold\">PopUI</span></a><div class=\"flex gap-6\"><a href=\"/docs\" class=\"text-sm hover:text-foreground transition-colors\">Documentation</a> <a href=\"https://github.com/invopop/popui\" target=\"_blank\" rel=\"noopener\" class=\"text-sm hover:text-foreground transition-colors\">GitHub</a></div></div></div></nav><div class=\"flex flex-1\"><aside class=\"w-64 border-r border-border-default-secondary bg-background sticky top-[73px] h-[calc(100vh-73px)] overflow-y-auto\"><div class=\"p-6\"><nav class=\"space-y-6\"><div><h3 class=\"text-xs font-semibold text-foreground-default-secondary uppercase tracking-wider mb-3\">Getting Started</h3><div class=\"space-y-1\"><a href=\"/docs\" class=\"block px-3 py-2 text-sm rounded-md hover:bg-background-default-secondary transition-colors\">Introduction</a></div></div><div><h3 class=\"text-xs font-semibold text-foreground-default-secondary uppercase tracking-wider mb-3\">Components</h3><div class=\"space-y-1\"><a href=\"/docs/components/accordion\" class=\"block px-3 py-2 text-sm rounded-md hover:bg-background-default-secondary transition-colors\">Accordion</a> <a href=\"/docs/components/avatar\" class=\"block px-3 py-2 text-sm rounded-md hover:bg-background-default-secondary transition-colors\">Avatar</a></div></div></nav></div></aside><main class=\"flex-1 overflow-y-auto\"><div class=\"container mx-auto px-4 py-8 max-w-4xl\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -59,7 +49,7 @@ func DocsLayout(title, description string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></main></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></main></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -89,6 +89,7 @@ const (
 	ButtonSpinner     = "popui-button-spinner"
 	ButtonTransparent = "popui-button--transparent"
 	ButtonSmall       = "popui-button--small"
+	ButtonSquare      = "popui-button--square"
 
 	Radio             = "popui-radio"
 	RadioWrapper      = "popui-radio-wrapper"

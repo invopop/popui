@@ -1,0 +1,37 @@
+package modules
+
+type ExampleProps struct {
+	Title       string
+	Description string
+	Code        string
+	Language    string
+}
+
+templ Example(props ExampleProps) {
+	{{ language := props.Language }}
+	{{if language == "" {
+	language = "go"
+}
+	}}
+	<div class="flex flex-col gap-3 w-full">
+		if props.Title != "" || props.Description != "" {
+			<div class="flex flex-col gap-1">
+				if props.Title != "" {
+					<h3 class="text-base font-semibold tracking-[-0.16px] text-foreground">{ props.Title }</h3>
+				}
+				if props.Description != "" {
+					<p class="text-sm text-foreground-default-secondary">{ props.Description }</p>
+				}
+			</div>
+		}
+		<div class="flex flex-col">
+			@PreviewBox() {
+				{ children... }
+			}
+			@CodeBlock(CodeBlockProps{
+				Language: language,
+				Code:     props.Code,
+			})
+		</div>
+	</div>
+}

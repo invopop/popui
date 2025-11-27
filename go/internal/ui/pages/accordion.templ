@@ -2,111 +2,73 @@
 package pages
 
 import (
+	_ "embed"
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/internal/ui/layouts"
 	"github.com/invopop/popui/go/internal/ui/modules"
 	"github.com/invopop/popui/go/props"
 )
 
+//go:embed examples/accordion_default.mdx
+var accordionDefaultCode string
+
 templ Accordion() {
 	@layouts.DocsLayout("Accordion", "Vertically stacked interactive sections to organize content.") {
-		<div class="space-y-8">
-			<div>
-				<h1 class="text-4xl font-bold mb-4">Accordion</h1>
-				<p class="text-lg text-foreground-default-secondary">
-					Vertically stacked interactive sections to organize content.
-				</p>
+		@modules.Example(modules.ExampleProps{
+			Code: accordionDefaultCode,
+		}) {
+			<div class="space-y-2">
+				@popui.Accordion(props.Accordion{Open: true}) {
+					@popui.AccordionTrigger() {
+						Is it accessible?
+					}
+					@popui.AccordionContent() {
+						@popui.Description() {
+							Yes. It uses native HTML details/summary elements for full keyboard navigation and screen reader support.
+						}
+					}
+				}
+				@popui.Accordion() {
+					@popui.AccordionTrigger() {
+						Is it styled?
+					}
+					@popui.AccordionContent() {
+						@popui.Description() {
+							Yes. It comes with default styles using Tailwind CSS that you can customize.
+						}
+					}
+				}
 			</div>
-			@modules.Section("Preview", "preview") {
-				<div class="p-6 rounded-lg border border-border-default-secondary bg-background-default-secondary space-y-2">
-					@popui.Accordion(props.Accordion{Open: true}) {
-						@popui.AccordionTrigger() {
-							Is it accessible?
-						}
-						@popui.AccordionContent() {
-							@popui.Description() {
-								Yes. It uses native HTML details/summary elements for full keyboard navigation and screen reader support.
-							}
-						}
-					}
-					@popui.Accordion() {
-						@popui.AccordionTrigger() {
-							Is it styled?
-						}
-						@popui.AccordionContent() {
-							@popui.Description() {
-								Yes. It comes with default styles using Tailwind CSS that you can customize.
-							}
-						}
-					}
-				</div>
-			}
-			@modules.Section("Usage", "usage") {
-				@modules.CodeBlock(modules.CodeBlockProps{
-					Language: "go",
-					Code: `package showcase
-
-import (
-	popui "github.com/invopop/popui/go"
-	"github.com/invopop/popui/go/props"
-)
-
-templ AccordionDefault() {
-	<div class="space-y-2">
-		@popui.Accordion(props.Accordion{Open: true}) {
-			@popui.AccordionTrigger() {
-				Is it accessible?
-			}
-			@popui.AccordionContent() {
-				@popui.Description() {
-					Yes. It uses native HTML details/summary elements for full keyboard navigation and screen reader support.
-				}
-			}
 		}
-		@popui.Accordion() {
-			@popui.AccordionTrigger() {
-				Is it styled?
-			}
-			@popui.AccordionContent() {
-				@popui.Description() {
-					Yes. It comes with default styles using Tailwind CSS that you can customize.
-				}
-			}
+		@modules.Section("API Reference", "api") {
+			@modules.APITable(modules.APITableProps{
+				Title:       "Accordion",
+				Description: "The main accordion container component using HTML details element.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the accordion element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+					{Name: "Open", Type: "bool", Default: "false", Description: "Whether the accordion is initially expanded"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the details element"},
+				},
+			})
+			@modules.APITable(modules.APITableProps{
+				Title:       "AccordionTrigger",
+				Description: "Clickable trigger element that toggles the accordion item.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the trigger element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the summary element"},
+				},
+			})
+			@modules.APITable(modules.APITableProps{
+				Title:       "AccordionContent",
+				Description: "Collapsible content area of the accordion item.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the content element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the content div"},
+				},
+			})
 		}
-	</div>
-}`,
-				})
-			}
-			@modules.Section("API Reference", "api") {
-				@modules.APITable(modules.APITableProps{
-					Title:       "Accordion",
-					Description: "The main accordion container component using HTML details element.",
-					Items: []modules.APITableItem{
-						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the accordion element"},
-						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
-						{Name: "Open", Type: "bool", Default: "false", Description: "Whether the accordion is initially expanded"},
-						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the details element"},
-					},
-				})
-				@modules.APITable(modules.APITableProps{
-					Title:       "AccordionTrigger",
-					Description: "Clickable trigger element that toggles the accordion item.",
-					Items: []modules.APITableItem{
-						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the trigger element"},
-						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
-						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the summary element"},
-					},
-				})
-				@modules.APITable(modules.APITableProps{
-					Title:       "AccordionContent",
-					Description: "Collapsible content area of the accordion item.",
-					Items: []modules.APITableItem{
-						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the content element"},
-						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
-						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the content div"},
-					},
-				})
-			}
-		</div>
 	}
 }

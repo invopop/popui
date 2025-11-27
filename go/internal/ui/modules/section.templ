@@ -1,10 +1,10 @@
 package modules
 
 templ Section(title, id string) {
-	<section id={ id } class="mb-12">
+	<div id={ id } class="flex flex-col gap-3 w-full">
 		if title != "" {
-			<h2 class="text-2xl font-bold mb-6">{ title }</h2>
+			<h2 class="text-base font-semibold tracking-[-0.16px] text-foreground">{ title }</h2>
 		}
 		{ children... }
-	</section>
+	</div>
 }

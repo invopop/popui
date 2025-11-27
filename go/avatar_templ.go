@@ -37,22 +37,9 @@ func Avatar(p ...props.Avatar) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		avatar := props.First(p)
-
-		var sizeClasses string
-		var borderClasses string
-		switch avatar.Size {
-		case "lg":
-			sizeClasses = "!h-8 !w-8 rounded-lg"
-		default:
-			sizeClasses = "h-5 w-5 rounded-md"
-		}
-		if avatar.Initial != "" {
-			borderClasses = "border border-border"
-		}
 		var templ_7745c5c3_Var2 = []any{utils.TwMerge(
 			"bg-background text-foreground-default-secondary flex items-center justify-center font-semibold relative font-sans",
-			sizeClasses,
-			borderClasses,
+			variantClasses(avatar),
 			avatar.Class,
 		),
 		}
@@ -72,7 +59,7 @@ func Avatar(p ...props.Avatar) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(avatar.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 27, Col: 17}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 14, Col: 17}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -112,7 +99,7 @@ func Avatar(p ...props.Avatar) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(avatar.Initial)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 40, Col: 19}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 26, Col: 19}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -130,6 +117,16 @@ func Avatar(p ...props.Avatar) templ.Component {
 		}
 		return nil
 	})
+}
+
+func variantClasses(avatar props.Avatar) string {
+	return utils.Clsx(
+		map[string]bool{
+			"!h-8 !w-8 rounded-lg": avatar.Size == "lg",
+			"h-5 w-5 rounded-md":   avatar.Size != "lg",
+			"border border-border": avatar.Initial != "",
+		},
+	)
 }
 
 var _ = templruntime.GeneratedTemplate

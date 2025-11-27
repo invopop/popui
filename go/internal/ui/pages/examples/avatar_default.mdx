@@ -1,0 +1,15 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ AvatarDefault() {
+	<div class="flex items-center gap-4">
+		@popui.Avatar(props.Avatar{Initial: "JD"})
+		@popui.Avatar(props.Avatar{Size: "lg", Initial: "XY"})
+	</div>
+}
+```

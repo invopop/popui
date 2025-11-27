@@ -35,18 +35,31 @@ templ Component(p ...ComponentProps) {
         if prp.ID != "" {
             id={ prp.ID }
         }
-        class={ utils.TwMerge("base-classes", prp.Class) }
+        class={ utils.TwMerge("base-classes", variantClasses(prp), prp.Class) }
         { prp.Attributes... }
     >
         { children... }
     </element>
 }
+
+func variantClasses(prp ComponentProps) string {
+    return utils.Clsx(
+        map[string]bool{
+            "variant-class": prp.Variant == "value",
+            "other-class":   prp.SomeCondition,
+        },
+    )
+}
 ```
 
-**Key Pattern:**
+**Key Patterns:**
 - Variadic parameter: `p ...ComponentProps`
 - Use `props.First(p)` instead of manual `if len(p) > 0` check
 - The `First()` helper is generic and returns zero value if array is empty
+- **Extract complex Go code to private functions** - keep templ templates clean and readable
+- **Always use a `variantClasses` helper function** when classes need to be added based on props
+- **Inside `variantClasses`, always use `utils.Clsx`** with map[string]bool for conditional classes
+- **Don't use prefixes on private functions** - context is clear from the file (use `variantClasses`, not `componentVariantClasses`)
 
 ---
 

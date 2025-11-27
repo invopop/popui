@@ -9,19 +9,6 @@ import (
 // Expects either an @popui.Image as child or uses Initial prop for text.
 templ Avatar(p ...props.Avatar) {
 	{{ avatar := props.First(p) }}
-	{{
-		var sizeClasses string
-		var borderClasses string
-		switch avatar.Size {
-		case "lg":
-			sizeClasses = "!h-8 !w-8 rounded-lg"
-		default:
-			sizeClasses = "h-5 w-5 rounded-md"
-		}
-		if avatar.Initial != "" {
-			borderClasses = "border border-border"
-		}
-	}}
 	<div
 		if avatar.ID != "" {
 			id={ avatar.ID }
@@ -29,8 +16,7 @@ templ Avatar(p ...props.Avatar) {
 		class={
 			utils.TwMerge(
 				"bg-background text-foreground-default-secondary flex items-center justify-center font-semibold relative font-sans",
-				sizeClasses,
-				borderClasses,
+				variantClasses(avatar),
 				avatar.Class,
 			),
 		}
@@ -42,4 +28,14 @@ templ Avatar(p ...props.Avatar) {
 			{ children... }
 		}
 	</div>
+}
+
+func variantClasses(avatar props.Avatar) string {
+	return utils.Clsx(
+		map[string]bool{
+			"!h-8 !w-8 rounded-lg": avatar.Size == "lg",
+			"h-5 w-5 rounded-md":   avatar.Size != "lg",
+			"border border-border": avatar.Initial != "",
+		},
+	)
 }

@@ -156,37 +156,62 @@ go/internal/ui/
 ├── modules/
 │   ├── api_table.templ     # API reference table
 │   ├── code_block.templ    # Code examples with syntax highlighting
+│   ├── example.templ       # Unified example component (preview + code)
+│   ├── preview_box.templ   # Preview container
 │   └── section.templ       # Section wrapper
 └── pages/
     ├── docs_home.templ     # /docs landing page
-    └── accordion.templ     # Component documentation
+    ├── accordion.templ     # Component documentation
+    └── examples/           # Code examples in MDX format
+        ├── accordion_default.mdx
+        ├── avatar_default.mdx
+        ├── avatar_sizes.mdx
+        └── avatar_with_images.mdx
 ```
 
-### Page Template
+### Example Component - Unified Pattern
+The `Example` component unifies preview and code display. It replaces the old pattern of manually creating PreviewBox and CodeBlock separately.
+
+**Key Features:**
+- Optional title and description
+- Automatic preview box styling
+- Automatic code block with markdown extraction
+- Language defaults to "go" (can be omitted)
+- Code examples stored in separate `.mdx` files
+
+**Props:**
+```go
+type ExampleProps struct {
+    Title       string  // Optional: Example title
+    Description string  // Optional: Example description
+    Code        string  // Required: Code to display (supports markdown with code fences)
+    Language    string  // Optional: Language for syntax highlighting (defaults to "go")
+}
+```
+
+**Usage:**
 ```templ
-templ ComponentName() {
-    @layouts.DocsLayout("Title", "Description") {
-        <div class="space-y-8">
-            <!-- Title & Description -->
-            <div>
-                <h1 class="text-4xl font-bold mb-4">Component Name</h1>
-                <p class="text-lg text-foreground-default-secondary">
-                    Brief description
-                </p>
-            </div>
+// 1. Embed the MDX file at the top of your page
+//go:embed examples/component_example.mdx
+var componentExampleCode string
 
-            <!-- Preview Section -->
-            @modules.Section("Preview", "preview") {
-                <div class="p-6 rounded-lg border border-border-default-secondary bg-background-default-secondary space-y-2">
-                    <!-- Live component examples -->
-                </div>
-            }
+// 2. Use the Example component
+@modules.Example(modules.ExampleProps{
+    Title:       "Optional Title",
+    Description: "Optional description of this example",
+    Code:        componentExampleCode,  // Language defaults to "go"
+}) {
+    <!-- Live preview content here -->
+    @popui.Component(props.Component{})
+}
+```
 
-            <!-- Usage Section -->
-            @modules.Section("Usage", "usage") {
-                @modules.CodeBlock(modules.CodeBlockProps{
-                    Language: "go",
-                    Code: `package showcase
+### MDX File Format for Examples
+Store code examples in `go/internal/ui/pages/examples/*.mdx`:
+
+```markdown
+```go
+package showcase
 
 import (
     popui "github.com/invopop/popui/go"
@@ -194,44 +219,134 @@ import (
 )
 
 templ ComponentExample() {
-    // Exact code from Preview section
-}`,
-                })
-            }
+    @popui.Component(props.Component{})
+}
+```
+```
 
-            <!-- API Reference Section -->
-            @modules.Section("API Reference", "api") {
-                @modules.APITable(modules.APITableProps{
-                    Title:       "Component",
-                    Description: "Description of the component",
-                    Items: []modules.APITableItem{
-                        {Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
-                        // ... more props
-                    },
-                })
-            }
+**Key Points:**
+- Files use `.mdx` extension
+- Code wrapped in markdown code fences (` ```go `)
+- Embedded at compile-time using `//go:embed`
+- Code extraction handled automatically by `CodeBlock` component
+- Zero runtime overhead
+
+### Sidebar Active States
+The docs layout automatically highlights the current page in the sidebar:
+- Slugifies the page title to match routes
+- Applies `bg-background-default-secondary` to active links
+- Same styling as hover state for consistency
+
+**Implementation:**
+```templ
+templ DocsLayout(title, description string) {
+    {{ currentPath := slugify(title) }}  // Auto-generates /docs/components/[slug]
+    // Sidebar links compare against currentPath
+}
+
+func slugify(title string) string {
+    return "/docs/components/" + strings.ToLower(strings.ReplaceAll(title, " ", "-"))
+}
+```
+
+### Page Template (New Pattern)
+```templ
+package pages
+
+import (
+    _ "embed"
+    popui "github.com/invopop/popui/go"
+    "github.com/invopop/popui/go/internal/ui/layouts"
+    "github.com/invopop/popui/go/internal/ui/modules"
+    "github.com/invopop/popui/go/props"
+)
+
+//go:embed examples/component_default.mdx
+var componentDefaultCode string
+
+//go:embed examples/component_variants.mdx
+var componentVariantsCode string
+
+templ ComponentName() {
+    @layouts.DocsLayout("Component Name", "Brief description") {
+        <!-- Basic Example (no title) -->
+        @modules.Example(modules.ExampleProps{
+            Code: componentDefaultCode,
+        }) {
+            @popui.Component(props.Component{})
+        }
+
+        <!-- Example with Title -->
+        @modules.Example(modules.ExampleProps{
+            Title:       "Variants",
+            Description: "Different component variants",
+            Code:        componentVariantsCode,
+        }) {
+            @popui.Component(props.Component{Variant: "primary"})
+            @popui.Component(props.Component{Variant: "secondary"})
+        }
+
+        <!-- API Reference -->
+        @modules.Section("API Reference", "api") {
+            @modules.APITable(modules.APITableProps{
+                Title:       "Component",
+                Description: "Description",
+                Items: []modules.APITableItem{
+                    {Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+                },
+            })
+        }
+    }
+}
+```
+
+### Old Pattern (Deprecated)
+```templ
+<!-- DON'T DO THIS ANYMORE -->
+<div class="space-y-8">
+    <div>
+        <h1 class="text-4xl font-bold mb-4">Component Name</h1>
+        <p class="text-lg text-foreground-default-secondary">Description</p>
+    </div>
+    
+    @modules.Section("Preview", "preview") {
+        <div class="p-6 rounded-lg ...">
+            <!-- preview -->
         </div>
+    }
+    
+    @modules.Section("Usage", "usage") {
+        @modules.CodeBlock(modules.CodeBlockProps{
+            Language: "go",
+            Code: `inline code string...`,
+        })
     }
 }
 ```
 
 ### Code Examples - CRITICAL RULES
 
-1. **Always show the full picture**:
+1. **Store examples in separate MDX files**:
+   - Location: `go/internal/ui/pages/examples/`
+   - Format: Markdown with code fences (` ```go `)
+   - Extension: `.mdx`
+   - Embed with `//go:embed examples/filename.mdx`
+
+2. **Always show the full picture**:
    - Include `package showcase` declaration
    - Include all necessary imports
    - Wrap in a `templ FunctionName()` function
    - Show complete, runnable code
 
-2. **Preview and Code MUST match exactly**:
-   - The code in the Usage section must be identical to the Preview section
-   - If Preview has 2 accordion items, Usage code shows 2 accordion items
-   - If Preview uses `popui.Description()`, Usage code shows `popui.Description()`
+3. **Preview and Code MUST match exactly**:
+   - The code in the MDX file must match what's in the preview
+   - If Preview has 2 items, code shows 2 items
    - Users need to see exactly what produces the preview
 
-3. **Use PopUI components consistently**:
-   - Use `@popui.Description()` instead of `<p>` tags
-   - Use proper PopUI semantic components throughout
+4. **Use the Example component**:
+   - Replaces manual PreviewBox + CodeBlock
+   - Cleaner, more maintainable
+   - Language defaults to "go" (omit unless needed)
 
 ### API Table Structure
 ```go

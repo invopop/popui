@@ -1,8 +1,9 @@
+// Package utils provides utility functions for the PopUI documentation site.
 package utils
 
 import "strings"
 
-// ExtractCode extracts code from markdown code fence
+// ExtractCode extracts code from a markdown code fence.
 func ExtractCode(md string) string {
 	lines := strings.Split(md, "\n")
 	var code []string

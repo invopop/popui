@@ -39,7 +39,7 @@ func Avatar(p ...props.Avatar) templ.Component {
 		avatar := props.First(p)
 		var templ_7745c5c3_Var2 = []any{utils.TwMerge(
 			"bg-background text-foreground-default-secondary flex items-center justify-center font-semibold relative font-sans",
-			variantClasses(avatar),
+			avatarClasses(avatar),
 			avatar.Class,
 		),
 		}
@@ -119,7 +119,7 @@ func Avatar(p ...props.Avatar) templ.Component {
 	})
 }
 
-func variantClasses(avatar props.Avatar) string {
+func avatarClasses(avatar props.Avatar) string {
 	return utils.Clsx(
 		map[string]bool{
 			"!h-8 !w-8 rounded-lg text-sm": avatar.Size == "lg",

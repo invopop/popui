@@ -572,7 +572,7 @@ func Page() templ.Component {
 			})
 			templ_7745c5c3_Err = popui.Button(
 				props.Button{
-					Attrs: templ.Attributes{"@click": "alert('Default button clicked')", ":disabled": "defaultButton.disabled"},
+					Attributes: templ.Attributes{"@click": "alert('Default button clicked')", ":disabled": "defaultButton.disabled"},
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var15), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -618,8 +618,8 @@ func Page() templ.Component {
 			})
 			templ_7745c5c3_Err = popui.Button(
 				props.Button{
-					Variant: "primary",
-					Attrs:   templ.Attributes{"@click": "alert('Primary button clicked')", ":disabled": "primaryButton.disabled"},
+					Variant:    "primary",
+					Attributes: templ.Attributes{"@click": "alert('Primary button clicked')", ":disabled": "primaryButton.disabled"},
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var16), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

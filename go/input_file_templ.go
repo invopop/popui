@@ -379,8 +379,8 @@ func InputFileAvatar(p props.InputFileAvatar) templ.Component {
 		templ_7745c5c3_Err = Button(props.Button{
 			Variant: "primary",
 			Type:    "button",
-			Small:   true,
-			Attrs: templ.Attributes{
+			Size:    "sm",
+			Attributes: templ.Attributes{
 				"onclick": "document.getElementById('" + p.ID + "').click();",
 			},
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var23), templ_7745c5c3_Buffer)

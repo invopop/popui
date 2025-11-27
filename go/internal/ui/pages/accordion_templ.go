@@ -18,7 +18,7 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-//go:embed examples/accordion_default.mdx
+//go:embed examples/accordion/default.mdx
 var accordionDefaultCode string
 
 func Accordion() templ.Component {

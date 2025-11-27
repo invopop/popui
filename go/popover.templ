@@ -11,9 +11,9 @@ templ Popover(opts ...props.Popover) {
 	{{ p := props.First(opts) }}
 	<div role="menu" class={ classes.PopoverWrapper, templ.KV(classes.PopoverWrapperRight, p.RightAlign) }>
 		@Button(props.Button{
-			Attrs:   templ.Attributes{"popovertarget": p.ID},
-			Square:  true,
-			Variant: p.ButtonVariant,
+			Attributes: templ.Attributes{"popovertarget": p.ID},
+			Size:       "icon",
+			Variant:    p.ButtonVariant,
 		}) {
 			{ p.ButtonLabel }
 		}

@@ -13,8 +13,8 @@ templ UploadFile(p props.UploadFile) {
 		<span class={ classes.UploadFileText } x-text={ p.Loading + " ? 'Uploading...' : 'Select logo'" }></span>
 		@popui.Button(props.Button{
 			Variant: "primary",
-			Small:   true,
-			Attrs: templ.Attributes{
+			Size:    "sm",
+			Attributes: templ.Attributes{
 				"@click":    p.OnSelect,
 				":disabled": p.Loading,
 			},
@@ -22,8 +22,8 @@ templ UploadFile(p props.UploadFile) {
 			Upload
 		}
 		@popui.Button(props.Button{
-			Small: true,
-			Attrs: templ.Attributes{
+			Size: "sm",
+			Attributes: templ.Attributes{
 				"@click":    p.OnRemove,
 				":disabled": p.Loading + " || !" + p.XModel,
 			},

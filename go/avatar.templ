@@ -33,9 +33,9 @@ templ Avatar(p ...props.Avatar) {
 func variantClasses(avatar props.Avatar) string {
 	return utils.Clsx(
 		map[string]bool{
-			"!h-8 !w-8 rounded-lg": avatar.Size == "lg",
-			"h-5 w-5 rounded-md":   avatar.Size != "lg",
-			"border border-border": avatar.Initial != "",
+			"!h-8 !w-8 rounded-lg text-sm": avatar.Size == "lg",
+			"h-5 w-5 rounded-md text-xs":   avatar.Size != "lg",
+			"border border-border":         avatar.Initial != "",
 		},
 	)
 }

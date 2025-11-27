@@ -57,9 +57,11 @@ func variantClasses(prp ComponentProps) string {
 - Use `props.First(p)` instead of manual `if len(p) > 0` check
 - The `First()` helper is generic and returns zero value if array is empty
 - **Extract complex Go code to private functions** - keep templ templates clean and readable
-- **Always use a `variantClasses` helper function** when classes need to be added based on props
-- **Inside `variantClasses`, always use `utils.Clsx`** with map[string]bool for conditional classes
+- **Use a SINGLE helper function** per component that combines all conditional logic
+- **Inside helper functions, always use `utils.Clsx`** with map[string]bool for conditional classes
 - **Don't use prefixes on private functions** - context is clear from the file (use `variantClasses`, not `componentVariantClasses`)
+- **Always place private helper functions at the BOTTOM of the file** - public templ components first
+- **Never create multiple helper functions** - one helper that handles variants, sizes, and states
 
 ---
 
@@ -162,12 +164,27 @@ go/internal/ui/
 └── pages/
     ├── docs_home.templ     # /docs landing page
     ├── accordion.templ     # Component documentation
-    └── examples/           # Code examples in MDX format
-        ├── accordion_default.mdx
-        ├── avatar_default.mdx
-        ├── avatar_sizes.mdx
-        └── avatar_with_images.mdx
+    └── examples/           # Code examples in MDX format - organized by component
+        ├── accordion/
+        │   └── default.mdx
+        ├── avatar/
+        │   ├── default.mdx
+        │   ├── sizes.mdx
+        │   └── with_images.mdx
+        └── button/
+            ├── default.mdx
+            ├── variants.mdx
+            ├── sizes.mdx
+            ├── with_icons.mdx
+            ├── disabled.mdx
+            └── anchor.mdx
 ```
+
+**Organization Rules:**
+- Examples live in `examples/[component]/` folders
+- File names remove component prefix (e.g., `button_default.mdx` → `button/default.mdx`)
+- Embed paths use folder structure: `//go:embed examples/button/default.mdx`
+- Keeps examples organized and easy to find
 
 ### Example Component - Unified Pattern
 The `Example` component unifies preview and code display. It replaces the old pattern of manually creating PreviewBox and CodeBlock separately.
@@ -192,14 +209,14 @@ type ExampleProps struct {
 **Usage:**
 ```templ
 // 1. Embed the MDX file at the top of your page
-//go:embed examples/component_example.mdx
-var componentExampleCode string
+//go:embed examples/button/default.mdx
+var buttonDefaultCode string
 
 // 2. Use the Example component
 @modules.Example(modules.ExampleProps{
     Title:       "Optional Title",
     Description: "Optional description of this example",
-    Code:        componentExampleCode,  // Language defaults to "go"
+    Code:        buttonDefaultCode,  // Language defaults to "go"
 }) {
     <!-- Live preview content here -->
     @popui.Component(props.Component{})
@@ -445,6 +462,9 @@ When child elements need to respond to parent state:
 - Use `<p>` tags when PopUI has semantic components
 - Show partial code examples
 - Have mismatched Preview and Usage sections
+- Create multiple helper functions for the same component
+- Forget text sizing classes (text-xs, text-sm, etc.) when components have text content
+- Rely on incompatible Tailwind v3 plugins
 
 ✅ **DO:**
 - Use PopUI's own design tokens from `components.css`
@@ -455,6 +475,9 @@ When child elements need to respond to parent state:
 - Show complete, runnable code examples
 - Ensure Preview and Usage match exactly
 - Include package, imports, and function wrapper in code examples
+- Use ONE helper function that combines all conditional logic (variants, sizes, states)
+- Add appropriate text sizing for components with text/initials
+- Reset browser defaults explicitly in styles.css @layer base when needed
 
 ---
 

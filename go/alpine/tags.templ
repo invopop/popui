@@ -55,7 +55,7 @@ templ Tags(p props.Tags) {
 					}, Error: props.Error{Attrs: templ.Attributes{"x-text": "tags_error"}}})
 				</div>
 				<div class={ classes.TagAddButton }>
-					@popui.Button(props.Button{Attrs: templ.Attributes{"@click": "tags_addTag"}}) {
+					@popui.Button(props.Button{Attributes: templ.Attributes{"@click": "tags_addTag"}}) {
 						Add
 					}
 				</div>

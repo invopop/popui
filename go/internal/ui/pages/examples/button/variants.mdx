@@ -1,0 +1,28 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ ButtonVariants() {
+	<div class="flex gap-2">
+		@popui.Button(props.Button{}) {
+			Default
+		}
+		@popui.Button(props.Button{Variant: "primary"}) {
+			Primary
+		}
+		@popui.Button(props.Button{Variant: "secondary"}) {
+			Secondary
+		}
+		@popui.Button(props.Button{Variant: "danger"}) {
+			Danger
+		}
+		@popui.Button(props.Button{Variant: "transparent"}) {
+			Transparent
+		}
+	</div>
+}
+```

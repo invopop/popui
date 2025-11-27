@@ -16,13 +16,13 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-//go:embed examples/avatar_default.mdx
+//go:embed examples/avatar/default.mdx
 var avatarDefaultCode string
 
-//go:embed examples/avatar_sizes.mdx
+//go:embed examples/avatar/sizes.mdx
 var avatarSizesCode string
 
-//go:embed examples/avatar_with_images.mdx
+//go:embed examples/avatar/with_images.mdx
 var avatarWithImagesCode string
 
 func Avatar() templ.Component {

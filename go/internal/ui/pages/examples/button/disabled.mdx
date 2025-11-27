@@ -1,0 +1,22 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ ButtonDisabled() {
+	<div class="flex gap-2">
+		@popui.Button(props.Button{Disabled: true}) {
+			Disabled Default
+		}
+		@popui.Button(props.Button{Variant: "primary", Disabled: true}) {
+			Disabled Primary
+		}
+		@popui.Button(props.Button{Variant: "danger", Disabled: true}) {
+			Disabled Danger
+		}
+	</div>
+}
+```

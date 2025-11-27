@@ -8,8 +8,10 @@ import (
 	"os"
 	"path"
 
+	"github.com/a-h/templ"
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/examples"
+	"github.com/invopop/popui/go/internal/ui/pages"
 )
 
 func main() {
@@ -19,17 +21,33 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}
-	// Create index.html file on public path
-	name := path.Join(publicPath, "index.html")
-	f, err := os.Create(name)
-	if err != nil {
-		log.Fatalf("failed to create output file: %v", err)
+
+	// Create docs pages
+	docsPages := map[string]func() error{
+		"index.html": func() error {
+			return renderPage(publicPath, "index.html", examples.Admin())
+		},
+		"docs/index.html": func() error {
+			return renderPage(publicPath, "docs/index.html", pages.DocsHome())
+		},
+		"docs/components/accordion/index.html": func() error {
+			return renderPage(publicPath, "docs/components/accordion/index.html", pages.Accordion())
+		},
+		"docs/components/avatar/index.html": func() error {
+			return renderPage(publicPath, "docs/components/avatar/index.html", pages.Avatar())
+		},
+		"docs/components/button/index.html": func() error {
+			return renderPage(publicPath, "docs/components/button/index.html", pages.Button())
+		},
 	}
-	// Render Admin example templ component
-	err = examples.Admin().Render(context.Background(), f)
-	if err != nil {
-		log.Fatalf("failed to write index page: %v", err)
+
+	for pagePath, renderFunc := range docsPages {
+		if err := renderFunc(); err != nil {
+			log.Fatalf("failed to render %s: %v", pagePath, err)
+		}
+		log.Printf("Generated: %s", pagePath)
 	}
+
 	// Copy assets to public path
 	assetsPath := "go/assets"
 	publicAssetPath := publicPath + popui.AssetPath + "/assets"
@@ -41,12 +59,37 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}
-	log.Printf("CSS file publissed")
+	log.Printf("CSS file published")
 	err = copyFile(assetsPath+"/popui.js", publicAssetPath+"/popui.js")
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}
-	log.Printf("JS file publissed")
+	log.Printf("JS file published")
+}
+
+// renderPage creates the necessary folders and renders a templ component to an HTML file
+func renderPage(basePath, pagePath string, component templ.Component) error {
+	fullPath := path.Join(basePath, pagePath)
+	dir := path.Dir(fullPath)
+
+	// Create directory structure
+	if err := createFolder(dir); err != nil {
+		return err
+	}
+
+	// Create file
+	f, err := os.Create(fullPath)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err := f.Close(); err != nil {
+			log.Printf("Failed to close file: %v", err)
+		}
+	}()
+
+	// Render component
+	return component.Render(context.Background(), f)
 }
 
 // copyFile copies a file from source to destination path

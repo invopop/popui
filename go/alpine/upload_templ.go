@@ -195,8 +195,8 @@ func UploadFile(p props.UploadFile) templ.Component {
 		})
 		templ_7745c5c3_Err = popui.Button(props.Button{
 			Variant: "primary",
-			Small:   true,
-			Attrs: templ.Attributes{
+			Size:    "sm",
+			Attributes: templ.Attributes{
 				"@click":    p.OnSelect,
 				":disabled": p.Loading,
 			},
@@ -223,8 +223,8 @@ func UploadFile(p props.UploadFile) templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = popui.Button(props.Button{
-			Small: true,
-			Attrs: templ.Attributes{
+			Size: "sm",
+			Attributes: templ.Attributes{
 				"@click":    p.OnRemove,
 				":disabled": p.Loading + " || !" + p.XModel,
 			},

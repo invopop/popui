@@ -243,8 +243,8 @@ templ formSection() {
 					},
 				}) {
 					@popui.Button(props.Button{
-						Type:  "button",
-						Small: true,
+						Type: "button",
+						Size: "sm",
 					}) {
 						Remove
 					}
@@ -356,7 +356,7 @@ templ formSection() {
 				},
 			})
 			<div class="flex gap-2">
-				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+				@popui.Button(props.Button{Variant: "primary"}) {
 					@icons.AddCircle()
 					Update
 				}

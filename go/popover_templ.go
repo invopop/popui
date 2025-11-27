@@ -83,9 +83,9 @@ func Popover(opts ...props.Popover) templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = Button(props.Button{
-			Attrs:   templ.Attributes{"popovertarget": p.ID},
-			Square:  true,
-			Variant: p.ButtonVariant,
+			Attributes: templ.Attributes{"popovertarget": p.ID},
+			Size:       "icon",
+			Variant:    p.ButtonVariant,
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

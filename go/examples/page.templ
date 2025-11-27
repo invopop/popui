@@ -258,7 +258,7 @@ templ Page() {
 			<div class="max-w-md">
 				@popui.Button(
 					props.Button{
-						Attrs: templ.Attributes{"@click": "alert('Default button clicked')", ":disabled": "defaultButton.disabled"},
+						Attributes: templ.Attributes{"@click": "alert('Default button clicked')", ":disabled": "defaultButton.disabled"},
 					}) {
 					Click Me
 				}
@@ -277,8 +277,8 @@ templ Page() {
 			<div class="max-w-md">
 				@popui.Button(
 					props.Button{
-						Variant: "primary",
-						Attrs:   templ.Attributes{"@click": "alert('Primary button clicked')", ":disabled": "primaryButton.disabled"},
+						Variant:    "primary",
+						Attributes: templ.Attributes{"@click": "alert('Primary button clicked')", ":disabled": "primaryButton.disabled"},
 					}) {
 					Click Me
 				}

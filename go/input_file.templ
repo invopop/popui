@@ -55,8 +55,8 @@ templ InputFileAvatar(p props.InputFileAvatar) {
 		@Button(props.Button{
 			Variant: "primary",
 			Type:    "button",
-			Small:   true,
-			Attrs: templ.Attributes{
+			Size:    "sm",
+			Attributes: templ.Attributes{
 				"onclick": "document.getElementById('" + p.ID + "').click();",
 			},
 		}) {

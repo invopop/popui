@@ -25,19 +25,19 @@ func main() {
 	// Create docs pages
 	docsPages := map[string]func() error{
 		"index.html": func() error {
-			return renderPage(publicPath, "index.html", examples.Admin())
+			return renderPage(publicPath, "index.html", pages.DocsHome())
 		},
-		"docs/index.html": func() error {
-			return renderPage(publicPath, "docs/index.html", pages.DocsHome())
+		"components/accordion/index.html": func() error {
+			return renderPage(publicPath, "components/accordion/index.html", pages.Accordion())
 		},
-		"docs/components/accordion/index.html": func() error {
-			return renderPage(publicPath, "docs/components/accordion/index.html", pages.Accordion())
+		"components/avatar/index.html": func() error {
+			return renderPage(publicPath, "components/avatar/index.html", pages.Avatar())
 		},
-		"docs/components/avatar/index.html": func() error {
-			return renderPage(publicPath, "docs/components/avatar/index.html", pages.Avatar())
+		"components/button/index.html": func() error {
+			return renderPage(publicPath, "components/button/index.html", pages.Button())
 		},
-		"docs/components/button/index.html": func() error {
-			return renderPage(publicPath, "docs/components/button/index.html", pages.Button())
+		"examples/index.html": func() error {
+			return renderPage(publicPath, "examples/index.html", examples.Admin())
 		},
 	}
 
@@ -60,6 +60,11 @@ func main() {
 		log.Fatalf("Error: %v", err)
 	}
 	log.Printf("CSS file published")
+	err = copyFile(assetsPath+"/popui-full.css", publicAssetPath+"/popui-full.css")
+	if err != nil {
+		log.Fatalf("Error: %v", err)
+	}
+	log.Printf("Full CSS file published")
 	err = copyFile(assetsPath+"/popui.js", publicAssetPath+"/popui.js")
 	if err != nil {
 		log.Fatalf("Error: %v", err)

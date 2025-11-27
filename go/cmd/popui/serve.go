@@ -44,23 +44,14 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 
 	e.StaticFS(popui.AssetPath, popui.Assets)
 
-	e.GET("/", s.index)
-	e.GET("/prose", s.prose)
-	e.GET("/admin", s.admin)
-	e.GET("/wizard", s.appIndex)
-	e.GET("/wizard/step-one", s.appStepOne)
-	e.GET("/wizard/step-two", s.appStepTwo)
-	e.GET("/wizard/step-three", s.appStepThree)
-	e.GET("/wizard/step-four", s.appStepFour)
-	e.GET("/wizard/confirm", s.confirm)
-	e.GET("/wizard/success", s.success)
-	e.GET("/wizard/error", s.error)
+	// Documentation routes (now at root)
+	e.GET("/", s.docsHome)
+	e.GET("/components/accordion", s.docsAccordion)
+	e.GET("/components/avatar", s.docsAvatar)
+	e.GET("/components/button", s.docsButton)
 
-	// Documentation routes
-	e.GET("/docs", s.docsHome)
-	e.GET("/docs/components/accordion", s.docsAccordion)
-	e.GET("/docs/components/avatar", s.docsAvatar)
-	e.GET("/docs/components/button", s.docsButton)
+	// Examples (deprecated, for reference only)
+	e.GET("/examples", s.admin)
 
 	var startErr error
 	go func() {
@@ -81,59 +72,9 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	return startErr
 }
 
-// index shows the example page that will render all the components
-func (s *serveOpts) index(c echo.Context) error {
-	return render(c, http.StatusOK, examples.Page())
-}
-
-// prose shows the prose example page with lots of possible combinations
-func (s *serveOpts) prose(c echo.Context) error {
-	return render(c, http.StatusOK, examples.Prose())
-}
-
-// admin shows the admin panel example page
+// admin shows the admin panel example page (deprecated)
 func (s *serveOpts) admin(c echo.Context) error {
 	return render(c, http.StatusOK, examples.Admin())
-}
-
-// appIndex shows a welcome page for a fullscreen type app
-func (s *serveOpts) appIndex(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppIndex())
-}
-
-// appStepOne shows the first page for a wizard type app
-func (s *serveOpts) appStepOne(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppStepOne())
-}
-
-// appStepTwo shows the second page for a wizard type app
-func (s *serveOpts) appStepTwo(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppStepTwo())
-}
-
-// appStepThree shows the third page for a wizard type app
-func (s *serveOpts) appStepThree(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppStepThree())
-}
-
-// appStepFour shows the fourth page for a wizard type app
-func (s *serveOpts) appStepFour(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppStepFour())
-}
-
-// confirm shows the confirm page for a wizard type app
-func (s *serveOpts) confirm(c echo.Context) error {
-	return render(c, http.StatusOK, examples.ConfirmPage())
-}
-
-// success shows the success page for a wizard type app
-func (s *serveOpts) success(c echo.Context) error {
-	return render(c, http.StatusOK, examples.SuccessPage())
-}
-
-// error shows the success page for a wizard type app
-func (s *serveOpts) error(c echo.Context) error {
-	return render(c, http.StatusOK, examples.ErrorPage())
 }
 
 // docsHome shows the documentation home page

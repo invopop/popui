@@ -6,7 +6,7 @@ import (
 )
 
 func slugify(title string) string {
-	return "/docs/components/" + strings.ToLower(strings.ReplaceAll(title, " ", "-"))
+	return "/components/" + strings.ToLower(strings.ReplaceAll(title, " ", "-"))
 }
 
 templ DocsLayout(title, description string) {
@@ -15,7 +15,7 @@ templ DocsLayout(title, description string) {
 		<div class="flex h-screen bg-background">
 			<aside class="w-[240px] border-r border-border-default-secondary bg-background h-full overflow-y-auto">
 				<div class="border-b border-border-default-secondary h-12 flex items-center justify-between px-5 py-3">
-					<a href="/docs">
+					<a href="/">
 						@popui.PopuiLogo()
 					</a>
 				</div>
@@ -25,7 +25,7 @@ templ DocsLayout(title, description string) {
 							<p class="text-xs font-medium text-foreground-default-secondary">Sections</p>
 						</div>
 						<div class="flex flex-col gap-0.5">
-							<a href="/docs" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == "/docs" || currentPath == "") }>
+							<a href="/" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == "/" || currentPath == "") }>
 								Get started
 							</a>
 						</div>
@@ -35,13 +35,13 @@ templ DocsLayout(title, description string) {
 							<p class="text-xs font-medium text-foreground-default-secondary">Components</p>
 						</div>
 						<div class="flex flex-col gap-0.5">
-							<a href="/docs/components/accordion" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Accordion")) }>
+							<a href="/components/accordion" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Accordion")) }>
 								Accordion
 							</a>
-							<a href="/docs/components/avatar" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Avatar")) }>
+							<a href="/components/avatar" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Avatar")) }>
 								Avatar
 							</a>
-							<a href="/docs/components/button" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Button")) }>
+							<a href="/components/button" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Button")) }>
 								Button
 							</a>
 						</div>

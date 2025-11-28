@@ -4,6 +4,7 @@ import DrawerContext from '../lib/DrawerContext.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 import { Close, Delete, Download, Edit, Logout, Settings, Workspace } from '@invopop/ui-icons'
+import WithActionStory from './helpers/DrawerContextWithAction.svelte'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
@@ -219,6 +220,12 @@ export const WithCountries: Story = {
       { label: 'Italy Office', value: 'it', country: 'IT' }
     ]
   }
+}
+
+export const WithAction: Story = {
+  render: () => ({
+    Component: WithActionStory
+  })
 }
 
 export const WithGroupsAndAvatars: Story = {

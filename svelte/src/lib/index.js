@@ -13,6 +13,7 @@ import ButtonUuidCopy from './ButtonUuidCopy.svelte'
 import CardCheckbox from './CardCheckbox.svelte'
 import CardRelation from './CardRelation.svelte'
 import CompanySelector from './CompanySelector.svelte'
+import CounterWidget from './CounterWidget.svelte'
 import DataListItem from './DataListItem.svelte'
 import DatePicker from './DatePicker.svelte'
 import DrawerContext from './DrawerContext.svelte'
@@ -83,6 +84,7 @@ export {
   CardCheckbox,
   CardRelation,
   CompanySelector,
+  CounterWidget,
   DataListItem,
   DatePicker,
   DrawerContext,

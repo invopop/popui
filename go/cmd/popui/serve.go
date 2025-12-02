@@ -50,6 +50,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/avatar", s.docsAvatar)
 	e.GET("/components/button", s.docsButton)
 	e.GET("/components/card", s.docsCard)
+	e.GET("/components/checkbox", s.docsCheckbox)
 	e.GET("/components/fieldset", s.docsFieldset)
 	e.GET("/components/image", s.docsImage)
 
@@ -103,6 +104,11 @@ func (s *serveOpts) docsButton(c echo.Context) error {
 // docsCard shows the card component documentation
 func (s *serveOpts) docsCard(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Card())
+}
+
+// docsCheckbox shows the checkbox component documentation
+func (s *serveOpts) docsCheckbox(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Checkbox())
 }
 
 // docsFieldset shows the fieldset component documentation

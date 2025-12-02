@@ -1,0 +1,19 @@
+```go
+@popui.OptionGroup(props.OptionGroup{
+	Label: "Select your interests",
+}) {
+	@popui.Checkbox(props.Checkbox{
+		Name:    "interest_design",
+		Label:   "Design",
+		Checked: true,
+	})
+	@popui.Checkbox(props.Checkbox{
+		Name:  "interest_development",
+		Label: "Development",
+	})
+	@popui.Checkbox(props.Checkbox{
+		Name:  "interest_marketing",
+		Label: "Marketing",
+	})
+}
+```

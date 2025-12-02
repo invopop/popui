@@ -169,10 +169,10 @@ templ Page() {
 				XModel: "checkbox.value",
 			})
 			<div class="max-w-md">
-				@popui.InputCheckbox(
-					props.InputCheckbox{
+				@popui.Checkbox(
+					props.Checkbox{
 						Label: "This is the label for the checbox",
-						Attrs: templ.Attributes{
+						Attributes: templ.Attributes{
 							"x-model": "checkbox.value",
 						},
 					})

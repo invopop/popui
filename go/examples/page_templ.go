@@ -421,10 +421,10 @@ func Page() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputCheckbox(
-				props.InputCheckbox{
+			templ_7745c5c3_Err = popui.Checkbox(
+				props.Checkbox{
 					Label: "This is the label for the checbox",
-					Attrs: templ.Attributes{
+					Attributes: templ.Attributes{
 						"x-model": "checkbox.value",
 					},
 				}).Render(ctx, templ_7745c5c3_Buffer)

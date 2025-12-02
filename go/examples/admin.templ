@@ -258,7 +258,7 @@ templ formSection() {
 			})
 			@popui.Fieldset(props.Fieldset{Legend: "Sudo", Variant: "card", Class: "bg-background-default-secondary"}) {
 				<input type="hidden" name="type" value=""/>
-				@popui.InputCheckbox(props.InputCheckbox{
+				@popui.Checkbox(props.Checkbox{
 					ID:      "enterprise",
 					Label:   "Enterprise",
 					Name:    "type",
@@ -284,8 +284,8 @@ templ formSection() {
 							<option disabled selected value="">Select a type of document...</option>
 						}
 						@popui.OptionGroup(props.OptionGroup{Label: "Actions performed on each document"}) {
-							@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"})
-							@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"})
+							@popui.Checkbox(props.Checkbox{Variant: "switch", Label: "Generate PDF (1 pop)"})
+							@popui.Checkbox(props.Checkbox{Variant: "switch", Label: "Send by email (1 pop)"})
 						}
 					}
 				}
@@ -328,15 +328,15 @@ templ formSection() {
 					Variant: props.ColorMetal,
 				})
 			</div>
-			@popui.InputCheckbox(props.InputCheckbox{
+			@popui.Checkbox(props.Checkbox{
 				Label: "Checbox regular",
 				Value: "checkbox-regular",
 			})
-			@popui.InputCheckbox(props.InputCheckbox{
+			@popui.Checkbox(props.Checkbox{
 				Label:   "Checkbox switch",
 				Value:   "checkbox-switch",
 				Checked: true,
-				Switch:  true,
+				Variant: "switch",
 			})
 			@popui.InputRange(props.InputRange{
 				Label: "Docs per month (1 pop)",

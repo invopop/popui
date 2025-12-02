@@ -1169,7 +1169,7 @@ func formSection() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = popui.InputCheckbox(props.InputCheckbox{
+				templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{
 					ID:      "enterprise",
 					Label:   "Enterprise",
 					Name:    "type",
@@ -1326,7 +1326,7 @@ func formSection() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{Variant: "switch", Label: "Generate PDF (1 pop)"}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1334,7 +1334,7 @@ func formSection() templ.Component {
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
-							templ_7745c5c3_Err = popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{Variant: "switch", Label: "Send by email (1 pop)"}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1462,7 +1462,7 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputCheckbox(props.InputCheckbox{
+			templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{
 				Label: "Checbox regular",
 				Value: "checkbox-regular",
 			}).Render(ctx, templ_7745c5c3_Buffer)
@@ -1473,11 +1473,11 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputCheckbox(props.InputCheckbox{
+			templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{
 				Label:   "Checkbox switch",
 				Value:   "checkbox-switch",
 				Checked: true,
-				Switch:  true,
+				Variant: "switch",
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

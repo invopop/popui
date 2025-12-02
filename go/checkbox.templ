@@ -1,0 +1,99 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
+)
+
+// Checkbox provides an input with type checkbox and appropriate styling.
+// Use Variant "switch" for toggle switch style.
+// If no ID is provided, one will be generated to ensure the label is correctly linked.
+templ Checkbox(p ...props.Checkbox) {
+	{{ checkbox := props.First(p).GenerateID() }}
+	{{ isSwitch := checkbox.Variant == "switch" }}
+	if isSwitch {
+		<label class="flex items-center gap-2 text-foreground text-base">
+			<div class="relative inline-block w-8 h-5 shrink-0 [&>input:checked+span]:bg-background-accent [&>input:focus+span]:shadow-[0_0_1px_#169958] [&>input:checked+span:before]:translate-x-3">
+				@checkboxInput(checkbox)
+				<span class="absolute cursor-pointer inset-0 bg-border-default-secondary-hover rounded-md transition-all duration-[0.4s] before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-background before:rounded before:transition-all before:duration-[0.4s]"></span>
+			</div>
+			if checkbox.Label != "" {
+				{ checkbox.Label }
+			} else {
+				{ children... }
+			}
+		</label>
+	} else {
+		<div class="flex items-center gap-2 [&>input:disabled+label]:opacity-30">
+			@checkboxInput(checkbox)
+			<label
+				for={ checkbox.ID }
+				class="font-sans text-base text-foreground"
+			>
+				if checkbox.Label != "" {
+					{ checkbox.Label }
+				} else {
+					{ children... }
+				}
+			</label>
+		</div>
+	}
+}
+
+templ checkboxInput(p props.Checkbox) {
+	{{ isSwitch := p.Variant == "switch" }}
+	<input
+		id={ p.ID }
+		type="checkbox"
+		class={
+			utils.TwMerge(
+				utils.Clsx(map[string]bool{
+					"form-checkbox w-4 h-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-secondary-hover focus:text-background-accent focus:ring-0 focus:ring-offset-0": !isSwitch,
+					"opacity-0 w-0 h-0": isSwitch,
+				}),
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+		if p.Checked {
+			checked
+		}
+		if p.Autofocus {
+			autofocus
+		}
+		if p.Disabled {
+			disabled
+		}
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
+	/>
+}
+
+// OptionGroup helps group a set of form elements together
+// such as checkboxes and radio buttons with a useful label.
+templ OptionGroup(opts ...props.OptionGroup) {
+	{{ group := props.First(opts) }}
+	<div
+		if group.ID != "" {
+			id={ group.ID }
+		}
+		class={
+			utils.TwMerge(
+				"flex flex-col gap-2",
+				group.Class,
+			),
+		}
+		{ group.Attributes... }
+	>
+		if group.Label != "" {
+			@InputLabel() {
+				{ group.Label }
+			}
+		}
+		{ children... }
+	</div>
+}

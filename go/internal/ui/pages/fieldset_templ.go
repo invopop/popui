@@ -289,7 +289,7 @@ func Fieldset() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					templ_7745c5c3_Err = popui.InputCheckbox(props.InputCheckbox{
+					templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{
 						ID:    "enterprise",
 						Name:  "type",
 						Label: "Enterprise",

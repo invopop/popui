@@ -50,6 +50,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/avatar", s.docsAvatar)
 	e.GET("/components/button", s.docsButton)
 	e.GET("/components/card", s.docsCard)
+	e.GET("/components/fieldset", s.docsFieldset)
 
 	// Examples (deprecated, for reference only)
 	e.GET("/examples", s.admin)
@@ -101,6 +102,11 @@ func (s *serveOpts) docsButton(c echo.Context) error {
 // docsCard shows the card component documentation
 func (s *serveOpts) docsCard(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Card())
+}
+
+// docsFieldset shows the fieldset component documentation
+func (s *serveOpts) docsFieldset(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Fieldset())
 }
 
 // render provides a wrapper around the component to make it nice to render.

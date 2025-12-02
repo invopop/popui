@@ -217,7 +217,7 @@ templ tableSection() {
 
 templ formSection() {
 	<form class={ classes.FormContainer }>
-		@popui.Fieldset(props.Fieldset{}) {
+		@popui.Fieldset() {
 			@popui.InputText(props.InputText{
 				ID:       "name",
 				Label:    "Full name",
@@ -256,7 +256,7 @@ templ formSection() {
 				Rows:  2,
 				Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
 			})
-			@popui.FieldsetCard(props.Fieldset{Legend: "Sudo", Class: classes.FieldsetCardGrayed}) {
+			@popui.Fieldset(props.Fieldset{Legend: "Sudo", Variant: "card", Class: "bg-background-default-secondary"}) {
 				<input type="hidden" name="type" value=""/>
 				@popui.InputCheckbox(props.InputCheckbox{
 					ID:      "enterprise",
@@ -279,7 +279,7 @@ templ formSection() {
 					Help me select a plan
 				}
 				@popui.AccordionContent() {
-					@popui.FieldsetCard(props.Fieldset{}) {
+					@popui.Fieldset(props.Fieldset{Variant: "card"}) {
 						@popui.Select(props.Select{}) {
 							<option disabled selected value="">Select a type of document...</option>
 						}

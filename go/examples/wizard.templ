@@ -111,7 +111,7 @@ templ AppStepOne() {
 				</section>
 				@popui.HorizontalDivider()
 				<section>
-					@popui.Fieldset(props.Fieldset{}) {
+					@popui.Fieldset() {
 						@popui.Subtitle() {
 							Representante legal
 						}
@@ -209,7 +209,7 @@ templ AppStepThree() {
 			}
 			<form id="step-four" action="/wizard/step-four" method="GET">
 				<section class="mt-8">
-					@popui.Fieldset(props.Fieldset{}) {
+					@popui.Fieldset() {
 						@popui.Subtitle() {
 							1. ¿Cómo vas a firmar el acuerdo?
 						}
@@ -229,7 +229,7 @@ templ AppStepThree() {
 					}
 				</section>
 				<section class="mt-8">
-					@popui.Fieldset(props.Fieldset{}) {
+					@popui.Fieldset() {
 						@popui.Subtitle() {
 							2. Sube el acuerdo firmado
 						}

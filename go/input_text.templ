@@ -73,6 +73,28 @@ templ InputText(p props.InputText) {
 	</div>
 }
 
+// InputTitle provides a title for a form element
+templ InputTitle(opts ...props.InputTitle) {
+	{{ p := props.First(opts) }}
+	<div class={ classes.InputTitle }>
+		@Subtitle() {
+			<span { p.Attrs... }>{ p.Title }</span>
+		}
+		{ children... }
+	</div>
+}
+
+// InputError provides a nicelly formatted error text
+templ InputError(e props.Error) {
+	<p class={ templ.KV(classes.Error, e.Class == ""), templ.KV(e.Class, e.Class != "") } { e.Attrs... }>
+		if e.Error != nil {
+			{ e.Error.Error() }
+		} else {
+			{ e.Text }
+		}
+	</p>
+}
+
 func cleanInputTextType(typ string) string {
 	switch typ {
 	case "email", "file", "search", "password", "tel", "url", "date", "time", "week", "month":

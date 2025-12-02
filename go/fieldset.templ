@@ -1,0 +1,34 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
+)
+
+// Fieldset groups a set of form fields together with correct vertical spacing.
+templ Fieldset(p ...props.Fieldset) {
+	{{ fieldset := props.First(p) }}
+	<fieldset
+		if fieldset.ID != "" {
+			id={ fieldset.ID }
+		}
+		class={
+			utils.TwMerge(
+				"space-y-4 relative w-full",
+				utils.Clsx(map[string]bool{
+					"border border-border-default-secondary rounded-md bg-background p-4": fieldset.Variant == "card",
+					"pt-12": fieldset.Legend != "",
+				}),
+				fieldset.Class,
+			),
+		}
+		{ fieldset.Attributes... }
+	>
+		if fieldset.Legend != "" {
+			<legend class="absolute top-4 text-sm font-medium text-foreground">
+				{ fieldset.Legend }
+			</legend>
+		}
+		{ children... }
+	</fieldset>
+}

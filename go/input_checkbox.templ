@@ -41,6 +41,27 @@ templ InputCheckbox(p props.InputCheckbox) {
 	}
 }
 
+// OptionGroup helps group a set of form elements together
+// such as checkboxes and radio buttons with a useful label
+templ OptionGroup(opts ...props.OptionGroup) {
+	{{ p := props.First(opts) }}
+	<div
+		class={
+			templ.KV(classes.OptionGroup, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+		}
+		{ p.Attrs... }
+	>
+		if p.Label != "" {
+			@InputLabel(props.Label{Attrs: p.LabelAttrs}) {
+				{ p.Label }
+			}
+		}
+		{ children... }
+	</div>
+}
+
+
 templ inputCheckbox(p props.InputCheckbox) {
 	<input
 		id={ p.ID }

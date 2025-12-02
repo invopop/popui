@@ -23,6 +23,14 @@ type InputCheckbox struct {
 	Attrs      templ.Attributes
 }
 
+// OptionGroup Templ component props.
+type OptionGroup struct {
+	Label      string
+	Class      string
+	Attrs      templ.Attributes
+	LabelAttrs templ.Attributes
+}
+
 // GenerateID returns a new InputCheckbox instance with either the existing ID
 // or a new randomly generated one.
 func (i InputCheckbox) GenerateID() InputCheckbox {

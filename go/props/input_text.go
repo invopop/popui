@@ -21,3 +21,10 @@ type InputText struct {
 	Error       Error
 	Attrs       templ.Attributes
 }
+
+// InputTitle Templ component props.
+type InputTitle struct {
+	Title string
+	Class string
+	Attrs templ.Attributes
+}

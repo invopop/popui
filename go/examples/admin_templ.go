@@ -1218,7 +1218,7 @@ func formSection() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = popui.FieldsetCard(props.Fieldset{Legend: "Sudo", Class: classes.FieldsetCardGrayed}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var47), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = popui.Fieldset(props.Fieldset{Legend: "Sudo", Variant: "card", Class: "bg-background-default-secondary"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var47), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1346,7 +1346,7 @@ func formSection() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = popui.FieldsetCard(props.Fieldset{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var52), templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = popui.Fieldset(props.Fieldset{Variant: "card"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var52), templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -1546,7 +1546,7 @@ func formSection() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = popui.Fieldset(props.Fieldset{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var41), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.Fieldset().Render(templ.WithChildren(ctx, templ_7745c5c3_Var41), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

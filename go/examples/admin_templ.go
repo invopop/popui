@@ -1774,58 +1774,279 @@ func cardsSection() templ.Component {
 			templ_7745c5c3_Var66 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop"}}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var67 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = popui.CardHeader(props.CardHeader{Title: "Invopop"}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = popui.Card(props.Card{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var67), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.Card(props.Card{
-			Header: props.CardHeader{
-				Title:  "Invopop with logo",
-				ImgSrc: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-			},
-		}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var68 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Var69 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+				if !templ_7745c5c3_IsBuffer {
+					defer func() {
+						templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+						if templ_7745c5c3_Err == nil {
+							templ_7745c5c3_Err = templ_7745c5c3_BufErr
+						}
+					}()
+				}
+				ctx = templ.InitializeContext(ctx)
+				templ_7745c5c3_Var70 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+					templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+					templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+					if !templ_7745c5c3_IsBuffer {
+						defer func() {
+							templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+							if templ_7745c5c3_Err == nil {
+								templ_7745c5c3_Err = templ_7745c5c3_BufErr
+							}
+						}()
+					}
+					ctx = templ.InitializeContext(ctx)
+					templ_7745c5c3_Err = popui.Image(props.Image{Src: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1"}).Render(ctx, templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+					return nil
+				})
+				templ_7745c5c3_Err = popui.Avatar(props.Avatar{Size: "lg"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var70), templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				return nil
+			})
+			templ_7745c5c3_Err = popui.CardHeader(props.CardHeader{
+				Title: "Invopop with logo",
+			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var69), templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = popui.Card(props.Card{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var68), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.Card(props.Card{
-			Header: props.CardHeader{
-				Title:   "Invopop with flag",
-				FlagISO: "es",
-			},
-		}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var71 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Var72 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+				if !templ_7745c5c3_IsBuffer {
+					defer func() {
+						templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+						if templ_7745c5c3_Err == nil {
+							templ_7745c5c3_Err = templ_7745c5c3_BufErr
+						}
+					}()
+				}
+				ctx = templ.InitializeContext(ctx)
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 97, "<div style=\"position: relative;\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = popui.Avatar(props.Avatar{Size: "lg", Initial: "I"}).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 98, "<img class=\"absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-foreground-inverse\" src=\"https://hatscripts.github.io/circle-flags/flags/es.svg\" width=\"12\"></div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				return nil
+			})
+			templ_7745c5c3_Err = popui.CardHeader(props.CardHeader{
+				Title: "Invopop with flag",
+			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var72), templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = popui.Card(props.Card{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var71), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.Card(props.Card{
-			Header: props.CardHeader{
-				Title:   "Invopop with logo and Flag",
-				ImgSrc:  "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-				FlagISO: "fr",
-			},
-		}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var73 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Var74 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+				if !templ_7745c5c3_IsBuffer {
+					defer func() {
+						templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+						if templ_7745c5c3_Err == nil {
+							templ_7745c5c3_Err = templ_7745c5c3_BufErr
+						}
+					}()
+				}
+				ctx = templ.InitializeContext(ctx)
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 99, "<div style=\"position: relative;\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Var75 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+					templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+					templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+					if !templ_7745c5c3_IsBuffer {
+						defer func() {
+							templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+							if templ_7745c5c3_Err == nil {
+								templ_7745c5c3_Err = templ_7745c5c3_BufErr
+							}
+						}()
+					}
+					ctx = templ.InitializeContext(ctx)
+					templ_7745c5c3_Err = popui.Image(props.Image{Src: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1"}).Render(ctx, templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+					return nil
+				})
+				templ_7745c5c3_Err = popui.Avatar(props.Avatar{Size: "lg"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var75), templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 100, "<img class=\"absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-foreground-inverse\" src=\"https://hatscripts.github.io/circle-flags/flags/fr.svg\" width=\"12\"></div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				return nil
+			})
+			templ_7745c5c3_Err = popui.CardHeader(props.CardHeader{
+				Title: "Invopop with logo and Flag",
+			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var74), templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = popui.Card(props.Card{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var73), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop with link"}, URL: "#something"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var76 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = popui.CardHeader(props.CardHeader{Title: "Invopop with link"}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = popui.Card(props.Card{Href: "#something"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var76), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.Card(props.Card{Header: props.CardHeader{Title: "Cyberdyne enterprises for World Global Domination INC"}}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var77 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = popui.CardHeader(props.CardHeader{Title: "Cyberdyne enterprises for World Global Domination INC"}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = popui.Card(props.Card{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var77), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.Card(props.Card{
-			Header: props.CardHeader{
+		templ_7745c5c3_Var78 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = popui.CardHeader(props.CardHeader{
 				Title:    "Invopop with subtitle",
 				Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-			},
-			URL:   "https://invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-			Attrs: templ.Attributes{"target": "_blank"},
-		}).Render(ctx, templ_7745c5c3_Buffer)
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = popui.Card(props.Card{
+			Href:       "https://invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+			Attributes: templ.Attributes{"target": "_blank"},
+		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var78), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 97, "<a href=\"#something\" style=\"padding: 16px; display: block; width: 100%;\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 101, "<a href=\"#something\" style=\"padding: 16px; display: block; width: 100%;\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -1836,7 +2057,7 @@ func cardsSection() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 98, "</a>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 102, "</a>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -1864,12 +2085,12 @@ func complexCard() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var67 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var67 == nil {
-			templ_7745c5c3_Var67 = templ.NopComponent
+		templ_7745c5c3_Var79 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var79 == nil {
+			templ_7745c5c3_Var79 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Var68 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Var80 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
 			if !templ_7745c5c3_IsBuffer {
@@ -1881,7 +2102,7 @@ func complexCard() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Var69 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_Var81 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
 				if !templ_7745c5c3_IsBuffer {
@@ -1893,6 +2114,36 @@ func complexCard() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 103, "<div style=\"position: relative;\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Var82 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+					templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+					templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+					if !templ_7745c5c3_IsBuffer {
+						defer func() {
+							templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+							if templ_7745c5c3_Err == nil {
+								templ_7745c5c3_Err = templ_7745c5c3_BufErr
+							}
+						}()
+					}
+					ctx = templ.InitializeContext(ctx)
+					templ_7745c5c3_Err = popui.Image(props.Image{Src: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1"}).Render(ctx, templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+					return nil
+				})
+				templ_7745c5c3_Err = popui.Avatar(props.Avatar{Size: "lg"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var82), templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 104, "<img class=\"absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-foreground-inverse\" src=\"https://hatscripts.github.io/circle-flags/flags/pt.svg\" width=\"12\"></div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
 				templ_7745c5c3_Err = popoverForCard().Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -1902,13 +2153,11 @@ func complexCard() templ.Component {
 			templ_7745c5c3_Err = popui.CardHeader(props.CardHeader{
 				Title:    "Complex card with header slot and more items",
 				Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-				ImgSrc:   "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-				FlagISO:  "pt",
-			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var69), templ_7745c5c3_Buffer)
+			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var81), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 99, " ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 105, " ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1921,11 +2170,11 @@ func complexCard() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 100, " ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 106, " ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Var70 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_Var83 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
 				if !templ_7745c5c3_IsBuffer {
@@ -1937,42 +2186,70 @@ func complexCard() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 101, "<option>Last 30 days</option>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 107, "<option>Last 30 days</option>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = popui.Select(props.Select{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var70), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = popui.Select(props.Select{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var83), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 102, " ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 108, " ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.CardDashboard(props.CardDashboard{
-				Items: []props.CardDashboardItem{
-					{
-						Label: "Documents",
-						Value: "10.5K",
-					},
-					{
-						Label: "Workflows",
-						Value: "10",
-					},
-					{
-						Label: "Parties",
-						Value: "123",
-					},
-				},
-			}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Var84 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+				if !templ_7745c5c3_IsBuffer {
+					defer func() {
+						templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+						if templ_7745c5c3_Err == nil {
+							templ_7745c5c3_Err = templ_7745c5c3_BufErr
+						}
+					}()
+				}
+				ctx = templ.InitializeContext(ctx)
+				templ_7745c5c3_Err = popui.CardDashboardItem(props.CardDashboardItem{
+					Label: "Documents",
+					Value: "10.5K",
+				}).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 109, " ")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = popui.CardDashboardItem(props.CardDashboardItem{
+					Label: "Workflows",
+					Value: "10",
+				}).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 110, " ")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = popui.CardDashboardItem(props.CardDashboardItem{
+					Label: "Parties",
+					Value: "123",
+				}).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				return nil
+			})
+			templ_7745c5c3_Err = popui.CardDashboard(props.CardDashboard{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var84), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = popui.Card(props.Card{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var68), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.Card(props.Card{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var80), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -1996,12 +2273,12 @@ func popoverForCard() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var71 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var71 == nil {
-			templ_7745c5c3_Var71 = templ.NopComponent
+		templ_7745c5c3_Var85 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var85 == nil {
+			templ_7745c5c3_Var85 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Var72 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Var86 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
 			if !templ_7745c5c3_IsBuffer {
@@ -2013,29 +2290,29 @@ func popoverForCard() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 103, "<ul>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 111, "<ul>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var73 = []any{classes.PopoverListItem, classes.PopoverListItemTextLeft}
-			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var73...)
+			var templ_7745c5c3_Var87 = []any{classes.PopoverListItem, classes.PopoverListItemTextLeft}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var87...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 104, "<li class=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 112, "<li class=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var74 string
-			templ_7745c5c3_Var74, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var73).String())
+			var templ_7745c5c3_Var88 string
+			templ_7745c5c3_Var88, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var87).String())
 			if templ_7745c5c3_Err != nil {
 				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/admin.templ`, Line: 1, Col: 0}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var74))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var88))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 105, "\"><button>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 113, "\"><button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2043,29 +2320,29 @@ func popoverForCard() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 106, "<span>Change Plan</span></button></li>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 114, "<span>Change Plan</span></button></li>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var75 = []any{classes.PopoverListItem, classes.PopoverListItemTextLeft}
-			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var75...)
+			var templ_7745c5c3_Var89 = []any{classes.PopoverListItem, classes.PopoverListItemTextLeft}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var89...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 107, "<li class=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 115, "<li class=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var76 string
-			templ_7745c5c3_Var76, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var75).String())
+			var templ_7745c5c3_Var90 string
+			templ_7745c5c3_Var90, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var89).String())
 			if templ_7745c5c3_Err != nil {
 				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/admin.templ`, Line: 1, Col: 0}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var76))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var90))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 108, "\"><button>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 116, "\"><button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2073,7 +2350,7 @@ func popoverForCard() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 109, "<span>Modify Workspace</span></button></li></ul>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 117, "<span>Modify Workspace</span></button></li></ul>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2085,7 +2362,7 @@ func popoverForCard() templ.Component {
 			ButtonVariant: "transparent",
 			RightAlign:    true,
 			Stretch:       true,
-		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var72), templ_7745c5c3_Buffer)
+		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var86), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -2109,12 +2386,12 @@ func fullTailwindSection() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var77 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var77 == nil {
-			templ_7745c5c3_Var77 = templ.NopComponent
+		templ_7745c5c3_Var91 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var91 == nil {
+			templ_7745c5c3_Var91 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 110, "<div class=\"space-y-6\"><!-- Grid Layout Example --><div><h3 class=\"text-lg font-semibold mb-3\">Grid Layouts</h3><div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4\"><div class=\"bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200\"><p class=\"text-sm font-medium text-blue-900\">Responsive Grid Item 1</p><p class=\"text-xs text-blue-700 mt-2\">Using grid-cols utilities</p></div><div class=\"bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200\"><p class=\"text-sm font-medium text-purple-900\">Responsive Grid Item 2</p><p class=\"text-xs text-purple-700 mt-2\">With gradient backgrounds</p></div><div class=\"bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200\"><p class=\"text-sm font-medium text-green-900\">Responsive Grid Item 3</p><p class=\"text-xs text-green-700 mt-2\">And custom colors</p></div></div></div><!-- Flexbox Example --><div><h3 class=\"text-lg font-semibold mb-3\">Advanced Flexbox</h3><div class=\"flex flex-wrap gap-3 items-center justify-between\"><div class=\"flex-1 min-w-[200px] bg-indigo-50 p-4 rounded-md\"><span class=\"text-sm text-indigo-900\">Flexible item with min-width</span></div><div class=\"flex-none bg-pink-50 p-4 rounded-md\"><span class=\"text-sm text-pink-900\">Fixed width item</span></div><div class=\"flex-1 min-w-[200px] bg-amber-50 p-4 rounded-md\"><span class=\"text-sm text-amber-900\">Another flexible item</span></div></div></div><!-- Spacing & Typography --><div><h3 class=\"text-lg font-semibold mb-3\">Typography & Spacing</h3><div class=\"space-y-4 bg-slate-50 p-6 rounded-lg\"><p class=\"text-xs text-slate-600\">Extra small text (text-xs)</p><p class=\"text-sm text-slate-700\">Small text (text-sm)</p><p class=\"text-base text-slate-800\">Base text (text-base)</p><p class=\"text-lg text-slate-900\">Large text (text-lg)</p><p class=\"text-xl font-medium text-slate-900\">Extra large with medium weight (text-xl)</p><p class=\"text-2xl font-semibold text-slate-900\">2XL with semibold (text-2xl)</p></div></div><!-- Shadows & Borders --><div><h3 class=\"text-lg font-semibold mb-3\">Shadows & Borders</h3><div class=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4\"><div class=\"bg-white p-4 rounded-lg shadow-sm border border-gray-200\"><p class=\"text-sm\">shadow-sm</p></div><div class=\"bg-white p-4 rounded-lg shadow-md border border-gray-200\"><p class=\"text-sm\">shadow-md</p></div><div class=\"bg-white p-4 rounded-lg shadow-lg border border-gray-200\"><p class=\"text-sm\">shadow-lg</p></div><div class=\"bg-white p-4 rounded-lg shadow-xl border-2 border-gray-300\"><p class=\"text-sm\">shadow-xl + border-2</p></div></div></div><!-- Colors Palette --><div><h3 class=\"text-lg font-semibold mb-3\">Extended Color Palette</h3><div class=\"flex flex-wrap gap-2\"><div class=\"w-16 h-16 bg-red-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-orange-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-amber-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-yellow-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-lime-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-green-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-emerald-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-teal-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-cyan-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-sky-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-blue-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-indigo-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-violet-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-purple-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-fuchsia-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-pink-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-rose-500 rounded-md shadow-sm\"></div></div></div><!-- Responsive Design --><div><h3 class=\"text-lg font-semibold mb-3\">Responsive Utilities</h3><div class=\"bg-white p-6 rounded-lg border border-gray-200\"><div class=\"bg-blue-100 sm:bg-green-100 md:bg-yellow-100 lg:bg-purple-100 xl:bg-pink-100 p-4 rounded text-center\"><p class=\"text-sm font-medium\">This box changes color at different breakpoints</p><p class=\"text-xs mt-2 text-gray-600\">Blue (default) → Green (sm) → Yellow (md) → Purple (lg) → Pink (xl)</p></div></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 118, "<div class=\"space-y-6\"><!-- Grid Layout Example --><div><h3 class=\"text-lg font-semibold mb-3\">Grid Layouts</h3><div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4\"><div class=\"bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200\"><p class=\"text-sm font-medium text-blue-900\">Responsive Grid Item 1</p><p class=\"text-xs text-blue-700 mt-2\">Using grid-cols utilities</p></div><div class=\"bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200\"><p class=\"text-sm font-medium text-purple-900\">Responsive Grid Item 2</p><p class=\"text-xs text-purple-700 mt-2\">With gradient backgrounds</p></div><div class=\"bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200\"><p class=\"text-sm font-medium text-green-900\">Responsive Grid Item 3</p><p class=\"text-xs text-green-700 mt-2\">And custom colors</p></div></div></div><!-- Flexbox Example --><div><h3 class=\"text-lg font-semibold mb-3\">Advanced Flexbox</h3><div class=\"flex flex-wrap gap-3 items-center justify-between\"><div class=\"flex-1 min-w-[200px] bg-indigo-50 p-4 rounded-md\"><span class=\"text-sm text-indigo-900\">Flexible item with min-width</span></div><div class=\"flex-none bg-pink-50 p-4 rounded-md\"><span class=\"text-sm text-pink-900\">Fixed width item</span></div><div class=\"flex-1 min-w-[200px] bg-amber-50 p-4 rounded-md\"><span class=\"text-sm text-amber-900\">Another flexible item</span></div></div></div><!-- Spacing & Typography --><div><h3 class=\"text-lg font-semibold mb-3\">Typography & Spacing</h3><div class=\"space-y-4 bg-slate-50 p-6 rounded-lg\"><p class=\"text-xs text-slate-600\">Extra small text (text-xs)</p><p class=\"text-sm text-slate-700\">Small text (text-sm)</p><p class=\"text-base text-slate-800\">Base text (text-base)</p><p class=\"text-lg text-slate-900\">Large text (text-lg)</p><p class=\"text-xl font-medium text-slate-900\">Extra large with medium weight (text-xl)</p><p class=\"text-2xl font-semibold text-slate-900\">2XL with semibold (text-2xl)</p></div></div><!-- Shadows & Borders --><div><h3 class=\"text-lg font-semibold mb-3\">Shadows & Borders</h3><div class=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4\"><div class=\"bg-white p-4 rounded-lg shadow-sm border border-gray-200\"><p class=\"text-sm\">shadow-sm</p></div><div class=\"bg-white p-4 rounded-lg shadow-md border border-gray-200\"><p class=\"text-sm\">shadow-md</p></div><div class=\"bg-white p-4 rounded-lg shadow-lg border border-gray-200\"><p class=\"text-sm\">shadow-lg</p></div><div class=\"bg-white p-4 rounded-lg shadow-xl border-2 border-gray-300\"><p class=\"text-sm\">shadow-xl + border-2</p></div></div></div><!-- Colors Palette --><div><h3 class=\"text-lg font-semibold mb-3\">Extended Color Palette</h3><div class=\"flex flex-wrap gap-2\"><div class=\"w-16 h-16 bg-red-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-orange-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-amber-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-yellow-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-lime-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-green-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-emerald-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-teal-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-cyan-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-sky-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-blue-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-indigo-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-violet-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-purple-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-fuchsia-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-pink-500 rounded-md shadow-sm\"></div><div class=\"w-16 h-16 bg-rose-500 rounded-md shadow-sm\"></div></div></div><!-- Responsive Design --><div><h3 class=\"text-lg font-semibold mb-3\">Responsive Utilities</h3><div class=\"bg-white p-6 rounded-lg border border-gray-200\"><div class=\"bg-blue-100 sm:bg-green-100 md:bg-yellow-100 lg:bg-purple-100 xl:bg-pink-100 p-4 rounded text-center\"><p class=\"text-sm font-medium\">This box changes color at different breakpoints</p><p class=\"text-xs mt-2 text-gray-600\">Blue (default) → Green (sm) → Yellow (md) → Purple (lg) → Pink (xl)</p></div></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -315,10 +315,11 @@ templ AppStepFour() {
 					</div>
 					<div class="mb-2">
 						@popui.CardFile(props.CardFile{}) {
-							<div class="flex gap-2 items-center">
+							@popui.CardFileInfo(props.CardFileInfo{
+								Label: "dni_back_already_stored.png",
+							}) {
 								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
-								<p>dni_back_already_stored.png</p>
-							</div>
+							}
 							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
 								@icons.Download()
 								Descargar
@@ -432,10 +433,11 @@ templ ConfirmPage() {
 						}
 					</div>
 					@popui.CardFile(props.CardFile{}) {
-						<div class="flex gap-2 items-center">
+						@popui.CardFileInfo(props.CardFileInfo{
+							Label: "acuerdo_veri*factu.pdf",
+						}) {
 							@popui.IconFile()
-							<p>acuerdo_veri*factu.pdf</p>
-						</div>
+						}
 						@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
 							Ver
 							@icons.ExternalLink()
@@ -457,10 +459,11 @@ templ ConfirmPage() {
 					</div>
 					<div class="mb-3">
 						@popui.CardFile(props.CardFile{}) {
-							<div class="flex gap-2 items-center">
+							@popui.CardFileInfo(props.CardFileInfo{
+								Label: "dni_front.png",
+							}) {
 								<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
-								<p>dni_front.png</p>
-							</div>
+							}
 							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
 								Ver
 								@icons.ExternalLink()
@@ -468,10 +471,11 @@ templ ConfirmPage() {
 						}
 					</div>
 					@popui.CardFile(props.CardFile{}) {
-						<div class="flex gap-2 items-center">
+						@popui.CardFileInfo(props.CardFileInfo{
+							Label: "dni_back.png",
+						}) {
 							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
-							<p>dni_back.png</p>
-						</div>
+						}
 						@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
 							Ver
 							@icons.ExternalLink()

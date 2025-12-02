@@ -409,36 +409,55 @@ templ readonlySection() {
 }
 
 templ cardsSection() {
-	@popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop"}})
+	@popui.Card(props.Card{}) {
+		@popui.CardHeader(props.CardHeader{Title: "Invopop"})
+	}
+	@popui.Card(props.Card{}) {
+		@popui.CardHeader(props.CardHeader{
+			Title: "Invopop with logo",
+		}) {
+			@popui.Avatar(props.Avatar{Size: "lg"}) {
+				@popui.Image(props.Image{Src: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1"})
+			}
+		}
+	}
+	@popui.Card(props.Card{}) {
+		@popui.CardHeader(props.CardHeader{
+			Title: "Invopop with flag",
+		}) {
+			<div style="position: relative;">
+				@popui.Avatar(props.Avatar{Size: "lg", Initial: "I"})
+				<img class="absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-foreground-inverse" src="https://hatscripts.github.io/circle-flags/flags/es.svg" width="12"/>
+			</div>
+		}
+	}
+	@popui.Card(props.Card{}) {
+		@popui.CardHeader(props.CardHeader{
+			Title: "Invopop with logo and Flag",
+		}) {
+			<div style="position: relative;">
+				@popui.Avatar(props.Avatar{Size: "lg"}) {
+					@popui.Image(props.Image{Src: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1"})
+				}
+				<img class="absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-foreground-inverse" src="https://hatscripts.github.io/circle-flags/flags/fr.svg" width="12"/>
+			</div>
+		}
+	}
+	@popui.Card(props.Card{Href: "#something"}) {
+		@popui.CardHeader(props.CardHeader{Title: "Invopop with link"})
+	}
+	@popui.Card(props.Card{}) {
+		@popui.CardHeader(props.CardHeader{Title: "Cyberdyne enterprises for World Global Domination INC"})
+	}
 	@popui.Card(props.Card{
-		Header: props.CardHeader{
-			Title:  "Invopop with logo",
-			ImgSrc: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-		},
-	})
-	@popui.Card(props.Card{
-		Header: props.CardHeader{
-			Title:   "Invopop with flag",
-			FlagISO: "es",
-		},
-	})
-	@popui.Card(props.Card{
-		Header: props.CardHeader{
-			Title:   "Invopop with logo and Flag",
-			ImgSrc:  "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-			FlagISO: "fr",
-		},
-	})
-	@popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop with link"}, URL: "#something"})
-	@popui.Card(props.Card{Header: props.CardHeader{Title: "Cyberdyne enterprises for World Global Domination INC"}})
-	@popui.Card(props.Card{
-		Header: props.CardHeader{
+		Href:       "https://invopop.com/invopop_with_subtitle_super_long_name_sandbox",
+		Attributes: templ.Attributes{"target": "_blank"},
+	}) {
+		@popui.CardHeader(props.CardHeader{
 			Title:    "Invopop with subtitle",
 			Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-		},
-		URL:   "https://invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-		Attrs: templ.Attributes{"target": "_blank"},
-	})
+		})
+	}
 	<a href="#something" style="padding: 16px; display: block; width: 100%;">
 		@popui.CardHeader(props.CardHeader{
 			Title:    "CardHeader without card",
@@ -453,9 +472,13 @@ templ complexCard() {
 		@popui.CardHeader(props.CardHeader{
 			Title:    "Complex card with header slot and more items",
 			Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-			ImgSrc:   "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-			FlagISO:  "pt",
 		}) {
+			<div style="position: relative;">
+				@popui.Avatar(props.Avatar{Size: "lg"}) {
+					@popui.Image(props.Image{Src: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1"})
+				}
+				<img class="absolute bottom-0 right-0 -mr-0.5 -mb-0.5 rounded-full border border-foreground-inverse" src="https://hatscripts.github.io/circle-flags/flags/pt.svg" width="12"/>
+			</div>
 			@popoverForCard()
 		}
 		@popui.CardProgressBar(props.CardProgressBar{
@@ -467,22 +490,20 @@ templ complexCard() {
 		@popui.Select(props.Select{}) {
 			<option>Last 30 days</option>
 		}
-		@popui.CardDashboard(props.CardDashboard{
-			Items: []props.CardDashboardItem{
-				{
-					Label: "Documents",
-					Value: "10.5K",
-				},
-				{
-					Label: "Workflows",
-					Value: "10",
-				},
-				{
-					Label: "Parties",
-					Value: "123",
-				},
-			},
-		})
+		@popui.CardDashboard(props.CardDashboard{}) {
+			@popui.CardDashboardItem(props.CardDashboardItem{
+				Label: "Documents",
+				Value: "10.5K",
+			})
+			@popui.CardDashboardItem(props.CardDashboardItem{
+				Label: "Workflows",
+				Value: "10",
+			})
+			@popui.CardDashboardItem(props.CardDashboardItem{
+				Label: "Parties",
+				Value: "123",
+			})
+		}
 	}
 }
 

@@ -1,0 +1,23 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
+)
+
+templ CardFile() {
+	@popui.CardFile(props.CardFile{}) {
+		@popui.CardFileInfo(props.CardFileInfo{
+			Label: "dni_back_already_stored.png",
+		}) {
+			<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
+		}
+		@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+			@icons.Download()
+			Descargar
+		}
+	}
+}
+```

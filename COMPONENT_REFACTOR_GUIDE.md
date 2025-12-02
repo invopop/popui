@@ -427,6 +427,50 @@ func docsHome() echo.HandlerFunc {
 - Use `group-open:` prefix for expanded state styling
 - Example: `group-open:before:rotate-90` for chevron animation
 
+### Card Components
+Card components should be **fully decoupled** with slot-based architecture:
+
+**Key Patterns:**
+- **Card** is just a container with optional `Href` for link behavior
+- **CardHeader** is standalone - expects Avatar/Flag as children via slots
+- All sub-components (CardHeader, CardProgressBar, CardDashboard, CardFile) are independent
+- Never nest prop structs (old: `Card.Header`) - use composition via children instead
+
+**Before (Coupled):**
+```templ
+@Card(props.Card{
+    Header: props.CardHeader{
+        Title: "Title",
+        ImgSrc: "/image.png",
+    },
+})
+```
+
+**After (Decoupled):**
+```templ
+@Card(props.Card{}) {
+    @CardHeader(props.CardHeader{
+        Title: "Title",
+    }) {
+        @Avatar(props.Avatar{Size: "lg"}) {
+            @Image(props.Image{Src: "/image.png"})
+        }
+    }
+}
+```
+
+**Slot Architecture Benefits:**
+- Avatar can be omitted if not needed
+- Flag can be added independently
+- Header can have custom children in the free slot
+- Maximum flexibility without prop complexity
+
+**Helper Functions for Business Logic:**
+- Move calculations to private functions at bottom of file
+- Example: `percentValue()`, `percentColor()`, `formatAmount()`
+- Keep templ code clean, move Go logic to helpers
+- Use CSS functions for dynamic styles (e.g., `percentageStyle()`)
+
 ### Parent-State Styling
 When child elements need to respond to parent state:
 ```templ
@@ -465,6 +509,8 @@ When child elements need to respond to parent state:
 - Create multiple helper functions for the same component
 - Forget text sizing classes (text-xs, text-sm, etc.) when components have text content
 - Rely on incompatible Tailwind v3 plugins
+- Nest prop structs (e.g., `Card.Header`) - use composition instead
+- Include business logic in templ templates - extract to helper functions
 
 ✅ **DO:**
 - Use PopUI's own design tokens from `components.css`
@@ -478,6 +524,8 @@ When child elements need to respond to parent state:
 - Use ONE helper function that combines all conditional logic (variants, sizes, states)
 - Add appropriate text sizing for components with text/initials
 - Reset browser defaults explicitly in styles.css @layer base when needed
+- Decouple components using slot architecture for maximum flexibility
+- Move calculations and business logic to private helper functions at bottom of file
 
 ---
 

@@ -49,6 +49,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/accordion", s.docsAccordion)
 	e.GET("/components/avatar", s.docsAvatar)
 	e.GET("/components/button", s.docsButton)
+	e.GET("/components/card", s.docsCard)
 
 	// Examples (deprecated, for reference only)
 	e.GET("/examples", s.admin)
@@ -95,6 +96,11 @@ func (s *serveOpts) docsAvatar(c echo.Context) error {
 // docsButton shows the button component documentation
 func (s *serveOpts) docsButton(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Button())
+}
+
+// docsCard shows the card component documentation
+func (s *serveOpts) docsCard(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Card())
 }
 
 // render provides a wrapper around the component to make it nice to render.

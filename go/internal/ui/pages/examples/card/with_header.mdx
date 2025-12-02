@@ -1,0 +1,25 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ CardWithHeader() {
+	@popui.Card(props.Card{}) {
+		@popui.CardHeader(props.CardHeader{
+			Title:    "John Doe",
+			Subtitle: "Software Engineer",
+		}) {
+			@popui.Avatar(props.Avatar{
+				Size:    "lg",
+				Initial: "J",
+			})
+		}
+		@popui.CardContent(props.CardContent{}) {
+			This card includes a header with an avatar and title information.
+		}
+	}
+}
+```

@@ -44,6 +44,9 @@ templ DocsLayout(title, description string) {
 							<a href="/components/button" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Button")) }>
 								Button
 							</a>
+							<a href="/components/card" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Card")) }>
+								Card
+							</a>
 						</div>
 					</div>
 				</div>

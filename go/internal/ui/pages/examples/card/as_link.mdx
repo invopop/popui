@@ -1,0 +1,27 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ CardAsLink() {
+	@popui.Card(props.Card{
+		Href: "/profile",
+	}) {
+		@popui.CardHeader(props.CardHeader{
+			Title:    "Clickable Card",
+			Subtitle: "Click anywhere to navigate",
+		}) {
+			@popui.Avatar(props.Avatar{
+				Size:    "lg",
+				Initial: "C",
+			})
+		}
+		@popui.CardContent(props.CardContent{}) {
+			This entire card is clickable.
+		}
+	}
+}
+```

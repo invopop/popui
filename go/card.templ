@@ -2,9 +2,8 @@ package popui
 
 import (
 	"fmt"
-	"github.com/invopop/gobl/num"
-	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
 	"github.com/invopop/popui/icons"
 )
 
@@ -14,149 +13,226 @@ const (
 )
 
 // Card provides a UI element for wrapping general information.
-templ Card(opts ...props.Card) {
-	{{ p := props.First(opts) }}
-	if p.URL != "" {
+// Supports URL prop to render as an anchor element.
+templ Card(p ...props.Card) {
+	{{ card := props.First(p) }}
+	if card.Href != "" {
 		<a
-			href={ p.URL }
+			if card.ID != "" {
+				id={ card.ID }
+			}
+			href={ card.Href }
 			class={
-				templ.KV(classes.Card, p.Class == ""),
-				templ.KV(classes.CardDisabled, p.Disabled),
-				templ.KV(p.Class, p.Class != ""),
+				utils.TwMerge(
+					"flex flex-col p-2 rounded-2xl border border-border bg-background w-full gap-2",
+					"hover:border-border-default-secondary",
+					cardClasses(card),
+					card.Class,
+				),
 			}
-			{ p.Attrs... }
+			{ card.Attributes... }
 		>
-			if !p.EmptyHeader() {
-				@CardHeader(p.Header)
-			}
 			{ children... }
 		</a>
 	} else {
 		<div
+			if card.ID != "" {
+				id={ card.ID }
+			}
 			class={
-				templ.KV(classes.Card, p.Class == ""),
-				templ.KV(p.Class, p.Class != ""),
+				utils.TwMerge(
+					"flex flex-col p-2 rounded-2xl border border-border bg-background w-full gap-2",
+					cardClasses(card),
+					card.Class,
+				),
 			}
-			{ p.Attrs... }
+			{ card.Attributes... }
 		>
-			if !p.EmptyHeader() {
-				@CardHeader(p.Header)
-			}
 			{ children... }
 		</div>
 	}
 }
 
-// CardHeader can be used as part of a Card component or standalone.
-// It provides an Avatar/Initial, Country Flag, Title and a free slot.
-templ CardHeader(opts ...props.CardHeader) {
-	{{ p := props.First(opts) }}
+// CardContent provides a styled container for card body content
+templ CardContent(p ...props.CardContent) {
+	{{ content := props.First(p) }}
 	<div
+		if content.ID != "" {
+			id={ content.ID }
+		}
 		class={
-			templ.KV(classes.CardHeader, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+			utils.TwMerge(
+				"text-foreground text-base",
+				content.Class,
+			),
 		}
-		{ p.Attrs... }
+		{ content.Attributes... }
 	>
-		if !p.HideAvatar {
-			<div style="position: relative;">
-				if p.ImgSrc != "" {
-					@Avatar(props.Avatar{Size: "lg"}) {
-						@Image(props.Image{Src: p.ImgSrc})
-					}
-				} else if p.Title != "" {
-					@Avatar(props.Avatar{Size: "lg", Initial: string(p.Title[0])})
-				}
-				if p.FlagISO != "" {
-					<img class={ classes.CardHeaderFlag } src={ flagProviderURL + p.FlagISO + ".svg" } width="12"/>
-				}
-			</div>
-		}
-		if p.Title != "" {
-			<div class={ classes.CardHeaderTitle }>
-				<p>{ p.Title }</p>
-				if p.Subtitle != "" {
-					<p>{ p.Subtitle }</p>
-				}
-			</div>
-		}
 		{ children... }
 	</div>
 }
 
-// CardProgressBar provides a UI element for wrapping info with a progress bar.
-templ CardProgressBar(opts ...props.CardProgressBar) {
-	{{ p := props.First(opts) }}
-	{{ f := p.Formatter() }}
+// CardHeader can be used as part of a Card component or standalone.
+// Expects Avatar and/or flag as children via slots.
+templ CardHeader(p ...props.CardHeader) {
+	{{ header := props.First(p) }}
 	<div
-		class={
-			templ.KV(classes.CardProgressBar, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+		if header.ID != "" {
+			id={ header.ID }
 		}
-		{ p.Attrs... }
+		class={
+			utils.TwMerge(
+				"flex items-center gap-3",
+				header.Class,
+			),
+		}
+		{ header.Attributes... }
 	>
-		<div class={ classes.CardProgressBarHeader }>
+		{ children... }
+		if header.Title != "" {
+			<div class="flex flex-col gap-0.5 min-w-0 flex-1">
+				<p class="truncate text-foreground text-base font-semibold">{ header.Title }</p>
+				if header.Subtitle != "" {
+					<p class="truncate text-foreground-default-secondary text-sm">{ header.Subtitle }</p>
+				}
+			</div>
+		}
+	</div>
+}
+
+// CardProgressBar provides a UI element for wrapping info with a progress bar.
+templ CardProgressBar(p ...props.CardProgressBar) {
+	{{ bar := props.First(p) }}
+	<div
+		if bar.ID != "" {
+			id={ bar.ID }
+		}
+		class={
+			utils.TwMerge(
+				"w-full flex flex-col justify-center items-start gap-2 rounded-md pt-2.5 pb-3 px-3 border border-border bg-background-default-secondary",
+				bar.Class,
+			),
+		}
+		{ bar.Attributes... }
+	>
+		<div class="w-full flex justify-between items-center">
 			<p>
-				<span class={ classes.CardProgressBarHeaderTitle }>
-					<span>{ p.Title }</span>
-					if p.Subtitle != "" {
+				<span class="text-foreground text-base">
+					<span>{ bar.Title }</span>
+					if bar.Subtitle != "" {
 						<span>· </span>
 					}
 				</span>
-				if p.Subtitle != "" {
-					<span class={ classes.CardProgressBarHeaderSubtitle }>{ p.Subtitle }</span>
+				if bar.Subtitle != "" {
+					<span class="text-foreground-default-secondary text-sm">{ bar.Subtitle }</span>
 				}
 			</p>
-			if !p.HideCounter {
-				<div class={ classes.CardProgressBarHeaderAmount }>
+			if !bar.HideCounter {
+				<div class="flex text-foreground-default-tertiary text-sm font-medium gap-1">
 					@icons.Invopop()
 					<div>
-						<span class={ classes.CardProgressBarHeaderAmountCurrent }>{ f.Amount(num.MakeAmount(p.Current, 0)) }</span>
+						<span class="text-foreground-default-secondary">{ bar.FormatAmount(bar.Current) }</span>
 						<span>/</span>
-						<span>{ f.Amount(num.MakeAmount(p.Total, 0)) }</span>
+						<span>{ bar.FormatAmount(bar.Total) }</span>
 					</div>
 				</div>
 			}
 		</div>
-		<div class={ classes.CardProgressBarProgress }>
-			<div class={ percentage(p.PercentValue(), p.PercentColor()) }></div>
+		<div class="w-full h-1 shrink-0 rounded-[1px] bg-border-default-secondary">
+			<div class={ percentageStyle(bar.PercentValue(), bar.PercentColor()) }></div>
 		</div>
 	</div>
 }
 
 // CardDashboard provides a grid of small info cards for showing dashboard-like information
-templ CardDashboard(p props.CardDashboard) {
+templ CardDashboard(p ...props.CardDashboard) {
+	{{ dash := props.First(p) }}
 	<ul
+		if dash.ID != "" {
+			id={ dash.ID }
+		}
 		class={
-			templ.KV(classes.CardDashboard, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+			utils.TwMerge(
+				"grid grid-cols-3 gap-x-3",
+				dash.Class,
+			),
 		}
-		{ p.Attrs... }
+		{ dash.Attributes... }
 	>
-		for _, i := range p.Items {
-			<li class={ classes.CardDashboardItem }>
-				<p class={ classes.CardDashboardItemLabel }>{ i.Label }</p>
-				<p class={ classes.CardDashboardItemValue }>{ i.Value }</p>
-			</li>
-		}
+		{ children... }
 	</ul>
 }
 
-// CardFile provides a card for displaying file details
-templ CardFile(opts ...props.CardFile) {
-	{{ p := props.First(opts) }}
-	<div
-		class={
-			templ.KV(classes.CardFile, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+// CardDashboardItem represents a single metric item in the dashboard grid
+templ CardDashboardItem(p ...props.CardDashboardItem) {
+	{{ item := props.First(p) }}
+	<li
+		if item.ID != "" {
+			id={ item.ID }
 		}
-		{ p.Attrs... }
+		class={
+			utils.TwMerge(
+				"flex flex-col items-center py-3 px-2 rounded-md border border-border bg-background-default-secondary",
+				item.Class,
+			),
+		}
+		{ item.Attributes... }
+	>
+		<p class="text-foreground-default-secondary text-sm">{ item.Label }</p>
+		<p class="text-foreground text-xl font-medium">{ item.Value }</p>
+	</li>
+}
+
+// CardFile provides a card for displaying file details
+templ CardFile(p ...props.CardFile) {
+	{{ file := props.First(p) }}
+	<div
+		if file.ID != "" {
+			id={ file.ID }
+		}
+		class={
+			utils.TwMerge(
+				"flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-border bg-background text-base text-foreground font-medium",
+				file.Class,
+			),
+		}
+		{ file.Attributes... }
 	>
 		{ children... }
 	</div>
 }
 
-css percentage(percent int64, color string) {
+// CardFileInfo provides structured layout for file information within CardFile
+templ CardFileInfo(p ...props.CardFileInfo) {
+	{{ info := props.First(p) }}
+	<div
+		if info.ID != "" {
+			id={ info.ID }
+		}
+		class={
+			utils.TwMerge(
+				"flex gap-2 items-center",
+				info.Class,
+			),
+		}
+		{ info.Attributes... }
+	>
+		{ children... }
+		if info.Label != "" {
+			<p>{ info.Label }</p>
+		}
+	</div>
+}
+
+func cardClasses(card props.Card) string {
+	return utils.Clsx(
+		map[string]bool{
+			"bg-background-default-secondary pointer-events-none": card.Disabled,
+		},
+	)
+}
+
+css percentageStyle(percent int64, color string) {
 	border-radius: 1px;
 	height: 4px;
 	width: { fmt.Sprintf("%d%%", percent) };

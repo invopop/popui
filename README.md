@@ -81,7 +81,7 @@ Air will also watch for changes and re-run everything for you, with the exceptio
 
 ### Using the Go Package
 
-There are three options for incorporating the Popui styles.
+There are two options for incorporating the Popui styles.
 
 **Option 1**: using the lightweight stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
 

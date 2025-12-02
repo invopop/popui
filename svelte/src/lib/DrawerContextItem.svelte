@@ -31,7 +31,11 @@
     )
   )
   let labelStyles = $derived(
-    clsx({ 'text-foreground-critical': item.destructive }, { 'text-foreground': !item.destructive })
+    clsx(
+      { 'text-foreground-critical': item.destructive },
+      { 'text-foreground': !item.destructive },
+      { 'opacity-30': item.locked }
+    )
   )
   let title = $derived(item.label.length > 25 ? item.label : undefined)
 
@@ -68,7 +72,9 @@
     {:else if item.icon}
       <Icon
         src={item.icon}
-        class="w-4 h-4 {item.destructive ? 'text-icon-critical' : item.iconClass || 'text-icon'}"
+        class="w-4 h-4 {item.destructive
+          ? 'text-icon-critical'
+          : item.iconClass || 'text-icon'} {item.locked ? 'opacity-30' : ''}"
       />
     {/if}
     <div class="whitespace-nowrap flex-1 text-left flex items-center space-x-1.5 truncate" {title}>
@@ -84,7 +90,9 @@
         </span>
       {/if}
     </div>
-    {#if multiple}
+    {#if item.action}
+      {@render item.action()}
+    {:else if multiple}
       <InputCheckbox
         checked={item.selected ?? false}
         onchange={(value) => {

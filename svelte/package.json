@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "scripts": {
     "dev": "vite dev",
     "dev:clean": "npm run clean && vite dev",
@@ -82,7 +82,7 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/core": "^1.5.1",
-    "@invopop/ui-icons": "0.0.72",
+    "@invopop/ui-icons": "0.0.74",
     "@steeze-ui/heroicons": "^2.2.3",
     "@steeze-ui/svelte-icon": "^1.6.2",
     "@tailwindcss/vite": "^4.1.12",

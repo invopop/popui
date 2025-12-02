@@ -67,8 +67,10 @@ export type DrawerOption = SelectOption & {
   sandbox?: boolean
   iconClass?: string
   disabled?: boolean
+  locked?: boolean
   groupBy?: string
   useAvatar?: boolean
+  action?: Snippet
 }
 
 export type Company = {
@@ -237,7 +239,23 @@ export interface AlertDialogProps {
     theme?: 'light' | 'navigation' | 'accent';
   }
 
-  export interface BaseDropdownProps {
+export interface CounterWidgetProps {
+	label: string;
+	current: number;
+	total: number;
+	resetDate?: string;
+	icon?: IconSource;
+	allowOverage?: boolean;
+}
+
+export interface ProgressBarProps {
+	percentage?: number;
+	current?: number;
+	total?: number;
+	allowOverage?: boolean;
+}
+
+export interface BaseDropdownProps {
     isOpen?: boolean;
     fullWidth?: boolean;
     placement?: Placement;

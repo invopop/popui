@@ -36,6 +36,18 @@ func main() {
 		"components/button/index.html": func() error {
 			return renderPage(publicPath, "components/button/index.html", pages.Button())
 		},
+		"components/card/index.html": func() error {
+			return renderPage(publicPath, "components/card/index.html", pages.Card())
+		},
+		"components/checkbox/index.html": func() error {
+			return renderPage(publicPath, "components/checkbox/index.html", pages.Checkbox())
+		},
+		"components/fieldset/index.html": func() error {
+			return renderPage(publicPath, "components/fieldset/index.html", pages.Fieldset())
+		},
+		"components/image/index.html": func() error {
+			return renderPage(publicPath, "components/image/index.html", pages.Image())
+		},
 		"examples/index.html": func() error {
 			return renderPage(publicPath, "examples/index.html", examples.Admin())
 		},

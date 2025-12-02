@@ -399,7 +399,7 @@ templ CodeBlock(props CodeBlockProps) {
 
 ---
 
-## Routing
+### Routing
 
 ### Integration into Serve Command
 Add routes in `go/cmd/popui/serve.go`:
@@ -416,6 +416,19 @@ func docsHome() echo.HandlerFunc {
     }
 }
 ```
+
+### ⚠️ CRITICAL: Update templ2html Generator for Netlify
+**ALWAYS** add new component pages to `go/cmd/templ2html/main.go` for static site generation:
+
+```go
+docsPages := map[string]func() error{
+    "components/newcomponent/index.html": func() error {
+        return renderPage(publicPath, "components/newcomponent/index.html", pages.NewComponent())
+    },
+}
+```
+
+This ensures the component documentation is included in the Netlify preview build.
 
 ---
 
@@ -576,4 +589,5 @@ When refactoring new components:
 - [ ] Does the Usage code match the Preview exactly?
 - [ ] Are all API props documented with descriptions?
 - [ ] Is the route added to `serve.go`?
+- [ ] **Is the component page added to `templ2html/main.go` for Netlify?**
 - [ ] Have you tested it works at `/docs/components/[name]`?

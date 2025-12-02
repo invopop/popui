@@ -1,20 +1,29 @@
 package popui
 
 import (
-	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
 )
 
-// Image provides a img element using the popui class
-templ Image(p props.Image) {
+// Image displays an image with rounded corners and proper object fit.
+templ Image(p ...props.Image) {
+	{{ img := props.First(p) }}
 	<img
-		class={ templ.KV(classes.Image, p.Class == ""), templ.KV(p.Class, p.Class != "") }
-		if (p.Src != "") {
-			src={ p.Src }
+		if img.ID != "" {
+			id={ img.ID }
 		}
-		if (p.Alt != "") {
-			alt={ p.Alt }
+		class={
+			utils.TwMerge(
+				"h-full w-full rounded-md object-cover",
+				img.Class,
+			),
 		}
-		{ p.Attrs... }
+		if img.Src != "" {
+			src={ img.Src }
+		}
+		if img.Alt != "" {
+			alt={ img.Alt }
+		}
+		{ img.Attributes... }
 	/>
 }

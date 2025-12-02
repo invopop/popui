@@ -1,0 +1,78 @@
+// Package pages provides documentation pages for PopUI components.
+package pages
+
+import (
+	_ "embed"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/layouts"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+//go:embed examples/image/default.mdx
+var imageDefaultCode string
+
+//go:embed examples/image/custom_size.mdx
+var imageCustomSizeCode string
+
+//go:embed examples/image/with_avatar.mdx
+var imageWithAvatarCode string
+
+templ Image() {
+	@layouts.DocsLayout("Image", "Displays images with rounded corners and proper object fit.") {
+		@modules.Example(modules.ExampleProps{
+			Code: imageDefaultCode,
+		}) {
+			<div class="w-32 h-32">
+				@popui.Image(props.Image{
+					Src: "https://i.pravatar.cc/300?img=1",
+					Alt: "User profile picture",
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Custom Size",
+			Description: "Use custom classes to control image dimensions and object fit.",
+			Code:        imageCustomSizeCode,
+		}) {
+			@popui.Image(props.Image{
+				Src:   "https://i.pravatar.cc/300?img=5",
+				Alt:   "Product image",
+				Class: "size-10",
+			})
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "With Avatar",
+			Description: "Wrap Image inside Avatar component for circular avatars.",
+			Code:        imageWithAvatarCode,
+		}) {
+			<div class="flex gap-4">
+				@popui.Avatar(props.Avatar{Size: "lg"}) {
+					@popui.Image(props.Image{
+						Src: "https://i.pravatar.cc/150?img=8",
+						Alt: "User avatar",
+					})
+				}
+				@popui.Avatar() {
+					@popui.Image(props.Image{
+						Src: "https://i.pravatar.cc/150?img=12",
+						Alt: "User avatar",
+					})
+				}
+			</div>
+		}
+		@modules.Section("API Reference", "api") {
+			@modules.APITable(modules.APITableProps{
+				Title:       "Image",
+				Description: "Displays an image with rounded corners and proper object fit.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the image element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with image styles"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+					{Name: "Src", Type: "string", Default: "", Description: "Image source URL"},
+					{Name: "Alt", Type: "string", Default: "", Description: "Alternative text for accessibility"},
+				},
+			})
+		}
+	}
+}

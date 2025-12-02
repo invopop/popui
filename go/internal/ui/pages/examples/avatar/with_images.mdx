@@ -8,7 +8,7 @@ import (
 
 templ AvatarWithImages() {
 	<div class="flex items-center gap-4">
-		@popui.Avatar(props.Avatar{}) {
+		@popui.Avatar() {
 			@popui.Image(props.Image{Src: "https://i.pravatar.cc/150?img=1"})
 		}
 		@popui.Avatar(props.Avatar{Size: "lg"}) {

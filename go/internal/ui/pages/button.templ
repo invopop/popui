@@ -33,7 +33,7 @@ templ Button() {
 		@modules.Example(modules.ExampleProps{
 			Code: buttonDefaultCode,
 		}) {
-			@popui.Button(props.Button{}) {
+			@popui.Button() {
 				Default Button
 			}
 		}
@@ -43,7 +43,7 @@ templ Button() {
 			Code:        buttonVariantsCode,
 		}) {
 			<div class="flex gap-2">
-				@popui.Button(props.Button{}) {
+				@popui.Button() {
 					Default
 				}
 				@popui.Button(props.Button{Variant: "primary"}) {

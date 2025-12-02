@@ -7,13 +7,13 @@ import (
 )
 
 templ CardDashboard() {
-	@popui.Card(props.Card{}) {
+	@popui.Card() {
 		@popui.CardHeader(props.CardHeader{
 			Title:    "Monthly Overview",
 			Subtitle: "Key performance metrics",
 		})
-		@popui.CardContent(props.CardContent{}) {
-			@popui.CardDashboard(props.CardDashboard{}) {
+		@popui.CardContent() {
+			@popui.CardDashboard() {
 				@popui.CardDashboardItem(props.CardDashboardItem{
 					Label: "Revenue",
 					Value: "$12.5k",

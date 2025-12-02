@@ -34,10 +34,10 @@ var cardFileCode string
 templ Card() {
 	@layouts.DocsLayout("Card", "Flexible container components for displaying content in a bordered box.") {
 		@modules.Example(modules.ExampleProps{
-			Code:        cardDefaultCode,
+			Code: cardDefaultCode,
 		}) {
-			@popui.Card(props.Card{}) {
-				@popui.CardContent(props.CardContent{}) {
+			@popui.Card() {
+				@popui.CardContent() {
 					Card content goes here
 				}
 			}
@@ -47,7 +47,7 @@ templ Card() {
 			Description: "Cards can include a header with avatar, title, and subtitle using the CardHeader component.",
 			Code:        cardWithHeaderCode,
 		}) {
-			@popui.Card(props.Card{}) {
+			@popui.Card() {
 				@popui.CardHeader(props.CardHeader{
 					Title:    "John Doe",
 					Subtitle: "Software Engineer",
@@ -57,7 +57,7 @@ templ Card() {
 						Initial: "J",
 					})
 				}
-				@popui.CardContent(props.CardContent{}) {
+				@popui.CardContent() {
 					This card includes a header with an avatar and title information.
 				}
 			}
@@ -72,7 +72,7 @@ templ Card() {
 					Title:    "Disabled Card",
 					Subtitle: "Cannot be interacted with",
 				})
-				@popui.CardContent(props.CardContent{}) {
+				@popui.CardContent() {
 					This card is disabled.
 				}
 			}
@@ -94,7 +94,7 @@ templ Card() {
 						Initial: "C",
 					})
 				}
-				@popui.CardContent(props.CardContent{}) {
+				@popui.CardContent() {
 					This entire card is clickable.
 				}
 			}
@@ -104,7 +104,7 @@ templ Card() {
 			Description: "CardProgressBar displays progress with a visual indicator and optional counter.",
 			Code:        cardProgressBarCode,
 		}) {
-			@popui.Card(props.Card{}) {
+			@popui.Card() {
 				@popui.CardHeader(props.CardHeader{
 					Title:    "Usage Statistics",
 					Subtitle: "Track your API consumption",
@@ -131,13 +131,13 @@ templ Card() {
 			Description: "CardDashboard displays multiple metrics in a grid layout.",
 			Code:        cardDashboardCode,
 		}) {
-			@popui.Card(props.Card{}) {
+			@popui.Card() {
 				@popui.CardHeader(props.CardHeader{
 					Title:    "Monthly Overview",
 					Subtitle: "Key performance metrics",
 				})
-				@popui.CardContent(props.CardContent{}) {
-					@popui.CardDashboard(props.CardDashboard{}) {
+				@popui.CardContent() {
+					@popui.CardDashboard() {
 						@popui.CardDashboardItem(props.CardDashboardItem{
 							Label: "Revenue",
 							Value: "$12.5k",
@@ -159,7 +159,7 @@ templ Card() {
 			Description: "CardFile provides a container for displaying file information.",
 			Code:        cardFileCode,
 		}) {
-			@popui.CardFile(props.CardFile{}) {
+			@popui.CardFile() {
 				@popui.CardFileInfo(props.CardFileInfo{
 					Label: "dni_back_already_stored.png",
 				}) {

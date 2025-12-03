@@ -1,0 +1,188 @@
+// Package pages provides documentation pages for PopUI components.
+package pages
+
+import (
+	_ "embed"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/layouts"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+//go:embed examples/file/default.mdx
+var fileDefaultCode string
+
+//go:embed examples/file/disabled.mdx
+var fileDisabledCode string
+
+//go:embed examples/file/accept_types.mdx
+var fileAcceptTypesCode string
+
+//go:embed examples/file/multiple.mdx
+var fileMultipleCode string
+
+//go:embed examples/file/upload_no_preview.mdx
+var fileUploadNoPreviewCode string
+
+//go:embed examples/file/avatar.mdx
+var fileAvatarCode string
+
+//go:embed examples/file/square_preview.mdx
+var fileSquarePreviewCode string
+
+//go:embed examples/file/with_buttons.mdx
+var fileWithButtonsCode string
+
+templ File() {
+	@layouts.DocsLayout("File", "File input components for selecting and uploading files. Use InputFile for basic file selection or FileUpload for avatar/image uploads with preview.") {
+		@modules.Example(modules.ExampleProps{
+			Code: fileDefaultCode,
+		}) {
+			<div class="w-full max-w-sm">
+				@popui.InputFile(props.InputFile{
+					Name: "document",
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Disabled State",
+			Description: "Disabled file inputs prevent user interaction.",
+			Code:        fileDisabledCode,
+		}) {
+			<div class="w-full max-w-sm">
+				@popui.InputFile(props.InputFile{
+					Name:     "document",
+					Disabled: true,
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Accept Specific Types",
+			Description: "Restrict file selection to specific file types using the Accept prop.",
+			Code:        fileAcceptTypesCode,
+		}) {
+			<div class="w-full max-w-sm space-y-4">
+				@popui.InputFile(props.InputFile{
+					Name:   "images",
+					Accept: "image/*",
+				})
+				@popui.InputFile(props.InputFile{
+					Name:   "documents",
+					Accept: ".pdf,.doc,.docx",
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Multiple Files",
+			Description: "Allow multiple file selection with the Multiple prop.",
+			Code:        fileMultipleCode,
+		}) {
+			<div class="w-full max-w-sm">
+				@popui.InputFile(props.InputFile{
+					Name:     "photos",
+					Multiple: true,
+					Accept:   "image/*",
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Upload Without Preview",
+			Description: "FileUpload without an initial avatar shows a placeholder icon.",
+			Code:        fileUploadNoPreviewCode,
+		}) {
+			<div class="w-full max-w-sm">
+				@popui.FileUpload(props.InputFile{
+					Name: "profile-picture",
+					Text: "Upload Profile Picture",
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Avatar Upload",
+			Description: "Use FileUpload for file inputs with avatar preview.",
+			Code:        fileAvatarCode,
+		}) {
+			<div class="w-full max-w-sm">
+				@popui.FileUpload(props.InputFile{
+					Name:      "avatar",
+					AvatarURL: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+					AvatarAlt: "User Avatar",
+					Text:      "Change Avatar",
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Square Preview",
+			Description: "Use PreviewSquare for square avatar previews (useful for logos).",
+			Code:        fileSquarePreviewCode,
+		}) {
+			<div class="w-full max-w-sm">
+				@popui.FileUpload(props.InputFile{
+					Name:          "logo",
+					AvatarURL:     "https://api.dicebear.com/7.x/shapes/svg?seed=Logo",
+					AvatarAlt:     "Company Logo",
+					Text:          "Upload Logo",
+					PreviewSquare: true,
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "With Additional Buttons",
+			Description: "Pass children to add extra buttons like Remove or Cancel.",
+			Code:        fileWithButtonsCode,
+		}) {
+			<div class="w-full max-w-sm">
+				@popui.FileUpload(props.InputFile{
+					Name:      "avatar",
+					AvatarURL: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+					AvatarAlt: "User Avatar",
+					Text:      "Change Avatar",
+				}) {
+					@popui.Button(props.Button{
+						Type: "button",
+						Size: "sm",
+					}) {
+						Remove
+					}
+				}
+			</div>
+		}
+		@modules.Section("API Reference", "api") {
+			@modules.APITable(modules.APITableProps{
+				Title:       "InputFile",
+				Description: "Basic file input component.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "auto-generated", Description: "Unique identifier for the file input"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+					{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission"},
+					{Name: "Accept", Type: "string", Default: "", Description: "Accepted file types (e.g., \"image/*\", \".pdf,.doc\")"},
+					{Name: "Capture", Type: "string", Default: "", Description: "Capture media from device camera (\"user\" or \"environment\")"},
+					{Name: "Multiple", Type: "bool", Default: "false", Description: "Allow multiple file selection"},
+					{Name: "Autofocus", Type: "bool", Default: "false", Description: "Autofocus the file input on page load"},
+					{Name: "Required", Type: "bool", Default: "false", Description: "Make the file input required"},
+					{Name: "Disabled", Type: "bool", Default: "false", Description: "Disable the file input"},
+				},
+			})
+			@modules.APITable(modules.APITableProps{
+				Title:       "FileUpload",
+				Description: "File upload component with avatar preview.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "auto-generated", Description: "Unique identifier for the file upload"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+					{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission"},
+					{Name: "Accept", Type: "string", Default: "", Description: "Accepted file types"},
+					{Name: "Capture", Type: "string", Default: "", Description: "Capture media from device camera (\"user\" or \"environment\")"},
+					{Name: "Required", Type: "bool", Default: "false", Description: "Make the file upload required"},
+					{Name: "Disabled", Type: "bool", Default: "false", Description: "Disable the file upload"},
+					{Name: "Multiple", Type: "bool", Default: "false", Description: "Allow multiple file selection"},
+					{Name: "AvatarURL", Type: "string", Default: "", Description: "Avatar image URL for preview"},
+					{Name: "AvatarAlt", Type: "string", Default: "", Description: "Alt text for avatar image"},
+					{Name: "Text", Type: "string", Default: "", Description: "Text label before upload button"},
+					{Name: "PreviewSquare", Type: "bool", Default: "false", Description: "Use square preview instead of circle"},
+				},
+			})
+		}
+	}
+}

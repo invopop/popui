@@ -1124,12 +1124,12 @@ func formSection() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = popui.InputFileAvatar(props.InputFileAvatar{
+			templ_7745c5c3_Err = popui.FileUpload(props.InputFile{
 				ID: "avatar",
 				// AvatarURL: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
 				AvatarAlt: "User Avatar",
 				Accept:    "image/*",
-				Attrs: templ.Attributes{
+				Attributes: templ.Attributes{
 					"onchange": "console.log('Send this form somewhere!')",
 				},
 			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var45), templ_7745c5c3_Buffer)

@@ -245,7 +245,7 @@ templ AppStepThree() {
 						}"
 							:class="{'popui-input-file--loading':  loading }"
 						>
-							@popui.InputFile(props.InputFile{Attrs: templ.Attributes{
+							@popui.InputFile(props.InputFile{Attributes: templ.Attributes{
 								"@change": "showLoader",
 							}})
 						</div>

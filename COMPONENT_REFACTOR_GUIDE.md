@@ -5,6 +5,37 @@ This guide documents the patterns and practices learned during the Accordion com
 
 ---
 
+## ⚠️ MANDATORY REFACTORING WORKFLOW ⚠️
+
+**CRITICAL: You MUST complete ALL these steps for EVERY component refactor. No exceptions.**
+
+### Step 1: Create Documentation FIRST (MANDATORY)
+Before writing any component code:
+
+1. **Create documentation page**: `go/internal/ui/pages/[component].templ`
+2. **Create MDX examples**: `go/internal/ui/pages/examples/[component]/*.mdx` (minimum 3 examples)
+3. **Add route**: `go/cmd/popui/serve.go` - add GET route and handler function
+4. **Add to sidebar**: `go/internal/ui/layouts/docs.templ` - add navigation link
+5. **Add to templ2html**: `go/cmd/templ2html/main.go` - add static generation for Netlify
+
+### Step 2: Create Component Props
+1. Create props file: `go/props/[component].go`
+2. Follow 3-prop pattern: `ID`, `Class`, `Attributes`
+3. Add component-specific props
+
+### Step 3: Implement Component
+1. Create component file: `go/[component].templ`
+2. Extract CSS classes from `components.css`
+3. Use variadic props with `props.First()`
+4. Use `utils.TwMerge` and `utils.Clsx`
+
+### Step 4: Update Examples
+1. Update `go/examples/admin.templ` to use new component
+2. Check `go/examples/page.templ` for old references
+3. Search for all old component usages and update
+
+---
+
 ## Component Structure Pattern
 
 ### Follow the 3-Prop Pattern
@@ -566,15 +597,16 @@ When child elements need to respond to parent state:
 
 ## Future Component Refactors
 
-When refactoring new components:
+When refactoring new components, **YOU MUST FOLLOW THE MANDATORY WORKFLOW** at the top of this document.
 
-1. **Structure**: Create props in `go/props/`, follow 3-prop pattern
-2. **Styling**: Convert to inline Tailwind, use PopUI tokens
-3. **Documentation**: Create page in `go/internal/ui/pages/`
-4. **Routing**: Add route in `serve.go`
-5. **Code Examples**: Show complete code with package, imports, and function
-6. **Verification**: Ensure Preview matches Usage code exactly
-7. **API Docs**: Add helpful descriptions for all props
+**DO NOT CREATE ANY COMPONENT CODE UNTIL DOCUMENTATION EXISTS.**
+
+This checklist is for reference only - the workflow section at the top defines the mandatory order:
+
+1. ✅ **Documentation FIRST** (see Step 1 in Mandatory Workflow)
+2. ✅ **Props Structure** (see Step 2 in Mandatory Workflow)  
+3. ✅ **Component Implementation** (see Step 3 in Mandatory Workflow)
+4. ✅ **Update Examples** (see Step 4 in Mandatory Workflow)
 
 ---
 

@@ -1,0 +1,21 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ FileAcceptTypes() {
+	<div class="space-y-4">
+		@popui.InputFile(props.InputFile{
+			Name:   "images",
+			Accept: "image/*",
+		})
+		@popui.InputFile(props.InputFile{
+			Name:   "documents",
+			Accept: ".pdf,.doc,.docx",
+		})
+	</div>
+}
+```

@@ -45,6 +45,9 @@ func main() {
 		"components/fieldset/index.html": func() error {
 			return renderPage(publicPath, "components/fieldset/index.html", pages.Fieldset())
 		},
+		"components/file/index.html": func() error {
+			return renderPage(publicPath, "components/file/index.html", pages.File())
+		},
 		"components/image/index.html": func() error {
 			return renderPage(publicPath, "components/image/index.html", pages.Image())
 		},

@@ -53,6 +53,9 @@ templ DocsLayout(title, description string) {
 							<a href="/components/fieldset" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Fieldset")) }>
 								Fieldset
 							</a>
+							<a href="/components/file" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("File")) }>
+								File
+							</a>
 							<a href="/components/image" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Image")) }>
 								Image
 							</a>

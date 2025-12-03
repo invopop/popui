@@ -374,12 +374,12 @@ func Page() templ.Component {
 				Title:  "Input Text",
 				XModel: "inputText.value",
 				Inputs: []input{
-					input{
+					{
 						Label:  "Error Text",
 						Type:   "text",
 						Xmodel: "inputText.errorText",
 					},
-					input{
+					{
 						Label:  "Disabled",
 						Type:   "checkbox",
 						Xmodel: "inputText.disabled",
@@ -439,12 +439,12 @@ func Page() templ.Component {
 				Title:  "Select",
 				XModel: "select.value",
 				Inputs: []input{
-					input{
+					{
 						Label:  "Error Text",
 						Type:   "text",
 						Xmodel: "select.errorText",
 					},
-					input{
+					{
 						Label:  "Disabled",
 						Type:   "checkbox",
 						Xmodel: "select.disabled",
@@ -497,12 +497,12 @@ func Page() templ.Component {
 				Title:  "Textarea",
 				XModel: "textarea.value",
 				Inputs: []input{
-					input{
+					{
 						Label:  "Error Text",
 						Type:   "text",
 						Xmodel: "textarea.errorText",
 					},
-					input{
+					{
 						Label:  "Disabled",
 						Type:   "checkbox",
 						Xmodel: "textarea.disabled",
@@ -538,7 +538,7 @@ func Page() templ.Component {
 			templ_7745c5c3_Err = fieldConfig(&config{
 				Title: "Default Button",
 				Inputs: []input{
-					input{
+					{
 						Label:  "Disabled",
 						Type:   "checkbox",
 						Xmodel: "defaultButton.disabled",
@@ -584,7 +584,7 @@ func Page() templ.Component {
 			templ_7745c5c3_Err = fieldConfig(&config{
 				Title: "Primary Button",
 				Inputs: []input{
-					input{
+					{
 						Label:  "Disabled",
 						Type:   "checkbox",
 						Xmodel: "primaryButton.disabled",

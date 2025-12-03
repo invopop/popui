@@ -54,6 +54,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/fieldset", s.docsFieldset)
 	e.GET("/components/file", s.docsFile)
 	e.GET("/components/image", s.docsImage)
+	e.GET("/components/radio", s.docsRadio)
 
 	// Examples (deprecated, for reference only)
 	e.GET("/examples", s.admin)
@@ -125,6 +126,11 @@ func (s *serveOpts) docsFile(c echo.Context) error {
 // docsImage shows the image component documentation
 func (s *serveOpts) docsImage(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Image())
+}
+
+// docsRadio shows the radio component documentation
+func (s *serveOpts) docsRadio(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Radio())
 }
 
 // render provides a wrapper around the component to make it nice to render.

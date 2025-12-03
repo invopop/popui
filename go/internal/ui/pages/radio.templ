@@ -1,0 +1,223 @@
+// Package pages provides documentation pages for PopUI components.
+package pages
+
+import (
+	_ "embed"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/layouts"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+//go:embed examples/radio/default.mdx
+var radioDefaultCode string
+
+//go:embed examples/radio/checked.mdx
+var radioCheckedCode string
+
+//go:embed examples/radio/disabled.mdx
+var radioDisabledCode string
+
+//go:embed examples/radio/with_description.mdx
+var radioWithDescriptionCode string
+
+//go:embed examples/radio/option_group.mdx
+var radioOptionGroupCode string
+
+//go:embed examples/radio/card.mdx
+var radioCardCode string
+
+//go:embed examples/radio/theme.mdx
+var radioThemeCode string
+
+templ Radio() {
+	@layouts.DocsLayout("Radio", "Radio button inputs for selecting a single option from a group.") {
+		@modules.Example(modules.ExampleProps{
+			Code: radioDefaultCode,
+		}) {
+			@popui.Radio(props.Radio{
+				Name:  "plan",
+				Value: "basic",
+				Label: "Basic Plan",
+			})
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Checked State",
+			Description: "Radio can be pre-checked using the Checked prop.",
+			Code:        radioCheckedCode,
+		}) {
+			<div class="space-y-3">
+				@popui.Radio(props.Radio{
+					Name:    "plan-checked-example",
+					Value:   "basic",
+					Label:   "Basic Plan",
+				})
+				@popui.Radio(props.Radio{
+					Name:    "plan-checked-example",
+					Value:   "pro",
+					Label:   "Pro Plan",
+					Checked: true,
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Disabled State",
+			Description: "Disabled radio buttons with reduced opacity.",
+			Code:        radioDisabledCode,
+		}) {
+			<div class="space-y-3">
+				@popui.Radio(props.Radio{
+					Name:     "option",
+					Value:    "1",
+					Label:    "Disabled radio",
+					Disabled: true,
+				})
+				@popui.Radio(props.Radio{
+					Name:     "option",
+					Value:    "2",
+					Label:    "Disabled checked radio",
+					Checked:  true,
+					Disabled: true,
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "With Description",
+			Description: "Add a description below the label for additional context.",
+			Code:        radioWithDescriptionCode,
+		}) {
+			@popui.OptionGroup(props.OptionGroup{
+				Label: "Select your subscription",
+			}) {
+				@popui.Radio(props.Radio{
+					Name:        "plan-description-example",
+					Value:       "free",
+					Label:       "Free",
+					Description: "Perfect for personal projects and testing.",
+					Checked:     true,
+				})
+				@popui.Radio(props.Radio{
+					Name:        "plan-description-example",
+					Value:       "pro",
+					Label:       "Pro - $9/month",
+					Description: "Best for professionals and small teams.",
+				})
+				@popui.Radio(props.Radio{
+					Name:        "plan-description-example",
+					Value:       "enterprise",
+					Label:       "Enterprise",
+					Description: "Custom pricing for large organizations.",
+				})
+			}
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Option Group",
+			Description: "Group multiple radio buttons together with a label.",
+			Code:        radioOptionGroupCode,
+		}) {
+			@popui.OptionGroup(props.OptionGroup{
+				Label: "Choose your plan",
+			}) {
+				@popui.Radio(props.Radio{
+					Name:    "plan",
+					Value:   "free",
+					Label:   "Free",
+					Checked: true,
+				})
+				@popui.Radio(props.Radio{
+					Name:  "plan",
+					Value: "pro",
+					Label: "Pro - $9/month",
+				})
+				@popui.Radio(props.Radio{
+					Name:  "plan",
+					Value: "enterprise",
+					Label: "Enterprise - Contact us",
+				})
+			}
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Card Variant",
+			Description: "Card-style radio buttons with descriptions, perfect for selection groups that need more context.",
+			Code:        radioCardCode,
+		}) {
+			<div class="space-y-3">
+				@popui.Radio(props.Radio{
+					Name:        "plan-card",
+					Value:       "starter",
+					Label:       "Starter",
+					Description: "Perfect for individuals and small projects.",
+					Variant:     "card",
+					Checked:     true,
+				})
+				@popui.Radio(props.Radio{
+					Name:        "plan-card",
+					Value:       "professional",
+					Label:       "Professional",
+					Description: "Best for growing teams and businesses.",
+					Variant:     "card",
+				})
+				@popui.Radio(props.Radio{
+					Name:        "plan-card",
+					Value:       "enterprise",
+					Label:       "Enterprise",
+					Description: "Custom solutions for large organizations.",
+					Variant:     "card",
+				})
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Theme Variant",
+			Description: "Circular color theme selector buttons. Use theme color constants (ColorSherwood, ColorOcean, ColorGrape, ColorMetal, ColorCosmos) as the Variant value.",
+			Code:        radioThemeCode,
+		}) {
+			<div class="flex gap-3">
+				@popui.Radio(props.Radio{
+					Name:    "color-theme",
+					Value:   "sherwood",
+					Variant: props.ColorSherwood,
+					Checked: true,
+				})
+				@popui.Radio(props.Radio{
+					Name:    "color-theme",
+					Value:   "ocean",
+					Variant: props.ColorOcean,
+				})
+				@popui.Radio(props.Radio{
+					Name:    "color-theme",
+					Value:   "grape",
+					Variant: props.ColorGrape,
+				})
+				@popui.Radio(props.Radio{
+					Name:    "color-theme",
+					Value:   "metal",
+					Variant: props.ColorMetal,
+				})
+				@popui.Radio(props.Radio{
+					Name:    "color-theme",
+					Value:   "cosmos",
+					Variant: props.ColorCosmos,
+				})
+			</div>
+		}
+		@modules.Section("API Reference", "api") {
+			@modules.APITable(modules.APITableProps{
+				Title:       "Radio",
+				Description: "Radio button input component.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "auto-generated", Description: "Unique identifier for the radio input"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+					{Name: "Label", Type: "string", Default: "", Description: "Label text for the radio button"},
+					{Name: "Description", Type: "string", Default: "", Description: "Optional description text shown below the label"},
+					{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission"},
+					{Name: "Value", Type: "string", Default: "", Description: "Value of the radio button"},
+					{Name: "Variant", Type: "string", Default: "", Description: "Style variant: \"card\" for card-style radios, or theme colors (props.ColorSherwood, props.ColorOcean, props.ColorGrape, props.ColorMetal, props.ColorCosmos)"},
+					{Name: "Checked", Type: "bool", Default: "false", Description: "Pre-check the radio button"},
+					{Name: "Autofocus", Type: "bool", Default: "false", Description: "Autofocus the radio button on page load"},
+					{Name: "Disabled", Type: "bool", Default: "false", Description: "Disable the radio button"},
+				},
+			})
+		}
+	}
+}

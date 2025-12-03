@@ -539,6 +539,30 @@ When child elements need to respond to parent state:
 2. Air automatically regenerates
 3. Refresh browser at `http://localhost:3000/docs`
 
+### ⚠️ CRITICAL: Always Format Go Code
+**MANDATORY: Format all Go files before committing changes.**
+
+After making any changes to `.go` files (props, utils, etc.), you MUST run:
+```bash
+gofmt -s -w path/to/file.go
+```
+
+Or format all Go files in the project:
+```bash
+find go -name "*.go" -not -path "*/node_modules/*" -exec gofmt -s -w {} \;
+```
+
+**Key Points:**
+- Use `gofmt -s` flag (simplifies code)
+- GitHub Actions will fail if code is not formatted
+- This includes all `.go` files in the `go/` directory
+- Generated `*_templ.go` files are automatically formatted by templ
+
+**Common Errors:**
+- `File is not gofmt-ed with -s` - means you forgot to format
+- Always format after creating or editing prop files
+- Always format after creating utility functions
+
 ---
 
 ## Common Pitfalls to Avoid

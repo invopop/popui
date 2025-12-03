@@ -1073,7 +1073,7 @@ func AppStepThree() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = popui.InputRadio(props.InputRadio{
+					templ_7745c5c3_Err = popui.Radio(props.Radio{
 						Name:        "type",
 						Label:       "Firma digital con certificado de representación legal",
 						Description: "Recomendado. No necesitarás subir más información.",
@@ -1087,7 +1087,7 @@ func AppStepThree() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = popui.InputRadio(props.InputRadio{
+					templ_7745c5c3_Err = popui.Radio(props.Radio{
 						Name:        "type",
 						Label:       "Firma manuscrita",
 						Description: "Necesitarás subir un documento de representación legal y tu documento de identidad.",

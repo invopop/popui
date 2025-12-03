@@ -290,39 +290,41 @@ templ formSection() {
 					}
 				}
 			}
-			@popui.InputRadioCard(props.InputRadio{
+			@popui.Radio(props.Radio{
 				Name:    "sandbox",
 				Label:   "Sandbox",
 				Value:   "true",
+				Variant: "card",
 				Checked: true,
 			})
-			@popui.InputRadioCard(props.InputRadio{
+			@popui.Radio(props.Radio{
 				Name:        "sandbox",
 				Label:       "Live",
 				Value:       "true",
+				Variant:     "card",
 				Checked:     false,
 				Description: "For production, issues valid invoices.",
 			})
-			@popui.InputRadio(props.InputRadio{
+			@popui.Radio(props.Radio{
 				Name:    "sandbox",
 				Label:   "Regular radio option 1",
 				Value:   "regular-1",
 				Checked: false,
 			})
-			@popui.InputRadio(props.InputRadio{
+			@popui.Radio(props.Radio{
 				Name:    "sandbox",
 				Label:   "Regular radio option 2",
 				Value:   "regular-2",
 				Checked: false,
 			})
 			<div class={ classes.InputTextGroup }>
-				@popui.InputRadioTheme(props.InputRadioTheme{
+				@popui.Radio(props.Radio{
 					Name:    "theme",
 					Value:   props.ColorSherwoodValue + "," + props.ColorBgSherwoodValue,
 					Variant: props.ColorSherwood,
 					Checked: true,
 				})
-				@popui.InputRadioTheme(props.InputRadioTheme{
+				@popui.Radio(props.Radio{
 					Name:    "theme",
 					Value:   props.ColorMetalValue + "," + props.ColorBgMetalValue,
 					Variant: props.ColorMetal,

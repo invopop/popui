@@ -1,0 +1,34 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ RadioWithDescription() {
+	@popui.OptionGroup(props.OptionGroup{
+		Label: "Select your subscription",
+	}) {
+		@popui.Radio(props.Radio{
+			Name:        "subscription",
+			Value:       "free",
+			Label:       "Free",
+			Description: "Perfect for personal projects and testing.",
+			Checked:     true,
+		})
+		@popui.Radio(props.Radio{
+			Name:        "subscription",
+			Value:       "pro",
+			Label:       "Pro - $9/month",
+			Description: "Best for professionals and small teams.",
+		})
+		@popui.Radio(props.Radio{
+			Name:        "subscription",
+			Value:       "enterprise",
+			Label:       "Enterprise",
+			Description: "Custom pricing for large organizations.",
+		})
+	}
+}
+```

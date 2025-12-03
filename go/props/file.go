@@ -1,8 +1,8 @@
 package props
 
 import (
-"github.com/a-h/templ"
-"github.com/google/uuid"
+	"github.com/a-h/templ"
+	"github.com/google/uuid"
 )
 
 // InputFile defines the properties for the InputFile and FileUpload components.

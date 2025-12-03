@@ -1,0 +1,118 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
+)
+
+// Radio provides an input with type radio and appropriate styling.
+// Radio buttons with the same Name form a group where only one can be selected.
+// If no ID is provided, one will be generated to ensure the label is correctly linked.
+// Supports variants: "card" for card-style radios, or theme colors (sherwood, ocean, grape, metal, cosmos).
+templ Radio(p ...props.Radio) {
+	{{ radio := props.First(p).GenerateID() }}
+	if radio.Variant == "card" {
+		@radioCard(radio)
+	} else if radio.Variant != "" && isThemeVariant(radio.Variant) {
+		@radioTheme(radio)
+	} else {
+		@radioDefault(radio)
+	}
+}
+
+// radioDefault provides the default radio button style.
+templ radioDefault(radio props.Radio) {
+	<div class="flex items-center gap-2 [&>input:disabled+label]:opacity-30">
+		@radioInput(radio)
+		<label
+			for={ radio.ID }
+			class={
+				utils.TwMerge(
+					"font-sans cursor-pointer",
+					utils.Clsx(map[string]bool{
+						"flex flex-col": radio.Description != "",
+					}),
+				),
+			}
+		>
+			if radio.Description != "" {
+				<span class="text-base text-foreground font-medium">{ radio.Label }</span>
+				<span class="text-sm text-foreground-default-secondary">{ radio.Description }</span>
+			} else if radio.Label != "" {
+				<span class="text-base text-foreground-default-secondary">{ radio.Label }</span>
+			} else {
+				{ children... }
+			}
+		</label>
+	</div>
+}
+
+// radioCard provides a card-style radio button with description.
+templ radioCard(radio props.Radio) {
+	<label
+		for={ radio.ID }
+		class={
+			utils.TwMerge(
+				"has-checked:border-border-selected-bold has-checked:shadow-active has-[input:not(:checked)]:border-border-default-secondary border rounded-lg w-full text-left cursor-pointer block",
+				radio.Class,
+			),
+		}
+	>
+		<div class="py-2 pr-2 pl-3 flex items-start justify-between">
+			<div class="flex flex-col space-y-0.5">
+				<span class="text-base text-foreground font-medium">{ radio.Label }</span>
+				if radio.Description != "" {
+					<span class="text-sm text-foreground-default-secondary">{ radio.Description }</span>
+				}
+			</div>
+			@radioInput(radio)
+		</div>
+	</label>
+}
+
+// radioTheme provides a circular theme color radio button.
+templ radioTheme(radio props.Radio) {
+	{{ radio = radio.ApplyThemeColor() }}
+	@radioInput(radio)
+}
+
+templ radioInput(p props.Radio) {
+	<input
+		type="radio"
+		id={ p.ID }
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
+		if p.Checked {
+			checked
+		}
+		if p.Autofocus {
+			autofocus
+		}
+		if p.Disabled {
+			disabled
+		}
+		class={
+			utils.TwMerge(
+				utils.Clsx(map[string]bool{
+					"form-radio h-5 w-5 border-border-default-secondary hover:border-border-default-secondary-hover text-background-accent focus:ring-0 focus:ring-offset-0 cursor-pointer disabled:cursor-not-allowed": !isThemeVariant(p.Variant),
+					"relative w-7 h-7 rounded-full border-2 border-transparent cursor-pointer p-0 ring-0 appearance-none bg-none [&:checked]:bg-none [&:checked]:after:content-[''] [&:checked]:after:absolute [&:checked]:after:top-1/2 [&:checked]:after:left-1/2 [&:checked]:after:-translate-x-1/2 [&:checked]:after:-translate-y-1/2 [&:checked]:after:w-5 [&:checked]:after:h-5 [&:checked]:after:bg-[url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M15%205.10547L8.33333%2014.5792L5%2011.1841%22%20stroke%3D%22white%22%20stroke-width%3D%221.1%22%2F%3E%3C%2Fsvg%3E')] [&:checked]:after:bg-contain [&:checked]:after:bg-no-repeat [&:checked]:after:bg-center [&:checked]:after:pointer-events-none": isThemeVariant(p.Variant),
+				}),
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	/>
+}
+
+func isThemeVariant(variant string) bool {
+	switch variant {
+	case props.ColorSherwood, props.ColorOcean, props.ColorGrape, props.ColorMetal, props.ColorCosmos:
+		return true
+	default:
+		return false
+	}
+}

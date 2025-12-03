@@ -51,6 +51,9 @@ func main() {
 		"components/image/index.html": func() error {
 			return renderPage(publicPath, "components/image/index.html", pages.Image())
 		},
+		"components/radio/index.html": func() error {
+			return renderPage(publicPath, "components/radio/index.html", pages.Radio())
+		},
 		"examples/index.html": func() error {
 			return renderPage(publicPath, "examples/index.html", examples.Admin())
 		},

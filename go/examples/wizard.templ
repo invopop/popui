@@ -213,14 +213,14 @@ templ AppStepThree() {
 						@popui.Subtitle() {
 							1. ¿Cómo vas a firmar el acuerdo?
 						}
-						@popui.InputRadio(props.InputRadio{
+						@popui.Radio(props.Radio{
 							Name:        "type",
 							Label:       "Firma digital con certificado de representación legal",
 							Description: "Recomendado. No necesitarás subir más información.",
 							Value:       "digital",
 							Checked:     true,
 						})
-						@popui.InputRadio(props.InputRadio{
+						@popui.Radio(props.Radio{
 							Name:        "type",
 							Label:       "Firma manuscrita",
 							Description: "Necesitarás subir un documento de representación legal y tu documento de identidad.",

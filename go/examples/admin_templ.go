@@ -1366,10 +1366,11 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputRadioCard(props.InputRadio{
+			templ_7745c5c3_Err = popui.Radio(props.Radio{
 				Name:    "sandbox",
 				Label:   "Sandbox",
 				Value:   "true",
+				Variant: "card",
 				Checked: true,
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -1379,10 +1380,11 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputRadioCard(props.InputRadio{
+			templ_7745c5c3_Err = popui.Radio(props.Radio{
 				Name:        "sandbox",
 				Label:       "Live",
 				Value:       "true",
+				Variant:     "card",
 				Checked:     false,
 				Description: "For production, issues valid invoices.",
 			}).Render(ctx, templ_7745c5c3_Buffer)
@@ -1393,7 +1395,7 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputRadio(props.InputRadio{
+			templ_7745c5c3_Err = popui.Radio(props.Radio{
 				Name:    "sandbox",
 				Label:   "Regular radio option 1",
 				Value:   "regular-1",
@@ -1406,7 +1408,7 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputRadio(props.InputRadio{
+			templ_7745c5c3_Err = popui.Radio(props.Radio{
 				Name:    "sandbox",
 				Label:   "Regular radio option 2",
 				Value:   "regular-2",
@@ -1441,7 +1443,7 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputRadioTheme(props.InputRadioTheme{
+			templ_7745c5c3_Err = popui.Radio(props.Radio{
 				Name:    "theme",
 				Value:   props.ColorSherwoodValue + "," + props.ColorBgSherwoodValue,
 				Variant: props.ColorSherwood,
@@ -1450,7 +1452,7 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputRadioTheme(props.InputRadioTheme{
+			templ_7745c5c3_Err = popui.Radio(props.Radio{
 				Name:    "theme",
 				Value:   props.ColorMetalValue + "," + props.ColorBgMetalValue,
 				Variant: props.ColorMetal,

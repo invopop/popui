@@ -324,27 +324,12 @@ input:checked + .popui-switch__input:before {
 }
 
 /* Range */
-.popui-range__input {
-  --c: #008852;
-  width: 100%;
-  --_c: color-mix(in srgb, var(--c), #000 var(--p, 0%));
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: none;
-  cursor: pointer;
-  overflow: hidden;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-}
 .popui-range__input::-webkit-slider-thumb {
   height: 12px;
   width: 12px;
-  background: var(--_c);
+  background: var(--color-background-accent);
   border-radius: 50%;
-  border-image: linear-gradient(90deg, var(--_c) 50%, #f3f4f6 0) 0 1 / calc(50% - 4px / 2) 100vw/0
-    100vw;
+  border-image: linear-gradient(90deg, var(--color-background-accent) 50%, var(--color-border-default-secondary) 0) 0 1 / calc(50% - 4px / 2) 100vw/0 100vw;
   -webkit-appearance: none;
   appearance: none;
   transition: 0.3s;
@@ -352,18 +337,12 @@ input:checked + .popui-switch__input:before {
 .popui-range__input::-moz-range-thumb {
   height: 12px;
   width: 12px;
-  background: var(--_c);
+  background: var(--color-background-accent);
   border-radius: 50%;
-  border-image: linear-gradient(90deg, var(--_c) 50%, #f3f4f6 0) 0 1 / calc(50% - 4px / 2) 100vw/0
-    100vw;
+  border-image: linear-gradient(90deg, var(--color-background-accent) 50%, var(--color-border-default-secondary) 0) 0 1 / calc(50% - 4px / 2) 100vw/0 100vw;
   -webkit-appearance: none;
   appearance: none;
   transition: 0.3s;
-}
-@supports not (color: color-mix(in srgb, red, red)) {
-  input {
-    --_c: var(--c);
-  }
 }
 .popui-range__input ~ datalist > option {
   color: var(--Neutral-Solid-40, #9ca3af);

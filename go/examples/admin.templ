@@ -340,12 +340,12 @@ templ formSection() {
 				Checked: true,
 				Variant: "switch",
 			})
-			@popui.InputRange(props.InputRange{
-				Label: "Docs per month (1 pop)",
-				Min:   "1",
-				Max:   "9",
-				Step:  "1",
-				ListOptions: []props.RangeListOptions{
+			@popui.Slider(props.Slider{
+				ID:   "docs_per_month",
+				Min:  "1",
+				Max:  "9",
+				Step: "1",
+				ListOptions: []props.SliderListOption{
 					{Value: "40", Label: "40"},
 					{Value: "100", Label: "100"},
 					{Value: "200", Label: "200"},
@@ -356,7 +356,11 @@ templ formSection() {
 					{Value: "10000", Label: "10K"},
 					{Value: "100000", Label: "20K+"},
 				},
-			})
+			}) {
+				@popui.InputLabel(props.Label{ID: "docs_per_month"}) {
+					Docs per month (1 pop)
+				}
+			}
 			<div class="flex gap-2">
 				@popui.Button(props.Button{Variant: "primary"}) {
 					@icons.AddCircle()

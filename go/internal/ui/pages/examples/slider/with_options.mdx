@@ -1,0 +1,20 @@
+```go
+@popui.Slider(props.Slider{
+	ID:   "size",
+	Name: "size",
+	Min:  "0",
+	Max:  "4",
+	Value: "2",
+	ListOptions: []props.SliderListOption{
+		{Value: "0", Label: "XS"},
+		{Value: "1", Label: "S"},
+		{Value: "2", Label: "M"},
+		{Value: "3", Label: "L"},
+		{Value: "4", Label: "XL"},
+	},
+}) {
+	@popui.InputLabel(props.Label{ID: "size"}) {
+		Size
+	}
+}
+```

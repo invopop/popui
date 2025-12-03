@@ -1,0 +1,56 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
+	"strconv"
+)
+
+// Slider provides a range slider input element.
+// If no ID is provided, one will be generated.
+templ Slider(p ...props.Slider) {
+	{{ prp := props.First(p) }}
+	{{ prp = prp.GenerateID() }}
+	<div>
+		{ children... }
+		<input
+			type="range"
+			class={ utils.TwMerge("w-full appearance-none bg-transparent cursor-pointer overflow-hidden my-2 rounded-md", "popui-range__input", prp.Class) }
+			id={ prp.ID }
+			if prp.Min != "" {
+				min={ prp.Min }
+			}
+			if prp.Max != "" {
+				max={ prp.Max }
+			}
+			if prp.Step != "" {
+				step={ prp.Step }
+			}
+			if prp.Name != "" {
+				name={ prp.Name }
+			}
+			if prp.Value != "" {
+				value={ prp.Value }
+			}
+			if prp.ListOptions != nil {
+				list={ prp.ID + "_list" }
+			}
+			{ prp.Attributes... }
+		/>
+		if prp.ListOptions != nil {
+			<datalist
+				id={ prp.ID + "_list" }
+				class={ sliderDatalist(len(prp.ListOptions)) }
+			>
+				for _, option := range prp.ListOptions {
+					<option value={ option.Value } label={ option.Label }></option>
+				}
+			</datalist>
+		}
+	</div>
+}
+
+css sliderDatalist(size int) {
+	display: flex;
+	--list-length: { strconv.Itoa(size - 1) };
+}

@@ -540,9 +540,9 @@ When child elements need to respond to parent state:
 3. Refresh browser at `http://localhost:3000/docs`
 
 ### ⚠️ CRITICAL: Always Format Go Code
-**MANDATORY: Format all Go files before committing changes.**
+**MANDATORY: Format all Go files before committing changes or at the end of your session.**
 
-After making any changes to `.go` files (props, utils, etc.), you MUST run:
+When you're done with all your changes to `.go` files (props, utils, etc.), run:
 ```bash
 gofmt -s -w path/to/file.go
 ```
@@ -557,11 +557,12 @@ find go -name "*.go" -not -path "*/node_modules/*" -exec gofmt -s -w {} \;
 - GitHub Actions will fail if code is not formatted
 - This includes all `.go` files in the `go/` directory
 - Generated `*_templ.go` files are automatically formatted by templ
+- **No need to format after every single change** - do it at the end of your session or before committing
+- If you follow Go standards and proper indentation when writing code, formatting may not be needed at all
 
 **Common Errors:**
-- `File is not gofmt-ed with -s` - means you forgot to format
-- Always format after creating or editing prop files
-- Always format after creating utility functions
+- `File is not gofmt-ed with -s` - means you forgot to format before committing
+- Run formatting at the end of the session, not after every change
 
 ---
 

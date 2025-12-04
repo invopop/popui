@@ -379,22 +379,22 @@ templ formSection() {
 }
 
 templ readonlySection() {
-	@popui.DescList() {
-		@popui.DescRow() {
-			<dt>First name</dt>
-			<dd>Facundo</dd>
-		}
-		@popui.DescRow() {
-			<dt>Surname</dt>
-			<dd>Velazquez</dd>
-		}
-		@popui.DescRow() {
-			<dt>Hobbies</dt>
-			<dd>I like to write long texts so they can not fit on different popui layouts</dd>
-		}
-		@popui.DescRow() {
-			<dt>Rich text</dt>
-			<dd>
+	@popui.DescriptionList() {
+		@popui.DescriptionListItem(props.DescriptionListItem{
+			Label: "First name",
+			Value: "Facundo",
+		})
+		@popui.DescriptionListItem(props.DescriptionListItem{
+			Label: "Surname",
+			Value: "Velazquez",
+		})
+		@popui.DescriptionListItem(props.DescriptionListItem{
+			Label: "Hobbies",
+			Value: "I like to write long texts so they can not fit on different popui layouts",
+		})
+		@popui.DescriptionListItem() {
+			@popui.DT() { Rich text }
+			@popui.DD() {
 				@popui.Prose() {
 					Here goes some <strong>bold sentence</strong> and some list
 					<ul>
@@ -408,7 +408,7 @@ templ readonlySection() {
 						</p>
 					</blockquote>
 				}
-			</dd>
+			}
 		}
 	}
 	@popui.AnchorButton(props.AnchorButton{

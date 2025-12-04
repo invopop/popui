@@ -9,6 +9,12 @@ func slugify(title string) string {
 	return "/components/" + strings.ToLower(strings.ReplaceAll(title, " ", "-"))
 }
 
+templ sidebarLink(href, title, currentPath string) {
+	<a href={ templ.URL(href) } class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify(title)) }>
+		{ title }
+	</a>
+}
+
 templ DocsLayout(title, description string) {
 	@BaseLayout(title, description) {
 		{{ currentPath := slugify(title) }}
@@ -35,42 +41,24 @@ templ DocsLayout(title, description string) {
 							<p class="text-xs font-medium text-foreground-default-secondary">Components</p>
 						</div>
 						<div class="flex flex-col gap-0.5">
-							<a href="/components/accordion" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Accordion")) }>
-								Accordion
-							</a>
-							<a href="/components/avatar" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Avatar")) }>
-								Avatar
-							</a>
-							<a href="/components/button" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Button")) }>
-								Button
-							</a>
-							<a href="/components/card" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Card")) }>
-								Card
-							</a>
-							<a href="/components/checkbox" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Checkbox")) }>
-								Checkbox
-							</a>
-							<a href="/components/fieldset" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Fieldset")) }>
-								Fieldset
-							</a>
-							<a href="/components/file" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("File")) }>
-								File
-							</a>
-							<a href="/components/image" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Image")) }>
-								Image
-							</a>
-							<a href="/components/input" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Input")) }>
-								Input
-							</a>
-							<a href="/components/label" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Label")) }>
-								Label
-							</a>
-							<a href="/components/radio" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Radio")) }>
-								Radio
-							</a>
-							<a href="/components/slider" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify("Slider")) }>
-								Slider
-							</a>
+							@sidebarLink("/components/accordion", "Accordion", currentPath)
+							@sidebarLink("/components/avatar", "Avatar", currentPath)
+							@sidebarLink("/components/button", "Button", currentPath)
+							@sidebarLink("/components/card", "Card", currentPath)
+							@sidebarLink("/components/checkbox", "Checkbox", currentPath)
+							@sidebarLink("/components/description-list", "Description List", currentPath)
+							@sidebarLink("/components/empty-state", "Empty State", currentPath)
+							@sidebarLink("/components/fieldset", "Fieldset", currentPath)
+							@sidebarLink("/components/file", "File", currentPath)
+							@sidebarLink("/components/flash-message", "Flash Message", currentPath)
+							@sidebarLink("/components/image", "Image", currentPath)
+							@sidebarLink("/components/input", "Input", currentPath)
+							@sidebarLink("/components/label", "Label", currentPath)
+							@sidebarLink("/components/notification", "Notification", currentPath)
+							@sidebarLink("/components/radio", "Radio", currentPath)
+							@sidebarLink("/components/separator", "Separator", currentPath)
+							@sidebarLink("/components/slider", "Slider", currentPath)
+							@sidebarLink("/components/typography", "Typography", currentPath)
 						</div>
 					</div>
 				</div>

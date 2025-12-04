@@ -1,0 +1,16 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ NotificationInfo() {
+	@popui.Notification(props.Notification{
+		Type:        "info",
+		Text:        "New feature available",
+		Description: "Check out the new reporting dashboard in your settings.",
+	})
+}
+```

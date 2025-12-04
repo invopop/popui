@@ -1,0 +1,124 @@
+// Package pages provides documentation pages for PopUI components.
+package pages
+
+import (
+	_ "embed"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/layouts"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+//go:embed examples/description_list/default.mdx
+var descriptionListDefaultCode string
+
+//go:embed examples/description_list/custom_width.mdx
+var descriptionListCustomWidthCode string
+
+//go:embed examples/description_list/rich_text.mdx
+var descriptionListRichTextCode string
+
+templ DescriptionList() {
+	@layouts.DocsLayout("Description List", "Semantic HTML definition list for displaying term-description pairs.") {
+		@modules.Example(modules.ExampleProps{
+			Code: descriptionListDefaultCode,
+		}) {
+			@popui.DescriptionList() {
+				@popui.DescriptionListItem(props.DescriptionListItem{
+					Label: "Name",
+					Value: "John Doe",
+				})
+				@popui.DescriptionListItem(props.DescriptionListItem{
+					Label: "Email",
+					Value: "john@example.com",
+				})
+				@popui.DescriptionListItem(props.DescriptionListItem{
+					Label: "Role",
+					Value: "Administrator",
+				})
+			}
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Custom Width",
+			Description: "Override the default width to fit your layout.",
+			Code:        descriptionListCustomWidthCode,
+		}) {
+			@popui.DescriptionList(props.DescriptionList{
+				Class: "w-full",
+			}) {
+				@popui.DescriptionListItem(props.DescriptionListItem{
+					Label: "Company",
+					Value: "Acme Corporation",
+				})
+				@popui.DescriptionListItem(props.DescriptionListItem{
+					Label: "Address",
+					Value: "123 Main Street, City, Country",
+				})
+			}
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Rich Text Content",
+			Description: "Use DT and DD components for complex HTML content.",
+			Code:        descriptionListRichTextCode,
+		}) {
+			@popui.DescriptionList() {
+				@popui.DescriptionListItem(props.DescriptionListItem{
+					Label: "Name",
+					Value: "John Doe",
+				})
+				@popui.DescriptionListItem() {
+					@popui.DT() { Bio }
+					@popui.DD() {
+						@popui.Prose() {
+							<p>Software engineer with expertise in <strong>Go</strong> and <strong>TypeScript</strong>.</p>
+							<ul>
+								<li>10+ years experience</li>
+								<li>Open source contributor</li>
+							</ul>
+						}
+					}
+				}
+			}
+		}
+		@modules.Section("API Reference", "api") {
+			@modules.APITable(modules.APITableProps{
+				Title:       "DescriptionList",
+				Description: "Container for definition list items (dl element).",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the list element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with list styles"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+				},
+			})
+			@modules.APITable(modules.APITableProps{
+				Title:       "DescriptionListItem",
+				Description: "Individual item with label and value, rendered as dt/dd pair.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the item element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with item styles"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+					{Name: "Label", Type: "string", Default: "", Description: "The term or label to display (dt element)"},
+					{Name: "Value", Type: "string", Default: "", Description: "The description or value to display (dd element)"},
+				},
+			})
+			@modules.APITable(modules.APITableProps{
+				Title:       "DT",
+				Description: "Definition term element (dt) with proper styling for use in DescriptionListItem.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+				},
+			})
+			@modules.APITable(modules.APITableProps{
+				Title:       "DD",
+				Description: "Definition description element (dd) with proper styling for use in DescriptionListItem.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+				},
+			})
+		}
+	}
+}

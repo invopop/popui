@@ -53,7 +53,7 @@ templ PageContent() {
 // Title and Description can be passed as prop
 templ PageSection(p props.PageSection) {
 	<div class="w-full">
-		@HorizontalDivider()
+		@Separator()
 		<div
 			class={
 				templ.KV(classes.PageSection, p.Class == ""),

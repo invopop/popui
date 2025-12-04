@@ -42,11 +42,20 @@ func main() {
 		"components/checkbox/index.html": func() error {
 			return renderPage(publicPath, "components/checkbox/index.html", pages.Checkbox())
 		},
+		"components/description-list/index.html": func() error {
+			return renderPage(publicPath, "components/description-list/index.html", pages.DescriptionList())
+		},
+		"components/empty-state/index.html": func() error {
+			return renderPage(publicPath, "components/empty-state/index.html", pages.EmptyState())
+		},
 		"components/fieldset/index.html": func() error {
 			return renderPage(publicPath, "components/fieldset/index.html", pages.Fieldset())
 		},
 		"components/file/index.html": func() error {
 			return renderPage(publicPath, "components/file/index.html", pages.File())
+		},
+		"components/flash-message/index.html": func() error {
+			return renderPage(publicPath, "components/flash-message/index.html", pages.FlashMessage())
 		},
 		"components/image/index.html": func() error {
 			return renderPage(publicPath, "components/image/index.html", pages.Image())
@@ -57,11 +66,20 @@ func main() {
 		"components/label/index.html": func() error {
 			return renderPage(publicPath, "components/label/index.html", pages.Label())
 		},
+		"components/notification/index.html": func() error {
+			return renderPage(publicPath, "components/notification/index.html", pages.Notification())
+		},
 		"components/radio/index.html": func() error {
 			return renderPage(publicPath, "components/radio/index.html", pages.Radio())
 		},
+		"components/separator/index.html": func() error {
+			return renderPage(publicPath, "components/separator/index.html", pages.Separator())
+		},
 		"components/slider/index.html": func() error {
 			return renderPage(publicPath, "components/slider/index.html", pages.Slider())
+		},
+		"components/typography/index.html": func() error {
+			return renderPage(publicPath, "components/typography/index.html", pages.Typography())
 		},
 		"examples/index.html": func() error {
 			return renderPage(publicPath, "examples/index.html", examples.Admin())

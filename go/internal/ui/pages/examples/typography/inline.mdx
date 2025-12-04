@@ -1,0 +1,15 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+)
+
+templ TypographyInline() {
+	@popui.P() {
+		<span>This paragraph contains </span>
+		@popui.Mark() { highlighted text }
+		<span> using the Mark component.</span>
+	}
+}
+```

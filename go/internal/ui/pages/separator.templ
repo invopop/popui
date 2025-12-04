@@ -1,0 +1,54 @@
+// Package pages provides documentation pages for PopUI components.
+package pages
+
+import (
+	_ "embed"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/layouts"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+//go:embed examples/separator/default.mdx
+var separatorDefaultCode string
+
+//go:embed examples/separator/custom_spacing.mdx
+var separatorCustomSpacingCode string
+
+templ Separator() {
+	@layouts.DocsLayout("Separator", "Horizontal divider with a dashed line for visual separation.") {
+		@modules.Example(modules.ExampleProps{
+			Code: separatorDefaultCode,
+		}) {
+			<div class="w-full">
+				@popui.P() { Content above }
+				@popui.Separator()
+				@popui.P() { Content below }
+			</div>
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Custom Spacing",
+			Description: "Adjust vertical spacing with custom classes.",
+			Code:        separatorCustomSpacingCode,
+		}) {
+			<div class="w-full">
+				@popui.P() { Content above }
+				@popui.Separator(props.Separator{
+					Class: "my-8",
+				})
+				@popui.P() { Content below }
+			</div>
+		}
+		@modules.Section("API Reference", "api") {
+			@modules.APITable(modules.APITableProps{
+				Title:       "Separator",
+				Description: "Horizontal separator component with dashed line styling.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the separator element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with separator styles"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+				},
+			})
+		}
+	}
+}

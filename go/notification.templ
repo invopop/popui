@@ -1,0 +1,52 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/icons"
+)
+
+// Notification provides a wrapper for a text to be shown as feedback.
+// Valid types are: info, warning, error, success
+templ Notification(opts ...props.Notification) {
+	{{ p := props.First(opts) }}
+	<div
+		class={
+			utils.TwMerge(
+				"flex px-3 py-2 justify-start items-start gap-2 rounded-lg text-base mb-4",
+				notificationClasses(p.Type),
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		if p.Type != "" {
+			<div class="mt-1">
+				if p.Type == "error" {
+					@icons.Failure()
+				} else if p.Type == "warning" {
+					@icons.Alert()
+				}
+			</div>
+		}
+		<div>
+			if p.Text != "" || p.Description != "" {
+				<p class="font-medium">{ p.Text }</p>
+				<p class="text-foreground-default-secondary">{ p.Description }</p>
+			} else {
+				{ children... }
+			}
+		</div>
+	</div>
+}
+
+func notificationClasses(notifType string) string {
+	return utils.Clsx(
+		map[string]bool{
+			"bg-background-info text-foreground-info":         notifType == "info",
+			"bg-background-warning text-foreground-warning":   notifType == "warning",
+			"bg-background-critical text-foreground-critical": notifType == "error",
+			"bg-background-success text-foreground-success":   notifType == "success",
+		},
+	)
+}

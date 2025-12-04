@@ -1,0 +1,41 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/icons"
+)
+
+// FlashMessage provides a toast message to be shown as feedback.
+// Valid types are: success
+templ FlashMessage(opts ...props.FlashMessage) {
+	{{ p := props.First(opts) }}
+	<div
+		class={
+			utils.TwMerge(
+				"text-sm font-semibold text-foreground flex items-center gap-1 opacity-0",
+				flashMessageClasses(p.Type),
+				p.Class,
+			),
+		}
+		style="animation: flashMessage 5.5s ease forwards;"
+		{ p.Attributes... }
+	>
+		if p.Type == "success" {
+			@icons.Success()
+		}
+		if p.Message != "" {
+			{ p.Message }
+		} else {
+			{ children... }
+		}
+	</div>
+}
+
+func flashMessageClasses(msgType string) string {
+	return utils.Clsx(
+		map[string]bool{
+			"text-foreground-accent": msgType == "success",
+		},
+	)
+}

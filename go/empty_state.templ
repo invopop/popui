@@ -1,0 +1,27 @@
+package popui
+
+import "github.com/invopop/popui/go/props"
+import "github.com/invopop/popui/go/utils"
+
+// EmptyState provides a layout for displaying an empty state illustration with some call to action
+templ EmptyState(opts ...props.EmptyState) {
+	{{ p := props.First(opts) }}
+	<div
+		class={
+			utils.TwMerge(
+				"flex flex-col items-center justify-center space-y-2 text-foreground-accent",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		@EmptyStateIcon()
+		@Subtitle() {
+			{ p.Title }
+		}
+		@Description() {
+			{ p.Description }
+		}
+		{ children... }
+	</div>
+}

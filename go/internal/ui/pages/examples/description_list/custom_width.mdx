@@ -1,0 +1,23 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ DescriptionListCustomWidth() {
+	@popui.DescriptionList(props.DescriptionList{
+		Class: "w-full",
+	}) {
+		@popui.DescriptionListItem(props.DescriptionListItem{
+			Label: "Company",
+			Value: "Acme Corporation",
+		})
+		@popui.DescriptionListItem(props.DescriptionListItem{
+			Label: "Address",
+			Value: "123 Main Street, City, Country",
+		})
+	}
+}
+```

@@ -512,7 +512,7 @@ func AppStepOne() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = popui.HorizontalDivider().Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = popui.Separator().Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

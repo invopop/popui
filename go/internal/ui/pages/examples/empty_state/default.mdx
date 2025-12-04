@@ -1,0 +1,19 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ EmptyStateDefault() {
+	@popui.EmptyState(props.EmptyState{
+		Title:       "No results found",
+		Description: "Try adjusting your search or filter to find what you're looking for.",
+	}) {
+		@popui.Button(props.Button{Variant: "primary"}) {
+			Clear filters
+		}
+	}
+}
+```

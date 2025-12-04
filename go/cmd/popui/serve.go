@@ -51,13 +51,19 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/button", s.docsButton)
 	e.GET("/components/card", s.docsCard)
 	e.GET("/components/checkbox", s.docsCheckbox)
+	e.GET("/components/description-list", s.docsDescriptionList)
+	e.GET("/components/empty-state", s.docsEmptyState)
 	e.GET("/components/fieldset", s.docsFieldset)
 	e.GET("/components/file", s.docsFile)
+	e.GET("/components/flash-message", s.docsFlashMessage)
 	e.GET("/components/image", s.docsImage)
 	e.GET("/components/input", s.docsInput)
 	e.GET("/components/label", s.docsLabel)
+	e.GET("/components/notification", s.docsNotification)
 	e.GET("/components/radio", s.docsRadio)
+	e.GET("/components/separator", s.docsSeparator)
 	e.GET("/components/slider", s.docsSlider)
+	e.GET("/components/typography", s.docsTypography)
 
 	// Examples (deprecated, for reference only)
 	e.GET("/examples", s.admin)
@@ -149,6 +155,36 @@ func (s *serveOpts) docsInput(c echo.Context) error {
 // docsLabel shows the label component documentation
 func (s *serveOpts) docsLabel(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Label())
+}
+
+// docsDescriptionList shows the description list component documentation
+func (s *serveOpts) docsDescriptionList(c echo.Context) error {
+	return render(c, http.StatusOK, pages.DescriptionList())
+}
+
+// docsEmptyState shows the empty state component documentation
+func (s *serveOpts) docsEmptyState(c echo.Context) error {
+	return render(c, http.StatusOK, pages.EmptyState())
+}
+
+// docsFlashMessage shows the flash message component documentation
+func (s *serveOpts) docsFlashMessage(c echo.Context) error {
+	return render(c, http.StatusOK, pages.FlashMessage())
+}
+
+// docsNotification shows the notification component documentation
+func (s *serveOpts) docsNotification(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Notification())
+}
+
+// docsSeparator shows the separator component documentation
+func (s *serveOpts) docsSeparator(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Separator())
+}
+
+// docsTypography shows the typography components documentation
+func (s *serveOpts) docsTypography(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Typography())
 }
 
 // render provides a wrapper around the component to make it nice to render.

@@ -1,0 +1,15 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+)
+
+templ SeparatorDefault() {
+	<div>
+		@popui.P() { Content above }
+		@popui.Separator()
+		@popui.P() { Content below }
+	</div>
+}
+```

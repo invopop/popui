@@ -1,0 +1,166 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/icons"
+)
+
+// P provides a paragraph element with default styling.
+templ P(opts ...props.P) {
+	{{ p := props.First(opts) }}
+	<p
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"font-sans text-base text-foreground",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</p>
+}
+
+// Title provides an h1 element with heading styling.
+templ Title(opts ...props.Title) {
+	{{ p := props.First(opts) }}
+	<h1
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"font-sans text-foreground text-2xl font-semibold",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</h1>
+}
+
+// Subtitle provides an h2 element with subheading styling.
+templ Subtitle(opts ...props.Subtitle) {
+	{{ p := props.First(opts) }}
+	<h2
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"font-sans text-base text-foreground font-medium",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</h2>
+}
+
+// Description provides a paragraph element with secondary text styling.
+templ Description(opts ...props.Description) {
+	{{ p := props.First(opts) }}
+	<p
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"text-foreground-default-secondary font-sans text-base",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</p>
+}
+
+// Info provides an info box with icon and text.
+templ Info(opts ...props.Info) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"font-sans text-sm text-foreground-default-secondary flex items-center gap-1",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		<div>
+			@InfoIcon()
+		</div>
+		<div class="flex-1">
+			{ children... }
+		</div>
+	</div>
+}
+
+// Warning provides a warning box with alert icon and text.
+templ Warning(opts ...props.Warning) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"font-sans text-sm text-foreground-default-secondary flex items-center gap-1",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		<div>
+			@icons.Alert()
+		</div>
+		<div class="flex-1">
+			<p class="font-sans text-base text-foreground-default-secondary">
+				{ children... }
+			</p>
+		</div>
+	</div>
+}
+
+// Mark provides a mark element for highlighted text.
+templ Mark(opts ...props.Mark) {
+	{{ p := props.First(opts) }}
+	<mark
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={ p.Class }
+		{ p.Attributes... }
+	>
+		{ children... }
+	</mark>
+}
+
+// Prose provides a wrapper for rendering raw HTML with default prose styling.
+templ Prose(opts ...props.Prose) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"prose",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</div>
+}

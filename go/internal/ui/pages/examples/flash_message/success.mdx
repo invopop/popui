@@ -1,0 +1,15 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ FlashMessageSuccess() {
+	@popui.FlashMessage(props.FlashMessage{
+		Type:    "success",
+		Message: "Saved",
+	})
+}
+```

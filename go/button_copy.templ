@@ -1,0 +1,41 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
+	"strconv"
+)
+
+// ButtonCopy renders text with a copy button.
+templ ButtonCopy(p props.ButtonCopy) {
+	<div class={ classes.ButtonCopy }>
+		<input
+			type="hidden"
+			data-copy-value
+			data-prefix-length={ strconv.Itoa(p.PrefixLength) }
+			data-suffix-length={ strconv.Itoa(p.SuffixLength) }
+			if ( p.Value != "") {
+				value={ p.Value }
+			}
+			{ p.Attrs... }
+		/>
+		<button
+			class={ classes.ButtonCopyText }
+			onclick="copyButtonValue(this)"
+		></button>
+		<button
+			class={ classes.ButtonCopyButton }
+			onclick="copyButtonValue(this)"
+		>
+			<div class={ classes.ButtonCopyIcon }>
+				@icons.Duplicate()
+			</div>
+		</button>
+		if p.CopiedText != "" {
+			<div class={ classes.ButtonCopyPopover }>
+				{ p.CopiedText }
+			</div>
+		}
+	</div>
+}

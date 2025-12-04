@@ -36,6 +36,9 @@ func main() {
 		"components/button/index.html": func() error {
 			return renderPage(publicPath, "components/button/index.html", pages.Button())
 		},
+		"components/breadcrumb/index.html": func() error {
+			return renderPage(publicPath, "components/breadcrumb/index.html", pages.Breadcrumb())
+		},
 		"components/card/index.html": func() error {
 			return renderPage(publicPath, "components/card/index.html", pages.Card())
 		},

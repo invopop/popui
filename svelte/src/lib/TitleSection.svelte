@@ -4,7 +4,7 @@
   let { title = '', children }: TitleSectionProps = $props()
 </script>
 
-<h1 class="text-neutral-800 font-medium text-lg font-sans tracking-tighter">
+<h1 class="text-foreground font-medium text-lg">
   {#if children}
     {@render children()}
   {:else}

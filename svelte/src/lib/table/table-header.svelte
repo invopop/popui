@@ -15,7 +15,7 @@
 <thead
   bind:this={ref}
   data-slot="table-header"
-  class={cn('[&_tr]:border-b [&_tr]:border-neutral-100 bg-white', className)}
+  class={cn('[&_tr]:border-b [&_tr]:border-border bg-background', className)}
   onclick={bubble('click')}
   onkeydown={bubble('keydown')}
 >

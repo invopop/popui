@@ -11,7 +11,7 @@
 <RangeCalendarPrimitive.HeadCell
   bind:ref
   class={cn(
-    'text-[#989AA4] w-(--cell-size) h-(--cell-size) text-sm font-normal border-b border-neutral-100 flex items-center justify-center',
+    'text-foreground-default-tertiary w-(--cell-size) h-(--cell-size) text-sm font-normal border-b border-border flex items-center justify-center',
     className
   )}
   {...restProps}

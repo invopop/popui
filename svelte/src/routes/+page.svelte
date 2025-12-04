@@ -11,6 +11,7 @@
   import DatePicker from '$lib/DatePicker.svelte'
   import BaseDropdown from '$lib/BaseDropdown.svelte'
   import AlertDialog from '$lib/AlertDialog.svelte'
+  import { toast } from 'svelte-sonner'
 
   let openDialog = $state(false)
 </script>
@@ -31,7 +32,7 @@
     {#snippet trigger()}
       <div class="border p-4">This is the trigger</div>
     {/snippet}
-    <div class="border border-red-300 p-4 bg-white">This is the content</div>
+    <div class="border border-red-300 p-4 bg-background">This is the content</div>
   </BaseDropdown>
 
   <BaseButton onclick={() => console.log('clicked')}>Hola</BaseButton>
@@ -106,3 +107,28 @@
   actionText="Discard & Exit"
   cancelText="Stay"
 />
+<button
+  onclick={() => {
+    toast.success('oli')
+  }}
+>
+  Show success toast
+</button>
+<button
+  onclick={() => {
+    toast.error('oli', { description: 'something went wrong' })
+  }}
+>
+  Show error toast
+</button>
+<button
+  onclick={() => {
+    toast.info('oli', {
+      description: 'something went neutral',
+      action: { label: 'Got it', onClick: () => console.log('info action clicked') },
+      duration: 80000
+    })
+  }}
+>
+  Show info toast
+</button>

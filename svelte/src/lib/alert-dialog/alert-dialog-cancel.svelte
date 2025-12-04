@@ -13,9 +13,11 @@
 <AlertDialogPrimitive.Cancel
   bind:ref
   data-slot="alert-dialog-cancel"
-  class={cn(buttonVariants({ variant: 'secondary' }), 'mt-2 sm:mt-0', className)}
+  class={cn(buttonVariants({ variant: 'secondary' }), 'group mt-2 sm:mt-0', className)}
   {onkeydown}
   {...restProps}
 >
-  {@render children?.()}
+  <div class="inline-flex items-center transition-transform group-active:translate-y-px">
+    {@render children?.()}
+  </div>
 </AlertDialogPrimitive.Cancel>

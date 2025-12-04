@@ -1,9 +1,9 @@
 <script lang="ts">
   import ProfileAvatar from './ProfileAvatar.svelte'
-  import type { AnyProp, CompanySelectorProps, DrawerOption } from './types.js'
+  import type { AnyProp, CompanySelectorProps, DrawerOption, DrawerGroup } from './types.js'
   import BaseDropdown from './BaseDropdown.svelte'
-  import DrawerContextWorkspace from './DrawerContextWorkspace.svelte'
-  import { DoubleArrow } from '@invopop/ui-icons'
+  import DrawerContext from './DrawerContext.svelte'
+  import { DoubleArrow, Workspace, AddCircle, ExternalLink } from '@invopop/ui-icons'
   import MenuItemCollapsible from './MenuItemCollapsible.svelte'
 
   let companyDropdown: BaseDropdown | undefined = $state()
@@ -21,6 +21,24 @@
   let country = $derived(selectedCompany?.country || '')
   let picture = $derived(selectedCompany?.logo_url || '')
   let isSandbox = $derived(selectedCompany?.sandbox)
+
+  let groups: DrawerGroup[] = [
+    {
+      label: 'Live',
+      slug: 'live',
+      emptyIcon: Workspace,
+      emptyTitle: 'No workspaces here',
+      emptyDescription: 'Create a workspace to start'
+    },
+    {
+      label: 'Sandbox',
+      slug: 'sandbox',
+      emptyIcon: Workspace,
+      emptyTitle: 'No workspaces here',
+      emptyDescription: 'Create a workspace to start'
+    }
+  ]
+
   let items = $derived([
     ...companies.map((c) => ({
       value: c.id,
@@ -28,8 +46,18 @@
       selected: c.slug === selectedCompany?.slug && !!c.sandbox === !!selectedCompany?.sandbox,
       country: c.country,
       picture: c.logo_url,
-      sandbox: c.sandbox
-    }))
+      sandbox: c.sandbox,
+      groupBy: c.sandbox ? 'sandbox' : 'live'
+    })),
+    {
+      separator: true
+    },
+    {
+      value: 'add',
+      label: 'Create workspace',
+      icon: AddCircle,
+      rightIcon: ExternalLink
+    }
   ] as DrawerOption[])
 
   function selectCompany(value: AnyProp) {
@@ -60,8 +88,8 @@
       active={isOpen}
       bold
     >
-      <ProfileAvatar {name} {picture} {country} dark large />
+      <ProfileAvatar {name} {picture} {country} dark variant="lg" />
     </MenuItemCollapsible>
   {/snippet}
-  <DrawerContextWorkspace {items} onclick={selectCompany} />
+  <DrawerContext {items} {groups} onclick={selectCompany} widthClass="w-[300px]" />
 </BaseDropdown>

@@ -16,13 +16,13 @@
 </script>
 
 {#snippet Fallback()}
-  <Icon src={ChevronRight} class="size-4" />
+  <Icon src={ChevronRight} class="size-4 shrink-0" />
 {/snippet}
 <RangeCalendarPrimitive.NextButton
   bind:ref
   class={cn(
-    buttonVariants({ variant, size: 'icon-sm' }),
-    'select-none disabled:opacity-50 rtl:rotate-180',
+    buttonVariants({ variant, size: 'sm' }),
+    'size-6 group select-none disabled:opacity-50 rtl:rotate-180',
     className
   )}
   children={children || Fallback}

@@ -35,11 +35,11 @@
       'justify-end': rightAlign,
       'text-sm': small,
       'text-base': !small,
-      'text-neutral-800': dark,
-      'text-neutral-500': !dark,
+      'text-foreground': dark,
+      'text-foreground-default-secondary': !dark,
       'justify-between': !compact,
       'w-full': full,
-      'border border-neutral-800/10 rounded-md pl-2.5 pr-2 py-[5px]': !full
+      'border border-border rounded-md pl-2.5 pr-2 py-[5px]': !full
     })
   )
 
@@ -65,6 +65,6 @@
     {formattedUuid}
   </button>
   <button class="p-1 cursor-pointer" onclick={handleIconClick}>
-    <Icon src={link ? ExternalLink : Duplicate} class="w-4 h-4 text-neutral-500" />
+    <Icon src={link ? ExternalLink : Duplicate} class="w-4 h-4 text-foreground-default-secondary" />
   </button>
 </div>

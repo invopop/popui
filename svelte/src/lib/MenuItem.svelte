@@ -36,18 +36,22 @@
   let leaveHoverTimeout: ReturnType<typeof setTimeout> | null = null
   let itemStyles = $derived(
     clsx(
-      { 'text-white font-medium': !isFolderItem },
-      { 'text-white-40': isFolderItem && !active },
-      { 'bg-white-10': active },
-      { 'border border-transparent hover:border-white-5 group p-2': collapsedSidebar },
-      { 'w-full px-2 py-1.5': !collapsedSidebar },
+      { 'text-foreground-inverse font-medium': !isFolderItem },
+      { 'text-foreground-inverse-secondary': isFolderItem && !active },
       {
-        'bg-white-10 border-white-5 text-white': active
+        'border border-transparent hover:bg-background-selected-inverse group p-[7px] size-8':
+          collapsedSidebar
       },
-      { 'hover:bg-white-5 focus:bg-white-10': !active }
+      { 'w-full px-2 py-1.5 h-8': !collapsedSidebar },
+      {
+        'bg-background-selected-inverse text-white': active
+      },
+      { 'hover:bg-background-selected-inverse': !active }
     )
   )
-  let iconStyles = $derived(clsx({ 'group-hover:text-white': collapsedSidebar }))
+  let iconStyles = $derived(
+    clsx({ 'group-hover:text-white text-icon-inverse-bold!': collapsedSidebar })
+  )
   let wrapperStyles = $derived(
     clsx({
       'ml-4 border-l border-white-10 pl-2 pt-0.5 relative': isFolderItem
@@ -106,11 +110,11 @@
     onmouseleave={handleBlur}
     onclick={handleClick}
     title={label}
-    class="cursor-pointer {itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-md"
+    class="cursor-pointer {itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-lg"
   >
-    <span class="flex items-center space-x-2">
+    <span class="flex items-center space-x-1.5">
       {#if resolvedIcon}
-        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 text-white-70" />
+        <Icon src={resolvedIcon} theme={iconTheme} class="{iconStyles} h-4 w-4 text-icon-inverse" />
       {/if}
       {#if !collapsedSidebar}
         <span class="whitespace-nowrap tracking-normal">{label}</span>

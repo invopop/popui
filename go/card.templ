@@ -110,8 +110,11 @@ templ CardProgressBar(opts ...props.CardProgressBar) {
 			if !p.HideCounter {
 				<div class={ classes.CardProgressBarHeaderAmount }>
 					@icons.Invopop()
-					<span class={ classes.CardProgressBarHeaderAmountCurrent }>{ f.Amount(num.MakeAmount(p.Current, 0)) }</span>
-					<span>/{ f.Amount(num.MakeAmount(p.Total, 0)) }</span>
+					<div>
+						<span class={ classes.CardProgressBarHeaderAmountCurrent }>{ f.Amount(num.MakeAmount(p.Current, 0)) }</span>
+						<span>/</span>
+						<span>{ f.Amount(num.MakeAmount(p.Total, 0)) }</span>
+					</div>
 				</div>
 			}
 		</div>

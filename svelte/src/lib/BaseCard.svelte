@@ -8,7 +8,6 @@
     title = '',
     description = '',
     type = 'default',
-    enabled = false,
     footer,
     onclick,
     ...rest
@@ -16,43 +15,49 @@
 </script>
 
 <button
-  class="cursor-pointer rounded-lg bg-white hover:bg-neutral-100 focus:bg-neutral-200 disabled:bg-neutral-50 disabled:pointer-events-none border border-neutral-100 p-3 flex flex-col min-w-[298px] min-h-[126px] text-left"
+  class="flex flex-col gap-4 p-3 min-w-[298px] bg-background border border-border rounded-xl cursor-pointer text-left transition-colors hover:border-border-default-secondary disabled:bg-background-default-secondary disabled:cursor-not-allowed disabled:pointer-events-none"
   disabled={type === 'soon'}
   {...rest}
   {onclick}
 >
-  <div class="flex flex-col items-start justify-center space-y-2 w-full">
-    <div class="flex items-center justify-between w-full">
-      <div class="rounded-md bg-white border border-neutral-100 p-1.5">
-        <img class="h-5 w-5 shrink-0" src={imageUrl} alt={imageAlt} />
+  <div class="flex flex-col gap-2 w-full flex-1">
+    <div class="flex items-start justify-between w-full">
+      <div
+        class="size-8 border border-border rounded-lg overflow-hidden flex items-center justify-center shrink-0"
+      >
+        <img class="size-5 shrink-0" src={imageUrl} alt={imageAlt} />
       </div>
-      <div class="flex items-center space-x-2">
-        {#if enabled}
-          <div
-            class="flex items-center space-x-1 rounded bg-neutral-50 border border-neutral-100 py-0.5 pl-1.5 pr-[5px] text-sm text-neutral-500 font-medium"
-          >
-            <div class="bg-positive-500 h-2 w-2 rounded-full"></div>
-            <span>Enabled</span>
-          </div>
-        {/if}
-        {#if type === 'beta'}
-          <TagBeta />
-        {:else if type === 'soon'}
-          <div
-            class="flex items-center space-x-1 rounded bg-neutral-50 border border-neutral-200 py-0.5 pl-1.5 pr-[5px] text-sm text-neutral-400 font-medium"
-          >
-            <span>Soon</span>
-          </div>
-        {/if}
-      </div>
+      {#if type === 'beta' || type === 'soon'}
+        <div class="flex gap-2 items-start">
+          {#if type === 'beta'}
+            <TagBeta />
+          {:else if type === 'soon'}
+            <div
+              class="flex items-center gap-2 px-[5px] py-0.5 rounded bg-background-default-secondary border border-border"
+            >
+              <span
+                class="font-medium text-sm leading-4 text-foreground-default-tertiary whitespace-nowrap"
+              >
+                Soon
+              </span>
+            </div>
+          {/if}
+        </div>
+      {/if}
     </div>
-    <h3 class="truncate text-base font-medium text-neutral-800 tracking-tight">{title}</h3>
+    <div class="flex flex-col gap-0.5 w-full flex-1">
+      <h3 class="font-medium text-sm leading-5 tracking-[-0.07px] text-foreground w-full">
+        {title}
+      </h3>
+      <p
+        class="font-normal text-sm leading-5 tracking-[-0.07px] text-foreground-default-secondary w-full"
+      >
+        {description}
+      </p>
+    </div>
   </div>
-  <p class="flex mt-0.5 text-base text-neutral-500 tracking-normal flex-1">
-    {description}
-  </p>
   {#if footer}
-    <div class="mt-5">
+    <div class="shrink-0">
       {@render footer?.()}
     </div>
   {/if}

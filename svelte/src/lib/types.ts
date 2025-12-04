@@ -7,13 +7,14 @@ export type IconTheme = 'default' | 'solid' | 'mini'
 export type IconPosition = 'right' | 'left'
 
 export type ButtonVariant =
-  | 'default'
+  | 'warning'
   | 'primary'
   | 'secondary'
-  | 'warning'
   | 'danger'
   | 'dark'
   | 'outline'
+  | 'ghost'
+  | 'dark-ghost'
 
 export type StatusType =
   | 'grey'
@@ -39,11 +40,19 @@ export type SidebarIcon = {
   iconTheme: IconTheme
 }
 
-export type Status = 'success' | 'warning' | 'error'
+export type Status = 'success' | 'warning' | 'error' | 'info' | 'neutral'
 
 export type SelectOption = {
   label: string
   value: AnyProp
+}
+
+export type DrawerGroup = {
+  label: string
+  slug: string
+  emptyIcon?: IconSource
+  emptyTitle?: string
+  emptyDescription?: string
 }
 
 export type DrawerOption = SelectOption & {
@@ -58,6 +67,10 @@ export type DrawerOption = SelectOption & {
   sandbox?: boolean
   iconClass?: string
   disabled?: boolean
+  locked?: boolean
+  groupBy?: string
+  useAvatar?: boolean
+  action?: Snippet
 }
 
 export type Company = {
@@ -144,18 +157,6 @@ export type TabItem = {
   warning?: boolean
 }
 
-export type EmptyStateIcon =
-  | 'invoices'
-  | 'contacts'
-  | 'parties'
-  | 'products'
-  | 'deliveries'
-  | 'orders'
-  | 'payments'
-  | 'pdf'
-  | 'file'
-  | 'no-results'
-  | 'no-results'
 
 export type DataListItem = {
   label: string
@@ -212,8 +213,7 @@ export interface AlertDialogProps {
     type?: 'button' | 'submit' | 'reset' | null;
     variant?: ButtonVariant;
     disabled?: boolean;
-    small?: boolean;
-    big?: boolean;
+    size?: 'sm' | 'md' | 'lg';
     dangerIcon?: boolean;
     shortcut?: boolean;
     fullwidth?: boolean;
@@ -229,18 +229,33 @@ export interface AlertDialogProps {
     title?: string;
     description?: string;
     type?: 'default' | 'soon' | 'beta';
-    enabled?: boolean;
     footer?: Snippet;
     [key: string]: any;
     onclick?: (event: MouseEvent) => void;
   }
 
   export interface BaseCounterProps {
-    content: number;
-    variant?: 'default' | 'light' | 'dark';
+    value: number;
+    theme?: 'light' | 'navigation' | 'accent';
   }
 
-  export interface BaseDropdownProps {
+export interface CounterWidgetProps {
+	label: string;
+	current: number;
+	total: number;
+	resetDate?: string;
+	icon?: IconSource;
+	allowOverage?: boolean;
+}
+
+export interface ProgressBarProps {
+	percentage?: number;
+	current?: number;
+	total?: number;
+	allowOverage?: boolean;
+}
+
+export interface BaseDropdownProps {
     isOpen?: boolean;
     fullWidth?: boolean;
     placement?: Placement;
@@ -252,7 +267,6 @@ export interface AlertDialogProps {
 
   export interface BaseFlagProps {
     country?: string;
-    width?: number;
   }
 
   export interface BaseTableProps {
@@ -335,19 +349,27 @@ export interface AlertDialogProps {
     onClickAction?: (args: {row: TableDataRow, action: AnyProp}) => void;
   }
 
+  export interface BreadcrumbProps {
+    breadcrumb: Breadcrumb;
+    isLast: boolean;
+    oncopied?: (label: string) => void;
+  }
+
   export interface BreadcrumbsProps {
     breadcrumbs?: Breadcrumb[];
     oncopied?: (label: string) => void;
   }
 
+  export type ButtonFileType = 'pdf' | 'xml' | 'png' | 'generic';
+
   export interface ButtonFileProps {
-    icon?: IconSource;
     name?: string;
     disabled?: boolean;
     date?: string;
-    iconColor?: StatusType;
+    fileType?: ButtonFileType;
     onPreview?: () => void;
     onDownload?: () => void;
+    class?: string;
     [key: string]: any
   }
 
@@ -367,6 +389,7 @@ export interface AlertDialogProps {
     description?: string;
     accentText?: string;
     checked?: boolean;
+    disabled?: boolean;
     icon?: IconSource | undefined;
     hideRadio?: boolean;
     footer?: Snippet;
@@ -386,11 +409,6 @@ export interface AlertDialogProps {
     collapsed?: boolean;
     onAdd?: () => void;
     onSelect?: (company: Company | null) => void;
-  }
-
-  export interface CounterWorkflowProps {
-    content: number | string;
-    variant?: 'default' | 'transparent';
   }
 
   export interface DataListItemProps {
@@ -417,22 +435,17 @@ export interface AlertDialogProps {
     onclick?: (value: AnyProp) => void;
     onselect?: (selected: DrawerOption[]) => void;
     children?: Snippet;
+    groups?: DrawerGroup[];
   }
 
   export interface DrawerContextItemProps {
     multiple?: boolean;
     item: DrawerOption;
     scrollIfSelected?: boolean;
-    workspace?: boolean;
     onclick?: (value: AnyProp) => void;
     onchange?: (item: DrawerOption) => void;
   }
 
-  export interface DrawerContextWorkspaceProps {
-    items?: DrawerOption[];
-    multiple?: boolean;
-    onclick?: (value: AnyProp) => void;
-  }
 
   export interface DropdownSelectProps {
     value?: AnyProp;
@@ -446,18 +459,12 @@ export interface AlertDialogProps {
     onSelect?: (value: AnyProp) => void;
   }
 
-  export interface EmptyStateIconProps {
-    icon?: IconSource | undefined;
+  export interface EmptyStateProps {
+    icon?: Snippet;
+    iconSource?: IconSource;
     title?: string;
     description?: string;
     check?: boolean;
-    children?: Snippet;
-  }
-
-  export interface EmptyStateIllustrationProps {
-    icon?: EmptyStateIcon | undefined;
-    title?: string;
-    description?: string;
     children?: Snippet;
   }
 
@@ -505,11 +512,6 @@ export interface AlertDialogProps {
     onView?: (slug: string) => void;
   }
 
-  export interface FormLayoutModalProps {
-    children?: Snippet;
-    footer?: Snippet;
-  }
-
   export interface GlobalSearchProps {
     collapsed?: boolean;
     onOpen?: () => void;
@@ -537,8 +539,10 @@ export interface AlertDialogProps {
 
   export interface InputRadioProps {
     checked?: boolean;
+    disabled?: boolean;
     id?: any;
     name?: string;
+    label?: string;
     onchange?: (checked: boolean) => void;
     [key: string]: any
   }
@@ -604,6 +608,7 @@ export interface AlertDialogProps {
     checked?: boolean;
     label?: string;
     onchange?: (checked: boolean) => void;
+    [key: string]: any
   }
 
   export interface MenuItemProps {
@@ -631,32 +636,20 @@ export interface AlertDialogProps {
   }
 
   export interface NotificationProps {
-    message?: string;
+    title?: string;
+    description?: string;
     type?: Status;
     children?: Snippet;
+    [key: string]: any
   }
 
   export interface ProfileAvatarProps {
     name?: string;
-    small?: boolean;
-    large?: boolean;
+    variant?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     dark?: boolean;
     picture?: string;
     country?: string;
-  }
-
-  export interface ProfileSelectorProps {
-    name?: string;
-    orgName?: string;
-    picture?: string;
-    collapsed?: boolean;
-    isOpen?: boolean;
-    onclick?: (event: MouseEvent) => void;
-  }
-
-  export interface SectionLayoutProps {
-    title?: string;
-    children?: Snippet;
+    icon?: IconSource;
   }
 
   export interface StatusLabelProps {
@@ -666,6 +659,7 @@ export interface AlertDialogProps {
 
   export interface StepIconListProps {
     icons?: StepIcon[]
+    [key: string]: any
   }
 
   export interface TagSearchProps {
@@ -692,6 +686,8 @@ export interface AlertDialogProps {
   }
 
   export interface ShortcutWrapperProps {
+    size?: 'sm' | 'md';
+    theme?: 'light' | 'navigation';
     children?: Snippet;
   }
 

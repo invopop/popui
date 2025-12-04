@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PopUI Kitchen Sink - Tailwind Classes</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!--
+    Kitchen Sink: All Tailwind utility classes used in real projects
+    This file ensures these utilities are included in popui-full.css
+  -->
+
+    <!-- Layout: Flexbox -->
+    <div class="flex flex-col flex-row flex-wrap flex-nowrap flex-1">
+        <div class="items-start items-center items-end items-baseline items-stretch">
+            <div class="justify-start justify-center justify-end justify-between justify-around justify-evenly">
+                <div class="flex-auto flex-initial flex-none"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Layout: Grid -->
+    <div class="grid grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4 grid-cols-5 grid-cols-6 grid-cols-12">
+        <div class="col-span-1 col-span-2 col-span-3 col-span-4 col-span-6 col-span-12"></div>
+        <div class="md:grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 md:grid-cols-6 md:grid-cols-12"></div>
+        <div class="md:col-span-1 md:col-span-2 md:col-span-3 md:col-span-4 md:col-span-6 md:col-span-12"></div>
+        <div class="lg:grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 lg:grid-cols-6"></div>
+        <div class="lg:col-span-1 lg:col-span-2 lg:col-span-3 lg:col-span-4"></div>
+    </div>
+
+    <!-- Spacing: Gap -->
+    <div class="gap-0 gap-0.5 gap-1 gap-1.5 gap-2 gap-3 gap-4 gap-5 gap-6 gap-8 gap-10 gap-12 gap-16"></div>
+    <div class="gap-x-1 gap-x-2 gap-x-3 gap-x-4 gap-x-6 gap-x-8"></div>
+    <div class="gap-y-1 gap-y-2 gap-y-3 gap-y-4 gap-y-6 gap-y-8"></div>
+    <div class="space-x-1 space-x-2 space-x-3 space-x-4 space-x-6 space-x-8"></div>
+    <div class="space-y-1 space-y-2 space-y-3 space-y-4 space-y-6 space-y-8"></div>
+
+    <!-- Spacing: Padding -->
+    <div class="p-0 p-0.5 p-1 p-1.5 p-2 p-3 p-4 p-5 p-6 p-8 p-10 p-12"></div>
+    <div class="px-0 px-1 px-2 px-3 px-4 px-5 px-6 px-8 px-10 px-12"></div>
+    <div class="py-0 py-0.5 py-1 py-1.5 py-2 py-3 py-4 py-5 py-6 py-8 py-10 py-12"></div>
+    <div class="pt-0 pt-1 pt-2 pt-3 pt-4 pt-6 pt-8 pt-10 pt-12"></div>
+    <div class="pr-0 pr-1 pr-2 pr-3 pr-4 pr-6 pr-8"></div>
+    <div class="pb-0 pb-1 pb-2 pb-3 pb-4 pb-6 pb-8 pb-10"></div>
+    <div class="pl-0 pl-1 pl-2 pl-3 pl-4 pl-6 pl-8"></div>
+
+    <!-- Spacing: Margin -->
+    <div class="m-0 m-1 m-2 m-3 m-4 m-5 m-6 m-8 m-10 m-auto"></div>
+    <div class="mx-0 mx-1 mx-2 mx-3 mx-4 mx-6 mx-8 mx-auto"></div>
+    <div class="my-0 my-1 my-2 my-3 my-4 my-6 my-8 my-auto"></div>
+    <div class="mt-0 mt-1 mt-2 mt-3 mt-4 mt-5 mt-6 mt-8 mt-10 mt-12 mt-16 mt-auto"></div>
+    <div class="mr-0 mr-1 mr-2 mr-3 mr-4 mr-6 mr-8 mr-auto"></div>
+    <div class="mb-0 mb-1 mb-2 mb-3 mb-4 mb-5 mb-6 mb-8 mb-10 mb-12 mb-16 mb-auto"></div>
+    <div class="ml-0 ml-1 ml-2 ml-3 ml-4 ml-6 ml-8 ml-auto"></div>
+    <div class="-mt-1 -mt-2 -mb-1 -mb-2 -ml-1 -ml-2 -mr-1 -mr-2"></div>
+
+    <!-- Width -->
+    <div class="w-0 w-1 w-2 w-3 w-4 w-5 w-6 w-8 w-10 w-12 w-16 w-20 w-24 w-32 w-40 w-48 w-56 w-64"></div>
+    <div class="w-auto w-full w-screen w-min w-max w-fit"></div>
+    <div class="w-1/2 w-1/3 w-2/3 w-1/4 w-3/4 w-1/5 w-2/5 w-3/5 w-4/5"></div>
+    <div class="min-w-0 min-w-full min-w-min min-w-max min-w-fit"></div>
+    <div
+        class="max-w-xs max-w-sm max-w-md max-w-lg max-w-xl max-w-2xl max-w-3xl max-w-4xl max-w-5xl max-w-6xl max-w-7xl max-w-full">
+    </div>
+
+    <!-- Height -->
+    <div class="h-0 h-1 h-2 h-3 h-4 h-5 h-6 h-8 h-10 h-12 h-16 h-20 h-24 h-32 h-40 h-48 h-56 h-64"></div>
+    <div class="h-auto h-full h-screen h-min h-max h-fit"></div>
+    <div class="min-h-0 min-h-full min-h-screen"></div>
+    <div class="max-h-full max-h-screen"></div>
+
+    <!-- Typography: Font Size -->
+    <div class="text-xs text-sm text-base text-lg text-xl text-2xl text-3xl text-4xl"></div>
+
+    <!-- Typography: Font Weight -->
+    <div
+        class="font-thin font-extralight font-light font-normal font-medium font-semibold font-bold font-extrabold font-black">
+    </div>
+
+    <!-- Typography: Text Align -->
+    <div class="text-left text-center text-right text-justify"></div>
+
+    <!-- Typography: Text Transform -->
+    <div class="uppercase lowercase capitalize normal-case"></div>
+
+    <!-- Typography: Text Decoration -->
+    <div class="underline line-through no-underline"></div>
+
+    <!-- Typography: Line Height -->
+    <div class="leading-none leading-tight leading-snug leading-normal leading-relaxed leading-loose"></div>
+
+    <!-- Typography: Letter Spacing -->
+    <div class="tracking-tighter tracking-tight tracking-normal tracking-wide tracking-wider tracking-widest"></div>
+
+    <!-- Typography: Text Overflow -->
+    <div class="truncate text-ellipsis text-clip overflow-hidden"></div>
+    <div class="whitespace-normal whitespace-nowrap whitespace-pre whitespace-pre-line whitespace-pre-wrap"></div>
+    <div class="break-normal break-words break-all"></div>
+
+    <!-- Colors: Background -->
+    <div class="bg-transparent bg-white bg-black"></div>
+    <div
+        class="bg-gray-50 bg-gray-100 bg-gray-200 bg-gray-300 bg-gray-400 bg-gray-500 bg-gray-600 bg-gray-700 bg-gray-800 bg-gray-900">
+    </div>
+    <div class="bg-red-50 bg-red-100 bg-red-500 bg-red-600 bg-red-700"></div>
+    <div class="bg-blue-50 bg-blue-100 bg-blue-500 bg-blue-600 bg-blue-700"></div>
+    <div class="bg-green-50 bg-green-100 bg-green-500 bg-green-600 bg-green-700"></div>
+    <div class="bg-yellow-50 bg-yellow-100 bg-yellow-500 bg-yellow-600"></div>
+    <div class="bg-indigo-50 bg-indigo-100 bg-indigo-500 bg-indigo-600"></div>
+    <div class="bg-purple-50 bg-purple-100 bg-purple-500 bg-purple-600"></div>
+    <div class="bg-pink-50 bg-pink-100 bg-pink-500 bg-pink-600"></div>
+
+    <!-- Colors: Text -->
+    <div class="text-transparent text-white text-black"></div>
+    <div class="text-gray-400 text-gray-500 text-gray-600 text-gray-700 text-gray-800 text-gray-900"></div>
+    <div class="text-red-500 text-red-600 text-red-700 text-red-800"></div>
+    <div class="text-blue-500 text-blue-600 text-blue-700 text-blue-800"></div>
+    <div class="text-green-500 text-green-600 text-green-700 text-green-800"></div>
+    <div class="text-yellow-500 text-yellow-600 text-yellow-700 text-yellow-800"></div>
+    <div class="text-indigo-500 text-indigo-600"></div>
+    <div class="text-purple-500 text-purple-600"></div>
+
+    <!-- Border -->
+    <div class="border border-0 border-2 border-4 border-8"></div>
+    <div class="border-t border-r border-b border-l"></div>
+    <div class="border-t-0 border-r-0 border-b-0 border-l-0"></div>
+    <div class="border-solid border-dashed border-dotted border-double border-none"></div>
+
+    <!-- Border Color -->
+    <div class="border-transparent border-white border-black"></div>
+    <div class="border-gray-200 border-gray-300 border-gray-400 border-gray-500 border-gray-600"></div>
+    <div class="border-red-500 border-blue-500 border-green-500 border-yellow-500"></div>
+
+    <!-- Border Radius -->
+    <div class="rounded-none rounded-sm rounded rounded-md rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-full">
+    </div>
+    <div class="rounded-t rounded-r rounded-b rounded-l"></div>
+    <div class="rounded-tl rounded-tr rounded-br rounded-bl"></div>
+
+    <!-- Display -->
+    <div class="block inline inline-block hidden"></div>
+    <div class="table table-row table-cell"></div>
+
+    <!-- Position -->
+    <div class="static relative absolute fixed sticky"></div>
+    <div class="inset-0 inset-x-0 inset-y-0"></div>
+    <div class="top-0 right-0 bottom-0 left-0"></div>
+    <div class="top-1 top-2 top-4 right-1 right-2 right-4 bottom-1 bottom-2 bottom-4 left-1 left-2 left-4"></div>
+
+    <!-- Z-Index -->
+    <div class="z-0 z-10 z-20 z-30 z-40 z-50 z-auto"></div>
+
+    <!-- Overflow -->
+    <div class="overflow-auto overflow-hidden overflow-visible overflow-scroll"></div>
+    <div class="overflow-x-auto overflow-x-hidden overflow-x-visible overflow-x-scroll"></div>
+    <div class="overflow-y-auto overflow-y-hidden overflow-y-visible overflow-y-scroll"></div>
+
+    <!-- Opacity -->
+    <div
+        class="opacity-0 opacity-5 opacity-10 opacity-20 opacity-25 opacity-30 opacity-40 opacity-50 opacity-60 opacity-70 opacity-75 opacity-80 opacity-90 opacity-95 opacity-100">
+    </div>
+
+    <!-- Shadow -->
+    <div class="shadow-none shadow-sm shadow shadow-md shadow-lg shadow-xl shadow-2xl"></div>
+
+    <!-- Cursor -->
+    <div class="cursor-auto cursor-default cursor-pointer cursor-wait cursor-text cursor-move cursor-not-allowed"></div>
+
+    <!-- User Select -->
+    <div class="select-none select-text select-all select-auto"></div>
+
+    <!-- Pointer Events -->
+    <div class="pointer-events-none pointer-events-auto"></div>
+
+    <!-- Divide -->
+    <div class="divide-y divide-x divide-gray-200 divide-gray-300"></div>
+
+    <!-- Hover States -->
+    <div class="hover:bg-gray-100 hover:bg-gray-200 hover:bg-blue-100"></div>
+    <div
+        class="hover:text-gray-600 hover:text-gray-700 hover:text-blue-600 hover:text-blue-700 hover:text-blue-800 hover:text-red-600 hover:text-red-700 hover:text-red-800">
+    </div>
+    <div class="hover:border-gray-300 hover:border-gray-400"></div>
+    <div class="hover:underline hover:no-underline"></div>
+    <div class="hover:opacity-80 hover:opacity-90 hover:opacity-100"></div>
+
+    <!-- Focus States -->
+    <div class="focus:outline-none focus:ring focus:ring-2 focus:ring-4"></div>
+    <div class="focus:ring-blue-500 focus:ring-green-500 focus:ring-red-500"></div>
+    <div class="focus:border-blue-500 focus:border-green-500"></div>
+
+    <!-- Transition -->
+    <div class="transition transition-all transition-colors transition-opacity transition-shadow transition-transform">
+    </div>
+    <div
+        class="duration-75 duration-100 duration-150 duration-200 duration-300 duration-500 duration-700 duration-1000">
+    </div>
+    <div class="ease-linear ease-in ease-out ease-in-out"></div>
+
+    <!-- Transform -->
+    <div class="scale-0 scale-50 scale-75 scale-90 scale-95 scale-100 scale-105 scale-110 scale-125 scale-150"></div>
+    <div class="rotate-0 rotate-45 rotate-90 rotate-180 -rotate-45 -rotate-90 -rotate-180"></div>
+    <div class="translate-x-0 translate-x-1 translate-x-2 translate-y-0 translate-y-1 translate-y-2"></div>
+
+    <!-- Aspect Ratio -->
+    <div class="aspect-auto aspect-square aspect-video"></div>
+
+    <!-- Object Fit -->
+    <div class="object-contain object-cover object-fill object-none object-scale-down"></div>
+
+    <!-- Align -->
+    <div class="align-baseline align-top align-middle align-bottom align-text-top align-text-bottom"></div>
+
+    <!-- Vertical Align -->
+    <div class="align-baseline align-top align-middle align-bottom"></div>
+
+    <!-- List Style -->
+    <div class="list-none list-disc list-decimal"></div>
+    <div class="list-inside list-outside"></div>
+
+    <!-- Appearance -->
+    <div class="appearance-none"></div>
+
+    <!-- Outline -->
+    <div class="outline-none outline outline-2 outline-4"></div>
+
+    <!-- Ring -->
+    <div class="ring ring-0 ring-1 ring-2 ring-4 ring-8"></div>
+    <div class="ring-inset ring-offset-0 ring-offset-1 ring-offset-2 ring-offset-4"></div>
+
+    <!-- Screen Reader -->
+    <div class="sr-only not-sr-only"></div>
+
+    <!-- Responsive variants (md:) -->
+    <div class="md:block md:hidden md:flex md:grid"></div>
+    <div class="md:flex-row md:flex-col"></div>
+    <div class="md:text-sm md:text-base md:text-lg md:text-xl"></div>
+    <div class="md:p-4 md:p-6 md:p-8"></div>
+    <div class="md:m-4 md:m-6 md:m-8"></div>
+    <div class="md:w-auto md:w-1/2 md:w-full"></div>
+
+    <!-- Responsive variants (lg:) -->
+    <div class="lg:block lg:hidden lg:flex lg:grid"></div>
+    <div class="lg:text-base lg:text-lg lg:text-xl lg:text-2xl"></div>
+    <div class="lg:w-1/3 lg:w-1/2 lg:w-2/3"></div>
+
+    <!-- Responsive variants (xl:) -->
+    <div class="xl:block xl:hidden xl:flex"></div>
+    <div class="xl:text-lg xl:text-xl"></div>
+</body>
+
+</html>

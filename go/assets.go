@@ -10,8 +10,9 @@ import (
 	"path"
 )
 
-//go:generate npm run build:tailwind ../
+//go:generate sh -c "cd .. && npm run build:tailwind"
 //go:generate cp ../dist/popui.css assets/popui.css
+//go:generate cp ../dist/popui-full.css assets/popui-full.css
 
 const (
 	// AssetPath determines where assets should be served from.

@@ -241,7 +241,7 @@
   }}
 />
 
-<div class="h-full w-full font-sans border rounded-md border-neutral-100 overflow-auto">
+<div class="h-full w-full font-sans rounded-md overflow-auto">
   <Table class="hidden md:table" {...rest}>
     <colgroup>
       {#if selectable}
@@ -258,13 +258,13 @@
       <TableRow>
         {#if selectable}
           <!-- if table is selectable we need to add an extra header with a checkbox -->
-          <TableHead class="bg-white sticky top-0 z-10 p-0 h-9">
+          <TableHead class="bg-background sticky top-0 z-10 p-0 h-9">
             {#if !hideSelectAll}
               <BaseTableCheckbox
-                hidden={!selectedRows.length}
                 {indeterminate}
                 checked={allChecked}
                 onChecked={() => {
+                  console.log('toggle all')
                   toggleAllSelected(!selectedRows.length)
                 }}
               />
@@ -273,7 +273,7 @@
         {/if}
         {#each fields as field, i (i)}
           <TableHead
-            class="bg-white group sticky z-10 top-0 py-0 {i === 0 && !selectable
+            class="bg-background group sticky z-10 top-0 py-0 {i === 0 && !selectable
               ? 'pl-3'
               : 'pl-0'} {i === fields.length - 1 && !addExtraCell ? 'pr-3' : 'pr-0'}"
           >
@@ -282,9 +282,7 @@
         {/each}
         {#if addExtraCell}
           <!-- if table has actions cell we need to add an extra header -->
-          <th scope="col" class="bg-white sticky top-0 z-10 rounded-tr-md">
-            <div class="border-b border-neutral-100 h-9"></div>
-          </th>
+          <th scope="col" class="bg-background sticky top-0 z-10 rounded-tr-md"> </th>
         {/if}
       </TableRow>
     </TableHeader>
@@ -295,17 +293,16 @@
             <th
               scope="colgroup"
               colspan={fields.length + (selectable ? 2 : 1)}
-              class="bg-white text-left text-sm font-medium text-neutral-500 sticky top-9 tracking-normal h-8 z-10"
+              class="bg-background text-left text-base font-normal text-foreground-default-secondary sticky top-9 tracking-normal h-8 z-10"
             >
               <span
-                class:border-t={i > 0}
-                class:pl-12={selectable}
-                class:pl-3={!selectable}
-                class="flex items-center space-x-1 box-border border-b border-neutral-100 h-8"
+                class:pl-16={selectable}
+                class:pl-6={!selectable}
+                class="flex items-center space-x-1 box-border border-b border-border h-9"
               >
                 <span>{group.label}</span>
                 {#if !hideCounter}
-                  <BaseCounter content={group.rows.length} />
+                  <BaseCounter value={group.rows.length} />
                 {/if}
               </span>
             </th>
@@ -364,7 +361,7 @@
       {#each group.rows as row}
         <button
           class:cursor-default={disableRowClick}
-          class="w-full text-left border border-neutral-200 rounded"
+          class="w-full text-left border border-border rounded"
           onclick={() => {
             if (disableRowClick) return
 

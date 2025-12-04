@@ -2,31 +2,27 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import type { CardRelationProps } from './types.js'
   import { ChevronRight } from '@invopop/ui-icons'
-  import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 
   let { title = '', icon = undefined, items = [], onclick }: CardRelationProps = $props()
 </script>
 
-<div class="border border-neutral-100 rounded-lg">
-  <button
-    class="cursor-pointer pl-3 py-2 pr-2 flex items-center justify-between space-x-3 w-full"
-    {onclick}
-  >
-    <div class="flex items-center space-x-1.5">
+<div class="border border-border-default-secondary rounded-2xl overflow-hidden">
+  <button class="flex items-center gap-3 px-3 py-2 w-full cursor-pointer" {onclick}>
+    <div class="flex grow items-center gap-1.5 min-w-0">
       {#if icon}
-        <Icon src={icon} class="h-4 w-4 text-neutral-500" />
+        <Icon src={icon} class="size-4 text-icon shrink-0" />
       {/if}
-      <span class="text-base font-medium text-neutral-800">{title}</span>
+      <span class="text-base font-medium text-foreground whitespace-nowrap">
+        {title}
+      </span>
     </div>
-
-    <Icon src={ChevronRight} class="h-4 w-4 text-neutral-500" />
+    <Icon src={ChevronRight} class="size-3 text-icon shrink-0" />
   </button>
-  <SeparatorHorizontal />
-  <div class="py-1.5 text-sm">
+  <div class="flex flex-col gap-2 px-3 pb-3 pt-2">
     {#each items as item}
-      <div class="px-3 py-1 flex items-center space-x-3">
-        <div class="min-w-[88px] text-neutral-500">{item.label}</div>
-        <div class="text-neutral-800">{item.value}</div>
+      <div class="flex items-center gap-3 text-sm">
+        <div class="min-w-[88px] text-foreground-default-secondary shrink-0">{item.label}</div>
+        <div class="grow text-foreground min-w-0">{item.value}</div>
       </div>
     {/each}
   </div>

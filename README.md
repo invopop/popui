@@ -83,13 +83,13 @@ Air will also watch for changes and re-run everything for you, with the exceptio
 
 There are two options for incorporating the Popui styles.
 
-**Option 1**: using the stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
+**Option 1**: using the lightweight stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
 
 ```go
 e.StaticFS(popui.AssetPath, popui.Assets)
 ```
 
-Then use the `EmbeddedCSS()` header method:
+Then use the `EmbeddedCSS()` header method for the lightweight version (only includes utilities from component classes):
 
 ```go
 templ Head() {
@@ -100,13 +100,13 @@ templ Head() {
 }
 ```
 
-**Option 2 (Deprecated)**: loading assets from the CDN:
+**Option 2**: using the full stylesheet with all Tailwind utilities. Use `EmbeddedFullCSS()` when you need access to all utility classes (useful for examples and development):
 
 ```go
 templ Head() {
   <head>
     <title>Title</title>
-    @popui.DefaultCSS()
+    @popui.EmbeddedFullCSS()
   </head>
 }
 ```

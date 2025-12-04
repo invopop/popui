@@ -20,16 +20,13 @@
   }
 </script>
 
-<label
-  for={id}
-  class="inline-flex items-center space-x-2 cursor-pointer group text-base text-neutral-800"
->
+<label for={id} class="inline-flex items-center gap-2 cursor-pointer text-base text-foreground">
   <input
     {id}
     type="checkbox"
     {checked}
     {indeterminate}
-    class="form-checkbox w-4 h-4 text-workspace-accent focus:text-workspace-accent rounded border border-neutral-200 hover:border-neutral-300 group-hover:border-neutral-300 focus:ring-0 focus:ring-offset-0"
+    class="form-checkbox size-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-primary focus:ring-0 focus:ring-offset-0 bg-background"
     {...rest}
     onchange={updateInput}
     {onclick}

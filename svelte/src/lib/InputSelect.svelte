@@ -29,43 +29,44 @@
 
   function handleChange(event: Event) {
     const target = (event as PointerEvent).target as HTMLSelectElement
-
     onchange?.(target.value)
   }
 </script>
 
-{#if label}
-  <InputLabel {id} {label} />
-{/if}
-<div class="relative">
-  <select
-    {id}
-    {name}
-    bind:value
-    {disabled}
-    class:pl-7={icon}
-    class:pl-2={!icon}
-    class="py-1.5 border border-neutral-200 hover:border-neutral-300 w-full rounded-md text-neutral-800 text-base pr-9 outline-none tracking-tight ui-select focus:border-workspace-accent focus:shadow-active"
-    {...rest}
-    onchange={handleChange}
-  >
-    <option value="" disabled={disablePlaceholder}>{placeholder}</option>
-    {#each options as option}
-      <option value={option.value}>{option.label}</option>
-    {/each}
-  </select>
-  {#if resolvedIcon}
-    <Icon
-      src={resolvedIcon}
-      theme={iconTheme}
-      class="h-4 w-4 absolute top-2 left-2 text-neutral-500"
-    />
+<div class="flex flex-col gap-2">
+  {#if label}
+    <InputLabel {id} {label} />
+  {/if}
+  <div class="relative">
+    <select
+      {id}
+      {name}
+      bind:value
+      {disabled}
+      class="h-8 w-full px-2 py-1.5 rounded-lg border bg-background text-base outline-none focus:ring-0 border-border hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active text-foreground ui-select"
+      class:pl-7={resolvedIcon}
+      class:text-foreground-default-secondary={!value}
+      {...rest}
+      onchange={handleChange}
+    >
+      <option value="" disabled={disablePlaceholder}>{placeholder}</option>
+      {#each options as option}
+        <option value={option.value}>{option.label}</option>
+      {/each}
+    </select>
+    {#if resolvedIcon}
+      <Icon
+        src={resolvedIcon}
+        theme={iconTheme}
+        class="absolute left-2 top-2 size-4 text-icon pointer-events-none"
+      />
+    {/if}
+  </div>
+
+  {#if errorText}
+    <InputError {errorText} />
   {/if}
 </div>
-
-{#if errorText}
-  <InputError {errorText} />
-{/if}
 
 <style>
   .ui-select {

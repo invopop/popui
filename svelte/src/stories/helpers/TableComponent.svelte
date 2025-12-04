@@ -73,9 +73,9 @@
   <TableBody>
     {#each data as row, i (i)}
       <TableRow>
-        <TableCell>
-          <p class="text-neutral-800 font-medium">{row.name}</p>
-          <p>{row.description}</p>
+        <TableCell class="py-2.5">
+          <p class="text-foreground font-medium">{row.name}</p>
+          <p class="text-foreground-default-secondary">{row.description}</p>
         </TableCell>
         <TableCell class="w-[317px]">
           <StepIconList icons={row.steps} />

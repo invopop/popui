@@ -10,6 +10,7 @@ type Button struct {
 	Class              string
 	Disabled           bool
 	Small              bool
+	Square             bool
 	Autofocus          bool
 	Name               string
 	Value              string

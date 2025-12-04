@@ -9,14 +9,14 @@ const meta = {
   title: 'Components/InputCheckbox',
   component: InputCheckbox,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
 } satisfies Meta<InputCheckbox>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
-export const Unckecked: Story = {}
+export const Unchecked: Story = {}
 
 export const Checked: Story = {
   args: {
@@ -27,6 +27,19 @@ export const Checked: Story = {
 export const Indeterminate: Story = {
   args: {
     indeterminate: true,
+    checked: true
+  }
+}
+
+export const WithLabel: Story = {
+  args: {
+    label: 'Label'
+  }
+}
+
+export const WithLabelChecked: Story = {
+  args: {
+    label: 'Label',
     checked: true
   }
 }

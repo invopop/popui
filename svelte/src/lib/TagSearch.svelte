@@ -20,15 +20,15 @@
 <span
   class:pl-2={icon}
   class:pl-3={!icon}
-  class="border rounded pr-1.5 text-sm inline-flex items-center border-workspace-accent-100 bg-workspace-accent-50"
+  class="border rounded pr-1.5 text-sm inline-flex items-center border-border-selected bg-background-selected"
 >
   {#if resolvedIcon}
-    <Icon src={resolvedIcon} theme={iconTheme} class="h-4 w-4 mr-1 text-workspace-accent" />
+    <Icon src={resolvedIcon} theme={iconTheme} class="h-4 w-4 mr-1 text-foreground-selected" />
   {/if}
-  <span class="py-1 pr-2 text-workspace-accent tracking-normal">{label}</span>
+  <span class="py-1 pr-2 text-foreground-selected tracking-normal">{label}</span>
   <button
     aria-label="Clear"
-    class="cursor-pointer py-1 border-l border-workspace-accent-100 pl-1 text-neutral-500"
+    class="cursor-pointer py-1 border-l border-border-selected pl-1 text-foreground-default-secondary"
     onclick={handleClear}
   >
     <svg

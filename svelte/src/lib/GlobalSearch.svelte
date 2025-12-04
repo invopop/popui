@@ -10,10 +10,14 @@
 
   let { collapsed = false, onOpen }: GlobalSearchProps = $props()
 
-  let styles = $derived(
-    clsx({
-      'space-x-1 w-full': !collapsed
-    })
+  const styles = $derived(
+    clsx(
+      'cursor-pointer flex items-center border border-border-inverse-default rounded-lg box-border',
+      {
+        'gap-1 px-2 py-1.5 w-full hover:bg-background-selected-inverse h-8': !collapsed,
+        'p-2 size-8': collapsed
+      }
+    )
   )
 
   function onKeyDown(event: KeyboardEvent) {
@@ -38,15 +42,12 @@
   })
 </script>
 
-<button
-  class="cursor-pointer {styles} flex items-center border pl-1.5 py-1.5 pr-2 border-white-10 bg-neutral-800/10 rounded-md"
-  onclick={() => onOpen?.()}
->
-  <Icon src={Search} class="w-4 h-4 text-white-70" />
+<button class={styles} onclick={() => onOpen?.()}>
+  <Icon src={Search} class="size-4 text-foreground-inverse shrink-0" />
   {#if !collapsed}
-    <span class="text-white-40 text-sm flex-1 text-left tracking-normal">Search</span>
-    <ShortcutWrapper>
-      <Icon src={Slash} class="w-3 h-3 text-white-70" />
+    <span class="text-foreground-inverse-secondary text-base flex-1 text-left">Search</span>
+    <ShortcutWrapper theme="navigation">
+      <Icon src={Slash} class="size-3" />
     </ShortcutWrapper>
   {/if}
 </button>

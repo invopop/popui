@@ -21,6 +21,7 @@ templ Button(opts ...props.Button) {
 			templ.KV(classes.ButtonSecondary, p.Variant == "secondary"),
 			templ.KV(classes.ButtonTransparent, p.Variant == "transparent"),
 			templ.KV(classes.ButtonSmall, p.Small),
+			templ.KV(classes.ButtonSquare, p.Square),
 		}
 		if p.ID != "" {
 			id={ p.ID }

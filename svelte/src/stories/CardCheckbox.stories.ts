@@ -1,38 +1,87 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
-import { CodeFork } from '@invopop/ui-icons'
+import { CodeFork, CheckBadge } from '@invopop/ui-icons'
 import CardCheckbox from '../lib/CardCheckbox.svelte'
+import CardCheckboxWithFooter from './helpers/CardCheckboxWithFooter.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
+import MaxWidth80Decorator from './decorartors/MaxWidth80Decorator.svelte'
 
-// More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/CardCheckbox',
-  component: CardCheckbox,
+  component: CardCheckbox as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator]
+  decorators: [() => MarginDecorator as any]
 } satisfies Meta<CardCheckbox>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-// More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Unchecked: Story = {
   args: {
-    title: 'Production',
-    description: 'A live workspace which produces valid invoices'
+    title: 'Send invoice',
+    description: 'V1 · Workflow to send default invoices'
   }
 }
+
 export const Checked: Story = {
   args: {
-    title: 'Production',
-    description: 'A live workspace which produces valid invoices',
+    title: 'Send invoice',
+    description: 'V1 · Workflow to send default invoices',
     checked: true
   }
 }
-export const WithIcons: Story = {
+
+export const WithIcon: Story = {
   args: {
-    title: 'Production',
-    description: 'A live workspace which produces valid invoices',
+    title: 'Send invoice',
+    description: 'V1 · Workflow to send default invoices',
     checked: true,
     icon: CodeFork
+  }
+}
+
+export const WithAccentText: Story = {
+  args: {
+    title: 'Production',
+    accentText: 'Live',
+    description: 'workspace which produces valid invoices',
+    checked: false
+  }
+}
+
+export const Disabled: Story = {
+  args: {
+    title: 'Send invoice',
+    description: 'V1 · Workflow to send default invoices',
+    disabled: true
+  }
+}
+
+export const DisabledChecked: Story = {
+  args: {
+    title: 'Send invoice',
+    description: 'V1 · Workflow to send default invoices',
+    disabled: true,
+    checked: true
+  }
+}
+
+export const WithOkIconHideRadio: Story = {
+  decorators: [() => MaxWidth80Decorator as any],
+  args: {
+    title: 'OK',
+    icon: CheckBadge,
+    hideRadio: true,
+  }
+}
+
+export const WithFooterSlot: StoryObj<typeof CardCheckboxWithFooter> = {
+  render: (args) => ({
+    Component: CardCheckboxWithFooter,
+    props: args
+  }),
+  args: {
+    title: 'With Footer',
+    description: 'Workflow with step icons',
+    checked: false
   }
 }

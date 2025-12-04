@@ -3,11 +3,12 @@
   import DataListItem from '../../lib/DataListItem.svelte'
 
   interface Props {
-    useSlot?: boolean;
-    label?: string;
-    value?: string;
-    monospaced?: boolean;
-    monospacedNums?: boolean;
+    useSlot?: boolean
+    label?: string
+    value?: string
+    monospaced?: boolean
+    monospacedNums?: boolean
+    fullWidth?: boolean
   }
 
   let {
@@ -15,14 +16,15 @@
     label = '',
     value = '',
     monospaced = false,
-    monospacedNums = false
-  }: Props = $props();
+    monospacedNums = false,
+    fullWidth = false
+  }: Props = $props()
 </script>
 
 {#if useSlot}
-  <DataListItem {label} {value}>
+  <DataListItem {label} {value} {fullWidth}>
     <TagStatus status="green" label="Closed" />
   </DataListItem>
 {:else}
-  <DataListItem {label} {value} {monospaced} {monospacedNums} />
+  <DataListItem {label} {value} {monospaced} {monospacedNums} {fullWidth} />
 {/if}

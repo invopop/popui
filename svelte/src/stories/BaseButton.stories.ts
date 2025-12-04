@@ -5,106 +5,19 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 import { Cog6Tooth } from '@steeze-ui/heroicons'
 import DarkBackgroundDecorator from './decorartors/DarkBackgroundDecorator.svelte'
-import { Close } from '@invopop/ui-icons'
+import { Close, Add } from '@invopop/ui-icons'
 
-// More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/BaseButton',
-  component: BaseButton,
+  component: BaseButton as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator]
+  decorators: [() => MarginDecorator as any]
 } satisfies Meta<BaseButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-// More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
-export const Default: Story = {
-  args: {
-    slot: 'Button'
-  }
-}
-
-export const DefaultDisabled: Story = {
-  args: {
-    slot: 'Button',
-    disabled: true
-  }
-}
-
-export const DefaultSmall: Story = {
-  args: {
-    slot: 'Button',
-    small: true
-  }
-}
-
-export const DefaultSmallWithIcon: Story = {
-  args: {
-    slot: 'Button',
-    small: true,
-    icon: Close
-  }
-}
-
-export const DefaultBig: Story = {
-  args: {
-    slot: 'Button',
-    big: true
-  }
-}
-
-export const DefaultSmallOnlyIcon: Story = {
-  args: {
-    small: true,
-    icon: Close
-  }
-}
-
-export const DefaultBigOnlyIcon: Story = {
-  args: {
-    big: true,
-    icon: Close
-  }
-}
-
-export const DefaultOnlyIconNotification: Story = {
-  args: {
-    big: true,
-    icon: Close,
-    notification: true
-  }
-}
-
-export const DefaultWithLeftIcon: Story = {
-  args: {
-    slot: 'Button',
-    icon: Cog6Tooth
-  }
-}
-
-export const DefaultBigWithLeftIcon: Story = {
-  args: {
-    slot: 'Button',
-    icon: Cog6Tooth,
-    big: true
-  }
-}
-
-export const DefaultWithRightIcon: Story = {
-  args: {
-    slot: 'Button',
-    icon: Cog6Tooth,
-    iconPosition: 'right'
-  }
-}
-
-export const DefaultWithOnlyIcon: Story = {
-  args: {
-    icon: Cog6Tooth
-  }
-}
-
+// Primary Variant
 export const Primary: Story = {
   args: {
     slot: 'Primary Button',
@@ -115,11 +28,134 @@ export const Primary: Story = {
 export const PrimaryWithIcon: Story = {
   args: {
     slot: 'Button',
-    icon: Cog6Tooth,
+    icon: Add,
     variant: 'primary'
   }
 }
 
+export const PrimaryIconOnly: Story = {
+  args: {
+    icon: Add,
+    variant: 'primary'
+  }
+}
+
+export const PrimaryDisabled: Story = {
+  args: {
+    slot: 'Button',
+    variant: 'primary',
+    disabled: true
+  }
+}
+
+// Warning Variant
+export const Warning: Story = {
+  args: {
+    slot: 'Warning Button',
+    variant: 'warning'
+  }
+}
+
+export const WarningWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Add,
+    variant: 'warning'
+  }
+}
+
+export const WarningIconOnly: Story = {
+  args: {
+    icon: Add,
+    variant: 'warning'
+  }
+}
+
+export const WarningDisabled: Story = {
+  args: {
+    slot: 'Button',
+    variant: 'warning',
+    disabled: true
+  }
+}
+
+// Danger Variant
+export const Danger: Story = {
+  args: {
+    slot: 'Danger Button',
+    variant: 'danger'
+  }
+}
+
+export const DangerWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Close,
+    variant: 'danger'
+  }
+}
+
+export const DangerIconOnly: Story = {
+  args: {
+    icon: Close,
+    variant: 'danger'
+  }
+}
+
+// Outline Variant
+export const Outline: Story = {
+  args: {
+    slot: 'Outline Button',
+    variant: 'outline'
+  }
+}
+
+export const OutlineWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'outline'
+  }
+}
+
+export const OutlineIconOnly: Story = {
+  args: {
+    icon: Cog6Tooth,
+    variant: 'outline'
+  }
+}
+
+// Ghost Variant  
+export const Ghost: Story = {
+  args: {
+    slot: 'Ghost Button',
+    variant: 'ghost'
+  }
+}
+
+export const GhostWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'ghost'
+  }
+}
+
+// Default Variant
+export const Default: Story = {
+  args: {
+    slot: 'Default Button'
+  }
+}
+
+export const DefaultWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth
+  }
+}
+
+// Secondary Variant
 export const Secondary: Story = {
   args: {
     slot: 'Secondary Button',
@@ -135,69 +171,16 @@ export const SecondaryWithIcon: Story = {
   }
 }
 
-export const SecondaryWithOnlyIcon: Story = {
+export const SecondaryIconOnly: Story = {
   args: {
     icon: Cog6Tooth,
     variant: 'secondary'
   }
 }
 
-export const SecondaryFullwidth: Story = {
-  decorators: [() => MaxWidthSmDecorator],
-  args: {
-    slot: 'Button',
-    icon: Cog6Tooth,
-    variant: 'secondary',
-    fullwidth: true
-  }
-}
-
-export const Danger: Story = {
-  args: {
-    slot: 'Danger Button',
-    variant: 'danger'
-  }
-}
-
-export const DangerWithIcon: Story = {
-  args: {
-    slot: 'Button',
-    icon: Cog6Tooth,
-    variant: 'danger'
-  }
-}
-
-export const DangerWithOnlyIcon: Story = {
-  args: {
-    icon: Cog6Tooth,
-    variant: 'danger'
-  }
-}
-
-export const Warning: Story = {
-  args: {
-    slot: 'Warning Button',
-    variant: 'warning'
-  }
-}
-
-export const WarningWithIcon: Story = {
-  args: {
-    slot: 'Button',
-    icon: Cog6Tooth,
-    variant: 'warning'
-  }
-}
-
-export const WarningWithOnlyIcon: Story = {
-  args: {
-    icon: Cog6Tooth,
-    variant: 'warning'
-  }
-}
-
+// Dark Variant (Navigation)
 export const Dark: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => DarkBackgroundDecorator as any],
   args: {
     slot: 'Dark Button',
     variant: 'dark'
@@ -205,7 +188,7 @@ export const Dark: Story = {
 }
 
 export const DarkWithIcon: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => DarkBackgroundDecorator as any],
   args: {
     slot: 'Button',
     icon: Cog6Tooth,
@@ -213,29 +196,117 @@ export const DarkWithIcon: Story = {
   }
 }
 
-export const DangerIcon: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+export const DarkIconOnly: Story = {
+  decorators: [() => DarkBackgroundDecorator as any],
   args: {
-    slot: 'Button',
     icon: Cog6Tooth,
-    dangerIcon: true
+    variant: 'dark'
   }
 }
 
-export const ShortcutIcon: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+// Dark Ghost Variant
+export const DarkGhost: Story = {
+  decorators: [() => DarkBackgroundDecorator as any],
+  args: {
+    slot: 'Dark Ghost Button',
+    variant: 'dark-ghost'
+  }
+}
+
+export const DarkGhostWithIcon: Story = {
+  decorators: [() => DarkBackgroundDecorator as any],
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'dark-ghost'
+  }
+}
+
+export const DarkGhostIconOnly: Story = {
+  decorators: [() => DarkBackgroundDecorator as any],
+  args: {
+    icon: Cog6Tooth,
+    variant: 'dark-ghost'
+  }
+}
+
+// Sizes
+export const SmallSize: Story = {
   args: {
     slot: 'Button',
     variant: 'primary',
-    iconPosition: 'right',
-    icon: Cog6Tooth,
-    shortcut: true
+    size: 'sm'
   }
 }
 
-export const Outline: Story = {
+export const SmallWithIcon: Story = {
   args: {
-    slot: 'Outline Button',
-    variant: 'outline'
+    slot: 'Button',
+    icon: Add,
+    variant: 'primary',
+    size: 'sm'
+  }
+}
+
+export const SmallIconOnly: Story = {
+  args: {
+    icon: Add,
+    variant: 'primary',
+    size: 'sm'
+  }
+}
+
+export const BigSize: Story = {
+  args: {
+    slot: 'Button',
+    variant: 'primary',
+    size: 'lg'
+  }
+}
+
+export const BigWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Add,
+    variant: 'primary',
+    size: 'lg'
+  }
+}
+
+export const BigIconOnly: Story = {
+  args: {
+    icon: Add,
+    variant: 'primary',
+    size: 'lg'
+  }
+}
+
+// Icon Position
+export const IconRight: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    iconPosition: 'right',
+    variant: 'primary'
+  }
+}
+
+// Fullwidth
+export const Fullwidth: Story = {
+  decorators: [() => MaxWidthSmDecorator as any],
+  args: {
+    slot: 'Full Width Button',
+    variant: 'primary',
+    fullwidth: true
+  }
+}
+
+// Danger Icon styling
+export const WithDangerIcon: Story = {
+  args: {
+    slot: 'Delete',
+    icon: Close,
+    variant: 'outline',
+    dangerIcon: true
   }
 }

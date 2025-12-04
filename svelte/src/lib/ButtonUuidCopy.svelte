@@ -28,13 +28,15 @@
 
 <BaseButton
   {disabled}
-  big
+  size="sm"
   icon={Duplicate}
   iconPosition="right"
-  onclick={async () => {
+  variant="ghost"
+  onclick={async (e) => {
+    e.stopPropagation()
     await navigator.clipboard.writeText(uuid)
     oncopied?.(uuid)
   }}
 >
-  <span class="font-mono text-neutral-500">{formattedUuid}</span>
+  <span class="font-mono">{formattedUuid}</span>
 </BaseButton>

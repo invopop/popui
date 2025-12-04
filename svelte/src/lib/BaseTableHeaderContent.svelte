@@ -15,7 +15,7 @@
 
   let headerStyles = $derived(
     clsx({
-      'hover:bg-neutral-50 focus:bg-neutral-100': field.sortable
+      'hover:bg-background-default-secondary focus:bg-background-default-tertiary': field.sortable
     })
   )
 
@@ -29,7 +29,7 @@
   {#if field.sortable}
     {#snippet trigger()}
       <span
-        class="{headerStyles} w-full p-3 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
+        class="{headerStyles} w-full px-3 py-2.5 flex items-center justify-start space-x-1 text-left text-base tracking-normal whitespace-nowrap font-normal"
       >
         <span class="w-full" class:text-right={field.rightAlign}>{field.headerLabel}</span>
         {#if sortBy === field.slug}
@@ -38,7 +38,7 @@
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             class:rotate-180={sortDirection === 'asc'}
-            class="mt-px text-neutral-400 h-3 w-3"
+            class="mt-px text-icon h-3 w-3"
           >
             <path
               fill-rule="evenodd"
@@ -59,7 +59,7 @@
     </BaseDropdown>
   {:else}
     <div
-      class="{headerStyles} p-3 text-left text-base font-normal tracking-normal whitespace-nowrap"
+      class="{headerStyles} px-3 py-2.5 text-left text-base font-normal tracking-normal whitespace-nowrap"
     >
       <div class="h-5">{field.headerLabel}</div>
     </div>

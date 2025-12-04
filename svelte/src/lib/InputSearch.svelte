@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Search } from '@invopop/ui-icons'
+  import ShortcutWrapper from './ShortcutWrapper.svelte'
   import type { InputSearchProps } from './types.js'
 
   const debounce = (target: HTMLInputElement) => {
@@ -66,8 +67,8 @@
     bind:this={input}
     bind:value
     type="search"
-    class="py-[5px] pl-7 border border-neutral-200 hover:border-neutral-300 w-full rounded-md text-neutral-800 placeholder-neutral-500 text-base outline-none tracking-tight caret-workspace-accent focus:border-workspace-accent focus:shadow-active bg-white"
-    style:padding-right={`${shortcutKeys.length * 15 + 12}px`}
+    class="flex items-center gap-1 h-8 w-full px-2 py-1.5 pl-7 rounded-lg border bg-background-default-default text-base text-foreground-default-default placeholder:text-foreground-default-tertiary outline-none caret-foreground-accent focus:ring-0 border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active"
+    style:padding-right={shortcut ? `${shortcutKeys.length * 20 + 12}px` : undefined}
     {placeholder}
     {...rest}
     oninput={handleInput}
@@ -75,15 +76,14 @@
     {onblur}
     {onclick}
   />
-  <Icon src={icon} class="absolute text-neutral-500 w-4 h-4 left-2" />
+  <Icon src={icon} class="absolute left-2 size-4 text-foreground-default-tertiary" />
 
   {#if shortcut}
-    <div class="absolute top-1 right-0 flex py-1.5 pr-1.5 space-x-1">
+    <div class="absolute right-2 flex items-center gap-1">
       {#each shortcutKeys as key}
-        <kbd
-          class="w-4 h-4 flex justify-center items-center rounded-md border border-neutral-200 bg-neutral-100 font-sans text-sm text-neutral-500 font-semibold"
-          >{key}</kbd
-        >
+        <ShortcutWrapper>
+          <span class="text-sm font-semibold">{key}</span>
+        </ShortcutWrapper>
       {/each}
     </div>
   {/if}

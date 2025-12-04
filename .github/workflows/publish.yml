@@ -10,6 +10,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
+      # Install global dependencies
+      - run: npm ci
+
       # Install dependencies inside svelte/
       - run: npm ci
         working-directory: svelte

@@ -33,5 +33,17 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     // Disable certain TypeScript features for better performance
     "typescript.surveys.enabled": false,
-    "typescript.disableAutomaticTypeAcquisition": true
+    "typescript.disableAutomaticTypeAcquisition": true,
+    // Reduce TypeScript server memory usage
+    "typescript.tsserver.maxTsServerMemory": 4096,
+    "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+    // Only validate open files to reduce CPU usage
+    "typescript.validate.enable": true,
+    "javascript.validate.enable": true,
+    // Exclude TypeScript from watching certain patterns
+    "files.exclude": {
+        "**/.svelte-kit": true,
+        "**/node_modules": false,
+        "**/.git": true
+    }
 }

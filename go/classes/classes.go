@@ -89,6 +89,7 @@ const (
 	ButtonSpinner     = "popui-button-spinner"
 	ButtonTransparent = "popui-button--transparent"
 	ButtonSmall       = "popui-button--small"
+	ButtonSquare      = "popui-button--square"
 
 	Radio             = "popui-radio"
 	RadioWrapper      = "popui-radio-wrapper"
@@ -163,7 +164,7 @@ const (
 const (
 	PopoverWrapper          = "popui-popover-wrapper"
 	PopoverWrapperRight     = "popui-popover-wrapper__right"
-	PopoverList             = "popui-popover-list"
+	PopoverList             = "popui-popover-list popover-menu"
 	PopoverListRight        = "popui-popover-list__right"
 	PopoverListStretch      = "popui-popover-list__stretch"
 	PopoverListItem         = "popui-popover-list-item"
@@ -215,10 +216,9 @@ const (
 
 // TagStatus classes
 const (
-	TagStatusBase  = "popui-tag-status"
-	TagStatusDot   = "popui-tag-status__dot"
-	TagStatusLabel = "popui-tag-status__label"
-
+	TagStatusBase       = "popui-tag-status"
+	TagStatusDot        = "popui-tag-status__dot"
+	TagStatusLabel      = "popui-tag-status__label"
 	TagStatusGreen      = "popui-tag-status--green"
 	TagStatusYellow     = "popui-tag-status--yellow"
 	TagStatusRed        = "popui-tag-status--red"

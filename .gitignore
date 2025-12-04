@@ -3,7 +3,6 @@ node_modules
 /build
 dist
 .svelte-kit
-/icons/.svelte-kit
 /icons/src/lib
 /package
 .env

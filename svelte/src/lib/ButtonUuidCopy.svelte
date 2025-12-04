@@ -1,0 +1,42 @@
+<script lang="ts">
+  import { Duplicate } from '@invopop/ui-icons'
+  import BaseButton from './BaseButton.svelte'
+  import type { ButtonUuidCopyProps } from './types'
+
+  let {
+    uuid = '',
+    prefixLength = 4,
+    suffixLength = 4,
+    full = false,
+    disabled = false,
+    oncopied
+  }: ButtonUuidCopyProps = $props()
+
+  function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
+    if (inputString.length <= prefixLength + suffixLength) {
+      return inputString // Return the whole string if it's too short
+    }
+
+    const prefix = inputString.substring(0, prefixLength)
+    const suffix = inputString.substring(inputString.length - suffixLength)
+
+    return prefix + '...' + suffix
+  }
+
+  let formattedUuid = $derived(full ? uuid : shortenString(uuid, prefixLength, suffixLength))
+</script>
+
+<BaseButton
+  {disabled}
+  size="sm"
+  icon={Duplicate}
+  iconPosition="right"
+  variant="ghost"
+  onclick={async (e) => {
+    e.stopPropagation()
+    await navigator.clipboard.writeText(uuid)
+    oncopied?.(uuid)
+  }}
+>
+  <span class="font-mono">{formattedUuid}</span>
+</BaseButton>

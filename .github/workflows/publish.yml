@@ -1,6 +1,6 @@
 on:
   push:
-    branches: svelte5
+    branches: main
 
 jobs:
   publish:
@@ -16,7 +16,6 @@ jobs:
 
       # Build Tailwind
       - run: npm run build:tailwind
-        working-directory: svelte
 
       # Build popui svelte package
       - run: npm run package

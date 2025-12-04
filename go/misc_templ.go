@@ -366,7 +366,7 @@ func Warning() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = icons.Alert().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = icons.Warning().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -500,7 +500,7 @@ func Notification(p props.Notification) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			} else if p.Type == "warning" {
-				templ_7745c5c3_Err = icons.Alert().Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = icons.Warning().Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

@@ -11,6 +11,9 @@ import (
 templ Notification(opts ...props.Notification) {
 	{{ p := props.First(opts) }}
 	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
 		class={
 			utils.TwMerge(
 				"flex px-3 py-2 justify-start items-start gap-2 rounded-lg text-base mb-4",

@@ -6,8 +6,8 @@ import "github.com/a-h/templ"
 type Accordion struct {
 	ID         string
 	Class      string
-	Open       bool
 	Attributes templ.Attributes
+	Open       bool
 }
 
 // AccordionTrigger provides props for the clickable summary element

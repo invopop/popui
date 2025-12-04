@@ -137,6 +137,7 @@ func EmptyState() templ.Component {
 					Title:       "EmptyState",
 					Description: "Layout component for displaying empty states with optional call-to-action.",
 					Items: []modules.APITableItem{
+						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the empty state element"},
 						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with empty state styles"},
 						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
 						{Name: "Title", Type: "string", Default: "", Description: "Title text displayed prominently in the empty state"},

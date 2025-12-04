@@ -7,6 +7,9 @@ import "github.com/invopop/popui/go/utils"
 templ EmptyState(opts ...props.EmptyState) {
 	{{ p := props.First(opts) }}
 	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
 		class={
 			utils.TwMerge(
 				"flex flex-col items-center justify-center space-y-2 text-foreground-accent",

@@ -11,6 +11,9 @@ import (
 templ FlashMessage(opts ...props.FlashMessage) {
 	{{ p := props.First(opts) }}
 	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
 		class={
 			utils.TwMerge(
 				"text-sm font-semibold text-foreground flex items-center gap-1 opacity-0",

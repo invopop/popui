@@ -137,6 +137,7 @@ func FlashMessage() templ.Component {
 					Title:       "FlashMessage",
 					Description: "Toast-style message component for quick feedback.",
 					Items: []modules.APITableItem{
+						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the flash message element"},
 						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with flash message styles"},
 						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
 						{Name: "Type", Type: "string", Default: "", Description: "Message type: currently supports 'success'"},

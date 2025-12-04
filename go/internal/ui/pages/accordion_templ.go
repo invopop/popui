@@ -272,8 +272,8 @@ func Accordion() templ.Component {
 					Items: []modules.APITableItem{
 						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the accordion element"},
 						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
-						{Name: "Open", Type: "bool", Default: "false", Description: "Whether the accordion is initially expanded"},
 						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the details element"},
+						{Name: "Open", Type: "bool", Default: "false", Description: "Whether the accordion is initially expanded"},
 					},
 				}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {

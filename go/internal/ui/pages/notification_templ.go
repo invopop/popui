@@ -211,6 +211,7 @@ func Notification() templ.Component {
 					Title:       "Notification",
 					Description: "Feedback message component with different severity types.",
 					Items: []modules.APITableItem{
+						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the notification element"},
 						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with notification styles"},
 						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
 						{Name: "Type", Type: "string", Default: "", Description: "Notification type: info, warning, error, or success"},

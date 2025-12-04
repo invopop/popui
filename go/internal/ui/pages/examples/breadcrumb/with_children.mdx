@@ -1,0 +1,26 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ BreadcrumbWithChildren() {
+	@popui.Breadcrumb() {
+		@popui.BreadcrumbItem(props.BreadcrumbItem{
+			Href: "/",
+		}) {
+			<span>🏠 Home</span>
+		}
+		@popui.BreadcrumbItem(props.BreadcrumbItem{
+			Href: "/products",
+		}) {
+			<span>📦 Products</span>
+		}
+		@popui.BreadcrumbItem(props.BreadcrumbItem{}) {
+			<span>💻 Electronics</span>
+		}
+	}
+}
+```

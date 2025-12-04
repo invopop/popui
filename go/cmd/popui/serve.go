@@ -48,6 +48,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/", s.docsHome)
 	e.GET("/components/accordion", s.docsAccordion)
 	e.GET("/components/avatar", s.docsAvatar)
+	e.GET("/components/breadcrumb", s.docsBreadcrumb)
 	e.GET("/components/button", s.docsButton)
 	e.GET("/components/card", s.docsCard)
 	e.GET("/components/checkbox", s.docsCheckbox)
@@ -105,6 +106,11 @@ func (s *serveOpts) docsAccordion(c echo.Context) error {
 // docsAvatar shows the avatar component documentation
 func (s *serveOpts) docsAvatar(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Avatar())
+}
+
+// docsBreadcrumb shows the breadcrumb component documentation
+func (s *serveOpts) docsBreadcrumb(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Breadcrumb())
 }
 
 // docsButton shows the button component documentation

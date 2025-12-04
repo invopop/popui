@@ -1016,7 +1016,7 @@ func formSection() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = popui.InputText(props.InputText{
+			templ_7745c5c3_Err = popui.Input(props.Input{
 				ID:       "name",
 				Label:    "Full name",
 				Value:    "Diego Fernández",
@@ -1029,7 +1029,7 @@ func formSection() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputText(props.InputText{
+			templ_7745c5c3_Err = popui.Input(props.Input{
 				ID:    "JOB",
 				Label: "Job Title",
 				Value: "Finance",
@@ -1183,7 +1183,7 @@ func formSection() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = popui.InputText(props.InputText{
+				templ_7745c5c3_Err = popui.Input(props.Input{
 					Label: "Stripe ID",
 					Name:  "stripe_id",
 				}).Render(ctx, templ_7745c5c3_Buffer)

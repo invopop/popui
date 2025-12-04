@@ -218,13 +218,13 @@ templ tableSection() {
 templ formSection() {
 	<form class={ classes.FormContainer }>
 		@popui.Fieldset() {
-			@popui.InputText(props.InputText{
+			@popui.Input(props.Input{
 				ID:       "name",
 				Label:    "Full name",
 				Value:    "Diego Fernández",
 				Disabled: true,
 			})
-			@popui.InputText(props.InputText{
+			@popui.Input(props.Input{
 				ID:    "JOB",
 				Label: "Job Title",
 				Value: "Finance",
@@ -265,7 +265,7 @@ templ formSection() {
 					Value:   "thing",
 					Checked: true,
 				})
-				@popui.InputText(props.InputText{
+				@popui.Input(props.Input{
 					Label: "Stripe ID",
 					Name:  "stripe_id",
 				})

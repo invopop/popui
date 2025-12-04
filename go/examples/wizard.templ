@@ -89,19 +89,22 @@ templ AppStepOne() {
 						@popui.Subtitle() {
 							Información de la empresa
 						}
-						@popui.InputText(props.InputText{
-							Label:     "Nombre",
-							LabelHint: "This is the name of the provider",
-							Value:     "Proveedor S.A.",
-							Disabled:  true,
-						})
+						@popui.Input(props.Input{
+							ID:       "nombre",
+							Value:    "Proveedor S.A.",
+							Disabled: true,
+						}) {
+							@popui.InputLabel(props.Label{ID: "nombre", Hint: "This is the name of the provider"}) {
+								Nombre
+							}
+						}
 						<div class={ classes.FormCellGroup }>
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								Label:    "Tipo de documento",
 								Value:    "CIF",
 								Disabled: true,
 							})
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								Label:    "CIF",
 								Value:    "A12345678",
 								Disabled: true,
@@ -116,24 +119,24 @@ templ AppStepOne() {
 							Representante legal
 						}
 						<div class={ classes.FormCellGroup }>
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								Label: "Nombre",
 								Value: "Juan",
 								Error: props.Error{
 									Text: "This name is cooler than expected",
 								},
 							})
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								Label: "Apellidos",
 								Value: "Perez",
 							})
 						</div>
 						<div class={ classes.FormCellGroup }>
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								Label: "Tipo de documento",
 								Value: "NIF",
 							})
-							@popui.InputText(props.InputText{
+							@popui.Input(props.Input{
 								Label: "NIF",
 								Value: "A12345678",
 							})

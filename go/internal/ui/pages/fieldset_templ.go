@@ -87,7 +87,7 @@ func Fieldset() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					templ_7745c5c3_Err = popui.InputText(props.InputText{
+					templ_7745c5c3_Err = popui.Input(props.Input{
 						ID:          "email",
 						Name:        "email",
 						Label:       "Email",
@@ -100,7 +100,7 @@ func Fieldset() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = popui.InputText(props.InputText{
+					templ_7745c5c3_Err = popui.Input(props.Input{
 						ID:          "password",
 						Name:        "password",
 						Type:        "password",
@@ -152,7 +152,7 @@ func Fieldset() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					templ_7745c5c3_Err = popui.InputText(props.InputText{
+					templ_7745c5c3_Err = popui.Input(props.Input{
 						ID:          "username",
 						Name:        "username",
 						Label:       "Username",
@@ -165,7 +165,7 @@ func Fieldset() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = popui.InputText(props.InputText{
+					templ_7745c5c3_Err = popui.Input(props.Input{
 						ID:          "email2",
 						Name:        "email",
 						Label:       "Email",
@@ -220,7 +220,7 @@ func Fieldset() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					templ_7745c5c3_Err = popui.InputText(props.InputText{
+					templ_7745c5c3_Err = popui.Input(props.Input{
 						ID:          "name",
 						Name:        "name",
 						Label:       "Full Name",
@@ -302,7 +302,7 @@ func Fieldset() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = popui.InputText(props.InputText{
+					templ_7745c5c3_Err = popui.Input(props.Input{
 						ID:          "stripe-id",
 						Name:        "stripe_id",
 						Label:       "Stripe ID",

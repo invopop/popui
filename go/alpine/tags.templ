@@ -48,11 +48,11 @@ templ Tags(p props.Tags) {
 				}` }
 			>
 				<div class="flex-1">
-					@popui.InputText(props.InputText{ID: id, Attrs: templ.Attributes{
+					@popui.Input(props.Input{ID: id, Attributes: templ.Attributes{
 						"x-model":        "tags_newTag",
 						"@keydown.enter": "tags_addTag",
 						":class":         "{ '" + classes.InputTextError + "': tags_error }",
-					}, Error: props.Error{Attrs: templ.Attributes{"x-text": "tags_error"}}})
+					}, Error: props.Error{Attributes: templ.Attributes{"x-text": "tags_error"}}})
 				</div>
 				<div class={ classes.TagAddButton }>
 					@popui.Button(props.Button{Attributes: templ.Attributes{"@click": "tags_addTag"}}) {

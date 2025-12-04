@@ -393,11 +393,11 @@ func Page() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputText(
-				props.InputText{
+			templ_7745c5c3_Err = popui.Input(
+				props.Input{
 					Label: "Name",
-					Error: props.Error{Attrs: templ.Attributes{"x-text": "inputText.errorText"}},
-					Attrs: templ.Attributes{
+					Error: props.Error{Attributes: templ.Attributes{"x-text": "inputText.errorText"}},
+					Attributes: templ.Attributes{
 						"x-model":   "inputText.value",
 						":disabled": "inputText.disabled",
 						":class":    "{ '" + classes.InputTextError + "': inputText.errorText }",
@@ -479,7 +479,7 @@ func Page() templ.Component {
 			templ_7745c5c3_Err = popui.Select(
 				props.Select{
 					Label: "Name",
-					Error: props.Error{Attrs: templ.Attributes{"x-text": "select.errorText"}},
+					Error: props.Error{Attributes: templ.Attributes{"x-text": "select.errorText"}},
 					Attrs: templ.Attributes{
 						"x-model":   "select.value",
 						":disabled": "select.disabled",
@@ -519,7 +519,7 @@ func Page() templ.Component {
 			templ_7745c5c3_Err = popui.Textarea(
 				props.Textarea{
 					Label: "Name",
-					Error: props.Error{Attrs: templ.Attributes{"x-text": "textarea.errorText"}},
+					Error: props.Error{Attributes: templ.Attributes{"x-text": "textarea.errorText"}},
 					Rows:  8,
 					Attrs: templ.Attributes{
 						"x-model":   "textarea.value",

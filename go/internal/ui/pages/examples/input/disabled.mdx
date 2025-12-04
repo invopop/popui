@@ -1,0 +1,21 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ InputDisabled() {
+	<div class="space-y-4">
+		@popui.Input(props.Input{
+			Placeholder: "This input is disabled",
+			Disabled:    true,
+		})
+		@popui.Input(props.Input{
+			Value:    "Read-only value",
+			Readonly: true,
+		})
+	</div>
+}
+```

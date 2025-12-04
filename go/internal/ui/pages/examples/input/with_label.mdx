@@ -1,0 +1,28 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ InputWithLabel() {
+	<div class="space-y-4">
+		@popui.Input(props.Input{
+			ID:          "email",
+			Label:       "Email",
+			Type:        "email",
+			Placeholder: "email@example.com",
+		})
+		@popui.Input(props.Input{
+			ID:          "username",
+			Type:        "text",
+			Placeholder: "johndoe",
+		}) {
+			@popui.InputLabel(props.Label{ID: "username", Hint: "Choose a unique username"}) {
+				Username
+			}
+		}
+	</div>
+}
+```

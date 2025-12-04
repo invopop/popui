@@ -254,11 +254,11 @@ func Tags(p props.Tags) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.InputText(props.InputText{ID: id, Attrs: templ.Attributes{
+			templ_7745c5c3_Err = popui.Input(props.Input{ID: id, Attributes: templ.Attributes{
 				"x-model":        "tags_newTag",
 				"@keydown.enter": "tags_addTag",
 				":class":         "{ '" + classes.InputTextError + "': tags_error }",
-			}, Error: props.Error{Attrs: templ.Attributes{"x-text": "tags_error"}}}).Render(ctx, templ_7745c5c3_Buffer)
+			}, Error: props.Error{Attributes: templ.Attributes{"x-text": "tags_error"}}}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

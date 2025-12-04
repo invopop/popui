@@ -206,7 +206,7 @@ func Input() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = popui.InputLabel(props.Label{ID: "username", Hint: "Choose a unique username"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = popui.Label(props.Label{ID: "username", Hint: "Choose a unique username"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -228,7 +228,7 @@ func Input() templ.Component {
 			})
 			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
 				Title:       "With Label",
-				Description: "Use the Label prop for a simple text label, or pass an InputLabel component as a child for more control with hints and custom styling.",
+				Description: "Use the Label prop for a simple text label, or pass a Label component as a child for more control with hints and custom styling.",
 				Code:        inputWithLabelCode,
 			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -348,7 +348,7 @@ func Input() templ.Component {
 						{Name: "Placeholder", Type: "string", Default: "", Description: "Placeholder text displayed when input is empty"},
 						{Name: "Value", Type: "string", Default: "", Description: "Initial or current value of the input"},
 						{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission"},
-						{Name: "Label", Type: "string", Default: "", Description: "Simple label text displayed above the input. For advanced labels with hints or custom styling, use the children slot with InputLabel component instead"},
+						{Name: "Label", Type: "string", Default: "", Description: "Simple label text displayed above the input. For advanced labels with hints or custom styling, use the children slot with Label component instead"},
 						{Name: "Prefix", Type: "string", Default: "", Description: "Text or symbol displayed before the input field"},
 						{Name: "Autofocus", Type: "bool", Default: "false", Description: "Automatically focuses the input on page load"},
 						{Name: "Disabled", Type: "bool", Default: "false", Description: "Disables the input"},

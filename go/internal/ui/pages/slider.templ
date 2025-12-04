@@ -45,7 +45,7 @@ templ Slider() {
 				Max:   "100",
 				Value: "50",
 			}) {
-				@popui.InputLabel(props.Label{ID: "volume"}) {
+				@popui.Label(props.Label{ID: "volume"}) {
 					Volume
 				}
 			}
@@ -69,7 +69,7 @@ templ Slider() {
 					{Value: "4", Label: "XL"},
 				},
 			}) {
-				@popui.InputLabel(props.Label{ID: "size"}) {
+				@popui.Label(props.Label{ID: "size"}) {
 					Size
 				}
 			}
@@ -87,7 +87,7 @@ templ Slider() {
 				Step:  "50",
 				Value: "500",
 			}) {
-				@popui.InputLabel(props.Label{ID: "price"}) {
+				@popui.Label(props.Label{ID: "price"}) {
 					Price Range
 				}
 			}

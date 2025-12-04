@@ -21,13 +21,13 @@ import (
 //  * month
 //
 // If the Label property is provided, a simple label will be rendered. For more
-// control over the label (adding hints, custom classes, etc.), pass an InputLabel
+// control over the label (adding hints, custom classes, etc.), pass a Label
 // component as a child instead.
 templ Input(p ...props.Input) {
 	{{ prp := props.First(p) }}
 	<div class="flex flex-col space-y-2 w-full">
 		if prp.Label != "" {
-			@InputLabel(props.Label{ID: prp.ID}) {
+			@Label(props.Label{ID: prp.ID}) {
 				{ prp.Label }
 			}
 		} else {

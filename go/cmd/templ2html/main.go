@@ -54,6 +54,9 @@ func main() {
 		"components/input/index.html": func() error {
 			return renderPage(publicPath, "components/input/index.html", pages.Input())
 		},
+		"components/label/index.html": func() error {
+			return renderPage(publicPath, "components/label/index.html", pages.Label())
+		},
 		"components/radio/index.html": func() error {
 			return renderPage(publicPath, "components/radio/index.html", pages.Radio())
 		},

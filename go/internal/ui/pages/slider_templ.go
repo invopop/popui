@@ -138,7 +138,7 @@ func Slider() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = popui.InputLabel(props.Label{ID: "volume"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = popui.Label(props.Label{ID: "volume"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -210,7 +210,7 @@ func Slider() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = popui.InputLabel(props.Label{ID: "size"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var9), templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = popui.Label(props.Label{ID: "size"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var9), templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -289,7 +289,7 @@ func Slider() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = popui.InputLabel(props.Label{ID: "price"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var12), templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = popui.Label(props.Label{ID: "price"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var12), templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}

@@ -1081,7 +1081,7 @@ func formSection() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = popui.InputLabel().Render(templ.WithChildren(ctx, templ_7745c5c3_Var44), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = popui.Label().Render(templ.WithChildren(ctx, templ_7745c5c3_Var44), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1518,7 +1518,7 @@ func formSection() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.InputLabel(props.Label{ID: "docs_per_month"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var58), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = popui.Label(props.Label{ID: "docs_per_month"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var58), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

@@ -55,6 +55,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/file", s.docsFile)
 	e.GET("/components/image", s.docsImage)
 	e.GET("/components/input", s.docsInput)
+	e.GET("/components/label", s.docsLabel)
 	e.GET("/components/radio", s.docsRadio)
 	e.GET("/components/slider", s.docsSlider)
 
@@ -143,6 +144,11 @@ func (s *serveOpts) docsSlider(c echo.Context) error {
 // docsInput shows the input component documentation
 func (s *serveOpts) docsInput(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Input())
+}
+
+// docsLabel shows the label component documentation
+func (s *serveOpts) docsLabel(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Label())
 }
 
 // render provides a wrapper around the component to make it nice to render.

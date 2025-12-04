@@ -29,7 +29,7 @@ import (
 //   - month
 //
 // If the Label property is provided, a simple label will be rendered. For more
-// control over the label (adding hints, custom classes, etc.), pass an InputLabel
+// control over the label (adding hints, custom classes, etc.), pass a Label
 // component as a child instead.
 func Input(p ...props.Input) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -81,7 +81,7 @@ func Input(p ...props.Input) templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = InputLabel(props.Label{ID: prp.ID}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = Label(props.Label{ID: prp.ID}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

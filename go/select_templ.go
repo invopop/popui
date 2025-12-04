@@ -14,7 +14,7 @@ import (
 )
 
 // Select provides a select element.
-// It provides an InputLabel component at the top if Label prop is present.
+// It provides a Label component at the top if Label prop is present.
 // It provides an InputError component at the botton if Error prop is present.
 func Select(p props.Select) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -83,7 +83,7 @@ func Select(p props.Select) templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = InputLabel(props.Label{ID: p.ID, Class: p.LabelClass, Hint: p.LabelHint}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = Label(props.Label{ID: p.ID, Class: p.LabelClass, Hint: p.LabelHint}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

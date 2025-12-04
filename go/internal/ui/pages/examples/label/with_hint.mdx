@@ -1,0 +1,17 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ LabelWithHint() {
+	@popui.Label(props.Label{
+		ID:   "email",
+		Hint: "This will be your primary contact email",
+	}) {
+		Email Address
+	}
+}
+```

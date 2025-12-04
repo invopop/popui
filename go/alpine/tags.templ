@@ -11,7 +11,7 @@ templ Tags(p props.Tags) {
 	{{ id := uniuri.New() }}
 	<div class={ classes.TagsWrapper }>
 		if p.Label != "" {
-			@popui.InputLabel(props.Label{ID: id}) {
+			@popui.Label(props.Label{ID: id}) {
 				{ p.Label }
 			}
 		}

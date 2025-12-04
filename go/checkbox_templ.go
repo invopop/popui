@@ -360,7 +360,7 @@ func OptionGroup(opts ...props.OptionGroup) templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = InputLabel().Render(templ.WithChildren(ctx, templ_7745c5c3_Var15), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = Label().Render(templ.WithChildren(ctx, templ_7745c5c3_Var15), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

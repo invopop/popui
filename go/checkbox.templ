@@ -90,7 +90,7 @@ templ OptionGroup(opts ...props.OptionGroup) {
 		{ group.Attributes... }
 	>
 		if group.Label != "" {
-			@InputLabel() {
+			@Label() {
 				{ group.Label }
 			}
 		}

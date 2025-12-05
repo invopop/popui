@@ -61,13 +61,19 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/input", s.docsInput)
 	e.GET("/components/label", s.docsLabel)
 	e.GET("/components/notification", s.docsNotification)
+	e.GET("/components/popover", s.docsPopover)
 	e.GET("/components/radio", s.docsRadio)
 	e.GET("/components/separator", s.docsSeparator)
 	e.GET("/components/slider", s.docsSlider)
 	e.GET("/components/typography", s.docsTypography)
 
-	// Examples (deprecated, for reference only)
-	e.GET("/examples", s.admin)
+	// Examples
+	e.GET("/examples/admin", s.examplesAdmin)
+	e.GET("/examples/wizard", s.examplesWizard)
+	e.GET("/wizard/step-one", s.wizardStepOne)
+	e.GET("/wizard/step-two", s.wizardStepTwo)
+	e.GET("/wizard/step-three", s.wizardStepThree)
+	e.GET("/wizard/step-four", s.wizardStepFour)
 
 	var startErr error
 	go func() {
@@ -88,9 +94,34 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	return startErr
 }
 
-// admin shows the admin panel example page (deprecated)
-func (s *serveOpts) admin(c echo.Context) error {
+// examplesAdmin shows the admin panel example page
+func (s *serveOpts) examplesAdmin(c echo.Context) error {
 	return render(c, http.StatusOK, examples.Admin())
+}
+
+// examplesWizard shows the wizard example page
+func (s *serveOpts) examplesWizard(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppIndex())
+}
+
+// wizardStepOne shows wizard step one
+func (s *serveOpts) wizardStepOne(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppStepOne())
+}
+
+// wizardStepTwo shows wizard step two
+func (s *serveOpts) wizardStepTwo(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppStepTwo())
+}
+
+// wizardStepThree shows wizard step three
+func (s *serveOpts) wizardStepThree(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppStepThree())
+}
+
+// wizardStepFour shows wizard step four
+func (s *serveOpts) wizardStepFour(c echo.Context) error {
+	return render(c, http.StatusOK, examples.AppStepFour())
 }
 
 // docsHome shows the documentation home page
@@ -181,6 +212,11 @@ func (s *serveOpts) docsFlashMessage(c echo.Context) error {
 // docsNotification shows the notification component documentation
 func (s *serveOpts) docsNotification(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Notification())
+}
+
+// docsPopover shows the popover component documentation
+func (s *serveOpts) docsPopover(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Popover())
 }
 
 // docsSeparator shows the separator component documentation

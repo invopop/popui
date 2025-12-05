@@ -1,0 +1,85 @@
+// Package pages provides documentation pages for PopUI components.
+package pages
+
+import (
+	_ "embed"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/layouts"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+//go:embed examples/popover/default.mdx
+var popoverDefaultCode string
+
+//go:embed examples/popover/right-aligned.mdx
+var popoverRightAlignedCode string
+
+templ Popover() {
+	@layouts.DocsLayout("Popover", "A context menu that displays when a button is clicked.") {
+		@modules.Example(modules.ExampleProps{
+			Code: popoverDefaultCode,
+		}) {
+			@popui.Popover(props.Popover{
+				ID:          "popover-default",
+				ButtonLabel: "···",
+			}) {
+				@popui.PopoverItem() {
+					Edit
+				}
+				@popui.PopoverItem() {
+					Duplicate
+				}
+				@popui.PopoverItem() {
+					Delete
+				}
+			}
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Right Aligned",
+			Description: "Align the popover menu to the right side of the button",
+			Code:        popoverRightAlignedCode,
+		}) {
+			<div class="flex justify-end">
+				@popui.Popover(props.Popover{
+					ID:          "popover-right",
+					ButtonLabel: "···",
+					RightAlign:  true,
+				}) {
+					@popui.PopoverItem() {
+						Settings
+					}
+					@popui.PopoverItem() {
+						Profile
+					}
+					@popui.PopoverItem() {
+						Logout
+					}
+				}
+			</div>
+		}
+		@modules.Section("API Reference", "api") {
+			@modules.APITable(modules.APITableProps{
+				Title:       "Popover",
+				Description: "The main popover component that displays a context menu.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the popover element", Required: true},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the menu container"},
+					{Name: "ButtonLabel", Type: "string", Default: "", Description: "Text label for the trigger button"},
+					{Name: "ButtonVariant", Type: "string", Default: "", Description: "Variant style for the trigger button (e.g., 'primary', 'secondary', 'transparent')"},
+					{Name: "RightAlign", Type: "bool", Default: "false", Description: "Align the popover menu to the right side of the button"},
+				},
+			})
+			@modules.APITable(modules.APITableProps{
+				Title:       "PopoverItem",
+				Description: "Individual menu item within the popover.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the item element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the list item"},
+				},
+			})
+		}
+	}
+}

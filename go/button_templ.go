@@ -39,7 +39,7 @@ func Button(p ...props.Button) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		btn := props.First(p)
 		var templ_7745c5c3_Var2 = []any{utils.TwMerge(
-			"cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:pt-[5px] active:pb-[3px]",
+			"cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:translate-y-[1px]",
 			buttonClasses(btn.Variant, btn.Size),
 			btn.Class,
 		),
@@ -222,7 +222,7 @@ func AnchorButton(p ...props.AnchorButton) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		anchor := props.First(p)
 		var templ_7745c5c3_Var10 = []any{utils.TwMerge(
-			"cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:pt-[5px] active:pb-[3px]",
+			"cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:translate-y-[1px]",
 			buttonClasses(anchor.Variant, anchor.Size),
 			anchor.Class,
 		),
@@ -363,8 +363,8 @@ func buttonClasses(variant string, size string) string {
 			"bg-background-accent text-foreground-inverse shadow-button-primary hover:bg-background-accent-hover active:bg-background-accent-hover":                                            variant == "primary",
 			"border-0 bg-background-default-tertiary hover:bg-background-default-tertiary-hover":                                                                                               variant == "secondary",
 			// Size classes
-			"text-sm rounded": size == "sm",
-			"p-1.5":           size == "icon",
+			"text-sm rounded":    size == "sm",
+			"p-1.5 leading-none": size == "icon",
 		},
 	)
 }

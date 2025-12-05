@@ -15,16 +15,16 @@ templ PageHeader(opts ...props.PageHeader) {
 		}
 		class={
 			utils.TwMerge(
-				"flex items-center justify-between px-6 py-4 border-b border-border-default-secondary",
+				"bg-background z-[2] h-12 fixed inset-0 flex px-6 justify-between items-center border-b border-border transition-[left] duration-300 ease-in-out md:left-[240px]",
 				p.Class,
 			),
 		}
 		{ p.Attributes... }
 	>
-		<div class="flex items-center gap-4">
-			@Button(props.Button{}) {
+		<div class="flex items-center gap-1">
+			<button class="block p-[5px] mr-2 md:hidden">
 				@icons.Menu()
-			}
+			</button>
 			if p.Breadcrumbs != nil {
 				@Breadcrumb() {
 					for _, i := range p.Breadcrumbs {
@@ -55,7 +55,7 @@ templ PageContent(opts ...props.PageContent) {
 		}
 		class={
 			utils.TwMerge(
-				"p-6",
+				"flex p-6 flex-col items-center gap-6",
 				p.Class,
 			),
 		}
@@ -77,13 +77,14 @@ templ PageSection(opts ...props.PageSection) {
 			}
 			class={
 				utils.TwMerge(
-					"flex flex-col gap-6 py-6",
+					"w-full flex flex-col lg:flex-row items-start",
 					p.Class,
 				),
 			}
+			style="gap: max(1.5rem, 5vw);"
 			{ p.Attributes... }
 		>
-			<div class="flex flex-col gap-2">
+			<div class="flex w-[240px] flex-col items-start gap-0.5 shrink-0">
 				@Subtitle() {
 					{ p.Title }
 				}
@@ -93,10 +94,13 @@ templ PageSection(opts ...props.PageSection) {
 			</div>
 			<div
 				class={
-					utils.Clsx(
-						map[string]bool{
-							"w-full": p.FullWidthContent,
-						},
+					utils.TwMerge(
+						"flex flex-col space-y-2 items-start w-full max-w-[768px]",
+						utils.Clsx(
+							map[string]bool{
+								"!max-w-none": p.FullWidthContent,
+							},
+						),
 					),
 				}
 			>
@@ -134,7 +138,7 @@ templ PageTitle(opts ...props.PageTitle) {
 		}
 		class={
 			utils.TwMerge(
-				"text-xl font-semibold text-foreground",
+				"font-sans text-foreground text-lg font-medium",
 				p.Class,
 			),
 		}

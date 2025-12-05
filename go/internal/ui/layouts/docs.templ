@@ -56,10 +56,24 @@ templ DocsLayout(title, description string) {
 							@sidebarLink("/components/input", "Input", currentPath)
 							@sidebarLink("/components/label", "Label", currentPath)
 							@sidebarLink("/components/notification", "Notification", currentPath)
+							@sidebarLink("/components/popover", "Popover", currentPath)
 							@sidebarLink("/components/radio", "Radio", currentPath)
 							@sidebarLink("/components/separator", "Separator", currentPath)
 							@sidebarLink("/components/slider", "Slider", currentPath)
 							@sidebarLink("/components/typography", "Typography", currentPath)
+						</div>
+					</div>
+					<div class="flex flex-col">
+						<div class="flex items-center gap-1 px-1.5 py-2 rounded-[10px]">
+							<p class="text-xs font-medium text-foreground-default-secondary">Examples</p>
+						</div>
+						<div class="flex flex-col gap-0.5">
+							<a href="/examples/admin" target="_blank" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == "/examples/admin") }>
+								Admin Panel
+							</a>
+							<a href="/examples/wizard" target="_blank" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == "/examples/wizard") }>
+								Wizard
+							</a>
 						</div>
 					</div>
 				</div>

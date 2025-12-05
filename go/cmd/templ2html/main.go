@@ -72,6 +72,9 @@ func main() {
 		"components/notification/index.html": func() error {
 			return renderPage(publicPath, "components/notification/index.html", pages.Notification())
 		},
+		"components/popover/index.html": func() error {
+			return renderPage(publicPath, "components/popover/index.html", pages.Popover())
+		},
 		"components/radio/index.html": func() error {
 			return renderPage(publicPath, "components/radio/index.html", pages.Radio())
 		},
@@ -84,8 +87,23 @@ func main() {
 		"components/typography/index.html": func() error {
 			return renderPage(publicPath, "components/typography/index.html", pages.Typography())
 		},
-		"examples/index.html": func() error {
-			return renderPage(publicPath, "examples/index.html", examples.Admin())
+		"examples/admin/index.html": func() error {
+			return renderPage(publicPath, "examples/admin/index.html", examples.Admin())
+		},
+		"examples/wizard/index.html": func() error {
+			return renderPage(publicPath, "examples/wizard/index.html", examples.AppIndex())
+		},
+		"wizard/step-one/index.html": func() error {
+			return renderPage(publicPath, "wizard/step-one/index.html", examples.AppStepOne())
+		},
+		"wizard/step-two/index.html": func() error {
+			return renderPage(publicPath, "wizard/step-two/index.html", examples.AppStepTwo())
+		},
+		"wizard/step-three/index.html": func() error {
+			return renderPage(publicPath, "wizard/step-three/index.html", examples.AppStepThree())
+		},
+		"wizard/step-four/index.html": func() error {
+			return renderPage(publicPath, "wizard/step-four/index.html", examples.AppStepFour())
 		},
 	}
 

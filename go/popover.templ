@@ -1,15 +1,23 @@
 package popui
 
 import (
-	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
 )
 
-// Popopver provides a Button that can be clicked for displaying a context menu.
+// Popover provides a Button that can be clicked for displaying a context menu.
 // Menu content will render the html passed as slot.
 templ Popover(opts ...props.Popover) {
 	{{ p := props.First(opts) }}
-	<div role="menu" class={ classes.PopoverWrapper, templ.KV(classes.PopoverWrapperRight, p.RightAlign) }>
+	<div
+		role="menu"
+		class={
+			utils.TwMerge(
+				"relative inline-block",
+				utils.Clsx(map[string]bool{"flex justify-end": p.RightAlign}),
+			),
+		}
+	>
 		@Button(props.Button{
 			Attributes: templ.Attributes{"popovertarget": p.ID},
 			Size:       "icon",
@@ -20,14 +28,38 @@ templ Popover(opts ...props.Popover) {
 		<div popover id={ p.ID }></div>
 		<div
 			class={
-				templ.KV(classes.PopoverList, p.Class == ""),
-				templ.KV(p.Class, p.Class != ""),
-				templ.KV(classes.PopoverListRight, p.RightAlign),
-				templ.KV(classes.PopoverListStretch, p.Stretch),
+				utils.TwMerge(
+					"hidden absolute left-0 top-8 border border-border-default-secondary rounded-md p-1 w-fit min-w-48 bg-background z-[9999] popover-menu",
+					utils.Clsx(map[string]bool{"!left-[unset] !right-0": p.RightAlign}),
+					p.Class,
+				),
 			}
-			{ p.Attrs... }
+			{ p.Attributes... }
 		>
-			{ children... }
+			<ul>
+				{ children... }
+			</ul>
 		</div>
 	</div>
+}
+
+// PopoverItem provides a menu item within the popover.
+templ PopoverItem(opts ...props.PopoverItem) {
+	{{ p := props.First(opts) }}
+	<li
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"font-sans font-medium text-base text-foreground w-full rounded hover:bg-background-default-tertiary",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		<div class="w-full pl-1.5 pr-2 py-1.5 flex items-center space-x-2 cursor-pointer whitespace-nowrap">
+			{ children... }
+		</div>
+	</li>
 }

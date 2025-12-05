@@ -706,6 +706,9 @@ form {
 .popui-table-wrapper {
   @apply border border-border rounded-md overflow-hidden;
 }
+.popui-table-wrapper:has([role=menu]) {
+  @apply overflow-visible;
+}
 .popui-table tr {
   @apply data-[state=disabled]:opacity-30;
 }

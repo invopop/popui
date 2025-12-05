@@ -199,10 +199,9 @@ templ Page() {
 					props.Select{
 						Label: "Name",
 						Error: props.Error{Attributes: templ.Attributes{"x-text": "select.errorText"}},
-						Attrs: templ.Attributes{
+						Attributes: templ.Attributes{
 							"x-model":   "select.value",
 							":disabled": "select.disabled",
-							":class":    "{ '" + classes.SelectError + "': select.errorText }",
 						},
 					}) {
 					<template x-for="row in select.options" :key="row">
@@ -234,14 +233,13 @@ templ Page() {
 				@popui.Textarea(
 					props.Textarea{
 						Label: "Name",
+						Class: "font-mono",
 						Error: props.Error{Attributes: templ.Attributes{"x-text": "textarea.errorText"}},
 						Rows:  8,
-						Attrs: templ.Attributes{
+						Attributes: templ.Attributes{
 							"x-model":   "textarea.value",
 							":disabled": "textarea.disabled",
-							":class":    "{ '" + classes.TextareaError + "': textarea.errorText }",
 						},
-						Monospaced: true,
 					})
 			</div>
 			// Default Button

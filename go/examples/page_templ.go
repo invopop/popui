@@ -480,10 +480,9 @@ func Page() templ.Component {
 				props.Select{
 					Label: "Name",
 					Error: props.Error{Attributes: templ.Attributes{"x-text": "select.errorText"}},
-					Attrs: templ.Attributes{
+					Attributes: templ.Attributes{
 						"x-model":   "select.value",
 						":disabled": "select.disabled",
-						":class":    "{ '" + classes.SelectError + "': select.errorText }",
 					},
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var14), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -519,14 +518,13 @@ func Page() templ.Component {
 			templ_7745c5c3_Err = popui.Textarea(
 				props.Textarea{
 					Label: "Name",
+					Class: "font-mono",
 					Error: props.Error{Attributes: templ.Attributes{"x-text": "textarea.errorText"}},
 					Rows:  8,
-					Attrs: templ.Attributes{
+					Attributes: templ.Attributes{
 						"x-model":   "textarea.value",
 						":disabled": "textarea.disabled",
-						":class":    "{ '" + classes.TextareaError + "': textarea.errorText }",
 					},
-					Monospaced: true,
 				}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -678,7 +676,7 @@ func fieldConfig(conf *config) templ.Component {
 		var templ_7745c5c3_Var18 string
 		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(conf.Title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 305, Col: 14}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 303, Col: 14}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 		if templ_7745c5c3_Err != nil {
@@ -696,7 +694,7 @@ func fieldConfig(conf *config) templ.Component {
 			var templ_7745c5c3_Var19 string
 			templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(conf.XModel)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 307, Col: 29}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 305, Col: 29}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 			if templ_7745c5c3_Err != nil {
@@ -724,7 +722,7 @@ func fieldConfig(conf *config) templ.Component {
 				var templ_7745c5c3_Var20 string
 				templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(i.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 315, Col: 14}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 313, Col: 14}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 				if templ_7745c5c3_Err != nil {
@@ -737,7 +735,7 @@ func fieldConfig(conf *config) templ.Component {
 				var templ_7745c5c3_Var21 string
 				templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(i.Type)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 316, Col: 14}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 314, Col: 14}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var21))
 				if templ_7745c5c3_Err != nil {
@@ -760,7 +758,7 @@ func fieldConfig(conf *config) templ.Component {
 				var templ_7745c5c3_Var22 string
 				templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(i.Xmodel)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 320, Col: 19}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/examples/page.templ`, Line: 318, Col: 19}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 				if templ_7745c5c3_Err != nil {

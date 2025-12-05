@@ -1,0 +1,18 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ TextareaWithLabel() {
+	@popui.Textarea(props.Textarea{
+		ID:          "bio",
+		Name:        "bio",
+		Label:       "Biography",
+		Placeholder: "Tell us about yourself...",
+		Rows:        6,
+	})
+}
+```

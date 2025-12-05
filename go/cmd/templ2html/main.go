@@ -78,11 +78,17 @@ func main() {
 		"components/radio/index.html": func() error {
 			return renderPage(publicPath, "components/radio/index.html", pages.Radio())
 		},
+		"components/select/index.html": func() error {
+			return renderPage(publicPath, "components/select/index.html", pages.Select())
+		},
 		"components/separator/index.html": func() error {
 			return renderPage(publicPath, "components/separator/index.html", pages.Separator())
 		},
 		"components/slider/index.html": func() error {
 			return renderPage(publicPath, "components/slider/index.html", pages.Slider())
+		},
+		"components/textarea/index.html": func() error {
+			return renderPage(publicPath, "components/textarea/index.html", pages.Textarea())
 		},
 		"components/typography/index.html": func() error {
 			return renderPage(publicPath, "components/typography/index.html", pages.Typography())

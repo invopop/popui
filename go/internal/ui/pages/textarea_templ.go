@@ -19,25 +19,28 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-//go:embed examples/input/default.mdx
-var inputDefaultCode string
+//go:embed examples/textarea/default.mdx
+var textareaDefaultCode string
 
-//go:embed examples/input/types.mdx
-var inputTypesCode string
+//go:embed examples/textarea/with_label.mdx
+var textareaWithLabelCode string
 
-//go:embed examples/input/with_label.mdx
-var inputWithLabelCode string
+//go:embed examples/textarea/custom_label.mdx
+var textareaCustomLabelCode string
 
-//go:embed examples/input/custom_label.mdx
-var inputCustomLabelCode string
+//go:embed examples/textarea/disabled.mdx
+var textareaDisabledCode string
 
-//go:embed examples/input/disabled.mdx
-var inputDisabledCode string
+//go:embed examples/textarea/with_error.mdx
+var textareaWithErrorCode string
 
-//go:embed examples/input/with_error.mdx
-var inputWithErrorCode string
+//go:embed examples/textarea/monospaced.mdx
+var textareaMonospacedCode string
 
-func Input() templ.Component {
+//go:embed examples/textarea/contenteditable.mdx
+var textareaContenteditableCode string
+
+func Textarea() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -82,8 +85,9 @@ func Input() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					Placeholder: "Enter your name",
+				templ_7745c5c3_Err = popui.Textarea(props.Textarea{
+					Placeholder: "Enter your message...",
+					Rows:        4,
 				}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -91,7 +95,7 @@ func Input() templ.Component {
 				return nil
 			})
 			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
-				Code: inputDefaultCode,
+				Code: textareaDefaultCode,
 			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -112,45 +116,27 @@ func Input() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"space-y-4\">")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					Type:        "email",
-					Placeholder: "email@example.com",
+				templ_7745c5c3_Err = popui.Textarea(props.Textarea{
+					ID:          "bio",
+					Name:        "bio",
+					Label:       "Biography",
+					Placeholder: "Tell us about yourself...",
+					Rows:        6,
 				}).Render(ctx, templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					Type:        "password",
-					Placeholder: "Enter password",
-				}).Render(ctx, templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					Type: "date",
-				}).Render(ctx, templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				return nil
 			})
 			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
-				Title:       "Input Types",
-				Description: "Input supports various types including text, email, password, date, and more.",
-				Code:        inputTypesCode,
+				Title:       "With Label",
+				Description: "Use the Label prop for a simple text label above the textarea.",
+				Code:        textareaWithLabelCode,
 			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, " ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -166,46 +152,11 @@ func Input() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					ID:          "email",
-					Label:       "Email",
-					Type:        "email",
-					Placeholder: "email@example.com",
-				}).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"flex flex-col gap-2\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				return nil
-			})
-			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
-				Title:       "With Label",
-				Description: "Use the Label prop for a simple text label above the input.",
-				Code:        inputWithLabelCode,
-			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, " ")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Var6 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
-				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
-				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
-				if !templ_7745c5c3_IsBuffer {
-					defer func() {
-						templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
-						if templ_7745c5c3_Err == nil {
-							templ_7745c5c3_Err = templ_7745c5c3_BufErr
-						}
-					}()
-				}
-				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<div class=\"flex flex-col space-y-2 w-full\">")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Var7 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+				templ_7745c5c3_Var6 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 					templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 					templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
 					if !templ_7745c5c3_IsBuffer {
@@ -217,20 +168,71 @@ func Input() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "Username")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "Comments")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.Label(props.Label{ID: "username", Hint: "Choose a unique username"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = popui.Label(props.Label{ID: "comments", Hint: "Share your thoughts in detail"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					ID:          "username",
-					Type:        "text",
-					Placeholder: "johndoe",
+				templ_7745c5c3_Err = popui.Textarea(props.Textarea{
+					ID:          "comments",
+					Name:        "comments",
+					Placeholder: "Enter your comments...",
+					Rows:        5,
+				}).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				return nil
+			})
+			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
+				Title:       "Custom Label",
+				Description: "For advanced label features like hints, render a Label component separately with proper spacing using a flex container.",
+				Code:        textareaCustomLabelCode,
+			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Var7 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+				if !templ_7745c5c3_IsBuffer {
+					defer func() {
+						templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+						if templ_7745c5c3_Err == nil {
+							templ_7745c5c3_Err = templ_7745c5c3_BufErr
+						}
+					}()
+				}
+				ctx = templ.InitializeContext(ctx)
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<div class=\"space-y-4\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = popui.Textarea(props.Textarea{
+					Value:    "This textarea is disabled and cannot be edited.",
+					Disabled: true,
+					Rows:     3,
+				}).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = popui.Textarea(props.Textarea{
+					Value:    "This textarea is read-only.",
+					Readonly: true,
+					Rows:     3,
 				}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -242,10 +244,10 @@ func Input() templ.Component {
 				return nil
 			})
 			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
-				Title:       "Custom Label",
-				Description: "For advanced label features like hints, render a Label component separately with proper spacing using a flex container.",
-				Code:        inputCustomLabelCode,
-			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
+				Title:       "Disabled & Read-only",
+				Description: "Textarea can be disabled to prevent interaction or set to read-only to prevent editing.",
+				Code:        textareaDisabledCode,
+			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -265,39 +267,30 @@ func Input() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<div class=\"space-y-4\">")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					Placeholder: "This input is disabled",
-					Disabled:    true,
+				templ_7745c5c3_Err = popui.Textarea(props.Textarea{
+					ID:          "message",
+					Name:        "message",
+					Label:       "Message",
+					Placeholder: "Enter your message...",
+					Rows:        4,
+					Error: props.Error{
+						Error: errors.New("Message must be at least 10 characters long"),
+					},
 				}).Render(ctx, templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					Value:    "Read-only value",
-					Readonly: true,
-				}).Render(ctx, templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "</div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				return nil
 			})
 			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
-				Title:       "Disabled & Read-only",
-				Description: "Input can be disabled to prevent interaction or set to read-only to prevent editing.",
-				Code:        inputDisabledCode,
+				Title:       "With Error",
+				Description: "Textarea can display error messages for validation feedback.",
+				Code:        textareaWithErrorCode,
 			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var8), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, " ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, " ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -313,15 +306,11 @@ func Input() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = popui.Input(props.Input{
-					ID:          "email",
-					Label:       "Email",
-					Type:        "email",
-					Placeholder: "email@example.com",
-					Value:       "invalid-email",
-					Error: props.Error{
-						Error: errors.New("Please enter a valid email address"),
-					},
+				templ_7745c5c3_Err = popui.Textarea(props.Textarea{
+					Label:       "Code Snippet",
+					Class:       "font-mono",
+					Placeholder: "Enter code here...",
+					Rows:        6,
 				}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -329,14 +318,14 @@ func Input() templ.Component {
 				return nil
 			})
 			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
-				Title:       "With Error",
-				Description: "Input can display error messages for validation feedback.",
-				Code:        inputWithErrorCode,
+				Title:       "Monospaced Font",
+				Description: "Use the Class prop with font-mono for code or monospaced text display.",
+				Code:        textareaMonospacedCode,
 			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var9), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, " ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, " ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -352,30 +341,79 @@ func Input() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<div class=\"space-y-4\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = popui.Textarea(props.Textarea{
+					Label: "Standard Textarea",
+					Value: "This is plain text in a textarea element. HTML tags like <strong>bold</strong> are displayed as text.",
+					Rows:  3,
+				}).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = popui.Contenteditable(props.Textarea{
+					Label: "Contenteditable Div",
+					Value: "This is a contenteditable div. You can use <strong>formatted</strong> <em>text</em> and it will render properly.",
+					Rows:  3,
+				}).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "</div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				return nil
+			})
+			templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
+				Title:       "Contenteditable",
+				Description: "Use Contenteditable for rich text editing with a div element instead of a textarea. It renders as a contenteditable div that can display formatted content.",
+				Code:        textareaContenteditableCode,
+			}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var10), templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Var11 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+				if !templ_7745c5c3_IsBuffer {
+					defer func() {
+						templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+						if templ_7745c5c3_Err == nil {
+							templ_7745c5c3_Err = templ_7745c5c3_BufErr
+						}
+					}()
+				}
+				ctx = templ.InitializeContext(ctx)
 				templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
-					Title:       "Input",
-					Description: "Text input field with support for various types and validation.",
+					Title:       "Textarea",
+					Description: "Multi-line text input field with support for labels and validation.",
 					Items: []modules.APITableItem{
-						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the input element"},
-						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with input styles"},
+						{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the textarea element"},
+						{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with textarea styles"},
 						{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
-						{Name: "Type", Type: "string", Default: "text", Description: "Input type: text, email, password, tel, url, date, time, week, month, search, file"},
-						{Name: "Placeholder", Type: "string", Default: "", Description: "Placeholder text displayed when input is empty"},
-						{Name: "Value", Type: "string", Default: "", Description: "Initial or current value of the input"},
 						{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission"},
-						{Name: "Label", Type: "string", Default: "", Description: "Simple label text displayed above the input"},
-						{Name: "Prefix", Type: "string", Default: "", Description: "Text or symbol displayed before the input field"},
-						{Name: "Autofocus", Type: "bool", Default: "false", Description: "Automatically focuses the input on page load"},
-						{Name: "Disabled", Type: "bool", Default: "false", Description: "Disables the input"},
-						{Name: "Readonly", Type: "bool", Default: "false", Description: "Makes the input read-only"},
-						{Name: "Required", Type: "bool", Default: "false", Description: "Marks the input as required for form validation"},
-						{Name: "Error", Type: "props.Error", Default: "", Description: "Error configuration to display validation feedback below the input"},
+						{Name: "Placeholder", Type: "string", Default: "", Description: "Placeholder text displayed when textarea is empty"},
+						{Name: "Value", Type: "string", Default: "", Description: "Initial or current value of the textarea"},
+						{Name: "Label", Type: "string", Default: "", Description: "Simple label text displayed above the textarea"},
+						{Name: "Rows", Type: "int", Default: "4", Description: "Number of visible text rows"},
+						{Name: "Disabled", Type: "bool", Default: "false", Description: "Disables the textarea"},
+						{Name: "Readonly", Type: "bool", Default: "false", Description: "Makes the textarea read-only"},
+						{Name: "Required", Type: "bool", Default: "false", Description: "Marks the textarea as required for form validation"},
+						{Name: "Autofocus", Type: "bool", Default: "false", Description: "Automatically focuses the textarea on page load"},
+						{Name: "Error", Type: "props.Error", Default: "", Description: "Error configuration to display validation feedback below the textarea"},
 					},
 				}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, " ")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, " ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -394,13 +432,13 @@ func Input() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = modules.Section("API Reference", "api").Render(templ.WithChildren(ctx, templ_7745c5c3_Var10), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = modules.Section("API Reference", "api").Render(templ.WithChildren(ctx, templ_7745c5c3_Var11), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.DocsLayout("Input", "Text input field for capturing user data with various types and validation.").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.DocsLayout("Textarea", "Multi-line text input field for capturing longer user input with support for labels and validation.").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

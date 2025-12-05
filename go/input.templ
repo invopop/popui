@@ -20,9 +20,7 @@ import (
 //  * week
 //  * month
 //
-// If the Label property is provided, a simple label will be rendered. For more
-// control over the label (adding hints, custom classes, etc.), pass a Label
-// component as a child instead.
+// If the Label property is provided, a simple label will be rendered above the input.
 templ Input(p ...props.Input) {
 	{{ prp := props.First(p) }}
 	<div class="flex flex-col space-y-2 w-full">
@@ -30,8 +28,6 @@ templ Input(p ...props.Input) {
 			@Label(props.Label{ID: prp.ID}) {
 				{ prp.Label }
 			}
-		} else {
-			{ children... }
 		}
 		<div class="flex items-center gap-2">
 			if prp.Prefix != "" {
@@ -44,10 +40,8 @@ templ Input(p ...props.Input) {
 				type={ inputType(prp.Type) }
 				class={
 					utils.TwMerge(
-						"font-sans py-1.5 px-2.5 border w-full rounded-md placeholder:text-foreground-default-tertiary text-base tracking-tight disabled:bg-background-default-secondary border-border-default-secondary text-foreground outline-none caret-foreground-accent",
-						"focus:ring-0 focus:ring-offset-0",
-						"hover:enabled:border-border-default-secondary-hover",
-						inputErrorClasses(prp),
+						utils.FormFieldClasses(),
+						utils.FormFieldErrorClasses(!prp.Error.Empty()),
 						prp.Class,
 					),
 				}
@@ -99,13 +93,4 @@ func inputType(typ string) string {
 	default:
 		return "text"
 	}
-}
-
-func inputErrorClasses(prp props.Input) string {
-	return utils.Clsx(
-		map[string]bool{
-			"!text-foreground-critical !border-border-critical-bold !outline-none !caret-foreground-critical": !prp.Error.Empty(),
-			"focus:border-border-selected-bold focus:shadow-active": prp.Error.Empty(),
-		},
-	)
 }

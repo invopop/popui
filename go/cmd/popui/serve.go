@@ -63,8 +63,10 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/notification", s.docsNotification)
 	e.GET("/components/popover", s.docsPopover)
 	e.GET("/components/radio", s.docsRadio)
+	e.GET("/components/select", s.docsSelect)
 	e.GET("/components/separator", s.docsSeparator)
 	e.GET("/components/slider", s.docsSlider)
+	e.GET("/components/textarea", s.docsTextarea)
 	e.GET("/components/typography", s.docsTypography)
 
 	// Examples
@@ -179,6 +181,11 @@ func (s *serveOpts) docsRadio(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Radio())
 }
 
+// docsSelect shows the select component documentation
+func (s *serveOpts) docsSelect(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Select())
+}
+
 // docsSlider shows the slider component documentation
 func (s *serveOpts) docsSlider(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Slider())
@@ -222,6 +229,11 @@ func (s *serveOpts) docsPopover(c echo.Context) error {
 // docsSeparator shows the separator component documentation
 func (s *serveOpts) docsSeparator(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Separator())
+}
+
+// docsTextarea shows the textarea component documentation
+func (s *serveOpts) docsTextarea(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Textarea())
 }
 
 // docsTypography shows the typography components documentation

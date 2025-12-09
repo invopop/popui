@@ -66,6 +66,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/select", s.docsSelect)
 	e.GET("/components/separator", s.docsSeparator)
 	e.GET("/components/slider", s.docsSlider)
+	e.GET("/components/table", s.docsTable)
 	e.GET("/components/textarea", s.docsTextarea)
 	e.GET("/components/typography", s.docsTypography)
 
@@ -229,6 +230,11 @@ func (s *serveOpts) docsPopover(c echo.Context) error {
 // docsSeparator shows the separator component documentation
 func (s *serveOpts) docsSeparator(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Separator())
+}
+
+// docsTable shows the table component documentation
+func (s *serveOpts) docsTable(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Table())
 }
 
 // docsTextarea shows the textarea component documentation

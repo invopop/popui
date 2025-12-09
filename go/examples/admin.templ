@@ -161,7 +161,7 @@ templ Admin() {
 
 // Sections
 templ tableSection() {
-	@popui.Table(props.Table{}) {
+	@popui.Table(props.Table{Class: "[&_th:last-child]:text-right [&_td:last-child]:text-right"}) {
 		<col style="width: 30%"/>
 		<col style="width: 30%"/>
 		<col style="width: 30%"/>
@@ -175,18 +175,28 @@ templ tableSection() {
 		</thead>
 		<tbody>
 			<tr>
-				@popui.TableCell(props.TableCell{Content: "Marta García", UseInitial: true, Bold: true})
-				@popui.TableCell(props.TableCell{Content: "Finance"})
+				<td>
+					<div class="flex items-center gap-2">
+						@popui.Avatar(props.Avatar{Initial: "M"})
+						<span class="font-medium">Marta García</span>
+					</div>
+				</td>
+				<td>Finance</td>
 				<td>
 					<a href="mailto:marga.garcia@invopop.com">marga.garcia@invopop.com</a>
 				</td>
-				@popui.TableCell(props.TableCell{Content: "Account owner", RightAlign: true})
+				<td>Account owner</td>
 			</tr>
 			<tr>
-				@popui.TableCell(props.TableCell{Content: "Alejandro Lopez", UseInitial: true, Bold: true})
-				@popui.TableCell(props.TableCell{Content: "Finance"})
-				@popui.TableCell(props.TableCell{Content: "alejandro.lopez@invopop.com"})
-				@popui.TableCell(props.TableCell{RightAlign: true}) {
+				<td>
+					<div class="flex items-center gap-2">
+						@popui.Avatar(props.Avatar{Initial: "A"})
+						<span class="font-medium">Alejandro Lopez</span>
+					</div>
+				</td>
+				<td>Finance</td>
+				<td>alejandro.lopez@invopop.com</td>
+				<td>
 					@popui.Popover(props.Popover{
 						ID:            "popover-table-actions",
 						ButtonLabel:   "···",
@@ -206,7 +216,7 @@ templ tableSection() {
 							</button>
 						}
 					}
-				}
+				</td>
 			</tr>
 		</tbody>
 	}

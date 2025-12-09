@@ -1,0 +1,39 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ RightAlignTableExample() {
+	@popui.Table(props.Table{
+		Class: "[&_th:last-child]:text-right [&_td:last-child]:text-right",
+	}) {
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>Quantity</th>
+				<th>Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Product A</td>
+				<td>3</td>
+				<td>$89.97</td>
+			</tr>
+			<tr>
+				<td>Product B</td>
+				<td>1</td>
+				<td>$39.99</td>
+			</tr>
+			<tr>
+				<td>Product C</td>
+				<td>2</td>
+				<td>$99.98</td>
+			</tr>
+		</tbody>
+	}
+}
+```

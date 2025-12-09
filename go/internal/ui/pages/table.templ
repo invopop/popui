@@ -1,0 +1,172 @@
+package pages
+
+import (
+	_ "embed"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/layouts"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+//go:embed examples/table/default.mdx
+var tableDefaultCode string
+
+//go:embed examples/table/clickable.mdx
+var tableClickableCode string
+
+//go:embed examples/table/right_align.mdx
+var tableRightAlignCode string
+
+//go:embed examples/table/custom_content.mdx
+var tableCustomContentCode string
+
+templ Table() {
+	@layouts.DocsLayout("Table", "Display data in a structured table format with automatic styling for headers, cells, and borders.") {
+		@modules.Example(modules.ExampleProps{
+			Code: tableDefaultCode,
+		}) {
+			@popui.Table() {
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Role</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>John Doe</td>
+						<td>john@example.com</td>
+						<td>Admin</td>
+					</tr>
+					<tr>
+						<td>Jane Smith</td>
+						<td>jane@example.com</td>
+						<td>User</td>
+					</tr>
+					<tr>
+						<td>Bob Johnson</td>
+						<td>bob@example.com</td>
+						<td>Editor</td>
+					</tr>
+				</tbody>
+			}
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Clickable Rows",
+			Description: "Add hover effects to table rows by passing additional classes via the Class prop.",
+			Code:        tableClickableCode,
+		}) {
+			@popui.Table(props.Table{
+				Class: "[&_tr:hover_td]:bg-background-default-secondary [&_tr:hover_td]:cursor-pointer",
+			}) {
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Status</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Widget A</td>
+						<td>Available</td>
+						<td>$29.99</td>
+					</tr>
+					<tr>
+						<td>Widget B</td>
+						<td>Out of Stock</td>
+						<td>$39.99</td>
+					</tr>
+					<tr>
+						<td>Widget C</td>
+						<td>Available</td>
+						<td>$49.99</td>
+					</tr>
+				</tbody>
+			}
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "Right-Aligned Cells",
+			Description: "Right-align specific columns using the Class prop with arbitrary variants like [&_th:last-child]:text-right.",
+			Code:        tableRightAlignCode,
+		}) {
+			@popui.Table(props.Table{
+				Class: "[&_th:last-child]:text-right [&_td:last-child]:text-right",
+			}) {
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Quantity</th>
+						<th>Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Product A</td>
+						<td>3</td>
+						<td>$89.97</td>
+					</tr>
+					<tr>
+						<td>Product B</td>
+						<td>1</td>
+						<td>$39.99</td>
+					</tr>
+					<tr>
+						<td>Product C</td>
+						<td>2</td>
+						<td>$99.98</td>
+					</tr>
+				</tbody>
+			}
+		}
+		@modules.Example(modules.ExampleProps{
+			Title:       "With Avatars",
+			Description: "Tables can contain any components including avatars. Use the Avatar component for user initials or images.",
+			Code:        tableCustomContentCode,
+		}) {
+			@popui.Table() {
+				<thead>
+					<tr>
+						<th>User</th>
+						<th>Email</th>
+						<th>Role</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<div class="flex items-center gap-2">
+								@popui.Avatar(props.Avatar{Initial: "JD"})
+								<span>John Doe</span>
+							</div>
+						</td>
+						<td>john@example.com</td>
+						<td>Admin</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="flex items-center gap-2">
+								@popui.Avatar(props.Avatar{Initial: "JS"})
+								<span>Jane Smith</span>
+							</div>
+						</td>
+						<td>jane@example.com</td>
+						<td>Editor</td>
+					</tr>
+				</tbody>
+			}
+		}
+		@modules.Section("API Reference", "api") {
+			@modules.APITable(modules.APITableProps{
+				Title:       "Table",
+				Description: "A table component with automatic styling for borders, spacing, and typography. The table wrapper provides rounded corners and overflow handling.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the table element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles. Use Tailwind's arbitrary variants like [&_tr:hover_td]:bg-gray-100 for advanced styling"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the table element"},
+				},
+			})
+		}
+	}
+}

@@ -4,17 +4,7 @@ import "github.com/a-h/templ"
 
 // Table Templ component props
 type Table struct {
-	Class     string
-	Clickable bool
-	Attrs     templ.Attributes
-}
-
-// TableCell Templ component props
-type TableCell struct {
-	Content    string
-	UseInitial bool
-	Bold       bool
-	RightAlign bool
+	ID         string
 	Class      string
-	Attrs      templ.Attributes
+	Attributes templ.Attributes
 }

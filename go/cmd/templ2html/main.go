@@ -87,6 +87,9 @@ func main() {
 		"components/slider/index.html": func() error {
 			return renderPage(publicPath, "components/slider/index.html", pages.Slider())
 		},
+		"components/table/index.html": func() error {
+			return renderPage(publicPath, "components/table/index.html", pages.Table())
+		},
 		"components/textarea/index.html": func() error {
 			return renderPage(publicPath, "components/textarea/index.html", pages.Textarea())
 		},

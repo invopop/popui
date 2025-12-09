@@ -4,6 +4,7 @@ import (
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/scripts"
 	"github.com/invopop/popui/icons"
 )
 
@@ -16,7 +17,7 @@ templ Admin() {
 			// Use simplified version if you only need popui compoments styles and not full Tailwind utilities
 			// @popui.EmbeddedCSS()
 			@popui.EmbeddedFullCSS()
-			@popui.EmbeddedJS()
+			@scripts.ButtonCopy()
 		</head>
 		<body class="popui-admin-wrapper">
 			@popui.Sidebar(props.Sidebar{Title: "Invopop Admin"}) {
@@ -712,12 +713,12 @@ templ buttonCopySection() {
 		@popui.ButtonCopy(props.ButtonCopy{Value: "123e4567-e89b-12d3-a456-426614174000", PrefixLength: 8, SuffixLength: 4, CopiedText: "Copied to clipboard!"})
 	</div>
 	<div class="mt-4">
-		<p class="popui-description mb-4">Value can also be set via the value attribute in Attrs:</p>
+		<p class="popui-description mb-4">Value can also be set via the value attribute in Attributes:</p>
 		@popui.ButtonCopy(props.ButtonCopy{
 			PrefixLength: 8,
 			SuffixLength: 4,
 			CopiedText:   "Success!",
-			Attrs: templ.Attributes{
+			Attributes: templ.Attributes{
 				"value": "set-via-attrs-example-uuid-98765432",
 			},
 		})

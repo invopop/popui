@@ -36,6 +36,9 @@ func main() {
 		"components/button/index.html": func() error {
 			return renderPage(publicPath, "components/button/index.html", pages.Button())
 		},
+		"components/button-copy/index.html": func() error {
+			return renderPage(publicPath, "components/button-copy/index.html", pages.ButtonCopy())
+		},
 		"components/breadcrumb/index.html": func() error {
 			return renderPage(publicPath, "components/breadcrumb/index.html", pages.Breadcrumb())
 		},

@@ -50,6 +50,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/avatar", s.docsAvatar)
 	e.GET("/components/breadcrumb", s.docsBreadcrumb)
 	e.GET("/components/button", s.docsButton)
+	e.GET("/components/button-copy", s.docsButtonCopy)
 	e.GET("/components/card", s.docsCard)
 	e.GET("/components/checkbox", s.docsCheckbox)
 	e.GET("/components/description-list", s.docsDescriptionList)
@@ -152,6 +153,11 @@ func (s *serveOpts) docsBreadcrumb(c echo.Context) error {
 // docsButton shows the button component documentation
 func (s *serveOpts) docsButton(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Button())
+}
+
+// docsButtonCopy shows the button copy component documentation
+func (s *serveOpts) docsButtonCopy(c echo.Context) error {
+	return render(c, http.StatusOK, pages.ButtonCopy())
 }
 
 // docsCard shows the card component documentation

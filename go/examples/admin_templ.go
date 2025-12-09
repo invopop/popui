@@ -12,6 +12,7 @@ import (
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/scripts"
 	"github.com/invopop/popui/icons"
 )
 
@@ -44,7 +45,7 @@ func Admin() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.EmbeddedJS().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = scripts.ButtonCopy().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -2682,7 +2683,7 @@ func buttonCopySection() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 123, "</div><div class=\"mt-4\"><p class=\"popui-description mb-4\">Value can also be set via the value attribute in Attrs:</p>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 123, "</div><div class=\"mt-4\"><p class=\"popui-description mb-4\">Value can also be set via the value attribute in Attributes:</p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -2690,7 +2691,7 @@ func buttonCopySection() templ.Component {
 			PrefixLength: 8,
 			SuffixLength: 4,
 			CopiedText:   "Success!",
-			Attrs: templ.Attributes{
+			Attributes: templ.Attributes{
 				"value": "set-via-attrs-example-uuid-98765432",
 			},
 		}).Render(ctx, templ_7745c5c3_Buffer)

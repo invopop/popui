@@ -41,7 +41,7 @@ func CodeBlock(props CodeBlockProps) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		if code := utils.ExtractCode(props.Code); code != "" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<pre class=\"!bg-background-default-negative !border !border-t-0 !border-border-default !rounded-b-xl !rounded-t-none overflow-hidden flex gap-[12px] !p-[12px] !font-mono !text-[13px] !tracking-[-0.039px] !m-0 !leading-[1.4]\"><div class=\"flex flex-col text-right w-[16px] text-[rgba(255,255,255,0.7)] shrink-0 select-none !leading-[1.4]\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<pre class=\"w-full !bg-background-default-negative !border !border-t-0 !border-border-default !rounded-b-xl !rounded-t-none overflow-hidden flex gap-[12px] !p-[12px] !font-mono !text-[13px] !tracking-[-0.039px] !m-0 !leading-[1.4]\"><div class=\"flex flex-col text-right w-[16px] text-[rgba(255,255,255,0.7)] shrink-0 select-none !leading-[1.4]\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

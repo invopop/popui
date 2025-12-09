@@ -2509,10 +2509,6 @@ func tagStatusSection() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.TagStatus(props.TagStatus{Label: "Blue Violet", Status: "blueViolet"}).Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
 		templ_7745c5c3_Err = popui.TagStatus(props.TagStatus{Label: "Steel Blue", Status: "steelBlue"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -2565,10 +2561,6 @@ func tagStatusSection() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = popui.TagStatus(props.TagStatus{Label: "Blue Violet", Status: "blueViolet", Dot: true}).Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
 		templ_7745c5c3_Err = popui.TagStatus(props.TagStatus{Label: "Steel Blue", Status: "steelBlue", Dot: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -2618,10 +2610,6 @@ func tagStatusSection() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.TagStatus(props.TagStatus{Status: "crimson", Dot: true}).Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = popui.TagStatus(props.TagStatus{Status: "blueViolet", Dot: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

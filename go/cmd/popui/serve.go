@@ -68,6 +68,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/slider", s.docsSlider)
 	e.GET("/components/table", s.docsTable)
 	e.GET("/components/tabs", s.docsTabs)
+	e.GET("/components/tag-status", s.docsTagStatus)
 	e.GET("/components/textarea", s.docsTextarea)
 	e.GET("/components/typography", s.docsTypography)
 
@@ -241,6 +242,11 @@ func (s *serveOpts) docsTable(c echo.Context) error {
 // docsTabs shows the tabs component documentation
 func (s *serveOpts) docsTabs(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Tabs())
+}
+
+// docsTagStatus shows the tag status component documentation
+func (s *serveOpts) docsTagStatus(c echo.Context) error {
+	return render(c, http.StatusOK, pages.TagStatus())
 }
 
 // docsTextarea shows the textarea component documentation

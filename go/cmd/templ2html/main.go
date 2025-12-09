@@ -93,6 +93,9 @@ func main() {
 		"components/tabs/index.html": func() error {
 			return renderPage(publicPath, "components/tabs/index.html", pages.Tabs())
 		},
+		"components/tag-status/index.html": func() error {
+			return renderPage(publicPath, "components/tag-status/index.html", pages.TagStatus())
+		},
 		"components/textarea/index.html": func() error {
 			return renderPage(publicPath, "components/textarea/index.html", pages.Textarea())
 		},

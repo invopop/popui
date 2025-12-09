@@ -1,0 +1,25 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ TagStatusColors() {
+	<div class="flex flex-wrap items-center gap-2">
+		@popui.TagStatus(props.TagStatus{Label: "Grey", Status: "grey"})
+		@popui.TagStatus(props.TagStatus{Label: "Green", Status: "green"})
+		@popui.TagStatus(props.TagStatus{Label: "Yellow", Status: "yellow"})
+		@popui.TagStatus(props.TagStatus{Label: "Red", Status: "red"})
+		@popui.TagStatus(props.TagStatus{Label: "Orange", Status: "orange"})
+		@popui.TagStatus(props.TagStatus{Label: "Blue", Status: "blue"})
+		@popui.TagStatus(props.TagStatus{Label: "Purple", Status: "purple"})
+		@popui.TagStatus(props.TagStatus{Label: "Olive", Status: "olive"})
+		@popui.TagStatus(props.TagStatus{Label: "Teal", Status: "teal"})
+		@popui.TagStatus(props.TagStatus{Label: "Crimson", Status: "crimson"})
+		@popui.TagStatus(props.TagStatus{Label: "Steel Blue", Status: "steelBlue"})
+		@popui.TagStatus(props.TagStatus{Label: "Empty", Status: "empty"})
+	</div>
+}
+```

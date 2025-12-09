@@ -67,6 +67,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/separator", s.docsSeparator)
 	e.GET("/components/slider", s.docsSlider)
 	e.GET("/components/table", s.docsTable)
+	e.GET("/components/tabs", s.docsTabs)
 	e.GET("/components/textarea", s.docsTextarea)
 	e.GET("/components/typography", s.docsTypography)
 
@@ -235,6 +236,11 @@ func (s *serveOpts) docsSeparator(c echo.Context) error {
 // docsTable shows the table component documentation
 func (s *serveOpts) docsTable(c echo.Context) error {
 	return render(c, http.StatusOK, pages.Table())
+}
+
+// docsTabs shows the tabs component documentation
+func (s *serveOpts) docsTabs(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Tabs())
 }
 
 // docsTextarea shows the textarea component documentation

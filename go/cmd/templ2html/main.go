@@ -90,6 +90,9 @@ func main() {
 		"components/table/index.html": func() error {
 			return renderPage(publicPath, "components/table/index.html", pages.Table())
 		},
+		"components/tabs/index.html": func() error {
+			return renderPage(publicPath, "components/tabs/index.html", pages.Tabs())
+		},
 		"components/textarea/index.html": func() error {
 			return renderPage(publicPath, "components/textarea/index.html", pages.Textarea())
 		},

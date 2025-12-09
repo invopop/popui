@@ -401,7 +401,7 @@ func Admin() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.Tab(props.Tab{Active: true, Class: classes.TabPill}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var16), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = popui.Tab(props.Tab{Active: true, Variant: "pill"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var16), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -431,7 +431,7 @@ func Admin() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.Tab(props.Tab{Class: classes.TabPill}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var17), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = popui.Tab(props.Tab{Variant: "pill"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var17), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -461,13 +461,13 @@ func Admin() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.Tab(props.Tab{Class: classes.TabPill}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var18), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = popui.Tab(props.Tab{Variant: "pill"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var18), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = popui.Tabs(props.Tabs{Class: classes.TabsPill}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var15), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = popui.Tabs(props.Tabs{Variant: "pill"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var15), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

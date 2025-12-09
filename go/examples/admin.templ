@@ -100,16 +100,16 @@ templ Admin() {
 					}
 				}
 				@popui.PageContent() {
-					@popui.Tabs(props.Tabs{Class: classes.TabsPill}) {
-						@popui.Tab(props.Tab{Active: true, Class: classes.TabPill}) {
+					@popui.Tabs(props.Tabs{Variant: "pill"}) {
+						@popui.Tab(props.Tab{Active: true, Variant: "pill"}) {
 							@icons.User()
 							<span>Members</span>
 						}
-						@popui.Tab(props.Tab{Class: classes.TabPill}) {
+						@popui.Tab(props.Tab{Variant: "pill"}) {
 							@icons.Billing()
 							<span>Billing</span>
 						}
-						@popui.Tab(props.Tab{Class: classes.TabPill}) {
+						@popui.Tab(props.Tab{Variant: "pill"}) {
 							@icons.Puzzle()
 							<span>Integrations</span>
 						}

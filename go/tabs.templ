@@ -1,20 +1,24 @@
 package popui
 
 import (
-	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
 )
 
 // Tabs provides the tabs container element
-templ Tabs(opts ...props.Tabs) {
-	{{ p := props.First(opts) }}
+templ Tabs(p ...props.Tabs) {
+	{{ prp := props.First(p) }}
 	<div
-		role="tablist"
-		class={
-			templ.KV(classes.Tabs, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+		if prp.ID != "" {
+			id={ prp.ID }
 		}
-		{ p.Attrs... }
+		role="tablist"
+		class={ utils.TwMerge(
+			"inline-flex w-full mb-4",
+			tabsClasses(prp),
+			prp.Class,
+		) }
+		{ prp.Attributes... }
 	>
 		{ children... }
 	</div>
@@ -22,20 +26,42 @@ templ Tabs(opts ...props.Tabs) {
 
 // Tab provides a single tab element
 // It is used inside a Tabs container.
-templ Tab(opts ...props.Tab) {
-	{{ p := props.First(opts) }}
+templ Tab(p ...props.Tab) {
+	{{ prp := props.First(p) }}
 	<button
+		if prp.ID != "" {
+			id={ prp.ID }
+		}
 		type="button"
 		role="tab"
-		class={
-			templ.KV(classes.Tab, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
-		}
-		{ p.Attrs... }
-		if (p.Active) {
+		class={ utils.TwMerge(
+			"inline-flex items-center justify-center gap-1.5 whitespace-nowrap text-base cursor-pointer",
+			tabClasses(prp),
+			prp.Class,
+		) }
+		{ prp.Attributes... }
+		if prp.Active {
 			data-state="active"
 		}
 	>
 		{ children... }
 	</button>
+}
+
+func tabsClasses(prp props.Tabs) string {
+	return utils.Clsx(
+		map[string]bool{
+			"gap-6 overflow-visible border-b border-border":                                                             prp.Variant != "pill",
+			"bg-background-default-tertiary text-base text-foreground h-7 items-center justify-center rounded-md p-0.5": prp.Variant == "pill",
+		},
+	)
+}
+
+func tabClasses(prp props.Tab) string {
+	return utils.Clsx(
+		map[string]bool{
+			"relative text-foreground-default-secondary pb-2 data-[state=active]:text-foreground data-[state=active]:font-medium data-[state=active]:border-b data-[state=active]:border-foreground data-[state=active]:-bottom-px": prp.Variant != "pill",
+			"rounded px-3 py-0.5 font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 w-full data-[state=active]:bg-background data-[state=active]:shadow-sm":         prp.Variant == "pill",
+		},
+	)
 }

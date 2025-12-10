@@ -10,12 +10,12 @@
   let containerStyles = $derived(
     clsx('inline-flex items-center gap-1 rounded-full overflow-hidden pl-0.5 pr-1 py-0.5', {
       'bg-background-selected-inverse': variant === 'dark',
-      'bg-background-default-tertiary': variant === 'default'
+      'bg-background-default-secondary': variant === 'default'
     })
   )
 
   let textStyles = $derived(
-    clsx('text-xs font-medium leading-4 whitespace-nowrap', {
+    clsx('text-sm font-medium leading-4 whitespace-nowrap', {
       'text-foreground-inverse-default': variant === 'dark',
       'text-foreground-default-default': variant === 'default'
     })

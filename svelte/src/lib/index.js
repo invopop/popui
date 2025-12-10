@@ -42,6 +42,7 @@ import MenuItemCollapsible from './MenuItemCollapsible.svelte'
 import Notification from './Notification.svelte'
 import ProfileAvatar from './ProfileAvatar.svelte'
 import ProgressBar from './ProgressBar.svelte'
+import ProgressBarCircle from './ProgressBarCircle.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import StatusLabel from './StatusLabel.svelte'
@@ -58,6 +59,7 @@ import {
 } from './table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
 import TagBeta from './TagBeta.svelte'
+import TagProgress from './TagProgress.svelte'
 import TagSearch from './TagSearch.svelte'
 import TagStatus from './TagStatus.svelte'
 import TitleMain from './TitleMain.svelte'
@@ -113,6 +115,7 @@ export {
   Notification,
   ProfileAvatar,
   ProgressBar,
+  ProgressBarCircle,
   SeparatorHorizontal,
   ShortcutWrapper,
   StatusLabel,
@@ -130,6 +133,7 @@ export {
   TabsList,
   TabsTrigger,
   TagBeta,
+  TagProgress,
   TagSearch,
   TagStatus,
   TitleMain,

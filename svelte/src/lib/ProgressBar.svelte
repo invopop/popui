@@ -2,13 +2,19 @@
   import clsx from 'clsx'
   import type { ProgressBarProps } from './types'
 
-  let { percentage = 0, current = 0, total = 0, allowOverage = true }: ProgressBarProps = $props()
+  let {
+    percentage = 0,
+    current = 0,
+    total = 0,
+    allowOverage = true,
+    warningPercentage = 80
+  }: ProgressBarProps = $props()
 
   let isOverage = $derived(current > total && allowOverage)
   let overagePercentage = $derived(isOverage && total > 0 ? ((current - total) / current) * 100 : 0)
   let usedPercentage = $derived(isOverage ? 100 - overagePercentage : percentage)
   let isCritical = $derived(percentage >= 100 || (current > total && !allowOverage))
-  let isWarning = $derived(percentage >= 80 && percentage < 100)
+  let isWarning = $derived(percentage >= warningPercentage && percentage < 100)
 
   let barColor = $derived(
     clsx({

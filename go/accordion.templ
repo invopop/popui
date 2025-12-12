@@ -17,8 +17,7 @@ templ Accordion(p ...props.Accordion) {
 		}
 		class={
 			utils.TwMerge(
-				"group rounded-md border border-border-default-secondary bg-background-default-secondary p-2 overflow-hidden backdrop-blur-[2px]",
-				"open:pb-4",
+				"w-full group rounded-lg border border-border-default-secondary bg-background-default-secondary p-2 backdrop-blur-[2px] table [&>:not(summary)]:block overflow-hidden",
 				prp.Class,
 			),
 		}
@@ -37,7 +36,7 @@ templ AccordionTrigger(p ...props.AccordionTrigger) {
 		}
 		class={
 			utils.TwMerge(
-				"cursor-pointer list-none relative pl-6 text-foreground text-sm font-medium",
+				"cursor-pointer list-none relative pl-6 text-foreground text-base font-medium block",
 				"before:content-[''] before:absolute before:left-0 before:top-[50%] before:w-4 before:h-4",
 				"before:bg-[url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYuMDAwMDUgMTJMMTAgNy45OTk5NEw2IDQiIHN0cm9rZT0iIzZCNzI4MCIvPjwvc3ZnPg==')]",
 				"before:bg-contain before:bg-no-repeat before:-translate-y-1/2 before:rotate-0 before:transition-transform before:duration-300 before:ease-in-out",
@@ -61,12 +60,14 @@ templ AccordionContent(p ...props.AccordionContent) {
 		}
 		class={
 			utils.TwMerge(
-				"mt-4 w-full flex flex-col gap-4 p-2",
+				"mt-4 grid transition-[grid-template-rows] duration-300 ease-in-out grid-rows-[0fr] group-open:grid-rows-[1fr]",
 				prp.Class,
 			),
 		}
 		{ prp.Attributes... }
 	>
-		{ children... }
+		<div class="overflow-hidden flex flex-col gap-4 p-2 min-h-0 w-max">
+			{ children... }
+		</div>
 	</div>
 }

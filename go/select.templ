@@ -25,7 +25,7 @@ templ Select(p ...props.Select) {
 					utils.FormFieldClasses(),
 					"pl-2",
 					selectHeightClasses(prp),
-					utils.FormFieldErrorClasses(!prp.Error.Empty()),
+					utils.FormFieldStateClasses(!prp.Error.Empty()),
 					prp.Class,
 				)
 			}

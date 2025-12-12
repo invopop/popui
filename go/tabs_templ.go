@@ -216,7 +216,7 @@ func tabsClasses(prp props.Tabs) string {
 func tabClasses(prp props.Tab) string {
 	return utils.Clsx(
 		map[string]bool{
-			"relative text-foreground-default-secondary pb-2 data-[state=active]:text-foreground data-[state=active]:font-medium data-[state=active]:border-b data-[state=active]:border-foreground data-[state=active]:-bottom-px":                              prp.Variant != "pill",
+			"relative text-foreground-default-secondary pb-2 data-[state=active]:text-foreground-selected data-[state=active]:font-medium data-[state=active]:border-b data-[state=active]:border-foreground-selected data-[state=active]:-bottom-px":            prp.Variant != "pill",
 			"rounded px-3 py-0.5 font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 w-full data-[state=active]:bg-background data-[state=active]:shadow-sm": prp.Variant == "pill",
 		},
 	)

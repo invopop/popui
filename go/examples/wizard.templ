@@ -2,7 +2,6 @@ package examples
 
 import "github.com/invopop/popui/go"
 import "github.com/invopop/popui/go/props"
-import "github.com/invopop/popui/go/classes"
 import "github.com/invopop/popui/icons"
 
 templ wizardLayout() {
@@ -20,7 +19,7 @@ templ wizardLayout() {
 			@popui.EmbeddedJS()
 			@popui.AlpineJS()
 		</head>
-		<body class={ classes.WizardPageWrapper }>
+		<body class="flex flex-col h-screen">
 			@popui.WizardHeader() {
 				@VeriFactuLogo()
 			}
@@ -98,7 +97,7 @@ templ AppStepOne() {
 								Nombre
 							}
 						}
-						<div class={ classes.FormCellGroup }>
+						<div class="flex flex-col gap-5">
 							@popui.Input(props.Input{
 								Label:    "Tipo de documento",
 								Value:    "CIF",
@@ -118,7 +117,7 @@ templ AppStepOne() {
 						@popui.Subtitle() {
 							Representante legal
 						}
-						<div class={ classes.FormCellGroup }>
+						<div class="flex flex-col gap-5">
 							@popui.Input(props.Input{
 								Label: "Nombre",
 								Value: "Juan",
@@ -131,7 +130,7 @@ templ AppStepOne() {
 								Value: "Perez",
 							})
 						</div>
-						<div class={ classes.FormCellGroup }>
+						<div class="flex flex-col gap-5">
 							@popui.Input(props.Input{
 								Label: "Tipo de documento",
 								Value: "NIF",
@@ -246,7 +245,7 @@ templ AppStepThree() {
 								}, 2000)
 							}
 						}"
-							:class="{'popui-input-file--loading':  loading }"
+							:class="{'animate-pulse opacity-30 pointer-events-none':  loading }"
 						>
 							@popui.InputFile(props.InputFile{Attributes: templ.Attributes{
 								"@change": "showLoader",
@@ -282,10 +281,10 @@ templ AppStepFour() {
 			}
 			<form id="confirm" action="/wizard/confirm" method="GET">
 				<section class="mt-8">
-					<div class="popui-layout-between mb-2 items-center">
+					<div class="flex justify-between items-start gap-2 mb-2 items-center">
 						<div class="flex gap-2 items-center">
 							// Quick hack to avoid the icon to be 16x16
-							<span class="popui-full-icon-size text-dimmed">
+							<span class="[&>div[style*='width']]:!w-auto [&>div[style*='height']]:!h-auto text-dimmed">
 								@icons.IdFront()
 							</span>
 							@popui.Subtitle() {
@@ -299,10 +298,10 @@ templ AppStepFour() {
 					@popui.InputFile(props.InputFile{})
 				</section>
 				<section class="mt-8">
-					<div class="popui-layout-between mb-2 items-center">
+					<div class="flex justify-between items-start gap-2 mb-2 items-center">
 						<div class="flex gap-2 items-center">
 							// Quick hack to avoid the icon to be 16x16
-							<span class="popui-full-icon-size text-dimmed">
+							<span class="[&>div[style*='width']]:!w-auto [&>div[style*='height']]:!h-auto text-dimmed">
 								@icons.IdBack()
 							</span>
 							@popui.Subtitle() {
@@ -359,7 +358,7 @@ templ ConfirmPage() {
 			}
 			<form id="success" action="/wizard/success" method="GET">
 				<section class="mt-8">
-					<div class="popui-layout-between mb-2 items-center">
+					<div class="flex justify-between items-start gap-2 mb-2 items-center">
 						<div class="flex gap-2 items-center">
 							@icons.Success()
 							@popui.Subtitle() {
@@ -423,7 +422,7 @@ templ ConfirmPage() {
 					</div>
 				</section>
 				<section class="mt-8">
-					<div class="popui-layout-between mb-3 items-center">
+					<div class="flex justify-between items-start gap-2 mb-3 items-center">
 						<div class="flex gap-2 items-center">
 							@icons.Success()
 							@popui.Subtitle() {
@@ -448,7 +447,7 @@ templ ConfirmPage() {
 					}
 				</section>
 				<section class="mt-8">
-					<div class="popui-layout-between mb-3 items-center">
+					<div class="flex justify-between items-start gap-2 mb-3 items-center">
 						<div class="flex gap-2 items-center">
 							@icons.Success()
 							@popui.Subtitle() {
@@ -510,7 +509,7 @@ templ ConfirmPage() {
 templ SuccessPage() {
 	@wizardLayout() {
 		@popui.WizardContent(props.WizardContent{CenterVertical: true}) {
-			<div class="popui-layout-center flex-col">
+			<div class="w-full flex justify-center items-center flex-col">
 				@popui.SuccessIcon()
 				<div class="mt-3 mb-1">
 					@popui.Subtitle() {
@@ -528,7 +527,7 @@ templ SuccessPage() {
 templ ErrorPage() {
 	@wizardLayout() {
 		@popui.WizardContent(props.WizardContent{CenterVertical: true}) {
-			<div class="popui-layout-center flex-col">
+			<div class="w-full flex justify-center items-center flex-col">
 				@popui.ErrorIcon()
 				<div class="mt-3">
 					@popui.Subtitle() {

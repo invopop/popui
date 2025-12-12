@@ -44,19 +44,39 @@ templ Button() {
 		}) {
 			<div class="flex gap-2">
 				@popui.Button() {
+					@icons.User()
 					Default
 				}
 				@popui.Button(props.Button{Variant: "primary"}) {
+					@icons.Download()
 					Primary
 				}
 				@popui.Button(props.Button{Variant: "secondary"}) {
+					@icons.Settings()
 					Secondary
 				}
 				@popui.Button(props.Button{Variant: "danger"}) {
+					@icons.Delete()
 					Danger
 				}
 				@popui.Button(props.Button{Variant: "transparent"}) {
+					@icons.Lock()
 					Transparent
+				}
+				@popui.Button(props.Button{Size: "icon"}) {
+					@icons.Settings()
+				}
+				@popui.Button(props.Button{Variant: "primary", Size: "icon"}) {
+					@icons.Add()
+				}
+				@popui.Button(props.Button{Variant: "secondary", Size: "icon"}) {
+					@icons.Settings()
+				}
+				@popui.Button(props.Button{Variant: "danger", Size: "icon"}) {
+					@icons.Delete()
+				}
+				@popui.Button(props.Button{Variant: "transparent", Size: "icon"}) {
+					@icons.Lock()
 				}
 			</div>
 		}
@@ -72,6 +92,9 @@ templ Button() {
 				@popui.Button(props.Button{Variant: "primary"}) {
 					Default
 				}
+				@popui.Button(props.Button{Variant: "primary", Size: "lg"}) {
+					Large
+				}
 				@popui.Button(props.Button{Variant: "primary", Size: "icon"}) {
 					@icons.Add()
 				}
@@ -85,9 +108,6 @@ templ Button() {
 			<div class="flex gap-2">
 				@popui.Button(props.Button{Variant: "primary"}) {
 					Save
-				}
-				@popui.Button(props.Button{Variant: "secondary"}) {
-					↓ Download
 				}
 				@popui.Button(props.Button{Variant: "danger"}) {
 					@icons.Delete()

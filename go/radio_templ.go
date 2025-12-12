@@ -162,14 +162,14 @@ func radioDefault(radio props.Radio) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		} else if radio.Label != "" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<span class=\"text-base text-foreground-default-secondary\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<span class=\"text-base text-foreground\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var8 string
 			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(radio.Label)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/radio.templ`, Line: 42, Col: 75}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/radio.templ`, Line: 42, Col: 57}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 			if templ_7745c5c3_Err != nil {
@@ -216,7 +216,7 @@ func radioCard(radio props.Radio) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		var templ_7745c5c3_Var10 = []any{utils.TwMerge(
-			"has-checked:border-border-selected-bold has-checked:shadow-active has-[input:not(:checked)]:border-border-default-secondary border rounded-lg w-full text-left cursor-pointer block",
+			"has-checked:border-border-selected-bold has-checked:shadow-active has-[input:not(:checked)]:border-border border rounded-lg w-full text-left cursor-pointer block",
 			radio.Class,
 		),
 		}

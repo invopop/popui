@@ -41,7 +41,7 @@ templ Input(p ...props.Input) {
 				class={
 					utils.TwMerge(
 						utils.FormFieldClasses(),
-						utils.FormFieldErrorClasses(!prp.Error.Empty()),
+						utils.FormFieldStateClasses(!prp.Error.Empty()),
 						prp.Class,
 					),
 				}

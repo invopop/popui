@@ -1,9 +1,12 @@
 // Package layouts provides layout templates for the PopUI documentation site.
 package layouts
 
-import "github.com/invopop/popui/go/scripts"
+import (
+	"github.com/invopop/popui/go/css"
+	"github.com/invopop/popui/go/scripts"
 
-import popui "github.com/invopop/popui/go"
+	popui "github.com/invopop/popui/go"
+)
 
 templ BaseLayout(title, description string) {
 	<!DOCTYPE html>
@@ -13,7 +16,8 @@ templ BaseLayout(title, description string) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>{ title } - PopUI</title>
 			<meta name="description" content={ description }/>
-			@popui.EmbeddedFullCSS()
+			@popui.EmbeddedCSS()
+			@css.Flag()
 			@scripts.ButtonCopy()
 			<!-- Prism.js for syntax highlighting -->
 			<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>

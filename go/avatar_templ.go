@@ -47,7 +47,7 @@ func Avatar(p ...props.Avatar) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div data-avatar")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -59,7 +59,7 @@ func Avatar(p ...props.Avatar) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(avatar.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 14, Col: 17}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 15, Col: 17}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -99,7 +99,7 @@ func Avatar(p ...props.Avatar) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(avatar.Initial)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 26, Col: 19}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/avatar.templ`, Line: 27, Col: 19}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -122,8 +122,8 @@ func Avatar(p ...props.Avatar) templ.Component {
 func avatarClasses(avatar props.Avatar) string {
 	return utils.Clsx(
 		map[string]bool{
-			"!h-8 !w-8 rounded-lg text-sm": avatar.Size == "lg",
-			"h-5 w-5 rounded-md text-xs":   avatar.Size != "lg",
+			"!h-8 !w-8 rounded-lg text-lg": avatar.Size == "lg",
+			"h-5 w-5 rounded-md text-sm":   avatar.Size != "lg",
 			"border border-border":         avatar.Initial != "",
 		},
 	)

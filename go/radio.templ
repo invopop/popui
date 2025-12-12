@@ -39,7 +39,7 @@ templ radioDefault(radio props.Radio) {
 				<span class="text-base text-foreground font-medium">{ radio.Label }</span>
 				<span class="text-sm text-foreground-default-secondary">{ radio.Description }</span>
 			} else if radio.Label != "" {
-				<span class="text-base text-foreground-default-secondary">{ radio.Label }</span>
+				<span class="text-base text-foreground">{ radio.Label }</span>
 			} else {
 				{ children... }
 			}
@@ -53,7 +53,7 @@ templ radioCard(radio props.Radio) {
 		for={ radio.ID }
 		class={
 			utils.TwMerge(
-				"has-checked:border-border-selected-bold has-checked:shadow-active has-[input:not(:checked)]:border-border-default-secondary border rounded-lg w-full text-left cursor-pointer block",
+				"has-checked:border-border-selected-bold has-checked:shadow-active has-[input:not(:checked)]:border-border border rounded-lg w-full text-left cursor-pointer block",
 				radio.Class,
 			),
 		}

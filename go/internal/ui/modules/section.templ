@@ -3,7 +3,7 @@ package modules
 templ Section(title, id string) {
 	<div id={ id } class="flex flex-col gap-3 w-full">
 		if title != "" {
-			<h2 class="text-base font-semibold tracking-[-0.16px] text-foreground">{ title }</h2>
+			<h2 class="text-lg font-semibold tracking-[-0.16px] text-foreground">{ title }</h2>
 		}
 		{ children... }
 	</div>

@@ -74,7 +74,7 @@ func Textarea(p ...props.Textarea) templ.Component {
 		}
 		var templ_7745c5c3_Var4 = []any{utils.TwMerge(
 			utils.FormFieldClasses(),
-			utils.FormFieldErrorClasses(!prp.Error.Empty()),
+			utils.FormFieldStateClasses(!prp.Error.Empty()),
 			prp.Class,
 		)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
@@ -285,7 +285,7 @@ func Contenteditable(p ...props.Textarea) templ.Component {
 		var templ_7745c5c3_Var14 = []any{utils.TwMerge(
 			utils.FormFieldClasses(),
 			"min-h-[80px]",
-			utils.FormFieldErrorClasses(!prp.Error.Empty()),
+			utils.FormFieldStateClasses(!prp.Error.Empty()),
 			prp.Class,
 		)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var14...)

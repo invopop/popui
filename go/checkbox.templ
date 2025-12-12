@@ -12,7 +12,7 @@ templ Checkbox(p ...props.Checkbox) {
 	{{ checkbox := props.First(p).GenerateID() }}
 	{{ isSwitch := checkbox.Variant == "switch" }}
 	if isSwitch {
-		<label class="flex items-center gap-2 text-foreground text-base">
+		<label class="flex items-center gap-2 text-foreground text-base has-[:disabled]:opacity-30">
 			<div class="relative inline-block w-8 h-5 shrink-0 [&>input:checked+span]:bg-background-accent [&>input:focus+span]:shadow-[0_0_1px_#169958] [&>input:checked+span:before]:translate-x-3">
 				@checkboxInput(checkbox)
 				<span class="absolute cursor-pointer inset-0 bg-border-default-secondary-hover rounded-md transition-all duration-[0.4s] before:content-[''] before:absolute before:h-4 before:w-4 before:left-0.5 before:bottom-0.5 before:bg-background before:rounded before:transition-all before:duration-[0.4s]"></span>
@@ -24,7 +24,7 @@ templ Checkbox(p ...props.Checkbox) {
 			}
 		</label>
 	} else {
-		<div class="flex items-center gap-2 [&>input:disabled+label]:opacity-30">
+		<div class="flex items-center gap-2 [&>input:disabled]:opacity-30 [&>input:disabled+label]:opacity-30">
 			@checkboxInput(checkbox)
 			<label
 				for={ checkbox.ID }
@@ -48,7 +48,7 @@ templ checkboxInput(p props.Checkbox) {
 		class={
 			utils.TwMerge(
 				utils.Clsx(map[string]bool{
-					"form-checkbox w-4 h-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-secondary-hover focus:text-background-accent focus:ring-0 focus:ring-offset-0": !isSwitch,
+					"form-checkbox w-4 h-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-secondary-hover focus:text-background-accent focus:ring-0 focus:ring-offset-0 disabled:opacity-30": !isSwitch,
 					"opacity-0 w-0 h-0": isSwitch,
 				}),
 				p.Class,

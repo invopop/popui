@@ -25,9 +25,6 @@ var selectDisabledCode string
 //go:embed examples/select/with_error.mdx
 var selectWithErrorCode string
 
-//go:embed examples/select/multiple.mdx
-var selectMultipleCode string
-
 templ Select() {
 	@layouts.DocsLayout("Select", "Dropdown selection control for choosing one or more options from a list.") {
 		@modules.Example(modules.ExampleProps{
@@ -110,24 +107,6 @@ templ Select() {
 				<option value="es">Spain</option>
 				<option value="fr">France</option>
 				<option value="de">Germany</option>
-			}
-		}
-		@modules.Example(modules.ExampleProps{
-			Title:       "Multiple Selection",
-			Description: "Enable multiple selection with the Multiple prop. Users can select multiple options using Ctrl/Cmd + click.",
-			Code:        selectMultipleCode,
-		}) {
-			@popui.Select(props.Select{
-				ID:       "countries",
-				Name:     "countries",
-				Label:    "Countries",
-				Multiple: true,
-			}) {
-				<option value="es">Spain</option>
-				<option value="fr">France</option>
-				<option value="de">Germany</option>
-				<option value="it">Italy</option>
-				<option value="pt">Portugal</option>
 			}
 		}
 		@modules.Section("API Reference", "api") {

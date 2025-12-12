@@ -130,7 +130,7 @@ func Title(opts ...props.Title) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		p := props.First(opts)
 		var templ_7745c5c3_Var6 = []any{utils.TwMerge(
-			"font-sans text-foreground text-2xl font-semibold",
+			"font-sans text-foreground text-lg font-medium",
 			p.Class,
 		),
 		}
@@ -222,7 +222,7 @@ func Subtitle(opts ...props.Subtitle) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		p := props.First(opts)
 		var templ_7745c5c3_Var10 = []any{utils.TwMerge(
-			"font-sans text-base text-foreground font-medium",
+			"font-sans text-base text-foreground-default-secondary",
 			p.Class,
 		),
 		}

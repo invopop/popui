@@ -46,7 +46,7 @@ func Card(p ...props.Card) templ.Component {
 		card := props.First(p)
 		if card.Href != "" {
 			var templ_7745c5c3_Var2 = []any{utils.TwMerge(
-				"flex flex-col p-2 rounded-2xl border border-border bg-background w-full gap-2",
+				"flex flex-col p-2 rounded-2xl border border-border bg-background w-full gap-2 has-[[data-avatar]]:pt-1",
 				"hover:border-border-default-secondary",
 				cardClasses(card),
 				card.Class,
@@ -127,7 +127,7 @@ func Card(p ...props.Card) templ.Component {
 			}
 		} else {
 			var templ_7745c5c3_Var6 = []any{utils.TwMerge(
-				"flex flex-col p-2 rounded-2xl border border-border bg-background w-full gap-2",
+				"flex flex-col p-2 rounded-2xl border border-border bg-background w-full gap-2 has-[[data-avatar]]:pt-1",
 				cardClasses(card),
 				card.Class,
 			),
@@ -375,7 +375,7 @@ func CardHeader(p ...props.CardHeader) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if header.Title != "" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "<div class=\"flex flex-col gap-0.5 min-w-0 flex-1\"><p class=\"truncate text-foreground text-base font-semibold\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "<div class=\"flex flex-col min-w-0 flex-1\"><p class=\"truncate text-foreground text-base font-semibold\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

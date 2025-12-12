@@ -1,0 +1,40 @@
+```go
+package showcase
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/scripts"
+)
+
+templ ButtonCopyVariants() {
+	<html>
+		<head>
+			@scripts.ButtonCopy()
+		</head>
+		<body>
+			<div class="flex gap-2">
+				@popui.ButtonCopy(props.ButtonCopy{
+					Value: "e73d5d20834934588127389172381789bc2f275460",
+				})
+				@popui.ButtonCopy(props.ButtonCopy{
+					Variant: "primary",
+					Value:   "e73d5d20834934588127389172381789bc2f275460",
+				})
+				@popui.ButtonCopy(props.ButtonCopy{
+					Variant: "secondary",
+					Value:   "e73d5d20834934588127389172381789bc2f275460",
+				})
+				@popui.ButtonCopy(props.ButtonCopy{
+					Variant: "danger",
+					Value:   "e73d5d20834934588127389172381789bc2f275460",
+				})
+				@popui.ButtonCopy(props.ButtonCopy{
+					Variant: "transparent",
+					Value:   "e73d5d20834934588127389172381789bc2f275460",
+				})
+			</div>
+		</body>
+	</html>
+}
+```

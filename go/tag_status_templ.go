@@ -99,7 +99,7 @@ func TagStatus(p ...props.TagStatus) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if prp.Dot {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<span data-dot class=\"w-2 h-2 rounded-sm shrink-0\"></span> ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<span data-dot class=\"w-2 h-2 rounded-xs shrink-0\"></span> ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -139,7 +139,7 @@ func tagStatusClasses(prp props.TagStatus) string {
 		map[string]bool{
 			// Padding based on dot and label presence
 			"px-1 py-0.5":     !hasDot || (hasDot && hasLabel),
-			"p-0.5 border":    hasDot && !hasLabel,
+			"p-1":             hasDot && !hasLabel,
 			"pl-1.5 pr-[5px]": hasDot && hasLabel,
 			"h-5":             hasLabel,
 

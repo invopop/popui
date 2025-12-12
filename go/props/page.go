@@ -2,6 +2,20 @@ package props
 
 import "github.com/a-h/templ"
 
+// Page Templ component props
+type Page struct {
+	ID         string
+	Class      string
+	Attributes templ.Attributes
+}
+
+// PageContainer Templ component props
+type PageContainer struct {
+	ID         string
+	Class      string
+	Attributes templ.Attributes
+}
+
 // PageHeader Templ component props
 type PageHeader struct {
 	ID          string
@@ -28,12 +42,18 @@ type PageContent struct {
 
 // PageSection Templ component props
 type PageSection struct {
-	ID               string
-	Class            string
-	Attributes       templ.Attributes
-	Title            string
-	Description      string
-	FullWidthContent bool
+	ID          string
+	Class       string
+	Attributes  templ.Attributes
+	Title       string
+	Description string
+}
+
+// PageSections Templ component props
+type PageSections struct {
+	ID         string
+	Class      string
+	Attributes templ.Attributes
 }
 
 // PageActions Templ component props

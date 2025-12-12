@@ -8,8 +8,10 @@ package popui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/invopop/popui/go/props"
-import "github.com/invopop/popui/go/classes"
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
+)
 
 // WizardHeader renders a header for the wizard app
 func WizardHeader(opts ...props.WizardHeader) templ.Component {
@@ -34,8 +36,10 @@ func WizardHeader(opts ...props.WizardHeader) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		p := props.First(opts)
-		var templ_7745c5c3_Var2 = []any{templ.KV(classes.WizardHeader, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+		var templ_7745c5c3_Var2 = []any{utils.TwMerge(
+			"flex items-center justify-between gap-2 p-6 border-b border-border bg-background",
+			p.Class,
+		),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
@@ -101,9 +105,11 @@ func WizardContent(opts ...props.WizardContent) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		p := props.First(opts)
-		var templ_7745c5c3_Var5 = []any{templ.KV(classes.WizardContent, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
-			templ.KV(classes.WizardContentCenterVertical, p.CenterVertical),
+		var templ_7745c5c3_Var5 = []any{utils.TwMerge(
+			"flex-1 flex justify-center overflow-y-auto pb-6 pt-[40px] px-6 bg-background",
+			utils.Clsx(map[string]bool{"items-center": p.CenterVertical}),
+			p.Class,
+		),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var5...)
 		if templ_7745c5c3_Err != nil {
@@ -130,7 +136,7 @@ func WizardContent(opts ...props.WizardContent) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "><div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "><div class=\"lg:w-[840px]\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -169,8 +175,10 @@ func WizardFooter(opts ...props.WizardFooter) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		p := props.First(opts)
-		var templ_7745c5c3_Var8 = []any{templ.KV(classes.WizardFooter, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+		var templ_7745c5c3_Var8 = []any{utils.TwMerge(
+			"flex items-center justify-end gap-5 px-6 py-4 border-t border-border bg-background",
+			p.Class,
+		),
 		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var8...)
 		if templ_7745c5c3_Err != nil {

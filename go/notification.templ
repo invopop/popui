@@ -16,7 +16,7 @@ templ Notification(opts ...props.Notification) {
 		}
 		class={
 			utils.TwMerge(
-				"flex px-3 py-2 justify-start items-start gap-2 rounded-lg text-base mb-4",
+				"flex px-3 py-2 justify-start items-start gap-1.5 rounded-xl text-base mb-4",
 				notificationClasses(p.Type),
 				p.Class,
 			),
@@ -24,18 +24,22 @@ templ Notification(opts ...props.Notification) {
 		{ p.Attributes... }
 	>
 		if p.Type != "" {
-			<div class="mt-1">
+			<div class="mt-0.5">
 				if p.Type == "error" {
 					@icons.Failure()
 				} else if p.Type == "warning" {
 					@icons.Alert()
+				} else if p.Type == "success" {
+					@icons.Success()
+				} else {
+					@icons.InfoBold()
 				}
 			</div>
 		}
 		<div>
 			if p.Text != "" || p.Description != "" {
 				<p class="font-medium">{ p.Text }</p>
-				<p class="text-foreground-default-secondary">{ p.Description }</p>
+				<p class="text-foreground-default-secondary text-sm">{ p.Description }</p>
 			} else {
 				{ children... }
 			}

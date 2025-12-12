@@ -57,6 +57,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/components/empty-state", s.docsEmptyState)
 	e.GET("/components/fieldset", s.docsFieldset)
 	e.GET("/components/file", s.docsFile)
+	e.GET("/components/flag", s.docsFlag)
 	e.GET("/components/flash-message", s.docsFlashMessage)
 	e.GET("/components/image", s.docsImage)
 	e.GET("/components/input", s.docsInput)
@@ -75,6 +76,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 
 	// Examples
 	e.GET("/examples/admin", s.examplesAdmin)
+	e.GET("/examples/app", s.examplesApp)
 	e.GET("/examples/wizard", s.examplesWizard)
 	e.GET("/wizard/step-one", s.wizardStepOne)
 	e.GET("/wizard/step-two", s.wizardStepTwo)
@@ -103,6 +105,11 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 // examplesAdmin shows the admin panel example page
 func (s *serveOpts) examplesAdmin(c echo.Context) error {
 	return render(c, http.StatusOK, examples.Admin())
+}
+
+// examplesApp shows the app panel example page
+func (s *serveOpts) examplesApp(c echo.Context) error {
+	return render(c, http.StatusOK, examples.App())
 }
 
 // examplesWizard shows the wizard example page
@@ -178,6 +185,11 @@ func (s *serveOpts) docsFieldset(c echo.Context) error {
 // docsFile shows the file component documentation
 func (s *serveOpts) docsFile(c echo.Context) error {
 	return render(c, http.StatusOK, pages.File())
+}
+
+// docsFlag shows the flag component documentation
+func (s *serveOpts) docsFlag(c echo.Context) error {
+	return render(c, http.StatusOK, pages.Flag())
 }
 
 // docsImage shows the image component documentation

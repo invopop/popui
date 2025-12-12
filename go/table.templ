@@ -1,17 +1,31 @@
 package popui
 
 import (
+	"fmt"
 	"github.com/invopop/popui/go/props"
 	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/icons"
+	"golang.org/x/text/language"
+	"golang.org/x/text/message"
 )
 
 // Table provides a table element with the popui class. Define the rest of the
 // table with the structure you'd normally expect, including `<thead>`, `<tbody>`,
 // `<tr>`, `<th>`, and `<td>` elements. The table automatically styles these elements
 // with appropriate borders, padding, and colors.
+// Variant "card" adds an outer border and rounded corners.
 templ Table(p ...props.Table) {
 	{{ prp := props.First(p) }}
-	<div class="border border-border rounded-md overflow-hidden has-[[role=menu]]:overflow-visible">
+	<div
+		class={
+			utils.TwMerge(
+				"overflow-hidden has-[[role=menu]]:overflow-visible",
+				utils.Clsx(map[string]bool{
+					"border border-border rounded-lg": prp.Variant == "card",
+				}),
+			),
+		}
+	>
 		<table
 			if prp.ID != "" {
 				id={ prp.ID }
@@ -25,4 +39,144 @@ templ Table(p ...props.Table) {
 			{ children... }
 		</table>
 	</div>
+}
+
+// TablePagination provides pagination controls for tables with page navigation,
+// rows per page selector, and total count display. Supports a children slot for
+// custom action buttons. Uses AnchorButton for URL-based navigation.
+templ TablePagination(p ...props.TablePagination) {
+	{{ prp := props.First(p) }}
+	{{
+		currentPageStr := fmt.Sprintf("%d", prp.CurrentPage)
+		totalPagesStr := fmt.Sprintf("%d", prp.TotalPages)
+		printer := message.NewPrinter(language.English)
+		totalItemsStr := printer.Sprintf("%d", prp.TotalItems)
+		itemsLabel := paginationItemsLabel(prp.ItemsLabel)
+	}}
+	<div
+		if prp.ID != "" {
+			id={ prp.ID }
+		}
+		class={
+			utils.TwMerge(
+				"flex items-center justify-between h-11 px-6 py-[5px] bg-background backdrop-blur-[10px] border-t border-border-default-default",
+				prp.Class,
+			),
+		}
+		{ prp.Attributes... }
+	>
+		<div class="flex items-center gap-3">
+			<div class="flex items-center gap-2">
+				<div class="flex items-center gap-1.5">
+					<div class="flex items-center">
+						@AnchorButton(props.AnchorButton{
+							Href:    prp.FirstPageURL,
+							Size:    "icon",
+							Variant: "transparent",
+							Class: utils.Clsx(map[string]bool{
+								"pointer-events-none opacity-30": prp.CurrentPage == 1,
+							}),
+							Attributes: templ.Attributes{
+								"aria-label": "First page",
+							},
+						}) {
+							@icons.ScrollLeft()
+						}
+						@AnchorButton(props.AnchorButton{
+							Href:    prp.PrevPageURL,
+							Size:    "icon",
+							Variant: "transparent",
+							Class: utils.Clsx(map[string]bool{
+								"pointer-events-none opacity-30": prp.CurrentPage == 1,
+							}),
+							Attributes: templ.Attributes{
+								"aria-label": "Previous page",
+							},
+						}) {
+							@icons.ArrowLeft()
+						}
+					</div>
+					<div class="flex items-center gap-1.5">
+						@Input(props.Input{
+							Type:  "number",
+							Value: currentPageStr,
+							Class: "w-12",
+							Attributes: templ.Attributes{
+								"min": "1",
+								"max": totalPagesStr,
+							},
+						})
+						<span class="text-sm text-foreground-default-secondary whitespace-nowrap">
+							/ { totalPagesStr }
+						</span>
+					</div>
+					<div class="flex items-center">
+						@AnchorButton(props.AnchorButton{
+							Href:    prp.NextPageURL,
+							Size:    "icon",
+							Variant: "transparent",
+							Class: utils.Clsx(map[string]bool{
+								"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
+							}),
+							Attributes: templ.Attributes{
+								"aria-label": "Next page",
+							},
+						}) {
+							@icons.ArrowRight()
+						}
+						@AnchorButton(props.AnchorButton{
+							Href:    prp.LastPageURL,
+							Size:    "icon",
+							Variant: "transparent",
+							Class: utils.Clsx(map[string]bool{
+								"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
+							}),
+							Attributes: templ.Attributes{
+								"aria-label": "Last page",
+							},
+						}) {
+							@icons.ScrollRight()
+						}
+					</div>
+				</div>
+				if prp.ShowRowsPerPage {
+					@Select(props.Select{
+						Class: "w-[105px]",
+						Attributes: templ.Attributes{
+							"aria-label": "Rows per page",
+						},
+					}) {
+						for _, option := range paginationRowsPerPageOptions(prp.RowsPerPageOptions) {
+							{{
+								optionStr := fmt.Sprintf("%d", option)
+							}}
+							<option value={ optionStr } selected?={ option == prp.RowsPerPage }>
+								{ optionStr } rows
+							</option>
+						}
+					}
+				}
+			</div>
+			if prp.TotalItems > 0 {
+				<span class="text-sm text-foreground-default-secondary">
+					{ totalItemsStr } { itemsLabel }
+				</span>
+			}
+		</div>
+		{ children... }
+	</div>
+}
+
+func paginationItemsLabel(label string) string {
+	if label == "" {
+		return "items"
+	}
+	return label
+}
+
+func paginationRowsPerPageOptions(options []int) []int {
+	if len(options) == 0 {
+		return []int{10, 25, 50, 100}
+	}
+	return options
 }

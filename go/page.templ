@@ -6,6 +6,42 @@ import (
 	"github.com/invopop/popui/icons"
 )
 
+templ Page(opts ...props.Page) {
+	{{ p := props.First(opts) }}
+	<main
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"flex-1 bg-background overflow-y-auto",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</main>
+}
+
+templ PageContainer(opts ...props.PageContainer) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"flex flex-col w-full max-w-[768px] mx-auto",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</div>
+}
+
 // PageHeader provides a wrapper for the page header
 templ PageHeader(opts ...props.PageHeader) {
 	{{ p := props.First(opts) }}
@@ -15,7 +51,7 @@ templ PageHeader(opts ...props.PageHeader) {
 		}
 		class={
 			utils.TwMerge(
-				"bg-background z-[2] h-12 fixed inset-0 flex px-6 justify-between items-center border-b border-border transition-[left] duration-300 ease-in-out md:left-[240px]",
+				"bg-background z-[2] h-12 sticky inset-0 flex px-6 justify-between items-center border-b border-border transition-[left] duration-300 ease-in-out",
 				p.Class,
 			),
 		}
@@ -36,9 +72,6 @@ templ PageHeader(opts ...props.PageHeader) {
 					}
 				}
 			}
-			@PageTitle() {
-				{ p.Title }
-			}
 		</div>
 		<div class="flex items-center gap-2">
 			{ children... }
@@ -55,7 +88,25 @@ templ PageContent(opts ...props.PageContent) {
 		}
 		class={
 			utils.TwMerge(
-				"flex p-6 flex-col items-center gap-6",
+				"flex p-8 flex-col items-center gap-10",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</div>
+}
+
+templ PageSections(opts ...props.PageSections) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			utils.TwMerge(
+				"flex flex-col items-start gap-10 w-full",
 				p.Class,
 			),
 		}
@@ -70,37 +121,30 @@ templ PageContent(opts ...props.PageContent) {
 templ PageSection(opts ...props.PageSection) {
 	{{ p := props.First(opts) }}
 	<div class="w-full">
-		@Separator()
 		<div
 			if p.ID != "" {
 				id={ p.ID }
 			}
 			class={
 				utils.TwMerge(
-					"w-full flex flex-col lg:flex-row items-start",
+					"w-full flex flex-col items-start space-y-3",
 					p.Class,
 				),
 			}
-			style="gap: max(1.5rem, 5vw);"
 			{ p.Attributes... }
 		>
-			<div class="flex w-[240px] flex-col items-start gap-0.5 shrink-0">
-				@Subtitle() {
+			<div class="flex flex-col items-start gap-0.5 shrink-0">
+				@Title() {
 					{ p.Title }
 				}
-				@Description() {
+				@Subtitle() {
 					{ p.Description }
 				}
 			</div>
 			<div
 				class={
 					utils.TwMerge(
-						"flex flex-col space-y-2 items-start w-full max-w-[768px]",
-						utils.Clsx(
-							map[string]bool{
-								"!max-w-none": p.FullWidthContent,
-							},
-						),
+						"flex flex-col space-y-2 items-start w-full",
 					),
 				}
 			>
@@ -130,7 +174,7 @@ templ PageActions(opts ...props.PageActions) {
 }
 
 // PageTitle provides a h1 element used as Page title
-templ PageTitle(opts ...props.PageTitle) {
+templ PageTitle(opts ...props.Title) {
 	{{ p := props.First(opts) }}
 	<h1
 		if p.ID != "" {
@@ -138,7 +182,7 @@ templ PageTitle(opts ...props.PageTitle) {
 		}
 		class={
 			utils.TwMerge(
-				"font-sans text-foreground text-lg font-medium",
+				"font-sans text-foreground text-2xl font-semibold",
 				p.Class,
 			),
 		}

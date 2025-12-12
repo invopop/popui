@@ -35,14 +35,14 @@ templ DescriptionListItem(opts ...props.DescriptionListItem) {
 		}
 		class={
 			utils.TwMerge(
-				"space-y-2",
+				"space-y-1.5",
 				p.Class,
 			),
 		}
 		{ p.Attributes... }
 	>
 		if p.Label != "" && p.Value != "" {
-			<dt class="font-sans text-sm font-medium text-foreground-default-secondary flex items-center gap-0.5">
+			<dt class="font-sans text-base font-medium text-foreground-default-secondary flex items-center gap-0.5">
 				{ p.Label }
 			</dt>
 			<dd class="text-base text-foreground font-medium">

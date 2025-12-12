@@ -40,7 +40,7 @@ func Checkbox(p ...props.Checkbox) templ.Component {
 		checkbox := props.First(p).GenerateID()
 		isSwitch := checkbox.Variant == "switch"
 		if isSwitch {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<label class=\"flex items-center gap-2 text-foreground text-base\"><div class=\"relative inline-block w-8 h-5 shrink-0 [&>input:checked+span]:bg-background-accent [&>input:focus+span]:shadow-[0_0_1px_#169958] [&>input:checked+span:before]:translate-x-3\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<label class=\"flex items-center gap-2 text-foreground text-base has-[:disabled]:opacity-30\"><div class=\"relative inline-block w-8 h-5 shrink-0 [&>input:checked+span]:bg-background-accent [&>input:focus+span]:shadow-[0_0_1px_#169958] [&>input:checked+span:before]:translate-x-3\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -73,7 +73,7 @@ func Checkbox(p ...props.Checkbox) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"flex items-center gap-2 [&>input:disabled+label]:opacity-30\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"flex items-center gap-2 [&>input:disabled]:opacity-30 [&>input:disabled+label]:opacity-30\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -147,7 +147,7 @@ func checkboxInput(p props.Checkbox) templ.Component {
 		isSwitch := p.Variant == "switch"
 		var templ_7745c5c3_Var6 = []any{utils.TwMerge(
 			utils.Clsx(map[string]bool{
-				"form-checkbox w-4 h-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-secondary-hover focus:text-background-accent focus:ring-0 focus:ring-offset-0": !isSwitch,
+				"form-checkbox w-4 h-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-secondary-hover focus:text-background-accent focus:ring-0 focus:ring-offset-0 disabled:opacity-30": !isSwitch,
 				"opacity-0 w-0 h-0": isSwitch,
 			}),
 			p.Class,

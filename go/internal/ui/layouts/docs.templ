@@ -10,9 +10,15 @@ func slugify(title string) string {
 }
 
 templ sidebarLink(href, title, currentPath string) {
-	<a href={ templ.URL(href) } class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == slugify(title)) }>
+	<a href={ templ.URL(href) } class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-base font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == href || (currentPath == "" && href == "/")) }>
 		{ title }
 	</a>
+}
+
+templ sidebarGroupTitle(title string) {
+	<div class="flex items-center gap-1 px-2 py-2 rounded-[10px]">
+		<p class="text-sm font-medium text-foreground-default-secondary">{ title }</p>
+	</div>
 }
 
 templ DocsLayout(title, description string) {
@@ -27,19 +33,21 @@ templ DocsLayout(title, description string) {
 				</div>
 				<div class="flex flex-col gap-3 p-3">
 					<div class="flex flex-col">
-						<div class="flex items-center gap-1 px-2 py-2 rounded-[10px]">
-							<p class="text-xs font-medium text-foreground-default-secondary">Sections</p>
-						</div>
+						@sidebarGroupTitle("Sections")
 						<div class="flex flex-col gap-0.5">
-							<a href="/" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == "/" || currentPath == "") }>
-								Get started
-							</a>
+							@sidebarLink("/", "Get started", currentPath)
 						</div>
 					</div>
 					<div class="flex flex-col">
-						<div class="flex items-center gap-1 px-1.5 py-2 rounded-[10px]">
-							<p class="text-xs font-medium text-foreground-default-secondary">Components</p>
+						@sidebarGroupTitle("Blocks")
+						<div class="flex flex-col gap-0.5">
+							@sidebarLink("/examples/admin", "Admin Page", currentPath)
+							@sidebarLink("/examples/app", "App Page", currentPath)
+							@sidebarLink("/examples/wizard", "Wizard", currentPath)
 						</div>
+					</div>
+					<div class="flex flex-col">
+						@sidebarGroupTitle("Components")
 						<div class="flex flex-col gap-0.5">
 							@sidebarLink("/components/accordion", "Accordion", currentPath)
 							@sidebarLink("/components/avatar", "Avatar", currentPath)
@@ -52,6 +60,7 @@ templ DocsLayout(title, description string) {
 							@sidebarLink("/components/empty-state", "Empty State", currentPath)
 							@sidebarLink("/components/fieldset", "Fieldset", currentPath)
 							@sidebarLink("/components/file", "File", currentPath)
+							@sidebarLink("/components/flag", "Flag", currentPath)
 							@sidebarLink("/components/flash-message", "Flash Message", currentPath)
 							@sidebarLink("/components/image", "Image", currentPath)
 							@sidebarLink("/components/input", "Input", currentPath)
@@ -69,30 +78,17 @@ templ DocsLayout(title, description string) {
 							@sidebarLink("/components/typography", "Typography", currentPath)
 						</div>
 					</div>
-					<div class="flex flex-col">
-						<div class="flex items-center gap-1 px-1.5 py-2 rounded-[10px]">
-							<p class="text-xs font-medium text-foreground-default-secondary">Examples</p>
-						</div>
-						<div class="flex flex-col gap-0.5">
-							<a href="/examples/admin" target="_blank" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == "/examples/admin") }>
-								Admin Panel
-							</a>
-							<a href="/examples/wizard" target="_blank" class={ "flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium text-foreground hover:bg-background-default-secondary transition-colors", templ.KV("bg-background-default-secondary", currentPath == "/examples/wizard") }>
-								Wizard
-							</a>
-						</div>
-					</div>
 				</div>
 			</aside>
 			<main class="flex-1 flex flex-col h-full overflow-y-auto">
 				<div class="border-b border-border-default-secondary h-12 flex items-center px-6 py-2.5 bg-background">
-					<p class="text-base font-medium tracking-[-0.16px]">{ title }</p>
+					<p class="text-lg font-medium tracking-[-0.16px]">{ title }</p>
 				</div>
 				<div class="flex-1 flex flex-col items-center px-6 py-8 gap-12 overflow-y-auto">
 					<div class="w-full max-w-[768px] min-w-[768px]">
 						<div class="space-y-8">
-							<div>
-								<h1 class="text-4xl font-bold mb-4">{ title }</h1>
+							<div class="space-y-1.5">
+								<h1 class="text-2xl font-bold">{ title }</h1>
 								<p class="text-lg text-foreground-default-secondary">
 									{ description }
 								</p>

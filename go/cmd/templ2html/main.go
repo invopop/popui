@@ -60,6 +60,9 @@ func main() {
 		"components/file/index.html": func() error {
 			return renderPage(publicPath, "components/file/index.html", pages.File())
 		},
+		"components/flag/index.html": func() error {
+			return renderPage(publicPath, "components/flag/index.html", pages.Flag())
+		},
 		"components/flash-message/index.html": func() error {
 			return renderPage(publicPath, "components/flash-message/index.html", pages.FlashMessage())
 		},
@@ -107,6 +110,9 @@ func main() {
 		},
 		"examples/admin/index.html": func() error {
 			return renderPage(publicPath, "examples/admin/index.html", examples.Admin())
+		},
+		"examples/app/index.html": func() error {
+			return renderPage(publicPath, "examples/app/index.html", examples.App())
 		},
 		"examples/wizard/index.html": func() error {
 			return renderPage(publicPath, "examples/wizard/index.html", examples.AppIndex())

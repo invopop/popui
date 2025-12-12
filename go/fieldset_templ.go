@@ -40,7 +40,7 @@ func Fieldset(p ...props.Fieldset) templ.Component {
 			"space-y-4 relative w-full",
 			utils.Clsx(map[string]bool{
 				"border border-border-default-secondary rounded-md bg-background p-4": fieldset.Variant == "card",
-				"pt-12": fieldset.Legend != "",
+				"pt-14": fieldset.Legend != "",
 			}),
 			fieldset.Class,
 		),
@@ -98,7 +98,7 @@ func Fieldset(p ...props.Fieldset) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if fieldset.Legend != "" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<legend class=\"absolute top-4 text-sm font-medium text-foreground\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<legend class=\"absolute top-4 text-lg font-medium text-foreground\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

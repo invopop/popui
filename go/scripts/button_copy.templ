@@ -9,9 +9,9 @@ templ ButtonCopy() {
 				buttonCopy: '[data-button-copy]',
 				buttonCopyValue: '[data-copy-value]',
 				buttonCopyText: '[data-copy-text]',
-				buttonCopyPopover: '[data-copy-popover]'
+				iconDuplicate: '[data-copy-icon-duplicate]',
+				iconSuccess: '[data-copy-icon-success]'
 			}
-			const POPOVER_VISIBLE_CLASS = 'opacity-100'
 
 			function initButtonCopy() {
 				const containers = document.querySelectorAll(QUERY_SELECTORS.buttonCopy)
@@ -41,11 +41,19 @@ templ ButtonCopy() {
 				navigator.clipboard
 					.writeText(value)
 					.then(() => {
-						const popover = container.querySelector(QUERY_SELECTORS.buttonCopyPopover)
-						if (popover) {
-							popover.classList.add(POPOVER_VISIBLE_CLASS)
+						// Switch to success icon
+						const duplicateIcon = container.querySelector(QUERY_SELECTORS.iconDuplicate)
+						const successIcon = container.querySelector(QUERY_SELECTORS.iconSuccess)
+
+						if (duplicateIcon && successIcon) {
+							// Hide duplicate icon and show success icon
+							duplicateIcon.classList.add('hidden')
+							successIcon.classList.remove('hidden')
+
+							// Restore original icon after 2 seconds
 							setTimeout(() => {
-								popover.classList.remove(POPOVER_VISIBLE_CLASS)
+								duplicateIcon.classList.remove('hidden')
+								successIcon.classList.add('hidden')
 							}, 2000)
 						}
 					})

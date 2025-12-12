@@ -131,7 +131,7 @@ func DescriptionListItem(opts ...props.DescriptionListItem) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		p := props.First(opts)
 		var templ_7745c5c3_Var6 = []any{utils.TwMerge(
-			"space-y-2",
+			"space-y-1.5",
 			p.Class,
 		),
 		}
@@ -188,7 +188,7 @@ func DescriptionListItem(opts ...props.DescriptionListItem) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if p.Label != "" && p.Value != "" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "<dt class=\"font-sans text-sm font-medium text-foreground-default-secondary flex items-center gap-0.5\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "<dt class=\"font-sans text-base font-medium text-foreground-default-secondary flex items-center gap-0.5\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -119,7 +119,7 @@ func Input(p ...props.Input) templ.Component {
 		}
 		var templ_7745c5c3_Var6 = []any{utils.TwMerge(
 			utils.FormFieldClasses(),
-			utils.FormFieldErrorClasses(!prp.Error.Empty()),
+			utils.FormFieldStateClasses(!prp.Error.Empty()),
 			prp.Class,
 		),
 		}

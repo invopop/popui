@@ -77,7 +77,7 @@ func Select(p ...props.Select) templ.Component {
 			utils.FormFieldClasses(),
 			"pl-2",
 			selectHeightClasses(prp),
-			utils.FormFieldErrorClasses(!prp.Error.Empty()),
+			utils.FormFieldStateClasses(!prp.Error.Empty()),
 			prp.Class,
 		)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)

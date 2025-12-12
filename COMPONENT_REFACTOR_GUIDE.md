@@ -124,7 +124,7 @@ func variantClasses(prp ComponentProps) string {
 ```
 
 **Becomes in templ:**
-```templ
+```go
 templ Avatar(p ...props.Avatar) {
     {{ avatar := props.First(p) }}
     {{
@@ -153,7 +153,7 @@ templ Avatar(p ...props.Avatar) {
 ```
 
 ### Class Organization
-```templ
+```go
 class={ utils.TwMerge(
     "flex items-center justify-between px-4 py-3",
     "bg-background border border-border-default-secondary",
@@ -238,7 +238,7 @@ type ExampleProps struct {
 ```
 
 **Usage:**
-```templ
+```go
 // 1. Embed the MDX file at the top of your page
 //go:embed examples/button/default.mdx
 var buttonDefaultCode string
@@ -286,7 +286,7 @@ The docs layout automatically highlights the current page in the sidebar:
 - Same styling as hover state for consistency
 
 **Implementation:**
-```templ
+```go
 templ DocsLayout(title, description string) {
     {{ currentPath := slugify(title) }}  // Auto-generates /docs/components/[slug]
     // Sidebar links compare against currentPath
@@ -298,7 +298,7 @@ func slugify(title string) string {
 ```
 
 ### Page Template (New Pattern)
-```templ
+```go
 package pages
 
 import (
@@ -349,7 +349,7 @@ templ ComponentName() {
 ```
 
 ### Old Pattern (Deprecated)
-```templ
+```go
 <!-- DON'T DO THIS ANYMORE -->
 <div class="space-y-8">
     <div>
@@ -410,14 +410,14 @@ type APITableItem struct {
 ### Syntax Highlighting
 - Using **Prism.js** for client-side syntax highlighting
 - Added to `base.templ`:
-```templ
+```go
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
 ```
 
 ### Code Block Component
-```templ
+```go
 type CodeBlockProps struct {
     Code     string
     Language string
@@ -481,7 +481,7 @@ Card components should be **fully decoupled** with slot-based architecture:
 - Never nest prop structs (old: `Card.Header`) - use composition via children instead
 
 **Before (Coupled):**
-```templ
+```go
 @Card(props.Card{
     Header: props.CardHeader{
         Title: "Title",
@@ -491,7 +491,7 @@ Card components should be **fully decoupled** with slot-based architecture:
 ```
 
 **After (Decoupled):**
-```templ
+```go
 @Card(props.Card{}) {
     @CardHeader(props.CardHeader{
         Title: "Title",
@@ -517,7 +517,7 @@ Card components should be **fully decoupled** with slot-based architecture:
 
 ### Parent-State Styling
 When child elements need to respond to parent state:
-```templ
+```go
 // Parent with group class
 <details class="group">
     // Child responds to parent's open state

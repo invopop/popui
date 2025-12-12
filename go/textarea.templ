@@ -22,7 +22,7 @@ templ Textarea(p ...props.Textarea) {
 			class={
 				utils.TwMerge(
 					utils.FormFieldClasses(),
-					utils.FormFieldErrorClasses(!prp.Error.Empty()),
+					utils.FormFieldStateClasses(!prp.Error.Empty()),
 					prp.Class,
 				)
 			}
@@ -79,7 +79,7 @@ templ Contenteditable(p ...props.Textarea) {
 				utils.TwMerge(
 					utils.FormFieldClasses(),
 					"min-h-[80px]",
-					utils.FormFieldErrorClasses(!prp.Error.Empty()),
+					utils.FormFieldStateClasses(!prp.Error.Empty()),
 					prp.Class,
 				)
 			}

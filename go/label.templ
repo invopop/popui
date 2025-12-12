@@ -23,7 +23,7 @@ templ Label(opts ...props.Label) {
 	>
 		{ children... }
 		if p.Hint != "" {
-			<div title={ p.Hint } class="popui-small-icon-size">
+			<div title={ p.Hint } class="[&>div[style*='width']]:!w-3 [&>div[style*='height']]:!h-3">
 				@icons.Question()
 			</div>
 		}

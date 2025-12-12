@@ -1,8 +1,8 @@
 package popui
 
 import (
-	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/utils"
 )
 
 // Sidebar provides a wrapper for sidebars on admin panels
@@ -10,8 +10,10 @@ templ Sidebar(opts ...props.Sidebar) {
 	{{ p := props.First(opts) }}
 	<div
 		class={
-			templ.KV(classes.Sidebar, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+			utils.TwMerge(
+				"h-full w-0 md:w-[240px] invisible md:visible bg-background flex flex-col items-center gap-0 transition-[width] ease-in-out duration-300 border-r border-border [&_ul_li_a]:whitespace-nowrap [&_ul_li_a]:overflow-hidden [&_ul_li_a_div]:shrink-0",
+				p.Class,
+			),
 		}
 		{ p.Attrs... }
 	>
@@ -21,14 +23,14 @@ templ Sidebar(opts ...props.Sidebar) {
 
 // SidebarHeader provides a header for the sidebar
 templ SidebarHeader() {
-	<div class={ classes.SidebarHeader }>
+	<div class="w-full flex px-3 items-center gap-2 border-b border-border text-foreground font-sans text-base font-semibold whitespace-nowrap h-12 [&_svg]:!w-7 [&_svg]:!h-7 [&_div]:!w-7 [&_div]:!h-7">
 		{ children... }
 	</div>
 }
 
 // SidebarContent provides a wrapper for the content of the sidebar
 templ SidebarContent() {
-	<div class={ classes.SidebarContent }>
+	<div class="w-full flex grow py-5 px-3 flex-col items-center gap-5">
 		{ children... }
 	</div>
 }
@@ -39,8 +41,10 @@ templ SidebarSection(opts ...props.SidebarSection) {
 	{{ p := props.First(opts) }}
 	<div
 		class={
-			templ.KV(classes.SidebarSection, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+			utils.TwMerge(
+				"w-full flex flex-col items-start gap-2 [&_p]:text-foreground-default-secondary [&_p]:font-sans [&_p]:text-sm [&_p]:font-medium [&_p]:indent-2 [&_ul]:flex [&_ul]:flex-col [&_ul]:items-start [&_ul]:w-full [&_ul]:gap-1.5 [&_ul_li]:w-full [&_a]:w-full [&_a]:flex [&_a]:py-1.5 [&_a]:px-2 [&_a]:items-center [&_a]:gap-1.5 [&_a]:rounded-lg [&_a]:text-foreground [&_a]:font-sans [&_a]:text-base [&_a]:font-medium [&_a:hover]:bg-background-default-secondary [&_svg_*[stroke]]:stroke-[var(--color-icon-default-default)] [&_svg_*[fill]]:fill-[var(--color-icon-default-default)]",
+				p.Class,
+			),
 		}
 		{ p.Attrs... }
 	>
@@ -55,7 +59,7 @@ templ SidebarSection(opts ...props.SidebarSection) {
 
 // SidebarFooter provides a footer for the sidebar
 templ SidebarFooter() {
-	<div class={ classes.SidebarFooter }>
+	<div class="grow-0 border-t border-border-default-secondary py-2 px-4 w-full">
 		{ children... }
 	</div>
 }

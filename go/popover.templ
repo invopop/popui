@@ -29,7 +29,7 @@ templ Popover(opts ...props.Popover) {
 		<div
 			class={
 				utils.TwMerge(
-					"hidden absolute left-0 top-8 border border-border-default-secondary rounded-md p-1 w-fit min-w-48 bg-background z-[9999] popover-menu",
+					"hidden absolute left-0 top-8 border border-border rounded-xl p-1 w-fit min-w-48 bg-background z-[9999] popover-menu",
 					utils.Clsx(map[string]bool{"!left-[unset] !right-0": p.RightAlign}),
 					p.Class,
 				),
@@ -52,13 +52,13 @@ templ PopoverItem(opts ...props.PopoverItem) {
 		}
 		class={
 			utils.TwMerge(
-				"font-sans font-medium text-base text-foreground w-full rounded hover:bg-background-default-tertiary",
+				"font-sans font-medium text-base text-foreground w-full rounded-md hover:bg-background-default-secondary",
 				p.Class,
 			),
 		}
 		{ p.Attributes... }
 	>
-		<div class="w-full pl-1.5 pr-2 py-1.5 flex items-center space-x-2 cursor-pointer whitespace-nowrap">
+		<div class="w-full px-2 py-1.5 flex items-center space-x-2 cursor-pointer whitespace-nowrap">
 			{ children... }
 		</div>
 	</li>

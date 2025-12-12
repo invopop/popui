@@ -37,8 +37,7 @@ func Accordion(p ...props.Accordion) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		var prp = props.First(p)
 		var templ_7745c5c3_Var2 = []any{utils.TwMerge(
-			"group rounded-md border border-border-default-secondary bg-background-default-secondary p-2 overflow-hidden backdrop-blur-[2px]",
-			"open:pb-4",
+			"w-full group rounded-lg border border-border-default-secondary bg-background-default-secondary p-2 backdrop-blur-[2px] table [&>:not(summary)]:block overflow-hidden",
 			prp.Class,
 		),
 		}
@@ -136,7 +135,7 @@ func AccordionTrigger(p ...props.AccordionTrigger) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		var prp = props.First(p)
 		var templ_7745c5c3_Var6 = []any{utils.TwMerge(
-			"cursor-pointer list-none relative pl-6 text-foreground text-sm font-medium",
+			"cursor-pointer list-none relative pl-6 text-foreground text-base font-medium block",
 			"before:content-[''] before:absolute before:left-0 before:top-[50%] before:w-4 before:h-4",
 			"before:bg-[url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYuMDAwMDUgMTJMMTAgNy45OTk5NEw2IDQiIHN0cm9rZT0iIzZCNzI4MCIvPjwvc3ZnPg==')]",
 			"before:bg-contain before:bg-no-repeat before:-translate-y-1/2 before:rotate-0 before:transition-transform before:duration-300 before:ease-in-out",
@@ -161,7 +160,7 @@ func AccordionTrigger(p ...props.AccordionTrigger) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(prp.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/accordion.templ`, Line: 36, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/accordion.templ`, Line: 35, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -233,7 +232,7 @@ func AccordionContent(p ...props.AccordionContent) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		var prp = props.First(p)
 		var templ_7745c5c3_Var10 = []any{utils.TwMerge(
-			"mt-4 w-full flex flex-col gap-4 p-2",
+			"mt-4 grid transition-[grid-template-rows] duration-300 ease-in-out grid-rows-[0fr] group-open:grid-rows-[1fr]",
 			prp.Class,
 		),
 		}
@@ -253,7 +252,7 @@ func AccordionContent(p ...props.AccordionContent) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(prp.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/accordion.templ`, Line: 60, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/accordion.templ`, Line: 59, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -285,7 +284,7 @@ func AccordionContent(p ...props.AccordionContent) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, ">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "><div class=\"overflow-hidden flex flex-col gap-4 p-2 min-h-0 w-max\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -293,7 +292,7 @@ func AccordionContent(p ...props.AccordionContent) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "</div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "</div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

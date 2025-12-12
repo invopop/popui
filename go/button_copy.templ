@@ -2,24 +2,28 @@ package popui
 
 import (
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
 	"github.com/invopop/popui/icons"
 	"strconv"
 )
 
 // ButtonCopy renders text with a copy button.
+// Supports variants: "outline" (default) and "ghost"
 templ ButtonCopy(opts ...props.ButtonCopy) {
 	{{ p := props.First(opts) }}
-	<div
-		if p.ID != "" {
-			id={ p.ID }
+	{{
+		buttonAttrs := templ.Attributes{
+			"data-button-copy": true,
+			"onclick":          "copyButtonValue(this)",
 		}
-		data-button-copy
-		class={ utils.TwMerge(
-			"inline-flex items-center gap-2 bg-background-default-secondary border border-border-default-secondary rounded-md px-2 py-1 relative",
-			p.Class,
-		) }
-	>
+	}}
+	@Button(props.Button{
+		ID:         p.ID,
+		Class:      p.Class,
+		Variant:    p.Variant,
+		Size:       p.Size,
+		Type:       "button",
+		Attributes: buttonAttrs,
+	}) {
 		<input
 			type="hidden"
 			data-copy-value
@@ -30,24 +34,15 @@ templ ButtonCopy(opts ...props.ButtonCopy) {
 			}
 			{ p.Attributes... }
 		/>
-		<button
+		<span
 			data-copy-text
-			class="font-mono text-sm text-foreground hover:text-foreground transition-colors border-0 bg-transparent p-0 m-0 cursor-pointer select-none outline-none focus:outline-none focus:shadow-none"
-			onclick="copyButtonValue(this)"
-		></button>
-		<button
-			data-copy-button
-			class="p-1 rounded text-foreground-default-secondary hover:text-foreground hover:bg-background-default-tertiary transition-colors cursor-pointer"
-			onclick="copyButtonValue(this)"
-		>
-			<div class="w-4 h-4">
-				@icons.Duplicate()
-			</div>
-		</button>
-		if p.CopiedText != "" {
-			<div data-copy-popover class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-background-default-negative text-foreground-inverse text-xs py-0.5 px-1.5 rounded text-center opacity-0 transition-opacity duration-200 pointer-events-none">
-				{ p.CopiedText }
-			</div>
-		}
-	</div>
+			class="font-mono"
+		></span>
+		<span data-copy-icon-duplicate>
+			@icons.Duplicate()
+		</span>
+		<span class="hidden" data-copy-icon-success>
+			@icons.Tick()
+		</span>
+	}
 }

@@ -15,7 +15,8 @@ templ Slider(p ...props.Slider) {
 		{ children... }
 		<input
 			type="range"
-			class={ utils.TwMerge("w-full appearance-none bg-transparent cursor-pointer overflow-hidden my-2 rounded-md", "popui-range__input", prp.Class) }
+			data-range-input
+			class={ utils.TwMerge("w-full appearance-none bg-transparent cursor-pointer overflow-hidden my-2 rounded-md", prp.Class) }
 			id={ prp.ID }
 			if prp.Min != "" {
 				min={ prp.Min }

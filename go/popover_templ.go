@@ -112,7 +112,7 @@ func Popover(opts ...props.Popover) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var7 = []any{utils.TwMerge(
-			"hidden absolute left-0 top-8 border border-border-default-secondary rounded-md p-1 w-fit min-w-48 bg-background z-[9999] popover-menu",
+			"hidden absolute left-0 top-8 border border-border rounded-xl p-1 w-fit min-w-48 bg-background z-[9999] popover-menu",
 			utils.Clsx(map[string]bool{"!left-[unset] !right-0": p.RightAlign}),
 			p.Class,
 		),
@@ -182,7 +182,7 @@ func PopoverItem(opts ...props.PopoverItem) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		p := props.First(opts)
 		var templ_7745c5c3_Var10 = []any{utils.TwMerge(
-			"font-sans font-medium text-base text-foreground w-full rounded hover:bg-background-default-tertiary",
+			"font-sans font-medium text-base text-foreground w-full rounded-md hover:bg-background-default-secondary",
 			p.Class,
 		),
 		}
@@ -234,7 +234,7 @@ func PopoverItem(opts ...props.PopoverItem) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "><div class=\"w-full pl-1.5 pr-2 py-1.5 flex items-center space-x-2 cursor-pointer whitespace-nowrap\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "><div class=\"w-full px-2 py-1.5 flex items-center space-x-2 cursor-pointer whitespace-nowrap\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

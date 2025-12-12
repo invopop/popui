@@ -5,7 +5,6 @@ Popui is a set of reusable components to be used inside Console UI and other Inv
 Currently we provide different libraries and examples for
 
 - Svelte
-- HTML
 - Go
 - Web Components
 
@@ -42,12 +41,6 @@ import { InputText } from '@invopop/popui'
 ```
 
 A complete catalogue of examples is availabe on [Storybook](https://popui-svelte.netlify.app/)
-
-## HTML
-
-Raw HTML Examples of most of the components are available under the [html](https://github.com/invopop/popui/tree/main/html) folder of this repo.
-
-They all make use of the `popui.css` file that is deployed to a CDN on each release.
 
 ## Go
 

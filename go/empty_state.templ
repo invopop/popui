@@ -12,19 +12,21 @@ templ EmptyState(opts ...props.EmptyState) {
 		}
 		class={
 			utils.TwMerge(
-				"flex flex-col items-center justify-center space-y-2 text-foreground-accent",
+				"flex flex-col items-center justify-center text-foreground-accent",
 				p.Class,
 			),
 		}
 		{ p.Attributes... }
 	>
 		@EmptyStateIcon()
-		@Subtitle() {
-			{ p.Title }
-		}
-		@Description() {
-			{ p.Description }
-		}
+		<div class="flex flex-col items-center justify-center space-y-0.5 mb-4">
+			@Subtitle() {
+				{ p.Title }
+			}
+			@Description() {
+				{ p.Description }
+			}
+		</div>
 		{ children... }
 	</div>
 }

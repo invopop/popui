@@ -1,12 +1,11 @@
-```go
-package showcase
+package examples
 
 import (
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/props"
 )
 
-templ AccordionDefault() {
+templ AccordionExample() {
 	<div class="w-full space-y-2">
 		@popui.Accordion(props.Accordion{Open: true}) {
 			@popui.AccordionTrigger() {
@@ -30,4 +29,3 @@ templ AccordionDefault() {
 		}
 	</div>
 }
-```

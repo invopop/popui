@@ -36,7 +36,7 @@ func InputWithErrorExample() templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		templ_7745c5c3_Err = popui.Input(props.Input{
-			ID:          "email",
+			ID:          "email-with-error",
 			Label:       "Email",
 			Type:        "email",
 			Placeholder: "email@example.com",

@@ -54,7 +54,7 @@ func SelectWithErrorExample() templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = popui.Select(props.Select{
-			ID:    "country",
+			ID:    "country-with-error",
 			Name:  "country",
 			Label: "Country",
 			Error: props.Error{

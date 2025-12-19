@@ -71,7 +71,7 @@ func SliderWithLabelExample() templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = popui.Slider(props.Slider{
-			ID:    "volume",
+			ID:    "slider-volume-custom",
 			Name:  "volume",
 			Min:   "0",
 			Max:   "100",

@@ -14,6 +14,7 @@ templ Index() {
 	@layout() {
 		<div class="flex h-screen bg-background" x-data="docs" x-cloak>
 			@sidebar()
+			@getStarted()
 			for _, group := range groups {
 				for _, page := range group.Pages {
 					@article(group.Path+"-"+page.Path, page.Title, page.Desc) {
@@ -52,6 +53,15 @@ templ layout() {
 	</html>
 }
 
+templ getStarted() {
+	@article("getting-started", "Getting Started", "Learn how to install and use PopUI in your projects.") {
+		<p>Welcome to PopUI! This guide will help you get started with installing and using PopUI in your projects.</p>
+		<h2 class="text-xl font-semibold mt-8">Installation</h2>
+		<p>To install PopUI, you can use the following command:</p>
+		<pre class="language-go"><code>go get github.com/invopop/popui/go</code></pre>
+	}
+}
+
 templ article(id, title, description string) {
 	<article x-show={ "page == '" + id + "'" } id={ id } class="flex-1 flex flex-col h-full overflow-y-auto">
 		<div class="border-b border-border-default-secondary h-12 flex items-center px-6 py-2.5 bg-background">
@@ -84,7 +94,7 @@ templ sidebar() {
 			<div class="flex flex-col">
 				@sidebarGroupTitle("Sections")
 				<div class="flex flex-col gap-0.5">
-					@sidebarLink("", "Get started")
+					@sidebarLink("getting-started", "Get started")
 				</div>
 			</div>
 			for _, group := range groups {

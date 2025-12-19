@@ -53,7 +53,7 @@ func LabelCustomStyleExample() templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = popui.Label(props.Label{
-			ID:    "password",
+			ID:    "custom-password",
 			Class: "text-foreground-accent text-base font-semibold",
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {

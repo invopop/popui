@@ -53,7 +53,7 @@ func SelectWithLabelExample() templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = popui.Select(props.Select{
-			ID:    "country",
+			ID:    "country-with-label",
 			Name:  "country",
 			Label: "Country",
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)

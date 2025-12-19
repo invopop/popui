@@ -61,7 +61,7 @@ func InputCustomLabelExample() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.Input(props.Input{
-			ID:          "username",
+			ID:          "custom-username",
 			Type:        "text",
 			Placeholder: "johndoe",
 		}).Render(ctx, templ_7745c5c3_Buffer)

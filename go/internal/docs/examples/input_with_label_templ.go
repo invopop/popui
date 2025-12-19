@@ -35,7 +35,7 @@ func InputWithLabelExample() templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		templ_7745c5c3_Err = popui.Input(props.Input{
-			ID:          "email",
+			ID:          "email-with-label",
 			Label:       "Email",
 			Type:        "email",
 			Placeholder: "email@example.com",

@@ -53,7 +53,7 @@ func LabelWithHintExample() templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = popui.Label(props.Label{
-			ID:   "email",
+			ID:   "email-with-hint",
 			Hint: "This will be your primary contact email",
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {

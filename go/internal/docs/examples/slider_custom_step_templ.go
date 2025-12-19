@@ -71,7 +71,7 @@ func SliderCustomStepExample() templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = popui.Slider(props.Slider{
-			ID:    "price",
+			ID:    "slider-price-custom",
 			Name:  "price",
 			Min:   "0",
 			Max:   "1000",

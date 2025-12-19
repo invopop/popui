@@ -71,7 +71,7 @@ func SliderWithOptionsExample() templ.Component {
 			return nil
 		})
 		templ_7745c5c3_Err = popui.Slider(props.Slider{
-			ID:    "size",
+			ID:    "slider-size-options",
 			Name:  "size",
 			Min:   "0",
 			Max:   "4",

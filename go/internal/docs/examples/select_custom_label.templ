@@ -7,11 +7,14 @@ import (
 
 templ SelectCustomLabelExample() {
 	<div class="flex flex-col space-y-2">
-		@popui.Label(props.Label{ID: "country", Hint: "Choose your preferred country"}) {
+		@popui.Label(props.Label{
+			ID:   "custom-country",
+			Hint: "Choose your preferred country",
+		}) {
 			Country
 		}
 		@popui.Select(props.Select{
-			ID:   "country",
+			ID:   "custom-country",
 			Name: "country",
 		}) {
 			<option value="">Select a country</option>

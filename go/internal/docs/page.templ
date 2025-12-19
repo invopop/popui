@@ -12,7 +12,7 @@ import (
 
 templ Index() {
 	@layout() {
-		<div class="flex h-screen bg-background" x-data="ui" x-cloak>
+		<div class="flex h-screen bg-background" x-data="docs" x-cloak>
 			@sidebar()
 			for _, group := range groups {
 				for _, page := range group.Pages {
@@ -36,7 +36,7 @@ templ layout() {
 			@popui.EmbeddedCSS()
 			@css.Flag()
 			@scripts.ButtonCopy()
-			<script src={ "/assets/" + assets.Versioned("scripts", "ui.js") }></script>
+			<script src={ "/assets/" + assets.Versioned("scripts", "docs.js") }></script>
 			<script src="//unpkg.com/alpinejs" defer></script>
 			<style>
                 [x-cloak] { display: none !important; }

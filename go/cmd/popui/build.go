@@ -71,6 +71,18 @@ func (s *buildOpts) run(cmd *cobra.Command, _ []string) error {
 	}
 	log.Printf("JS file published")
 
+	// Copy over the docs specific JS
+	scriptsOutPath := path.Join(buildOutputPath, "assets", "scripts")
+	err = createFolder(scriptsOutPath)
+	if err != nil {
+		log.Fatalf("Error: %v", err)
+	}
+	err = copyFile(path.Join("go/internal/docs/assets/scripts", "docs.js"), path.Join(scriptsOutPath, "docs.js"))
+	if err != nil {
+		log.Fatalf("Error: %v", err)
+	}
+	log.Printf("Docs JS file published")
+
 	return nil
 }
 

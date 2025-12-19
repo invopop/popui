@@ -1,7 +1,7 @@
 
 document.addEventListener("alpine:init", () => {
   // Product Form
-  Alpine.data("ui", () => ({
+  Alpine.data("docs", () => ({
     page: "getting-started",
     init() {
       this.changePage();

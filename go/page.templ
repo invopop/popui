@@ -2,7 +2,7 @@ package popui
 
 import (
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 	"github.com/invopop/popui/icons"
 )
 
@@ -13,7 +13,7 @@ templ Page(opts ...props.Page) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex-1 bg-background overflow-y-auto",
 				p.Class,
 			),
@@ -31,7 +31,7 @@ templ PageContainer(opts ...props.PageContainer) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex flex-col w-full max-w-[768px] mx-auto",
 				p.Class,
 			),
@@ -50,7 +50,7 @@ templ PageHeader(opts ...props.PageHeader) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"bg-background z-[2] h-12 sticky inset-0 flex px-6 justify-between items-center border-b border-border transition-[left] duration-300 ease-in-out",
 				p.Class,
 			),
@@ -87,7 +87,7 @@ templ PageContent(opts ...props.PageContent) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex p-8 flex-col items-center gap-10",
 				p.Class,
 			),
@@ -105,7 +105,7 @@ templ PageSections(opts ...props.PageSections) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex flex-col items-start gap-10 w-full",
 				p.Class,
 			),
@@ -126,7 +126,7 @@ templ PageSection(opts ...props.PageSection) {
 				id={ p.ID }
 			}
 			class={
-				utils.TwMerge(
+				tailwind.Merge(
 					"w-full flex flex-col items-start space-y-3",
 					p.Class,
 				),
@@ -143,7 +143,7 @@ templ PageSection(opts ...props.PageSection) {
 			</div>
 			<div
 				class={
-					utils.TwMerge(
+					tailwind.Merge(
 						"flex flex-col space-y-2 items-start w-full",
 					),
 				}
@@ -162,7 +162,7 @@ templ PageActions(opts ...props.PageActions) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex items-center gap-2",
 				p.Class,
 			),
@@ -181,7 +181,7 @@ templ PageTitle(opts ...props.Title) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"font-sans text-foreground text-2xl font-semibold",
 				p.Class,
 			),

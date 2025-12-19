@@ -2,7 +2,7 @@ package popui
 
 import (
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 	"github.com/invopop/popui/icons"
 )
 
@@ -14,7 +14,7 @@ templ Label(opts ...props.Label) {
 			for={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"font-sans text-sm font-medium text-foreground-default-secondary flex items-center gap-0.5",
 				p.Class,
 			),

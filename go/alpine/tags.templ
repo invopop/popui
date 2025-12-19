@@ -3,8 +3,8 @@ package alpine
 import (
 	"github.com/dchest/uniuri"
 	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
 )
 
 templ Tags(p props.Tags) {
@@ -51,7 +51,7 @@ templ Tags(p props.Tags) {
 					@popui.Input(props.Input{ID: id, Attributes: templ.Attributes{
 						"x-model":        "tags_newTag",
 						"@keydown.enter": "tags_addTag",
-						":class":         "{ '" + utils.FormFieldErrorClasses() + "': tags_error }",
+						":class":         "{ '" + classes.FormFieldError() + "': tags_error }",
 					}, Error: props.Error{Attributes: templ.Attributes{"x-text": "tags_error"}}})
 				</div>
 				<div class="mt-0.5">

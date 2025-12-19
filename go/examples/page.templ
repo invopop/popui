@@ -3,8 +3,8 @@ package examples
 import (
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/alpine"
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
 )
 
 // Page provides the main wrapper around content.
@@ -157,7 +157,7 @@ templ Page() {
 						Attributes: templ.Attributes{
 							"x-model":   "inputText.value",
 							":disabled": "inputText.disabled",
-							":class":    "{ '" + utils.FormFieldErrorClasses() + "': inputText.errorText }",
+							":class":    "{ '" + classes.FormFieldError() + "': inputText.errorText }",
 						},
 					})
 			</div>

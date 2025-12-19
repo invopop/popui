@@ -1,0 +1,49 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/internal/ui/examples"
+	"github.com/invopop/popui/go/internal/ui/modules"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Flag() {
+	@popui.Notification(props.Notification{
+		Type:        "warning",
+		Text:        "CSS required",
+		Description: "This component requires the flag-icons CSS library. Use @css.Flag() in your template.",
+	})
+	@modules.Example(modules.ExampleProps{
+		Code: examples.LoadExample("flag.templ"),
+	}) {
+		@examples.FlagExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Multiple Countries",
+		Description: "Display flags for different countries using ISO 3166-1 alpha-2 codes.",
+		Code:        examples.LoadExample("flag_countries.templ"),
+	}) {
+		@examples.FlagCountriesExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "In Context",
+		Description: "Flags work great alongside text labels in lists or forms.",
+		Code:        examples.LoadExample("flag_in_context.templ"),
+	}) {
+		@examples.FlagInContextExample()
+	}
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "Flag",
+			Description: "Display country flags using the flag-icons library.",
+			Items: []modules.APITableItem{
+				{Name: "Country", Type: "string", Default: "", Description: "ISO 3166-1 alpha-2 country code (e.g., 'ES', 'US', 'GB')", Required: true},
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the flag element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the element"},
+			},
+		})
+	}
+}

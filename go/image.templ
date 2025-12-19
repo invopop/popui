@@ -2,7 +2,7 @@ package popui
 
 import (
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // Image displays an image with rounded corners and proper object fit.
@@ -13,7 +13,7 @@ templ Image(p ...props.Image) {
 			id={ img.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"h-full w-full rounded-md object-cover",
 				img.Class,
 			),

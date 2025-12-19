@@ -2,7 +2,7 @@ package popui
 
 import (
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // PopupConfigContainer provides a wrapper for sidebar popups used on the Invopop Console UI
@@ -14,7 +14,7 @@ templ PopupConfigContainer(p ...props.PopupConfigContainer) {
 		}
 		x-cloak
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex flex-col gap-3 p-0.5 h-full",
 				container.Class,
 			),
@@ -33,7 +33,7 @@ templ PopupConfigFooter(p ...props.PopupConfigFooter) {
 			id={ footer.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex-1 flex flex-col justify-end w-full",
 				footer.Class,
 			),

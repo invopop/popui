@@ -2,7 +2,7 @@ package popui
 
 import (
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 	"strconv"
 )
 
@@ -16,7 +16,7 @@ templ Slider(p ...props.Slider) {
 		<input
 			type="range"
 			data-range-input
-			class={ utils.TwMerge("w-full appearance-none bg-transparent cursor-pointer overflow-hidden my-2 rounded-md", prp.Class) }
+			class={ tailwind.Merge("w-full appearance-none bg-transparent cursor-pointer overflow-hidden my-2 rounded-md", prp.Class) }
 			id={ prp.ID }
 			if prp.Min != "" {
 				min={ prp.Min }

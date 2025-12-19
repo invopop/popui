@@ -1,0 +1,128 @@
+package ui
+
+import (
+	"github.com/invopop/popui/go/css"
+	"github.com/invopop/popui/go/internal/ui/assets"
+	"github.com/invopop/popui/go/scripts"
+	"path"
+	"strings"
+
+	popui "github.com/invopop/popui/go"
+)
+
+templ Index() {
+	@layout() {
+		<div class="flex h-screen bg-background" x-data="ui" x-cloak>
+			@sidebar()
+			for _, group := range groups {
+				for _, page := range group.Pages {
+					@article(group.Path+"-"+page.Path, page.Title, page.Desc) {
+						@page.Template
+					}
+				}
+			}
+		</div>
+	}
+}
+
+templ layout() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>PopUI</title>
+			<meta name="description" content="PopUI - The Invopop UI framework"/>
+			@popui.EmbeddedCSS()
+			@css.Flag()
+			@scripts.ButtonCopy()
+			<script src={ "/assets/" + assets.Versioned("scripts", "ui.js") }></script>
+			<script src="//unpkg.com/alpinejs" defer></script>
+			<style>
+                [x-cloak] { display: none !important; }
+            </style>
+			<!-- Prism.js for syntax highlighting -->
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+		</head>
+		<body class="bg-background text-foreground">
+			{ children... }
+		</body>
+	</html>
+}
+
+templ article(id, title, description string) {
+	<article x-show={ "page == '" + id + "'" } id={ id } class="flex-1 flex flex-col h-full overflow-y-auto">
+		<div class="border-b border-border-default-secondary h-12 flex items-center px-6 py-2.5 bg-background">
+			<p class="text-lg font-medium tracking-[-0.16px]">{ title }</p>
+		</div>
+		<div class="flex-1 flex flex-col items-center px-6 py-8 gap-12 overflow-y-auto">
+			<div class="w-full max-w-[768px] min-w-[768px]">
+				<div class="space-y-8">
+					<div class="space-y-1.5">
+						<h1 class="text-2xl font-bold">{ title }</h1>
+						<p class="text-lg text-foreground-default-secondary">
+							{ description }
+						</p>
+					</div>
+					{ children... }
+				</div>
+			</div>
+		</div>
+	</article>
+}
+
+templ sidebar() {
+	<aside class="w-[240px] border-r border-border-default-secondary bg-background h-full overflow-y-auto">
+		<div class="border-b border-border-default-secondary h-12 flex items-center justify-between px-5 py-3">
+			<a href="/">
+				@popui.PopuiLogo()
+			</a>
+		</div>
+		<div class="flex flex-col gap-3 p-3">
+			<div class="flex flex-col">
+				@sidebarGroupTitle("Sections")
+				<div class="flex flex-col gap-0.5">
+					@sidebarLink("", "Get started")
+				</div>
+			</div>
+			for _, group := range groups {
+				<div class="flex flex-col">
+					@sidebarGroupTitle(group.Title)
+					<div class="flex flex-col gap-0.5">
+						for _, page := range group.Pages {
+							@sidebarPageLink(group, page)
+						}
+					</div>
+				</div>
+			}
+		</div>
+	</aside>
+}
+
+templ sidebarGroupTitle(title string) {
+	<div class="flex items-center gap-1 px-2 py-2 rounded-[10px]">
+		<p class="text-sm font-medium text-foreground-default-secondary">{ title }</p>
+	</div>
+}
+
+templ sidebarPageLink(group *Group, page *Page) {
+	@sidebarLink(path.Join(group.Path, page.Path), page.Title)
+}
+
+templ sidebarLink(href, title string) {
+	// bg-background-default-secondary for active
+	{{ id := slugify(href) }}
+	<a
+		href={ "#" + id }
+		@click={ "goto(\"" + id + "\")" }
+		:class={ "{'flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-base font-medium text-foreground hover:bg-background-default-secondary transition-colors': true, 'bg-background-default-secondary': page == '" + id + "'}" }
+	>
+		{ title }
+	</a>
+}
+
+func slugify(path string) string {
+	return strings.ToLower(strings.ReplaceAll(path, "/", "-"))
+}

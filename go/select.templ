@@ -1,8 +1,9 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // Select provides a select element. By default it renders a native dropdown control
@@ -20,15 +21,13 @@ templ Select(p ...props.Select) {
 		}
 		<select
 			id={ prp.ID }
-			class={
-				utils.TwMerge(
-					utils.FormFieldClasses(),
+			class={ tailwind.Merge(
+					classes.FormField(),
 					"pl-2",
 					selectHeightClasses(prp),
-					utils.FormFieldStateClasses(!prp.Error.Empty()),
+					classes.FormFieldState(!prp.Error.Empty()),
 					prp.Class,
-				)
-			}
+				) }
 			if !prp.Multiple {
 				style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0YzRjRGNiIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwMzA3MTIiIHN0cm9rZS13aWR0aD0iMS4xIi8+Cjwvc3ZnPgo='); background-repeat: no-repeat; background-position: right 0.375rem center; background-size: 1.25rem 1.25rem;"
 			}
@@ -58,7 +57,7 @@ templ Select(p ...props.Select) {
 }
 
 func selectHeightClasses(prp props.Select) string {
-	return utils.Clsx(
+	return classes.Join(
 		map[string]bool{
 			"h-8 pr-9":    !prp.Multiple,
 			"h-auto pr-2": prp.Multiple,

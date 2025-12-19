@@ -1,0 +1,20 @@
+package examples
+
+import (
+	"errors"
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ TextareaWithErrorExample() {
+	@popui.Textarea(props.Textarea{
+		ID:          "message",
+		Name:        "message",
+		Label:       "Message",
+		Placeholder: "Enter your message...",
+		Rows:        4,
+		Error: props.Error{
+			Error: errors.New("Message must be at least 10 characters long"),
+		},
+	})
+}

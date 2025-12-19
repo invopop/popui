@@ -1,7 +1,7 @@
 package popui
 
 import "github.com/invopop/popui/go/props"
-import "github.com/invopop/popui/go/utils"
+import "github.com/invopop/popui/go/tailwind"
 
 // EmptyState provides a layout for displaying an empty state illustration with some call to action
 templ EmptyState(opts ...props.EmptyState) {
@@ -11,7 +11,7 @@ templ EmptyState(opts ...props.EmptyState) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex flex-col items-center justify-center text-foreground-accent",
 				p.Class,
 			),

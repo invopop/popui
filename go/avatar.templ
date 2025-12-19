@@ -1,8 +1,9 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // Avatar displays a user avatar with an image or initials.
@@ -15,7 +16,7 @@ templ Avatar(p ...props.Avatar) {
 			id={ avatar.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"bg-background text-foreground-default-secondary flex items-center justify-center font-semibold relative font-sans",
 				avatarClasses(avatar),
 				avatar.Class,
@@ -32,7 +33,7 @@ templ Avatar(p ...props.Avatar) {
 }
 
 func avatarClasses(avatar props.Avatar) string {
-	return utils.Clsx(
+	return classes.Join(
 		map[string]bool{
 			"!h-8 !w-8 rounded-lg text-lg": avatar.Size == "lg",
 			"h-5 w-5 rounded-md text-sm":   avatar.Size != "lg",

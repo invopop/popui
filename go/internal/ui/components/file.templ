@@ -1,0 +1,102 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	"github.com/invopop/popui/go/internal/ui/examples"
+	"github.com/invopop/popui/go/internal/ui/modules"
+)
+
+templ File() {
+	@modules.Example(modules.ExampleProps{
+		Code: examples.LoadExample("file.templ"),
+	}) {
+		@examples.FileExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Disabled State",
+		Description: "Disabled file inputs prevent user interaction.",
+		Code:        examples.LoadExample("file_disabled.templ"),
+	}) {
+		@examples.FileDisabledExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Accept Specific Types",
+		Description: "Restrict file selection to specific file types using the Accept prop.",
+		Code:        examples.LoadExample("file_accept_types.templ"),
+	}) {
+		@examples.FileAcceptTypesExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Multiple Files",
+		Description: "Allow multiple file selection with the Multiple prop.",
+		Code:        examples.LoadExample("file_multiple.templ"),
+	}) {
+		@examples.FileMultipleExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Upload Without Preview",
+		Description: "FileUpload without an initial avatar shows a placeholder icon.",
+		Code:        examples.LoadExample("file_upload_no_preview.templ"),
+	}) {
+		@examples.FileUploadNoPreviewExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Avatar Upload",
+		Description: "Use FileUpload for file inputs with avatar preview.",
+		Code:        examples.LoadExample("file_avatar.templ"),
+	}) {
+		@examples.FileAvatarExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Square Preview",
+		Description: "Use PreviewSquare for square avatar previews (useful for logos).",
+		Code:        examples.LoadExample("file_square_preview.templ"),
+	}) {
+		@examples.FileSquarePreviewExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "With Additional Buttons",
+		Description: "Pass children to add extra buttons like Remove or Cancel.",
+		Code:        examples.LoadExample("file_with_buttons.templ"),
+	}) {
+		@examples.FileWithButtonsExample()
+	}
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "InputFile",
+			Description: "Basic file input component.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "auto-generated", Description: "Unique identifier for the file input"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+				{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission"},
+				{Name: "Accept", Type: "string", Default: "", Description: "Accepted file types (e.g., \"image/*\", \".pdf,.doc\")"},
+				{Name: "Capture", Type: "string", Default: "", Description: "Capture media from device camera (\"user\" or \"environment\")"},
+				{Name: "Multiple", Type: "bool", Default: "false", Description: "Allow multiple file selection"},
+				{Name: "Autofocus", Type: "bool", Default: "false", Description: "Autofocus the file input on page load"},
+				{Name: "Required", Type: "bool", Default: "false", Description: "Make the file input required"},
+				{Name: "Disabled", Type: "bool", Default: "false", Description: "Disable the file input"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "FileUpload",
+			Description: "File upload component with avatar preview.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "auto-generated", Description: "Unique identifier for the file upload"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+				{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission"},
+				{Name: "Accept", Type: "string", Default: "", Description: "Accepted file types"},
+				{Name: "Capture", Type: "string", Default: "", Description: "Capture media from device camera (\"user\" or \"environment\")"},
+				{Name: "Required", Type: "bool", Default: "false", Description: "Make the file upload required"},
+				{Name: "Disabled", Type: "bool", Default: "false", Description: "Disable the file upload"},
+				{Name: "Multiple", Type: "bool", Default: "false", Description: "Allow multiple file selection"},
+				{Name: "AvatarURL", Type: "string", Default: "", Description: "Avatar image URL for preview"},
+				{Name: "AvatarAlt", Type: "string", Default: "", Description: "Alt text for avatar image"},
+				{Name: "Text", Type: "string", Default: "", Description: "Text label before upload button"},
+				{Name: "PreviewSquare", Type: "bool", Default: "false", Description: "Use square preview instead of circle"},
+			},
+		})
+	}
+}

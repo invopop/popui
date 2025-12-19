@@ -1,8 +1,9 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // Checkbox provides an input with type checkbox and appropriate styling.
@@ -46,8 +47,8 @@ templ checkboxInput(p props.Checkbox) {
 		id={ p.ID }
 		type="checkbox"
 		class={
-			utils.TwMerge(
-				utils.Clsx(map[string]bool{
+			tailwind.Merge(
+				classes.Join(map[string]bool{
 					"form-checkbox w-4 h-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-secondary-hover focus:text-background-accent focus:ring-0 focus:ring-offset-0 disabled:opacity-30": !isSwitch,
 					"opacity-0 w-0 h-0": isSwitch,
 				}),
@@ -82,7 +83,7 @@ templ OptionGroup(opts ...props.OptionGroup) {
 			id={ group.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex flex-col gap-2",
 				group.Class,
 			),

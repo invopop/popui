@@ -2,7 +2,7 @@ package popui
 
 import (
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // Separator provides a horizontal separator with a dashed line.
@@ -13,7 +13,7 @@ templ Separator(opts ...props.Separator) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"my-2",
 				p.Class,
 			),

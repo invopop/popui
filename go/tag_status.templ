@@ -1,8 +1,9 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // TagStatus provides a status tag with optional dot and different color variants.
@@ -18,7 +19,7 @@ templ TagStatus(p ...props.TagStatus) {
 		if prp.ID != "" {
 			id={ prp.ID }
 		}
-		class={ utils.TwMerge(
+		class={ tailwind.Merge(
 			"rounded text-sm inline-flex items-center font-medium gap-1 box-border",
 			tagStatusClasses(prp),
 			prp.Class,
@@ -38,7 +39,7 @@ func tagStatusClasses(prp props.TagStatus) string {
 	hasDot := prp.Dot
 	hasLabel := prp.Label != ""
 
-	return utils.Clsx(
+	return classes.Join(
 		map[string]bool{
 			// Padding based on dot and label presence
 			"px-1 py-0.5":     !hasDot || (hasDot && hasLabel),

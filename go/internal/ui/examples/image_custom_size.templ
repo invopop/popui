@@ -1,0 +1,14 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ ImageCustomSizeExample() {
+	@popui.Image(props.Image{
+		Src:   "https://i.pravatar.cc/300?img=5",
+		Alt:   "Product image",
+		Class: "w-40 h-24 object-contain",
+	})
+}

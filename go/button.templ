@@ -1,8 +1,9 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // Button provides a button element.
@@ -33,7 +34,7 @@ templ Button(p ...props.Button) {
 			autofocus
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-[3px] rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:translate-y-[1px] box-border",
 				buttonClasses(btn.Variant, btn.Size),
 				btn.Class,
@@ -67,7 +68,7 @@ templ AnchorButton(p ...props.AnchorButton) {
 			download
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:translate-y-[1px]",
 				buttonClasses(anchor.Variant, anchor.Size),
 				anchor.Class,
@@ -80,7 +81,7 @@ templ AnchorButton(p ...props.AnchorButton) {
 }
 
 func buttonClasses(variant string, size string) string {
-	return utils.Clsx(
+	return classes.Join(
 		map[string]bool{
 			// Variant classes
 			"border-0 shadow-none hover:bg-background-default-tertiary-hover hover:shadow-button-default":                                                                                                            variant == "transparent",

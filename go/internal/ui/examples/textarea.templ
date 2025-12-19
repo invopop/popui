@@ -1,0 +1,13 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ TextareaExample() {
+	@popui.Textarea(props.Textarea{
+		Placeholder: "Enter your message...",
+		Rows:        4,
+	})
+}

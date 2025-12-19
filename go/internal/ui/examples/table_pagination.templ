@@ -1,0 +1,71 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ TablePaginationExample() {
+	<div class="border border-border rounded-lg overflow-hidden">
+		@popui.Table() {
+			<thead>
+				<tr>
+					<th>Invoice ID</th>
+					<th>Customer</th>
+					<th>Amount</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>INV-001</td>
+					<td>Acme Corp</td>
+					<td>$1,234.56</td>
+					<td>Paid</td>
+				</tr>
+				<tr>
+					<td>INV-002</td>
+					<td>Tech Solutions</td>
+					<td>$987.65</td>
+					<td>Pending</td>
+				</tr>
+				<tr>
+					<td>INV-003</td>
+					<td>Global Inc</td>
+					<td>$2,345.67</td>
+					<td>Paid</td>
+				</tr>
+			</tbody>
+		}
+		@popui.TablePagination(props.TablePagination{
+			CurrentPage:        1,
+			TotalPages:         260,
+			TotalItems:         25991,
+			RowsPerPage:        100,
+			RowsPerPageOptions: []int{10, 25, 50, 100, 250},
+			ShowRowsPerPage:    true,
+			ItemsLabel:         "invoices",
+			FirstPageURL:       "?page=1",
+			PrevPageURL:        "?page=0",
+			NextPageURL:        "?page=2",
+			LastPageURL:        "?page=260",
+		}) {
+			<div class="flex items-center gap-2">
+				@popui.Button(props.Button{
+					Type:    "button",
+					Size:    "sm",
+					Variant: "secondary",
+				}) {
+					Export
+				}
+				@popui.Button(props.Button{
+					Type:    "button",
+					Size:    "sm",
+					Variant: "primary",
+				}) {
+					Create Invoice
+				}
+			</div>
+		}
+	</div>
+}

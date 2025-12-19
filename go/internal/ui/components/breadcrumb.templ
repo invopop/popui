@@ -1,0 +1,45 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	"github.com/invopop/popui/go/internal/ui/examples"
+	"github.com/invopop/popui/go/internal/ui/modules"
+)
+
+templ Breadcrumb() {
+	@modules.Example(modules.ExampleProps{
+		Code: examples.LoadExample("breadcrumb.templ"),
+	}) {
+		@examples.BreadcrumbExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "With Children",
+		Description: "Use children instead of Label prop for custom content.",
+		Code:        examples.LoadExample("breadcrumb_with_children.templ"),
+	}) {
+		@examples.BreadcrumbWithChildrenExample()
+	}
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "Breadcrumb",
+			Description: "Container component for breadcrumb navigation.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the breadcrumb element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with breadcrumb styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "BreadcrumbItem",
+			Description: "Individual breadcrumb item. Renders as a link if Href is provided, otherwise as plain text.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the breadcrumb item element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with item styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+				{Name: "Label", Type: "string", Default: "", Description: "Text label for the breadcrumb item"},
+				{Name: "Href", Type: "templ.SafeURL", Default: "", Description: "URL for the breadcrumb link. If empty, renders as plain text"},
+			},
+		})
+	}
+}

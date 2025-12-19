@@ -1,0 +1,49 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	"github.com/invopop/popui/go/internal/ui/examples"
+	"github.com/invopop/popui/go/internal/ui/modules"
+)
+
+templ Notification() {
+	@modules.Example(modules.ExampleProps{
+		Title: "Info",
+		Code:  examples.LoadExample("notification_info.templ"),
+	}) {
+		@examples.NotificationInfoExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title: "Warning",
+		Code:  examples.LoadExample("notification_warning.templ"),
+	}) {
+		@examples.NotificationWarningExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title: "Error",
+		Code:  examples.LoadExample("notification_error.templ"),
+	}) {
+		@examples.NotificationErrorExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title: "Success",
+		Code:  examples.LoadExample("notification_success.templ"),
+	}) {
+		@examples.NotificationSuccessExample()
+	}
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "Notification",
+			Description: "Feedback message component with different severity types.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the notification element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with notification styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+				{Name: "Type", Type: "string", Default: "", Description: "Notification type: info, warning, error, or success"},
+				{Name: "Text", Type: "string", Default: "", Description: "Main notification text (bold)"},
+				{Name: "Description", Type: "string", Default: "", Description: "Additional descriptive text"},
+			},
+		})
+	}
+}

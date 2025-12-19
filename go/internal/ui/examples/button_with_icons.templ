@@ -1,0 +1,19 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
+)
+
+templ ButtonWithIconsExample() {
+	<div class="flex gap-2">
+		@popui.Button(props.Button{Variant: "primary"}) {
+			Save
+		}
+		@popui.Button(props.Button{Variant: "danger"}) {
+			@icons.Delete()
+            Delete
+		}
+	</div>
+}

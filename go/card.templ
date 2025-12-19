@@ -2,8 +2,9 @@ package popui
 
 import (
 	"fmt"
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 	"github.com/invopop/popui/icons"
 )
 
@@ -23,7 +24,7 @@ templ Card(p ...props.Card) {
 			}
 			href={ card.Href }
 			class={
-				utils.TwMerge(
+				tailwind.Merge(
 					"flex flex-col p-2 rounded-2xl border border-border bg-background w-full gap-2 has-[[data-avatar]]:pt-1",
 					"hover:border-border-default-secondary",
 					cardClasses(card),
@@ -40,7 +41,7 @@ templ Card(p ...props.Card) {
 				id={ card.ID }
 			}
 			class={
-				utils.TwMerge(
+				tailwind.Merge(
 					"flex flex-col p-2 rounded-2xl border border-border bg-background w-full gap-2 has-[[data-avatar]]:pt-1",
 					cardClasses(card),
 					card.Class,
@@ -61,7 +62,7 @@ templ CardContent(p ...props.CardContent) {
 			id={ content.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"text-foreground text-base",
 				content.Class,
 			),
@@ -81,7 +82,7 @@ templ CardHeader(p ...props.CardHeader) {
 			id={ header.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex items-center gap-3",
 				header.Class,
 			),
@@ -108,7 +109,7 @@ templ CardProgressBar(p ...props.CardProgressBar) {
 			id={ bar.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"w-full flex flex-col justify-center items-start gap-2 rounded-md pt-2.5 pb-3 px-3 border border-border bg-background-default-secondary",
 				bar.Class,
 			),
@@ -152,7 +153,7 @@ templ CardDashboard(p ...props.CardDashboard) {
 			id={ dash.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"grid grid-cols-3 gap-x-3",
 				dash.Class,
 			),
@@ -171,7 +172,7 @@ templ CardDashboardItem(p ...props.CardDashboardItem) {
 			id={ item.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex flex-col items-center py-3 px-2 rounded-md border border-border bg-background-default-secondary",
 				item.Class,
 			),
@@ -191,7 +192,7 @@ templ CardFile(p ...props.CardFile) {
 			id={ file.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex items-center justify-between gap-3 w-full h-16 px-4 py-1.5 rounded-lg border border-border bg-background text-base text-foreground font-medium",
 				file.Class,
 			),
@@ -210,7 +211,7 @@ templ CardFileInfo(p ...props.CardFileInfo) {
 			id={ info.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex gap-2 items-center",
 				info.Class,
 			),
@@ -225,7 +226,7 @@ templ CardFileInfo(p ...props.CardFileInfo) {
 }
 
 func cardClasses(card props.Card) string {
-	return utils.Clsx(
+	return classes.Join(
 		map[string]bool{
 			"bg-background-default-secondary pointer-events-none": card.Disabled,
 		},

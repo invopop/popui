@@ -1,0 +1,16 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ FileSquarePreviewExample() {
+	@popui.FileUpload(props.InputFile{
+		Name:          "logo",
+		AvatarURL:     "https://api.dicebear.com/7.x/shapes/svg?seed=Logo",
+		AvatarAlt:     "Company Logo",
+		Text:          "Upload Logo",
+		PreviewSquare: true,
+	})
+}

@@ -2,8 +2,9 @@ package popui
 
 import (
 	"fmt"
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 	"github.com/invopop/popui/icons"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
@@ -18,9 +19,9 @@ templ Table(p ...props.Table) {
 	{{ prp := props.First(p) }}
 	<div
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"overflow-hidden has-[[role=menu]]:overflow-visible",
-				utils.Clsx(map[string]bool{
+				classes.Join(map[string]bool{
 					"border border-border rounded-lg": prp.Variant == "card",
 				}),
 			),
@@ -30,7 +31,7 @@ templ Table(p ...props.Table) {
 			if prp.ID != "" {
 				id={ prp.ID }
 			}
-			class={ utils.TwMerge(
+			class={ tailwind.Merge(
 				"table-fixed w-full border-collapse border-0 font-sans text-base flex-1 rounded-lg bg-background [&_tr]:data-[state=disabled]:opacity-30 [&_td>div]:flex [&_td>div]:items-center [&_td>div]:gap-2 [&_th]:border-b [&_th]:border-border [&_th]:text-left [&_th]:bg-background [&_th]:box-border [&_th]:p-2 [&_th]:font-sans [&_th]:text-base [&_th]:font-normal [&_th]:h-10 [&_th]:text-foreground-default-secondary [&_th:first-child]:pl-4 [&_th:last-child]:pr-4 [&_td]:border-b [&_td]:border-border [&_td]:text-left [&_td]:bg-background [&_td]:box-border [&_td]:p-2 [&_td]:font-sans [&_td]:text-base [&_td]:font-normal [&_td]:h-10 [&_td]:text-foreground [&_td:first-child]:pl-4 [&_td:first-child]:font-medium [&_td:last-child]:pr-4 [&_tr:last-child_td]:border-b-0 [&_td:has([role=menu])]:py-1.5 [&_th:has([role=menu])]:py-1.5",
 				prp.Class,
 			) }
@@ -58,7 +59,7 @@ templ TablePagination(p ...props.TablePagination) {
 			id={ prp.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"flex items-center justify-between h-11 px-6 py-[5px] bg-background backdrop-blur-[10px] border-t border-border-default-default",
 				prp.Class,
 			),
@@ -73,7 +74,7 @@ templ TablePagination(p ...props.TablePagination) {
 							Href:    prp.FirstPageURL,
 							Size:    "icon",
 							Variant: "transparent",
-							Class: utils.Clsx(map[string]bool{
+							Class: classes.Join(map[string]bool{
 								"pointer-events-none opacity-30": prp.CurrentPage == 1,
 							}),
 							Attributes: templ.Attributes{
@@ -86,7 +87,7 @@ templ TablePagination(p ...props.TablePagination) {
 							Href:    prp.PrevPageURL,
 							Size:    "icon",
 							Variant: "transparent",
-							Class: utils.Clsx(map[string]bool{
+							Class: classes.Join(map[string]bool{
 								"pointer-events-none opacity-30": prp.CurrentPage == 1,
 							}),
 							Attributes: templ.Attributes{
@@ -115,7 +116,7 @@ templ TablePagination(p ...props.TablePagination) {
 							Href:    prp.NextPageURL,
 							Size:    "icon",
 							Variant: "transparent",
-							Class: utils.Clsx(map[string]bool{
+							Class: classes.Join(map[string]bool{
 								"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
 							}),
 							Attributes: templ.Attributes{
@@ -128,7 +129,7 @@ templ TablePagination(p ...props.TablePagination) {
 							Href:    prp.LastPageURL,
 							Size:    "icon",
 							Variant: "transparent",
-							Class: utils.Clsx(map[string]bool{
+							Class: classes.Join(map[string]bool{
 								"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
 							}),
 							Attributes: templ.Attributes{
@@ -147,9 +148,7 @@ templ TablePagination(p ...props.TablePagination) {
 						},
 					}) {
 						for _, option := range paginationRowsPerPageOptions(prp.RowsPerPageOptions) {
-							{{
-								optionStr := fmt.Sprintf("%d", option)
-							}}
+							{{ optionStr := fmt.Sprintf("%d", option) }}
 							<option value={ optionStr } selected?={ option == prp.RowsPerPage }>
 								{ optionStr } rows
 							</option>

@@ -1,8 +1,9 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // Popover provides a Button that can be clicked for displaying a context menu.
@@ -12,9 +13,9 @@ templ Popover(opts ...props.Popover) {
 	<div
 		role="menu"
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"relative inline-block",
-				utils.Clsx(map[string]bool{"flex justify-end": p.RightAlign}),
+				classes.Join(map[string]bool{"flex justify-end": p.RightAlign}),
 			),
 		}
 	>
@@ -28,9 +29,9 @@ templ Popover(opts ...props.Popover) {
 		<div popover id={ p.ID }></div>
 		<div
 			class={
-				utils.TwMerge(
+				tailwind.Merge(
 					"hidden absolute left-0 top-8 border border-border rounded-xl p-1 w-fit min-w-48 bg-background z-[9999] popover-menu",
-					utils.Clsx(map[string]bool{"!left-[unset] !right-0": p.RightAlign}),
+					classes.Join(map[string]bool{"!left-[unset] !right-0": p.RightAlign}),
 					p.Class,
 				),
 			}
@@ -51,7 +52,7 @@ templ PopoverItem(opts ...props.PopoverItem) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"font-sans font-medium text-base text-foreground w-full rounded-md hover:bg-background-default-secondary",
 				p.Class,
 			),

@@ -2,8 +2,9 @@ package popui
 
 import (
 	"fmt"
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 )
 
 // Textarea provides a multi-line text input element.
@@ -19,13 +20,11 @@ templ Textarea(p ...props.Textarea) {
 		}
 		<textarea
 			id={ prp.ID }
-			class={
-				utils.TwMerge(
-					utils.FormFieldClasses(),
-					utils.FormFieldStateClasses(!prp.Error.Empty()),
+			class={ tailwind.Merge(
+					classes.FormField(),
+					classes.FormFieldState(!prp.Error.Empty()),
 					prp.Class,
-				)
-			}
+				) }
 			rows={ prp.GetRows() }
 			if prp.Disabled {
 				disabled
@@ -75,14 +74,12 @@ templ Contenteditable(p ...props.Textarea) {
 			contenteditable="true"
 			id={ prp.ID }
 			style={ "min-height: " + fmt.Sprintf("%d", prp.Rows*34) + "px" }
-			class={
-				utils.TwMerge(
-					utils.FormFieldClasses(),
+			class={ tailwind.Merge(
+					classes.FormField(),
 					"min-h-[80px]",
-					utils.FormFieldStateClasses(!prp.Error.Empty()),
+					classes.FormFieldState(!prp.Error.Empty()),
 					prp.Class,
-				)
-			}
+				) }
 			{ prp.Attributes... }
 		>
 			if prp.Value != "" {

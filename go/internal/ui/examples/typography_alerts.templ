@@ -1,0 +1,12 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+)
+
+templ TypographyAlertsExample() {
+	<div class="space-y-3">
+		@popui.Info() { This is an informational message with an icon. }
+		@popui.Warning() { This is a warning message with an alert icon. }
+	</div>
+}

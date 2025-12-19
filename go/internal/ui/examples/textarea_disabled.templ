@@ -1,0 +1,14 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ TextareaDisabledExample() {
+	@popui.Textarea(props.Textarea{
+		Value:    "This textarea is disabled and cannot be edited.",
+		Disabled: true,
+		Rows:     3,
+	})
+}

@@ -1,0 +1,13 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ FileDisabledExample() {
+	@popui.InputFile(props.InputFile{
+		Name:     "document",
+		Disabled: true,
+	})
+}

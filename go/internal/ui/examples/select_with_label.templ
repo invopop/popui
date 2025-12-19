@@ -1,0 +1,19 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ SelectWithLabelExample() {
+	@popui.Select(props.Select{
+		ID:    "country",
+		Name:  "country",
+		Label: "Country",
+	}) {
+		<option value="">Choose a country</option>
+		<option value="es">Spain</option>
+		<option value="fr">France</option>
+		<option value="de">Germany</option>
+	}
+}

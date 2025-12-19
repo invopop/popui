@@ -2,7 +2,7 @@ package popui
 
 import (
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 	"strings"
 )
 
@@ -15,7 +15,7 @@ templ Flag(opts ...props.Flag) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"w-3.5 h-2.5 rounded-[1.5px] overflow-hidden flex items-center justify-center",
 				p.Class,
 			),

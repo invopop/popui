@@ -1,8 +1,9 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/utils"
+	"github.com/invopop/popui/go/tailwind"
 	"github.com/invopop/popui/icons"
 )
 
@@ -15,7 +16,7 @@ templ FlashMessage(opts ...props.FlashMessage) {
 			id={ p.ID }
 		}
 		class={
-			utils.TwMerge(
+			tailwind.Merge(
 				"text-sm font-semibold text-foreground flex items-center gap-1 opacity-0",
 				flashMessageClasses(p.Type),
 				p.Class,
@@ -36,7 +37,7 @@ templ FlashMessage(opts ...props.FlashMessage) {
 }
 
 func flashMessageClasses(msgType string) string {
-	return utils.Clsx(
+	return classes.Join(
 		map[string]bool{
 			"text-foreground-accent": msgType == "success",
 		},

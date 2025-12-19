@@ -12,35 +12,35 @@ templ ButtonVariantsExample() {
 			@icons.User()
 			Default
 		}
-		@popui.Button(props.Button{Variant: "primary"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantPrimary}) {
 			@icons.Download()
 			Primary
 		}
-		@popui.Button(props.Button{Variant: "secondary"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantSecondary}) {
 			@icons.Settings()
 			Secondary
 		}
-		@popui.Button(props.Button{Variant: "danger"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantDanger}) {
 			@icons.Delete()
 			Danger
 		}
-		@popui.Button(props.Button{Variant: "transparent"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantTransparent}) {
 			@icons.Lock()
 			Transparent
 		}
-		@popui.Button(props.Button{Size: "icon"}) {
+		@popui.Button(props.Button{Size: props.ButtonSizeIcon}) {
 			@icons.Settings()
 		}
-		@popui.Button(props.Button{Variant: "primary", Size: "icon"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantPrimary, Size: props.ButtonSizeIcon}) {
 			@icons.Add()
 		}
-		@popui.Button(props.Button{Variant: "secondary", Size: "icon"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantSecondary, Size: props.ButtonSizeIcon}) {
 			@icons.Settings()
 		}
-		@popui.Button(props.Button{Variant: "danger", Size: "icon"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantDanger, Size: props.ButtonSizeIcon}) {
 			@icons.Delete()
 		}
-		@popui.Button(props.Button{Variant: "transparent", Size: "icon"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantTransparent, Size: props.ButtonSizeIcon}) {
 			@icons.Lock()
 		}
 	</div>

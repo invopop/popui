@@ -41,7 +41,7 @@ func CheckboxSwitchExample() templ.Component {
 		templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{
 			Name:    "notifications",
 			Label:   "Enable notifications",
-			Variant: "switch",
+			Variant: props.CheckboxVariantSwitch,
 			Checked: true,
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
@@ -50,7 +50,7 @@ func CheckboxSwitchExample() templ.Component {
 		templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{
 			Name:    "marketing",
 			Label:   "Marketing emails",
-			Variant: "switch",
+			Variant: props.CheckboxVariantSwitch,
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

@@ -78,7 +78,7 @@ func ButtonDisabledExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = popui.Button(props.Button{Variant: "primary", Disabled: true}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.Button(props.Button{Variant: props.ButtonVariantPrimary, Disabled: true}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -100,7 +100,7 @@ func ButtonDisabledExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = popui.Button(props.Button{Variant: "danger", Disabled: true}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.Button(props.Button{Variant: props.ButtonVariantDanger, Disabled: true}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

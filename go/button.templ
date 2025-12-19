@@ -6,9 +6,8 @@ import (
 	"github.com/invopop/popui/go/tailwind"
 )
 
-// Button provides a button element.
-// Supports sizes: "sm", "md" (default), and "icon"
-// Supports variants: "primary", "secondary", "danger" and "transparent"
+// Button provides a button element. See the props button
+// constants for supported sizes and variants.
 templ Button(p ...props.Button) {
 	{{ btn := props.First(p) }}
 	<button
@@ -84,19 +83,19 @@ func buttonClasses(variant string, size string) string {
 	return classes.Join(
 		map[string]bool{
 			// Variant classes
-			"border-0 shadow-none hover:bg-background-default-tertiary-hover hover:shadow-button-default":                                                                                                            variant == "transparent",
-			"border-border-default-secondary bg-background-default-tertiary text-foreground-critical hover:border-transparent hover:bg-background-critical-bold hover:text-foreground-inverse [&_svg]:text-critical": variant == "danger",
-			"bg-background-accent text-foreground-inverse shadow-button-primary hover:bg-background-accent-hover active:bg-background-accent-hover":                                                                  variant == "primary",
-			"border-0 bg-background-default-tertiary hover:bg-background-default-tertiary-hover":                                                                                                                     variant == "secondary",
+			"border-0 shadow-none hover:bg-background-default-tertiary-hover hover:shadow-button-default":                                                                                                            variant == props.ButtonVariantTransparent,
+			"border-border-default-secondary bg-background-default-tertiary text-foreground-critical hover:border-transparent hover:bg-background-critical-bold hover:text-foreground-inverse [&_svg]:text-critical": variant == props.ButtonVariantDanger,
+			"bg-background-accent text-foreground-inverse shadow-button-primary hover:bg-background-accent-hover active:bg-background-accent-hover":                                                                  variant == props.ButtonVariantPrimary,
+			"border-0 bg-background-default-tertiary hover:bg-background-default-tertiary-hover":                                                                                                                     variant == props.ButtonVariantSecondary,
 			// Size classes
-			"text-sm rounded":             size == "sm",
-			"py-[5px] px-3 rounded-lg":    size == "lg",
-			"p-[5px] leading-none size-7": size == "icon",
+			"text-sm rounded":             size == props.ButtonSizeSmall,
+			"py-[5px] px-3 rounded-lg":    size == props.ButtonSizeLarge,
+			"p-[5px] leading-none size-7": size == props.ButtonSizeIcon,
 			// Icon color based on size
-			"[&_svg]:text-icon":               size != "icon" && variant != "primary" && variant != "danger",
-			"[&_svg]:text-icon-inverse":       size != "icon" && variant == "primary",
-			"[&_svg]:text-foreground":         size == "icon" && variant != "primary",
-			"[&_svg]:text-foreground-inverse": size == "icon" && variant == "primary",
+			"[&_svg]:text-icon":               size != props.ButtonSizeIcon && variant != props.ButtonVariantPrimary && variant != props.ButtonVariantDanger,
+			"[&_svg]:text-icon-inverse":       size != props.ButtonSizeIcon && variant == props.ButtonVariantPrimary,
+			"[&_svg]:text-foreground":         size == props.ButtonSizeIcon && variant != props.ButtonVariantPrimary,
+			"[&_svg]:text-foreground-inverse": size == props.ButtonSizeIcon && variant == props.ButtonVariantPrimary,
 		},
 	)
 }

@@ -11,7 +11,7 @@ import (
 // If no ID is provided, one will be generated to ensure the label is correctly linked.
 templ Checkbox(p ...props.Checkbox) {
 	{{ checkbox := props.First(p).GenerateID() }}
-	{{ isSwitch := checkbox.Variant == "switch" }}
+	{{ isSwitch := checkbox.Variant == props.CheckboxVariantSwitch }}
 	if isSwitch {
 		<label class="flex items-center gap-2 text-foreground text-base has-[:disabled]:opacity-30">
 			<div class="relative inline-block w-8 h-5 shrink-0 [&>input:checked+span]:bg-background-accent [&>input:focus+span]:shadow-[0_0_1px_#169958] [&>input:checked+span:before]:translate-x-3">
@@ -42,7 +42,7 @@ templ Checkbox(p ...props.Checkbox) {
 }
 
 templ checkboxInput(p props.Checkbox) {
-	{{ isSwitch := p.Variant == "switch" }}
+	{{ isSwitch := p.Variant == props.CheckboxVariantSwitch }}
 	<input
 		id={ p.ID }
 		type="checkbox"

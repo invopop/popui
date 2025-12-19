@@ -39,21 +39,20 @@ func ButtonCopySizesExample() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{
-			Size:  "sm",
+			Size:  props.ButtonSizeSmall,
 			Value: "e73d5d20834934588127389172381789bc2f275460",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{
-			Size:  "md",
 			Value: "e73d5d20834934588127389172381789bc2f275460",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{
-			Size:  "lg",
+			Size:  props.ButtonSizeLarge,
 			Value: "e73d5d20834934588127389172381789bc2f275460",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {

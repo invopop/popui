@@ -8,12 +8,12 @@ import (
 
 templ ButtonWithIconsExample() {
 	<div class="flex gap-2">
-		@popui.Button(props.Button{Variant: "primary"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantPrimary}) {
 			Save
 		}
-		@popui.Button(props.Button{Variant: "danger"}) {
+		@popui.Button(props.Button{Variant: props.ButtonVariantDanger}) {
 			@icons.Delete()
-            Delete
+			Delete
 		}
 	</div>
 }

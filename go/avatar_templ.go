@@ -123,8 +123,8 @@ func Avatar(p ...props.Avatar) templ.Component {
 func avatarClasses(avatar props.Avatar) string {
 	return classes.Join(
 		map[string]bool{
-			"!h-8 !w-8 rounded-lg text-lg": avatar.Size == "lg",
-			"h-5 w-5 rounded-md text-sm":   avatar.Size != "lg",
+			"!h-8 !w-8 rounded-lg text-lg": avatar.Size == props.AvatarSizeLarge,
+			"h-5 w-5 rounded-md text-sm":   avatar.Size != props.AvatarSizeLarge,
 			"border border-border":         avatar.Initial != "",
 		},
 	)

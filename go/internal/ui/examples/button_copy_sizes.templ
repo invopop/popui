@@ -8,15 +8,14 @@ import (
 templ ButtonCopySizesExample() {
 	<div class="flex flex-col gap-2">
 		@popui.ButtonCopy(props.ButtonCopy{
-			Size:  "sm",
+			Size:  props.ButtonSizeSmall,
 			Value: "e73d5d20834934588127389172381789bc2f275460",
 		})
 		@popui.ButtonCopy(props.ButtonCopy{
-			Size:  "md",
 			Value: "e73d5d20834934588127389172381789bc2f275460",
 		})
 		@popui.ButtonCopy(props.ButtonCopy{
-			Size:  "lg",
+			Size:  props.ButtonSizeLarge,
 			Value: "e73d5d20834934588127389172381789bc2f275460",
 		})
 	</div>

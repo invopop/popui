@@ -7,16 +7,27 @@ import (
 
 templ ButtonSizesExample() {
 	<div class="flex gap-2 items-center">
-		@popui.Button(props.Button{Variant: "primary", Size: "sm"}) {
+		@popui.Button(props.Button{
+			Variant: props.ButtonVariantPrimary,
+			Size:    props.ButtonSizeSmall,
+		}) {
 			Small
 		}
-		@popui.Button(props.Button{Variant: "primary"}) {
+		@popui.Button(props.Button{
+			Variant: props.ButtonVariantPrimary,
+		}) {
 			Default
 		}
-		@popui.Button(props.Button{Variant: "primary", Size: "lg"}) {
+		@popui.Button(props.Button{
+			Variant: props.ButtonVariantPrimary,
+			Size:    props.ButtonSizeLarge,
+		}) {
 			Large
 		}
-		@popui.Button(props.Button{Variant: "primary", Size: "icon"}) {
+		@popui.Button(props.Button{
+			Variant: props.ButtonVariantPrimary,
+			Size:    props.ButtonSizeIcon,
+		}) {
 			+
 		}
 	</div>

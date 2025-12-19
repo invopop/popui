@@ -7,6 +7,11 @@ import (
 	"github.com/a-h/templ"
 )
 
+const (
+	// CheckboxVariantSwitch represents a switch-style checkbox.
+	CheckboxVariantSwitch string = "switch"
+)
+
 // Checkbox defines the properties for checkbox inputs.
 type Checkbox struct {
 	ID         string

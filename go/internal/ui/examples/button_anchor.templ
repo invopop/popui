@@ -9,13 +9,13 @@ templ ButtonAnchorExample() {
 	<div class="flex gap-2">
 		@popui.AnchorButton(props.AnchorButton{
 			Href:    "/docs",
-			Variant: "primary",
+			Variant: props.ButtonVariantPrimary,
 		}) {
 			Visit Website
 		}
 		@popui.AnchorButton(props.AnchorButton{
 			Href:    "/docs",
-			Variant: "secondary",
+			Variant: props.ButtonVariantSecondary,
 			Target:  "_blank",
 		}) {
 			Open in New Tab

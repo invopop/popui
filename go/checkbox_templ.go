@@ -39,7 +39,7 @@ func Checkbox(p ...props.Checkbox) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		checkbox := props.First(p).GenerateID()
-		isSwitch := checkbox.Variant == "switch"
+		isSwitch := checkbox.Variant == props.CheckboxVariantSwitch
 		if isSwitch {
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<label class=\"flex items-center gap-2 text-foreground text-base has-[:disabled]:opacity-30\"><div class=\"relative inline-block w-8 h-5 shrink-0 [&>input:checked+span]:bg-background-accent [&>input:focus+span]:shadow-[0_0_1px_#169958] [&>input:checked+span:before]:translate-x-3\">")
 			if templ_7745c5c3_Err != nil {
@@ -145,7 +145,7 @@ func checkboxInput(p props.Checkbox) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		isSwitch := p.Variant == "switch"
+		isSwitch := p.Variant == props.CheckboxVariantSwitch
 		var templ_7745c5c3_Var6 = []any{tailwind.Merge(
 			classes.Join(map[string]bool{
 				"form-checkbox w-4 h-4 text-background-accent rounded border border-border-default-secondary hover:border-border-default-secondary-hover focus:text-background-accent focus:ring-0 focus:ring-offset-0 disabled:opacity-30": !isSwitch,

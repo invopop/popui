@@ -58,7 +58,7 @@ func CheckboxDisabledExample() templ.Component {
 		templ_7745c5c3_Err = popui.Checkbox(props.Checkbox{
 			Name:     "option3",
 			Label:    "Disabled switch",
-			Variant:  "switch",
+			Variant:  props.CheckboxVariantSwitch,
 			Disabled: true,
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {

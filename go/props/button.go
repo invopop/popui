@@ -2,6 +2,21 @@ package props
 
 import "github.com/a-h/templ"
 
+// Button Sizes
+const (
+	ButtonSizeSmall string = "sm"
+	ButtonSizeLarge string = "lg"
+	ButtonSizeIcon  string = "icon"
+)
+
+// Button Variants
+const (
+	ButtonVariantPrimary     string = "primary"
+	ButtonVariantSecondary   string = "secondary"
+	ButtonVariantDanger      string = "danger"
+	ButtonVariantTransparent string = "transparent"
+)
+
 // Button Templ component props
 type Button struct {
 	ID         string

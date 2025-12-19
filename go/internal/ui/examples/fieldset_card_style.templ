@@ -8,7 +8,7 @@ import (
 templ FieldsetCardStyleExample() {
 	@popui.Fieldset(props.Fieldset{
 		Legend:  "Profile Settings",
-		Variant: "card",
+		Variant: props.FieldsetVariantCard,
 	}) {
 		@popui.Input(props.Input{
 			ID:          "name",

@@ -45,28 +45,28 @@ func ButtonCopyVariantsExample() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{
-			Variant: "primary",
+			Variant: props.ButtonVariantPrimary,
 			Value:   "e73d5d20834934588127389172381789bc2f275460",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{
-			Variant: "secondary",
+			Variant: props.ButtonVariantSecondary,
 			Value:   "e73d5d20834934588127389172381789bc2f275460",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{
-			Variant: "danger",
+			Variant: props.ButtonVariantDanger,
 			Value:   "e73d5d20834934588127389172381789bc2f275460",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = popui.ButtonCopy(props.ButtonCopy{
-			Variant: "transparent",
+			Variant: props.ButtonVariantTransparent,
 			Value:   "e73d5d20834934588127389172381789bc2f275460",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {

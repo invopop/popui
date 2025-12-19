@@ -14,9 +14,8 @@ import (
 	"github.com/invopop/popui/go/tailwind"
 )
 
-// Button provides a button element.
-// Supports sizes: "sm", "md" (default), and "icon"
-// Supports variants: "primary", "secondary", "danger" and "transparent"
+// Button provides a button element. See the props button
+// constants for supported sizes and variants.
 func Button(p ...props.Button) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -61,7 +60,7 @@ func Button(p ...props.Button) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(btn.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 16, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 15, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -80,7 +79,7 @@ func Button(p ...props.Button) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(btn.Type)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 19, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 18, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -99,7 +98,7 @@ func Button(p ...props.Button) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(btn.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 22, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 21, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -118,7 +117,7 @@ func Button(p ...props.Button) templ.Component {
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(btn.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 25, Col: 20}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 24, Col: 20}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 			if templ_7745c5c3_Err != nil {
@@ -137,7 +136,7 @@ func Button(p ...props.Button) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(btn.Form)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 28, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 27, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -244,7 +243,7 @@ func AnchorButton(p ...props.AnchorButton) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(anchor.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 56, Col: 17}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 55, Col: 17}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -263,7 +262,7 @@ func AnchorButton(p ...props.AnchorButton) templ.Component {
 			var templ_7745c5c3_Var12 templ.SafeURL
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinURLErrs(anchor.Href)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 59, Col: 21}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 58, Col: 21}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 			if templ_7745c5c3_Err != nil {
@@ -282,7 +281,7 @@ func AnchorButton(p ...props.AnchorButton) templ.Component {
 			var templ_7745c5c3_Var13 string
 			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(anchor.Target)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 62, Col: 25}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 61, Col: 25}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 			if templ_7745c5c3_Err != nil {
@@ -301,7 +300,7 @@ func AnchorButton(p ...props.AnchorButton) templ.Component {
 			var templ_7745c5c3_Var14 string
 			templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(anchor.Rel)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 65, Col: 19}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/button.templ`, Line: 64, Col: 19}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 			if templ_7745c5c3_Err != nil {
@@ -359,19 +358,19 @@ func buttonClasses(variant string, size string) string {
 	return classes.Join(
 		map[string]bool{
 			// Variant classes
-			"border-0 shadow-none hover:bg-background-default-tertiary-hover hover:shadow-button-default":                                                                                                            variant == "transparent",
-			"border-border-default-secondary bg-background-default-tertiary text-foreground-critical hover:border-transparent hover:bg-background-critical-bold hover:text-foreground-inverse [&_svg]:text-critical": variant == "danger",
-			"bg-background-accent text-foreground-inverse shadow-button-primary hover:bg-background-accent-hover active:bg-background-accent-hover":                                                                  variant == "primary",
-			"border-0 bg-background-default-tertiary hover:bg-background-default-tertiary-hover":                                                                                                                     variant == "secondary",
+			"border-0 shadow-none hover:bg-background-default-tertiary-hover hover:shadow-button-default":                                                                                                            variant == props.ButtonVariantTransparent,
+			"border-border-default-secondary bg-background-default-tertiary text-foreground-critical hover:border-transparent hover:bg-background-critical-bold hover:text-foreground-inverse [&_svg]:text-critical": variant == props.ButtonVariantDanger,
+			"bg-background-accent text-foreground-inverse shadow-button-primary hover:bg-background-accent-hover active:bg-background-accent-hover":                                                                  variant == props.ButtonVariantPrimary,
+			"border-0 bg-background-default-tertiary hover:bg-background-default-tertiary-hover":                                                                                                                     variant == props.ButtonVariantSecondary,
 			// Size classes
-			"text-sm rounded":             size == "sm",
-			"py-[5px] px-3 rounded-lg":    size == "lg",
-			"p-[5px] leading-none size-7": size == "icon",
+			"text-sm rounded":             size == props.ButtonSizeSmall,
+			"py-[5px] px-3 rounded-lg":    size == props.ButtonSizeLarge,
+			"p-[5px] leading-none size-7": size == props.ButtonSizeIcon,
 			// Icon color based on size
-			"[&_svg]:text-icon":               size != "icon" && variant != "primary" && variant != "danger",
-			"[&_svg]:text-icon-inverse":       size != "icon" && variant == "primary",
-			"[&_svg]:text-foreground":         size == "icon" && variant != "primary",
-			"[&_svg]:text-foreground-inverse": size == "icon" && variant == "primary",
+			"[&_svg]:text-icon":               size != props.ButtonSizeIcon && variant != props.ButtonVariantPrimary && variant != props.ButtonVariantDanger,
+			"[&_svg]:text-icon-inverse":       size != props.ButtonSizeIcon && variant == props.ButtonVariantPrimary,
+			"[&_svg]:text-foreground":         size == props.ButtonSizeIcon && variant != props.ButtonVariantPrimary,
+			"[&_svg]:text-foreground-inverse": size == props.ButtonSizeIcon && variant == props.ButtonVariantPrimary,
 		},
 	)
 }

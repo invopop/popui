@@ -1,0 +1,50 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	"github.com/invopop/popui/go/internal/docs/examples"
+	"github.com/invopop/popui/go/internal/docs/modules"
+)
+
+templ Fieldset() {
+	@modules.Example(modules.ExampleProps{
+		Code: examples.LoadExample("fieldset.templ"),
+	}) {
+		@examples.FieldsetExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "With Legend",
+		Description: "Add a legend to label the group of fields.",
+		Code:        examples.LoadExample("fieldset_with_legend.templ"),
+	}) {
+		@examples.FieldsetWithLegendExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Card Style",
+		Description: "Card variant provides a bordered, card-style container for form fields.",
+		Code:        examples.LoadExample("fieldset_card_style.templ"),
+	}) {
+		@examples.FieldsetCardStyleExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Custom Card Style",
+		Description: "Card variant with custom classes.",
+		Code:        examples.LoadExample("fieldset_highlighted.templ"),
+	}) {
+		@examples.FieldsetHighlightedExample()
+	}
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "Fieldset",
+			Description: "Groups form fields together with proper spacing and optional legend.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the fieldset element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with fieldset styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+				{Name: "Legend", Type: "string", Default: "", Description: "Text to display as the fieldset legend"},
+				{Name: "Variant", Type: "string", Default: "", Description: "Visual variant: \"card\" for bordered card style"},
+			},
+		})
+	}
+}

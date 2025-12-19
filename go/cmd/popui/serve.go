@@ -8,8 +8,8 @@ import (
 
 	"github.com/a-h/templ"
 	popui "github.com/invopop/popui/go"
-	"github.com/invopop/popui/go/internal/ui"
-	"github.com/invopop/popui/go/internal/ui/assets"
+	"github.com/invopop/popui/go/internal/docs"
+	"github.com/invopop/popui/go/internal/docs/assets"
 	"github.com/labstack/echo/v4"
 	"github.com/spf13/cobra"
 )
@@ -68,7 +68,7 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 }
 
 func (s *serveOpts) index(c echo.Context) error {
-	return render(c, http.StatusOK, ui.Index())
+	return render(c, http.StatusOK, docs.Index())
 }
 
 // render provides a wrapper around the component to make it nice to render.

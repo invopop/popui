@@ -1,0 +1,120 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	"github.com/invopop/popui/go/internal/docs/examples"
+	"github.com/invopop/popui/go/internal/docs/modules"
+)
+
+templ Typography() {
+	@modules.Example(modules.ExampleProps{
+		Title:       "Headings",
+		Description: "Title and Subtitle components for page and section headings.",
+		Code:        examples.LoadExample("typography_headings.templ"),
+	}) {
+		@examples.TypographyHeadingsExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Paragraphs",
+		Description: "Standard paragraph and description text components.",
+		Code:        examples.LoadExample("typography_paragraphs.templ"),
+	}) {
+		@examples.TypographyParagraphsExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Inline Text",
+		Description: "Mark component for highlighted text.",
+		Code:        examples.LoadExample("typography_inline.templ"),
+	}) {
+		@examples.TypographyInlineExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Alert Messages",
+		Description: "Info and Warning components with icons.",
+		Code:        examples.LoadExample("typography_alerts.templ"),
+	}) {
+		@examples.TypographyAlertsExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Prose",
+		Description: "Wrapper for raw HTML with Tailwind prose styling.",
+		Code:        examples.LoadExample("typography_prose.templ"),
+	}) {
+		@examples.TypographyProseExample()
+	}
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "Title",
+			Description: "H1 heading element with bold styling.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Subtitle",
+			Description: "H2 subheading element with medium weight.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "P",
+			Description: "Standard paragraph element.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Description",
+			Description: "Paragraph with secondary text color.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Mark",
+			Description: "Inline highlighted text element.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Info",
+			Description: "Informational message with icon.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Warning",
+			Description: "Warning message with alert icon.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Prose",
+			Description: "Container for raw HTML with Tailwind prose styling.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+	}
+}

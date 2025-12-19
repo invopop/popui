@@ -1,0 +1,46 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	"github.com/invopop/popui/go/internal/docs/examples"
+	"github.com/invopop/popui/go/internal/docs/modules"
+)
+
+templ Popover() {
+	@modules.Example(modules.ExampleProps{
+		Code: examples.LoadExample("popover.templ"),
+	}) {
+		@examples.PopoverExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Right Aligned",
+		Description: "Align the popover menu to the right side of the button",
+		Code:        examples.LoadExample("popover_right_aligned.templ"),
+	}) {
+		@examples.PopoverRightAlignedExample()
+	}
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "Popover",
+			Description: "The main popover component that displays a context menu.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the popover element", Required: true},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the menu container"},
+				{Name: "ButtonLabel", Type: "string", Default: "", Description: "Text label for the trigger button"},
+				{Name: "ButtonVariant", Type: "string", Default: "", Description: "Variant style for the trigger button (e.g., 'primary', 'secondary', 'transparent')"},
+				{Name: "RightAlign", Type: "bool", Default: "false", Description: "Align the popover menu to the right side of the button"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "PopoverItem",
+			Description: "Individual menu item within the popover.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the item element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with base styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes to apply to the list item"},
+			},
+		})
+	}
+}

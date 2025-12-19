@@ -74,7 +74,7 @@ func EmbeddedCSS() templ.Component {
 		var templ_7745c5c3_Var3 templ.SafeURL
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(path.Join(AssetPath, Versioned("assets", "popui.css")))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/head.templ`, Line: 17, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `head.templ`, Line: 17, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -123,7 +123,7 @@ func EmbeddedFullCSS() templ.Component {
 		var templ_7745c5c3_Var5 templ.SafeURL
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinURLErrs(path.Join(AssetPath, Versioned("assets", "popui-full.css")))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/head.templ`, Line: 25, Col: 73}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `head.templ`, Line: 25, Col: 73}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -168,7 +168,7 @@ func EmbeddedJS() templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(path.Join(AssetPath, Versioned("assets", "popui.js")))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/head.templ`, Line: 32, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `head.templ`, Line: 32, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -212,7 +212,7 @@ func AlpineStoreContenteditable() templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(path.Join(AssetPath, Versioned("assets", "contenteditable.js")))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/head.templ`, Line: 38, Col: 78}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `head.templ`, Line: 38, Col: 78}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {

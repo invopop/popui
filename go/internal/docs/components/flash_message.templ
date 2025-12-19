@@ -1,0 +1,36 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	"github.com/invopop/popui/go/internal/docs/examples"
+	"github.com/invopop/popui/go/internal/docs/modules"
+)
+
+templ FlashMessage() {
+	@modules.Example(modules.ExampleProps{
+		Code: examples.LoadExample("flash_message_success.templ"),
+	}) {
+		@examples.FlashMessageSuccessExample()
+	}
+	@modules.Example(modules.ExampleProps{
+		Title:       "Custom Message",
+		Description: "Provide a longer custom message for more context.",
+		Code:        examples.LoadExample("flash_message_custom_message.templ"),
+	}) {
+		@examples.FlashMessageCustomMessageExample()
+	}
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "FlashMessage",
+			Description: "Toast-style message component for quick feedback.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the flash message element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with flash message styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
+				{Name: "Type", Type: "string", Default: "", Description: "Message type: currently supports 'success'"},
+				{Name: "Message", Type: "string", Default: "", Description: "Message text to display"},
+			},
+		})
+	}
+}

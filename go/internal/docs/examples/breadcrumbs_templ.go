@@ -13,7 +13,7 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-func BreadcrumbExample() templ.Component {
+func BreadcrumbsExample() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -46,7 +46,7 @@ func BreadcrumbExample() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = popui.BreadcrumbItem(props.BreadcrumbItem{
+			templ_7745c5c3_Err = popui.Breadcrumb(props.Breadcrumb{
 				Label: "Home",
 				Href:  "/",
 			}).Render(ctx, templ_7745c5c3_Buffer)
@@ -57,7 +57,7 @@ func BreadcrumbExample() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.BreadcrumbItem(props.BreadcrumbItem{
+			templ_7745c5c3_Err = popui.Breadcrumb(props.Breadcrumb{
 				Label: "Products",
 				Href:  "/products",
 			}).Render(ctx, templ_7745c5c3_Buffer)
@@ -68,7 +68,7 @@ func BreadcrumbExample() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = popui.BreadcrumbItem(props.BreadcrumbItem{
+			templ_7745c5c3_Err = popui.Breadcrumb(props.Breadcrumb{
 				Label: "Electronics",
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -76,7 +76,7 @@ func BreadcrumbExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = popui.Breadcrumb().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = popui.Breadcrumbs().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

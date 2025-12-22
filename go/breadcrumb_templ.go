@@ -14,8 +14,8 @@ import (
 	"github.com/invopop/popui/icons"
 )
 
-// Breadcrumb provides a navigation breadcrumb wrapper.
-func Breadcrumb(opts ...props.Breadcrumb) templ.Component {
+// Breadcrumbs provides a navigation breadcrumb wrapper.
+func Breadcrumbs(opts ...props.Breadcrumbs) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -106,10 +106,10 @@ func Breadcrumb(opts ...props.Breadcrumb) templ.Component {
 	})
 }
 
-// BreadcrumbItem provides an individual breadcrumb item.
+// Breadcrumb provides an individual breadcrumb item.
 // Renders as a link if Href is provided, otherwise as plain text.
 // The last item is styled with medium font weight and darker color.
-func BreadcrumbItem(opts ...props.BreadcrumbItem) templ.Component {
+func Breadcrumb(opts ...props.Breadcrumb) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {

@@ -1,133 +1,120 @@
 package examples
 
 import (
+	"github.com/invopop/gobl/pkg/here"
 	popui "github.com/invopop/popui/go"
-	"github.com/invopop/popui/go/css"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/scripts"
 	"github.com/invopop/popui/icons"
 )
 
 templ Admin() {
-	<html>
-		<head>
-			<title>Invopop - Admin panel</title>
-			<meta charset="utf-8"/>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			// Use simplified version if you only need popui compoments styles and not full Tailwind utilities
-			@popui.EmbeddedCSS()
-			// @popui.EmbeddedFullCSS()
-			@css.Flag()
-			@scripts.ButtonCopy()
-		</head>
-		<body class="flex h-screen">
-			@popui.Sidebar(props.Sidebar{Title: "Invopop Admin"}) {
-				@popui.SidebarHeader() {
-					@popui.InvopopLogoSquare()
-					Admin
-				}
-				@popui.SidebarContent() {
-					@popui.SidebarSection(props.SidebarSection{Title: "Account"}) {
-						<li>
-							<a>
-								@icons.User()
-								<span>Profile</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Lock()
-								<span>Security</span>
-							</a>
-						</li>
-					}
-					@popui.SidebarSection(props.SidebarSection{Title: "Cyberdyne Enterprises"}) {
-						<li>
-							<a>
-								@icons.Dashboard()
-								<span>Dashboard</span>
-							</a>
-						</li>
-						<li>
-							<a class="bg-background-default-secondary transition-[background] duration-250 ease-in-out">
-								@icons.Workspace()
-								<span>Workspaces</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Billing()
-								<span>Billing</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Team()
-								<span>Members</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Company()
-								<span>Organization</span>
-							</a>
-						</li>
-					}
-					@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
-						<li>
-							<a>
-								@icons.Puzzle()
-								<span>Applications</span>
-							</a>
-						</li>
-					}
-				}
+	// @css.Flag() - missing
+	@popui.App(props.App{
+		Title: "Invopop - Admin panel",
+		Description: here.Doc(`
+			This is a standalone admin or app example that includes
+			an optional sidebar for navigation and a header for actions.
+		`),
+	}) {
+		@popui.Header(props.Header{
+			Breadcrumbs: []props.Breadcrumb{
+				{
+					Label: "Workspaces",
+				},
+			},
+		}) {
+			@popui.Button() {
+				@icons.Add()
+				<span>Create Sandbox</span>
 			}
-			@popui.Page() {
-				@popui.PageHeader(props.PageHeader{
-					Title: "Create Workspace",
-					Breadcrumbs: []props.PageBreadcrumb{
-						{
-							Name: "Workspaces",
-						},
-					},
+			@popui.Button(props.Button{Variant: "primary"}) {
+				@icons.Add()
+				<span>Create live workspace</span>
+			}
+		}
+		@popui.Main() {
+			@popui.PageSections() {
+				@popui.PageSection(props.PageSection{
+					Title:       "Live",
+					Description: "A production workspace which produces valid invoices",
 				}) {
-					@popui.PageActions() {
-						@popui.Button() {
-							@icons.Add()
-							<span>Create Sandbox</span>
-						}
-						@popui.Button(props.Button{Variant: "primary"}) {
-							@icons.Add()
-							<span>Create live workspace</span>
-						}
-					}
+					@liveWorkspaces()
 				}
-				@popui.PageContent() {
-					@popui.PageContainer() {
-						@popui.PageTitle() {
-							Workspaces
-						}
-						@popui.Separator(props.Separator{Class: "my-5"})
-						@popui.PageSections() {
-							@popui.PageSection(props.PageSection{
-								Title:       "Live workspaces",
-								Description: "A production workspace which produces valid invoices",
-							}) {
-								@liveWorkspaces()
-							}
-							@popui.PageSection(props.PageSection{
-								Title:       "Sandbox",
-								Description: "A testing workspace which simulates invoicing and doesn't incur in costs",
-							}) {
-								@sandboxWorkspaces()
-							}
-						}
-					}
+				@popui.PageSection(props.PageSection{
+					Title:       "Sandbox",
+					Description: "A testing workspace which simulates invoicing and doesn't incur in costs",
+				}) {
+					@sandboxWorkspaces()
 				}
 			}
-		</body>
-	</html>
+		}
+		@adminSidebar()
+	}
+}
+
+templ adminSidebar() {
+	@popui.Sidebar(props.Sidebar{Title: "Invopop Admin"}) {
+		@popui.SidebarHeader() {
+			@popui.InvopopLogoSquare()
+			Admin
+		}
+		@popui.SidebarContent() {
+			@popui.SidebarSection(props.SidebarSection{Title: "Account"}) {
+				<li>
+					<a>
+						@icons.User()
+						<span>Profile</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						@icons.Lock()
+						<span>Security</span>
+					</a>
+				</li>
+			}
+			@popui.SidebarSection(props.SidebarSection{Title: "Cyberdyne Enterprises"}) {
+				<li>
+					<a>
+						@icons.Dashboard()
+						<span>Dashboard</span>
+					</a>
+				</li>
+				<li>
+					<a class="bg-background-default-secondary transition-[background] duration-250 ease-in-out">
+						@icons.Workspace()
+						<span>Workspaces</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						@icons.Billing()
+						<span>Billing</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						@icons.Team()
+						<span>Members</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						@icons.Company()
+						<span>Organization</span>
+					</a>
+				</li>
+			}
+			@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
+				<li>
+					<a>
+						@icons.Puzzle()
+						<span>Applications</span>
+					</a>
+				</li>
+			}
+		}
+	}
 }
 
 templ liveWorkspaces() {

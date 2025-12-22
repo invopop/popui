@@ -40,10 +40,10 @@ var groups = []*Group{
 				Template: components.Avatar(),
 			},
 			{
-				Title:    "Breadcrumb",
+				Title:    "Breadcrumbs",
 				Desc:     "Navigation breadcrumbs to show the current page location.",
 				Path:     "breadcrumb",
-				Template: components.Breadcrumb(),
+				Template: components.Breadcrumbs(),
 			},
 			{
 				Title:    "Button",

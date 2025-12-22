@@ -3,14 +3,14 @@ package props
 import "github.com/a-h/templ"
 
 // Breadcrumb defines the props for the Breadcrumb component.
-type Breadcrumb struct {
+type Breadcrumbs struct {
 	ID         string
 	Class      string
 	Attributes templ.Attributes
 }
 
-// BreadcrumbItem defines the props for the BreadcrumbItem component.
-type BreadcrumbItem struct {
+// Breadcrumb defines the props for an individual breadcrumb item.
+type Breadcrumb struct {
 	ID         string
 	Class      string
 	Attributes templ.Attributes

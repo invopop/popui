@@ -6,6 +6,8 @@ import (
 	"github.com/invopop/popui/icons"
 )
 
+// Page prepares the layout of a single page application.
+// Deprecated: use App and related components instead.
 templ Page(opts ...props.Page) {
 	{{ p := props.First(opts) }}
 	<main
@@ -62,9 +64,9 @@ templ PageHeader(opts ...props.PageHeader) {
 				@icons.Menu()
 			</button>
 			if p.Breadcrumbs != nil {
-				@Breadcrumb() {
+				@Breadcrumbs() {
 					for _, i := range p.Breadcrumbs {
-						@BreadcrumbItem(props.BreadcrumbItem{
+						@Breadcrumb(props.Breadcrumb{
 							Label:      i.Name,
 							Href:       i.URL,
 							Attributes: i.Attrs,
@@ -174,6 +176,7 @@ templ PageActions(opts ...props.PageActions) {
 }
 
 // PageTitle provides a h1 element used as Page title
+// Deprecated: use Title component instead.
 templ PageTitle(opts ...props.Title) {
 	{{ p := props.First(opts) }}
 	<h1

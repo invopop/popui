@@ -8,7 +8,8 @@ import (
 // Sidebar provides a wrapper for sidebars on admin panels
 templ Sidebar(opts ...props.Sidebar) {
 	{{ p := props.First(opts) }}
-	<div
+	<nav
+		id="popui-sidebar"
 		class={
 			tailwind.Merge(
 				"h-full w-0 md:w-[240px] invisible md:visible bg-background flex flex-col items-center gap-0 transition-[width] ease-in-out duration-300 border-r border-border [&_ul_li_a]:whitespace-nowrap [&_ul_li_a]:overflow-hidden [&_ul_li_a_div]:shrink-0",
@@ -18,7 +19,7 @@ templ Sidebar(opts ...props.Sidebar) {
 		{ p.Attrs... }
 	>
 		{ children... }
-	</div>
+	</nav>
 }
 
 // SidebarHeader provides a header for the sidebar

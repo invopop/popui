@@ -1,0 +1,17 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Console() {
+	@popui.Console(props.App{Title: "Invopop - Console panel"}) {
+		@popui.Main() {
+			@liveWorkspacesApp()
+			@popui.Info() {
+				You should see an error in the console...
+			}
+		}
+	}
+}

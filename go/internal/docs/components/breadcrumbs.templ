@@ -7,18 +7,18 @@ import (
 	"github.com/invopop/popui/go/internal/docs/modules"
 )
 
-templ Breadcrumb() {
+templ Breadcrumbs() {
 	@modules.Example(modules.ExampleProps{
-		Code: examples.LoadExample("breadcrumb.templ"),
+		Code: examples.LoadExample("breadcrumbs.templ"),
 	}) {
-		@examples.BreadcrumbExample()
+		@examples.BreadcrumbsExample()
 	}
 	@modules.Example(modules.ExampleProps{
 		Title:       "With Children",
 		Description: "Use children instead of Label prop for custom content.",
-		Code:        examples.LoadExample("breadcrumb_with_children.templ"),
+		Code:        examples.LoadExample("breadcrumbs_with_children.templ"),
 	}) {
-		@examples.BreadcrumbWithChildrenExample()
+		@examples.BreadcrumbsWithChildrenExample()
 	}
 	@modules.Section("API Reference", "api") {
 		@modules.APITable(modules.APITableProps{

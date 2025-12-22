@@ -17,6 +17,14 @@ const (
 	ButtonVariantTransparent string = "transparent"
 )
 
+// Buttons is used with buttons components that usually contain
+// multiple buttons.
+type Buttons struct {
+	ID         string
+	Class      string
+	Attributes templ.Attributes
+}
+
 // Button Templ component props
 type Button struct {
 	ID         string

@@ -8,6 +8,7 @@ import (
 
 	"github.com/a-h/templ"
 	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/examples"
 	"github.com/invopop/popui/go/internal/docs"
 	"github.com/invopop/popui/go/internal/docs/assets"
 	"github.com/labstack/echo/v4"
@@ -47,6 +48,17 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 
 	// Documentation routes (now at root)
 	e.GET("/", s.index)
+
+	// Older examples are provided here for testing
+	e.GET("/examples/admin", func(c echo.Context) error {
+		return render(c, http.StatusOK, examples.Admin())
+	})
+	e.GET("/examples/app", func(c echo.Context) error {
+		return render(c, http.StatusOK, examples.App())
+	})
+	e.GET("/examples/console", func(c echo.Context) error {
+		return render(c, http.StatusOK, examples.Console())
+	})
 
 	var startErr error
 	go func() {

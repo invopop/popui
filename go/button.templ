@@ -6,6 +6,27 @@ import (
 	"github.com/invopop/popui/go/tailwind"
 )
 
+// Buttons provides a wrapper around a set of horizontal buttons
+// with a consistent gap between them, useful for actions in headers
+// or footers.
+templ Buttons(opts ...props.Buttons) {
+	{{ btns := props.First(opts) }}
+	<div
+		if btns.ID != "" {
+			id={ btns.ID }
+		}
+		class={
+			tailwind.Merge(
+				"flex items-center gap-2",
+				btns.Class,
+			),
+		}
+		{ btns.Attributes... }
+	>
+		{ children... }
+	</div>
+}
+
 // Button provides a button element. See the props button
 // constants for supported sizes and variants.
 templ Button(p ...props.Button) {

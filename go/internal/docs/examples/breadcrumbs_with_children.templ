@@ -5,19 +5,19 @@ import (
 	"github.com/invopop/popui/go/props"
 )
 
-templ BreadcrumbWithChildrenExample() {
-	@popui.Breadcrumb() {
-		@popui.BreadcrumbItem(props.BreadcrumbItem{
+templ BreadcrumbsWithChildrenExample() {
+	@popui.Breadcrumbs() {
+		@popui.Breadcrumb(props.Breadcrumb{
 			Href: "/",
 		}) {
 			<span>🏠 Home</span>
 		}
-		@popui.BreadcrumbItem(props.BreadcrumbItem{
+		@popui.Breadcrumb(props.Breadcrumb{
 			Href: "/products",
 		}) {
 			<span>📦 Products</span>
 		}
-		@popui.BreadcrumbItem(props.BreadcrumbItem{}) {
+		@popui.Breadcrumb(props.Breadcrumb{}) {
 			<span>💻 Electronics</span>
 		}
 	}

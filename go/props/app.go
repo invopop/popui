@@ -17,16 +17,29 @@ type App struct {
 
 // Main for configuring the App main content component.
 type Main struct {
-	ID         string
-	Class      string
+	ID    string
+	Class string
+
+	// Cloak when true adds the x-cloak attribute to the main element.
+	Cloak bool
+
+	// Data adds the x-data attribute to the main element.
+	Data string
+
+	// When true, removes padding in the main content area to allow
+	// for edge to edge content such as tables or potentially iframes.
+	EdgeToEdge bool
+
 	Attributes templ.Attributes
 }
 
-// Article for configuring the App article component.
-type Article struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
+// Header for configuring the App header component and set of
+// breadcrumbs if required.
+type Header struct {
+	ID          string
+	Class       string
+	Attributes  templ.Attributes
+	Breadcrumbs []Breadcrumb
 }
 
 // Footer for configuring the App footer component.

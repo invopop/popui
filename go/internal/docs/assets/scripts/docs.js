@@ -5,6 +5,9 @@ document.addEventListener("alpine:init", () => {
     page: "getting-started",
     init() {
       this.changePage();
+      window.addEventListener("hashchange", () => {
+        this.changePage();
+      });
     },
     changePage() {
       const page = location.hash;

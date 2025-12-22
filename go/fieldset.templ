@@ -6,7 +6,9 @@ import (
 	"github.com/invopop/popui/go/tailwind"
 )
 
-// Fieldset groups a set of form fields together with correct vertical spacing.
+// Fieldset groups a set of form fields together with correct vertical spacing and padding
+// between fields. If the Variant is set to "card" it will also add a border and background
+// to the fieldset to visually separate it from the rest of the form.
 templ Fieldset(p ...props.Fieldset) {
 	{{ fieldset := props.First(p) }}
 	<fieldset

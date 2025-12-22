@@ -14,6 +14,7 @@ import (
 )
 
 // PopupConfigContainer provides a wrapper for sidebar popups used on the Invopop Console UI
+// Deprecated: use Main component inside an App instead.
 func PopupConfigContainer(p ...props.PopupConfigContainer) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -57,7 +58,7 @@ func PopupConfigContainer(p ...props.PopupConfigContainer) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(container.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/containers.templ`, Line: 13, Col: 20}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/containers.templ`, Line: 14, Col: 20}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -105,7 +106,8 @@ func PopupConfigContainer(p ...props.PopupConfigContainer) templ.Component {
 	})
 }
 
-// PopupConfigFooter provides a footer for sidebar popups used on the Invopop Console UI
+// PopupConfigFooter provides a footer for sidebar popups used on the Invopop Console UI.
+// Deprecated: use Footer component inside an App instead.
 func PopupConfigFooter(p ...props.PopupConfigFooter) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -149,7 +151,7 @@ func PopupConfigFooter(p ...props.PopupConfigFooter) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(footer.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/containers.templ`, Line: 33, Col: 17}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/containers.templ`, Line: 35, Col: 17}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {

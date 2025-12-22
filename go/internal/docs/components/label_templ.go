@@ -125,7 +125,7 @@ func Label() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<p class=\"text-base text-foreground-default-secondary mb-4\">The Label component is used in:</p><ul class=\"list-disc list-inside space-y-2 text-base\"><li><a href=\"/components/checkbox\" class=\"text-foreground-accent hover:underline\">Checkbox</a></li><li><a href=\"/components/input\" class=\"text-foreground-accent hover:underline\">Input</a></li><li><a href=\"/components/select\" class=\"text-foreground-accent hover:underline\">Select</a></li><li><a href=\"/components/slider\" class=\"text-foreground-accent hover:underline\">Slider</a></li><li><a href=\"/components/textarea\" class=\"text-foreground-accent hover:underline\">Textarea</a></li></ul>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<p class=\"text-base text-foreground-default-secondary mb-4\">The Label component is used in:</p><ul class=\"list-disc list-inside space-y-2 text-base\"><li><a href=\"#components-checkbox\" class=\"text-foreground-accent hover:underline\">Checkbox</a></li><li><a href=\"#components-input\" class=\"text-foreground-accent hover:underline\">Input</a></li><li><a href=\"#components-select\" class=\"text-foreground-accent hover:underline\">Select</a></li><li><a href=\"#components-slider\" class=\"text-foreground-accent hover:underline\">Slider</a></li><li><a href=\"#components-textarea\" class=\"text-foreground-accent hover:underline\">Textarea</a></li></ul>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

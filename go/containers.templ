@@ -6,6 +6,7 @@ import (
 )
 
 // PopupConfigContainer provides a wrapper for sidebar popups used on the Invopop Console UI
+// Deprecated: use Main component inside an App instead.
 templ PopupConfigContainer(p ...props.PopupConfigContainer) {
 	{{ container := props.First(p) }}
 	<div
@@ -25,7 +26,8 @@ templ PopupConfigContainer(p ...props.PopupConfigContainer) {
 	</div>
 }
 
-// PopupConfigFooter provides a footer for sidebar popups used on the Invopop Console UI
+// PopupConfigFooter provides a footer for sidebar popups used on the Invopop Console UI.
+// Deprecated: use Footer component inside an App instead.
 templ PopupConfigFooter(p ...props.PopupConfigFooter) {
 	{{ footer := props.First(p) }}
 	<div

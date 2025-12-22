@@ -126,7 +126,6 @@ templ sidebarLink(href, title string) {
 	{{ id := slugify(href) }}
 	<a
 		href={ "#" + id }
-		@click={ "goto(\"" + id + "\")" }
 		:class={ "{'flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-base font-medium text-foreground hover:bg-background-default-secondary transition-colors': true, 'bg-background-default-secondary': page == '" + id + "'}" }
 	>
 		{ title }

@@ -24,14 +24,14 @@ templ Sidebar(opts ...props.Sidebar) {
 
 // SidebarHeader provides a header for the sidebar
 templ SidebarHeader() {
-	<div class="w-full flex px-3 items-center gap-2 border-b border-border text-foreground font-sans text-base font-semibold whitespace-nowrap h-12 [&_svg]:!w-7 [&_svg]:!h-7 [&_div]:!w-7 [&_div]:!h-7">
+	<div class="w-full flex p-4 items-center gap-2 border-b border-border text-foreground font-sans text-base font-semibold whitespace-nowrap h-12 [&_div]:!w-7 [&_div]:!h-7">
 		{ children... }
 	</div>
 }
 
 // SidebarContent provides a wrapper for the content of the sidebar
 templ SidebarContent() {
-	<div class="w-full flex grow py-5 px-3 flex-col items-center gap-5">
+	<div class="w-full flex grow py-5 px-3 flex-col items-center gap-4 overflow-y-auto">
 		{ children... }
 	</div>
 }

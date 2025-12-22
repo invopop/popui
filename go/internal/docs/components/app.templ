@@ -1,0 +1,68 @@
+// Package components provides documentation pages for PopUI components.
+package components
+
+import (
+	_ "embed"
+	"github.com/invopop/popui/go/internal/docs/examples"
+	"github.com/invopop/popui/go/internal/docs/modules"
+)
+
+templ App() {
+	@modules.Example(modules.ExampleProps{
+		Code:          examples.LoadExample("app.templ"),
+		IframeContent: examples.AppExample(),
+		IframeHeight:  "500px",
+	})
+	@modules.Section("API Reference", "api") {
+		@modules.APITable(modules.APITableProps{
+			Title:       "App",
+			Description: "Root application container for full-window apps. Sets up the basic HTML structure with head and body, and includes Alpine.js for interactivity. Designed to be standalone or embedded in the Invopop Console.",
+			Items: []modules.APITableItem{
+				{Name: "Title", Type: "string", Default: "", Description: "Page title displayed in browser tab"},
+				{Name: "Description", Type: "string", Default: "", Description: "Meta description for SEO"},
+				{Name: "Console", Type: "bool", Default: "false", Description: "Enable Invopop Console integration with auto accent color adjustment"},
+				{Name: "Head", Type: "templ.Component", Default: "nil", Description: "Additional content to include in the <head> section"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Console",
+			Description: "Convenience wrapper that configures an App for use inside the Invopop Console. Automatically sets Console: true.",
+			Items: []modules.APITableItem{
+				{Name: "Title", Type: "string", Default: "", Description: "Page title displayed in browser tab"},
+				{Name: "Description", Type: "string", Default: "", Description: "Meta description for SEO"},
+				{Name: "Head", Type: "templ.Component", Default: "nil", Description: "Additional content to include in the <head> section"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Main",
+			Description: "Main content area wrapper for apps. Use this outside Header/Footer components. Contains the primary content and provides overflow handling.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the main element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with main styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+				{Name: "Cloak", Type: "bool", Default: "false", Description: "Add x-cloak attribute to hide content until Alpine.js initializes"},
+				{Name: "Data", Type: "string", Default: "", Description: "Alpine.js x-data attribute value for reactive state"},
+				{Name: "EdgeToEdge", Type: "bool", Default: "false", Description: "Remove default padding for full-width content (tables, iframes, etc.)"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Header",
+			Description: "Header area for apps with optional breadcrumb navigation. Use directly inside App component, not inside Main. Sticky positioned at top.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the header element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with header styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+				{Name: "Breadcrumbs", Type: "[]props.Breadcrumb", Default: "nil", Description: "Navigation breadcrumbs displayed on the left side of header"},
+			},
+		})
+		@modules.APITable(modules.APITableProps{
+			Title:       "Footer",
+			Description: "Footer component for apps with content justified to the end. Use directly inside App component, not inside Main.",
+			Items: []modules.APITableItem{
+				{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the footer element"},
+				{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with footer styles"},
+				{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+			},
+		})
+	}
+}

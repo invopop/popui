@@ -13,6 +13,9 @@ type App struct {
 	// Head allows for additional headers to be added to the App's Head
 	// component.
 	Head templ.Component
+
+	// Data adds the x-data attribute to the application body's contents.
+	Data string
 }
 
 // Main for configuring the App main content component.
@@ -36,29 +39,28 @@ type Main struct {
 // Header for configuring the App header component and set of
 // breadcrumbs if required.
 type Header struct {
-	ID          string
-	Class       string
+	ID    string
+	Class string
+	// Data adds the x-data attribute to the header element.
+	Data        string
 	Attributes  templ.Attributes
 	Breadcrumbs []Breadcrumb
 }
 
 // Footer for configuring the App footer component.
 type Footer struct {
-	ID         string
-	Class      string
+	ID    string
+	Class string
+	// Data adds the x-data attribute to the footer element.
+	Data       string
 	Attributes templ.Attributes
 }
 
 // Nav for configuring the App nav component.
 type Nav struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-}
-
-// Aside for configuring the App aside component.
-type Aside struct {
-	ID         string
-	Class      string
+	ID    string
+	Class string
+	// Data adds the x-data attribute to the nav element.
+	Data       string
 	Attributes templ.Attributes
 }

@@ -3,6 +3,7 @@ document.addEventListener("alpine:init", () => {
   // Product Form
   Alpine.data("docs", () => ({
     page: "getting-started",
+    title: "Getting Started",
     init() {
       this.changePage();
       window.addEventListener("hashchange", () => {
@@ -14,7 +15,6 @@ document.addEventListener("alpine:init", () => {
       if (page) {
         this.page = page.replace("#", "");
       }
-      console.log("Current page:", this.page);
     },
     goto(id) {
       this.page = id;

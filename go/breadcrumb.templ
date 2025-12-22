@@ -43,7 +43,10 @@ templ Breadcrumb(opts ...props.Breadcrumb) {
 		{ p.Attributes... }
 	>
 		if p.Href != "" {
-			<a href={ p.Href } class="font-sans text-lg leading-6 tracking-[-0.16px] whitespace-nowrap text-foreground-default-secondary font-normal hover:text-foreground">
+			<a
+				href={ p.Href }
+				class="font-sans text-lg leading-6 tracking-[-0.16px] whitespace-nowrap text-foreground-default-secondary font-normal hover:text-foreground"
+			>
 				if p.Label != "" {
 					{ p.Label }
 				} else {
@@ -51,7 +54,9 @@ templ Breadcrumb(opts ...props.Breadcrumb) {
 				}
 			</a>
 		} else {
-			<span class="font-sans text-lg leading-6 tracking-[-0.16px] whitespace-nowrap text-foreground font-medium">
+			<span
+				class="font-sans text-lg leading-6 tracking-[-0.16px] whitespace-nowrap text-foreground font-medium"
+			>
 				if p.Label != "" {
 					{ p.Label }
 				} else {

@@ -34,6 +34,12 @@ var groups = []*Group{
 				Template: components.Accordion(),
 			},
 			{
+				Title:    "App",
+				Desc:     "The main application layout component with header, nav, aside, main, and footer sections.",
+				Path:     "app",
+				Template: components.App(),
+			},
+			{
 				Title:    "Avatar",
 				Desc:     "Display user profile images or initials in circular containers.",
 				Path:     "avatar",

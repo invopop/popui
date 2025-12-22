@@ -1,0 +1,28 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/icons"
+)
+
+templ AppExample() {
+	@popui.App(props.App{Title: "Application"}) {
+		@popui.Header(props.Header{
+			Breadcrumbs: []props.Breadcrumb{{Label: "Example"}},
+		}) {
+			@popui.Button(props.Button{Variant: "primary"}) {
+				@icons.Add()
+				<span>New Item</span>
+			}
+		}
+		@popui.Main() {
+			<div class="w-full flex items-center justify-center min-h-10 p-4 gap-2 border border-dashed border-border-document-png bg-background-document-png rounded-2xl">
+				This is where the page contents goes.
+			</div>
+		}
+		@popui.Footer() {
+			&copy; 2025 Invopop Inc.
+		}
+	}
+}

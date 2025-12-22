@@ -3,7 +3,6 @@ package popui
 import (
 	"github.com/invopop/popui/go/props"
 	"github.com/invopop/popui/go/tailwind"
-	"github.com/invopop/popui/icons"
 )
 
 // App provides the root application container for a full-window app
@@ -30,7 +29,12 @@ templ App(opts ...props.App) {
 			}
 		}
 		@Body() {
-			<div class="grid grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] w-full h-full [&_nav]:col-start-1 [&_nav]:row-span-full">
+			<div
+				if p.Data != "" {
+					x-data={ p.Data }
+				}
+				class="grid grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] w-full h-full [&_nav]:col-start-1 [&_nav]:row-span-full"
+			>
 				{ children... }
 			</div>
 		}
@@ -88,6 +92,9 @@ templ Main(opts ...props.Main) {
 				p.Class,
 			),
 		}
+		if p.Data != "" {
+			x-data={ p.Data }
+		}
 		{ p.Attributes... }
 	>
 		{ children... }
@@ -109,40 +116,52 @@ templ Header(opts ...props.Header) {
 				p.Class,
 			),
 		}
+		if p.Data != "" {
+			x-data={ p.Data }
+		}
 		{ p.Attributes... }
 	>
-		<div class="flex items-center gap-1">
+		/* TODO: add menu button
 			<button class="block p-[5px] mr-2 md:hidden">
 				@icons.Menu()
 			</button>
-			if p.Breadcrumbs != nil {
-				@Breadcrumbs() {
-					for _, b := range p.Breadcrumbs {
-						@Breadcrumb(b)
+        */
+		if p.Breadcrumbs != nil {
+			<div class="flex items-center gap-1">
+				if p.Breadcrumbs != nil {
+					@Breadcrumbs() {
+						for _, b := range p.Breadcrumbs {
+							@Breadcrumb(b)
+						}
 					}
 				}
-			}
-		</div>
+			</div>
+		}
 		<div class="flex items-center gap-2">
 			{ children... }
 		</div>
 	</header>
 }
 
-// Footer provides a footer to be used inside the App component.
-templ Footer(p ...props.Footer) {
-	{{ footer := props.First(p) }}
+// Footer provides a footer to be used inside the App with contents
+// justified to the end. This should be used directly inside the App
+// component.
+templ Footer(opts ...props.Footer) {
+	{{ p := props.First(opts) }}
 	<footer
-		if footer.ID != "" {
-			id={ footer.ID }
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		if p.Data != "" {
+			x-data={ p.Data }
 		}
 		class={
 			tailwind.Merge(
 				"flex flex-col justify-end w-full col-start-2 row-start-3",
-				footer.Class,
+				p.Class,
 			),
 		}
-		{ footer.Attributes... }
+		{ p.Attributes... }
 	>
 		<div class="flex justify-end border-t border-border gap-3 p-4">
 			{ children... }

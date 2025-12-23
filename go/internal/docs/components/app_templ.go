@@ -38,8 +38,30 @@ func App() templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
+			Title:         "Basic App",
+			Description:   "Simple app with a header, main content area, and footer.",
 			Code:          examples.LoadExample("app.templ"),
 			IframeContent: examples.AppExample(),
+			IframeHeight:  "400px",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
+			Title:         "Configuration App",
+			Description:   "Simple app with only a basic content area.",
+			Code:          examples.LoadExample("app_config.templ"),
+			IframeContent: examples.AppConfigExample(),
+			IframeHeight:  "400px",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
+			Title:         "App with Sidebar Navigation",
+			Description:   "App layout that includes a sidebar navigation menu alongside the main content area.",
+			Code:          examples.LoadExample("app_with_sidebar.templ"),
+			IframeContent: examples.AppWithSidebarExample(),
 			IframeHeight:  "500px",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
@@ -63,8 +85,9 @@ func App() templ.Component {
 				Items: []modules.APITableItem{
 					{Name: "Title", Type: "string", Default: "", Description: "Page title displayed in browser tab"},
 					{Name: "Description", Type: "string", Default: "", Description: "Meta description for SEO"},
-					{Name: "Console", Type: "bool", Default: "false", Description: "Enable Invopop Console integration with auto accent color adjustment"},
+					{Name: "AccentColor", Type: "string", Default: "", Description: "Accent color for the application"},
 					{Name: "Head", Type: "templ.Component", Default: "nil", Description: "Additional content to include in the <head> section"},
+					{Name: "Data", Type: "string", Default: "", Description: "Alpine.js x-data attribute value for the application body's contents"},
 				},
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -75,12 +98,15 @@ func App() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
-				Title:       "Console",
-				Description: "Convenience wrapper that configures an App for use inside the Invopop Console. Automatically sets Console: true.",
+				Title:       "Main",
+				Description: "Main content area wrapper for apps. Use this outside Header/Footer components. Contains the primary content and provides overflow handling.",
 				Items: []modules.APITableItem{
-					{Name: "Title", Type: "string", Default: "", Description: "Page title displayed in browser tab"},
-					{Name: "Description", Type: "string", Default: "", Description: "Meta description for SEO"},
-					{Name: "Head", Type: "templ.Component", Default: "nil", Description: "Additional content to include in the <head> section"},
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the main element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with main styles"},
+					{Name: "Cloak", Type: "bool", Default: "false", Description: "Add x-cloak attribute to hide content until Alpine.js initializes"},
+					{Name: "Data", Type: "string", Default: "", Description: "Alpine.js x-data attribute value for reactive state"},
+					{Name: "Center", Type: "bool", Default: "false", Description: "Center the main content with a maximum width"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
 				},
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -91,15 +117,15 @@ func App() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
-				Title:       "Main",
-				Description: "Main content area wrapper for apps. Use this outside Header/Footer components. Contains the primary content and provides overflow handling.",
+				Title:       "Header",
+				Description: "Header area for apps with optional breadcrumb navigation. Use directly inside App component, not inside Main. Sticky positioned at top.",
 				Items: []modules.APITableItem{
-					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the main element"},
-					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with main styles"},
-					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
-					{Name: "Cloak", Type: "bool", Default: "false", Description: "Add x-cloak attribute to hide content until Alpine.js initializes"},
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the header element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with header styles"},
+					{Name: "Title", Type: "templ.Component", Default: "nil", Description: "Custom title component displayed on the left side of the header before breadcrumbs"},
 					{Name: "Data", Type: "string", Default: "", Description: "Alpine.js x-data attribute value for reactive state"},
-					{Name: "EdgeToEdge", Type: "bool", Default: "false", Description: "Remove default padding for full-width content (tables, iframes, etc.)"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+					{Name: "Breadcrumbs", Type: "[]props.Breadcrumb", Default: "nil", Description: "Navigation breadcrumbs displayed on the left side of header"},
 				},
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -110,13 +136,13 @@ func App() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
-				Title:       "Header",
-				Description: "Header area for apps with optional breadcrumb navigation. Use directly inside App component, not inside Main. Sticky positioned at top.",
+				Title:       "Footer",
+				Description: "Footer component for apps with content justified to the end. Use directly inside App component, not inside Main.",
 				Items: []modules.APITableItem{
-					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the header element"},
-					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with header styles"},
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the footer element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with footer styles"},
+					{Name: "Data", Type: "string", Default: "", Description: "Alpine.js x-data attribute value for reactive state"},
 					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
-					{Name: "Breadcrumbs", Type: "[]props.Breadcrumb", Default: "nil", Description: "Navigation breadcrumbs displayed on the left side of header"},
 				},
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -127,11 +153,29 @@ func App() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
-				Title:       "Footer",
-				Description: "Footer component for apps with content justified to the end. Use directly inside App component, not inside Main.",
+				Title:       "Article",
+				Description: "Article component for app content with optional full-width mode.",
 				Items: []modules.APITableItem{
-					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the footer element"},
-					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with footer styles"},
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the article element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with article styles"},
+					{Name: "FullWidth", Type: "bool", Default: "false", Description: "Makes the article take the full width of the main content area while maintaining padding"},
+					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
+				},
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
+				Title:       "Nav",
+				Description: "Navigation component for apps.",
+				Items: []modules.APITableItem{
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the nav element"},
+					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with nav styles"},
+					{Name: "Data", Type: "string", Default: "", Description: "Alpine.js x-data attribute value for reactive state"},
 					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes"},
 				},
 			}).Render(ctx, templ_7745c5c3_Buffer)

@@ -65,7 +65,7 @@ templ article(id, title, description string) {
 			"x-show": "page == '" + id + "'",
 		},
 	}) {
-		<div class="w-full min-w-[768px]">
+		<div class="w-full">
 			<div class="space-y-8">
 				<div class="space-y-1.5">
 					<h1 class="text-2xl font-bold">{ title }</h1>
@@ -88,16 +88,12 @@ templ sidebar() {
 		}
 		@popui.SidebarContent() {
 			@popui.SidebarSection(props.SidebarSection{Title: "Overview"}) {
-				<li>
-					@sidebarLink("getting-started", "Get started")
-				</li>
+				@sidebarItem("getting-started", "Get started")
 			}
 			for _, group := range groups {
 				@popui.SidebarSection(props.SidebarSection{Title: group.Title}) {
 					for _, page := range group.Pages {
-						<li>
-							@sidebarPageLink(group, page)
-						</li>
+						@sidebarPageItem(group, page)
 					}
 				}
 			}
@@ -105,19 +101,21 @@ templ sidebar() {
 	}
 }
 
-templ sidebarPageLink(group *Group, page *Page) {
-	@sidebarLink(path.Join(group.Path, page.Path), page.Title)
+templ sidebarPageItem(group *Group, page *Page) {
+	@sidebarItem(path.Join(group.Path, page.Path), page.Title)
 }
 
-templ sidebarLink(href, title string) {
+templ sidebarItem(href, title string) {
 	// bg-background-default-secondary for active
 	{{ id := slugify(href) }}
-	<a
-		href={ "#" + id }
-		:class={ "{'flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-base font-medium text-foreground hover:bg-background-default-secondary transition-colors': true, 'bg-background-default-secondary': page == '" + id + "'}" }
-	>
+	@popui.SidebarItem(props.SidebarItem{
+		Href: templ.URL("#" + id),
+		Attrs: templ.Attributes{
+			":class": "{'bg-background-default-secondary': page == '" + id + "'}",
+		},
+	}) {
 		{ title }
-	</a>
+	}
 }
 
 func slugify(path string) string {

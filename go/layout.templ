@@ -79,14 +79,6 @@ templ AlpineStoreContenteditable() {
 	<script src={ path.Join(AssetPath, Versioned("assets", "contenteditable.js")) }></script>
 }
 
-// DefaultPopupScripts provides the scripts to include in `<head>` section of an HTML
-// document to enable the Invopop Console UI SDK and AlpineJS config.
-// Deprecated: use AppJS instead.
-templ DefaultPopupScripts() {
-	@AppConsoleJS()
-	@AlpineJS()
-}
-
 // PopupLayout provides the contents for pop-up pages meant to be shown inside
 // the Invopop Console
 // Deprecated: use App instead.
@@ -97,7 +89,7 @@ templ PopupLayout(p props.PopupLayout) {
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			@EmbeddedCSS()
-			@DefaultPopupScripts()
+			@AlpineJS()
 		</head>
 		<body>
 			<main style="height: 100%;">

@@ -6,9 +6,6 @@ import "github.com/a-h/templ"
 type App struct {
 	Title       string
 	Description string
-	// When Console is true, the App is being rendered inside the Invopop
-	// console and will load the additional JavaScript required.
-	Console bool
 
 	// Accent color for the application.
 	AccentColor string

@@ -1,6 +1,7 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
 	"github.com/invopop/popui/go/tailwind"
 )
@@ -36,8 +37,8 @@ templ SidebarContent() {
 	</div>
 }
 
-// Sidebar provides a wrapper for a ul element used in Sidebar component
-// Expects a set of li elements as slot
+// Sidebar provides a wrapper for a ul element used in Sidebar component.
+// Expects either a set of `<li>` or SidebarItem components.
 templ SidebarSection(opts ...props.SidebarSection) {
 	{{ p := props.First(opts) }}
 	<div
@@ -56,6 +57,36 @@ templ SidebarSection(opts ...props.SidebarSection) {
 			{ children... }
 		</ul>
 	</div>
+}
+
+// SidebarItem provides an individual item for the SidebarSection component.
+// All attributes provided in Attrs will be added to the `<a>` element embedded
+// inside the `<li>`. If you need to select the item using javascript, apply
+// the `bg-background-default-secondary` class, for static rendering use the
+// `Selected` property.
+templ SidebarItem(opts ...props.SidebarItem) {
+	{{ p := props.First(opts) }}
+	<li>
+		<a
+			if p.ID != "" {
+				id={ p.ID }
+			}
+			if p.Href != "" {
+				href={ p.Href }
+			}
+			class={
+				tailwind.Merge(
+					classes.Join(map[string]bool{
+						"bg-background-default-secondary": p.Selected,
+					}),
+					p.Class,
+				),
+			}
+			{ p.Attrs... }
+		>
+			{ children... }
+		</a>
+	</li>
 }
 
 // SidebarFooter provides a footer for the sidebar

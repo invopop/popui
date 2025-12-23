@@ -22,9 +22,6 @@ templ App(opts ...props.App) {
 			Description: p.Description,
 			AlpineJS:    true,
 		}) {
-			if p.Console {
-				@AppConsoleJS()
-			}
 			if p.Head != nil {
 				@p.Head
 			}
@@ -47,34 +44,6 @@ templ App(opts ...props.App) {
 			</div>
 		}
 	}
-}
-
-// Console is a convenience wrapper to set up an application to be used
-// inside the Invopop Console.
-templ Console(p props.App) {
-	{{ p.Console = true }}
-	@App(p) {
-		{ children... }
-	}
-}
-
-// AppConsoleJS provides the JS to include in the `<head>` section of an HTML
-// document that is embedded inside the Invopop Console and will automatically
-// adjust the accent color based on URL parameters.
-templ AppConsoleJS() {
-	<script>
-        const CONSOLE_SDK_URL = 'https://cdn.jsdelivr.net/npm/@invopop/console-ui-sdk@0.0.9/index.js'
-
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search)
-            const accentColor = urlParams.get('accent')
-
-            if (accentColor) {
-                const root = document.querySelector(':root')
-                root.style.setProperty('--workspace-accent-color', accentColor)
-            }
-        }
-    </script>
 }
 
 // Main provides a wrapper for the main content area of apps.
@@ -123,10 +92,9 @@ templ Article(opts ...props.Article) {
 		}
 		class={
 			tailwind.Merge(
-				"p-4",
+				"p-4 flex-1 w-full",
 				classes.Join(map[string]bool{
 					"lg:w-200": !p.FullWidth,
-					"w-full":   p.FullWidth,
 				}),
 				p.Class,
 			),

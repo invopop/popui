@@ -100,7 +100,7 @@ func Breadcrumbs() templ.Component {
 			}
 			ctx = templ.InitializeContext(ctx)
 			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
-				Title:       "Breadcrumb",
+				Title:       "Breadcrumbs",
 				Description: "Container component for breadcrumb navigation.",
 				Items: []modules.APITableItem{
 					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the breadcrumb element"},
@@ -116,7 +116,7 @@ func Breadcrumbs() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
-				Title:       "BreadcrumbItem",
+				Title:       "Breadcrumb",
 				Description: "Individual breadcrumb item. Renders as a link if Href is provided, otherwise as plain text.",
 				Items: []modules.APITableItem{
 					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the breadcrumb item element"},

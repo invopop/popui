@@ -1,6 +1,6 @@
 on:
   push:
-    branches: svelte5
+    branches: main
 
 jobs:
   publish:
@@ -10,13 +10,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
+      # Install global dependencies
+      - run: npm ci
+
       # Install dependencies inside svelte/
       - run: npm ci
         working-directory: svelte
 
       # Build Tailwind
       - run: npm run build:tailwind
-        working-directory: svelte
 
       # Build popui svelte package
       - run: npm run package

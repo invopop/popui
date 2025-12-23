@@ -6,7 +6,6 @@ Currently we provide different libraries and examples for
 
 - Svelte
 - Go
-- Web Components
 
 ## Svelte
 

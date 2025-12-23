@@ -253,6 +253,18 @@ export interface ProgressBarProps {
 	current?: number;
 	total?: number;
 	allowOverage?: boolean;
+  warningPercentage?: number;
+}
+
+export interface ProgressBarCircleProps {
+	progress: number;
+	size: number;
+	variant?: 'default' | 'dark';
+}
+
+export interface TagProgressProps {
+	progress: number;
+	variant?: 'default' | 'dark';
 }
 
 export interface BaseDropdownProps {

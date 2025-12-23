@@ -29,6 +29,13 @@ templ App() {
 		IframeContent: examples.AppWithSidebarExample(),
 		IframeHeight:  "500px",
 	})
+	@modules.Example(modules.ExampleProps{
+		Title:         "App with table and pagination",
+		Description:   "App layout that includes a full width table and pagination in the main content area.",
+		Code:          examples.LoadExample("app_with_table.templ"),
+		IframeContent: examples.AppWithTableExample(),
+		IframeHeight:  "500px",
+	})
 	@modules.Section("API Reference", "api") {
 		@modules.APITable(modules.APITableProps{
 			Title:       "App",

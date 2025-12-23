@@ -67,6 +67,16 @@ func App() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+		templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
+			Title:         "App with table and pagination",
+			Description:   "App layout that includes a full width table and pagination in the main content area.",
+			Code:          examples.LoadExample("app_with_table.templ"),
+			IframeContent: examples.AppWithTableExample(),
+			IframeHeight:  "500px",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		templ_7745c5c3_Var2 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)

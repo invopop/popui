@@ -172,7 +172,7 @@ func TablePagination(p ...props.TablePagination) templ.Component {
 		totalItemsStr := printer.Sprintf("%d", prp.TotalItems)
 		itemsLabel := paginationItemsLabel(prp.ItemsLabel)
 		var templ_7745c5c3_Var8 = []any{tailwind.Merge(
-			"flex items-center justify-between h-11 px-6 py-[5px] bg-background backdrop-blur-[10px] border-t border-border-default-default",
+			"flex items-center justify-between h-11 px-4 py-[5px] bg-background backdrop-blur-[10px] border-t border-border-default-default",
 			prp.Class,
 		),
 		}

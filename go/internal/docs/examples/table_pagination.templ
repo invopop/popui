@@ -50,7 +50,7 @@ templ TablePaginationExample() {
 			NextPageURL:        "?page=2",
 			LastPageURL:        "?page=260",
 		}) {
-			<div class="flex items-center gap-2">
+			@popui.Buttons() {
 				@popui.Button(props.Button{
 					Type:    "button",
 					Size:    "sm",
@@ -65,7 +65,7 @@ templ TablePaginationExample() {
 				}) {
 					Create Invoice
 				}
-			</div>
+			}
 		}
 	</div>
 }

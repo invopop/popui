@@ -3,6 +3,7 @@ package docs
 
 import (
 	"github.com/a-h/templ"
+	"github.com/invopop/gobl/pkg/here"
 	"github.com/invopop/popui/go/internal/docs/components"
 )
 
@@ -28,8 +29,12 @@ var groups = []*Group{
 		Path:  "layout",
 		Pages: []*Page{
 			{
-				Title:    "App",
-				Desc:     "The main application layout component with header, nav, aside, main, and footer sections.",
+				Title: "App",
+				Desc: here.Doc(`
+					The main application layout component with header, nav, aside, main,
+					and footer sections. Use this as the base for all popui applications,
+					and extend as needed.
+				`),
 				Path:     "app",
 				Template: components.App(),
 			},

@@ -24,44 +24,14 @@ type Group struct {
 // DocsIndex is the index of all documentation pages.
 var groups = []*Group{
 	{
-		Title: "Components",
-		Path:  "components",
+		Title: "Layout",
+		Path:  "layout",
 		Pages: []*Page{
-			{
-				Title:    "Accordion",
-				Desc:     "Vertically stacked interactive sections to organize content.",
-				Path:     "accordion",
-				Template: components.Accordion(),
-			},
 			{
 				Title:    "App",
 				Desc:     "The main application layout component with header, nav, aside, main, and footer sections.",
 				Path:     "app",
 				Template: components.App(),
-			},
-			{
-				Title:    "Avatar",
-				Desc:     "Display user profile images or initials in circular containers.",
-				Path:     "avatar",
-				Template: components.Avatar(),
-			},
-			{
-				Title:    "Breadcrumbs",
-				Desc:     "Navigation breadcrumbs to show the current page location.",
-				Path:     "breadcrumb",
-				Template: components.Breadcrumbs(),
-			},
-			{
-				Title:    "Button",
-				Desc:     "Trigger actions and events with customizable button components.",
-				Path:     "button",
-				Template: components.Button(),
-			},
-			{
-				Title:    "Button Copy",
-				Desc:     "Copy-to-clipboard button with text truncation and visual feedback.",
-				Path:     "button-copy",
-				Template: components.ButtonCopy(),
 			},
 			{
 				Title:    "Card",
@@ -70,22 +40,28 @@ var groups = []*Group{
 				Template: components.Card(),
 			},
 			{
-				Title:    "Checkbox",
-				Desc:     "Checkbox inputs with optional toggle switch variant.",
-				Path:     "checkbox",
-				Template: components.Checkbox(),
-			},
-			{
-				Title:    "Description List",
-				Desc:     "Semantic HTML definition list for displaying term-description pairs.",
-				Path:     "description-list",
-				Template: components.DescriptionList(),
-			},
-			{
 				Title:    "Empty State",
 				Desc:     "Layout for displaying empty states with illustrations and call-to-action.",
 				Path:     "empty-state",
 				Template: components.EmptyState(),
+			},
+			{
+				Title:    "Separator",
+				Desc:     "Horizontal divider with a dashed line for visual separation.",
+				Path:     "separator",
+				Template: components.Separator(),
+			},
+		},
+	},
+	{
+		Title: "Forms",
+		Path:  "forms",
+		Pages: []*Page{
+			{
+				Title:    "Checkbox",
+				Desc:     "Checkbox inputs with optional toggle switch variant.",
+				Path:     "checkbox",
+				Template: components.Checkbox(),
 			},
 			{
 				Title:    "Fieldset",
@@ -100,24 +76,6 @@ var groups = []*Group{
 				Template: components.File(),
 			},
 			{
-				Title:    "Flag",
-				Desc:     "Display country flags using ISO 3166-1 alpha-2 country codes.",
-				Path:     "flag",
-				Template: components.Flag(),
-			},
-			{
-				Title:    "Flash Message",
-				Desc:     "Toast-style success message for quick feedback.",
-				Path:     "flash-message",
-				Template: components.FlashMessage(),
-			},
-			{
-				Title:    "Image",
-				Desc:     "Displays images with rounded corners and proper object fit.",
-				Path:     "image",
-				Template: components.Image(),
-			},
-			{
 				Title:    "Input",
 				Desc:     "Text input field for capturing user data with various types and validation.",
 				Path:     "input",
@@ -128,18 +86,6 @@ var groups = []*Group{
 				Desc:     "Form label element with optional hint tooltip.",
 				Path:     "label",
 				Template: components.Label(),
-			},
-			{
-				Title:    "Notification",
-				Desc:     "Feedback messages with different severity types and icons.",
-				Path:     "notification",
-				Template: components.Notification(),
-			},
-			{
-				Title:    "Popover",
-				Desc:     "A context menu that displays when a button is clicked.",
-				Path:     "popover",
-				Template: components.Popover(),
 			},
 			{
 				Title:    "Radio",
@@ -154,16 +100,76 @@ var groups = []*Group{
 				Template: components.Select(),
 			},
 			{
-				Title:    "Separator",
-				Desc:     "Horizontal divider with a dashed line for visual separation.",
-				Path:     "separator",
-				Template: components.Separator(),
-			},
-			{
 				Title:    "Slider",
 				Desc:     "A range slider input for selecting numeric values.",
 				Path:     "slider",
 				Template: components.Slider(),
+			},
+			{
+				Title:    "Textarea",
+				Desc:     "Multi-line text input field for capturing longer user input with support for labels and validation.",
+				Path:     "textarea",
+				Template: components.Textarea(),
+			},
+		},
+	},
+	{
+		Title: "Navigation",
+		Path:  "navigation",
+		Pages: []*Page{
+			{
+				Title:    "Breadcrumbs",
+				Desc:     "Navigation breadcrumbs to show the current page location.",
+				Path:     "breadcrumb",
+				Template: components.Breadcrumbs(),
+			},
+			{
+				Title:    "Popover",
+				Desc:     "A context menu that displays when a button is clicked.",
+				Path:     "popover",
+				Template: components.Popover(),
+			},
+			{
+				Title:    "Tabs",
+				Desc:     "Interactive tab navigation component with default and pill variants.",
+				Path:     "tabs",
+				Template: components.Tabs(),
+			},
+		},
+	},
+	{
+		Title: "Display",
+		Path:  "display",
+		Pages: []*Page{
+			{
+				Title:    "Accordion",
+				Desc:     "Vertically stacked interactive sections to organize content.",
+				Path:     "accordion",
+				Template: components.Accordion(),
+			},
+			{
+				Title:    "Avatar",
+				Desc:     "Display user profile images or initials in circular containers.",
+				Path:     "avatar",
+				Template: components.Avatar(),
+			},
+			{
+				Title:    "Description List",
+				Desc:     "Semantic HTML definition list for displaying term-description pairs.",
+				Path:     "description-list",
+				Template: components.DescriptionList(),
+			},
+			{
+				Title:    "Flag",
+				Desc:     "Display country flags using ISO 3166-1 alpha-2 country codes.",
+				Path:     "flag",
+				Template: components.Flag(),
+			},
+			{
+				Title:    "Image",
+				Desc:     "Displays images with rounded corners and proper object fit.",
+				Path:     "image",
+				Template: components.Image(),
 			},
 			{
 				Title:    "Table",
@@ -172,28 +178,52 @@ var groups = []*Group{
 				Template: components.Table(),
 			},
 			{
-				Title:    "Tabs",
-				Desc:     "Interactive tab navigation component with default and pill variants.",
-				Path:     "tabs",
-				Template: components.Tabs(),
+				Title:    "Typography",
+				Desc:     "Text components for headings, paragraphs, descriptions, and formatted content.",
+				Path:     "typography",
+				Template: components.Typography(),
+			},
+		},
+	},
+	{
+		Title: "Actions",
+		Path:  "actions",
+		Pages: []*Page{
+			{
+				Title:    "Button",
+				Desc:     "Trigger actions and events with customizable button components.",
+				Path:     "button",
+				Template: components.Button(),
+			},
+			{
+				Title:    "Button Copy",
+				Desc:     "Copy-to-clipboard button with text truncation and visual feedback.",
+				Path:     "button-copy",
+				Template: components.ButtonCopy(),
+			},
+		},
+	},
+	{
+		Title: "Feedback",
+		Path:  "feedback",
+		Pages: []*Page{
+			{
+				Title:    "Flash Message",
+				Desc:     "Toast-style success message for quick feedback.",
+				Path:     "flash-message",
+				Template: components.FlashMessage(),
+			},
+			{
+				Title:    "Notification",
+				Desc:     "Feedback messages with different severity types and icons.",
+				Path:     "notification",
+				Template: components.Notification(),
 			},
 			{
 				Title:    "Tag Status",
 				Desc:     "Status indicators with optional dots and different color variants.",
 				Path:     "tag-status",
 				Template: components.TagStatus(),
-			},
-			{
-				Title:    "Textarea",
-				Desc:     "Multi-line text input field for capturing longer user input with support for labels and validation.",
-				Path:     "textarea",
-				Template: components.Textarea(),
-			},
-			{
-				Title:    "Typography",
-				Desc:     "Text components for headings, paragraphs, descriptions, and formatted content.",
-				Path:     "typography",
-				Template: components.Typography(),
 			},
 		},
 	},

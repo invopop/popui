@@ -50,15 +50,20 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e.GET("/", s.index)
 
 	// Older examples are provided here for testing
-	e.GET("/examples/admin", func(c echo.Context) error {
-		return render(c, http.StatusOK, examples.Admin())
-	})
-	e.GET("/examples/app", func(c echo.Context) error {
-		return render(c, http.StatusOK, examples.App())
-	})
-	e.GET("/examples/console", func(c echo.Context) error {
-		return render(c, http.StatusOK, examples.Console())
-	})
+	e.GET("/examples/admin", renderComponent(examples.Admin()))
+	e.GET("/examples/app", renderComponent(examples.App()))
+	e.GET("/examples/console", renderComponent(examples.Console()))
+
+	// Wizard example
+	e.GET("/examples/wizard", renderComponent(examples.Wizard()))
+	e.GET("/examples/wizard/start", renderComponent(examples.Wizard()))
+	e.GET("/examples/wizard/step-one", renderComponent(examples.WizardStepOne()))
+	e.GET("/examples/wizard/step-two", renderComponent(examples.WizardStepTwo()))
+	e.GET("/examples/wizard/step-three", renderComponent(examples.WizardStepThree()))
+	e.GET("/examples/wizard/step-four", renderComponent(examples.WizardStepFour()))
+	e.GET("/examples/wizard/confirm", renderComponent(examples.WizardConfirm()))
+	e.GET("/examples/wizard/success", renderComponent(examples.WizardSuccess()))
+	e.GET("/examples/wizard/error", renderComponent(examples.WizardError()))
 
 	var startErr error
 	go func() {
@@ -77,6 +82,13 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 		return err
 	}
 	return startErr
+}
+
+func renderComponent(tmp templ.Component) func(c echo.Context) error {
+	return func(c echo.Context) error {
+		return render(c, http.StatusOK, tmp)
+
+	}
 }
 
 func (s *serveOpts) index(c echo.Context) error {

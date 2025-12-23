@@ -17,13 +17,7 @@ templ Index() {
 		Data:        "docs",
 	}) {
 		@sidebar()
-		@popui.Header() {
-			@popui.Breadcrumbs() {
-				@popui.Breadcrumb() {
-					<span>Documentation</span>
-				}
-			}
-		}
+		@popui.Header(props.Header{Title: title()})
 		@popui.Main() {
 			@getStarted()
 			for _, group := range groups {
@@ -33,6 +27,14 @@ templ Index() {
 					}
 				}
 			}
+		}
+	}
+}
+
+templ title() {
+	@popui.Breadcrumbs() {
+		@popui.Breadcrumb() {
+			<span>Documentation</span>
 		}
 	}
 }
@@ -55,7 +57,14 @@ templ getStarted() {
 }
 
 templ article(id, title, description string) {
-	<article x-show={ "page == '" + id + "'" } id={ id } class="flex-1 flex flex-col h-full overflow-y-auto">
+	@popui.Article(props.Article{
+		ID:        id,
+		Class:     "flex-1 flex flex-col",
+		FullWidth: true,
+		Attributes: templ.Attributes{
+			"x-show": "page == '" + id + "'",
+		},
+	}) {
 		<div class="w-full min-w-[768px]">
 			<div class="space-y-8">
 				<div class="space-y-1.5">
@@ -67,7 +76,7 @@ templ article(id, title, description string) {
 				{ children... }
 			</div>
 		</div>
-	</article>
+	}
 }
 
 templ sidebar() {
@@ -78,7 +87,7 @@ templ sidebar() {
 			</a>
 		}
 		@popui.SidebarContent() {
-			@popui.SidebarSection(props.SidebarSection{Title: "Sections"}) {
+			@popui.SidebarSection(props.SidebarSection{Title: "Overview"}) {
 				<li>
 					@sidebarLink("getting-started", "Get started")
 				</li>

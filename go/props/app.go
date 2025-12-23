@@ -10,6 +10,9 @@ type App struct {
 	// console and will load the additional JavaScript required.
 	Console bool
 
+	// Accent color for the application.
+	AccentColor string
+
 	// Head allows for additional headers to be added to the App's Head
 	// component.
 	Head templ.Component
@@ -29,9 +32,21 @@ type Main struct {
 	// Data adds the x-data attribute to the main element.
 	Data string
 
-	// When true, removes padding in the main content area to allow
-	// for edge to edge content such as tables or potentially iframes.
-	EdgeToEdge bool
+	// Center when true will ensure that the main content is centered in
+	// the available space with a maximum width.
+	Center bool
+
+	Attributes templ.Attributes
+}
+
+// Article for configuring the App article component.
+type Article struct {
+	ID    string
+	Class string
+
+	// FullWidth when true makes the article take the full width of the
+	// main content area while maintaining padding.
+	FullWidth bool
 
 	Attributes templ.Attributes
 }
@@ -41,9 +56,18 @@ type Main struct {
 type Header struct {
 	ID    string
 	Class string
+
+	// title allows for a custom title component to be provided on the left
+	// side of the header before the Breadcrumbs.
+	Title templ.Component
+
 	// Data adds the x-data attribute to the header element.
-	Data        string
-	Attributes  templ.Attributes
+	Data string
+
+	// Attributes adds additional attributes to the header element.
+	Attributes templ.Attributes
+
+	// Breadcrumbs is the set of breadcrumbs to show in the header.
 	Breadcrumbs []Breadcrumb
 }
 

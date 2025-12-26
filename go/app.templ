@@ -21,6 +21,8 @@ templ App(opts ...props.App) {
 			Title:       p.Title,
 			Description: p.Description,
 			AlpineJS:    true,
+			Stylesheets: p.Stylesheets,
+			Scripts:     p.Scripts,
 		}) {
 			if p.Head != nil {
 				@p.Head

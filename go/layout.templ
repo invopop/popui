@@ -27,6 +27,12 @@ templ Head(p ...props.Head) {
 		if h.AlpineJS {
 			@AlpineJS()
 		}
+		for _, sheet := range h.Stylesheets {
+			<link href={ sheet.Href } rel={ sheet.RelOrDefault() }/>
+		}
+		for _, script := range h.Scripts {
+			<script src={ script.Src } defer?={ script.Defer } async?={ script.Async }></script>
+		}
 		{ children... }
 	</head>
 }

@@ -13,12 +13,15 @@ templ Index() {
 	@popui.App(props.App{
 		Title:       "PopUI Documentation",
 		Description: "Comprehensive documentation for the PopUI component library.",
-		Head:        headers(),
-		Data:        "docs",
+		Scripts: []props.Script{
+			{Src: "/assets/" + assets.Versioned("scripts", "docs.js")},
+		},
+		Head: headers(),
+		Data: "docs",
 	}) {
 		@sidebar()
 		@popui.Header(props.Header{Title: title()})
-		@popui.Main() {
+		@popui.Main(props.Main{Cloak: true}) {
 			@getStarted()
 			for _, group := range groups {
 				for _, page := range group.Pages {
@@ -40,7 +43,6 @@ templ title() {
 }
 
 templ headers() {
-	<script src={ "/assets/" + assets.Versioned("scripts", "docs.js") }></script>
 	<!-- Prism.js for syntax highlighting -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

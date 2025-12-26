@@ -1,3 +1,5 @@
+// Package examples defines all the example templ components that are both
+// rendered and incorporated into the documentation.
 package examples
 
 import (

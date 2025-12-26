@@ -2,7 +2,7 @@ package props
 
 import "github.com/a-h/templ"
 
-// Breadcrumb defines the props for the Breadcrumb component.
+// Breadcrumbs defines the props for the Breadcrumbs component.
 type Breadcrumbs struct {
 	ID         string
 	Class      string

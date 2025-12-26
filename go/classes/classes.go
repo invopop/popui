@@ -40,13 +40,13 @@ func FormField() string {
 	return "font-sans py-1.5 px-2.5 border border-border-default-secondary w-full rounded-lg text-base outline-none text-foreground tracking-tight caret-foreground-accent placeholder:text-foreground-default-tertiary box-border disabled:bg-background-default-secondary hover:enabled:border-border-default-secondary-hover focus:hover:enabled:border-border-selected-bold focus:ring-0 focus:ring-offset-0"
 }
 
-// FormFieldErrorClasses returns the error styling classes for form fields.
+// FormFieldError returns the error styling classes for form fields.
 // Useful for dynamic class bindings or composing custom error states.
 func FormFieldError() string {
 	return "!text-foreground-critical !border-border-critical-bold !outline-none !caret-foreground-critical"
 }
 
-// FormFieldStateClasses returns CSS classes for form field states.
+// FormFieldState returns CSS classes for form field states.
 // When hasError is true, applies critical styling. When false, applies focus styling.
 func FormFieldState(hasError bool) string {
 	return Join(

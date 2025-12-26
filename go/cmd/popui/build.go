@@ -36,7 +36,7 @@ func (s *buildOpts) cmd() *cobra.Command {
 	return cmd
 }
 
-func (s *buildOpts) run(cmd *cobra.Command, _ []string) error {
+func (s *buildOpts) run(_ *cobra.Command, _ []string) error {
 	// Prepare output folder
 	err := createFolder(buildOutputPath)
 	if err != nil {

@@ -15,6 +15,11 @@ document.addEventListener("alpine:init", () => {
       if (page) {
         this.page = page.replace("#", "");
       }
+      // Scroll main area to top
+      const main = document.querySelector('main');
+      if (main) {
+        main.scrollTo({ top: 0, behavior: 'instant' });
+      }
     },
     goto(id) {
       this.page = id;

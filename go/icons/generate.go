@@ -39,7 +39,9 @@ func generate() error {
 
 		{{ range .Icons }}
 		templ {{ .Name }}() {
-			{{ .Data }}
+			<div style="width: 16px; height: 16px;">
+				{{ .Data }}
+			</div>
 		}
 		{{ end }}
 	`)

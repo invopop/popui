@@ -23,7 +23,7 @@ func build(o *rootOpts) *buildOpts {
 
 const (
 	buildOutputPath = "public"
-	buildAssetsPath = "go/assets"
+	buildAssetsPath = "assets"
 )
 
 func (s *buildOpts) cmd() *cobra.Command {
@@ -77,7 +77,7 @@ func (s *buildOpts) run(cmd *cobra.Command, _ []string) error {
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}
-	err = copyFile(path.Join("go/internal/docs/assets/scripts", "docs.js"), path.Join(scriptsOutPath, "docs.js"))
+	err = copyFile(path.Join("internal/docs/assets/scripts", "docs.js"), path.Join(scriptsOutPath, "docs.js"))
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}

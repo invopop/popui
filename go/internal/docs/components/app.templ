@@ -23,6 +23,13 @@ templ App() {
 		IframeHeight:  "400px",
 	})
 	@modules.Example(modules.ExampleProps{
+		Title:         "App Popup",
+		Description:   "App layout with a header and closer button..",
+		Code:          examples.LoadExample("app_popup.templ"),
+		IframeContent: examples.AppPopupExample(),
+		IframeHeight:  "300px",
+	})
+	@modules.Example(modules.ExampleProps{
 		Title:         "App with Sidebar Navigation",
 		Description:   "App layout that includes a sidebar navigation menu alongside the main content area.",
 		Code:          examples.LoadExample("app_with_sidebar.templ"),

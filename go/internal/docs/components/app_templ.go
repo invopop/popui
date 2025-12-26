@@ -58,6 +58,16 @@ func App() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
+			Title:         "App Popup",
+			Description:   "App layout with a header and closer button..",
+			Code:          examples.LoadExample("app_popup.templ"),
+			IframeContent: examples.AppPopupExample(),
+			IframeHeight:  "300px",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
 			Title:         "App with Sidebar Navigation",
 			Description:   "App layout that includes a sidebar navigation menu alongside the main content area.",
 			Code:          examples.LoadExample("app_with_sidebar.templ"),

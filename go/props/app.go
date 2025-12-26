@@ -61,8 +61,9 @@ type Header struct {
 	ID    string
 	Class string
 
-	// title allows for a custom title component to be provided on the left
-	// side of the header before the Breadcrumbs.
+	// Title allows for a custom title component to be provided on the left
+	// side of the header before the Breadcrumbs. This can be used for logos,
+	// texts, and a closer button.
 	Title templ.Component
 
 	// Data adds the x-data attribute to the header element.

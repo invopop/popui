@@ -57,7 +57,7 @@ func Tags(p props.Tags) templ.Component {
 				var templ_7745c5c3_Var3 string
 				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(p.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/alpine/tags.templ`, Line: 15, Col: 13}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `alpine/tags.templ`, Line: 15, Col: 13}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 				if templ_7745c5c3_Err != nil {
@@ -77,7 +77,7 @@ func Tags(p props.Tags) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(p.Tags + `.length`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/alpine/tags.templ`, Line: 18, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `alpine/tags.templ`, Line: 18, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -90,7 +90,7 @@ func Tags(p props.Tags) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(`(tag, idx) in ` + p.Tags)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/alpine/tags.templ`, Line: 19, Col: 46}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `alpine/tags.templ`, Line: 19, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -103,7 +103,7 @@ func Tags(p props.Tags) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(p.Tags + `.splice(idx, 1); ` + p.OnRemove + `(tag)`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/alpine/tags.templ`, Line: 22, Col: 139}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `alpine/tags.templ`, Line: 22, Col: 139}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -146,7 +146,7 @@ func Tags(p props.Tags) templ.Component {
 				`	}
 				}`)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `go/alpine/tags.templ`, Line: 48, Col: 6}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `alpine/tags.templ`, Line: 48, Col: 6}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {

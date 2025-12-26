@@ -11,10 +11,14 @@ import (
 	"text/template"
 
 	"github.com/invopop/gobl/pkg/here"
-	"github.com/invopop/popui/icons"
 
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
+)
+
+const (
+	themeDefault   = "default"
+	baseThemesPath = "../../icons/themes"
 )
 
 func main() {
@@ -35,7 +39,7 @@ func generate() error {
 
 		{{ range .Icons }}
 		templ {{ .Name }}() {
-			@Show("{{ .Filename }}")
+			{{ .Data }}
 		}
 		{{ end }}
 	`)
@@ -44,14 +48,14 @@ func generate() error {
 		return fmt.Errorf("preparing template: %w", err)
 	}
 
-	files, err := icons.Content.ReadDir(filepath.Join("themes", icons.ThemeDefault))
+	files, err := os.ReadDir(filepath.Join(baseThemesPath, themeDefault))
 	if err != nil {
 		return fmt.Errorf("loading directory: %w", err)
 	}
 
 	type Icon struct {
-		Name     string
-		Filename string
+		Name string
+		Data string
 	}
 
 	caser := cases.Title(language.English)
@@ -68,9 +72,15 @@ func generate() error {
 		name := caser.String(strings.ReplaceAll(filename, "-", " "))
 		name = strings.ReplaceAll(name, " ", "")
 		icon := Icon{
-			Name:     name,
-			Filename: filename,
+			Name: name,
 		}
+
+		data, err := os.ReadFile(filepath.Join(baseThemesPath, themeDefault, file.Name()))
+		if err != nil {
+			return fmt.Errorf("reading icon file %v: %w", file.Name(), err)
+		}
+		// Remove new lines for embedding, this should be safe as SVG ignores whitespace.
+		icon.Data = strings.ReplaceAll(string(data), "\n", "")
 		icons = append(icons, icon)
 	}
 

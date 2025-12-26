@@ -10,8 +10,8 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/icons"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/icons"
 )
 
 func TabsWithIconsExample() templ.Component {

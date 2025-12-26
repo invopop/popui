@@ -53,14 +53,6 @@ templ EmbeddedCSS() {
 	<link href={ path.Join(AssetPath, Versioned("assets", "popui.css")) } rel="stylesheet"/>
 }
 
-// EmbeddedFullCSS provides the full CSS including all Tailwind utilities to include in the `<head>`
-// section of an HTML document. This loads the complete stylesheet from embedded files
-// served by the web server, useful for development or when you need access to all utility classes.
-templ EmbeddedFullCSS() {
-	@FontInterLinks()
-	<link href={ path.Join(AssetPath, Versioned("assets", "popui-full.css")) } rel="stylesheet"/>
-}
-
 // EmbeddedJS provides the JS to include in the `<head>` section of an HTML
 // document that will load the Javascript code needed for dynamic components
 // such as Hamburger menu to function

@@ -11,8 +11,8 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"github.com/invopop/gobl/pkg/here"
 	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/icons"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/icons"
 )
 
 func Admin() templ.Component {

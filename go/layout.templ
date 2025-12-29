@@ -27,8 +27,11 @@ templ Head(p ...props.Head) {
 		if h.AlpineJS {
 			@AlpineJS()
 		}
+		if h.HTMX {
+			@HTMX()
+		}
 		for _, sheet := range h.Stylesheets {
-			<link href={ sheet.Href } rel={ sheet.RelOrDefault() }/>
+			<link href={ sheet.Href } rel={ sheet.RelOrStylesheet() }/>
 		}
 		for _, script := range h.Scripts {
 			<script src={ script.Src } defer?={ script.Defer } async?={ script.Async }></script>
@@ -69,6 +72,11 @@ templ EmbeddedJS() {
 // AlpineJS loads the default AlpineJS library from a CDN.
 templ AlpineJS() {
 	<script src="https://cdn.jsdelivr.net/npm/alpinejs/dist/cdn.min.js" defer></script>
+}
+
+// HTMX loads the HTMX library from a CDN.
+templ HTMX() {
+	<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
 }
 
 // AlpineStoreContenteditable provides the JS to include in an Alpine component

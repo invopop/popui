@@ -8,6 +8,9 @@ type Head struct {
 	// AlpineJS when true includes Alpine.js in the head.
 	AlpineJS bool
 
+	// HTMX when true loads the htmx library
+	HTMX bool
+
 	// Scripts is a list of additional script paths to include.
 	Scripts []Script
 	// Stylesheets is a list of additional stylesheet links to include.
@@ -32,8 +35,8 @@ type Link struct {
 	Rel  string // default rel will be "stylesheet"
 }
 
-// RelOrDefault returns the rel or the default value if not set.
-func (l Link) RelOrDefault() string {
+// RelOrStylesheet returns the rel or "stylesheet" value if not set.
+func (l Link) RelOrStylesheet() string {
 	if l.Rel == "" {
 		return "stylesheet"
 	}

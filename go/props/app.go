@@ -17,6 +17,9 @@ type App struct {
 	// Data adds the x-data attribute to the application body's contents.
 	Data string
 
+	// HTMX when true loads the htmx javascript library
+	HTMX bool
+
 	// Scripts is a list of additional script paths to include as an alternative
 	// to defining in the head property.
 	Scripts []Script

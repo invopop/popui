@@ -108,6 +108,7 @@ func App() templ.Component {
 					{Name: "AccentColor", Type: "string", Default: "", Description: "Accent color for the application"},
 					{Name: "Head", Type: "templ.Component", Default: "nil", Description: "Additional content to include in the <head> section"},
 					{Name: "Data", Type: "string", Default: "", Description: "Alpine.js x-data attribute value for the application body's contents"},
+					{Name: "HTMX", Type: "bool", Default: "false", Description: "When true, includes the HTMX javascript library for enhanced interactivity"},
 					{Name: "Scripts", Type: "[]props.Script", Default: "nil", Description: "Additional script paths to include in the head (alternative to defining in Head property)"},
 					{Name: "Stylesheets", Type: "[]props.Link", Default: "nil", Description: "Additional stylesheet links to include in the head (alternative to defining in Head property)"},
 				},

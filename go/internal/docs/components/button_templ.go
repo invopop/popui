@@ -185,7 +185,7 @@ func Button() templ.Component {
 		})
 		templ_7745c5c3_Err = modules.Example(modules.ExampleProps{
 			Title:       "Anchor Button",
-			Description: "Use AnchorButton for links styled as buttons.",
+			Description: "Set the Href property to render a link styled as a button.",
 			Code:        examples.LoadExample("button_anchor.templ"),
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
@@ -205,41 +205,23 @@ func Button() templ.Component {
 			ctx = templ.InitializeContext(ctx)
 			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
 				Title:       "Button",
-				Description: "Standard button component for triggering actions.",
+				Description: "Button component that can render as either a <button> or <a> element. When Href is set, renders as an anchor link styled as a button.",
 				Items: []modules.APITableItem{
-					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the button element"},
+					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the element"},
 					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with button styles"},
 					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
-					{Name: "Type", Type: "string", Default: "", Description: "Button type: 'button', 'submit', or 'reset'"},
-					{Name: "Variant", Type: "string", Default: "", Description: "Visual style: 'primary', 'secondary', 'danger', or 'transparent'"},
-					{Name: "Size", Type: "string", Default: "md", Description: "Button size: 'sm', 'md' (default), or 'icon'"},
-					{Name: "Disabled", Type: "bool", Default: "false", Description: "Disables the button"},
-					{Name: "Autofocus", Type: "bool", Default: "false", Description: "Automatically focuses the button on page load"},
-					{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission"},
-					{Name: "Value", Type: "string", Default: "", Description: "Value attribute for form submission"},
-					{Name: "Form", Type: "string", Default: "", Description: "Associates button with a form by ID"},
-				},
-			}).Render(ctx, templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, " ")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = modules.APITable(modules.APITableProps{
-				Title:       "AnchorButton",
-				Description: "Anchor element styled as a button for navigation.",
-				Items: []modules.APITableItem{
-					{Name: "ID", Type: "string", Default: "", Description: "Unique identifier for the anchor element"},
-					{Name: "Class", Type: "string", Default: "", Description: "Additional CSS classes to merge with button styles"},
-					{Name: "Attributes", Type: "templ.Attributes", Default: "", Description: "Additional HTML attributes (data-*, aria-*, etc.)"},
-					{Name: "Variant", Type: "string", Default: "", Description: "Visual style: 'primary', 'secondary', 'danger', or 'transparent'"},
-					{Name: "Size", Type: "string", Default: "md", Description: "Button size: 'sm', 'md' (default), or 'icon'"},
-					{Name: "Href", Type: "templ.SafeURL", Default: "", Description: "URL destination for the link"},
-					{Name: "Target", Type: "string", Default: "", Description: "Target attribute: '_blank', '_self', etc."},
-					{Name: "Rel", Type: "string", Default: "", Description: "Rel attribute for link relationship"},
-					{Name: "Download", Type: "bool", Default: "false", Description: "Triggers download of the linked resource"},
+					{Name: "Variant", Type: "string", Default: "primary", Description: "Visual style: 'primary', 'secondary', 'danger', or 'transparent'"},
+					{Name: "Size", Type: "string", Default: "md", Description: "Button size: 'sm', 'md' (default), 'lg', or 'icon'"},
+					{Name: "Type", Type: "string", Default: "", Description: "Button type: 'button', 'submit', or 'reset' (form buttons only)"},
+					{Name: "Name", Type: "string", Default: "", Description: "Name attribute for form submission (form buttons only)"},
+					{Name: "Value", Type: "string", Default: "", Description: "Value attribute for form submission (form buttons only)"},
+					{Name: "Form", Type: "string", Default: "", Description: "Associates button with a form by ID (form buttons only)"},
+					{Name: "Disabled", Type: "bool", Default: "false", Description: "Disables the button (form buttons only)"},
+					{Name: "Autofocus", Type: "bool", Default: "false", Description: "Automatically focuses the button on page load (form buttons only)"},
+					{Name: "Href", Type: "templ.SafeURL", Default: "", Description: "URL destination; when set, renders as an anchor link"},
+					{Name: "Target", Type: "string", Default: "", Description: "Target attribute: '_blank', '_self', etc. (anchor buttons only)"},
+					{Name: "Rel", Type: "string", Default: "", Description: "Rel attribute for link relationship (anchor buttons only)"},
+					{Name: "Download", Type: "bool", Default: "false", Description: "Triggers download of the linked resource (anchor buttons only)"},
 				},
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {

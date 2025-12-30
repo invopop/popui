@@ -13,7 +13,11 @@ templ CardFileExample() {
 		}) {
 			<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
 		}
-		@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+		@popui.Button(props.Button{
+			Variant:  "transparent",
+			Href:     "#",
+			Download: true,
+		}) {
 			@icons.Download()
 			Download
 		}

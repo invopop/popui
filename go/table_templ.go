@@ -246,10 +246,10 @@ func TablePagination(p ...props.TablePagination) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = AnchorButton(props.AnchorButton{
+		templ_7745c5c3_Err = Button(props.Button{
 			Href:    prp.FirstPageURL,
-			Size:    "icon",
-			Variant: "transparent",
+			Size:    props.ButtonSizeIcon,
+			Variant: props.ButtonVariantTransparent,
 			Class: classes.Join(map[string]bool{
 				"pointer-events-none opacity-30": prp.CurrentPage == 1,
 			}),
@@ -278,10 +278,10 @@ func TablePagination(p ...props.TablePagination) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = AnchorButton(props.AnchorButton{
+		templ_7745c5c3_Err = Button(props.Button{
 			Href:    prp.PrevPageURL,
-			Size:    "icon",
-			Variant: "transparent",
+			Size:    props.ButtonSizeIcon,
+			Variant: props.ButtonVariantTransparent,
 			Class: classes.Join(map[string]bool{
 				"pointer-events-none opacity-30": prp.CurrentPage == 1,
 			}),
@@ -343,10 +343,10 @@ func TablePagination(p ...props.TablePagination) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = AnchorButton(props.AnchorButton{
+		templ_7745c5c3_Err = Button(props.Button{
 			Href:    prp.NextPageURL,
-			Size:    "icon",
-			Variant: "transparent",
+			Size:    props.ButtonSizeIcon,
+			Variant: props.ButtonVariantTransparent,
 			Class: classes.Join(map[string]bool{
 				"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
 			}),
@@ -375,10 +375,10 @@ func TablePagination(p ...props.TablePagination) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = AnchorButton(props.AnchorButton{
+		templ_7745c5c3_Err = Button(props.Button{
 			Href:    prp.LastPageURL,
-			Size:    "icon",
-			Variant: "transparent",
+			Size:    props.ButtonSizeIcon,
+			Variant: props.ButtonVariantTransparent,
 			Class: classes.Join(map[string]bool{
 				"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
 			}),

@@ -70,10 +70,10 @@ templ TablePagination(p ...props.TablePagination) {
 			<div class="flex items-center gap-2">
 				<div class="flex items-center gap-1.5">
 					<div class="flex items-center">
-						@AnchorButton(props.AnchorButton{
+						@Button(props.Button{
 							Href:    prp.FirstPageURL,
-							Size:    "icon",
-							Variant: "transparent",
+							Size:    props.ButtonSizeIcon,
+							Variant: props.ButtonVariantTransparent,
 							Class: classes.Join(map[string]bool{
 								"pointer-events-none opacity-30": prp.CurrentPage == 1,
 							}),
@@ -83,10 +83,10 @@ templ TablePagination(p ...props.TablePagination) {
 						}) {
 							@icons.ScrollLeft()
 						}
-						@AnchorButton(props.AnchorButton{
+						@Button(props.Button{
 							Href:    prp.PrevPageURL,
-							Size:    "icon",
-							Variant: "transparent",
+							Size:    props.ButtonSizeIcon,
+							Variant: props.ButtonVariantTransparent,
 							Class: classes.Join(map[string]bool{
 								"pointer-events-none opacity-30": prp.CurrentPage == 1,
 							}),
@@ -112,10 +112,10 @@ templ TablePagination(p ...props.TablePagination) {
 						</span>
 					</div>
 					<div class="flex items-center">
-						@AnchorButton(props.AnchorButton{
+						@Button(props.Button{
 							Href:    prp.NextPageURL,
-							Size:    "icon",
-							Variant: "transparent",
+							Size:    props.ButtonSizeIcon,
+							Variant: props.ButtonVariantTransparent,
 							Class: classes.Join(map[string]bool{
 								"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
 							}),
@@ -125,10 +125,10 @@ templ TablePagination(p ...props.TablePagination) {
 						}) {
 							@icons.ArrowRight()
 						}
-						@AnchorButton(props.AnchorButton{
+						@Button(props.Button{
 							Href:    prp.LastPageURL,
-							Size:    "icon",
-							Variant: "transparent",
+							Size:    props.ButtonSizeIcon,
+							Variant: props.ButtonVariantTransparent,
 							Class: classes.Join(map[string]bool{
 								"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
 							}),

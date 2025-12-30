@@ -27,77 +27,79 @@ templ Buttons(opts ...props.Buttons) {
 	</div>
 }
 
-// Button provides a button element. See the props button
-// constants for supported sizes and variants.
+// Button provides a button or anchor element styled as a button.
+// If the Anchor property is set, it renders an <a> tag, otherwise a <button> tag.
+// Supports sizes: "sm", "md" (default), "lg", and "icon"
+// Supports variants: "primary", "secondary", "danger" and "transparent"
 templ Button(p ...props.Button) {
 	{{ btn := props.First(p) }}
-	<button
-		if btn.ID != "" {
-			id={ btn.ID }
-		}
-		if btn.Type != "" {
-			type={ btn.Type }
-		}
-		if btn.Name != "" {
-			name={ btn.Name }
-		}
-		if btn.Value != "" {
-			value={ btn.Value }
-		}
-		if btn.Form != "" {
-			form={ btn.Form }
-		}
-		if btn.Disabled {
-			disabled
-		}
-		if btn.Autofocus {
-			autofocus
-		}
-		class={
-			tailwind.Merge(
-				"cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-[3px] rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:translate-y-[1px] box-border",
-				buttonClasses(btn.Variant, btn.Size),
-				btn.Class,
-			),
-		}
-		{ btn.Attributes... }
-	>
-		{ children... }
-	</button>
+	if btn.IsAnchor() {
+		<a
+			if btn.ID != "" {
+				id={ btn.ID }
+			}
+			if btn.Href != "" {
+				href={ btn.Href }
+			}
+			if btn.Target != "" {
+				target={ btn.Target }
+			}
+			if btn.Rel != "" {
+				rel={ btn.Rel }
+			}
+			if btn.Download {
+				download
+			}
+			class={
+				tailwind.Merge(
+					buttonBaseClasses(),
+					buttonClasses(btn.Variant, btn.Size),
+					btn.Class,
+				),
+			}
+			{ btn.Attributes... }
+		>
+			{ children... }
+		</a>
+	} else {
+		<button
+			if btn.ID != "" {
+				id={ btn.ID }
+			}
+			if btn.Type != "" {
+				type={ btn.Type }
+			}
+			if btn.Name != "" {
+				name={ btn.Name }
+			}
+			if btn.Value != "" {
+				value={ btn.Value }
+			}
+			if btn.Form != "" {
+				form={ btn.Form }
+			}
+			if btn.Disabled {
+				disabled
+			}
+			if btn.Autofocus {
+				autofocus
+			}
+			class={
+				tailwind.Merge(
+					buttonBaseClasses(),
+					buttonClasses(btn.Variant, btn.Size),
+					btn.Class,
+				),
+			}
+			{ btn.Attributes... }
+		>
+			{ children... }
+		</button>
+	}
 }
 
-// AnchorButton provides an anchor element styled as a button.
-// Supports sizes: "sm", "md" (default), and "icon"
-// Supports variants: "primary", "secondary", "danger" and "transparent"
-templ AnchorButton(p ...props.AnchorButton) {
-	{{ anchor := props.First(p) }}
-	<a
-		if anchor.ID != "" {
-			id={ anchor.ID }
-		}
-		if anchor.Href != "" {
-			href={ anchor.Href }
-		}
-		if anchor.Target != "" {
-			target={ anchor.Target }
-		}
-		if anchor.Rel != "" {
-			rel={ anchor.Rel }
-		}
-		if anchor.Download {
-			download
-		}
-		class={
-			tailwind.Merge(
-				"cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-1 rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:translate-y-[1px]",
-				buttonClasses(anchor.Variant, anchor.Size),
-				anchor.Class,
-			),
-		}
-		{ anchor.Attributes... }
-	>
-		{ children... }
-	</a>
+func buttonBaseClasses() string {
+	return "cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-[3px] rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:translate-y-[1px] box-border"
 }
 
 func buttonClasses(variant string, size string) string {

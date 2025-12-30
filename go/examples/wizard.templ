@@ -45,7 +45,7 @@ templ Wizard() {
 					</section>
 				}
 				<div class="mt-8">
-					@popui.AnchorButton(props.AnchorButton{
+					@popui.Button(props.Button{
 						Variant: "primary",
 						Href:    "/examples/wizard/step-one",
 					}) {
@@ -146,7 +146,7 @@ templ WizardStepOne() {
 			}
 		}
 		@popui.Footer() {
-			@popui.AnchorButton(props.AnchorButton{
+			@popui.Button(props.Button{
 				Href: "start",
 			}) {
 				@icons.ArrowLeft()
@@ -186,13 +186,13 @@ templ WizardStepTwo() {
 			}
 		}
 		@popui.Footer() {
-			@popui.AnchorButton(props.AnchorButton{
+			@popui.Button(props.Button{
 				Href: "step-one",
 			}) {
 				@icons.ArrowLeft()
 				Atras
 			}
-			@popui.AnchorButton(props.AnchorButton{
+			@popui.Button(props.Button{
 				Variant: "primary",
 				Href:    "step-three",
 			}) {
@@ -261,7 +261,7 @@ templ WizardStepThree() {
 			}
 		}
 		@popui.Footer() {
-			@popui.AnchorButton(props.AnchorButton{
+			@popui.Button(props.Button{
 				Href: "step-two",
 			}) {
 				@icons.ArrowLeft()
@@ -328,7 +328,11 @@ templ WizardStepFour() {
 								}) {
 									<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
 								}
-								@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+								@popui.Button(props.Button{
+									Variant:  "transparent",
+									Href:     "#",
+									Download: true,
+								}) {
 									@icons.Download()
 									Descargar
 								}
@@ -340,7 +344,7 @@ templ WizardStepFour() {
 			}
 		}
 		@popui.Footer() {
-			@popui.AnchorButton(props.AnchorButton{
+			@popui.Button(props.Button{
 				Href: "step-three",
 			}) {
 				@icons.ArrowLeft()
@@ -448,7 +452,7 @@ templ WizardConfirm() {
 							}) {
 								@popui.IconFile()
 							}
-							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+							@popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}) {
 								Ver
 								@icons.ExternalLink()
 							}
@@ -474,7 +478,7 @@ templ WizardConfirm() {
 								}) {
 									<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
 								}
-								@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+								@popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}) {
 									Ver
 									@icons.ExternalLink()
 								}
@@ -486,7 +490,7 @@ templ WizardConfirm() {
 							}) {
 								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
 							}
-							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+							@popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}) {
 								Ver
 								@icons.ExternalLink()
 							}
@@ -496,7 +500,7 @@ templ WizardConfirm() {
 			}
 		}
 		@popui.Footer() {
-			@popui.AnchorButton(props.AnchorButton{
+			@popui.Button(props.Button{
 				Href: "step-four",
 			}) {
 				@icons.ArrowLeft()
@@ -505,7 +509,7 @@ templ WizardConfirm() {
 			@popui.Button(props.Button{Form: "success", Variant: "primary"}) {
 				Confirmar
 			}
-			@popui.AnchorButton(props.AnchorButton{
+			@popui.Button(props.Button{
 				Href:    "error",
 				Variant: "danger",
 			}) {

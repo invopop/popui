@@ -248,7 +248,7 @@ func Wizard() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+					templ_7745c5c3_Err = popui.Button(props.Button{
 						Variant: "primary",
 						Href:    "/examples/wizard/step-one",
 					}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var11), templ_7745c5c3_Buffer)
@@ -675,7 +675,7 @@ func WizardStepOne() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+				templ_7745c5c3_Err = popui.Button(props.Button{
 					Href: "start",
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var25), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
@@ -916,7 +916,7 @@ func WizardStepTwo() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+				templ_7745c5c3_Err = popui.Button(props.Button{
 					Href: "step-one",
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var35), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
@@ -948,7 +948,7 @@ func WizardStepTwo() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+				templ_7745c5c3_Err = popui.Button(props.Button{
 					Variant: "primary",
 					Href:    "step-three",
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var36), templ_7745c5c3_Buffer)
@@ -1259,7 +1259,7 @@ func WizardStepThree() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+				templ_7745c5c3_Err = popui.Button(props.Button{
 					Href: "step-two",
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var48), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
@@ -1632,7 +1632,11 @@ func WizardStepFour() templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{Variant: "transparent"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var63), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = popui.Button(props.Button{
+							Variant:  "transparent",
+							Href:     "#",
+							Download: true,
+						}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var63), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1704,7 +1708,7 @@ func WizardStepFour() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+				templ_7745c5c3_Err = popui.Button(props.Button{
 					Href: "step-three",
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var65), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
@@ -2151,7 +2155,7 @@ func WizardConfirm() templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{Variant: "transparent"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var83), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var83), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -2287,7 +2291,7 @@ func WizardConfirm() templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{Variant: "transparent"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var88), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var88), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -2363,7 +2367,7 @@ func WizardConfirm() templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{Variant: "transparent"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var91), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var91), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -2427,7 +2431,7 @@ func WizardConfirm() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+				templ_7745c5c3_Err = popui.Button(props.Button{
 					Href: "step-four",
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var93), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
@@ -2481,7 +2485,7 @@ func WizardConfirm() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
+				templ_7745c5c3_Err = popui.Button(props.Button{
 					Href:    "error",
 					Variant: "danger",
 				}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var95), templ_7745c5c3_Buffer)

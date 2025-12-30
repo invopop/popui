@@ -56,9 +56,9 @@ func ButtonAnchorExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
-			Href:    "/docs",
+		templ_7745c5c3_Err = popui.Button(props.Button{
 			Variant: props.ButtonVariantPrimary,
+			Href:    "/docs",
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -81,9 +81,9 @@ func ButtonAnchorExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = popui.AnchorButton(props.AnchorButton{
-			Href:    "/docs",
+		templ_7745c5c3_Err = popui.Button(props.Button{
 			Variant: props.ButtonVariantSecondary,
+			Href:    "/docs",
 			Target:  "_blank",
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {

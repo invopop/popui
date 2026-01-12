@@ -2,24 +2,11 @@ package props
 
 import "github.com/a-h/templ"
 
-// Accordion provides props for the details element wrapper
+// Accordion Templ component props
 type Accordion struct {
-	ID         string
 	Class      string
-	Attributes templ.Attributes
+	Title      string
 	Open       bool
-}
-
-// AccordionTrigger provides props for the clickable summary element
-type AccordionTrigger struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-}
-
-// AccordionContent provides props for the collapsible content area
-type AccordionContent struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
+	Scrollable bool
+	Attrs      templ.Attributes
 }

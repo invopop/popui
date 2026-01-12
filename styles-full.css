@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "./svelte/src/lib/tailwind.theme.css";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@import "./components.css";

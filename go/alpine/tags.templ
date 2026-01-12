@@ -9,17 +9,17 @@ import (
 
 templ Tags(p props.Tags) {
 	{{ id := uniuri.New() }}
-	<div class="flex flex-col gap-1">
+	<div class={ classes.TagsWrapper }>
 		if p.Label != "" {
-			@popui.Label(props.Label{ID: id}) {
+			@popui.InputLabel(props.Label{ID: id}) {
 				{ p.Label }
 			}
 		}
-		<ul x-show={ p.Tags + `.length` } class="flex items-center gap-2 flex-wrap">
+		<ul x-show={ p.Tags + `.length` } class={ classes.Tags }>
 			<template x-for={ `(tag, idx) in ` + p.Tags } :key="idx">
-				<li class="inline-flex items-center gap-1 rounded border border-border bg-background-success-default text-foreground-success-default py-1 pl-1.5 pr-[5px] lining-nums tabular-nums text-sm font-medium">
+				<li class={ classes.Tag }>
 					<span x-text="tag"></span>
-					<button class="text-foreground-success-default" data-tooltip="remove tag" @click={ p.Tags + `.splice(idx, 1); ` + p.OnRemove + `(tag)` }>
+					<button class={ classes.TagButton } data-tooltip="remove tag" @click={ p.Tags + `.splice(idx, 1); ` + p.OnRemove + `(tag)` }>
 						@popui.CloseIcon()
 					</button>
 				</li>
@@ -28,7 +28,7 @@ templ Tags(p props.Tags) {
 		if !p.HideAddInput {
 			{{ addTag := `this.` + p.Tags + `.push(this.tags_newTag); this.` + p.OnAdd + `(this.tags_newTag); this.tags_newTag = ''` }}
 			<div
-				class="flex items-start gap-2 w-full"
+				class={ classes.TagAddInput }
 				x-data={ `{
 					tags_newTag: '',
 					tags_error: '',
@@ -48,14 +48,14 @@ templ Tags(p props.Tags) {
 				}` }
 			>
 				<div class="flex-1">
-					@popui.Input(props.Input{ID: id, Attributes: templ.Attributes{
+					@popui.InputText(props.InputText{ID: id, Attrs: templ.Attributes{
 						"x-model":        "tags_newTag",
 						"@keydown.enter": "tags_addTag",
-						":class":         "{ '" + classes.FormFieldError() + "': tags_error }",
-					}, Error: props.Error{Attributes: templ.Attributes{"x-text": "tags_error"}}})
+						":class":         "{ '" + classes.InputTextError + "': tags_error }",
+					}, Error: props.Error{Attrs: templ.Attributes{"x-text": "tags_error"}}})
 				</div>
-				<div class="mt-0.5">
-					@popui.Button(props.Button{Attributes: templ.Attributes{"@click": "tags_addTag"}}) {
+				<div class={ classes.TagAddButton }>
+					@popui.Button(props.Button{Attrs: templ.Attributes{"@click": "tags_addTag"}}) {
 						Add
 					}
 				</div>

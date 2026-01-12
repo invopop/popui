@@ -1,14 +1,18 @@
 package examples
 
-import (
-	popui "github.com/invopop/popui/go"
-	"github.com/invopop/popui/go/props"
-)
+import popui "github.com/invopop/popui/go"
 
 templ Prose() {
-	@popui.App(props.App{Title: "Invopop - Appkit Prose"}) {
-		@popui.Main(props.Main{Center: true}) {
-			@popui.Article() {
+	<html>
+		<head>
+			<title>Invopop - Appkit Prose</title>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			@popui.EmbeddedCSS()
+			@popui.DefaultPopupScripts()
+		</head>
+		<body>
+			<main>
 				@popui.Prose() {
 					<p class="lead">
 						Until now, trying to style an article, document, or blog post with Tailwind has been a
@@ -350,7 +354,7 @@ templ Prose() {
 						What I've written here is probably long enough, but adding this final sentence can't hurt.
 					</p>
 				}
-			}
-		}
-	}
+			</main>
+		</body>
+	</html>
 }

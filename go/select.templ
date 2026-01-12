@@ -3,64 +3,42 @@ package popui
 import (
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/tailwind"
 )
 
-// Select provides a select element. By default it renders a native dropdown control
-// with custom styling.
-//
-// If the Label property is provided, a simple label will be rendered above the select.
-// The children slot is used for the option elements.
-templ Select(p ...props.Select) {
-	{{ prp := props.First(p) }}
-	<div class="flex flex-col space-y-2">
-		if prp.Label != "" {
-			@Label(props.Label{ID: prp.ID}) {
-				{ prp.Label }
+// Select provides a select element.
+// It provides an InputLabel component at the top if Label prop is present.
+// It provides an InputError component at the botton if Error prop is present.
+templ Select(p props.Select) {
+	<div class={ classes.SelectWrapper }>
+		if p.Label != "" {
+			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass, Hint: p.LabelHint}) {
+				{ p.Label }
 			}
 		}
 		<select
-			id={ prp.ID }
-			class={ tailwind.Merge(
-					classes.FormField(),
-					"pl-2",
-					selectHeightClasses(prp),
-					classes.FormFieldState(!prp.Error.Empty()),
-					prp.Class,
-				) }
-			if !prp.Multiple {
-				style="appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iI0YzRjRGNiIvPgo8cGF0aCBkPSJNNi41IDguMjUwMDRMMTAgMTEuNzVMMTMuNSA4LjI1IiBzdHJva2U9IiMwMzA3MTIiIHN0cm9rZS13aWR0aD0iMS4xIi8+Cjwvc3ZnPgo='); background-repeat: no-repeat; background-position: right 0.375rem center; background-size: 1.25rem 1.25rem;"
-			}
-			if prp.Disabled {
+			id={ p.ID }
+			class={ templ.KV(classes.SelectBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+			if p.Disabled {
 				disabled
 			}
-			if prp.Autofocus {
+			if p.Autofocus {
 				autofocus
 			}
-			if prp.Multiple {
+			if p.Multiple {
 				multiple
 			}
-			if prp.Required {
+			if p.Required {
 				required
 			}
-			if prp.Name != "" {
-				name={ prp.Name }
+			if p.Name != "" {
+				name={ p.Name }
 			}
-			{ prp.Attributes... }
+			{ p.Attrs... }
 		>
 			{ children... }
 		</select>
-		if !prp.Error.Empty() {
-			@InputError(prp.Error)
+		if !p.Error.Empty() {
+			@InputError(p.Error)
 		}
 	</div>
-}
-
-func selectHeightClasses(prp props.Select) string {
-	return classes.Join(
-		map[string]bool{
-			"h-8 pr-9":    !prp.Multiple,
-			"h-auto pr-2": prp.Multiple,
-		},
-	)
 }

@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Popui - Input</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/@invopop/popui@0.0.52/dist/popui.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="p-5 space-y-4 max-w-md">
+    <!-- Without label -->
+    <div class="popui-textarea-wrapper">
+      <textarea class="popui-textarea" rows="6"></textarea>
+    </div>
+
+    <!-- With label -->
+    <div class="popui-textarea-wrapper">
+      <label for="textarea-with-label" class="popui-label">With label</label>
+      <textarea id="textarea-with-label" class="popui-textarea" rows="6"></textarea>
+    </div>
+
+    <!-- With error -->
+    <div class="popui-select-wrapper">
+      <label for="textarea-with-error" class="popui-label">With error</label>
+      <textarea id="textarea-with-error" class="popui-textarea kit-input--error" rows="6"></textarea>
+      <p class="popui-error">Error: Some stuff is wrong</p>
+    </div>
+  </body>
+</html>

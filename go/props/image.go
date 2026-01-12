@@ -2,11 +2,10 @@ package props
 
 import "github.com/a-h/templ"
 
-// Image properties for displaying images.
+// Image Templ component props
 type Image struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-	Src        string
-	Alt        string
+	Src   string
+	Alt   string
+	Class string
+	Attrs templ.Attributes
 }

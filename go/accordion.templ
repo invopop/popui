@@ -1,73 +1,26 @@
 package popui
 
 import (
+	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/tailwind"
 )
 
-// Accordion provides a details element wrapper with base styles
-templ Accordion(p ...props.Accordion) {
-	{{ var prp = props.First(p) }}
+// Accordion provides a details html element with a fancy accordion transition
+templ Accordion(p props.Accordion) {
 	<details
-		if prp.ID != "" {
-			id={ prp.ID }
-		}
-		if prp.Open {
+		if p.Open {
 			open
 		}
 		class={
-			tailwind.Merge(
-				"w-full group rounded-lg border border-border-default-secondary bg-background-default-secondary p-2 backdrop-blur-[2px] table [&>:not(summary)]:block overflow-hidden",
-				prp.Class,
-			),
+			templ.KV(classes.Accordion, p.Class == ""),
+			templ.KV(classes.AccordionScrollable, p.Scrollable),
+			templ.KV(p.Class, p.Class != ""),
 		}
-		{ prp.Attributes... }
+		{ p.Attrs... }
 	>
-		{ children... }
-	</details>
-}
-
-// AccordionTrigger provides the clickable summary element
-templ AccordionTrigger(p ...props.AccordionTrigger) {
-	{{ var prp = props.First(p) }}
-	<summary
-		if prp.ID != "" {
-			id={ prp.ID }
-		}
-		class={
-			tailwind.Merge(
-				"cursor-pointer list-none relative pl-6 text-foreground text-base font-medium block",
-				"before:content-[''] before:absolute before:left-0 before:top-[50%] before:w-4 before:h-4",
-				"before:bg-[url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYuMDAwMDUgMTJMMTAgNy45OTk5NEw2IDQiIHN0cm9rZT0iIzZCNzI4MCIvPjwvc3ZnPg==')]",
-				"before:bg-contain before:bg-no-repeat before:-translate-y-1/2 before:rotate-0 before:transition-transform before:duration-300 before:ease-in-out",
-				"group-open:before:rotate-90",
-				"[&::-webkit-details-marker]:hidden",
-				prp.Class,
-			),
-		}
-		{ prp.Attributes... }
-	>
-		{ children... }
-	</summary>
-}
-
-// AccordionContent provides the collapsible content area
-templ AccordionContent(p ...props.AccordionContent) {
-	{{ var prp = props.First(p) }}
-	<div
-		if prp.ID != "" {
-			id={ prp.ID }
-		}
-		class={
-			tailwind.Merge(
-				"mt-4 grid transition-[grid-template-rows] duration-300 ease-in-out grid-rows-[0fr] group-open:grid-rows-[1fr]",
-				prp.Class,
-			),
-		}
-		{ prp.Attributes... }
-	>
-		<div class="overflow-hidden flex flex-col gap-4 p-2 min-h-0 w-max">
+		<summary>{ p.Title }</summary>
+		<div class={ classes.AccordionContent }>
 			{ children... }
 		</div>
-	</div>
+	</details>
 }

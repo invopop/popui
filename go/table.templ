@@ -1,181 +1,60 @@
 package popui
 
 import (
-	"fmt"
 	"github.com/invopop/popui/go/classes"
-	"github.com/invopop/popui/go/icons"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/tailwind"
-	"golang.org/x/text/language"
-	"golang.org/x/text/message"
 )
 
 // Table provides a table element with the popui class. Define the rest of the
-// table with the structure you'd normally expect, including `<thead>`, `<tbody>`,
-// `<tr>`, `<th>`, and `<td>` elements. The table automatically styles these elements
-// with appropriate borders, padding, and colors.
-// Variant "card" adds an outer border and rounded corners.
-templ Table(p ...props.Table) {
-	{{ prp := props.First(p) }}
-	<div
-		class={
-			tailwind.Merge(
-				"overflow-hidden has-[[role=menu]]:overflow-visible",
-				classes.Join(map[string]bool{
-					"border border-border rounded-lg": prp.Variant == "card",
-				}),
-			),
-		}
-	>
+// table with the structure you'd normally expect, including `<col />`, `<thead>` and
+// `<tbody>` sections.
+templ Table(opts ...props.Table) {
+	{{ p := props.First(opts) }}
+	<div class={ classes.TableWrapper }>
 		<table
-			if prp.ID != "" {
-				id={ prp.ID }
+			class={
+				templ.KV(classes.Table, p.Class == ""),
+				templ.KV(classes.TableClickable, p.Clickable),
+				templ.KV(p.Class, p.Class != ""),
 			}
-			class={ tailwind.Merge(
-				"table-fixed w-full border-collapse border-0 font-sans text-base flex-1 rounded-lg bg-background [&_tr]:data-[state=disabled]:opacity-30 [&_td>div]:flex [&_td>div]:items-center [&_td>div]:gap-2 [&_th]:border-b [&_th]:border-border [&_th]:text-left [&_th]:bg-background [&_th]:box-border [&_th]:p-2 [&_th]:font-sans [&_th]:text-base [&_th]:font-normal [&_th]:h-10 [&_th]:text-foreground-default-secondary [&_th:first-child]:pl-4 [&_th:last-child]:pr-4 [&_td]:border-b [&_td]:border-border [&_td]:text-left [&_td]:bg-background [&_td]:box-border [&_td]:p-2 [&_td]:font-sans [&_td]:text-base [&_td]:font-normal [&_td]:h-10 [&_td]:text-foreground [&_td:first-child]:pl-4 [&_td:first-child]:font-medium [&_td:last-child]:pr-4 [&_tr:last-child_td]:border-b-0 [&_td:has([role=menu])]:py-1.5 [&_th:has([role=menu])]:py-1.5",
-				prp.Class,
-			) }
-			{ prp.Attributes... }
+			{ p.Attrs... }
 		>
 			{ children... }
 		</table>
 	</div>
 }
 
-// TablePagination provides pagination controls for tables with page navigation,
-// rows per page selector, and total count display. Supports a children slot for
-// custom action buttons. Uses AnchorButton for URL-based navigation.
-templ TablePagination(p ...props.TablePagination) {
-	{{ prp := props.First(p) }}
-	{{
-		currentPageStr := fmt.Sprintf("%d", prp.CurrentPage)
-		totalPagesStr := fmt.Sprintf("%d", prp.TotalPages)
-		printer := message.NewPrinter(language.English)
-		totalItemsStr := printer.Sprintf("%d", prp.TotalItems)
-		itemsLabel := paginationItemsLabel(prp.ItemsLabel)
-	}}
-	<div
-		if prp.ID != "" {
-			id={ prp.ID }
-		}
-		class={
-			tailwind.Merge(
-				"flex items-center justify-between h-11 px-4 py-[5px] bg-background backdrop-blur-[10px] border-t border-border-default-default",
-				prp.Class,
-			),
-		}
-		{ prp.Attributes... }
-	>
-		<div class="flex items-center gap-3">
-			<div class="flex items-center gap-2">
-				<div class="flex items-center gap-1.5">
-					<div class="flex items-center">
-						@Button(props.Button{
-							Href:    prp.FirstPageURL,
-							Size:    props.ButtonSizeIcon,
-							Variant: props.ButtonVariantTransparent,
-							Class: classes.Join(map[string]bool{
-								"pointer-events-none opacity-30": prp.CurrentPage == 1,
-							}),
-							Attributes: templ.Attributes{
-								"aria-label": "First page",
-							},
-						}) {
-							@icons.ScrollLeft()
-						}
-						@Button(props.Button{
-							Href:    prp.PrevPageURL,
-							Size:    props.ButtonSizeIcon,
-							Variant: props.ButtonVariantTransparent,
-							Class: classes.Join(map[string]bool{
-								"pointer-events-none opacity-30": prp.CurrentPage == 1,
-							}),
-							Attributes: templ.Attributes{
-								"aria-label": "Previous page",
-							},
-						}) {
-							@icons.ArrowLeft()
-						}
+// TableCell optionally provides a convenience wrapper around the `<td>` element
+// with support for right-aligning the content and displaying an avatar with the
+// initial of the content.
+templ TableCell(opts ...props.TableCell) {
+	{{ p := props.First(opts) }}
+	<td class={ templ.KV(classes.TableCellRight, p.RightAlign) }>
+		if (p.Content != "") {
+			if (p.UseInitial) {
+				<div>
+					<div class={ classes.AvatarBase, classes.AvatarInitial }>
+						{ getInitial(p.Content) }
 					</div>
-					<div class="flex items-center gap-1.5">
-						@Input(props.Input{
-							Type:  "number",
-							Value: currentPageStr,
-							Class: "w-12",
-							Attributes: templ.Attributes{
-								"min": "1",
-								"max": totalPagesStr,
-							},
-						})
-						<span class="text-sm text-foreground-default-secondary whitespace-nowrap">
-							/ { totalPagesStr }
-						</span>
-					</div>
-					<div class="flex items-center">
-						@Button(props.Button{
-							Href:    prp.NextPageURL,
-							Size:    props.ButtonSizeIcon,
-							Variant: props.ButtonVariantTransparent,
-							Class: classes.Join(map[string]bool{
-								"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
-							}),
-							Attributes: templ.Attributes{
-								"aria-label": "Next page",
-							},
-						}) {
-							@icons.ArrowRight()
-						}
-						@Button(props.Button{
-							Href:    prp.LastPageURL,
-							Size:    props.ButtonSizeIcon,
-							Variant: props.ButtonVariantTransparent,
-							Class: classes.Join(map[string]bool{
-								"pointer-events-none opacity-30": prp.CurrentPage == prp.TotalPages,
-							}),
-							Attributes: templ.Attributes{
-								"aria-label": "Last page",
-							},
-						}) {
-							@icons.ScrollRight()
-						}
-					</div>
+					@tableCellContent(p)
 				</div>
-				if prp.ShowRowsPerPage {
-					@Select(props.Select{
-						Class: "w-[105px]",
-						Attributes: templ.Attributes{
-							"aria-label": "Rows per page",
-						},
-					}) {
-						for _, option := range paginationRowsPerPageOptions(prp.RowsPerPageOptions) {
-							{{ optionStr := fmt.Sprintf("%d", option) }}
-							<option value={ optionStr } selected?={ option == prp.RowsPerPage }>
-								{ optionStr } rows
-							</option>
-						}
-					}
-				}
-			</div>
-			if prp.TotalItems > 0 {
-				<span class="text-sm text-foreground-default-secondary">
-					{ totalItemsStr } { itemsLabel }
-				</span>
+			} else {
+				@tableCellContent(p)
 			}
-		</div>
-		{ children... }
-	</div>
+		} else {
+			{ children... }
+		}
+	</td>
 }
 
-func paginationItemsLabel(label string) string {
-	if label == "" {
-		return "items"
-	}
-	return label
+templ tableCellContent(p props.TableCell) {
+	<span class={ templ.KV(classes.Subtitle, p.Bold) }>{ p.Content }</span>
 }
 
-func paginationRowsPerPageOptions(options []int) []int {
-	if len(options) == 0 {
-		return []int{10, 25, 50, 100}
+func getInitial(text string) string {
+	if len(text) > 0 {
+		return string(text[0])
 	}
-	return options
+
+	return ""
 }

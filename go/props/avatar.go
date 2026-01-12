@@ -2,16 +2,10 @@ package props
 
 import "github.com/a-h/templ"
 
-// Avatar sizes
-const (
-	AvatarSizeLarge string = "lg"
-)
-
-// Avatar provides props for the avatar component
+// Avatar Templ component props
 type Avatar struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-	Initial    string
-	Size       string
+	Class   string
+	Initial string
+	Large   bool
+	Attrs   templ.Attributes
 }

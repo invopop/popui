@@ -1,0 +1,84 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+// InputRadio provides a simple input type radio element. Label is optional.
+// If no ID is provided, one will be generated to ensure
+// any label is correctly linked to the input element.
+templ InputRadio(p props.InputRadio) {
+	{{ p = p.GenerateID() }}
+	if p.Label != "" {
+		<div class={ classes.CheckboxWrapper }>
+			@inputRadio(p)
+			<label
+				for={ p.ID }
+				class={ templ.KV(classes.CheckboxLabel, p.LabelClass == ""), templ.KV(p.LabelClass, p.LabelClass != "") }
+			>
+				if p.Description != "" {
+					<span class={ classes.RadioLabel }>{ p.Label }</span>
+					<p class={ classes.RadioDescription }>{ p.Description }</p>
+				} else {
+					{ p.Label }
+				}
+			</label>
+		</div>
+	} else {
+		@inputRadio(p)
+	}
+}
+
+// InputRadioCard provides an alternative representation of a regular radio
+// button as a card with a description.
+templ InputRadioCard(p props.InputRadio) {
+	{{ p = p.GenerateID() }}
+	<label
+		for={ p.ID }
+		class={ classes.RadioWrapper }
+	>
+		<div class={ classes.RadioWrapperInner }>
+			<div class={ classes.RadioLabelWrapper }>
+				<span class={ classes.RadioLabel }>{ p.Label }</span>
+				if p.Description != "" {
+					<p class={ classes.RadioDescription }>
+						{ p.Description }
+					</p>
+				}
+			</div>
+			@inputRadio(p)
+		</div>
+	</label>
+}
+
+// InputRadioTheme is a wrapper for the InputRadio component that applies a theme
+templ InputRadioTheme(p props.InputRadioTheme) {
+	{{ p = p.GenerateVariant() }}
+	@inputRadio(p.ToRadioProp())
+}
+
+// Valid variants are "sherwood", "ocean", "grape", "metal" and "cosmos"
+templ inputRadio(p props.InputRadio) {
+	<input
+		type="radio"
+		id={ p.ID }
+		class={ templ.KV(classes.Radio, p.Class == ""), templ.KV(p.Class, p.Class != "") }
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
+		if p.Checked {
+			checked
+		}
+		if p.Autofocus {
+			autofocus
+		}
+		if p.Required {
+			required
+		}
+		{ p.Attrs... }
+	/>
+}

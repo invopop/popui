@@ -2,26 +2,11 @@ package props
 
 import "github.com/a-h/templ"
 
-// Page Templ component props
-type Page struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-}
-
-// PageContainer Templ component props
-type PageContainer struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-}
-
 // PageHeader Templ component props
 type PageHeader struct {
-	ID          string
-	Class       string
-	Attributes  templ.Attributes
 	Title       string
+	Class       string
+	Attrs       templ.Attributes
 	Breadcrumbs []PageBreadcrumb
 }
 
@@ -33,39 +18,11 @@ type PageBreadcrumb struct {
 	Attrs templ.Attributes
 }
 
-// PageContent Templ component props
-type PageContent struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-}
-
 // PageSection Templ component props
 type PageSection struct {
-	ID          string
-	Class       string
-	Attributes  templ.Attributes
-	Title       string
-	Description string
-}
-
-// PageSections Templ component props
-type PageSections struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-}
-
-// PageActions Templ component props
-type PageActions struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-}
-
-// PageTitle Templ component props
-type PageTitle struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
+	Title            string
+	Description      string
+	Class            string
+	FullWidthContent bool
+	Attrs            templ.Attributes
 }

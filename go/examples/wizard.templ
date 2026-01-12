@@ -1,158 +1,155 @@
 package examples
 
-import (
-	popui "github.com/invopop/popui/go"
-	"github.com/invopop/popui/go/icons"
-	"github.com/invopop/popui/go/props"
-)
+import "github.com/invopop/popui/go"
+import "github.com/invopop/popui/go/props"
+import "github.com/invopop/popui/go/classes"
+import "github.com/invopop/popui/icons"
 
 templ wizardLayout() {
-	@popui.App(props.App{Title: "Invopop - Wizard", AccentColor: "black"}) {
-		@popui.Header(props.Header{
-			Title: verifactuLogo(),
-		})
-		{ children... }
-	}
-}
-
-templ verifactuTitle(text string) {
-	<span class="flex items-center gap-2">
-		@verifactuLogo()
-		{ text }
-	</span>
-}
-
-templ Wizard() {
-	@wizardLayout() {
-		@popui.Main(props.Main{Center: true}) {
-			@popui.Article() {
-				@popui.Title() {
-					Registro VERI*FACTU
+	<html>
+		<head>
+			<title>Invopop - Wizard</title>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<style>
+				:root {
+					--workspace-accent-color: black;
 				}
-				@popui.Prose() {
-					<section>
-						<p>Firma el acuerdo para poder enviar tus facturas a la AEAT en tu nombre.</p>
-						<p>Para completar el proceso necesitarás:</p>
-						<ul>
-							<li>Descargar el acuerdo</li>
-							<li>Firmar el acuerdo (con firma digital o manuscrita)</li>
-						</ul>
-						<p>Si la firma es manuscrita, también necesitarás:</p>
-						<ul>
-							<li>Documento de representación legal</li>
-							<li>Tu DNI, NIF o Pasaporte</li>
-						</ul>
-					</section>
-				}
-				<div class="mt-8">
-					@popui.Button(props.Button{
-						Variant: "primary",
-						Href:    "/examples/wizard/step-one",
-					}) {
-						Comenzar
-						@icons.ArrowRight()
-					}
-				</div>
+			</style>
+			@popui.EmbeddedCSS()
+			@popui.EmbeddedJS()
+			@popui.AlpineJS()
+		</head>
+		<body class={ classes.WizardPageWrapper }>
+			@popui.WizardHeader() {
+				@VeriFactuLogo()
 			}
+			{ children... }
+		</body>
+	</html>
+}
+
+templ AppIndex() {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{CenterVertical: true}) {
+			@popui.Title() {
+				Registro VERI*FACTU
+			}
+			@popui.Prose() {
+				<section>
+					<p>Firma el acuerdo para poder enviar tus facturas a la AEAT en tu nombre.</p>
+					<p>Para completar el proceso necesitarás:</p>
+					<ul>
+						<li>Descargar el acuerdo</li>
+						<li>Firmar el acuerdo (con firma digital o manuscrita)</li>
+					</ul>
+					<p>Si la firma es manuscrita, también necesitarás:</p>
+					<ul>
+						<li>Documento de representación legal</li>
+						<li>Tu DNI, NIF o Pasaporte</li>
+					</ul>
+				</section>
+			}
+			<div class="mt-8">
+				@popui.AnchorButton(props.AnchorButton{Variant: "primary", Href: "/wizard/step-one"}) {
+					Comenzar
+					@icons.ArrowRight()
+				}
+			</div>
 		}
 	}
 }
 
-templ WizardStepOne() {
+templ AppStepOne() {
 	@wizardLayout() {
-		@popui.Main(props.Main{Center: true}) {
-			@popui.Article() {
-				@popui.Title() {
-					Revisa y completa los datos
-				}
-				@popui.Description() {
-					Rellena el formulario con los datos de tu empresa y su representante legal
-				}
-				<form id="party-form" action="step-two" method="get">
-					<section class="mt-8">
-						<div class="mb-6">
+		@popui.WizardContent() {
+			@popui.Title() {
+				Revisa y completa los datos
+			}
+			@popui.Description() {
+				Rellena el formulario con los datos de tu empresa y su representante legal
+			}
+			<form id="party-form" action="/wizard/step-two" method="get">
+				<section class="mt-8">
+					<div class="mb-6">
+						@popui.Notification(props.Notification{
+							Text:        "Titulo error",
+							Description: "Descripción",
+							Type:        "error",
+						})
+						<div class="mt-3">
 							@popui.Notification(props.Notification{
-								Text:        "Titulo error",
+								Text:        "Titulo aviso",
 								Description: "Descripción",
-								Type:        "error",
+								Type:        "warning",
 							})
-							<div class="mt-3">
-								@popui.Notification(props.Notification{
-									Text:        "Titulo aviso",
-									Description: "Descripción",
-									Type:        "warning",
-								})
-							</div>
 						</div>
-						@popui.Fieldset() {
-							@popui.Subtitle() {
-								Información de la empresa
-							}
-							@popui.Input(props.Input{
-								ID:       "nombre",
-								Value:    "Proveedor S.A.",
+					</div>
+					@popui.Fieldset() {
+						@popui.Subtitle() {
+							Información de la empresa
+						}
+						@popui.InputText(props.InputText{
+							Label:     "Nombre",
+							LabelHint: "This is the name of the provider",
+							Value:     "Proveedor S.A.",
+							Disabled:  true,
+						})
+						<div class={ classes.FormCellGroup }>
+							@popui.InputText(props.InputText{
+								Label:    "Tipo de documento",
+								Value:    "CIF",
 								Disabled: true,
-							}) {
-								@popui.Label(props.Label{ID: "nombre", Hint: "This is the name of the provider"}) {
-									Nombre
-								}
-							}
-							<div class="flex flex-col gap-5">
-								@popui.Input(props.Input{
-									Label:    "Tipo de documento",
-									Value:    "CIF",
-									Disabled: true,
-								})
-								@popui.Input(props.Input{
-									Label:    "CIF",
-									Value:    "A12345678",
-									Disabled: true,
-								})
-							</div>
+							})
+							@popui.InputText(props.InputText{
+								Label:    "CIF",
+								Value:    "A12345678",
+								Disabled: true,
+							})
+						</div>
+					}
+				</section>
+				@popui.HorizontalDivider()
+				<section>
+					@popui.Fieldset(props.Fieldset{}) {
+						@popui.Subtitle() {
+							Representante legal
 						}
-					</section>
-					@popui.Separator()
-					<section>
-						@popui.Fieldset() {
-							@popui.Subtitle() {
-								Representante legal
-							}
-							<div class="flex flex-col gap-5">
-								@popui.Input(props.Input{
-									Label: "Nombre",
-									Value: "Juan",
-									Error: props.Error{
-										Text: "This name is cooler than expected",
-									},
-								})
-								@popui.Input(props.Input{
-									Label: "Apellidos",
-									Value: "Perez",
-								})
-							</div>
-							<div class="flex flex-col gap-5">
-								@popui.Input(props.Input{
-									Label: "Tipo de documento",
-									Value: "NIF",
-								})
-								@popui.Input(props.Input{
-									Label: "NIF",
-									Value: "A12345678",
-								})
-							</div>
-						}
-					</section>
-				</form>
-			}
+						<div class={ classes.FormCellGroup }>
+							@popui.InputText(props.InputText{
+								Label: "Nombre",
+								Value: "Juan",
+								Error: props.Error{
+									Text: "This name is cooler than expected",
+								},
+							})
+							@popui.InputText(props.InputText{
+								Label: "Apellidos",
+								Value: "Perez",
+							})
+						</div>
+						<div class={ classes.FormCellGroup }>
+							@popui.InputText(props.InputText{
+								Label: "Tipo de documento",
+								Value: "NIF",
+							})
+							@popui.InputText(props.InputText{
+								Label: "NIF",
+								Value: "A12345678",
+							})
+						</div>
+					}
+				</section>
+			</form>
 		}
-		@popui.Footer() {
-			@popui.Button(props.Button{
-				Href: "start",
+		@popui.WizardFooter() {
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard",
 			}) {
 				@icons.ArrowLeft()
 				Atras
 			}
-			@popui.Button(props.Button{Form: "party-form", Variant: "primary"}) {
+			@popui.Button(props.Button{Form: "party-form", Variant: "primary", ShowSpinnerOnClick: true}) {
 				Continuar
 				@icons.ArrowRight()
 			}
@@ -160,87 +157,84 @@ templ WizardStepOne() {
 	}
 }
 
-templ WizardStepTwo() {
+templ AppStepTwo() {
 	@wizardLayout() {
-		@popui.Main(props.Main{Center: true}) {
-			@popui.Article() {
-				@popui.Title() {
-					Descarga y firma el acuerdo
-				}
-				<div class="mt-1">
-					@popui.Description() {
-						En este acuerdo darás consentimiento a Invopop S.L. a emitir facturas en tu nombre.
-						<br/>
-						Para continuar descarga el acuerdo y fírmalo.
-					}
-				</div>
-				<div class="mt-8">
-					@popui.Button(props.Button{Variant: "primary"}) {
-						@icons.Download()
-						Descargar acuerdo
-					}
-				</div>
-				<div class="mt-8 border border-border-default-secondary">
-					<iframe src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf" width="100%" height="600px"></iframe>
-				</div>
+		@popui.WizardContent(props.WizardContent{}) {
+			@popui.Title() {
+				Descarga y firma el acuerdo
 			}
-		}
-		@popui.Footer() {
-			@popui.Button(props.Button{
-				Href: "step-one",
-			}) {
-				@icons.ArrowLeft()
-				Atras
-			}
-			@popui.Button(props.Button{
-				Variant: "primary",
-				Href:    "step-three",
-			}) {
-				Continuar
-				@icons.ArrowRight()
-			}
-		}
-	}
-}
-
-templ WizardStepThree() {
-	@wizardLayout() {
-		@popui.Main(props.Main{Center: true}) {
-			@popui.Article() {
-				@popui.Title() {
-					Sube el acuerdo firmado
-				}
+			<div class="mt-1">
 				@popui.Description() {
-					Si no lo has descargado, vuelve al paso anterior
+					En este acuerdo darás consentimiento a Invopop S.L. a emitir facturas en tu nombre.
+					<br/>
+					Para continuar descarga el acuerdo y fírmalo.
 				}
-				<form id="step-four" action="step-four" method="GET">
-					<section class="mt-8">
-						@popui.Fieldset() {
-							@popui.Subtitle() {
-								1. ¿Cómo vas a firmar el acuerdo?
-							}
-							@popui.Radio(props.Radio{
-								Name:        "type",
-								Label:       "Firma digital con certificado de representación legal",
-								Description: "Recomendado. No necesitarás subir más información.",
-								Value:       "digital",
-								Checked:     true,
-							})
-							@popui.Radio(props.Radio{
-								Name:        "type",
-								Label:       "Firma manuscrita",
-								Description: "Necesitarás subir un documento de representación legal y tu documento de identidad.",
-								Value:       "hand",
-							})
+			</div>
+			<div class="mt-8">
+				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
+					@icons.Download()
+					Descargar acuerdo
+				}
+			</div>
+			<div class="mt-8">
+				<iframe src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf" width="100%" height="600px"></iframe>
+			</div>
+		}
+		@popui.WizardFooter(props.WizardFooter{}) {
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard/step-one",
+			}) {
+				@icons.ArrowLeft()
+				Atras
+			}
+			@popui.AnchorButton(props.AnchorButton{
+				Variant: "primary",
+				Href:    "/wizard/step-three",
+			}) {
+				Continuar
+				@icons.ArrowRight()
+			}
+		}
+	}
+}
+
+templ AppStepThree() {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{}) {
+			@popui.Title() {
+				Sube el acuerdo firmado
+			}
+			@popui.Description() {
+				Si no lo has descargado, vuelve al paso anterior
+			}
+			<form id="step-four" action="/wizard/step-four" method="GET">
+				<section class="mt-8">
+					@popui.Fieldset(props.Fieldset{}) {
+						@popui.Subtitle() {
+							1. ¿Cómo vas a firmar el acuerdo?
 						}
-					</section>
-					<section class="mt-8">
-						@popui.Fieldset() {
-							@popui.Subtitle() {
-								2. Sube el acuerdo firmado
-							}
-							<div
-								x-data="{
+						@popui.InputRadio(props.InputRadio{
+							Name:        "type",
+							Label:       "Firma digital con certificado de representación legal",
+							Description: "Recomendado. No necesitarás subir más información.",
+							Value:       "digital",
+							Checked:     true,
+						})
+						@popui.InputRadio(props.InputRadio{
+							Name:        "type",
+							Label:       "Firma manuscrita",
+							Description: "Necesitarás subir un documento de representación legal y tu documento de identidad.",
+							Value:       "hand",
+						})
+					}
+				</section>
+				<section class="mt-8">
+					@popui.Fieldset(props.Fieldset{}) {
+						@popui.Subtitle() {
+							2. Sube el acuerdo firmado
+						}
+						<div
+							x-data="{
 							loading: false,
 							showLoader() {
 								this.loading = true;
@@ -249,25 +243,24 @@ templ WizardStepThree() {
 								}, 2000)
 							}
 						}"
-								:class="{'animate-pulse opacity-30 pointer-events-none':  loading }"
-							>
-								@popui.InputFile(props.InputFile{Attributes: templ.Attributes{
-									"@change": "showLoader",
-								}})
-							</div>
-						}
-					</section>
-				</form>
-			}
+							:class="{'popui-input-file--loading':  loading }"
+						>
+							@popui.InputFile(props.InputFile{Attrs: templ.Attributes{
+								"@change": "showLoader",
+							}})
+						</div>
+					}
+				</section>
+			</form>
 		}
-		@popui.Footer() {
-			@popui.Button(props.Button{
-				Href: "step-two",
+		@popui.WizardFooter(props.WizardFooter{}) {
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard/step-two",
 			}) {
 				@icons.ArrowLeft()
 				Atras
 			}
-			@popui.Button(props.Button{Form: "step-four", Variant: "primary"}) {
+			@popui.Button(props.Button{Form: "step-four", Variant: "primary", ShowSpinnerOnClick: true}) {
 				Continuar
 				@icons.ArrowRight()
 			}
@@ -275,242 +268,230 @@ templ WizardStepThree() {
 	}
 }
 
-templ WizardStepFour() {
+templ AppStepFour() {
 	@wizardLayout() {
-		@popui.Main(props.Main{Center: true}) {
-			@popui.Article() {
-				@popui.Title() {
-					Sube tu documento de identidad
-				}
-				@popui.Description() {
-					Sube un DNI, NIE o Pasaporte para verificar tu identidad.
-				}
-				<form id="confirm" action="confirm" method="GET">
-					<section class="mt-8">
-						<div class="flex justify-between items-start gap-2 mb-2 items-center">
-							<div class="flex gap-2 items-center">
-								// Quick hack to avoid the icon to be 16x16
-								<span class="[&>div[style*='width']]:!w-auto [&>div[style*='height']]:!h-auto text-dimmed">
-									@icons.IdFront()
-								</span>
-								@popui.Subtitle() {
-									Frente o página principal
-								}
-							</div>
-							@popui.Description() {
-								PDF o JPG (tamaño máximo 10MB)
-							}
-						</div>
-						@popui.InputFile(props.InputFile{})
-					</section>
-					<section class="mt-8">
-						<div class="flex justify-between items-start gap-2 mb-2 items-center">
-							<div class="flex gap-2 items-center">
-								// Quick hack to avoid the icon to be 16x16
-								<span class="[&>div[style*='width']]:!w-auto [&>div[style*='height']]:!h-auto text-dimmed">
-									@icons.IdBack()
-								</span>
-								@popui.Subtitle() {
-									Reverso
-								}
-								@popui.Description() {
-									(Solo en caso de DNI o NIE)
-								}
-							</div>
-							@popui.Description() {
-								PDF o JPG (tamaño máximo 10MB)
-							}
-						</div>
-						<div class="mb-2">
-							@popui.CardFile(props.CardFile{}) {
-								@popui.CardFileInfo(props.CardFileInfo{
-									Label: "dni_back_already_stored.png",
-								}) {
-									<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
-								}
-								@popui.Button(props.Button{
-									Variant:  "transparent",
-									Href:     "#",
-									Download: true,
-								}) {
-									@icons.Download()
-									Descargar
-								}
-							}
-						</div>
-						@popui.InputFile(props.InputFile{})
-					</section>
-				</form>
+		@popui.WizardContent(props.WizardContent{}) {
+			@popui.Title() {
+				Sube tu documento de identidad
 			}
-		}
-		@popui.Footer() {
-			@popui.Button(props.Button{
-				Href: "step-three",
-			}) {
-				@icons.ArrowLeft()
-				Atras
+			@popui.Description() {
+				Sube un DNI, NIE o Pasaporte para verificar tu identidad.
 			}
-			@popui.Button(props.Button{Form: "confirm", Variant: "primary"}) {
-				Continuar
-				@icons.ArrowRight()
-			}
-		}
-	}
-}
-
-templ WizardConfirm() {
-	@wizardLayout() {
-		@popui.Main(props.Main{Center: true}) {
-			@popui.Article() {
-				@popui.Title() {
-					Revisa tus datos
-				}
-				@popui.Description() {
-					Revisa que la información sea correcta. Una vez enviada no podrás editarla.
-				}
-				<form id="success" action="success" method="GET">
-					<section class="mt-8">
-						<div class="flex justify-between items-start gap-2 mb-2 items-center">
-							<div class="flex gap-2 items-center">
-								@icons.Success()
-								@popui.Subtitle() {
-									Información fiscal
-								}
-							</div>
-							@popui.Button(props.Button{Variant: "secondary"}) {
-								@icons.Edit()
-								Editar
+			<form id="confirm" action="/wizard/confirm" method="GET">
+				<section class="mt-8">
+					<div class="popui-layout-between mb-2 items-center">
+						<div class="flex gap-2 items-center">
+							// Quick hack to avoid the icon to be 16x16
+							<span class="popui-full-icon-size text-dimmed">
+								@icons.IdFront()
+							</span>
+							@popui.Subtitle() {
+								Frente o página principal
 							}
 						</div>
-						<div class="mt-4">
-							<div class="font-medium mb-4">
-								@popui.Description() {
-									Información de la empresa
-								}
-							</div>
-							@popui.Table(props.Table{}) {
-								<col style="width: 20%"/>
-								<col style="width: 80%"/>
-								<tbody>
-									<tr>
-										<td>Nombre</td>
-										<td class="font-medium">Proveedor S.A.</td>
-									</tr>
-									<tr>
-										<td>NIF</td>
-										<td class="font-medium">A87654321</td>
-									</tr>
-									<tr>
-										<td>Calle</td>
-										<td class="font-medium">Calle de Eixample, 456, Barcelona, Cataluña, 08001, España</td>
-									</tr>
-								</tbody>
-							}
-						</div>
-						<div class="mt-4">
-							<div class="font-medium mb-4">
-								@popui.Description() {
-									Representante legal
-								}
-							</div>
-							@popui.Table(props.Table{}) {
-								<col style="width: 20%"/>
-								<col style="width: 80%"/>
-								<tbody>
-									<tr>
-										<td>Nombre</td>
-										<td class="font-medium">Juan Perez</td>
-									</tr>
-									<tr>
-										<td>NIF</td>
-										<td class="font-medium">A87654321</td>
-									</tr>
-									<tr>
-										<td>Calle</td>
-										<td class="font-medium">Calle de Eixample, 456, Barcelona, Cataluña, 08001, España</td>
-									</tr>
-								</tbody>
-							}
-						</div>
-					</section>
-					<section class="mt-8">
-						<div class="flex justify-between items-start gap-2 mb-3 items-center">
-							<div class="flex gap-2 items-center">
-								@icons.Success()
-								@popui.Subtitle() {
-									Acuerdo firmado
-								}
-							</div>
-							@popui.Button(props.Button{Variant: "secondary"}) {
-								@icons.Edit()
-								Editar
-							}
-						</div>
-						@popui.CardFile(props.CardFile{}) {
-							@popui.CardFileInfo(props.CardFileInfo{
-								Label: "acuerdo_veri*factu.pdf",
-							}) {
-								@popui.IconFile()
-							}
-							@popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}) {
-								Ver
-								@icons.ExternalLink()
-							}
+						@popui.Description() {
+							PDF o JPG (tamaño máximo 10MB)
 						}
-					</section>
-					<section class="mt-8">
-						<div class="flex justify-between items-start gap-2 mb-3 items-center">
-							<div class="flex gap-2 items-center">
-								@icons.Success()
-								@popui.Subtitle() {
-									Documento de identidad
-								}
-							</div>
-							@popui.Button(props.Button{Variant: "secondary"}) {
-								@icons.Edit()
-								Editar
+					</div>
+					@popui.InputFile(props.InputFile{})
+				</section>
+				<section class="mt-8">
+					<div class="popui-layout-between mb-2 items-center">
+						<div class="flex gap-2 items-center">
+							// Quick hack to avoid the icon to be 16x16
+							<span class="popui-full-icon-size text-dimmed">
+								@icons.IdBack()
+							</span>
+							@popui.Subtitle() {
+								Reverso
+							}
+							@popui.Description() {
+								(Solo en caso de DNI o NIE)
 							}
 						</div>
-						<div class="mb-3">
-							@popui.CardFile(props.CardFile{}) {
-								@popui.CardFileInfo(props.CardFileInfo{
-									Label: "dni_front.png",
-								}) {
-									<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
-								}
-								@popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}) {
-									Ver
-									@icons.ExternalLink()
-								}
-							}
-						</div>
+						@popui.Description() {
+							PDF o JPG (tamaño máximo 10MB)
+						}
+					</div>
+					<div class="mb-2">
 						@popui.CardFile(props.CardFile{}) {
-							@popui.CardFileInfo(props.CardFileInfo{
-								Label: "dni_back.png",
-							}) {
+							<div class="flex gap-2 items-center">
 								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
-							}
-							@popui.Button(props.Button{Variant: "transparent", Href: "#", Download: true}) {
-								Ver
-								@icons.ExternalLink()
+								<p>dni_back_already_stored.png</p>
+							</div>
+							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+								@icons.Download()
+								Descargar
 							}
 						}
-					</section>
-				</form>
-			}
+					</div>
+					@popui.InputFile(props.InputFile{})
+				</section>
+			</form>
 		}
-		@popui.Footer() {
-			@popui.Button(props.Button{
-				Href: "step-four",
+		@popui.WizardFooter(props.WizardFooter{}) {
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard/step-three",
 			}) {
 				@icons.ArrowLeft()
 				Atras
 			}
-			@popui.Button(props.Button{Form: "success", Variant: "primary"}) {
+			@popui.Button(props.Button{Form: "confirm", Variant: "primary", ShowSpinnerOnClick: true}) {
+				Continuar
+				@icons.ArrowRight()
+			}
+		}
+	}
+}
+
+templ ConfirmPage() {
+	@wizardLayout() {
+		@popui.WizardContent(props.WizardContent{}) {
+			@popui.Title() {
+				Revisa tus datos
+			}
+			@popui.Description() {
+				Revisa que la información sea correcta. Una vez enviada no podrás editarla.
+			}
+			<form id="success" action="/wizard/success" method="GET">
+				<section class="mt-8">
+					<div class="popui-layout-between mb-2 items-center">
+						<div class="flex gap-2 items-center">
+							@icons.Success()
+							@popui.Subtitle() {
+								Información fiscal
+							}
+						</div>
+						@popui.Button(props.Button{Variant: "secondary"}) {
+							@icons.Edit()
+							Editar
+						}
+					</div>
+					<div class="mt-4">
+						<div class="font-medium mb-4">
+							@popui.Description() {
+								Información de la empresa
+							}
+						</div>
+						@popui.Table(props.Table{}) {
+							<col style="width: 20%"/>
+							<col style="width: 80%"/>
+							<tbody>
+								<tr>
+									<td>Nombre</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "Proveedor S.A."})
+								</tr>
+								<tr>
+									<td>NIF</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "A87654321"})
+								</tr>
+								<tr>
+									<td>Calle</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "Calle de Eixample, 456, Barcelona, Cataluña, 08001, España"})
+								</tr>
+							</tbody>
+						}
+					</div>
+					<div class="mt-4">
+						<div class="font-medium mb-4">
+							@popui.Description() {
+								Representante legal
+							}
+						</div>
+						@popui.Table(props.Table{}) {
+							<col style="width: 20%"/>
+							<col style="width: 80%"/>
+							<tbody>
+								<tr>
+									<td>Nombre</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "Juan Perez"})
+								</tr>
+								<tr>
+									<td>NIF</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "A87654321"})
+								</tr>
+								<tr>
+									<td>Calle</td>
+									@popui.TableCell(props.TableCell{Bold: true, Content: "Calle de Eixample, 456, Barcelona, Cataluña, 08001, España"})
+								</tr>
+							</tbody>
+						}
+					</div>
+				</section>
+				<section class="mt-8">
+					<div class="popui-layout-between mb-3 items-center">
+						<div class="flex gap-2 items-center">
+							@icons.Success()
+							@popui.Subtitle() {
+								Acuerdo firmado
+							}
+						</div>
+						@popui.Button(props.Button{Variant: "secondary"}) {
+							@icons.Edit()
+							Editar
+						}
+					</div>
+					@popui.CardFile(props.CardFile{}) {
+						<div class="flex gap-2 items-center">
+							@popui.IconFile()
+							<p>acuerdo_veri*factu.pdf</p>
+						</div>
+						@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+							Ver
+							@icons.ExternalLink()
+						}
+					}
+				</section>
+				<section class="mt-8">
+					<div class="popui-layout-between mb-3 items-center">
+						<div class="flex gap-2 items-center">
+							@icons.Success()
+							@popui.Subtitle() {
+								Documento de identidad
+							}
+						</div>
+						@popui.Button(props.Button{Variant: "secondary"}) {
+							@icons.Edit()
+							Editar
+						}
+					</div>
+					<div class="mb-3">
+						@popui.CardFile(props.CardFile{}) {
+							<div class="flex gap-2 items-center">
+								<img src="https://sede.agenciatributaria.gob.es/static_files/Sede/Consultas_Inf/Firmas_digitales_Clave_PIN/Clave_PIN/Incidencias_tecnicas/Obtencion_fecha_DNI/img/3ValDNI.PNG" height="32" width="50"/>
+								<p>dni_front.png</p>
+							</div>
+							@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+								Ver
+								@icons.ExternalLink()
+							}
+						}
+					</div>
+					@popui.CardFile(props.CardFile{}) {
+						<div class="flex gap-2 items-center">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Spanish_ID_card_%28back_side%29.webp/473px-Spanish_ID_card_%28back_side%29.webp.png?20210720095942" height="32" width="50"/>
+							<p>dni_back.png</p>
+						</div>
+						@popui.AnchorButton(props.AnchorButton{Variant: "transparent"}) {
+							Ver
+							@icons.ExternalLink()
+						}
+					}
+				</section>
+			</form>
+		}
+		@popui.WizardFooter(props.WizardFooter{}) {
+			@popui.AnchorButton(props.AnchorButton{
+				Href: "/wizard/step-four",
+			}) {
+				@icons.ArrowLeft()
+				Atras
+			}
+			@popui.Button(props.Button{Form: "success", Variant: "primary", ShowSpinnerOnClick: true}) {
 				Confirmar
 			}
-			@popui.Button(props.Button{
-				Href:    "error",
+			@popui.AnchorButton(props.AnchorButton{
+				Href:    "/wizard/error",
 				Variant: "danger",
 			}) {
 				Fallar
@@ -519,10 +500,10 @@ templ WizardConfirm() {
 	}
 }
 
-templ WizardSuccess() {
+templ SuccessPage() {
 	@wizardLayout() {
-		@popui.Main(props.Main{Center: true}) {
-			<div class="w-full flex justify-center items-center flex-col">
+		@popui.WizardContent(props.WizardContent{CenterVertical: true}) {
+			<div class="popui-layout-center flex-col">
 				@popui.SuccessIcon()
 				<div class="mt-3 mb-1">
 					@popui.Subtitle() {
@@ -537,10 +518,10 @@ templ WizardSuccess() {
 	}
 }
 
-templ WizardError() {
+templ ErrorPage() {
 	@wizardLayout() {
-		@popui.Main(props.Main{Center: true}) {
-			<div class="w-full flex justify-center items-center flex-col">
+		@popui.WizardContent(props.WizardContent{CenterVertical: true}) {
+			<div class="popui-layout-center flex-col">
 				@popui.ErrorIcon()
 				<div class="mt-3">
 					@popui.Subtitle() {
@@ -552,7 +533,7 @@ templ WizardError() {
 						Por favor intenta de nuevo
 					}
 				</div>
-				<form action="confirm" method="GET">
+				<form action="/wizard/confirm" method="GET">
 					@popui.Button(props.Button{Variant: "primary"}) {
 						Enviar nuevamente
 					}
@@ -560,20 +541,4 @@ templ WizardError() {
 			</div>
 		}
 	}
-}
-
-templ verifactuLogo() {
-	<svg width="137" height="17" viewBox="0 0 137 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<circle cx="55.8769" cy="8.87692" r="7.87692" fill="white"></circle>
-		<path d="M56.2884 2.40732C56.5682 2.25719 56.8546 2.20476 57.141 2.25693C57.4666 2.3157 57.7207 2.47265 57.89 2.74033C58.0658 3.00812 58.1179 3.33507 58.0463 3.73349C58.0072 3.94923 57.7535 4.53053 57.2718 5.48349C56.8224 6.385 56.5142 7.36318 56.3607 8.42783C56.4067 8.46199 56.4471 8.50197 56.4838 8.54599C57.5804 8.07301 58.5472 7.48291 59.3939 6.7833C60.2732 6.04508 60.9379 5.71869 61.3871 5.79697C61.6932 5.84918 61.9467 6.00007 62.1488 6.24814C62.3506 6.49624 62.4154 6.79683 62.3568 7.14951C62.2329 7.86751 61.6864 8.24003 60.7035 8.27256C59.1116 8.31662 57.7618 8.58005 56.6468 9.05381C56.6434 9.1038 56.6356 9.15168 56.6224 9.19834L56.764 9.31748C57.5128 9.95102 58.6784 10.5847 60.267 11.2052C61.1719 11.5709 61.5631 12.1259 61.433 12.877C61.3614 13.2818 61.1658 13.5496 60.847 13.6671C60.5215 13.7914 60.2411 13.831 59.9935 13.7853C59.5443 13.707 59.0233 13.1452 58.4242 12.0938C57.8251 11.0423 57.1479 10.2386 56.3861 9.67685L56.3031 9.61728C56.2549 9.64629 56.2035 9.66855 56.1488 9.68564L56.1381 9.74814C55.9168 11.0346 55.891 12.1257 56.0472 13.0206C56.2035 13.9154 56.2686 14.4516 56.2425 14.6212C56.1839 14.9608 56.0144 15.2485 55.7279 15.4835C55.4416 15.7182 55.1098 15.7966 54.7259 15.7315C54.3742 15.6727 54.1203 15.4961 53.9574 15.2022C53.8011 14.9083 53.7484 14.5882 53.807 14.2354C53.8206 14.1496 54.1207 13.5033 54.6996 12.3028C55.2791 11.0947 55.5585 10.2128 55.5326 9.64463V9.5958C55.4806 9.56004 55.4348 9.51678 55.3939 9.46884C54.2553 9.95278 53.1934 10.5983 52.1986 11.4015C51.5216 11.9433 50.9423 12.1785 50.4672 12.0938C50.083 12.0284 49.8153 11.8651 49.6654 11.6104C49.5157 11.3557 49.4636 11.0937 49.5092 10.839C49.6395 10.0815 50.2653 9.6763 51.3851 9.62412V9.63095C53.0321 9.54611 54.3088 9.32361 55.223 8.96982C55.2266 8.8926 55.2419 8.81906 55.2679 8.75009C54.5285 8.15527 53.3859 7.51242 51.8275 6.81552C50.8183 6.36509 50.3691 5.80362 50.4799 5.13095C50.5384 4.79129 50.6878 4.53607 50.9418 4.36631C51.1892 4.19649 51.476 4.1451 51.7953 4.19736C52.2445 4.2758 52.7655 4.80433 53.3646 5.79697C53.937 6.74981 54.6996 7.60291 55.6429 8.34873C55.6806 8.3317 55.7203 8.31903 55.7611 8.30869L55.8129 8.01084C55.9625 7.14227 55.9689 6.23446 55.8451 5.29404C55.7213 4.3471 55.6825 3.70013 55.7474 3.34092C55.8257 2.87085 56.0084 2.55751 56.2884 2.40732Z" fill="#D12A21"></path>
-		<path d="M4.35807 1.17876L5.94749 12.5861H6.07678L11.4534 1.17876H15.6665L7.8259 16.7536H2.81428L0.144958 1.17876H4.35807Z" fill="#05559A"></path>
-		<path d="M14.5008 16.7536L17.0864 1.17876H27.9462L27.4291 4.23593H20.3337L19.8166 7.42998H26.3568L25.8397 10.4948H19.2995L18.7823 13.6964H25.8777L25.3606 16.7536H14.5008Z" fill="#05559A"></path>
-		<path d="M27.4611 16.7536L30.0468 1.17876H36.4805C37.6466 1.17876 38.62 1.38916 39.4008 1.80996C40.1816 2.2257 40.7367 2.82395 41.0663 3.60472C41.3958 4.38042 41.4719 5.30061 41.2944 6.3653C41.122 7.44012 40.7367 8.35524 40.1385 9.11066C39.5453 9.86101 38.7797 10.4339 37.8418 10.8294C36.9089 11.2248 35.8493 11.4226 34.6629 11.4226H30.5943L31.0962 8.45664H34.4652C35.028 8.45664 35.5147 8.38313 35.9253 8.2361C36.336 8.084 36.663 7.85586 36.9064 7.55166C37.1548 7.24239 37.3196 6.84694 37.4007 6.3653C37.4767 5.88365 37.4413 5.48566 37.2942 5.17133C37.1523 4.85192 36.9013 4.61364 36.5413 4.45647C36.1865 4.29423 35.7302 4.21311 35.1725 4.21311H33.3169L31.2255 16.7536H27.4611ZM37.4083 9.6354L40.108 16.7536H36.0014L33.3853 9.6354H37.4083Z" fill="#05559A"></path>
-		<path d="M47.9008 1.17876L45.3152 16.7536H41.5507L44.1364 1.17876H47.9008Z" fill="#05559A"></path>
-		<path d="M64.4515 16.7536L67.0372 1.17876H77.6688L77.1517 4.23593H70.2845L69.7673 7.42998H75.9577L75.4406 10.4948H69.2502L68.2159 16.7536H64.4515Z" fill="#05559A"></path>
-		<path d="M78.1457 16.7536H74.0999L81.9405 1.17876H86.9522L89.6215 16.7536H85.5757L83.8646 5.10288H83.7429L78.1457 16.7536ZM78.6324 10.624H87.0891L86.6023 13.4835H78.1457L78.6324 10.624Z" fill="#05559A"></path>
-		<path d="M106.082 6.82159H102.325C102.345 6.42614 102.307 6.07377 102.211 5.76451C102.115 5.45017 101.963 5.18147 101.755 4.95839C101.547 4.73024 101.288 4.55787 100.979 4.44126C100.67 4.32465 100.31 4.26634 99.8992 4.26634C99.1133 4.26634 98.401 4.46154 97.7622 4.85192C97.1234 5.24231 96.5885 5.80507 96.1576 6.54021C95.7266 7.27535 95.425 8.15752 95.2526 9.18671C95.0954 10.1804 95.098 11.0094 95.2602 11.6735C95.4275 12.3377 95.7368 12.8371 96.188 13.1717C96.6392 13.5012 97.2121 13.666 97.9067 13.666C98.3579 13.666 98.7762 13.6128 99.1615 13.5063C99.5519 13.3948 99.9043 13.2351 100.219 13.0272C100.533 12.8193 100.804 12.5684 101.032 12.2743C101.266 11.9752 101.446 11.6431 101.572 11.2781H105.359C105.172 11.9625 104.863 12.6444 104.432 13.3238C104.006 13.9981 103.468 14.609 102.819 15.1566C102.171 15.7041 101.418 16.1427 100.561 16.4722C99.704 16.8017 98.7508 16.9665 97.7014 16.9665C96.2666 16.9665 95.0295 16.6446 93.9902 16.0007C92.9559 15.3568 92.2081 14.4239 91.7467 13.2021C91.2904 11.9752 91.2043 10.4897 91.4882 8.74563C91.767 7.05734 92.3171 5.63523 93.1384 4.47928C93.9648 3.32334 94.9687 2.44878 96.15 1.85559C97.3363 1.26241 98.6013 0.96582 99.9448 0.96582C100.918 0.96582 101.793 1.09764 102.568 1.36128C103.349 1.61984 104.011 2.00009 104.553 2.50201C105.096 2.99886 105.499 3.60979 105.763 4.33479C106.031 5.05979 106.138 5.88872 106.082 6.82159Z" fill="#05559A"></path>
-		<path d="M107.903 4.23593L108.42 1.17876H121.584L121.067 4.23593H116.344L114.276 16.7536H110.565L112.633 4.23593H107.903Z" fill="#05559A"></path>
-		<path d="M132.588 1.17876H136.345L134.68 11.2248C134.487 12.3858 134.043 13.3973 133.349 14.2592C132.659 15.116 131.78 15.7802 130.71 16.2517C129.64 16.7181 128.449 16.9513 127.135 16.9513C125.817 16.9513 124.704 16.7181 123.797 16.2517C122.889 15.7802 122.233 15.116 121.827 14.2592C121.422 13.3973 121.313 12.3858 121.5 11.2248L123.166 1.17876H126.93L125.31 10.8978C125.224 11.4352 125.265 11.9143 125.432 12.3351C125.604 12.7509 125.883 13.0804 126.269 13.3238C126.654 13.5621 127.125 13.6812 127.683 13.6812C128.246 13.6812 128.76 13.5621 129.227 13.3238C129.693 13.0804 130.079 12.7509 130.383 12.3351C130.687 11.9143 130.882 11.4352 130.968 10.8978L132.588 1.17876Z" fill="#05559A"></path>
-	</svg>
 }

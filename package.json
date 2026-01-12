@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build:tailwind:npx": "npx @tailwindcss/cli@4.1.13 -i ./styles.css -o ./dist/popui.css --minify",
-    "build:tailwind": "tailwindcss -i ./styles.css -o ./dist/popui.css --minify"
+    "build:tailwind:base": "npx @tailwindcss/cli@4.1.13 -i ./styles.css -o ./dist/popui.css --minify",
+    "build:tailwind:full": "npx @tailwindcss/cli@4.1.13 -i ./styles-full.css -o ./dist/popui-full.css --minify",
+    "build:tailwind": "npm run build:tailwind:base && npm run build:tailwind:full"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.13",

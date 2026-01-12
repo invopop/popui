@@ -1,0 +1,83 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+)
+
+// InputText provides a text input field. By default the type will be "text" but can
+// be overridden with any of the following types with a similar presentation to text
+// inputs:
+//
+//  * email
+//  * file
+//  * password
+//  * search
+//  * tel
+//  * url
+//  * date
+//  * time
+//  * week
+//  * month
+//
+// If the Label or Error properties are provided, they will be added alongside the
+// input box.
+templ InputText(p props.InputText) {
+	<div class={ classes.InputTextWrapper }>
+		if p.Label != "" {
+			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass, Hint: p.LabelHint}) {
+				{ p.Label }
+			}
+		}
+		<div class={ classes.InputTextGroup }>
+			if p.Prefix != "" {
+				@Description() {
+					{ p.Prefix }
+				}
+			}
+			<input
+				id={ p.ID }
+				type={ cleanInputTextType(p.Type) }
+				class={
+					templ.KV(classes.InputTextBase, p.Class == ""),
+					templ.KV(p.Class, p.Class != ""),
+					templ.KV(classes.InputTextError, !p.Error.Empty()),
+				}
+				if p.Placeholder != "" {
+					placeholder={ p.Placeholder }
+				}
+				if p.Autofocus {
+					autofocus
+				}
+				if p.Disabled {
+					disabled
+				}
+				if p.Readonly {
+					readonly
+				}
+				if p.Required {
+					required
+				}
+				if p.Name != "" {
+					name={ p.Name }
+				}
+				if p.Value != "" {
+					value={ p.Value }
+				}
+				{ p.Attrs... }
+			/>
+		</div>
+		if !p.Error.Empty() {
+			@InputError(p.Error)
+		}
+	</div>
+}
+
+func cleanInputTextType(typ string) string {
+	switch typ {
+	case "email", "file", "search", "password", "tel", "url", "date", "time", "week", "month":
+		return typ
+	default:
+		return "text"
+	}
+}

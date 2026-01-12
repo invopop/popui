@@ -1,0 +1,40 @@
+package popui
+
+import "github.com/invopop/popui/go/props"
+
+// PopupLayout provides the contents for pop-up pages meant to be shown inside
+// the Invopop Console
+templ PopupLayout(p props.PopupLayout) {
+	<html>
+		<head>
+			<title>{ p.Title }</title>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			@EmbeddedCSS()
+			@DefaultPopupScripts()
+		</head>
+		<body>
+			<main style="height: 100%;">
+				<!-- header pending -->
+				{ children... }
+				<!-- footer pending -->
+			</main>
+		</body>
+	</html>
+}
+
+// LayoutBetween provides a layout for elements that should be placed
+// with flex justify between
+templ LayoutBetween() {
+	<div class="popui-layout-between">
+		{ children... }
+	</div>
+}
+
+// LayoutCenter provides a layout for elements that should be placed
+// with flex justify center
+templ LayoutCenter() {
+	<div class="popui-layout-center">
+		{ children... }
+	</div>
+}

@@ -3,122 +3,89 @@ package popui
 import (
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/tailwind"
 )
 
-// Buttons provides a wrapper around a set of horizontal buttons
-// with a consistent gap between them, useful for actions in headers
-// or footers.
-templ Buttons(opts ...props.Buttons) {
-	{{ btns := props.First(opts) }}
-	<div
-		if btns.ID != "" {
-			id={ btns.ID }
+// Button provides a button element.
+// Supports small size and different variants: "primary", "secondary", "danger" and "transparent"
+templ Button(opts ...props.Button) {
+	{{ p := props.First(opts) }}
+	<button
+		if p.ShowSpinnerOnClick {
+			onclick="showButtonSpinner(this);"
 		}
 		class={
-			tailwind.Merge(
-				"flex items-center gap-2",
-				btns.Class,
-			),
+			templ.KV(classes.ButtonBase, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
+			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),
+			templ.KV(classes.ButtonSecondary, p.Variant == "secondary"),
+			templ.KV(classes.ButtonTransparent, p.Variant == "transparent"),
+			templ.KV(classes.ButtonSmall, p.Small),
+			templ.KV(classes.ButtonSquare, p.Square),
 		}
-		{ btns.Attributes... }
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		if p.Disabled {
+			disabled
+		}
+		if p.Type != "" {
+			type={ p.Type }
+		}
+		if p.Autofocus {
+			autofocus
+		}
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
+		if p.Form != "" {
+			form={ p.Form }
+		}
+		{ p.Attrs... }
 	>
 		{ children... }
-	</div>
+		<div class={ classes.ButtonSpinner }>
+			@ButtonSpinner()
+		</div>
+	</button>
 }
 
-// Button provides a button or anchor element styled as a button.
-// If the Anchor property is set, it renders an <a> tag, otherwise a <button> tag.
-// Supports sizes: "sm", "md" (default), "lg", and "icon"
-// Supports variants: "primary", "secondary", "danger" and "transparent"
-templ Button(p ...props.Button) {
-	{{ btn := props.First(p) }}
-	if btn.IsAnchor() {
-		<a
-			if btn.ID != "" {
-				id={ btn.ID }
-			}
-			if btn.Href != "" {
-				href={ btn.Href }
-			}
-			if btn.Target != "" {
-				target={ btn.Target }
-			}
-			if btn.Rel != "" {
-				rel={ btn.Rel }
-			}
-			if btn.Download {
-				download
-			}
-			class={
-				tailwind.Merge(
-					buttonBaseClasses(),
-					buttonClasses(btn.Variant, btn.Size),
-					btn.Class,
-				),
-			}
-			{ btn.Attributes... }
-		>
-			{ children... }
-		</a>
-	} else {
-		<button
-			if btn.ID != "" {
-				id={ btn.ID }
-			}
-			if btn.Type != "" {
-				type={ btn.Type }
-			}
-			if btn.Name != "" {
-				name={ btn.Name }
-			}
-			if btn.Value != "" {
-				value={ btn.Value }
-			}
-			if btn.Form != "" {
-				form={ btn.Form }
-			}
-			if btn.Disabled {
-				disabled
-			}
-			if btn.Autofocus {
-				autofocus
-			}
-			class={
-				tailwind.Merge(
-					buttonBaseClasses(),
-					buttonClasses(btn.Variant, btn.Size),
-					btn.Class,
-				),
-			}
-			{ btn.Attributes... }
-		>
-			{ children... }
-		</button>
-	}
-}
-
-func buttonBaseClasses() string {
-	return "cursor-pointer inline-flex items-center justify-center font-medium font-sans relative tracking-tight px-2 py-[3px] rounded-md disabled:opacity-30 disabled:pointer-events-none border border-border-default-secondary text-base gap-1 shadow-button-default hover:border-border-default-secondary-hover active:border-border-default-secondary-hover active:shadow-button-pressed active:translate-y-[1px] box-border"
-}
-
-func buttonClasses(variant string, size string) string {
-	return classes.Join(
-		map[string]bool{
-			// Variant classes
-			"border-0 shadow-none hover:bg-background-default-tertiary-hover hover:shadow-button-default":                                                                                                            variant == props.ButtonVariantTransparent,
-			"border-border-default-secondary bg-background-default-tertiary text-foreground-critical hover:border-transparent hover:bg-background-critical-bold hover:text-foreground-inverse [&_svg]:text-critical": variant == props.ButtonVariantDanger,
-			"bg-background-accent text-foreground-inverse shadow-button-primary hover:bg-background-accent-hover active:bg-background-accent-hover":                                                                  variant == props.ButtonVariantPrimary,
-			"border-0 bg-background-default-tertiary hover:bg-background-default-tertiary-hover":                                                                                                                     variant == props.ButtonVariantSecondary,
-			// Size classes
-			"text-sm rounded":             size == props.ButtonSizeSmall,
-			"py-[5px] px-3 rounded-lg":    size == props.ButtonSizeLarge,
-			"p-[5px] leading-none size-7": size == props.ButtonSizeIcon,
-			// Icon color based on size
-			"[&_svg]:text-icon":               size != props.ButtonSizeIcon && variant != props.ButtonVariantPrimary && variant != props.ButtonVariantDanger,
-			"[&_svg]:text-icon-inverse":       size != props.ButtonSizeIcon && variant == props.ButtonVariantPrimary,
-			"[&_svg]:text-foreground":         size == props.ButtonSizeIcon && variant != props.ButtonVariantPrimary,
-			"[&_svg]:text-foreground-inverse": size == props.ButtonSizeIcon && variant == props.ButtonVariantPrimary,
-		},
-	)
+// AnchorButton provides an anchor element styled as a button.
+// Supports small size and different variants: "primary", "secondary", "danger" and "transparent"
+templ AnchorButton(p props.AnchorButton) {
+	<a
+		class={
+			templ.KV(classes.ButtonBase, p.Class == ""),
+			templ.KV(p.Class, p.Class != ""),
+			templ.KV(classes.ButtonDanger, p.Variant == "danger"),
+			templ.KV(classes.ButtonPrimary, p.Variant == "primary"),
+			templ.KV(classes.ButtonSecondary, p.Variant == "secondary"),
+			templ.KV(classes.ButtonTransparent, p.Variant == "transparent"),
+			templ.KV(classes.ButtonSmall, p.Small),
+		}
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		if p.Href != "" {
+			href={ p.Href }
+		}
+		if p.Target != "" {
+			target={ p.Target }
+		}
+		if p.Rel != "" {
+			rel={ p.Rel }
+		}
+		if p.Download {
+			download
+		}
+		if p.Type != "" {
+			type={ p.Type }
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</a>
 }

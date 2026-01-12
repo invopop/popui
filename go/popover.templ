@@ -3,64 +3,31 @@ package popui
 import (
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/go/tailwind"
 )
 
-// Popover provides a Button that can be clicked for displaying a context menu.
+// Popopver provides a Button that can be clicked for displaying a context menu.
 // Menu content will render the html passed as slot.
 templ Popover(opts ...props.Popover) {
 	{{ p := props.First(opts) }}
-	<div
-		role="menu"
-		class={
-			tailwind.Merge(
-				"relative inline-block",
-				classes.Join(map[string]bool{"flex justify-end": p.RightAlign}),
-			),
-		}
-	>
+	<div role="menu" class={ classes.PopoverWrapper, templ.KV(classes.PopoverWrapperRight, p.RightAlign) }>
 		@Button(props.Button{
-			Attributes: templ.Attributes{"popovertarget": p.ID},
-			Size:       "icon",
-			Variant:    p.ButtonVariant,
+			Attrs:   templ.Attributes{"popovertarget": p.ID},
+			Square:  true,
+			Variant: p.ButtonVariant,
 		}) {
 			{ p.ButtonLabel }
 		}
 		<div popover id={ p.ID }></div>
 		<div
 			class={
-				tailwind.Merge(
-					"hidden absolute left-0 top-8 border border-border rounded-xl p-1 w-fit min-w-48 bg-background z-[9999] popover-menu",
-					classes.Join(map[string]bool{"!left-[unset] !right-0": p.RightAlign}),
-					p.Class,
-				),
+				templ.KV(classes.PopoverList, p.Class == ""),
+				templ.KV(p.Class, p.Class != ""),
+				templ.KV(classes.PopoverListRight, p.RightAlign),
+				templ.KV(classes.PopoverListStretch, p.Stretch),
 			}
-			{ p.Attributes... }
+			{ p.Attrs... }
 		>
-			<ul>
-				{ children... }
-			</ul>
-		</div>
-	</div>
-}
-
-// PopoverItem provides a menu item within the popover.
-templ PopoverItem(opts ...props.PopoverItem) {
-	{{ p := props.First(opts) }}
-	<li
-		if p.ID != "" {
-			id={ p.ID }
-		}
-		class={
-			tailwind.Merge(
-				"font-sans font-medium text-base text-foreground w-full rounded-md hover:bg-background-default-secondary",
-				p.Class,
-			),
-		}
-		{ p.Attributes... }
-	>
-		<div class="w-full px-2 py-1.5 flex items-center space-x-2 cursor-pointer whitespace-nowrap">
 			{ children... }
 		</div>
-	</li>
+	</div>
 }

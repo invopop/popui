@@ -4,8 +4,8 @@ import "github.com/a-h/templ"
 
 // Label defines the tag properties for labels.
 type Label struct {
-	ID         string
-	Class      string
-	Attributes templ.Attributes
-	Hint       string
+	ID    string
+	Hint  string
+	Class string
+	Attrs templ.Attributes
 }

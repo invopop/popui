@@ -5,11 +5,8 @@ Popui is a set of reusable components to be used inside Console UI and other Inv
 Currently we provide different libraries and examples for
 
 - Svelte
+- HTML
 - Go
-
-## Go
-
-Please see the go/README.md file for details.
 
 ## Svelte
 
@@ -45,6 +42,96 @@ import { InputText } from '@invopop/popui'
 
 A complete catalogue of examples is availabe on [Storybook](https://popui-svelte.netlify.app/)
 
+## HTML
+
+Raw HTML Examples of most of the components are available under the [html](https://github.com/invopop/popui/tree/main/html) folder of this repo.
+
+They all make use of the `popui.css` file that is deployed to a CDN on each release.
+
+## Go
+
+For Go, we are using Templ for creating template wrappers around these HTML components.
+
+### Building CSS Assets
+
+Go requires the CSS with all the Tailwind components to be built independently. To do this, run the go generate command and check any potential errors with your node instalation:
+
+```bash
+go generate ./...
+```
+
+This will compile the admin templ and compile it to `public/index.html`
+
+```bash
+go run ./go/cmd/templ2html
+```
+
+### Development server
+
+To run a development server for the Go library:
+
+```bash
+air
+```
+
+This command will compile the `.templ` templates and start up a web server loading the `go/examples/page.templ` file.
+
+Air will also watch for changes and re-run everything for you, with the exception of the tailwind classes which will need to be rebuilt manually (for the time being).
+
+### Using the Go Package
+
+There are two options for incorporating the Popui styles.
+
+**Option 1**: using the lightweight stylesheet provided in the repository and the embedded filesystem. With Echo's `StaticFS` method, server assets using:
+
+```go
+e.StaticFS(popui.AssetPath, popui.Assets)
+```
+
+Then use the `EmbeddedCSS()` header method for the lightweight version (only includes utilities from component classes):
+
+```go
+templ Head() {
+  <head>
+    <title>Title</title>
+    @popui.EmbeddedCSS()
+  </head>
+}
+```
+
+**Option 2**: using the full stylesheet with all Tailwind utilities. Use `EmbeddedFullCSS()` when you need access to all utility classes (useful for examples and development):
+
+```go
+templ Head() {
+  <head>
+    <title>Title</title>
+    @popui.EmbeddedFullCSS()
+  </head>
+}
+```
+
+### Use the Go Templ Components
+
+```go
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ Page() {
+    <div class="max-w-md">
+        @popui.Button(
+            props.Button{
+                Variant: "primary",
+                Small: true,
+            }) {
+            Click Me
+        }
+    </div>
+}
+```
+
+You can check out examples of each component in `go/examples/page.templ` file.
 
 ## Web Components
 

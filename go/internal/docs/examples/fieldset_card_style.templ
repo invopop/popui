@@ -1,0 +1,26 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ FieldsetCardStyleExample() {
+	@popui.Fieldset(props.Fieldset{
+		Legend:  "Profile Settings",
+		Variant: props.FieldsetVariantCard,
+	}) {
+		@popui.Input(props.Input{
+			ID:          "name",
+			Name:        "name",
+			Label:       "Full Name",
+			Placeholder: "John Doe",
+		})
+		@popui.Textarea(props.Textarea{
+			ID:          "bio",
+			Name:        "bio",
+			Label:       "Bio",
+			Placeholder: "Tell us about yourself",
+		})
+	}
+}

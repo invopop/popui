@@ -11,7 +11,15 @@ const ACTIVE_MENU_CLASS = 'menu--active'
 const LOADING_CLASS = 'popui-button--loading'
 const POPOVER_VISIBLE_CLASS = 'popui-button-copy__popover--visible'
 
+const CONSOLE_SDK_URL = 'https://cdn.jsdelivr.net/npm/@invopop/console-ui-sdk@0.0.9/index.js'
+
+// Prepare accent color from URL parameter, if provided.
+window.onload = function() {
+  prepareAccentColor();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+
   // Sidebar
   const button = document.querySelector(QUERY_SELECTORS.hamburgerButton)
   const sidebar = document.querySelector(QUERY_SELECTORS.sidebar)
@@ -50,6 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 })
+
+function prepareAccentColor() {
+  const urlParams = new URLSearchParams(window.location.search)
+  const accentColor = urlParams.get('accent')
+
+  if (accentColor) {
+      const root = document.querySelector(':root')
+      root.style.setProperty('--workspace-accent-color', accentColor)
+  }
+}
 
 // eslint-disable-next-line
 function showButtonSpinner(button) {

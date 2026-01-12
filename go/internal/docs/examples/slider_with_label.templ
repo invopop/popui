@@ -1,0 +1,20 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ SliderWithLabelExample() {
+	@popui.Slider(props.Slider{
+		ID:    "slider-volume-custom",
+		Name:  "volume",
+		Min:   "0",
+		Max:   "100",
+		Value: "50",
+	}) {
+		@popui.Label(props.Label{ID: "volume"}) {
+			Volume
+		}
+	}
+}

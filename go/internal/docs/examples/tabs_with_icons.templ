@@ -1,0 +1,24 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/icons"
+	"github.com/invopop/popui/go/props"
+)
+
+templ TabsWithIconsExample() {
+	@popui.Tabs(props.Tabs{}) {
+		@popui.Tab(props.Tab{Active: true}) {
+			@icons.User()
+			Account
+		}
+		@popui.Tab(props.Tab{}) {
+			@icons.Settings()
+			Settings
+		}
+		@popui.Tab(props.Tab{}) {
+			@icons.Lock()
+			Privacy
+		}
+	}
+}

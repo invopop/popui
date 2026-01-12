@@ -110,10 +110,8 @@ templ Page() {
 			})
 			<div>
 				@popui.Avatar(props.Avatar{
-					Class: classes.AvatarBase + " " + classes.AvatarInitial,
-				}) {
-					<p class="uppercase">i</p>
-				}
+					Initial: "I",
+				})
 			</div>
 			// Popover
 			@fieldConfig(&config{
@@ -125,12 +123,12 @@ templ Page() {
 					ButtonLabel: "Do Stuff",
 				}) {
 					<ul>
-						<li class={ classes.PopoverListItem }>
+						@popui.PopoverItem() {
 							<button class="w-full text-left" @click="alert('1')">1</button>
-						</li>
-						<li class={ classes.PopoverListItem }>
+						}
+						@popui.PopoverItem() {
 							<button class="w-full text-left" @click="alert('2')">2</button>
-						</li>
+						}
 					</ul>
 				}
 			</div>
@@ -152,14 +150,14 @@ templ Page() {
 				},
 			})
 			<div class="max-w-md">
-				@popui.InputText(
-					props.InputText{
+				@popui.Input(
+					props.Input{
 						Label: "Name",
-						Error: props.Error{Attrs: templ.Attributes{"x-text": "inputText.errorText"}},
-						Attrs: templ.Attributes{
+						Error: props.Error{Attributes: templ.Attributes{"x-text": "inputText.errorText"}},
+						Attributes: templ.Attributes{
 							"x-model":   "inputText.value",
 							":disabled": "inputText.disabled",
-							":class":    "{ '" + classes.InputTextError + "': inputText.errorText }",
+							":class":    "{ '" + classes.FormFieldError() + "': inputText.errorText }",
 						},
 					})
 			</div>
@@ -169,10 +167,10 @@ templ Page() {
 				XModel: "checkbox.value",
 			})
 			<div class="max-w-md">
-				@popui.InputCheckbox(
-					props.InputCheckbox{
+				@popui.Checkbox(
+					props.Checkbox{
 						Label: "This is the label for the checbox",
-						Attrs: templ.Attributes{
+						Attributes: templ.Attributes{
 							"x-model": "checkbox.value",
 						},
 					})
@@ -198,11 +196,10 @@ templ Page() {
 				@popui.Select(
 					props.Select{
 						Label: "Name",
-						Error: props.Error{Attrs: templ.Attributes{"x-text": "select.errorText"}},
-						Attrs: templ.Attributes{
+						Error: props.Error{Attributes: templ.Attributes{"x-text": "select.errorText"}},
+						Attributes: templ.Attributes{
 							"x-model":   "select.value",
 							":disabled": "select.disabled",
-							":class":    "{ '" + classes.SelectError + "': select.errorText }",
 						},
 					}) {
 					<template x-for="row in select.options" :key="row">
@@ -234,14 +231,13 @@ templ Page() {
 				@popui.Textarea(
 					props.Textarea{
 						Label: "Name",
-						Error: props.Error{Attrs: templ.Attributes{"x-text": "textarea.errorText"}},
+						Class: "font-mono",
+						Error: props.Error{Attributes: templ.Attributes{"x-text": "textarea.errorText"}},
 						Rows:  8,
-						Attrs: templ.Attributes{
+						Attributes: templ.Attributes{
 							"x-model":   "textarea.value",
 							":disabled": "textarea.disabled",
-							":class":    "{ '" + classes.TextareaError + "': textarea.errorText }",
 						},
-						Monospaced: true,
 					})
 			</div>
 			// Default Button
@@ -258,7 +254,7 @@ templ Page() {
 			<div class="max-w-md">
 				@popui.Button(
 					props.Button{
-						Attrs: templ.Attributes{"@click": "alert('Default button clicked')", ":disabled": "defaultButton.disabled"},
+						Attributes: templ.Attributes{"@click": "alert('Default button clicked')", ":disabled": "defaultButton.disabled"},
 					}) {
 					Click Me
 				}
@@ -277,8 +273,8 @@ templ Page() {
 			<div class="max-w-md">
 				@popui.Button(
 					props.Button{
-						Variant: "primary",
-						Attrs:   templ.Attributes{"@click": "alert('Primary button clicked')", ":disabled": "primaryButton.disabled"},
+						Variant:    "primary",
+						Attributes: templ.Attributes{"@click": "alert('Primary button clicked')", ":disabled": "primaryButton.disabled"},
 					}) {
 					Click Me
 				}
@@ -308,14 +304,14 @@ templ fieldConfig(conf *config) {
 		}
 	</h2>
 	if conf.Inputs != nil {
-		<div class="popui-demo-wrapper">
+		<div class="space-y-2 border border-black p-4 mb-4">
 			<h3>Props</h3>
 			for _, i := range conf.Inputs {
-				<label class="popui-demo-label">
+				<label class="text-sm inline-flex items-center gap-2 whitespace-nowrap mr-2">
 					{ i.Label } <input
 	type={ i.Type }
 	if i.Type == "text" || i.Type == "number" {
-		class="popui-demo-input"
+		class="py-1.5 px-2.5 border w-full rounded-md"
 	}
 	x-model={ i.Xmodel }
 />

@@ -1,0 +1,37 @@
+version: "2"
+output:
+  formats:
+    text:
+      path: stdout
+linters:
+  enable:
+    - errname
+    - goconst
+    - gocyclo
+    - nakedret
+    - revive
+    - unconvert
+    - unparam
+    - zerologlint
+  settings:
+    staticcheck:
+      checks:
+        - all
+        # Embedding is complex in GOBL, so disabled this check.
+        - -QF1008
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

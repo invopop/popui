@@ -4,73 +4,90 @@ import (
 	"fmt"
 	"github.com/invopop/popui/go/classes"
 	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/tailwind"
 )
 
-// Textarea provides a text element.
-// It provides an InputLabel component at the top if Label prop is present.
-// It provides an InputError component at the botton if Error prop is present.
-templ Textarea(p props.Textarea) {
-	<div class={ classes.TextareaWrapper }>
-		if p.Label != "" {
-			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass, Hint: p.LabelHint}) {
-				{ p.Label }
+// Textarea provides a multi-line text input element.
+//
+// If the Label property is provided, a simple label will be rendered above the textarea.
+templ Textarea(p ...props.Textarea) {
+	{{ prp := props.First(p) }}
+	<div class="flex flex-col gap-2 w-full">
+		if prp.Label != "" {
+			@Label(props.Label{ID: prp.ID}) {
+				{ prp.Label }
 			}
 		}
 		<textarea
-			id={ p.ID }
-			class={ templ.KV(classes.TextareaBase, p.Class == ""), templ.KV(p.Class, p.Class != ""), templ.KV(classes.TextareaMonospaced, p.Monospaced) }
-			rows={ p.GetRows() }
-			if p.Disabled {
+			id={ prp.ID }
+			class={ tailwind.Merge(
+					classes.FormField(),
+					classes.FormFieldState(!prp.Error.Empty()),
+					prp.Class,
+				) }
+			rows={ prp.GetRows() }
+			if prp.Disabled {
 				disabled
 			}
-			if p.Autofocus {
+			if prp.Autofocus {
 				autofocus
 			}
-			if p.Readonly {
+			if prp.Readonly {
 				readonly
 			}
-			if p.Required {
+			if prp.Required {
 				required
 			}
-			if p.Name != "" {
-				name={ p.Name }
+			if prp.Name != "" {
+				name={ prp.Name }
 			}
-			if p.Placeholder != "" {
-				placeholder={ p.Placeholder }
+			if prp.Placeholder != "" {
+				placeholder={ prp.Placeholder }
 			}
-			{ p.Attrs... }
+			{ prp.Attributes... }
 		>
-			if p.Value != "" {
-				{ p.Value }
+			if prp.Value != "" {
+				{ prp.Value }
 			}
 		</textarea>
-		if !p.Error.Empty() {
-			@InputError(p.Error)
+		if !prp.Error.Empty() {
+			@InputError(prp.Error)
 		}
 	</div>
 }
 
 // Contenteditable provides a div with contenteditable set to true.
 // It behaves as a Textarea component.
-// TODO: Use the same component and find a way to render a div or a textarea dynamicly
-templ Contenteditable(p props.Textarea) {
-	<div class={ classes.TextareaWrapper }>
-		if p.Label != "" {
-			@InputLabel(props.Label{ID: p.ID, Class: p.LabelClass, Hint: p.LabelHint}) {
-				{ p.Label }
+//
+// If the Label property is provided, a simple label will be rendered above the contenteditable div.
+templ Contenteditable(p ...props.Textarea) {
+	{{ prp := props.First(p) }}
+	<div class="flex flex-col gap-2 w-full">
+		if prp.Label != "" {
+			@Label(props.Label{ID: prp.ID}) {
+				{ prp.Label }
 			}
 		}
 		<div
 			tabindex="0"
 			role="textarea"
 			contenteditable="true"
-			id={ p.ID }
-			style={ "min-height: " + fmt.Sprintf("%d", p.Rows*34) + "px" }
-			class={ templ.KV(classes.TextareaBase, p.Class == ""), templ.KV(p.Class, p.Class != "") }
-			{ p.Attrs... }
-		></div>
-		if !p.Error.Empty() {
-			@InputError(p.Error)
+			id={ prp.ID }
+			style={ "min-height: " + fmt.Sprintf("%d", prp.Rows*34) + "px" }
+			class={ tailwind.Merge(
+					classes.FormField(),
+					"min-h-[80px]",
+					classes.FormFieldState(!prp.Error.Empty()),
+					prp.Class,
+				) }
+			{ prp.Attributes... }
+		>
+			if prp.Value != "" {
+				@templ.Raw(prp.Value)
+			}
+		</div>
+		if !prp.Error.Empty() {
+			@InputError(prp.Error)
 		}
 	</div>
 }

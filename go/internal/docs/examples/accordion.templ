@@ -1,0 +1,31 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ AccordionExample() {
+	<div class="w-full space-y-2">
+		@popui.Accordion(props.Accordion{Open: true}) {
+			@popui.AccordionTrigger() {
+				Is it accessible?
+			}
+			@popui.AccordionContent() {
+				@popui.Description() {
+					Yes. It uses native HTML details/summary elements for full keyboard navigation and screen reader support.
+				}
+			}
+		}
+		@popui.Accordion() {
+			@popui.AccordionTrigger() {
+				Is it styled?
+			}
+			@popui.AccordionContent() {
+				@popui.Description() {
+					Yes. It comes with default styles using Tailwind CSS that you can customize.
+				}
+			}
+		}
+	</div>
+}

@@ -1,0 +1,16 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ SeparatorCustomSpacingExample() {
+	<div>
+		@popui.P() { Content above }
+		@popui.Separator(props.Separator{
+			Class: "my-8",
+		})
+		@popui.P() { Content below }
+	</div>
+}

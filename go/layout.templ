@@ -1,0 +1,108 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/props"
+	"path"
+)
+
+// HTML provides the root `<html>` element for an HTML document.
+templ HTML() {
+	<html>
+		{ children... }
+	</html>
+}
+
+// Head provides the standard `<head>` section for an HTML document with defaults.
+templ Head(p ...props.Head) {
+	<head>
+		{{ h := props.First(p) }}
+		<title>{ h.Title }</title>
+		if h.Description != "" {
+			<meta name="description" content={ h.Description }/>
+		}
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		@EmbeddedCSS()
+		@EmbeddedJS()
+		if h.AlpineJS {
+			@AlpineJS()
+		}
+		if h.HTMX {
+			@HTMX()
+		}
+		for _, sheet := range h.Stylesheets {
+			<link href={ sheet.Href } rel={ sheet.RelOrStylesheet() }/>
+		}
+		for _, script := range h.Scripts {
+			<script src={ script.Src } defer?={ script.Defer } async?={ script.Async }></script>
+		}
+		{ children... }
+	</head>
+}
+
+// Body provides the standard `<body>` section for an HTML document.
+templ Body() {
+	<body>
+		{ children... }
+	</body>
+}
+
+// FontInterLinks provides the head data required to load the Inter font.
+templ FontInterLinks() {
+	<!-- Inter font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com"/>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+}
+
+// EmbeddedCSS provides the CSS to include in the `<head>` section of an HTML
+// document that will load the styles from embeded files served by the web server.
+templ EmbeddedCSS() {
+	@FontInterLinks()
+	<link href={ path.Join(AssetPath, Versioned("assets", "popui.css")) } rel="stylesheet"/>
+}
+
+// EmbeddedJS provides the JS to include in the `<head>` section of an HTML
+// document that will load the Javascript code needed for dynamic components
+// such as Hamburger menu to function
+templ EmbeddedJS() {
+	<script src={ path.Join(AssetPath, Versioned("assets", "popui.js")) }></script>
+}
+
+// AlpineJS loads the default AlpineJS library from a CDN.
+templ AlpineJS() {
+	<script src="https://cdn.jsdelivr.net/npm/alpinejs/dist/cdn.min.js" defer></script>
+}
+
+// HTMX loads the HTMX library from a CDN.
+templ HTMX() {
+	<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+}
+
+// AlpineStoreContenteditable provides the JS to include in an Alpine component
+// that wants to use the AlpineJS library to enable contenteditable functionality.
+templ AlpineStoreContenteditable() {
+	<script src={ path.Join(AssetPath, Versioned("assets", "contenteditable.js")) }></script>
+}
+
+// PopupLayout provides the contents for pop-up pages meant to be shown inside
+// the Invopop Console
+// Deprecated: use App instead.
+templ PopupLayout(p props.PopupLayout) {
+	<html>
+		<head>
+			<title>{ p.Title }</title>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			@EmbeddedCSS()
+			@AlpineJS()
+		</head>
+		<body>
+			<main style="height: 100%;">
+				<!-- header pending -->
+				{ children... }
+				<!-- footer pending -->
+			</main>
+		</body>
+	</html>
+}

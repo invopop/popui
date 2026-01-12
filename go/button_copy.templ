@@ -1,41 +1,48 @@
 package popui
 
 import (
-	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/icons"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/icons"
 	"strconv"
 )
 
 // ButtonCopy renders text with a copy button.
-templ ButtonCopy(p props.ButtonCopy) {
-	<div class={ classes.ButtonCopy }>
+// Supports variants: "outline" (default) and "ghost"
+templ ButtonCopy(opts ...props.ButtonCopy) {
+	{{ p := props.First(opts) }}
+	{{
+		buttonAttrs := templ.Attributes{
+			"data-button-copy": true,
+			"onclick":          "copyButtonValue(this)",
+		}
+	}}
+	@Button(props.Button{
+		ID:         p.ID,
+		Class:      p.Class,
+		Variant:    p.Variant,
+		Size:       p.Size,
+		Type:       "button",
+		Attributes: buttonAttrs,
+	}) {
 		<input
 			type="hidden"
 			data-copy-value
 			data-prefix-length={ strconv.Itoa(p.PrefixLength) }
 			data-suffix-length={ strconv.Itoa(p.SuffixLength) }
-			if ( p.Value != "") {
+			if p.Value != "" {
 				value={ p.Value }
 			}
-			{ p.Attrs... }
+			{ p.Attributes... }
 		/>
-		<button
-			class={ classes.ButtonCopyText }
-			onclick="copyButtonValue(this)"
-		></button>
-		<button
-			class={ classes.ButtonCopyButton }
-			onclick="copyButtonValue(this)"
-		>
-			<div class={ classes.ButtonCopyIcon }>
-				@icons.Duplicate()
-			</div>
-		</button>
-		if p.CopiedText != "" {
-			<div class={ classes.ButtonCopyPopover }>
-				{ p.CopiedText }
-			</div>
-		}
-	</div>
+		<span
+			data-copy-text
+			class="font-mono"
+		></span>
+		<span data-copy-icon-duplicate>
+			@icons.Duplicate()
+		</span>
+		<span class="hidden" data-copy-icon-success>
+			@icons.Tick()
+		</span>
+	}
 }

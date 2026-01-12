@@ -1,0 +1,97 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/tailwind"
+)
+
+// Input provides a text input field. By default the type will be "text" but can
+// be overridden with any of the following types with a similar presentation to text
+// inputs:
+//
+//  * email
+//  * file
+//  * password
+//  * search
+//  * tel
+//  * url
+//  * date
+//  * time
+//  * week
+//  * month
+//
+// If the Label property is provided, a simple label will be rendered above the input.
+templ Input(p ...props.Input) {
+	{{ prp := props.First(p) }}
+	<div class="flex flex-col space-y-2 w-full">
+		if prp.Label != "" {
+			@Label(props.Label{ID: prp.ID}) {
+				{ prp.Label }
+			}
+		}
+		<div class="flex items-center gap-2">
+			if prp.Prefix != "" {
+				@Description() {
+					{ prp.Prefix }
+				}
+			}
+			<input
+				id={ prp.ID }
+				type={ inputType(prp.Type) }
+				class={
+					tailwind.Merge(
+						classes.FormField(),
+						classes.FormFieldState(!prp.Error.Empty()),
+						prp.Class,
+					),
+				}
+				if prp.Placeholder != "" {
+					placeholder={ prp.Placeholder }
+				}
+				if prp.Autofocus {
+					autofocus
+				}
+				if prp.Disabled {
+					disabled
+				}
+				if prp.Readonly {
+					readonly
+				}
+				if prp.Required {
+					required
+				}
+				if prp.Name != "" {
+					name={ prp.Name }
+				}
+				if prp.Value != "" {
+					value={ prp.Value }
+				}
+				{ prp.Attributes... }
+			/>
+		</div>
+		if !prp.Error.Empty() {
+			@InputError(prp.Error)
+		}
+	</div>
+}
+
+// InputError provides a nicely formatted error text
+templ InputError(e props.Error) {
+	<p class={ tailwind.Merge("font-sans text-sm text-foreground-critical flex items-center space-x-1 pl-[20px] bg-no-repeat bg-left bg-[length:16px_16px] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCQk8cGF0aAoJCQlmaWxsLXJ1bGU9ImV2ZW5vZGQiCgkJCWNsaXAtcnVsZT0iZXZlbm9kZCIKCQkJZD0iTTggMTQuNUMxMS41ODk5IDE0LjUgMTQuNSAxMS41ODk5IDE0LjUgOEMxNC41IDQuNDEwMTUgMTEuNTg5OSAxLjUgOCAxLjVDNC40MTAxNSAxLjUgMS41IDQuNDEwMTUgMS41IDhDMS41IDExLjU4OTkgNC40MTAxNSAxNC41IDggMTQuNVpNNy45OTk5OSA5LjM1QzcuNjY4NjIgOS4zNSA3LjM5OTk5IDkuMDgxMzcgNy4zOTk5OSA4Ljc1VjQuNzVDNy4zOTk5OSA0LjQxODYzIDcuNjY4NjIgNC4xNSA3Ljk5OTk5IDQuMTVDOC4zMzEzNyA0LjE1IDguNTk5OTkgNC40MTg2MyA4LjU5OTk5IDQuNzVMOC41OTk5OSA4Ljc1QzguNTk5OTkgOS4wODEzNyA4LjMzMTM2IDkuMzUgNy45OTk5OSA5LjM1Wk04Ljc1IDExQzguNzUgMTEuNDE0MiA4LjQxNDIxIDExLjc1IDggMTEuNzVDNy41ODU3OSAxMS43NSA3LjI1IDExLjQxNDIgNy4yNSAxMUM3LjI1IDEwLjU4NTggNy41ODU3OSAxMC4yNSA4IDEwLjI1QzguNDE0MjEgMTAuMjUgOC43NSAxMC41ODU4IDguNzUgMTFaIgoJCQlmaWxsPSIjQzkyRDQ1IgoJCT48L3BhdGg+Cgk8L3N2Zz4=')]", e.Class) } { e.Attributes... }>
+		if e.Error != nil {
+			{ e.Error.Error() }
+		} else {
+			{ e.Text }
+		}
+	</p>
+}
+
+func inputType(typ string) string {
+	switch typ {
+	case "email", "file", "search", "password", "tel", "url", "date", "time", "week", "month":
+		return typ
+	default:
+		return "text"
+	}
+}

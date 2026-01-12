@@ -4,13 +4,17 @@ import "github.com/a-h/templ"
 
 // Tabs Templ component props
 type Tabs struct {
-	Class string
-	Attrs templ.Attributes
+	ID         string
+	Class      string
+	Attributes templ.Attributes
+	Variant    string // "default" or "pill"
 }
 
 // Tab Templ component props
 type Tab struct {
-	Class  string
-	Active bool
-	Attrs  templ.Attributes
+	ID         string
+	Class      string
+	Attributes templ.Attributes
+	Active     bool
+	Variant    string // "default" or "pill" - should match parent Tabs variant
 }

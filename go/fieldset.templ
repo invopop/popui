@@ -1,0 +1,37 @@
+package popui
+
+import (
+	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/tailwind"
+)
+
+// Fieldset groups a set of form fields together with correct vertical spacing and padding
+// between fields. If the Variant is set to "card" it will also add a border and background
+// to the fieldset to visually separate it from the rest of the form.
+templ Fieldset(p ...props.Fieldset) {
+	{{ fieldset := props.First(p) }}
+	<fieldset
+		if fieldset.ID != "" {
+			id={ fieldset.ID }
+		}
+		class={
+			tailwind.Merge(
+				"space-y-4 relative w-full",
+				classes.Join(map[string]bool{
+					"border border-border-default-secondary rounded-md bg-background p-4": fieldset.Variant == props.FieldsetVariantCard,
+					"pt-14": fieldset.Legend != "",
+				}),
+				fieldset.Class,
+			),
+		}
+		{ fieldset.Attributes... }
+	>
+		if fieldset.Legend != "" {
+			<legend class="absolute top-4 text-lg font-medium text-foreground">
+				{ fieldset.Legend }
+			</legend>
+		}
+		{ children... }
+	</fieldset>
+}

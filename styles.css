@@ -1,4 +1,4 @@
-@import "tailwindcss" source("./go/classes");
+@import "tailwindcss" source("./go/**/*.{templ,go}");
 @import "./svelte/src/lib/tailwind.theme.css";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";

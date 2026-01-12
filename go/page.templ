@@ -1,76 +1,154 @@
 package popui
 
 import (
-	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/icons"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/icons"
+	"github.com/invopop/popui/go/tailwind"
 )
 
-// PageHeader provides a wrapper for the page header
-templ PageHeader(p props.PageHeader) {
-	<div
-		class={
-			templ.KV(classes.PageHeader, p.Class == ""),
-			templ.KV(p.Class, p.Class != ""),
+// Page prepares the layout of a single page application.
+// Deprecated: use App and related components instead.
+templ Page(opts ...props.Page) {
+	{{ p := props.First(opts) }}
+	<main
+		if p.ID != "" {
+			id={ p.ID }
 		}
-		{ p.Attrs... }
+		class={
+			tailwind.Merge(
+				"flex-1 bg-background overflow-y-auto",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
 	>
-		<div class={ classes.PageTitleWrapper }>
-			@Button(props.Button{}) {
+		{ children... }
+	</main>
+}
+
+templ PageContainer(opts ...props.PageContainer) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			tailwind.Merge(
+				"flex flex-col w-full max-w-[768px] mx-auto",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</div>
+}
+
+// PageHeader provides a wrapper for the page header
+templ PageHeader(opts ...props.PageHeader) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			tailwind.Merge(
+				"bg-background z-[2] h-12 sticky inset-0 flex px-6 justify-between items-center border-b border-border transition-[left] duration-300 ease-in-out",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		<div class="flex items-center gap-1">
+			<button class="block p-[5px] mr-2 md:hidden">
 				@icons.Menu()
-			}
+			</button>
 			if p.Breadcrumbs != nil {
-				@PageBreadcrumbs() {
+				@Breadcrumbs() {
 					for _, i := range p.Breadcrumbs {
-						<li>
-							if i.URL != "" {
-								<a href={ i.URL } { i.Attrs... }>{ i.Name }</a>
-							} else {
-								<span { i.Attrs... }>{ i.Name }</span>
-							}
-						</li>
+						@Breadcrumb(props.Breadcrumb{
+							Label:      i.Name,
+							Href:       i.URL,
+							Attributes: i.Attrs,
+						})
 					}
 				}
 			}
-			@PageTitle() {
-				{ p.Title }
-			}
 		</div>
-		<div class={ classes.PageHeaderActions }>
+		<div class="flex items-center gap-2">
 			{ children... }
 		</div>
 	</div>
 }
 
 // PageContent provides a wrapper for the page content
-templ PageContent() {
-	<div class={ classes.PageContent }>
+templ PageContent(opts ...props.PageContent) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			tailwind.Merge(
+				"flex p-8 flex-col items-center gap-10",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
+		{ children... }
+	</div>
+}
+
+templ PageSections(opts ...props.PageSections) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			tailwind.Merge(
+				"flex flex-col items-start gap-10 w-full",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
 		{ children... }
 	</div>
 }
 
 // PageSection provides a wrapper for page sections.
 // Title and Description can be passed as prop
-templ PageSection(p props.PageSection) {
+templ PageSection(opts ...props.PageSection) {
+	{{ p := props.First(opts) }}
 	<div class="w-full">
-		@HorizontalDivider()
 		<div
-			class={
-				templ.KV(classes.PageSection, p.Class == ""),
-				templ.KV(p.Class, p.Class != ""),
+			if p.ID != "" {
+				id={ p.ID }
 			}
-			{ p.Attrs... }
+			class={
+				tailwind.Merge(
+					"w-full flex flex-col items-start space-y-3",
+					p.Class,
+				),
+			}
+			{ p.Attributes... }
 		>
-			<div class={ classes.PageSectionTitle }>
-				@Subtitle() {
+			<div class="flex flex-col items-start gap-0.5 shrink-0">
+				@Title() {
 					{ p.Title }
 				}
-				@Description() {
+				@Subtitle() {
 					{ p.Description }
 				}
 			</div>
 			<div
-				class={ classes.PageSectionContent, templ.KV("w-full", p.FullWidthContent) }
+				class={
+					tailwind.Merge(
+						"flex flex-col space-y-2 items-start w-full",
+					),
+				}
 			>
 				{ children... }
 			</div>
@@ -78,23 +156,41 @@ templ PageSection(p props.PageSection) {
 	</div>
 }
 
-// PageBreadcrumbs provides a popui component to show navigation breadcrumbs. List items can be either links or text
-templ PageBreadcrumbs() {
-	<ul class={ classes.PageBreadcrumbs }>
-		{ children... }
-	</ul>
-}
-
 // PageActions provides a wrapper for displaying items such as buttons at the right of a PageHeader component
-templ PageActions() {
-	<div class={ classes.PageHeaderActions }>
+templ PageActions(opts ...props.PageActions) {
+	{{ p := props.First(opts) }}
+	<div
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			tailwind.Merge(
+				"flex items-center gap-2",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
 		{ children... }
 	</div>
 }
 
 // PageTitle provides a h1 element used as Page title
-templ PageTitle() {
-	<h1 class={ classes.PageTitle }>
+// Deprecated: use Title component instead.
+templ PageTitle(opts ...props.Title) {
+	{{ p := props.First(opts) }}
+	<h1
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={
+			tailwind.Merge(
+				"font-sans text-foreground text-2xl font-semibold",
+				p.Class,
+			),
+		}
+		{ p.Attributes... }
+	>
 		{ children... }
 	</h1>
 }

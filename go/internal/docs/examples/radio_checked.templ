@@ -1,0 +1,22 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ RadioCheckedExample() {
+	<div class="space-y-3">
+		@popui.Radio(props.Radio{
+			Name:    "subscription",
+			Value:   "basic",
+			Label:   "Basic Plan",
+		})
+		@popui.Radio(props.Radio{
+			Name:    "subscription",
+			Value:   "pro",
+			Label:   "Pro Plan",
+			Checked: true,
+		})
+	</div>
+}

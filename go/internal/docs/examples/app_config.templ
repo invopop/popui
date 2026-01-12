@@ -1,0 +1,29 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ AppConfigExample() {
+	@popui.App(props.App{Title: "Configure"}) {
+		@popui.Main(props.Main{Center: true}) {
+			@popui.Article() {
+				@popui.Fieldset() {
+					@popui.Input(props.Input{
+						ID:          "name-for-app-config",
+						Label:       "Name",
+						Type:        "text",
+						Placeholder: "Your Name",
+					})
+					@popui.Input(props.Input{
+						ID:          "email-for-app-config",
+						Label:       "Email",
+						Type:        "email",
+						Placeholder: "email@example.com",
+					})
+				}
+			}
+		}
+	}
+}

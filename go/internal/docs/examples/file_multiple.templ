@@ -1,0 +1,14 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ FileMultipleExample() {
+	@popui.InputFile(props.InputFile{
+		Name:     "photos",
+		Multiple: true,
+		Accept:   "image/*",
+	})
+}

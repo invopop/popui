@@ -15,3 +15,12 @@ type SidebarSection struct {
 	Class string
 	Attrs templ.Attributes
 }
+
+// SidebarItem defines the property for a single sidebar navigation item.
+type SidebarItem struct {
+	ID       string
+	Class    string
+	Selected bool
+	Attrs    templ.Attributes
+	Href     templ.SafeURL
+}

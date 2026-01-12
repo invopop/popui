@@ -1,18 +1,48 @@
 package popui
 
-import "github.com/invopop/popui/go/classes"
+import (
+	"github.com/invopop/popui/go/props"
+	"github.com/invopop/popui/go/tailwind"
+)
 
 // PopupConfigContainer provides a wrapper for sidebar popups used on the Invopop Console UI
-templ PopupConfigContainer() {
-	<div x-cloak class={ classes.PopupConfigContainer }>
+// Deprecated: use Main component inside an App instead.
+templ PopupConfigContainer(p ...props.PopupConfigContainer) {
+	{{ container := props.First(p) }}
+	<div
+		if container.ID != "" {
+			id={ container.ID }
+		}
+		x-cloak
+		class={
+			tailwind.Merge(
+				"flex flex-col gap-3 p-0.5 h-full",
+				container.Class,
+			),
+		}
+		{ container.Attributes... }
+	>
 		{ children... }
 	</div>
 }
 
-// PopupConfigFooter provides a footer for sidebar popups used on the Invopop Console UI
-templ PopupConfigFooter() {
-	<div class="popui-config-footer">
-		<div class="popui-config-footer__content">
+// PopupConfigFooter provides a footer for sidebar popups used on the Invopop Console UI.
+// Deprecated: use Footer component inside an App instead.
+templ PopupConfigFooter(p ...props.PopupConfigFooter) {
+	{{ footer := props.First(p) }}
+	<div
+		if footer.ID != "" {
+			id={ footer.ID }
+		}
+		class={
+			tailwind.Merge(
+				"flex-1 flex flex-col justify-end w-full",
+				footer.Class,
+			),
+		}
+		{ footer.Attributes... }
+	>
+		<div class="flex justify-end border-t border-border gap-3 p-4">
 			{ children... }
 		</div>
 	</div>

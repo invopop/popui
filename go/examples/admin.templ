@@ -1,690 +1,236 @@
 package examples
 
 import (
+	"github.com/invopop/gobl/pkg/here"
 	popui "github.com/invopop/popui/go"
-	"github.com/invopop/popui/go/classes"
+	"github.com/invopop/popui/go/icons"
 	"github.com/invopop/popui/go/props"
-	"github.com/invopop/popui/icons"
 )
 
 templ Admin() {
-	<html>
-		<head>
-			<title>Invopop - Admin panel</title>
-			<meta charset="utf-8"/>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			// Use simplified version if you only need popui compoments styles and not full Tailwind utilities
-			// @popui.EmbeddedCSS()
-			@popui.EmbeddedFullCSS()
-			@popui.EmbeddedJS()
-		</head>
-		<body class="popui-admin-wrapper">
-			@popui.Sidebar(props.Sidebar{Title: "Invopop Admin"}) {
-				@popui.SidebarHeader() {
-					@popui.InvopopLogoSquare()
-					Admin
+	// @css.Flag() - missing
+	@popui.App(props.App{
+		Title: "Invopop - Admin panel",
+		Description: here.Doc(`
+			This is a standalone admin or app example that includes
+			an optional sidebar for navigation and a header for actions.
+		`),
+	}) {
+		@popui.Header(props.Header{
+			Breadcrumbs: []props.Breadcrumb{
+				{
+					Label: "Workspaces",
+				},
+			},
+		}) {
+			@popui.Button() {
+				@icons.Add()
+				<span>Create Sandbox</span>
+			}
+			@popui.Button(props.Button{Variant: "primary"}) {
+				@icons.Add()
+				<span>Create live workspace</span>
+			}
+		}
+		@popui.Main() {
+			@popui.PageSections() {
+				@popui.PageSection(props.PageSection{
+					Title:       "Live",
+					Description: "A production workspace which produces valid invoices",
+				}) {
+					@liveWorkspaces()
 				}
-				@popui.SidebarContent() {
-					@popui.SidebarSection(props.SidebarSection{Title: "Account"}) {
-						<li>
-							<a class={ classes.SidebarSectionItemActive }>
-								@icons.User()
-								<span>Profile</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Lock()
-								<span>Security</span>
-							</a>
-						</li>
-					}
-					@popui.SidebarSection(props.SidebarSection{Title: "Cyberdyne Enterprises"}) {
-						<li>
-							<a>
-								@icons.Dashboard()
-								<span>Dashboard</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Workspace()
-								<span>Workspaces</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Billing()
-								<span>Billing</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Team()
-								<span>Members</span>
-							</a>
-						</li>
-						<li>
-							<a>
-								@icons.Company()
-								<span>Organization</span>
-							</a>
-						</li>
-					}
-					@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
-						<li>
-							<a>
-								@icons.Puzzle()
-								<span>Applications</span>
-							</a>
-						</li>
-					}
+				@popui.PageSection(props.PageSection{
+					Title:       "Sandbox",
+					Description: "A testing workspace which simulates invoicing and doesn't incur in costs",
+				}) {
+					@sandboxWorkspaces()
 				}
 			}
-			<main class={ classes.Page }>
-				@popui.PageHeader(props.PageHeader{
-					Title: "Create Workspace",
-					Breadcrumbs: []props.PageBreadcrumb{
-						{
-							Name: "Workspaces",
-							URL:  "#something",
-						},
-						{
-							Name: "Non-navigable",
-						},
-					},
-				}) {
-					@popui.Button(props.Button{Variant: "primary"}) {
-						@icons.Envelope()
-						<span>Invite</span>
-					}
-				}
-				@popui.PageContent() {
-					@popui.Tabs(props.Tabs{Class: classes.TabsPill}) {
-						@popui.Tab(props.Tab{Active: true, Class: classes.TabPill}) {
-							@icons.User()
-							<span>Members</span>
-						}
-						@popui.Tab(props.Tab{Class: classes.TabPill}) {
-							@icons.Billing()
-							<span>Billing</span>
-						}
-						@popui.Tab(props.Tab{Class: classes.TabPill}) {
-							@icons.Puzzle()
-							<span>Integrations</span>
-						}
-					}
-					@popui.Tabs(props.Tabs{}) {
-						@popui.Tab(props.Tab{Active: true}) {
-							@icons.User()
-							<span>Members</span>
-						}
-						@popui.Tab(props.Tab{}) {
-							@icons.Billing()
-							<span>Billing</span>
-						}
-						@popui.Tab(props.Tab{}) {
-							@icons.Puzzle()
-							<span>Integrations</span>
-						}
-					}
-					@popui.PageSection(props.PageSection{
-						Title:            "Active Members",
-						Description:      "People who have access to all the workspaces in your organization",
-						FullWidthContent: true,
-					}) {
-						@tableSection()
-					}
-					@popui.PageSection(props.PageSection{Title: "Member information", Description: "Update a member’s job title within your organization"}) {
-						@formSection()
-					}
-					@popui.PageSection(props.PageSection{Title: "Readonly", Description: "This section is used to display a form in readonly mode for show views"}) {
-						@readonlySection()
-					}
-					@popui.PageSection(props.PageSection{Title: "Cards", Description: "We are displaying different type of cards here"}) {
-						@cardsSection()
-					}
-					@popui.PageSection(props.PageSection{Title: "Tag Status", Description: "Status indicators with optional dots and different color variants"}) {
-						@tagStatusSection()
-					}
-					@popui.PageSection(props.PageSection{Title: "Button Copy", Description: "Components for displaying and copying text with different formats"}) {
-						@buttonCopySection()
-					}
-					@popui.PageSection(props.PageSection{Title: "Full Tailwind Utilities", Description: "Examples using utility classes from popui-full.css"}) {
-						@fullTailwindSection()
-					}
-				}
-			</main>
-		</body>
-	</html>
+		}
+		@adminSidebar()
+	}
 }
 
-// Sections
-templ tableSection() {
-	@popui.Table(props.Table{}) {
-		<col style="width: 30%"/>
-		<col style="width: 30%"/>
-		<col style="width: 30%"/>
+templ adminSidebar() {
+	@popui.Sidebar(props.Sidebar{Title: "Invopop Admin"}) {
+		@popui.SidebarHeader() {
+			@popui.InvopopLogoSquare()
+			Admin
+		}
+		@popui.SidebarContent() {
+			@popui.SidebarSection(props.SidebarSection{Title: "Account"}) {
+				<li>
+					<a>
+						@icons.User()
+						<span>Profile</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						@icons.Lock()
+						<span>Security</span>
+					</a>
+				</li>
+			}
+			@popui.SidebarSection(props.SidebarSection{Title: "Cyberdyne Enterprises"}) {
+				<li>
+					<a>
+						@icons.Dashboard()
+						<span>Dashboard</span>
+					</a>
+				</li>
+				<li>
+					<a class="bg-background-default-secondary transition-[background] duration-250 ease-in-out">
+						@icons.Workspace()
+						<span>Workspaces</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						@icons.Billing()
+						<span>Billing</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						@icons.Team()
+						<span>Members</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						@icons.Company()
+						<span>Organization</span>
+					</a>
+				</li>
+			}
+			@popui.SidebarSection(props.SidebarSection{Title: "Developers"}) {
+				<li>
+					<a>
+						@icons.Puzzle()
+						<span>Applications</span>
+					</a>
+				</li>
+			}
+		}
+	}
+}
+
+templ liveWorkspaces() {
+	@popui.Table(props.Table{Variant: "card", Class: "[&_th:last-child]:text-right [&_td:last-child]:text-right"}) {
+		<col style="width: 40%"/>
+		<col style="width: 40%"/>
+		<col style="width: 20%"/>
 		<thead>
 			<tr>
-				<th>Name</th>
-				<th>Job Title</th>
-				<th>Email</th>
+				<th>Workspace name</th>
+				<th>Billing account</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				@popui.TableCell(props.TableCell{Content: "Marta García", UseInitial: true, Bold: true})
-				@popui.TableCell(props.TableCell{Content: "Finance"})
 				<td>
-					<a href="mailto:marga.garcia@invopop.com">marga.garcia@invopop.com</a>
+					<div class="flex items-center gap-2">
+						@popui.Avatar(props.Avatar{}) {
+							@popui.Image(props.Image{Src: "https://cdn.prod.website-files.com/63bdbe03bd3b7012dacee940/693ae6da3c42add7ee2201ea_image%201.png"})
+						}
+						<span class="flex items-center gap-2 font-medium">
+							<span>Cyberdyne Mexico</span>
+							@popui.Flag(props.Flag{Country: "MX", Class: "mt-0.5"})
+						</span>
+					</div>
 				</td>
-				@popui.TableCell(props.TableCell{Content: "Account owner", RightAlign: true})
+				<td>Cyberdyne Billing</td>
+				<td>
+					@popui.Button(props.Button{
+						Variant: "secondary",
+					}) {
+						<span>Console</span>
+						@icons.ExternalLink()
+					}
+				</td>
 			</tr>
 			<tr>
-				@popui.TableCell(props.TableCell{Content: "Alejandro Lopez", UseInitial: true, Bold: true})
-				@popui.TableCell(props.TableCell{Content: "Finance"})
-				@popui.TableCell(props.TableCell{Content: "alejandro.lopez@invopop.com"})
-				@popui.TableCell(props.TableCell{RightAlign: true}) {
-					@popui.Popover(props.Popover{
-						ID:            "popover",
-						ButtonLabel:   "···",
-						ButtonVariant: "transparent",
-						RightAlign:    true,
-						Stretch:       true,
+				<td>
+					<div class="flex items-center gap-2">
+						@popui.Avatar(props.Avatar{}) {
+							@popui.Image(props.Image{Src: "https://cdn.prod.website-files.com/63bdbe03bd3b7012dacee940/693ae6da3c42add7ee2201ea_image%201.png"})
+						}
+						<span class="flex items-center gap-2 font-medium">
+							<span>Cyberdyne France</span>
+							@popui.Flag(props.Flag{Country: "FR", Class: "mt-0.5"})
+						</span>
+					</div>
+				</td>
+				<td>Cyberdyne Billing</td>
+				<td>
+					@popui.Button(props.Button{
+						Variant: "secondary",
 					}) {
-						<ul>
-							<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-								<button onclick="alert('Edit')">
-									@icons.Edit()
-									<span>Edit Member</span>
-								</button>
-							</li>
-							<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-								<button class="text-danger">
-									@icons.Delete()
-									<span>Disable Access</span>
-								</button>
-							</li>
-						</ul>
+						<span>Console</span>
+						@icons.ExternalLink()
 					}
-				}
+				</td>
 			</tr>
 		</tbody>
 	}
-	@popui.Button(props.Button{Variant: "secondary"}) {
-		Send
-	}
-	@popui.Button(props.Button{Variant: "danger"}) {
-		Destroy universe
-	}
 }
 
-templ formSection() {
-	<form class={ classes.FormContainer }>
-		@popui.Fieldset(props.Fieldset{}) {
-			@popui.InputText(props.InputText{
-				ID:       "name",
-				Label:    "Full name",
-				Value:    "Diego Fernández",
-				Disabled: true,
-			})
-			@popui.InputText(props.InputText{
-				ID:    "JOB",
-				Label: "Job Title",
-				Value: "Finance",
-			})
-			<div class={ classes.InputTextWrapper }>
-				@popui.InputLabel() {
-					Avatar
-				}
-				@popui.InputFileAvatar(props.InputFileAvatar{
-					ID: "avatar",
-					// AvatarURL: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-					AvatarAlt: "User Avatar",
-					Accept:    "image/*",
-					Attrs: templ.Attributes{
-						"onchange": "console.log('Send this form somewhere!')",
-					},
-				}) {
+templ sandboxWorkspaces() {
+	@popui.Table(props.Table{Variant: "card", Class: "[&_th:last-child]:text-right [&_td:last-child]:text-right"}) {
+		<col style="width: 40%"/>
+		<col style="width: 40%"/>
+		<col style="width: 20%"/>
+		<thead>
+			<tr>
+				<th>Workspace name</th>
+				<th>Billing account</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<div class="flex items-center gap-2">
+						@popui.Avatar(props.Avatar{}) {
+							@popui.Image(props.Image{Src: "https://cdn.prod.website-files.com/63bdbe03bd3b7012dacee940/693ae6da3c42add7ee2201ea_image%201.png"})
+						}
+						<span class="font-medium">
+							Cyberdyne Sandbox
+						</span>
+					</div>
+				</td>
+				<td>Sandbox (Free)</td>
+				<td>
 					@popui.Button(props.Button{
-						Type:  "button",
-						Small: true,
+						Variant: "secondary",
 					}) {
-						Remove
+						<span>Console</span>
+						@icons.ExternalLink()
 					}
-				}
-			</div>
-			@popui.Textarea(props.Textarea{
-				ID:    "desc",
-				Label: "Description",
-				Rows:  2,
-				Value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
-			})
-			@popui.FieldsetCard(props.Fieldset{Legend: "Sudo", Class: classes.FieldsetCardGrayed}) {
-				<input type="hidden" name="type" value=""/>
-				@popui.InputCheckbox(props.InputCheckbox{
-					ID:      "enterprise",
-					Label:   "Enterprise",
-					Name:    "type",
-					Value:   "thing",
-					Checked: true,
-				})
-				@popui.InputText(props.InputText{
-					Label: "Stripe ID",
-					Name:  "stripe_id",
-				})
-				@popui.Info() {
-					Remove the Stripe ID to force the creation of a new Stripe
-					customer, thus allowing a new Tax ID to be uploaded.
-				}
-			}
-			@popui.Accordion(props.Accordion{Title: "Help me select a plan"}) {
-				@popui.FieldsetCard(props.Fieldset{}) {
-					@popui.Select(props.Select{}) {
-						<option disabled selected value="">Select a type of document...</option>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="flex items-center gap-2">
+						@popui.Avatar(props.Avatar{Initial: "I"})
+						<span class="font-medium">
+							Integrations Testing
+						</span>
+					</div>
+				</td>
+				<td>Sandbox (Free)</td>
+				<td>
+					@popui.Button(props.Button{
+						Variant: "secondary",
+					}) {
+						<span>Console</span>
+						@icons.ExternalLink()
 					}
-					@popui.OptionGroup(props.OptionGroup{Label: "Actions performed on each document"}) {
-						@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Generate PDF (1 pop)"})
-						@popui.InputCheckbox(props.InputCheckbox{Switch: true, Label: "Send by email (1 pop)"})
-					}
-				}
-			}
-			@popui.InputRadioCard(props.InputRadio{
-				Name:    "sandbox",
-				Label:   "Sandbox",
-				Value:   "true",
-				Checked: true,
-			})
-			@popui.InputRadioCard(props.InputRadio{
-				Name:        "sandbox",
-				Label:       "Live",
-				Value:       "true",
-				Checked:     false,
-				Description: "For production, issues valid invoices.",
-			})
-			@popui.InputRadio(props.InputRadio{
-				Name:    "sandbox",
-				Label:   "Regular radio option 1",
-				Value:   "regular-1",
-				Checked: false,
-			})
-			@popui.InputRadio(props.InputRadio{
-				Name:    "sandbox",
-				Label:   "Regular radio option 2",
-				Value:   "regular-2",
-				Checked: false,
-			})
-			<div class={ classes.InputTextGroup }>
-				@popui.InputRadioTheme(props.InputRadioTheme{
-					Name:    "theme",
-					Value:   props.ColorSherwoodValue + "," + props.ColorBgSherwoodValue,
-					Variant: props.ColorSherwood,
-					Checked: true,
-				})
-				@popui.InputRadioTheme(props.InputRadioTheme{
-					Name:    "theme",
-					Value:   props.ColorMetalValue + "," + props.ColorBgMetalValue,
-					Variant: props.ColorMetal,
-				})
-			</div>
-			@popui.InputCheckbox(props.InputCheckbox{
-				Label: "Checbox regular",
-				Value: "checkbox-regular",
-			})
-			@popui.InputCheckbox(props.InputCheckbox{
-				Label:   "Checkbox switch",
-				Value:   "checkbox-switch",
-				Checked: true,
-				Switch:  true,
-			})
-			@popui.InputRange(props.InputRange{
-				Label: "Docs per month (1 pop)",
-				Min:   "1",
-				Max:   "9",
-				Step:  "1",
-				ListOptions: []props.RangeListOptions{
-					{Value: "40", Label: "40"},
-					{Value: "100", Label: "100"},
-					{Value: "200", Label: "200"},
-					{Value: "400", Label: "400"},
-					{Value: "1000", Label: "1K"},
-					{Value: "2000", Label: "2K"},
-					{Value: "4000", Label: "4K"},
-					{Value: "10000", Label: "10K"},
-					{Value: "100000", Label: "20K+"},
-				},
-			})
-			<div class="flex gap-2">
-				@popui.Button(props.Button{Variant: "primary", ShowSpinnerOnClick: true}) {
-					@icons.AddCircle()
-					Update
-				}
-				@popui.FlashMessage(props.FlashMessage{Type: "success", Message: "Saved"})
-			</div>
-		}
-	</form>
-}
-
-templ readonlySection() {
-	@popui.DescList() {
-		@popui.DescRow() {
-			<dt>First name</dt>
-			<dd>Facundo</dd>
-		}
-		@popui.DescRow() {
-			<dt>Surname</dt>
-			<dd>Velazquez</dd>
-		}
-		@popui.DescRow() {
-			<dt>Hobbies</dt>
-			<dd>I like to write long texts so they can not fit on different popui layouts</dd>
-		}
-		@popui.DescRow() {
-			<dt>Rich text</dt>
-			<dd>
-				@popui.Prose() {
-					Here goes some <strong>bold sentence</strong> and some list
-					<ul>
-						<li>One</li>
-						<li>Two</li>
-						<li>Three</li>
-					</ul>
-					<blockquote>
-						<p>
-							And this is a quote to finish.
-						</p>
-					</blockquote>
-				}
-			</dd>
-		}
+				</td>
+			</tr>
+		</tbody>
 	}
-	@popui.AnchorButton(props.AnchorButton{
-		Variant: "secondary",
-		Href:    "https://www.invopop.com",
-		Target:  "_blank",
-	}) {
-		Modify
-	}
-}
-
-templ cardsSection() {
-	@popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop"}})
-	@popui.Card(props.Card{
-		Header: props.CardHeader{
-			Title:  "Invopop with logo",
-			ImgSrc: "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-		},
-	})
-	@popui.Card(props.Card{
-		Header: props.CardHeader{
-			Title:   "Invopop with flag",
-			FlagISO: "es",
-		},
-	})
-	@popui.Card(props.Card{
-		Header: props.CardHeader{
-			Title:   "Invopop with logo and Flag",
-			ImgSrc:  "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-			FlagISO: "fr",
-		},
-	})
-	@popui.Card(props.Card{Header: props.CardHeader{Title: "Invopop with link"}, URL: "#something"})
-	@popui.Card(props.Card{Header: props.CardHeader{Title: "Cyberdyne enterprises for World Global Domination INC"}})
-	@popui.Card(props.Card{
-		Header: props.CardHeader{
-			Title:    "Invopop with subtitle",
-			Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-		},
-		URL:   "https://invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-		Attrs: templ.Attributes{"target": "_blank"},
-	})
-	<a href="#something" style="padding: 16px; display: block; width: 100%;">
-		@popui.CardHeader(props.CardHeader{
-			Title:    "CardHeader without card",
-			Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-		})
-	</a>
-	@complexCard()
-}
-
-templ complexCard() {
-	@popui.Card(props.Card{}) {
-		@popui.CardHeader(props.CardHeader{
-			Title:    "Complex card with header slot and more items",
-			Subtitle: "invopop.com/invopop_with_subtitle_super_long_name_sandbox",
-			ImgSrc:   "https://ams3.digitaloceanspaces.com/invopop-console-files-dev/9acccd03a8258818cadbfce3e32e67af1e7ff826deb2e6ec66c9cdc6fc8f24a1",
-			FlagISO:  "pt",
-		}) {
-			@popoverForCard()
-		}
-		@popui.CardProgressBar(props.CardProgressBar{
-			Title:    "Pops",
-			Subtitle: "Refills Dec 1, 2024",
-			Current:  1200,
-			Total:    1000,
-		})
-		@popui.Select(props.Select{}) {
-			<option>Last 30 days</option>
-		}
-		@popui.CardDashboard(props.CardDashboard{
-			Items: []props.CardDashboardItem{
-				{
-					Label: "Documents",
-					Value: "10.5K",
-				},
-				{
-					Label: "Workflows",
-					Value: "10",
-				},
-				{
-					Label: "Parties",
-					Value: "123",
-				},
-			},
-		})
-	}
-}
-
-templ popoverForCard() {
-	@popui.Popover(props.Popover{
-		ID:            "popover-card",
-		ButtonLabel:   "···",
-		ButtonVariant: "transparent",
-		RightAlign:    true,
-		Stretch:       true,
-	}) {
-		<ul>
-			<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-				<button>
-					@icons.Billing()
-					<span>Change Plan</span>
-				</button>
-			</li>
-			<li class={ classes.PopoverListItem, classes.PopoverListItemTextLeft }>
-				<button>
-					@icons.Edit()
-					<span>Modify Workspace</span>
-				</button>
-			</li>
-		</ul>
-	}
-}
-
-templ fullTailwindSection() {
-	<div class="space-y-6">
-		<!-- Grid Layout Example -->
-		<div>
-			<h3 class="text-lg font-semibold mb-3">Grid Layouts</h3>
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-				<div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
-					<p class="text-sm font-medium text-blue-900">Responsive Grid Item 1</p>
-					<p class="text-xs text-blue-700 mt-2">Using grid-cols utilities</p>
-				</div>
-				<div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200">
-					<p class="text-sm font-medium text-purple-900">Responsive Grid Item 2</p>
-					<p class="text-xs text-purple-700 mt-2">With gradient backgrounds</p>
-				</div>
-				<div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200">
-					<p class="text-sm font-medium text-green-900">Responsive Grid Item 3</p>
-					<p class="text-xs text-green-700 mt-2">And custom colors</p>
-				</div>
-			</div>
-		</div>
-		<!-- Flexbox Example -->
-		<div>
-			<h3 class="text-lg font-semibold mb-3">Advanced Flexbox</h3>
-			<div class="flex flex-wrap gap-3 items-center justify-between">
-				<div class="flex-1 min-w-[200px] bg-indigo-50 p-4 rounded-md">
-					<span class="text-sm text-indigo-900">Flexible item with min-width</span>
-				</div>
-				<div class="flex-none bg-pink-50 p-4 rounded-md">
-					<span class="text-sm text-pink-900">Fixed width item</span>
-				</div>
-				<div class="flex-1 min-w-[200px] bg-amber-50 p-4 rounded-md">
-					<span class="text-sm text-amber-900">Another flexible item</span>
-				</div>
-			</div>
-		</div>
-		<!-- Spacing & Typography -->
-		<div>
-			<h3 class="text-lg font-semibold mb-3">Typography & Spacing</h3>
-			<div class="space-y-4 bg-slate-50 p-6 rounded-lg">
-				<p class="text-xs text-slate-600">Extra small text (text-xs)</p>
-				<p class="text-sm text-slate-700">Small text (text-sm)</p>
-				<p class="text-base text-slate-800">Base text (text-base)</p>
-				<p class="text-lg text-slate-900">Large text (text-lg)</p>
-				<p class="text-xl font-medium text-slate-900">Extra large with medium weight (text-xl)</p>
-				<p class="text-2xl font-semibold text-slate-900">2XL with semibold (text-2xl)</p>
-			</div>
-		</div>
-		<!-- Shadows & Borders -->
-		<div>
-			<h3 class="text-lg font-semibold mb-3">Shadows & Borders</h3>
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-				<div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-					<p class="text-sm">shadow-sm</p>
-				</div>
-				<div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-					<p class="text-sm">shadow-md</p>
-				</div>
-				<div class="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
-					<p class="text-sm">shadow-lg</p>
-				</div>
-				<div class="bg-white p-4 rounded-lg shadow-xl border-2 border-gray-300">
-					<p class="text-sm">shadow-xl + border-2</p>
-				</div>
-			</div>
-		</div>
-		<!-- Colors Palette -->
-		<div>
-			<h3 class="text-lg font-semibold mb-3">Extended Color Palette</h3>
-			<div class="flex flex-wrap gap-2">
-				<div class="w-16 h-16 bg-red-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-orange-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-amber-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-yellow-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-lime-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-green-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-emerald-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-teal-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-cyan-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-sky-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-blue-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-indigo-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-violet-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-purple-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-fuchsia-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-pink-500 rounded-md shadow-sm"></div>
-				<div class="w-16 h-16 bg-rose-500 rounded-md shadow-sm"></div>
-			</div>
-		</div>
-		<!-- Responsive Design -->
-		<div>
-			<h3 class="text-lg font-semibold mb-3">Responsive Utilities</h3>
-			<div class="bg-white p-6 rounded-lg border border-gray-200">
-				<div class="bg-blue-100 sm:bg-green-100 md:bg-yellow-100 lg:bg-purple-100 xl:bg-pink-100 p-4 rounded text-center">
-					<p class="text-sm font-medium">This box changes color at different breakpoints</p>
-					<p class="text-xs mt-2 text-gray-600">
-						Blue (default) → Green (sm) → Yellow (md) → Purple (lg) → Pink (xl)
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-}
-
-templ tagStatusSection() {
-	<div class="flex flex-wrap gap-2">
-		@popui.TagStatus(props.TagStatus{Label: "Grey", Status: "grey"})
-		@popui.TagStatus(props.TagStatus{Label: "Green", Status: "green"})
-		@popui.TagStatus(props.TagStatus{Label: "Yellow", Status: "yellow"})
-		@popui.TagStatus(props.TagStatus{Label: "Red", Status: "red"})
-		@popui.TagStatus(props.TagStatus{Label: "Orange", Status: "orange"})
-		@popui.TagStatus(props.TagStatus{Label: "Blue", Status: "blue"})
-		@popui.TagStatus(props.TagStatus{Label: "Purple", Status: "purple"})
-		@popui.TagStatus(props.TagStatus{Label: "Olive", Status: "olive"})
-		@popui.TagStatus(props.TagStatus{Label: "Teal", Status: "teal"})
-		@popui.TagStatus(props.TagStatus{Label: "Crimson", Status: "crimson"})
-		@popui.TagStatus(props.TagStatus{Label: "Blue Violet", Status: "blueViolet"})
-		@popui.TagStatus(props.TagStatus{Label: "Steel Blue", Status: "steelBlue"})
-		@popui.TagStatus(props.TagStatus{Label: "Empty", Status: "empty"})
-	</div>
-	<div class="flex flex-wrap gap-2 mt-4">
-		@popui.TagStatus(props.TagStatus{Label: "Grey", Status: "grey", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Green", Status: "green", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Yellow", Status: "yellow", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Red", Status: "red", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Orange", Status: "orange", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Blue", Status: "blue", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Purple", Status: "purple", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Olive", Status: "olive", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Teal", Status: "teal", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Crimson", Status: "crimson", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Blue Violet", Status: "blueViolet", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Steel Blue", Status: "steelBlue", Dot: true})
-		@popui.TagStatus(props.TagStatus{Label: "Empty", Status: "empty", Dot: true})
-	</div>
-	<div class="flex flex-wrap gap-2 mt-4">
-		@popui.TagStatus(props.TagStatus{Status: "grey", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "green", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "yellow", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "red", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "orange", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "blue", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "purple", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "olive", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "teal", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "crimson", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "blueViolet", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "steelBlue", Dot: true})
-		@popui.TagStatus(props.TagStatus{Status: "empty", Dot: true})
-	</div>
-}
-
-templ buttonCopySection() {
-	<div>
-		@popui.ButtonCopy(props.ButtonCopy{Value: "e73d5d20834934588127389172381789bc2f275460", CopiedText: "Copied!"})
-	</div>
-	<div class="mt-4">
-		@popui.ButtonCopy(props.ButtonCopy{Value: "e73d5d20834934588127389172381789bc2f275460", PrefixLength: 4, SuffixLength: 4})
-	</div>
-	<div class="mt-4">
-		@popui.ButtonCopy(props.ButtonCopy{Value: "e73d5d20834934588127389172381789bc2f275460", PrefixLength: 6, SuffixLength: 6, CopiedText: "Done ✓"})
-	</div>
-	<div class="mt-4">
-		@popui.ButtonCopy(props.ButtonCopy{Value: "123e4567-e89b-12d3-a456-426614174000", PrefixLength: 8, SuffixLength: 4, CopiedText: "Copied to clipboard!"})
-	</div>
-	<div class="mt-4">
-		<p class="popui-description mb-4">Value can also be set via the value attribute in Attrs:</p>
-		@popui.ButtonCopy(props.ButtonCopy{
-			PrefixLength: 8,
-			SuffixLength: 4,
-			CopiedText:   "Success!",
-			Attrs: templ.Attributes{
-				"value": "set-via-attrs-example-uuid-98765432",
-			},
-		})
-	</div>
 }

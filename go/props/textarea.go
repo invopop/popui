@@ -9,21 +9,18 @@ import (
 // Textarea Templ component props
 type Textarea struct {
 	ID          string
+	Class       string
+	Attributes  templ.Attributes
 	Name        string
 	Placeholder string
 	Value       string
-	Class       string
 	Label       string
-	LabelClass  string
-	LabelHint   string
 	Disabled    bool
 	Readonly    bool
 	Required    bool
 	Autofocus   bool
-	Monospaced  bool
 	Rows        int
 	Error       Error
-	Attrs       templ.Attributes
 }
 
 // GetRows returns the Rows prop as a string with a default if not present

@@ -9,6 +9,8 @@ import (
 	"github.com/a-h/templ"
 	popui "github.com/invopop/popui/go"
 	"github.com/invopop/popui/go/examples"
+	"github.com/invopop/popui/go/internal/docs"
+	"github.com/invopop/popui/go/internal/docs/assets"
 	"github.com/labstack/echo/v4"
 	"github.com/spf13/cobra"
 )
@@ -25,7 +27,7 @@ func serve(o *rootOpts) *serveOpts {
 func (s *serveOpts) cmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "serve",
-		Short: "Serve serves the examples Templ components",
+		Short: "Serve serves the popui UI components browser",
 		RunE:  s.runE,
 	}
 
@@ -42,18 +44,27 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	e := echo.New()
 
 	e.StaticFS(popui.AssetPath, popui.Assets)
+	e.StaticFS("/assets", assets.Content)
 
+	// Documentation routes (now at root)
 	e.GET("/", s.index)
-	e.GET("/prose", s.prose)
-	e.GET("/admin", s.admin)
-	e.GET("/wizard", s.appIndex)
-	e.GET("/wizard/step-one", s.appStepOne)
-	e.GET("/wizard/step-two", s.appStepTwo)
-	e.GET("/wizard/step-three", s.appStepThree)
-	e.GET("/wizard/step-four", s.appStepFour)
-	e.GET("/wizard/confirm", s.confirm)
-	e.GET("/wizard/success", s.success)
-	e.GET("/wizard/error", s.error)
+
+	// Older examples are provided here for testing
+	e.GET("/examples/admin", renderComponent(examples.Admin()))
+	e.GET("/examples/app", renderComponent(examples.App()))
+	e.GET("/examples/console", renderComponent(examples.Console()))
+	e.GET("/examples/prose", renderComponent(examples.Prose()))
+
+	// Wizard example
+	e.GET("/examples/wizard", renderComponent(examples.Wizard()))
+	e.GET("/examples/wizard/start", renderComponent(examples.Wizard()))
+	e.GET("/examples/wizard/step-one", renderComponent(examples.WizardStepOne()))
+	e.GET("/examples/wizard/step-two", renderComponent(examples.WizardStepTwo()))
+	e.GET("/examples/wizard/step-three", renderComponent(examples.WizardStepThree()))
+	e.GET("/examples/wizard/step-four", renderComponent(examples.WizardStepFour()))
+	e.GET("/examples/wizard/confirm", renderComponent(examples.WizardConfirm()))
+	e.GET("/examples/wizard/success", renderComponent(examples.WizardSuccess()))
+	e.GET("/examples/wizard/error", renderComponent(examples.WizardError()))
 
 	var startErr error
 	go func() {
@@ -74,59 +85,15 @@ func (s *serveOpts) runE(cmd *cobra.Command, _ []string) error {
 	return startErr
 }
 
-// index shows the example page that will render all the components
+func renderComponent(tmp templ.Component) func(c echo.Context) error {
+	return func(c echo.Context) error {
+		return render(c, http.StatusOK, tmp)
+
+	}
+}
+
 func (s *serveOpts) index(c echo.Context) error {
-	return render(c, http.StatusOK, examples.Page())
-}
-
-// prose shows the prose example page with lots of possible combinations
-func (s *serveOpts) prose(c echo.Context) error {
-	return render(c, http.StatusOK, examples.Prose())
-}
-
-// admin shows the admin panel example page
-func (s *serveOpts) admin(c echo.Context) error {
-	return render(c, http.StatusOK, examples.Admin())
-}
-
-// appIndex shows a welcome page for a fullscreen type app
-func (s *serveOpts) appIndex(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppIndex())
-}
-
-// appStepOne shows the first page for a wizard type app
-func (s *serveOpts) appStepOne(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppStepOne())
-}
-
-// appStepTwo shows the second page for a wizard type app
-func (s *serveOpts) appStepTwo(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppStepTwo())
-}
-
-// appStepThree shows the third page for a wizard type app
-func (s *serveOpts) appStepThree(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppStepThree())
-}
-
-// appStepFour shows the fourth page for a wizard type app
-func (s *serveOpts) appStepFour(c echo.Context) error {
-	return render(c, http.StatusOK, examples.AppStepFour())
-}
-
-// confirm shows the confirm page for a wizard type app
-func (s *serveOpts) confirm(c echo.Context) error {
-	return render(c, http.StatusOK, examples.ConfirmPage())
-}
-
-// success shows the success page for a wizard type app
-func (s *serveOpts) success(c echo.Context) error {
-	return render(c, http.StatusOK, examples.SuccessPage())
-}
-
-// error shows the success page for a wizard type app
-func (s *serveOpts) error(c echo.Context) error {
-	return render(c, http.StatusOK, examples.ErrorPage())
+	return render(c, http.StatusOK, docs.Index())
 }
 
 // render provides a wrapper around the component to make it nice to render.

@@ -13,12 +13,13 @@ func root() *rootOpts {
 
 func (o *rootOpts) cmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:           "gokit",
+		Use:           "popui",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 	}
 
 	cmd.AddCommand(serve(o).cmd())
+	cmd.AddCommand(build(o).cmd())
 
 	return cmd
 }

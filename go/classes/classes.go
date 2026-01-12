@@ -1,253 +1,58 @@
-// Package classes contains the available default css classes for components.
+// Package classes provides utilities for managing CSS class names in Go projects.
 package classes
 
-// Accordion related classes
-const (
-	Accordion           = "popui-accordion"
-	AccordionScrollable = "popui-accordion__scrollable"
-	AccordionContent    = "popui-accordion__content"
+import (
+	"strings"
 )
 
-// Avatar related classes
-const (
-	AvatarBase    = "popui-avatar"
-	AvatarLarge   = "popui-avatar--large"
-	AvatarInitial = "popui-avatar--initial"
-)
+// Join conditionally joins class names together, mimicking the clsx/classnames behavior.
+// Accepts strings (which are included as-is) and maps (where keys are included if values are truthy).
+// Empty strings are filtered out automatically.
+//
+// Example:
+//
+//	classes.Join("base-class", map[string]bool{"active": isActive, "disabled": isDisabled})
+//	// Returns: "base-class active" (if isActive is true and isDisabled is false)
+func Join(items ...any) string {
+	var classes []string
 
-// Card related classes
-const (
-	Card            = "popui-card"
-	CardDisabled    = "popui-card--disabled"
-	CardHeader      = "popui-card__header"
-	CardHeaderFlag  = "popui-card__header-flag"
-	CardHeaderTitle = "popui-card__header-title"
+	for _, item := range items {
+		switch v := item.(type) {
+		case string:
+			if v != "" {
+				classes = append(classes, v)
+			}
+		case map[string]bool:
+			for class, condition := range v {
+				if condition && class != "" {
+					classes = append(classes, class)
+				}
+			}
+		}
+	}
 
-	CardProgressBar                    = "popui-card-progress-bar"
-	CardProgressBarProgress            = "popui-card-progress-bar__progress"
-	CardProgressBarHeader              = "popui-card-progress-bar__header"
-	CardProgressBarHeaderTitle         = "popui-card-progress-bar__header-title"
-	CardProgressBarHeaderSubtitle      = "popui-card-progress-bar__header-subtitle"
-	CardProgressBarHeaderAmount        = "popui-card-progress-bar__header-amount"
-	CardProgressBarHeaderAmountCurrent = "popui-card-progress-bar__header-amount_current"
+	return strings.Join(classes, " ")
+}
 
-	CardDashboard          = "popui-card-dashboard"
-	CardDashboardItem      = "popui-card-dashboard__item"
-	CardDashboardItemLabel = "popui-card-dashboard__item-label"
-	CardDashboardItemValue = "popui-card-dashboard__item-value"
+// FormField returns common CSS classes for form fields (input, select, textarea).
+// These classes provide consistent styling for border, focus, hover, disabled states, font, caret, and padding.
+func FormField() string {
+	return "font-sans py-1.5 px-2.5 border border-border-default-secondary w-full rounded-lg text-base outline-none text-foreground tracking-tight caret-foreground-accent placeholder:text-foreground-default-tertiary box-border disabled:bg-background-default-secondary hover:enabled:border-border-default-secondary-hover focus:hover:enabled:border-border-selected-bold focus:ring-0 focus:ring-offset-0"
+}
 
-	CardFile = "popui-card-file"
-)
+// FormFieldError returns the error styling classes for form fields.
+// Useful for dynamic class bindings or composing custom error states.
+func FormFieldError() string {
+	return "!text-foreground-critical !border-border-critical-bold !outline-none !caret-foreground-critical"
+}
 
-// Container classes
-const (
-	PopupConfigContainer = "popui-container-config"
-)
-
-// Image related classes
-const (
-	Image = "popui-image"
-)
-
-// Form and input and related classes
-const (
-	FormContainer = "popui-form__container"
-	FormListItem  = "popui-form__list-item"
-	FormCellGroup = "popui-form__cell-group"
-
-	Fieldset           = "popui-fieldset"
-	FieldsetCard       = "popui-fieldset popui-fieldset__card"
-	FieldsetCardGrayed = "popui-fieldset popui-fieldset__card popui-fieldset__card-grayed"
-	FieldsetLegend     = "popui-fieldset-legend"
-
-	OptionGroup = "popui-option-group"
-
-	InputTitle = "popui-input-title"
-
-	InputTextWrapper = "popui-input-text-wrapper"
-	InputTextGroup   = "popui-input-text-group"
-	InputTextBase    = "popui-input-text"
-	InputTextError   = "popui-input-text--error"
-
-	InputFile = "popui-input-file"
-
-	CheckboxWrapper = "popui-checkbox-wrapper"
-	CheckboxInput   = "popui-checkbox-input"
-	CheckboxLabel   = "popui-checkbox-label"
-
-	RangeInput = "popui-range__input"
-
-	SwitchWrapper = "popui-switch__wrapper"
-	SwitchInput   = "popui-switch__input"
-	SwitchLabel   = "popui-switch__label"
-
-	ButtonBase        = "popui-button"
-	ButtonDanger      = "popui-button--danger"
-	ButtonPrimary     = "popui-button--primary"
-	ButtonSecondary   = "popui-button--secondary"
-	ButtonLoading     = "popui-button--loading"
-	ButtonSpinner     = "popui-button-spinner"
-	ButtonTransparent = "popui-button--transparent"
-	ButtonSmall       = "popui-button--small"
-	ButtonSquare      = "popui-button--square"
-
-	Radio             = "popui-radio"
-	RadioWrapper      = "popui-radio-wrapper"
-	RadioWrapperInner = "popui-radio-wrapper__inner"
-	RadioLabel        = "popui-radio-label"
-	RadioLabelWrapper = "popui-radio-label__wrapper"
-	RadioDescription  = "popui-radio-description"
-	RadioTheme        = "popui-radio__theme"
-
-	SelectWrapper = "popui-select-wrapper"
-	SelectBase    = "popui-select"
-	SelectError   = "popui-input--error"
-
-	TextareaWrapper         = "popui-textarea-wrapper"
-	TextareaBase            = "popui-textarea"
-	TextareaContenteditable = "popui-textarea__contenteditable"
-	TextareaError           = "popui-input--error"
-	TextareaMonospaced      = "popui-textarea--monospaced"
-
-	Label = "popui-label"
-	Error = "popui-error"
-)
-
-// Prose and general classes
-const (
-	P                        = "popui-paragraph"
-	Title                    = "popui-title"
-	Subtitle                 = "popui-subtitle"
-	Description              = "popui-description"
-	Info                     = "popui-info"
-	InfoText                 = "popui-info-text"
-	FlashMessage             = "popui-form-message"
-	FlashMessageSuccess      = "popui-form-message--success"
-	WarningText              = "popui-warning-text"
-	Notification             = "popui-notification"
-	NotificationInfo         = "popui-notification__info"
-	NotificationWarning      = "popui-notification__warning"
-	NotificationSuccess      = "popui-notification__success"
-	NotificationError        = "popui-notification__error"
-	NotificationDescription  = "popui-notification__description"
-	Prose                    = "popui-prose"
-	HorizontalDividerWrapper = "popui-divider-wrapper"
-	HorizontalDivider        = "popui-divider"
-	DescList                 = "popui-desc-list"
-	EmptyState               = "popui-empty-state"
-)
-
-// Page classes
-const (
-	Page               = "popui-admin-page"
-	PageHeader         = "popui-admin-page__header"
-	PageHeaderActions  = "popui-admin-page__header-actions"
-	PageContent        = "popui-admin-page__content"
-	PageSection        = "popui-admin-page__section"
-	PageSectionTitle   = "popui-admin-page__section-title"
-	PageSectionContent = "popui-admin-page__section-content"
-	PageBreadcrumbs    = "popui-admin-page__breadcrumbs"
-	PageTitle          = "popui-admin-page-title"
-	PageTitleWrapper   = "popui-admin-page-title__wrapper"
-)
-
-// Wizard classes
-const (
-	WizardPageWrapper           = "popui-wizard-page"
-	WizardHeader                = "popui-wizard-header"
-	WizardContent               = "popui-wizard-content"
-	WizardFooter                = "popui-wizard-footer"
-	WizardContentCenterVertical = "popui-wizard-content__center-vertical"
-)
-
-// Popover classes
-const (
-	PopoverWrapper          = "popui-popover-wrapper"
-	PopoverWrapperRight     = "popui-popover-wrapper__right"
-	PopoverList             = "popui-popover-list popover-menu"
-	PopoverListRight        = "popui-popover-list__right"
-	PopoverListStretch      = "popui-popover-list__stretch"
-	PopoverListItem         = "popui-popover-list-item"
-	PopoverListItemTextLeft = "popui-popover-list-item__text-left"
-)
-
-// Sidebar classes
-const (
-	Sidebar                  = "popui-admin-sidebar"
-	SidebarHeader            = "popui-admin-sidebar__header"
-	SidebarContent           = "popui-admin-sidebar__content"
-	SidebarFooter            = "popui-admin-sidebar__footer"
-	SidebarSection           = "popui-admin-sidebar__section"
-	SidebarSectionItemActive = "popui-admin-sidebar__item-active"
-)
-
-// SVG classes
-const (
-	SVGLoading = "popui-svg-loading"
-)
-
-// Table classes
-const (
-	Table          = "popui-table"
-	TableClickable = "popui-table--clickable"
-	TableWrapper   = "popui-table-wrapper"
-	TableCellRight = "popui-table-cell__right"
-)
-
-// Tabs classes
-const (
-	Tabs        = "popui-tabs"
-	TabsPill    = "popui-tabs__pill"
-	Tab         = "popui-tab"
-	TabPill     = "popui-tab__pill"
-	TabActive   = "popui-tab--active"
-	TabDisabled = "popui-tab--disabled"
-)
-
-// Tags classes
-const (
-	TagsWrapper  = "popui-tags-wrapper"
-	Tags         = "popui-tags"
-	Tag          = "popui-tag"
-	TagButton    = "popui-tag-button"
-	TagAddButton = "popui-tag-add-button"
-	TagAddInput  = "popui-tag-add-input"
-)
-
-// TagStatus classes
-const (
-	TagStatusBase       = "popui-tag-status"
-	TagStatusDot        = "popui-tag-status__dot"
-	TagStatusLabel      = "popui-tag-status__label"
-	TagStatusGreen      = "popui-tag-status--green"
-	TagStatusYellow     = "popui-tag-status--yellow"
-	TagStatusRed        = "popui-tag-status--red"
-	TagStatusOrange     = "popui-tag-status--orange"
-	TagStatusBlue       = "popui-tag-status--blue"
-	TagStatusPurple     = "popui-tag-status--purple"
-	TagStatusOlive      = "popui-tag-status--olive"
-	TagStatusTeal       = "popui-tag-status--teal"
-	TagStatusCrimson    = "popui-tag-status--crimson"
-	TagStatusBlueViolet = "popui-tag-status--blue-violet"
-	TagStatusSteelBlue  = "popui-tag-status--steel-blue"
-	TagStatusEmpty      = "popui-tag-status--empty"
-	TagStatusGrey       = "popui-tag-status--grey"
-)
-
-// ButtonCopy component classes
-const (
-	ButtonCopy        = "popui-button-copy"
-	ButtonCopyText    = "popui-button-copy__text"
-	ButtonCopyButton  = "popui-button-copy__button"
-	ButtonCopyIcon    = "popui-button-copy__icon"
-	ButtonCopyPopover = "popui-button-copy__popover"
-)
-
-// Upload classes
-const (
-	UploadFile            = "popui-upload_file"
-	UploadFileImg         = "popui-upload_file-image"
-	UploadFileImgSquare   = "popui-upload_file-image_square"
-	UploadFilePlaceholder = "popui-upload_file-placeholder"
-	UploadFileText        = "popui-upload_file-text"
-)
+// FormFieldState returns CSS classes for form field states.
+// When hasError is true, applies critical styling. When false, applies focus styling.
+func FormFieldState(hasError bool) string {
+	return Join(
+		map[string]bool{
+			FormFieldError(): hasError,
+			"focus:border-border-selected-bold focus:shadow-active": !hasError,
+		},
+	)
+}

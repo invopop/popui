@@ -1,0 +1,22 @@
+package examples
+
+import (
+	popui "github.com/invopop/popui/go"
+	"github.com/invopop/popui/go/props"
+)
+
+templ CheckboxSwitchExample() {
+	<div class="space-y-3">
+		@popui.Checkbox(props.Checkbox{
+			Name:    "notifications",
+			Label:   "Enable notifications",
+			Variant: props.CheckboxVariantSwitch,
+			Checked: true,
+		})
+		@popui.Checkbox(props.Checkbox{
+			Name:    "marketing",
+			Label:   "Marketing emails",
+			Variant: props.CheckboxVariantSwitch,
+		})
+	</div>
+}

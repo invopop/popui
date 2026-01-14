@@ -12,9 +12,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 /src
 storybook-static
-/popui
-/tmp
-/public
 /icons/dist
 # Local Netlify folder
 .netlify

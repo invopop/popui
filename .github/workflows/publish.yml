@@ -1,6 +1,9 @@
 on:
   push:
     branches: main
+    paths:
+      - 'svelte/**'
+      - '.github/workflows/publish.yml'
 
 jobs:
   publish:
@@ -10,23 +13,17 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
-      # Install global dependencies
-      - run: npm ci
 
-      # Install dependencies inside svelte/
+      # Install dependencies and build svelte package
       - run: npm ci
         working-directory: svelte
 
-      # Build Tailwind
-      - run: npm run build:tailwind
-
-      # Build popui svelte package
       - run: npm run package
         working-directory: svelte
 
       # Publish to npm
       - uses: JS-DevTools/npm-publish@v3
         with:
-          package: svelte
+          package: ./svelte/package.json
           token: ${{ secrets.NPM_TOKEN }}
           ignore-scripts: false

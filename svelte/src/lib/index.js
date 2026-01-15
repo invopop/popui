@@ -67,8 +67,18 @@ import TitleSection from './TitleSection.svelte'
 import { Toaster } from './sonner'
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
 import UuidCopy from './UuidCopy.svelte'
-import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
+import { resolveIcon, getCountryName, getStatusType } from './helpers.ts'
 import { buttonVariants } from './button/button.svelte' // Ensure button styles are included
+import {
+  DataTable,
+  DataTableToolbar,
+  DataTableViewOptions,
+  DataTableFacetedFilter,
+  FlexRender,
+  createSvelteTable,
+  renderComponent,
+  renderSnippet
+} from './data-table'
 
 export {
   AlertDialog,
@@ -146,5 +156,13 @@ export {
   resolveIcon,
   getCountryName,
   getStatusType,
-  buttonVariants
+  buttonVariants,
+  DataTable,
+  DataTableToolbar,
+  DataTableViewOptions,
+  DataTableFacetedFilter,
+  FlexRender,
+  createSvelteTable,
+  renderComponent,
+  renderSnippet
 }

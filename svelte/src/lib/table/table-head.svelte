@@ -4,7 +4,8 @@
   let {
     ref = $bindable(null),
     class: className,
-    children
+    children,
+    ...restProps
   }: WithElementRef<HTMLThAttributes> = $props()
 </script>
 
@@ -12,9 +13,10 @@
   bind:this={ref}
   data-slot="table-head"
   class={cn(
-    'text-foreground-default-secondary text-base font-normal text-left align-middle [&:has([role=checkbox])]:pr-0 px-3',
+    'text-foreground-default-secondary text-base font-normal text-left align-middle [&:has([role=checkbox])]:pr-0 px-3 bg-white',
     className
   )}
+  {...restProps}
 >
   {@render children?.()}
 </th>

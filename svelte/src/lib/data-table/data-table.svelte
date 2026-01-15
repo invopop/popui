@@ -2,6 +2,7 @@
   import {
     type ColumnDef,
     type ColumnFiltersState,
+    type ColumnSizingState,
     type PaginationState,
     type Row,
     type RowSelectionState,
@@ -50,6 +51,36 @@
   let columnFilters = $state<ColumnFiltersState>([])
   let sorting = $state<SortingState>([])
   let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 })
+  let columnSizing = $state<ColumnSizingState>({})
+  let containerRef = $state<HTMLDivElement | null>(null)
+
+  // Calculate initial column sizes based on available width
+  $effect(() => {
+    if (containerRef && Object.keys(columnSizing).length === 0) {
+      const containerWidth = containerRef.offsetWidth
+      // Define default sizes as percentages that sum to reasonable widths
+      const defaultSizes = {
+        select: 40,
+        id: 100,
+        title: 300,
+        status: 150,
+        priority: 120,
+        actions: 50
+      }
+
+      const totalDefaultSize = Object.values(defaultSizes).reduce((sum, size) => sum + size, 0)
+
+      // If container is wider than default, scale columns proportionally
+      if (containerWidth > totalDefaultSize) {
+        const scale = containerWidth / totalDefaultSize
+        const newSizing: ColumnSizingState = {}
+        Object.entries(defaultSizes).forEach(([key, value]) => {
+          newSizing[key] = Math.floor(value * scale)
+        })
+        columnSizing = newSizing
+      }
+    }
+  })
 
   const columns: ColumnDef<Task>[] = [
     {
@@ -68,7 +99,11 @@
           'aria-label': 'Select row'
         }),
       enableSorting: false,
-      enableHiding: false
+      enableHiding: false,
+      enableResizing: false,
+      size: 40,
+      minSize: 40,
+      maxSize: 40
     },
     {
       accessorKey: 'id',
@@ -82,7 +117,7 @@
         const idSnippet = createRawSnippet<[{ id: string }]>((getId) => {
           const { id } = getId()
           return {
-            render: () => `<div class="w-[80px]">${id}</div>`
+            render: () => `<div class="truncate">${id}</div>`
           }
         })
 
@@ -91,7 +126,9 @@
         })
       },
       enableSorting: false,
-      enableHiding: false
+      enableHiding: false,
+      size: 100,
+      minSize: 80
     },
     {
       accessorKey: 'title',
@@ -101,7 +138,9 @@
           labelValue: row.original.label,
           value: row.original.title
         })
-      }
+      },
+      size: 300,
+      minSize: 150
     },
     {
       accessorKey: 'status',
@@ -117,7 +156,9 @@
       },
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id))
-      }
+      },
+      size: 150,
+      minSize: 100
     },
     {
       accessorKey: 'priority',
@@ -134,11 +175,17 @@
       },
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id))
-      }
+      },
+      size: 120,
+      minSize: 100
     },
     {
       id: 'actions',
-      cell: ({ row }) => renderSnippet(RowActions, { row })
+      cell: ({ row }) => renderSnippet(RowActions, { row }),
+      enableResizing: false,
+      size: 50,
+      minSize: 50,
+      maxSize: 50
     }
   ]
 
@@ -161,10 +208,16 @@
       },
       get pagination() {
         return pagination
+      },
+      get columnSizing() {
+        return columnSizing
       }
     },
     columns,
     enableRowSelection: true,
+    enableColumnResizing: true,
+    columnResizeMode: 'onChange',
+    columnResizeDirection: 'ltr',
     onRowSelectionChange: (updater) => {
       if (typeof updater === 'function') {
         rowSelection = updater(rowSelection)
@@ -200,6 +253,13 @@
         pagination = updater
       }
     },
+    onColumnSizingChange: (updater) => {
+      if (typeof updater === 'function') {
+        columnSizing = updater(columnSizing)
+      } else {
+        columnSizing = updater
+      }
+    },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -212,20 +272,20 @@
 {#snippet StatusCell({ value }: { value: string })}
   {@const status = statuses.find((status) => status.value === value)}
   {#if status}
-    <div class="flex w-[100px] items-center">
-      <Icon src={status.icon} class="text-muted-foreground me-2 size-4" />
-      <span>{status.label}</span>
+    <div class="flex items-center min-w-0">
+      <Icon src={status.icon} class="text-muted-foreground me-2 size-4 flex-shrink-0" />
+      <span class="truncate">{status.label}</span>
     </div>
   {/if}
 {/snippet}
 
 {#snippet TitleCell({ value, labelValue }: { value: string; labelValue: string })}
   {@const label = labels.find((label) => label.value === labelValue)}
-  <div class="flex space-x-2">
+  <div class="flex space-x-2 min-w-0">
     {#if label}
-      <TagStatus label={label.label} />
+      <TagStatus label={label.label} class="flex-shrink-0" />
     {/if}
-    <span class="max-w-[500px] truncate font-medium">
+    <span class="truncate font-medium min-w-0">
       {value}
     </span>
   </div>
@@ -234,9 +294,9 @@
 {#snippet PriorityCell({ value }: { value: string })}
   {@const priority = priorities.find((priority) => priority.value === value)}
   {#if priority}
-    <div class="flex items-center">
-      <Icon src={priority.icon} class="text-muted-foreground me-2 size-4" />
-      <span>{priority.label}</span>
+    <div class="flex items-center min-w-0">
+      <Icon src={priority.icon} class="text-muted-foreground me-2 size-4 flex-shrink-0" />
+      <span class="truncate">{priority.label}</span>
     </div>
   {/if}
 {/snippet}
@@ -416,18 +476,40 @@
 
 <div class="space-y-4">
   <DataTableToolbar {table} />
-  <div class="rounded-md border">
-    <Table.Root>
+  <div bind:this={containerRef}>
+    <div class="overflow-x-auto">
+      <Table.Root style={`width: ${table.getTotalSize()}px;`}>
       <Table.Header>
         {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
           <Table.Row>
             {#each headerGroup.headers as header (header.id)}
-              <Table.Head colspan={header.colSpan}>
+              <Table.Head
+                colspan={header.colSpan}
+                style={`min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
+                class="relative"
+              >
                 {#if !header.isPlaceholder}
                   <FlexRender
                     content={header.column.columnDef.header}
                     context={header.getContext()}
                   />
+                {/if}
+                {#if header.column.getCanResize()}
+                  <div
+                    class={cn(
+                      'absolute right-0 top-0 h-full w-4 cursor-col-resize select-none touch-none hover:bg-border-default-secondary/50 group',
+                      header.column.getIsResizing() ? 'bg-border-default-secondary/50' : ''
+                    )}
+                    onmousedown={header.getResizeHandler()}
+                    ontouchstart={header.getResizeHandler()}
+                  >
+                    <div
+                      class={cn(
+                        'absolute right-0 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity',
+                        header.column.getIsResizing() ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                      )}
+                    ></div>
+                  </div>
                 {/if}
               </Table.Head>
             {/each}
@@ -438,7 +520,7 @@
         {#each table.getRowModel().rows as row (row.id)}
           <Table.Row data-state={row.getIsSelected() && 'selected'}>
             {#each row.getVisibleCells() as cell (cell.id)}
-              <Table.Cell>
+              <Table.Cell style={`min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}>
                 <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
               </Table.Cell>
             {/each}
@@ -449,7 +531,8 @@
           </Table.Row>
         {/each}
       </Table.Body>
-    </Table.Root>
+      </Table.Root>
+    </div>
   </div>
   {@render Pagination({ table })}
 </div>

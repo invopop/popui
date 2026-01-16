@@ -340,6 +340,7 @@ export interface BaseDropdownProps {
     isActive?: boolean;
     sortDirection: TableSortBy;
     onOrderBy?: (direction: TableSortBy) => void;
+    onHide?: () => void;
   }
 
   export interface BaseTableRowProps {

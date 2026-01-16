@@ -18,29 +18,22 @@
     type Column
   } from '@tanstack/table-core'
   import DataTableToolbar from './data-table-toolbar.svelte'
+  import DataTablePagination from './data-table-pagination.svelte'
   import { createSvelteTable } from './data-table-svelte.svelte.js'
   import FlexRender from './flex-render.svelte'
   import * as Table from '../table/index.js'
-  import BaseDropdown from '$lib/BaseDropdown.svelte'
-  import DrawerContext from '$lib/DrawerContext.svelte'
   import { labels, priorities, statuses } from './data.js'
   import { taskSchema, type Task } from './schemas.js'
   import { renderComponent, renderSnippet } from './render-helpers.js'
   import InputCheckbox from '$lib/InputCheckbox.svelte'
   import { createRawSnippet } from 'svelte'
   import TagStatus from '$lib/TagStatus.svelte'
-  import BaseButton from '$lib/BaseButton.svelte'
-  import InputSelect from '$lib/InputSelect.svelte'
+  import BaseTableActions from '$lib/BaseTableActions.svelte'
+  import BaseDropdown from '$lib/BaseDropdown.svelte'
+  import BaseTableHeaderOrderBy from '$lib/BaseTableHeaderOrderBy.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import {
-    Options,
-    ChevronRight,
-    ChevronLeft,
-    ArrowUp,
-    ArrowDown,
-    ChevronUp,
-    SidebarHide
-  } from '@invopop/ui-icons'
+  import { ArrowUp, ArrowDown, ChevronUp, SidebarHide } from '@invopop/ui-icons'
+  import type { TableSortBy } from '$lib/types.js'
   import type { HTMLAttributes } from 'svelte/elements'
   import { cn } from '$lib/utils.js'
 
@@ -52,7 +45,16 @@
   let sorting = $state<SortingState>([])
   let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 })
   let columnSizing = $state<ColumnSizingState>({})
+  let columnSizingInfo = $state({})
   let containerRef = $state<HTMLDivElement | null>(null)
+
+  const rowActions = [
+    { label: 'Edit', value: 'edit' },
+    { label: 'Make a copy', value: 'copy' },
+    { label: 'Favorite', value: 'favorite' },
+    { label: '', value: '', separator: true },
+    { label: 'Delete', value: 'delete', destructive: true }
+  ]
 
   // Calculate initial column sizes based on available width
   $effect(() => {
@@ -183,9 +185,9 @@
       id: 'actions',
       cell: ({ row }) => renderSnippet(RowActions, { row }),
       enableResizing: false,
-      size: 50,
-      minSize: 50,
-      maxSize: 50
+      size: 44,
+      minSize: 44,
+      maxSize: 44
     }
   ]
 
@@ -211,6 +213,9 @@
       },
       get columnSizing() {
         return columnSizing
+      },
+      get columnSizingInfo() {
+        return columnSizingInfo
       }
     },
     columns,
@@ -260,6 +265,13 @@
         columnSizing = updater
       }
     },
+    onColumnSizingInfoChange: (updater) => {
+      if (typeof updater === 'function') {
+        columnSizingInfo = updater(columnSizingInfo)
+      } else {
+        columnSizingInfo = updater
+      }
+    },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -283,7 +295,7 @@
   {@const label = labels.find((label) => label.value === labelValue)}
   <div class="flex space-x-2 min-w-0">
     {#if label}
-      <TagStatus label={label.label} class="flex-shrink-0" />
+      <TagStatus label={label.label} />
     {/if}
     <span class="truncate font-medium min-w-0">
       {value}
@@ -303,117 +315,12 @@
 
 {#snippet RowActions({ row }: { row: Row<Task> })}
   {@const task = taskSchema.parse(row.original)}
-  <BaseDropdown>
-    {#snippet trigger()}
-      <button
-        class="data-[state=open]:bg-muted flex h-8 w-8 p-0 items-center justify-center rounded-md border border-border-default-secondary bg-background text-foreground hover:border-border-default-secondary-hover"
-      >
-        <Icon src={Options} class="size-4" />
-        <span class="sr-only">Open Menu</span>
-      </button>
-    {/snippet}
-    <DrawerContext>
-      <button class="w-full text-left px-2 py-1.5 hover:bg-background-default-tertiary-hover"
-        >Edit</button
-      >
-      <button class="w-full text-left px-2 py-1.5 hover:bg-background-default-tertiary-hover"
-        >Make a copy</button
-      >
-      <button class="w-full text-left px-2 py-1.5 hover:bg-background-default-tertiary-hover"
-        >Favorite</button
-      >
-      <div class="my-1 h-px bg-border-default-secondary"></div>
-      <div class="px-2 py-1.5">
-        <div class="font-medium mb-1">Labels</div>
-        {#each labels as label (label.value)}
-          <button
-            class="w-full text-left px-2 py-1 hover:bg-background-default-tertiary-hover rounded"
-            class:bg-background-default-tertiary={task.label === label.value}
-          >
-            {label.label}
-          </button>
-        {/each}
-      </div>
-      <div class="my-1 h-px bg-border-default-secondary"></div>
-      <button
-        class="w-full text-left px-2 py-1.5 hover:bg-background-default-tertiary-hover flex items-center justify-between"
-      >
-        <span>Delete</span>
-        <span class="text-muted-foreground text-xs">⌘⌫</span>
-      </button>
-    </DrawerContext>
-  </BaseDropdown>
-{/snippet}
-
-{#snippet Pagination({ table }: { table: TableType<Task> })}
-  <div class="flex items-center justify-between px-2">
-    <div class="text-muted-foreground flex-1 text-sm">
-      {table.getFilteredSelectedRowModel().rows.length} of
-      {table.getFilteredRowModel().rows.length} row(s) selected.
-    </div>
-    <div class="flex items-center space-x-6 lg:space-x-8">
-      <div class="flex items-center space-x-2">
-        <p class="text-sm font-medium">Rows per page</p>
-        <InputSelect
-          value={`${table.getState().pagination.pageSize}`}
-          options={[10, 20, 30, 40, 50].map((size) => ({ value: `${size}`, label: `${size}` }))}
-          onchange={(value) => {
-            table.setPageSize(Number(value))
-          }}
-        />
-      </div>
-      <div class="flex w-[100px] items-center justify-center text-sm font-medium">
-        Page {table.getState().pagination.pageIndex + 1} of
-        {table.getPageCount()}
-      </div>
-      <div class="flex items-center space-x-2">
-        <BaseButton
-          variant="outline"
-          class="hidden size-8 p-0 lg:flex"
-          onclick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {#snippet children()}
-            <span class="sr-only">Go to first page</span>
-            <Icon src={ChevronLeft} class="size-4" />
-          {/snippet}
-        </BaseButton>
-        <BaseButton
-          variant="outline"
-          class="size-8 p-0"
-          onclick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {#snippet children()}
-            <span class="sr-only">Go to previous page</span>
-            <Icon src={ChevronLeft} class="size-4" />
-          {/snippet}
-        </BaseButton>
-        <BaseButton
-          variant="outline"
-          class="size-8 p-0"
-          onclick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {#snippet children()}
-            <span class="sr-only">Go to next page</span>
-            <Icon src={ChevronRight} class="size-4" />
-          {/snippet}
-        </BaseButton>
-        <BaseButton
-          variant="outline"
-          class="hidden size-8 p-0 lg:flex"
-          onclick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}
-        >
-          {#snippet children()}
-            <span class="sr-only">Go to last page</span>
-            <Icon src={ChevronRight} class="size-4" />
-          {/snippet}
-        </BaseButton>
-      </div>
-    </div>
-  </div>
+  <BaseTableActions
+    actions={rowActions}
+    onclick={(action) => {
+      console.log('Action clicked:', action, 'for task:', task)
+    }}
+  />
 {/snippet}
 
 {#snippet ColumnHeader({
@@ -427,11 +334,11 @@
       {title}
     </div>
   {:else}
-    <div class={cn('flex items-center', className)} {...restProps}>
-      <BaseDropdown>
+    <div class={cn('flex items-center w-full', className)} {...restProps}>
+      <BaseDropdown fullWidth>
         {#snippet trigger()}
           <button
-            class="data-[state=open]:bg-accent -ms-3 h-8 flex items-center gap-1 px-3 py-1 rounded-md hover:bg-background-default-tertiary-hover"
+            class="data-[state=open]:bg-accent w-full flex items-center gap-1 py-2.5 text-left"
           >
             <span>
               {title}
@@ -440,35 +347,15 @@
               <Icon src={ArrowDown} class="size-4" />
             {:else if column.getIsSorted() === 'asc'}
               <Icon src={ArrowUp} class="size-4" />
-            {:else}
-              <Icon src={ChevronUp} class="size-4" />
             {/if}
           </button>
         {/snippet}
-        <DrawerContext>
-          <button
-            class="w-full text-left px-2 py-1.5 hover:bg-background-default-tertiary-hover flex items-center gap-2"
-            onclick={() => column.toggleSorting(false)}
-          >
-            <Icon src={ArrowUp} class="text-muted-foreground/70 size-3.5" />
-            Asc
-          </button>
-          <button
-            class="w-full text-left px-2 py-1.5 hover:bg-background-default-tertiary-hover flex items-center gap-2"
-            onclick={() => column.toggleSorting(true)}
-          >
-            <Icon src={ArrowDown} class="text-muted-foreground/70 size-3.5" />
-            Desc
-          </button>
-          <div class="my-1 h-px bg-border-default-secondary"></div>
-          <button
-            class="w-full text-left px-2 py-1.5 hover:bg-background-default-tertiary-hover flex items-center gap-2"
-            onclick={() => column.toggleVisibility(false)}
-          >
-            <Icon src={SidebarHide} class="text-muted-foreground/70 size-3.5" />
-            Hide
-          </button>
-        </DrawerContext>
+        <BaseTableHeaderOrderBy
+          sortDirection={column.getIsSorted() === 'asc' ? 'asc' : 'desc'}
+          isActive={column.getIsSorted() !== false}
+          onOrderBy={(direction) => column.toggleSorting(direction === 'desc')}
+          onHide={() => column.toggleVisibility(false)}
+        />
       </BaseDropdown>
     </div>
   {/if}
@@ -476,63 +363,101 @@
 
 <div class="space-y-4">
   <DataTableToolbar {table} />
-  <div bind:this={containerRef}>
-    <div class="overflow-x-auto">
-      <Table.Root style={`width: ${table.getTotalSize()}px;`}>
-      <Table.Header>
-        {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-          <Table.Row>
-            {#each headerGroup.headers as header (header.id)}
-              <Table.Head
-                colspan={header.colSpan}
-                style={`min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
-                class="relative"
-              >
-                {#if !header.isPlaceholder}
-                  <FlexRender
-                    content={header.column.columnDef.header}
-                    context={header.getContext()}
-                  />
-                {/if}
-                {#if header.column.getCanResize()}
-                  <div
-                    class={cn(
-                      'absolute right-0 top-0 h-full w-4 cursor-col-resize select-none touch-none hover:bg-border-default-secondary/50 group',
-                      header.column.getIsResizing() ? 'bg-border-default-secondary/50' : ''
-                    )}
-                    onmousedown={header.getResizeHandler()}
-                    ontouchstart={header.getResizeHandler()}
-                  >
+  <div bind:this={containerRef} class="relative bg-white">
+    <!-- Full-width background with horizontal lines -->
+    <div
+      class="absolute inset-0 pointer-events-none z-0"
+      style="background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent 39px, #e5e7eb 39px, #e5e7eb 40px)"
+    ></div>
+    <div class="overflow-x-auto relative z-10">
+      <Table.Root>
+        <Table.Header>
+          {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
+            <Table.Row class="hover:!bg-transparent">
+              {#each headerGroup.headers as header, index (header.id)}
+                {@const isLastScrollable = index === headerGroup.headers.length - 2}
+                <Table.Head
+                  colspan={header.colSpan}
+                  style={header.id === 'actions'
+                    ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px; border-bottom: 1px solid #e5e7eb;`
+                    : isLastScrollable
+                      ? `min-width: ${header.getSize()}px;`
+                      : `min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
+                  class={cn(
+                    'relative',
+                    header.id === 'actions' ? 'sticky right-0 text-right bg-white' : '',
+                    isLastScrollable ? 'w-full' : '',
+                    header.column.getIsResizing()
+                      ? 'border-r-2 border-r-border-default-secondary'
+                      : ''
+                  )}
+                >
+                  {#if !header.isPlaceholder}
+                    <FlexRender
+                      content={header.column.columnDef.header}
+                      context={header.getContext()}
+                    />
+                  {/if}
+                  {#if header.column.getCanResize()}
                     <div
-                      class={cn(
-                        'absolute right-0 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity',
-                        header.column.getIsResizing() ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                      )}
-                    ></div>
-                  </div>
-                {/if}
-              </Table.Head>
-            {/each}
-          </Table.Row>
-        {/each}
-      </Table.Header>
-      <Table.Body>
-        {#each table.getRowModel().rows as row (row.id)}
-          <Table.Row data-state={row.getIsSelected() && 'selected'}>
-            {#each row.getVisibleCells() as cell (cell.id)}
-              <Table.Cell style={`min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}>
-                <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
-              </Table.Cell>
-            {/each}
-          </Table.Row>
-        {:else}
-          <Table.Row>
-            <Table.Cell colspan={columns.length} class="h-24 text-center">No results.</Table.Cell>
-          </Table.Row>
-        {/each}
-      </Table.Body>
+                      class="absolute right-0 top-0 h-full w-0.5 cursor-col-resize select-none touch-none group"
+                      onmousedown={header.getResizeHandler()}
+                      ontouchstart={header.getResizeHandler()}
+                    >
+                      <div
+                        class={cn(
+                          'absolute right-0 top-0 h-full w-full bg-border-default-secondary transition-opacity',
+                          header.column.getIsResizing()
+                            ? 'opacity-0'
+                            : 'opacity-0 group-hover:opacity-100'
+                        )}
+                      ></div>
+                    </div>
+                  {/if}
+                </Table.Head>
+              {/each}
+            </Table.Row>
+          {/each}
+        </Table.Header>
+        <Table.Body>
+          {#each table.getRowModel().rows as row (row.id)}
+            <Table.Row data-state={row.getIsSelected() ? 'selected' : undefined}>
+              {#each row.getVisibleCells() as cell, index (cell.id)}
+                {@const isLastScrollable = index === row.getVisibleCells().length - 2}
+                <Table.Cell
+                  style={cell.column.id === 'actions'
+                    ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
+                    : isLastScrollable
+                      ? `min-width: ${cell.column.getSize()}px;`
+                      : `min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}
+                  class={cn(
+                    cell.column.id === 'actions'
+                      ? 'sticky right-0 text-right !p-0'
+                      : '',
+                    isLastScrollable ? 'w-full' : '',
+                    cell.column.getIsResizing()
+                      ? 'border-r-2 border-r-border-default-secondary'
+                      : ''
+                  )}
+                >
+                  {#if cell.column.id === 'actions'}
+                    <div class="h-[38px] bg-white group-hover/row:bg-transparent group-data-[state=selected]/row:bg-background-default-secondary flex items-center justify-end px-3">
+                      <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
+                    </div>
+                  {:else}
+                    <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
+                  {/if}
+                </Table.Cell>
+              {/each}
+            </Table.Row>
+          {:else}
+            <Table.Row>
+              <Table.Cell colspan={columns.length} class="h-24 text-center">No results.</Table.Cell>
+            </Table.Row>
+          {/each}
+        </Table.Body>
       </Table.Root>
     </div>
   </div>
-  {@render Pagination({ table })}
+  <DataTablePagination {table} />
 </div>

@@ -10,7 +10,9 @@
   let { table }: { table: Table<TData> } = $props()
 
   const columns = $derived(
-    table.getAllColumns().filter((col) => typeof col.accessorFn !== 'undefined' && col.getCanHide())
+    table.getAllColumns().filter((col) =>
+      typeof col.accessorFn !== 'undefined' && col.id !== 'select' && col.id !== 'actions'
+    )
   )
 
   let itemsWithActions = $derived(
@@ -44,10 +46,12 @@
 
 {#snippet toggleAction(item: DrawerOption)}
   {@const column = table.getColumn(String(item.value))}
-  <InputToggle
-    checked={column?.getIsVisible() ?? false}
-    onchange={(v) => column?.toggleVisibility(!!v)}
-  />
+  {#if column?.getCanHide()}
+    <InputToggle
+      checked={column?.getIsVisible() ?? false}
+      onchange={(v) => column?.toggleVisibility(!!v)}
+    />
+  {/if}
 {/snippet}
 
 <BaseDropdown class="ms-auto hidden lg:flex">

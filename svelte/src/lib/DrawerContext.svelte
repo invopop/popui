@@ -235,7 +235,7 @@
 
   {#if ungroupedItems.length}
     <div class="flex-shrink-0 overflow-y-auto max-h-[564px]" bind:this={ungroupedContainer}>
-      {#each ungroupedItems as item}
+      {#each ungroupedItems as item (item.value)}
         {@render drawerItem(item)}
       {/each}
     </div>

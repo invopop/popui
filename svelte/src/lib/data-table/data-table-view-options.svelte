@@ -9,33 +9,56 @@
 
   let { table }: { table: Table<TData> } = $props()
 
-  const columns = $derived(
-    table.getAllColumns().filter((col) => col.id !== 'select' && col.id !== 'actions')
-  )
+  let itemsWithActions = $state<DrawerOption[]>([])
 
-  let itemsWithActions = $derived(
-    columns.map((col) => ({
+  // Initialize and update items when table state changes
+  $effect(() => {
+    const columnOrder = table.getState().columnOrder
+    const allColumns = table.getAllColumns()
+
+    let orderedColumns
+    // If there's a custom order, use it; otherwise use default order
+    if (columnOrder.length > 0) {
+      orderedColumns = columnOrder
+        .map((id) => allColumns.find((col) => col.id === id))
+        .filter((col) => col && col.id !== 'select' && col.id !== 'actions')
+    } else {
+      orderedColumns = allColumns.filter((col) => col.id !== 'select' && col.id !== 'actions')
+    }
+
+    const newItems = orderedColumns.map((col) => ({
       label: (col.columnDef.meta as any)?.label || col.id.charAt(0).toUpperCase() + col.id.slice(1),
       value: col.id,
       icon: Drag,
       action: toggleAction
     })) as DrawerOption[]
-  )
+
+    // Only update if the order has actually changed (avoid overwriting during drag)
+    const currentOrder = itemsWithActions.map(i => i.value).join(',')
+    const newOrder = newItems.map(i => i.value).join(',')
+
+    if (currentOrder !== newOrder) {
+      itemsWithActions = newItems
+    }
+  })
 
   function handleReorder(reorderedItems: any[]) {
+    // Update local items to match the drag order immediately
+    itemsWithActions = reorderedItems
+
     const newOrder = reorderedItems.map((item) => item.value)
     // Get all column IDs from the table
-    const allColumns = table.getAllColumns().map((col) => col.id)
+    const allColumnIds = table.getAllColumns().map((col) => col.id)
 
     // Filter to keep select and actions in their fixed positions
     const selectColumn = 'select'
     const actionsColumn = 'actions'
 
-    // Build final order: select first, reordered columns in middle, actions last
+    // Build final order: select first (if exists), reordered columns in middle, actions last (if exists)
     const finalOrder = [
-      selectColumn,
+      ...(allColumnIds.includes(selectColumn) ? [selectColumn] : []),
       ...newOrder.filter((id) => id !== selectColumn && id !== actionsColumn),
-      actionsColumn
+      ...(allColumnIds.includes(actionsColumn) ? [actionsColumn] : [])
     ]
 
     table.setColumnOrder(finalOrder)

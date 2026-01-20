@@ -3,6 +3,7 @@
     type ColumnDef,
     type ColumnFiltersState,
     type ColumnSizingState,
+    type ColumnOrderState,
     type PaginationState,
     type Row,
     type RowSelectionState,
@@ -22,17 +23,20 @@
   import { createSvelteTable } from './data-table-svelte.svelte.js'
   import FlexRender from './flex-render.svelte'
   import * as Table from '../table/index.js'
-  import { labels, priorities, statuses } from './data.js'
+  import { labels, statuses } from './data.js'
   import { taskSchema, type Task } from './schemas.js'
   import { renderComponent, renderSnippet } from './render-helpers.js'
   import InputCheckbox from '$lib/InputCheckbox.svelte'
   import { createRawSnippet } from 'svelte'
   import TagStatus from '$lib/TagStatus.svelte'
+  import StatusLabel from '$lib/StatusLabel.svelte'
   import BaseTableActions from '$lib/BaseTableActions.svelte'
   import BaseDropdown from '$lib/BaseDropdown.svelte'
   import BaseTableHeaderOrderBy from '$lib/BaseTableHeaderOrderBy.svelte'
+  import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
+  import EmptyState from '$lib/EmptyState.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { ArrowUp, ArrowDown, ChevronUp, SidebarHide } from '@invopop/ui-icons'
+  import { ArrowUp, ArrowDown, ChevronUp, SidebarHide, Search } from '@invopop/ui-icons'
   import type { TableSortBy } from '$lib/types.js'
   import type { HTMLAttributes } from 'svelte/elements'
   import { cn } from '$lib/utils.js'
@@ -46,6 +50,7 @@
   let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 })
   let columnSizing = $state<ColumnSizingState>({})
   let columnSizingInfo = $state({})
+  let columnOrder = $state<ColumnOrderState>([])
   let containerRef = $state<HTMLDivElement | null>(null)
 
   const rowActions = [
@@ -163,23 +168,20 @@
       minSize: 100
     },
     {
-      accessorKey: 'priority',
+      accessorKey: 'uuid',
       header: ({ column }) => {
         return renderSnippet(ColumnHeader, {
-          title: 'Priority',
+          title: 'UUID',
           column
         })
       },
       cell: ({ row }) => {
-        return renderSnippet(PriorityCell, {
-          value: row.original.priority
+        return renderSnippet(UuidCell, {
+          value: row.original.uuid
         })
       },
-      filterFn: (row, id, value) => {
-        return value.includes(row.getValue(id))
-      },
-      size: 120,
-      minSize: 100
+      size: 200,
+      minSize: 150
     },
     {
       id: 'actions',
@@ -216,6 +218,9 @@
       },
       get columnSizingInfo() {
         return columnSizingInfo
+      },
+      get columnOrder() {
+        return columnOrder
       }
     },
     columns,
@@ -272,6 +277,13 @@
         columnSizingInfo = updater
       }
     },
+    onColumnOrderChange: (updater) => {
+      if (typeof updater === 'function') {
+        columnOrder = updater(columnOrder)
+      } else {
+        columnOrder = updater
+      }
+    },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -284,10 +296,7 @@
 {#snippet StatusCell({ value }: { value: string })}
   {@const status = statuses.find((status) => status.value === value)}
   {#if status}
-    <div class="flex items-center min-w-0">
-      <Icon src={status.icon} class="text-muted-foreground me-2 size-4 flex-shrink-0" />
-      <span class="truncate">{status.label}</span>
-    </div>
+    <StatusLabel status={status.status} label={status.label} />
   {/if}
 {/snippet}
 
@@ -295,7 +304,7 @@
   {@const label = labels.find((label) => label.value === labelValue)}
   <div class="flex space-x-2 min-w-0">
     {#if label}
-      <TagStatus label={label.label} />
+      <TagStatus label={label.label} status={label.color} />
     {/if}
     <span class="truncate font-medium min-w-0">
       {value}
@@ -303,14 +312,8 @@
   </div>
 {/snippet}
 
-{#snippet PriorityCell({ value }: { value: string })}
-  {@const priority = priorities.find((priority) => priority.value === value)}
-  {#if priority}
-    <div class="flex items-center min-w-0">
-      <Icon src={priority.icon} class="text-muted-foreground me-2 size-4 flex-shrink-0" />
-      <span class="truncate">{priority.label}</span>
-    </div>
-  {/if}
+{#snippet UuidCell({ value }: { value: string })}
+  <ButtonUuidCopy uuid={value} />
 {/snippet}
 
 {#snippet RowActions({ row }: { row: Row<Task> })}
@@ -361,13 +364,16 @@
   {/if}
 {/snippet}
 
-<div class="space-y-4">
+<div class="flex flex-col gap-4">
   <DataTableToolbar {table} />
+  <div class="flex flex-col gap-[5px]">
   <div bind:this={containerRef} class="relative bg-white">
-    <!-- Full-width background with horizontal lines -->
-    <div
-      class="absolute inset-0 pointer-events-none z-0 [background-image:repeating-linear-gradient(to_bottom,transparent_0px,transparent_39px,var(--color-border-default-default)_39px,var(--color-border-default-default)_40px)]"
-    ></div>
+    <!-- Full-width background with horizontal lines (only when table has data) -->
+    {#if data.length > 0}
+      <div
+        class="absolute inset-0 pointer-events-none z-0 [background-image:repeating-linear-gradient(to_bottom,transparent_0px,transparent_39px,var(--color-border-default-default)_39px,var(--color-border-default-default)_40px)]"
+      ></div>
+    {/if}
     <div class="overflow-x-auto relative z-10">
       <Table.Root>
         <Table.Header>
@@ -383,12 +389,13 @@
                       ? `min-width: ${header.getSize()}px;`
                       : `min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
                   class={cn(
-                    'relative',
+                    'relative whitespace-nowrap overflow-hidden',
                     header.id === 'actions' ? 'sticky right-0 text-right bg-white' : '',
                     isLastScrollable ? 'w-full' : '',
                     header.column.getIsResizing()
                       ? 'border-r-2 border-r-border-default-secondary'
-                      : ''
+                      : '',
+                    !header.column.getCanSort() ? 'hover:!bg-transparent' : ''
                   )}
                 >
                   {#if !header.isPlaceholder}
@@ -431,9 +438,8 @@
                       ? `min-width: ${cell.column.getSize()}px;`
                       : `min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}
                   class={cn(
-                    cell.column.id === 'actions'
-                      ? 'sticky right-0 text-right !p-0'
-                      : '',
+                    'whitespace-nowrap overflow-hidden',
+                    cell.column.id === 'actions' ? 'sticky right-0 text-right !p-0' : '',
                     isLastScrollable ? 'w-full' : '',
                     cell.column.getIsResizing()
                       ? 'border-r-2 border-r-border-default-secondary'
@@ -441,12 +447,22 @@
                   )}
                 >
                   {#if cell.column.id === 'actions'}
-                    <div class="h-[38px] bg-white group-hover/row:bg-transparent group-data-[state=selected]/row:bg-background-default-secondary flex items-center justify-end px-3 relative">
+                    <div
+                      class="h-[38.5px] bg-white group-hover/row:bg-transparent group-data-[state=selected]/row:bg-transparent flex items-center justify-end px-3 relative"
+                    >
                       {#if isFirstRow}
-                        <div class="absolute inset-x-0 top-0 h-[1px] bg-border" style="transform: translateY(-2px);"></div>
+                        <div
+                          class="absolute inset-x-0 top-0 h-[1px] bg-border"
+                          style="transform: translateY(-1.5px);"
+                        ></div>
                       {/if}
-                      <div class="absolute inset-x-0 bottom-0 h-[1px] bg-border group-hover/row:bg-transparent" style={isFirstRow ? "" : "transform: translateY(0.5px);"}></div>
-                      <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
+                      <div
+                        class="absolute inset-x-0 bottom-0 h-[1px] bg-border group-hover/row:bg-transparent group-data-[state=selected]/row:bg-transparent"
+                      ></div>
+                      <FlexRender
+                        content={cell.column.columnDef.cell}
+                        context={cell.getContext()}
+                      />
                     </div>
                   {:else}
                     <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
@@ -456,7 +472,13 @@
             </Table.Row>
           {:else}
             <Table.Row>
-              <Table.Cell colspan={columns.length} class="h-24 text-center">No results.</Table.Cell>
+              <Table.Cell colspan={columns.length} class="h-48">
+                <EmptyState
+                  iconSource={Search}
+                  title="No results"
+                  description="Try adjusting your filters or search query"
+                />
+              </Table.Cell>
             </Table.Row>
           {/each}
         </Table.Body>
@@ -464,4 +486,5 @@
     </div>
   </div>
   <DataTablePagination {table} />
+  </div>
 </div>

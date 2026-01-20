@@ -1,17 +1,30 @@
-import { ArrowDown, ArrowRight, ArrowUp, CheckCircle, CircleOutline, Question, AddCircle } from "@invopop/ui-icons";
+import type { StatusType, FeedItemStatus } from "$lib/types";
 
 export const labels = [
 	{
 		value: "bug",
 		label: "Bug",
+		color: "red" as StatusType,
 	},
 	{
 		value: "feature",
 		label: "Feature",
+		color: "blue" as StatusType,
 	},
 	{
 		value: "documentation",
 		label: "Documentation",
+		color: "purple" as StatusType,
+	},
+	{
+		value: "enhancement",
+		label: "Enhancement",
+		color: "teal" as StatusType,
+	},
+	{
+		value: "refactor",
+		label: "Refactor",
+		color: "orange" as StatusType,
 	},
 ];
 
@@ -19,44 +32,26 @@ export const statuses = [
 	{
 		value: "backlog",
 		label: "Backlog",
-		icon: Question,
+		status: "queued" as FeedItemStatus,
 	},
 	{
 		value: "todo",
 		label: "Todo",
-		icon: CircleOutline,
+		status: "queued" as FeedItemStatus,
 	},
 	{
 		value: "in progress",
 		label: "In Progress",
-		icon: AddCircle,
+		status: "run" as FeedItemStatus,
 	},
 	{
 		value: "done",
 		label: "Done",
-		icon: CheckCircle,
+		status: "success" as FeedItemStatus,
 	},
 	{
 		value: "canceled",
 		label: "Canceled",
-		icon: CircleOutline,
-	},
-];
-
-export const priorities = [
-	{
-		label: "Low",
-		value: "low",
-		icon: ArrowDown,
-	},
-	{
-		label: "Medium",
-		value: "medium",
-		icon: ArrowRight,
-	},
-	{
-		label: "High",
-		value: "high",
-		icon: ArrowUp,
+		status: "failure" as FeedItemStatus,
 	},
 ];

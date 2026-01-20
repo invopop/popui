@@ -70,7 +70,7 @@ export type DrawerOption = SelectOption & {
   locked?: boolean
   groupBy?: string
   useAvatar?: boolean
-  action?: Snippet
+  action?: Snippet<[DrawerOption]>
 }
 
 export type Company = {
@@ -444,9 +444,11 @@ export interface BaseDropdownProps {
   export interface DrawerContextProps {
     items?: DrawerOption[];
     multiple?: boolean;
+    draggable?: boolean;
     widthClass?: string;
     onclick?: (value: AnyProp) => void;
     onselect?: (selected: DrawerOption[]) => void;
+    onreorder?: (items: DrawerOption[]) => void;
     children?: Snippet;
     groups?: DrawerGroup[];
   }

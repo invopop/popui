@@ -10,4 +10,4 @@ export { renderComponent, renderSnippet } from "./render-helpers.js";
 // Re-export types and utilities that might be useful
 export type { Task } from "./schemas.js";
 export { taskSchema } from "./schemas.js";
-export { statuses, priorities, labels } from "./data.js";
+export { statuses, labels } from "./data.js";

@@ -24,10 +24,20 @@
 
   function handleReorder(reorderedItems: any[]) {
     const newOrder = reorderedItems.map((item) => item.value)
-    // Always keep 'select' as the first column, followed by reordered columns, then 'actions' at the end
+    // Get all column IDs from the table
+    const allColumns = table.getAllColumns().map((col) => col.id)
+
+    // Filter to keep select and actions in their fixed positions
     const selectColumn = 'select'
     const actionsColumn = 'actions'
-    const finalOrder = [selectColumn, ...newOrder, actionsColumn]
+
+    // Build final order: select first, reordered columns in middle, actions last
+    const finalOrder = [
+      selectColumn,
+      ...newOrder.filter((id) => id !== selectColumn && id !== actionsColumn),
+      actionsColumn
+    ]
+
     table.setColumnOrder(finalOrder)
   }
 </script>

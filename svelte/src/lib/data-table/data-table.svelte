@@ -110,7 +110,8 @@
       enableResizing: false,
       size: 40,
       minSize: 40,
-      maxSize: 40
+      maxSize: 40,
+      meta: { label: 'Select' }
     },
     {
       accessorKey: 'id',
@@ -135,7 +136,8 @@
       enableSorting: false,
       enableHiding: false,
       size: 100,
-      minSize: 80
+      minSize: 80,
+      meta: { label: 'Task' }
     },
     {
       accessorKey: 'title',
@@ -147,7 +149,8 @@
         })
       },
       size: 300,
-      minSize: 150
+      minSize: 150,
+      meta: { label: 'Title' }
     },
     {
       accessorKey: 'status',
@@ -165,7 +168,8 @@
         return value.includes(row.getValue(id))
       },
       size: 150,
-      minSize: 100
+      minSize: 100,
+      meta: { label: 'Status' }
     },
     {
       accessorKey: 'uuid',
@@ -181,7 +185,8 @@
         })
       },
       size: 200,
-      minSize: 150
+      minSize: 150,
+      meta: { label: 'UUID' }
     },
     {
       id: 'actions',
@@ -189,7 +194,8 @@
       enableResizing: false,
       size: 44,
       minSize: 44,
-      maxSize: 44
+      maxSize: 44,
+      meta: { label: 'Actions' }
     }
   ]
 

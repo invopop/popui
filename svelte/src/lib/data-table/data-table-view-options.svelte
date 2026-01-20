@@ -10,14 +10,12 @@
   let { table }: { table: Table<TData> } = $props()
 
   const columns = $derived(
-    table.getAllColumns().filter((col) =>
-      typeof col.accessorFn !== 'undefined' && col.id !== 'select' && col.id !== 'actions'
-    )
+    table.getAllColumns().filter((col) => col.id !== 'select' && col.id !== 'actions')
   )
 
   let itemsWithActions = $derived(
     columns.map((col) => ({
-      label: col.id.charAt(0).toUpperCase() + col.id.slice(1),
+      label: (col.columnDef.meta as any)?.label || col.id.charAt(0).toUpperCase() + col.id.slice(1),
       value: col.id,
       icon: Drag,
       action: toggleAction

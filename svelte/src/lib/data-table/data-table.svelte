@@ -366,8 +366,7 @@
   <div bind:this={containerRef} class="relative bg-white">
     <!-- Full-width background with horizontal lines -->
     <div
-      class="absolute inset-0 pointer-events-none z-0"
-      style="background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent 39px, #e5e7eb 39px, #e5e7eb 40px)"
+      class="absolute inset-0 pointer-events-none z-0 [background-image:repeating-linear-gradient(to_bottom,transparent_0px,transparent_39px,var(--color-border-default-default)_39px,var(--color-border-default-default)_40px)]"
     ></div>
     <div class="overflow-x-auto relative z-10">
       <Table.Root>
@@ -379,7 +378,7 @@
                 <Table.Head
                   colspan={header.colSpan}
                   style={header.id === 'actions'
-                    ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px; border-bottom: 1px solid #e5e7eb;`
+                    ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px; border-bottom: 1px solid transparent;`
                     : isLastScrollable
                       ? `min-width: ${header.getSize()}px;`
                       : `min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
@@ -420,10 +419,11 @@
           {/each}
         </Table.Header>
         <Table.Body>
-          {#each table.getRowModel().rows as row (row.id)}
+          {#each table.getRowModel().rows as row, rowIndex (row.id)}
             <Table.Row data-state={row.getIsSelected() ? 'selected' : undefined}>
               {#each row.getVisibleCells() as cell, index (cell.id)}
                 {@const isLastScrollable = index === row.getVisibleCells().length - 2}
+                {@const isFirstRow = rowIndex === 0}
                 <Table.Cell
                   style={cell.column.id === 'actions'
                     ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
@@ -441,7 +441,11 @@
                   )}
                 >
                   {#if cell.column.id === 'actions'}
-                    <div class="h-[38px] bg-white group-hover/row:bg-transparent group-data-[state=selected]/row:bg-background-default-secondary flex items-center justify-end px-3">
+                    <div class="h-[38px] bg-white group-hover/row:bg-transparent group-data-[state=selected]/row:bg-background-default-secondary flex items-center justify-end px-3 relative">
+                      {#if isFirstRow}
+                        <div class="absolute inset-x-0 top-0 h-[1px] bg-border" style="transform: translateY(-2px);"></div>
+                      {/if}
+                      <div class="absolute inset-x-0 bottom-0 h-[1px] bg-border group-hover/row:bg-transparent" style={isFirstRow ? "" : "transform: translateY(0.5px);"}></div>
                       <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
                     </div>
                   {:else}

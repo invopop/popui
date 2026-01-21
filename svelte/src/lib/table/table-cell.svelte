@@ -16,7 +16,7 @@
   bind:this={ref}
   data-slot="table-cell"
   class={cn(
-    'py-[9px] [&:has([role=menu])]:py-0 [&:has([data-uuid-copy])]:py-0 pl-3 pr-3 align-middle text-foreground font-normal text-base [&:has([role=menu])]:pl-1 relative z-1 group-data-[state=selected]/row:bg-background-default-secondary',
+    'py-[9px] [&:has([role=menu])]:py-0 [&:has([data-uuid-copy])]:py-0 pl-3 pr-3 align-middle text-foreground font-normal text-base [&:has([role=menu])]:pl-1 relative z-1 [&:has([role=menu])]:bg-white [&:has([type=checkbox])]:bg-white',
     className
   )}
   {...restProps}

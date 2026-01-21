@@ -3,6 +3,7 @@
     type ColumnDef,
     type ColumnFiltersState,
     type ColumnSizingState,
+    type ColumnSizingInfoState,
     type ColumnOrderState,
     type PaginationState,
     type Row,
@@ -36,7 +37,15 @@
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import EmptyState from '$lib/EmptyState.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { ArrowUp, ArrowDown, ChevronUp, SidebarHide, Search, Signature, Sign } from '@invopop/ui-icons'
+  import {
+    ArrowUp,
+    ArrowDown,
+    ChevronUp,
+    SidebarHide,
+    Search,
+    Signature,
+    Sign
+  } from '@invopop/ui-icons'
   import type { TableSortBy } from '$lib/types.js'
   import type { HTMLAttributes } from 'svelte/elements'
   import { cn } from '$lib/utils.js'
@@ -49,7 +58,14 @@
   let sorting = $state<SortingState>([])
   let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 })
   let columnSizing = $state<ColumnSizingState>({})
-  let columnSizingInfo = $state({})
+  let columnSizingInfo = $state<ColumnSizingInfoState>({
+    columnSizingStart: [],
+    deltaOffset: null,
+    deltaPercentage: null,
+    isResizingColumn: false,
+    startOffset: null,
+    startSize: null
+  })
   let columnOrder = $state<ColumnOrderState>([])
   let containerRef = $state<HTMLDivElement | null>(null)
 
@@ -345,23 +361,35 @@
   })
 </script>
 
-{#snippet StickyCellWrapper({ children, isFirstRow, align = 'left' }: { children: any; isFirstRow: boolean; align?: 'left' | 'right' })}
+{#snippet StickyCellWrapper({
+  children,
+  isFirstRow,
+  align = 'left'
+}: {
+  children: any
+  isFirstRow: boolean
+  align?: 'left' | 'right'
+})}
   <div
     class={cn(
-      "h-[38.5px] bg-white group-hover/row:bg-transparent group-data-[state=selected]/row:bg-transparent flex items-center px-3 relative",
+      'h-[39px] flex items-center px-3 relative group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected',
       align === 'right' ? 'justify-end' : ''
     )}
+    style="transform: translateY(-0.5px);"
   >
     {#if isFirstRow}
       <div
-        class="absolute inset-x-0 top-0 h-[1px] bg-border"
+        class="absolute inset-x-0 top-0 h-[1px] bg-border z-20"
         style="transform: translateY(-1.5px);"
       ></div>
     {/if}
     <div
-      class="absolute inset-x-0 bottom-0 h-[1px] bg-border group-hover/row:bg-transparent group-data-[state=selected]/row:bg-transparent"
+      class="absolute inset-x-0 bottom-0 h-[1px] bg-border z-20"
+      style={isFirstRow ? '' : 'transform: translateY(0.5px);'}
     ></div>
-    {@render children()}
+    <div class="relative z-10">
+      {@render children()}
+    </div>
   </div>
 {/snippet}
 
@@ -443,128 +471,142 @@
 <div class="flex flex-col gap-4">
   <DataTableToolbar {table} />
   <div class="flex flex-col gap-[5px]">
-  <div bind:this={containerRef} class="relative bg-white">
-    <!-- Full-width background with horizontal lines (only when table has data) -->
-    {#if data.length > 0}
-      <div
-        class="absolute inset-0 pointer-events-none z-0 [background-image:repeating-linear-gradient(to_bottom,transparent_0px,transparent_39px,var(--color-border-default-default)_39px,var(--color-border-default-default)_40px)]"
-      ></div>
-    {/if}
-    <div class="overflow-x-auto relative z-10">
-      <Table.Root>
-        <Table.Header>
-          {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-            <Table.Row class="hover:!bg-transparent">
-              {#each headerGroup.headers as header, index (header.id)}
-                {@const isLastScrollable = index === headerGroup.headers.length - 2}
-                <Table.Head
-                  colspan={header.colSpan}
-                  style={header.id === 'actions'
-                    ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px; border-bottom: 1px solid transparent;`
-                    : header.id === 'select'
-                      ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px; border-bottom: 1px solid transparent;`
-                      : isLastScrollable
-                        ? `min-width: ${header.getSize()}px;`
-                        : `min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
-                  class={cn(
-                    'relative whitespace-nowrap overflow-hidden',
-                    header.id === 'actions' ? 'sticky right-0 text-right bg-white' : '',
-                    header.id === 'select' ? 'sticky left-0 bg-white z-10' : '',
-                    isLastScrollable ? 'w-full' : '',
-                    header.column.getIsResizing()
-                      ? 'border-r-2 border-r-border-default-secondary'
-                      : '',
-                    !header.column.getCanSort() ? 'hover:!bg-transparent' : ''
-                  )}
-                >
-                  {#if !header.isPlaceholder}
-                    <FlexRender
-                      content={header.column.columnDef.header}
-                      context={header.getContext()}
-                    />
-                  {/if}
-                  {#if header.column.getCanResize()}
-                    <div
-                      class="absolute right-0 top-0 h-full w-3 cursor-col-resize select-none touch-none group -mr-1.5"
-                      onmousedown={header.getResizeHandler()}
-                      ontouchstart={header.getResizeHandler()}
-                    >
+    <div bind:this={containerRef} class="relative bg-background">
+      <!-- Full-width background with horizontal lines (only when table has data) -->
+      {#if data.length > 0}
+        <div
+          class="absolute inset-0 pointer-events-none z-0 [background-image:repeating-linear-gradient(to_bottom,transparent_0px,transparent_39px,var(--color-border-default-default)_39px,var(--color-border-default-default)_40px)]"
+        ></div>
+      {/if}
+      <div class="overflow-x-auto relative z-10">
+        <Table.Root>
+          <Table.Header>
+            {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
+              <Table.Row class="hover:!bg-transparent">
+                {#each headerGroup.headers as header, index (header.id)}
+                  {@const isLastScrollable = index === headerGroup.headers.length - 2}
+                  <Table.Head
+                    colspan={header.colSpan}
+                    style={header.id === 'actions'
+                      ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`
+                      : header.id === 'select'
+                        ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`
+                        : isLastScrollable
+                          ? `min-width: ${header.getSize()}px;`
+                          : `min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
+                    class={cn(
+                      'relative whitespace-nowrap overflow-hidden',
+                      header.id === 'actions' ? 'sticky right-0 text-right bg-white' : '',
+                      header.id === 'select' ? 'sticky left-0 bg-white z-10' : '',
+                      isLastScrollable ? 'w-full' : '',
+                      header.column.getIsResizing()
+                        ? 'border-r-2 border-r-border-default-secondary'
+                        : '',
+                      !header.column.getCanSort() ? 'hover:!bg-transparent' : ''
+                    )}
+                  >
+                    {#if !header.isPlaceholder}
+                      <FlexRender
+                        content={header.column.columnDef.header}
+                        context={header.getContext()}
+                      />
+                    {/if}
+                    {#if header.column.getCanResize()}
                       <div
-                        class={cn(
-                          'absolute right-1.5 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity',
-                          header.column.getIsResizing()
-                            ? 'opacity-0'
-                            : 'opacity-0 group-hover:opacity-100'
-                        )}
-                      ></div>
-                    </div>
-                  {/if}
-                </Table.Head>
-              {/each}
-            </Table.Row>
-          {/each}
-        </Table.Header>
-        <Table.Body>
-          {#each table.getRowModel().rows as row, rowIndex (row.id)}
-            <Table.Row data-state={row.getIsSelected() ? 'selected' : undefined}>
-              {#each row.getVisibleCells() as cell, index (cell.id)}
-                {@const isLastScrollable = index === row.getVisibleCells().length - 2}
-                {@const isFirstRow = rowIndex === 0}
-                <Table.Cell
-                  style={cell.column.id === 'actions'
-                    ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
-                    : cell.column.id === 'select'
+                        role="button"
+                        tabindex="0"
+                        aria-label="Resize column"
+                        class="absolute right-0 top-0 h-full w-3 cursor-col-resize select-none touch-none group -mr-1.5"
+                        onmousedown={header.getResizeHandler()}
+                        ontouchstart={header.getResizeHandler()}
+                      >
+                        <div
+                          class={cn(
+                            'absolute right-1.5 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity',
+                            header.column.getIsResizing()
+                              ? 'opacity-0'
+                              : 'opacity-0 group-hover:opacity-100'
+                          )}
+                        ></div>
+                      </div>
+                    {/if}
+                  </Table.Head>
+                {/each}
+              </Table.Row>
+            {/each}
+          </Table.Header>
+          <Table.Body>
+            {#each table.getRowModel().rows as row, rowIndex (row.id)}
+              <Table.Row data-state={row.getIsSelected() ? 'selected' : undefined}>
+                {#each row.getVisibleCells() as cell, index (cell.id)}
+                  {@const isLastScrollable = index === row.getVisibleCells().length - 2}
+                  {@const isFirstRow = rowIndex === 0}
+                  <Table.Cell
+                    style={cell.column.id === 'actions'
                       ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
-                      : isLastScrollable
-                        ? `min-width: ${cell.column.getSize()}px;`
-                        : `min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}
-                  class={cn(
-                    'whitespace-nowrap overflow-hidden',
-                    cell.column.id === 'actions' ? 'sticky right-0 text-right !p-0' : '',
-                    cell.column.id === 'select' ? 'sticky left-0 !p-0 z-10' : '',
-                    isLastScrollable ? 'w-full' : '',
-                    cell.column.getIsResizing()
-                      ? 'border-r-2 border-r-border-default-secondary'
-                      : ''
-                  )}
-                >
-                  {#if cell.column.id === 'actions'}
-                    {@render StickyCellWrapper({ isFirstRow, align: 'right', children: CellContent })}
+                      : cell.column.id === 'select'
+                        ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
+                        : isLastScrollable
+                          ? `min-width: ${cell.column.getSize()}px;`
+                          : `min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}
+                    class={cn(
+                      'whitespace-nowrap overflow-hidden',
+                      cell.column.id === 'actions' ? 'sticky right-0 text-right !p-0' : '',
+                      cell.column.id === 'select' ? 'sticky left-0 !p-0 z-10' : '',
+                      isLastScrollable ? 'w-full' : '',
+                      cell.column.getIsResizing()
+                        ? 'border-r-2 border-r-border-default-secondary'
+                        : ''
+                    )}
+                  >
+                    {#if cell.column.id === 'actions'}
+                      {@render StickyCellWrapper({
+                        isFirstRow,
+                        align: 'right',
+                        children: CellContent
+                      })}
                       {#snippet CellContent()}
                         <FlexRender
                           content={cell.column.columnDef.cell}
                           context={cell.getContext()}
                         />
                       {/snippet}
-                  {:else if cell.column.id === 'select'}
-                    {@render StickyCellWrapper({ isFirstRow, align: 'left', children: CellContent })}
+                    {:else if cell.column.id === 'select'}
+                      {@render StickyCellWrapper({
+                        isFirstRow,
+                        align: 'left',
+                        children: CellContent
+                      })}
                       {#snippet CellContent()}
                         <FlexRender
                           content={cell.column.columnDef.cell}
                           context={cell.getContext()}
                         />
                       {/snippet}
-                  {:else}
-                    <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
-                  {/if}
+                    {:else}
+                      <FlexRender
+                        content={cell.column.columnDef.cell}
+                        context={cell.getContext()}
+                      />
+                    {/if}
+                  </Table.Cell>
+                {/each}
+              </Table.Row>
+            {:else}
+              <Table.Row>
+                <Table.Cell colspan={columns.length} class="h-48">
+                  <EmptyState
+                    iconSource={Search}
+                    title="No results"
+                    description="Try adjusting your filters or search query"
+                  />
                 </Table.Cell>
-              {/each}
-            </Table.Row>
-          {:else}
-            <Table.Row>
-              <Table.Cell colspan={columns.length} class="h-48">
-                <EmptyState
-                  iconSource={Search}
-                  title="No results"
-                  description="Try adjusting your filters or search query"
-                />
-              </Table.Cell>
-            </Table.Row>
-          {/each}
-        </Table.Body>
-      </Table.Root>
+              </Table.Row>
+            {/each}
+          </Table.Body>
+        </Table.Root>
+      </div>
     </div>
-  </div>
-  <DataTablePagination {table} />
+    <DataTablePagination {table} />
   </div>
 </div>

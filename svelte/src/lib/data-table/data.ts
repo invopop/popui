@@ -55,3 +55,26 @@ export const statuses = [
 		status: "failure" as FeedItemStatus,
 	},
 ];
+
+export const states = [
+	{
+		value: "paid",
+		label: "Paid",
+		color: "green" as StatusType,
+	},
+	{
+		value: "sent",
+		label: "Sent",
+		color: "blue" as StatusType,
+	},
+	{
+		value: "empty",
+		label: "Empty",
+		color: "grey" as StatusType,
+	},
+	{
+		value: "error",
+		label: "Error",
+		color: "red" as StatusType,
+	},
+];

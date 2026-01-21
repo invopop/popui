@@ -23,7 +23,7 @@
   import { createSvelteTable } from './data-table-svelte.svelte.js'
   import FlexRender from './flex-render.svelte'
   import * as Table from '../table/index.js'
-  import { labels, statuses } from './data.js'
+  import { labels, statuses, states } from './data.js'
   import { taskSchema, type Task } from './schemas.js'
   import { renderComponent, renderSnippet } from './render-helpers.js'
   import InputCheckbox from '$lib/InputCheckbox.svelte'
@@ -36,7 +36,7 @@
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import EmptyState from '$lib/EmptyState.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { ArrowUp, ArrowDown, ChevronUp, SidebarHide, Search } from '@invopop/ui-icons'
+  import { ArrowUp, ArrowDown, ChevronUp, SidebarHide, Search, Signature, Sign } from '@invopop/ui-icons'
   import type { TableSortBy } from '$lib/types.js'
   import type { HTMLAttributes } from 'svelte/elements'
   import { cn } from '$lib/utils.js'
@@ -68,10 +68,13 @@
       // Define default sizes as percentages that sum to reasonable widths
       const defaultSizes = {
         select: 40,
-        id: 100,
-        title: 300,
-        status: 150,
-        priority: 120,
+        invoice: 150,
+        signed: 60,
+        state: 100,
+        supplier: 220,
+        customer: 220,
+        total: 140,
+        createdAt: 140,
         actions: 50
       }
 
@@ -114,79 +117,122 @@
       meta: { label: 'Select' }
     },
     {
-      accessorKey: 'id',
+      accessorKey: 'invoice',
       header: ({ column }) => {
         return renderSnippet(ColumnHeader, {
           column,
-          title: 'Task'
+          title: 'Invoice'
         })
       },
       cell: ({ row }) => {
-        const idSnippet = createRawSnippet<[{ id: string }]>((getId) => {
-          const { id } = getId()
+        const invoiceSnippet = createRawSnippet<[{ invoice: string }]>((getInvoice) => {
+          const { invoice } = getInvoice()
           return {
-            render: () => `<div class="truncate">${id}</div>`
+            render: () => `<div class="truncate font-medium">${invoice}</div>`
           }
         })
 
-        return renderSnippet(idSnippet, {
-          id: row.original.id
+        return renderSnippet(invoiceSnippet, {
+          invoice: row.original.invoice
         })
       },
       enableSorting: false,
       enableHiding: false,
-      size: 100,
-      minSize: 80,
-      meta: { label: 'Task' }
+      size: 150,
+      minSize: 120,
+      meta: { label: 'Invoice' }
     },
     {
-      accessorKey: 'title',
-      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Title' }),
+      accessorKey: 'signed',
+      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: '' }),
       cell: ({ row }) => {
-        return renderSnippet(TitleCell, {
-          labelValue: row.original.label,
-          value: row.original.title
+        return renderSnippet(SignedCell, {
+          value: row.original.signed
         })
       },
-      size: 300,
-      minSize: 150,
-      meta: { label: 'Title' }
+      enableSorting: false,
+      enableResizing: false,
+      size: 60,
+      minSize: 60,
+      maxSize: 60,
+      meta: { label: 'Signed' }
     },
     {
-      accessorKey: 'status',
-      header: ({ column }) =>
-        renderSnippet(ColumnHeader, {
-          column,
-          title: 'Status'
-        }),
+      accessorKey: 'state',
+      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'State' }),
       cell: ({ row }) => {
-        return renderSnippet(StatusCell, {
-          value: row.original.status
+        return renderSnippet(StateCell, {
+          value: row.original.state
         })
       },
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id))
       },
-      size: 150,
-      minSize: 100,
-      meta: { label: 'Status' }
+      size: 100,
+      minSize: 80,
+      meta: { label: 'State' }
     },
     {
-      accessorKey: 'uuid',
-      header: ({ column }) => {
-        return renderSnippet(ColumnHeader, {
-          title: 'UUID',
-          column
-        })
-      },
+      accessorKey: 'supplier',
+      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Supplier' }),
       cell: ({ row }) => {
-        return renderSnippet(UuidCell, {
-          value: row.original.uuid
+        const supplierSnippet = createRawSnippet<[{ supplier: string }]>((getSupplier) => {
+          const { supplier } = getSupplier()
+          return {
+            render: () => `<div class="truncate">${supplier}</div>`
+          }
+        })
+
+        return renderSnippet(supplierSnippet, {
+          supplier: row.original.supplier
         })
       },
-      size: 200,
+      size: 220,
       minSize: 150,
-      meta: { label: 'UUID' }
+      meta: { label: 'Supplier' }
+    },
+    {
+      accessorKey: 'customer',
+      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Customer' }),
+      cell: ({ row }) => {
+        const customerSnippet = createRawSnippet<[{ customer: string }]>((getCustomer) => {
+          const { customer } = getCustomer()
+          return {
+            render: () => `<div class="truncate">${customer}</div>`
+          }
+        })
+
+        return renderSnippet(customerSnippet, {
+          customer: row.original.customer
+        })
+      },
+      size: 220,
+      minSize: 150,
+      meta: { label: 'Customer' }
+    },
+    {
+      accessorKey: 'total',
+      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Total' }),
+      cell: ({ row }) => {
+        return renderSnippet(TotalCell, {
+          value: row.original.total
+        })
+      },
+      size: 140,
+      minSize: 120,
+      meta: { label: 'Total' }
+    },
+    {
+      accessorKey: 'createdAt',
+      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Created at' }),
+      cell: ({ row }) => {
+        return renderSnippet(DateCell, {
+          value: row.original.createdAt
+        })
+      },
+      size: 140,
+      minSize: 120,
+      meta: { label: 'Created at' }
     },
     {
       id: 'actions',
@@ -299,27 +345,51 @@
   })
 </script>
 
-{#snippet StatusCell({ value }: { value: string })}
-  {@const status = statuses.find((status) => status.value === value)}
-  {#if status}
-    <StatusLabel status={status.status} label={status.label} />
-  {/if}
-{/snippet}
-
-{#snippet TitleCell({ value, labelValue }: { value: string; labelValue: string })}
-  {@const label = labels.find((label) => label.value === labelValue)}
-  <div class="flex space-x-2 min-w-0">
-    {#if label}
-      <TagStatus label={label.label} status={label.color} />
+{#snippet StickyCellWrapper({ children, isFirstRow, align = 'left' }: { children: any; isFirstRow: boolean; align?: 'left' | 'right' })}
+  <div
+    class={cn(
+      "h-[38.5px] bg-white group-hover/row:bg-transparent group-data-[state=selected]/row:bg-transparent flex items-center px-3 relative",
+      align === 'right' ? 'justify-end' : ''
+    )}
+  >
+    {#if isFirstRow}
+      <div
+        class="absolute inset-x-0 top-0 h-[1px] bg-border"
+        style="transform: translateY(-1.5px);"
+      ></div>
     {/if}
-    <span class="truncate font-medium min-w-0">
-      {value}
-    </span>
+    <div
+      class="absolute inset-x-0 bottom-0 h-[1px] bg-border group-hover/row:bg-transparent group-data-[state=selected]/row:bg-transparent"
+    ></div>
+    {@render children()}
   </div>
 {/snippet}
 
-{#snippet UuidCell({ value }: { value: string })}
-  <ButtonUuidCopy uuid={value} />
+{#snippet SignedCell({ value }: { value: boolean })}
+  {#if value}
+    <div class="flex justify-center">
+      <Icon src={Sign} class="size-4 text-text-secondary-default" />
+    </div>
+  {/if}
+{/snippet}
+
+{#snippet StateCell({ value }: { value: string })}
+  {@const state = states.find((state) => state.value === value)}
+  {#if state}
+    <TagStatus label={state.label} status={state.color} dot />
+  {/if}
+{/snippet}
+
+{#snippet TotalCell({ value }: { value: string })}
+  <span class="font-mono text-base text-foreground">
+    {value}
+  </span>
+{/snippet}
+
+{#snippet DateCell({ value }: { value: string })}
+  <span class="font-mono text-base text-foreground">
+    {value}
+  </span>
 {/snippet}
 
 {#snippet RowActions({ row }: { row: Row<Task> })}
@@ -391,12 +461,15 @@
                   colspan={header.colSpan}
                   style={header.id === 'actions'
                     ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px; border-bottom: 1px solid transparent;`
-                    : isLastScrollable
-                      ? `min-width: ${header.getSize()}px;`
-                      : `min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
+                    : header.id === 'select'
+                      ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px; border-bottom: 1px solid transparent;`
+                      : isLastScrollable
+                        ? `min-width: ${header.getSize()}px;`
+                        : `min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
                   class={cn(
                     'relative whitespace-nowrap overflow-hidden',
                     header.id === 'actions' ? 'sticky right-0 text-right bg-white' : '',
+                    header.id === 'select' ? 'sticky left-0 bg-white z-10' : '',
                     isLastScrollable ? 'w-full' : '',
                     header.column.getIsResizing()
                       ? 'border-r-2 border-r-border-default-secondary'
@@ -412,13 +485,13 @@
                   {/if}
                   {#if header.column.getCanResize()}
                     <div
-                      class="absolute right-0 top-0 h-full w-0.5 cursor-col-resize select-none touch-none group"
+                      class="absolute right-0 top-0 h-full w-3 cursor-col-resize select-none touch-none group -mr-1.5"
                       onmousedown={header.getResizeHandler()}
                       ontouchstart={header.getResizeHandler()}
                     >
                       <div
                         class={cn(
-                          'absolute right-0 top-0 h-full w-full bg-border-default-secondary transition-opacity',
+                          'absolute right-1.5 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity',
                           header.column.getIsResizing()
                             ? 'opacity-0'
                             : 'opacity-0 group-hover:opacity-100'
@@ -440,12 +513,15 @@
                 <Table.Cell
                   style={cell.column.id === 'actions'
                     ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
-                    : isLastScrollable
-                      ? `min-width: ${cell.column.getSize()}px;`
-                      : `min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}
+                    : cell.column.id === 'select'
+                      ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
+                      : isLastScrollable
+                        ? `min-width: ${cell.column.getSize()}px;`
+                        : `min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}
                   class={cn(
                     'whitespace-nowrap overflow-hidden',
                     cell.column.id === 'actions' ? 'sticky right-0 text-right !p-0' : '',
+                    cell.column.id === 'select' ? 'sticky left-0 !p-0 z-10' : '',
                     isLastScrollable ? 'w-full' : '',
                     cell.column.getIsResizing()
                       ? 'border-r-2 border-r-border-default-secondary'
@@ -453,23 +529,21 @@
                   )}
                 >
                   {#if cell.column.id === 'actions'}
-                    <div
-                      class="h-[38.5px] bg-white group-hover/row:bg-transparent group-data-[state=selected]/row:bg-transparent flex items-center justify-end px-3 relative"
-                    >
-                      {#if isFirstRow}
-                        <div
-                          class="absolute inset-x-0 top-0 h-[1px] bg-border"
-                          style="transform: translateY(-1.5px);"
-                        ></div>
-                      {/if}
-                      <div
-                        class="absolute inset-x-0 bottom-0 h-[1px] bg-border group-hover/row:bg-transparent group-data-[state=selected]/row:bg-transparent"
-                      ></div>
-                      <FlexRender
-                        content={cell.column.columnDef.cell}
-                        context={cell.getContext()}
-                      />
-                    </div>
+                    {@render StickyCellWrapper({ isFirstRow, align: 'right', children: CellContent })}
+                      {#snippet CellContent()}
+                        <FlexRender
+                          content={cell.column.columnDef.cell}
+                          context={cell.getContext()}
+                        />
+                      {/snippet}
+                  {:else if cell.column.id === 'select'}
+                    {@render StickyCellWrapper({ isFirstRow, align: 'left', children: CellContent })}
+                      {#snippet CellContent()}
+                        <FlexRender
+                          content={cell.column.columnDef.cell}
+                          context={cell.getContext()}
+                        />
+                      {/snippet}
                   {:else}
                     <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
                   {/if}

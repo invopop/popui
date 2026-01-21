@@ -3,11 +3,13 @@ import DataTable from '../lib/data-table/data-table.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 
 type Task = {
-	id: string
-	title: string
-	status: 'backlog' | 'todo' | 'in progress' | 'done' | 'canceled'
-	label: 'bug' | 'feature' | 'documentation' | 'enhancement' | 'refactor'
-	uuid: string
+	invoice: string
+	signed: boolean
+	state: 'paid' | 'sent' | 'empty' | 'error'
+	supplier: string
+	customer: string
+	total: string
+	createdAt: string
 }
 
 function generateUuid(): string {
@@ -19,32 +21,56 @@ function generateUuid(): string {
 }
 
 const generateTasks = (count: number): Task[] => {
-	const statuses: Task['status'][] = ['backlog', 'todo', 'in progress', 'done', 'canceled']
-	const labels: Task['label'][] = ['bug', 'feature', 'documentation', 'enhancement', 'refactor']
-	const titles = [
-		'Fix authentication bug',
-		'Update documentation',
-		'Implement dark mode',
-		'Refactor API endpoints',
-		'Add unit tests',
-		'Optimize database queries',
-		'Design new landing page',
-		'Setup CI/CD pipeline',
-		'Implement search feature',
-		'Fix mobile responsiveness',
-		'Add error handling',
-		'Improve accessibility',
-		'Update dependencies',
-		'Add logging system',
-		'Implement caching'
+	const states: Task['state'][] = ['paid', 'sent', 'empty', 'error']
+
+	const suppliers = [
+		'Quantum Leap',
+		'EcoSphere Solutions',
+		'Horizon Dynamics',
+		'Future Vision Tech',
+		'Summit Peak Ventures',
+		'Global Nexus',
+		'Stellar Innovations',
+		'Prime Matrix',
+		'Apex Systems',
+		'Velocity Corp'
 	]
 
+	const customers = [
+		'TechNova Solutions',
+		'GreenWave Innovations',
+		'Skyline Enterprises',
+		'Quantum Dynamics',
+		'BrightFuture Tech',
+		'Pinnacle Ventures',
+		'Digital Frontiers',
+		'NextGen Industries',
+		'Synergy Partners',
+		'CloudFirst Inc'
+	]
+
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+	const generateDate = (i: number) => {
+		const year = 2025 + Math.floor(i / 12)
+		const month = months[i % 12]
+		const day = Math.floor(Math.random() * 28) + 1
+		return `${month} ${day.toString().padStart(2, ' ')}, ${year}`
+	}
+
+	const generateAmount = () => {
+		const amount = (Math.random() * 2500 + 500).toFixed(2)
+		return `${amount} EUR`
+	}
+
 	return Array.from({ length: count }, (_, i) => ({
-		id: `TASK-${1000 + i}`,
-		title: titles[i % titles.length],
-		status: statuses[Math.floor(Math.random() * statuses.length)],
-		label: labels[Math.floor(Math.random() * labels.length)],
-		uuid: generateUuid()
+		invoice: `INV-2023-${(19 - i).toString().padStart(3, '0')}`,
+		signed: Math.random() > 0.3,
+		state: states[Math.floor(Math.random() * states.length)],
+		supplier: suppliers[Math.floor(Math.random() * suppliers.length)],
+		customer: customers[Math.floor(Math.random() * customers.length)],
+		total: generateAmount(),
+		createdAt: generateDate(i)
 	}))
 }
 

@@ -363,30 +363,17 @@
 
 {#snippet StickyCellWrapper({
   children,
-  isFirstRow,
   align = 'left'
 }: {
   children: any
-  isFirstRow: boolean
   align?: 'left' | 'right'
 })}
   <div
     class={cn(
-      'h-[39px] flex items-center px-3 relative group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected',
+      'h-10 flex items-center px-3 relative group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected',
       align === 'right' ? 'justify-end' : ''
     )}
-    style="transform: translateY(-0.5px);"
   >
-    {#if isFirstRow}
-      <div
-        class="absolute inset-x-0 top-0 h-[1px] bg-border z-20"
-        style="transform: translateY(-1.5px);"
-      ></div>
-    {/if}
-    <div
-      class="absolute inset-x-0 bottom-0 h-[1px] bg-border z-20"
-      style={isFirstRow ? '' : 'transform: translateY(0.5px);'}
-    ></div>
     <div class="relative z-10">
       {@render children()}
     </div>
@@ -472,17 +459,11 @@
   <DataTableToolbar {table} />
   <div class="flex flex-col gap-[5px]">
     <div bind:this={containerRef} class="relative bg-background">
-      <!-- Full-width background with horizontal lines (only when table has data) -->
-      {#if data.length > 0}
-        <div
-          class="absolute inset-0 pointer-events-none z-0 [background-image:repeating-linear-gradient(to_bottom,transparent_0px,transparent_39px,var(--color-border-default-default)_39px,var(--color-border-default-default)_40px)]"
-        ></div>
-      {/if}
       <div class="overflow-x-auto relative z-10">
         <Table.Root>
           <Table.Header>
             {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-              <Table.Row class="hover:!bg-transparent">
+              <Table.Row class="hover:!bg-transparent border-b border-border">
                 {#each headerGroup.headers as header, index (header.id)}
                   {@const isLastScrollable = index === headerGroup.headers.length - 2}
                   <Table.Head
@@ -537,10 +518,12 @@
           </Table.Header>
           <Table.Body>
             {#each table.getRowModel().rows as row, rowIndex (row.id)}
-              <Table.Row data-state={row.getIsSelected() ? 'selected' : undefined}>
+              <Table.Row
+                data-state={row.getIsSelected() ? 'selected' : undefined}
+                class="border-b border-border"
+              >
                 {#each row.getVisibleCells() as cell, index (cell.id)}
                   {@const isLastScrollable = index === row.getVisibleCells().length - 2}
-                  {@const isFirstRow = rowIndex === 0}
                   <Table.Cell
                     style={cell.column.id === 'actions'
                       ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
@@ -561,7 +544,6 @@
                   >
                     {#if cell.column.id === 'actions'}
                       {@render StickyCellWrapper({
-                        isFirstRow,
                         align: 'right',
                         children: CellContent
                       })}
@@ -573,7 +555,6 @@
                       {/snippet}
                     {:else if cell.column.id === 'select'}
                       {@render StickyCellWrapper({
-                        isFirstRow,
                         align: 'left',
                         children: CellContent
                       })}

@@ -34,6 +34,6 @@ jobs:
       # Publish to npm
       - name: Publish to NPM registry
         working-directory: svelte
-        run: npm publish
+        run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

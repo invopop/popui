@@ -69,6 +69,15 @@ import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
 import UuidCopy from './UuidCopy.svelte'
 import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
 import { buttonVariants } from './button/button.svelte' // Ensure button styles are included
+import {
+  DataTable,
+  DataTableToolbar,
+  DataTableViewOptions,
+  FlexRender,
+  createSvelteTable,
+  renderComponent,
+  renderSnippet
+} from './data-table'
 
 export {
   AlertDialog,
@@ -146,5 +155,12 @@ export {
   resolveIcon,
   getCountryName,
   getStatusType,
-  buttonVariants
+  buttonVariants,
+  DataTable,
+  DataTableToolbar,
+  DataTableViewOptions,
+  FlexRender,
+  createSvelteTable,
+  renderComponent,
+  renderSnippet
 }

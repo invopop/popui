@@ -10,7 +10,8 @@
     oncontextmenu,
     onkeydown,
     onmouseover,
-    onfocus
+    onfocus,
+    ...restProps
   }: WithElementRef<HTMLAttributes<HTMLTableRowElement>> = $props()
 </script>
 
@@ -18,7 +19,7 @@
   bind:this={ref}
   data-slot="table-row"
   class={cn(
-    'data-[state=selected]:bg-background-default-secondary data-[state=checked]:bg-background-selected transition-colors h-10',
+    'group/row data-[state=selected]:bg-background-selected data-[state=checked]:bg-background-selected transition-colors h-10 data-[state=selected]:hover:bg-background-selected data-[state=checked]:hover:bg-background-selected',
     className
   )}
   {oncontextmenu}
@@ -26,6 +27,7 @@
   {onkeydown}
   {onmouseover}
   {onfocus}
+  {...restProps}
 >
   {@render children?.()}
 </tr>

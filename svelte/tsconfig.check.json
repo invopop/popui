@@ -1,0 +1,32 @@
+{
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"moduleResolution": "bundler"
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.js",
+		"src/**/*.svelte",
+		".svelte-kit/ambient.d.ts",
+		".svelte-kit/types/**/$types.d.ts",
+		"vite.config.ts"
+	],
+	"exclude": [
+		"node_modules",
+		".svelte-kit",
+		"dist",
+		"build",
+		".storybook-static",
+		"**/*.spec.ts",
+		"**/*.test.ts",
+		"src/stories/**/*"
+	]
+}

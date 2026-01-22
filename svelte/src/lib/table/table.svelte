@@ -9,7 +9,7 @@
 </script>
 
 <div data-slot="table-container" class="relative w-full">
-  <table bind:this={ref} data-slot="table" class={cn('w-full caption-bottom', className)}>
+  <table bind:this={ref} data-slot="table" class={cn('caption-bottom', className)}>
     {@render children?.()}
   </table>
 </div>

@@ -32,6 +32,7 @@
   icon={Duplicate}
   iconPosition="right"
   variant="ghost"
+  data-uuid-copy
   onclick={async (e) => {
     e.stopPropagation()
     await navigator.clipboard.writeText(uuid)

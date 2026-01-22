@@ -7,13 +7,17 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import { ChevronRight } from '@steeze-ui/heroicons'
   import { slide } from 'svelte/transition'
+  import Sortable from 'sortablejs'
+  import { onMount } from 'svelte'
 
   let {
     items = $bindable([]),
     multiple = false,
+    draggable = false,
     widthClass = 'w-60',
     onclick,
     onselect,
+    onreorder,
     children,
     groups
   }: DrawerContextProps = $props()
@@ -42,6 +46,8 @@
   })
 
   let openGroups = $state<Record<string, boolean>>({})
+  let ungroupedContainer: HTMLElement | null = $state(null)
+  let groupContainers: Record<string, HTMLElement | null> = {}
 
   $effect(() => {
     if (hasGroups) {
@@ -56,6 +62,80 @@
     onselect?.(selectedItems)
   })
 
+  function initializeSortable() {
+    if (!draggable) return
+
+    // Initialize sortable for ungrouped items
+    if (ungroupedContainer && ungroupedItems.length > 0) {
+      Sortable.create(ungroupedContainer, {
+        animation: 150,
+        handle: '.draggable-item',
+        ghostClass: 'opacity-10',
+        dragClass: 'cursor-grabbing',
+        forceFallback: true,
+        onEnd: (event) => {
+          if (event.oldIndex !== undefined && event.newIndex !== undefined) {
+            const newItems = [...items]
+            const ungroupedIndices = items
+              .map((item, index) => (!item.groupBy ? index : -1))
+              .filter((i) => i !== -1)
+
+            const fromIndex = ungroupedIndices[event.oldIndex]
+            const toIndex = ungroupedIndices[event.newIndex]
+
+            const [removed] = newItems.splice(fromIndex, 1)
+            newItems.splice(toIndex, 0, removed)
+
+            items = newItems
+            onreorder?.(newItems)
+          }
+        }
+      })
+    }
+
+    // Initialize sortable for grouped items
+    if (hasGroups && groups) {
+      groups.forEach((group) => {
+        const container = groupContainers[group.slug]
+        const groupItems = groupedItems.get(group.slug) || []
+
+        if (container && groupItems.length > 0) {
+          Sortable.create(container, {
+            animation: 150,
+            handle: '.draggable-item',
+            ghostClass: 'opacity-10',
+            dragClass: 'cursor-grabbing',
+            forceFallback: true,
+            onEnd: (event) => {
+              if (event.oldIndex !== undefined && event.newIndex !== undefined) {
+                const newItems = [...items]
+                const groupedIndices = items
+                  .map((item, index) => (item.groupBy === group.slug ? index : -1))
+                  .filter((i) => i !== -1)
+
+                const fromIndex = groupedIndices[event.oldIndex]
+                const toIndex = groupedIndices[event.newIndex]
+
+                const [removed] = newItems.splice(fromIndex, 1)
+                newItems.splice(toIndex, 0, removed)
+
+                items = newItems
+                onreorder?.(newItems)
+              }
+            }
+          })
+        }
+      })
+    }
+  }
+
+  onMount(() => {
+    if (draggable) {
+      // Small delay to ensure DOM is ready
+      setTimeout(initializeSortable, 100)
+    }
+  })
+
   function updateItem(item: DrawerOption) {
     items = items.map((i) => {
       if (i.value === item.value) return item
@@ -65,6 +145,11 @@
 
   function toggleGroup(groupSlug: string) {
     openGroups = openGroups[groupSlug] ? {} : { [groupSlug]: true }
+
+    // Reinitialize sortable when a group is toggled
+    if (draggable) {
+      setTimeout(initializeSortable, 100)
+    }
   }
 </script>
 
@@ -72,7 +157,7 @@
   {#if item.separator}
     <DrawerContextSeparator />
   {:else}
-    <div class:px-1={!item.groupBy}>
+    <div class:px-1={!item.groupBy} class:draggable-item={draggable} class:cursor-grab={draggable}>
       <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
     </div>
   {/if}
@@ -116,7 +201,11 @@
         </button>
 
         {#if isOpen}
-          <div class="w-full overflow-y-auto flex-1 min-h-0" transition:slide={{ duration: 200 }}>
+          <div
+            class="w-full overflow-y-auto flex-1 min-h-0"
+            transition:slide={{ duration: 200 }}
+            bind:this={groupContainers[group.slug]}
+          >
             {#if !groupItems.length}
               <div class="px-1 pt-1 pb-5">
                 <EmptyState
@@ -140,8 +229,8 @@
   {/if}
 
   {#if ungroupedItems.length}
-    <div class="flex-shrink-0 overflow-y-auto max-h-[564px]">
-      {#each ungroupedItems as item}
+    <div class="flex-shrink-0 overflow-y-auto max-h-[564px]" bind:this={ungroupedContainer}>
+      {#each ungroupedItems as item (item.value)}
         {@render drawerItem(item)}
       {/each}
     </div>

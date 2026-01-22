@@ -2,6 +2,9 @@
   "name": "@invopop/popui",
   "license": "MIT",
   "version": "0.1.36.beta.1",
+  "repository": {
+    "url":  "https://github.com/invopop/popui"
+  },
   "scripts": {
     "dev": "vite dev",
     "dev:clean": "npm run clean && vite dev",

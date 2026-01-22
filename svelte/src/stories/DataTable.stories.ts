@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 import DataTable from '../lib/data-table/data-table.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
+import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
+import { Sign } from '@invopop/ui-icons'
+import type { StatusType } from '$lib/types.js'
 
-type Task = {
+type Invoice = {
 	invoice: string
 	signed: boolean
 	state: 'paid' | 'sent' | 'empty' | 'error'
@@ -12,16 +15,8 @@ type Task = {
 	createdAt: string
 }
 
-function generateUuid(): string {
-	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-		const r = (Math.random() * 16) | 0
-		const v = c === 'x' ? r : (r & 0x3) | 0x8
-		return v.toString(16)
-	})
-}
-
-const generateTasks = (count: number): Task[] => {
-	const states: Task['state'][] = ['paid', 'sent', 'empty', 'error']
+const generateInvoices = (count: number): Invoice[] => {
+	const states: Invoice['state'][] = ['paid', 'sent', 'empty', 'error']
 
 	const suppliers = [
 		'Quantum Leap',
@@ -74,24 +69,255 @@ const generateTasks = (count: number): Task[] => {
 	}))
 }
 
+const stateOptions = [
+	{
+		value: 'paid',
+		label: 'Paid',
+		color: 'green' as StatusType
+	},
+	{
+		value: 'sent',
+		label: 'Sent',
+		color: 'blue' as StatusType
+	},
+	{
+		value: 'empty',
+		label: 'Empty',
+		color: 'grey' as StatusType
+	},
+	{
+		value: 'error',
+		label: 'Error',
+		color: 'red' as StatusType
+	}
+]
+
+const columns: DataTableColumn<Invoice>[] = [
+	{
+		id: 'invoice',
+		accessorKey: 'invoice',
+		header: 'Invoice',
+		cellType: 'text',
+		cellConfig: { className: 'font-medium' },
+		enableSorting: false,
+		enableHiding: false,
+		size: 150,
+		minSize: 120
+	},
+	{
+		id: 'signed',
+		accessorKey: 'signed',
+		// No header - will display empty column header
+		cellType: 'boolean',
+		cellConfig: {
+			icon: Sign,
+			iconClass: 'size-4 text-text-secondary-default'
+		},
+		enableSorting: false,
+		enableResizing: false,
+		size: 60,
+		minSize: 60,
+		maxSize: 60
+	},
+	{
+		id: 'state',
+		accessorKey: 'state',
+		header: 'State',
+		cellType: 'tag',
+		cellConfig: {
+			options: stateOptions,
+			showDot: true
+		},
+		filterFn: (row, id, value) => {
+			return value.includes(row.state)
+		},
+		size: 100,
+		minSize: 80
+	},
+	{
+		id: 'supplier',
+		accessorKey: 'supplier',
+		header: 'Supplier',
+		cellType: 'text',
+		size: 220,
+		minSize: 150
+	},
+	{
+		id: 'customer',
+		accessorKey: 'customer',
+		header: 'Customer',
+		cellType: 'text',
+		size: 220,
+		minSize: 150
+	},
+	{
+		id: 'total',
+		accessorKey: 'total',
+		header: 'Total',
+		cellType: 'currency',
+		size: 140,
+		minSize: 120
+	},
+	{
+		id: 'createdAt',
+		accessorKey: 'createdAt',
+		header: 'Created At',
+		cellType: 'date',
+		size: 140,
+		minSize: 120
+	}
+]
+
+const rowActions: RowAction[] = [
+	{ label: 'Edit', value: 'edit' },
+	{ label: 'Make a copy', value: 'copy' },
+	{ label: 'Favorite', value: 'favorite' },
+	{ label: '', value: '', separator: true },
+	{ label: 'Delete', value: 'delete', destructive: true }
+]
+
 const meta = {
 	title: 'Components/DataTable',
 	component: DataTable as any,
 	tags: ['autodocs'],
 	decorators: [(story) => ({ Component: MarginDecorator, slot: story })]
-} satisfies Meta<DataTable>
+} satisfies Meta<typeof DataTable>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
 	args: {
-		data: generateTasks(50)
+		data: generateInvoices(50),
+		columns,
+		rowActions,
+		onRowAction: (action, row) => {
+			console.log('Action:', action, 'Row:', row)
+		},
+		onSelectionChange: (selectedRows) => {
+			console.log('Selected rows:', selectedRows)
+		}
 	}
 }
 
 export const Empty: Story = {
 	args: {
-		data: []
+		data: [],
+		columns,
+		rowActions
+	}
+}
+
+export const WithoutSelection: Story = {
+	args: {
+		data: generateInvoices(20),
+		columns,
+		disableSelection: true,
+		rowActions
+	}
+}
+
+export const WithoutActions: Story = {
+	args: {
+		data: generateInvoices(20),
+		columns,
+		rowActions: []
+	}
+}
+
+export const FixedWidthColumns: Story = {
+	args: {
+		data: generateInvoices(30),
+		columns: [
+			{
+				id: 'invoice',
+				accessorKey: 'invoice',
+				header: 'Invoice',
+				cellType: 'text',
+				cellConfig: { className: 'font-medium' },
+				enableSorting: false,
+				enableHiding: false,
+				enableResizing: false,
+				size: 200,
+				minSize: 200,
+				maxSize: 200
+			},
+			{
+				id: 'state',
+				accessorKey: 'state',
+				header: 'State',
+				cellType: 'tag',
+				cellConfig: {
+					options: stateOptions,
+					showDot: true
+				},
+				enableResizing: false,
+				size: 120,
+				minSize: 120,
+				maxSize: 120
+			},
+			{
+				id: 'supplier',
+				accessorKey: 'supplier',
+				header: 'Supplier',
+				cellType: 'text',
+				enableResizing: true,
+				size: 250,
+				minSize: 150
+			},
+			{
+				id: 'total',
+				accessorKey: 'total',
+				header: 'Total',
+				cellType: 'currency',
+				enableResizing: true,
+				size: 150,
+				minSize: 100
+			}
+		],
+		disableSelection: true,
+		rowActions: []
+	}
+}
+
+export const WideColumns: Story = {
+	args: {
+		data: generateInvoices(20),
+		columns: [
+			{
+				id: 'invoice',
+				accessorKey: 'invoice',
+				header: 'Invoice',
+				cellType: 'text',
+				cellConfig: { className: 'font-medium' },
+				size: 300,
+				minSize: 150
+			},
+			{
+				id: 'supplier',
+				accessorKey: 'supplier',
+				header: 'Supplier',
+				cellType: 'text',
+				size: 400,
+				minSize: 200
+			},
+			{
+				id: 'customer',
+				accessorKey: 'customer',
+				header: 'Customer',
+				cellType: 'text',
+				size: 400,
+				minSize: 200
+			},
+			{
+				id: 'total',
+				accessorKey: 'total',
+				header: 'Total',
+				cellType: 'currency',
+				size: 200,
+				minSize: 120
+			}
+		],
+		rowActions
 	}
 }

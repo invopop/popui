@@ -1,19 +1,9 @@
 <script lang="ts">
-  import type { Table as TableType } from '@tanstack/table-core'
   import Button from '$lib/button/button.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
-  import { Icon } from '@steeze-ui/svelte-icon'
   import { ArrowLeft, ArrowRight, ScrollLeft, ScrollRight } from '@invopop/ui-icons'
   import { cn } from '$lib/utils.js'
-
-  interface Props<T> {
-    table: TableType<T>
-    id?: string
-    class?: string
-    showRowsPerPage?: boolean
-    rowsPerPageOptions?: number[]
-    itemsLabel?: string
-  }
+  import type { DataTablePaginationProps } from './data-table-types.js'
 
   let {
     table,
@@ -21,19 +11,16 @@
     class: className,
     showRowsPerPage = true,
     rowsPerPageOptions = [10, 25, 50, 100],
-    itemsLabel = 'items'
-  }: Props<any> = $props()
+    itemsLabel = 'items',
+    children
+  }: DataTablePaginationProps<any> = $props()
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
   let totalPages = $derived(table.getPageCount())
   let totalItems = $derived(table.getFilteredRowModel().rows.length)
   let rowsPerPage = $derived(table.getState().pagination.pageSize)
 
-  let pageInputValue = $state(`${currentPage}`)
-
-  $effect(() => {
-    pageInputValue = `${currentPage}`
-  })
+  let pageInputValue = $derived(`${currentPage}`)
 
   function handlePageInput(event: Event) {
     const target = event.target as HTMLInputElement
@@ -130,7 +117,10 @@
         <div class="w-[105px]">
           <InputSelect
             value={`${rowsPerPage}`}
-            options={rowsPerPageOptions.map((size) => ({ value: `${size}`, label: `${size} rows` }))}
+            options={rowsPerPageOptions.map((size) => ({
+              value: `${size}`,
+              label: `${size} rows`
+            }))}
             onchange={(value) => {
               table.setPageSize(Number(value))
             }}
@@ -148,5 +138,7 @@
       </span>
     {/if}
   </div>
-  <slot />
+  {#if children}
+    {@render children()}
+  {/if}
 </div>

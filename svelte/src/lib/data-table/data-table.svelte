@@ -1,7 +1,5 @@
-<script lang="ts">
+<script lang="ts" generics="TData">
   import {
-    type ColumnDef,
-    type ColumnFiltersState,
     type ColumnSizingState,
     type ColumnSizingInfoState,
     type ColumnOrderState,
@@ -10,53 +8,50 @@
     type RowSelectionState,
     type SortingState,
     type VisibilityState,
-    type Table as TableType,
-    getCoreRowModel,
-    getFacetedRowModel,
-    getFacetedUniqueValues,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
     type Column
   } from '@tanstack/table-core'
   import DataTableToolbar from './data-table-toolbar.svelte'
   import DataTablePagination from './data-table-pagination.svelte'
-  import { createSvelteTable } from './data-table-svelte.svelte.js'
   import FlexRender from './flex-render.svelte'
   import * as Table from '../table/index.js'
-  import { labels, statuses, states } from './data.js'
-  import { taskSchema, type Task } from './schemas.js'
-  import { renderComponent, renderSnippet } from './render-helpers.js'
-  import InputCheckbox from '$lib/InputCheckbox.svelte'
-  import { createRawSnippet } from 'svelte'
-  import TagStatus from '$lib/TagStatus.svelte'
-  import StatusLabel from '$lib/StatusLabel.svelte'
   import BaseTableActions from '$lib/BaseTableActions.svelte'
   import BaseDropdown from '$lib/BaseDropdown.svelte'
   import BaseTableHeaderOrderBy from '$lib/BaseTableHeaderOrderBy.svelte'
-  import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import EmptyState from '$lib/EmptyState.svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import {
-    ArrowUp,
-    ArrowDown,
-    ChevronUp,
-    SidebarHide,
-    Search,
-    Signature,
-    Sign
-  } from '@invopop/ui-icons'
-  import type { TableSortBy } from '$lib/types.js'
+  import { ArrowUp, ArrowDown, Search } from '@invopop/ui-icons'
   import type { HTMLAttributes } from 'svelte/elements'
   import { cn } from '$lib/utils.js'
+  import type { DataTableProps } from './data-table-types.js'
+  import { calculateColumnSizing } from './column-sizing-helpers.js'
+  import { getHeaderStyle, getHeaderClasses, getCellStyle, getCellClasses } from './table-styles.js'
+  import { buildColumns, setupTable } from './table-setup.js'
 
-  let { data }: { data: Task[] } = $props()
+  let {
+    data,
+    columns: columnConfig,
+    disableSelection = false,
+    disablePagination = false,
+    rowActions = [],
+    onRowAction,
+    initialPageSize = 10,
+    emptyState = {
+      iconSource: Search,
+      title: 'No results',
+      description: 'Try adjusting your filters or search query'
+    },
+    onRowClick,
+    onSelectionChange,
+    filters
+  }: DataTableProps<TData> = $props()
+
+  const enableSelection = !disableSelection
+  const enablePagination = !disablePagination
 
   let rowSelection = $state<RowSelectionState>({})
   let columnVisibility = $state<VisibilityState>({})
-  let columnFilters = $state<ColumnFiltersState>([])
   let sorting = $state<SortingState>([])
-  let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 })
+  let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: initialPageSize })
   let columnSizing = $state<ColumnSizingState>({})
   let columnSizingInfo = $state<ColumnSizingInfoState>({
     columnSizingStart: [],
@@ -69,295 +64,55 @@
   let columnOrder = $state<ColumnOrderState>([])
   let containerRef = $state<HTMLDivElement | null>(null)
 
-  const rowActions = [
-    { label: 'Edit', value: 'edit' },
-    { label: 'Make a copy', value: 'copy' },
-    { label: 'Favorite', value: 'favorite' },
-    { label: '', value: '', separator: true },
-    { label: 'Delete', value: 'delete', destructive: true }
-  ]
+  // Build TanStack columns from config
+  const columns = $derived.by(() =>
+    buildColumns<TData>(columnConfig, enableSelection, RowActions, rowActions.length > 0)
+  )
 
   // Calculate initial column sizes based on available width
   $effect(() => {
     if (containerRef && Object.keys(columnSizing).length === 0) {
       const containerWidth = containerRef.offsetWidth
-      // Define default sizes as percentages that sum to reasonable widths
-      const defaultSizes = {
-        select: 40,
-        invoice: 150,
-        signed: 60,
-        state: 100,
-        supplier: 220,
-        customer: 220,
-        total: 140,
-        createdAt: 140,
-        actions: 50
-      }
-
-      const totalDefaultSize = Object.values(defaultSizes).reduce((sum, size) => sum + size, 0)
-
-      // If container is wider than default, scale columns proportionally
-      if (containerWidth > totalDefaultSize) {
-        const scale = containerWidth / totalDefaultSize
-        const newSizing: ColumnSizingState = {}
-        Object.entries(defaultSizes).forEach(([key, value]) => {
-          newSizing[key] = Math.floor(value * scale)
-        })
+      const newSizing = calculateColumnSizing(columns, containerWidth)
+      if (newSizing) {
         columnSizing = newSizing
       }
     }
   })
 
-  const columns: ColumnDef<Task>[] = [
-    {
-      id: 'select',
-      header: ({ table }) =>
-        renderComponent(InputCheckbox, {
-          checked: table.getIsAllPageRowsSelected(),
-          onchange: (value: boolean) => table.toggleAllPageRowsSelected(value),
-          indeterminate: table.getIsSomePageRowsSelected() && !table.getIsAllPageRowsSelected(),
-          'aria-label': 'Select all'
-        }),
-      cell: ({ row }) =>
-        renderComponent(InputCheckbox, {
-          checked: row.getIsSelected(),
-          onchange: (value: boolean) => row.toggleSelected(value),
-          'aria-label': 'Select row'
-        }),
-      enableSorting: false,
-      enableHiding: false,
-      enableResizing: false,
-      size: 40,
-      minSize: 40,
-      maxSize: 40,
-      meta: { label: 'Select' }
-    },
-    {
-      accessorKey: 'invoice',
-      header: ({ column }) => {
-        return renderSnippet(ColumnHeader, {
-          column,
-          title: 'Invoice'
-        })
-      },
-      cell: ({ row }) => {
-        const invoiceSnippet = createRawSnippet<[{ invoice: string }]>((getInvoice) => {
-          const { invoice } = getInvoice()
-          return {
-            render: () => `<div class="truncate font-medium">${invoice}</div>`
-          }
-        })
-
-        return renderSnippet(invoiceSnippet, {
-          invoice: row.original.invoice
-        })
-      },
-      enableSorting: false,
-      enableHiding: false,
-      size: 150,
-      minSize: 120,
-      meta: { label: 'Invoice' }
-    },
-    {
-      accessorKey: 'signed',
-      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: '' }),
-      cell: ({ row }) => {
-        return renderSnippet(SignedCell, {
-          value: row.original.signed
-        })
-      },
-      enableSorting: false,
-      enableResizing: false,
-      size: 60,
-      minSize: 60,
-      maxSize: 60,
-      meta: { label: 'Signed' }
-    },
-    {
-      accessorKey: 'state',
-      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'State' }),
-      cell: ({ row }) => {
-        return renderSnippet(StateCell, {
-          value: row.original.state
-        })
-      },
-      filterFn: (row, id, value) => {
-        return value.includes(row.getValue(id))
-      },
-      size: 100,
-      minSize: 80,
-      meta: { label: 'State' }
-    },
-    {
-      accessorKey: 'supplier',
-      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Supplier' }),
-      cell: ({ row }) => {
-        const supplierSnippet = createRawSnippet<[{ supplier: string }]>((getSupplier) => {
-          const { supplier } = getSupplier()
-          return {
-            render: () => `<div class="truncate">${supplier}</div>`
-          }
-        })
-
-        return renderSnippet(supplierSnippet, {
-          supplier: row.original.supplier
-        })
-      },
-      size: 220,
-      minSize: 150,
-      meta: { label: 'Supplier' }
-    },
-    {
-      accessorKey: 'customer',
-      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Customer' }),
-      cell: ({ row }) => {
-        const customerSnippet = createRawSnippet<[{ customer: string }]>((getCustomer) => {
-          const { customer } = getCustomer()
-          return {
-            render: () => `<div class="truncate">${customer}</div>`
-          }
-        })
-
-        return renderSnippet(customerSnippet, {
-          customer: row.original.customer
-        })
-      },
-      size: 220,
-      minSize: 150,
-      meta: { label: 'Customer' }
-    },
-    {
-      accessorKey: 'total',
-      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Total' }),
-      cell: ({ row }) => {
-        return renderSnippet(TotalCell, {
-          value: row.original.total
-        })
-      },
-      size: 140,
-      minSize: 120,
-      meta: { label: 'Total' }
-    },
-    {
-      accessorKey: 'createdAt',
-      header: ({ column }) => renderSnippet(ColumnHeader, { column, title: 'Created at' }),
-      cell: ({ row }) => {
-        return renderSnippet(DateCell, {
-          value: row.original.createdAt
-        })
-      },
-      size: 140,
-      minSize: 120,
-      meta: { label: 'Created at' }
-    },
-    {
-      id: 'actions',
-      cell: ({ row }) => renderSnippet(RowActions, { row }),
-      enableResizing: false,
-      size: 44,
-      minSize: 44,
-      maxSize: 44,
-      meta: { label: 'Actions' }
+  // Track selection changes
+  $effect(() => {
+    if (onSelectionChange) {
+      const selectedRows = Object.keys(rowSelection)
+        .filter((key) => rowSelection[key])
+        .map((key) => data[parseInt(key)])
+      onSelectionChange(selectedRows)
     }
-  ]
+  })
 
-  const table = createSvelteTable({
+  const table = setupTable({
     get data() {
       return data
     },
-    state: {
-      get sorting() {
-        return sorting
-      },
-      get columnVisibility() {
-        return columnVisibility
-      },
-      get rowSelection() {
-        return rowSelection
-      },
-      get columnFilters() {
-        return columnFilters
-      },
-      get pagination() {
-        return pagination
-      },
-      get columnSizing() {
-        return columnSizing
-      },
-      get columnSizingInfo() {
-        return columnSizingInfo
-      },
-      get columnOrder() {
-        return columnOrder
-      }
+    get columns() {
+      return columns
     },
-    columns,
-    enableRowSelection: true,
-    enableColumnResizing: true,
-    columnResizeMode: 'onChange',
-    columnResizeDirection: 'ltr',
-    onRowSelectionChange: (updater) => {
-      if (typeof updater === 'function') {
-        rowSelection = updater(rowSelection)
-      } else {
-        rowSelection = updater
-      }
-    },
-    onSortingChange: (updater) => {
-      if (typeof updater === 'function') {
-        sorting = updater(sorting)
-      } else {
-        sorting = updater
-      }
-    },
-    onColumnFiltersChange: (updater) => {
-      if (typeof updater === 'function') {
-        columnFilters = updater(columnFilters)
-      } else {
-        columnFilters = updater
-      }
-    },
-    onColumnVisibilityChange: (updater) => {
-      if (typeof updater === 'function') {
-        columnVisibility = updater(columnVisibility)
-      } else {
-        columnVisibility = updater
-      }
-    },
-    onPaginationChange: (updater) => {
-      if (typeof updater === 'function') {
-        pagination = updater(pagination)
-      } else {
-        pagination = updater
-      }
-    },
-    onColumnSizingChange: (updater) => {
-      if (typeof updater === 'function') {
-        columnSizing = updater(columnSizing)
-      } else {
-        columnSizing = updater
-      }
-    },
-    onColumnSizingInfoChange: (updater) => {
-      if (typeof updater === 'function') {
-        columnSizingInfo = updater(columnSizingInfo)
-      } else {
-        columnSizingInfo = updater
-      }
-    },
-    onColumnOrderChange: (updater) => {
-      if (typeof updater === 'function') {
-        columnOrder = updater(columnOrder)
-      } else {
-        columnOrder = updater
-      }
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues()
+    enableSelection,
+    enablePagination,
+    getRowSelection: () => rowSelection,
+    getColumnVisibility: () => columnVisibility,
+    getSorting: () => sorting,
+    getPagination: () => pagination,
+    getColumnSizing: () => columnSizing,
+    getColumnSizingInfo: () => columnSizingInfo,
+    getColumnOrder: () => columnOrder,
+    setRowSelection: (value) => (rowSelection = value),
+    setColumnVisibility: (value) => (columnVisibility = value),
+    setSorting: (value) => (sorting = value),
+    setPagination: (value) => (pagination = value),
+    setColumnSizing: (value) => (columnSizing = value),
+    setColumnSizingInfo: (value) => (columnSizingInfo = value),
+    setColumnOrder: (value) => (columnOrder = value)
   })
 </script>
 
@@ -380,39 +135,13 @@
   </div>
 {/snippet}
 
-{#snippet SignedCell({ value }: { value: boolean })}
-  {#if value}
-    <div class="flex justify-center">
-      <Icon src={Sign} class="size-4 text-text-secondary-default" />
-    </div>
-  {/if}
-{/snippet}
-
-{#snippet StateCell({ value }: { value: string })}
-  {@const state = states.find((state) => state.value === value)}
-  {#if state}
-    <TagStatus label={state.label} status={state.color} dot />
-  {/if}
-{/snippet}
-
-{#snippet TotalCell({ value }: { value: string })}
-  <span class="font-mono text-base text-foreground">
-    {value}
-  </span>
-{/snippet}
-
-{#snippet DateCell({ value }: { value: string })}
-  <span class="font-mono text-base text-foreground">
-    {value}
-  </span>
-{/snippet}
-
-{#snippet RowActions({ row }: { row: Row<Task> })}
-  {@const task = taskSchema.parse(row.original)}
+{#snippet RowActions({ row }: { row: Row<TData> })}
   <BaseTableActions
     actions={rowActions}
     onclick={(action) => {
-      console.log('Action clicked:', action, 'for task:', task)
+      if (onRowAction) {
+        onRowAction(action, row.original)
+      }
     }}
   />
 {/snippet}
@@ -422,10 +151,10 @@
   title,
   class: className,
   ...restProps
-}: { column: Column<Task>; title: string } & HTMLAttributes<HTMLDivElement>)}
+}: { column: Column<TData>; title?: string } & HTMLAttributes<HTMLDivElement>)}
   {#if !column?.getCanSort()}
     <div class={className} {...restProps}>
-      {title}
+      {title || ''}
     </div>
   {:else}
     <div class={cn('flex items-center w-full', className)} {...restProps}>
@@ -435,7 +164,7 @@
             class="data-[state=open]:bg-accent w-full flex items-center gap-1 py-2.5 text-left"
           >
             <span>
-              {title}
+              {title || ''}
             </span>
             {#if column.getIsSorted() === 'desc'}
               <Icon src={ArrowDown} class="size-4" />
@@ -456,7 +185,7 @@
 {/snippet}
 
 <div class="flex flex-col gap-4">
-  <DataTableToolbar {table} />
+  <DataTableToolbar {table} {filters} />
   <div class="flex flex-col gap-[5px]">
     <div bind:this={containerRef} class="relative bg-background">
       <div class="overflow-x-auto relative z-10">
@@ -468,29 +197,21 @@
                   {@const isLastScrollable = index === headerGroup.headers.length - 2}
                   <Table.Head
                     colspan={header.colSpan}
-                    style={header.id === 'actions'
-                      ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`
-                      : header.id === 'select'
-                        ? `width: ${header.getSize()}px; min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`
-                        : isLastScrollable
-                          ? `min-width: ${header.getSize()}px;`
-                          : `min-width: ${header.getSize()}px; max-width: ${header.getSize()}px;`}
-                    class={cn(
-                      'relative whitespace-nowrap overflow-hidden',
-                      header.id === 'actions' ? 'sticky right-0 text-right bg-white' : '',
-                      header.id === 'select' ? 'sticky left-0 bg-white z-10' : '',
-                      isLastScrollable ? 'w-full' : '',
-                      header.column.getIsResizing()
-                        ? 'border-r-2 border-r-border-default-secondary'
-                        : '',
-                      !header.column.getCanSort() ? 'hover:!bg-transparent' : ''
-                    )}
+                    style={getHeaderStyle(header, isLastScrollable)}
+                    class={getHeaderClasses(header, isLastScrollable)}
                   >
                     {#if !header.isPlaceholder}
-                      <FlexRender
-                        content={header.column.columnDef.header}
-                        context={header.getContext()}
-                      />
+                      {#if typeof header.column.columnDef.header === 'string'}
+                        {@render ColumnHeader({
+                          column: header.column as Column<TData>,
+                          title: header.column.columnDef.header as string
+                        })}
+                      {:else}
+                        <FlexRender
+                          content={header.column.columnDef.header}
+                          context={header.getContext()}
+                        />
+                      {/if}
                     {/if}
                     {#if header.column.getCanResize()}
                       <div
@@ -517,30 +238,17 @@
             {/each}
           </Table.Header>
           <Table.Body>
-            {#each table.getRowModel().rows as row, rowIndex (row.id)}
+            {#each table.getRowModel().rows as row (row.id)}
               <Table.Row
                 data-state={row.getIsSelected() ? 'selected' : undefined}
                 class="border-b border-border"
+                onclick={() => onRowClick?.(row.original as TData)}
               >
                 {#each row.getVisibleCells() as cell, index (cell.id)}
                   {@const isLastScrollable = index === row.getVisibleCells().length - 2}
                   <Table.Cell
-                    style={cell.column.id === 'actions'
-                      ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
-                      : cell.column.id === 'select'
-                        ? `width: ${cell.column.getSize()}px; min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`
-                        : isLastScrollable
-                          ? `min-width: ${cell.column.getSize()}px;`
-                          : `min-width: ${cell.column.getSize()}px; max-width: ${cell.column.getSize()}px;`}
-                    class={cn(
-                      'whitespace-nowrap overflow-hidden',
-                      cell.column.id === 'actions' ? 'sticky right-0 text-right !p-0' : '',
-                      cell.column.id === 'select' ? 'sticky left-0 !p-0 z-10' : '',
-                      isLastScrollable ? 'w-full' : '',
-                      cell.column.getIsResizing()
-                        ? 'border-r-2 border-r-border-default-secondary'
-                        : ''
-                    )}
+                    style={getCellStyle(cell, isLastScrollable)}
+                    class={getCellClasses(cell, isLastScrollable)}
                   >
                     {#if cell.column.id === 'actions'}
                       {@render StickyCellWrapper({
@@ -577,9 +285,9 @@
               <Table.Row>
                 <Table.Cell colspan={columns.length} class="h-48">
                   <EmptyState
-                    iconSource={Search}
-                    title="No results"
-                    description="Try adjusting your filters or search query"
+                    iconSource={emptyState.iconSource}
+                    title={emptyState.title}
+                    description={emptyState.description}
                   />
                 </Table.Cell>
               </Table.Row>
@@ -588,6 +296,8 @@
         </Table.Root>
       </div>
     </div>
-    <DataTablePagination {table} />
+    {#if enablePagination}
+      <DataTablePagination {table} />
+    {/if}
   </div>
 </div>

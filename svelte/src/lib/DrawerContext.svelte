@@ -46,7 +46,7 @@
   })
 
   let openGroups = $state<Record<string, boolean>>({})
-  let ungroupedContainer: HTMLElement | null = null
+  let ungroupedContainer: HTMLElement | null = $state(null)
   let groupContainers: Record<string, HTMLElement | null> = {}
 
   $effect(() => {
@@ -158,12 +158,7 @@
     <DrawerContextSeparator />
   {:else}
     <div class:px-1={!item.groupBy} class:draggable-item={draggable} class:cursor-grab={draggable}>
-      <DrawerContextItem
-        {item}
-        {multiple}
-        {onclick}
-        onchange={updateItem}
-      />
+      <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
     </div>
   {/if}
 {/snippet}

@@ -6,6 +6,7 @@
   import DrawerContext from '$lib/DrawerContext.svelte'
   import InputToggle from '$lib/InputToggle.svelte'
   import BaseButton from '$lib/BaseButton.svelte'
+  import { capitalize } from '$lib/helpers.js'
 
   let { table }: { table: Table<TData> } = $props()
 
@@ -27,15 +28,15 @@
     }
 
     const newItems = orderedColumns.map((col) => ({
-      label: (col.columnDef.meta as any)?.label || col.id.charAt(0).toUpperCase() + col.id.slice(1),
-      value: col.id,
+      label: (col?.columnDef.header as string) || capitalize(col?.id || ''),
+      value: col?.id,
       icon: Drag,
       action: toggleAction
     })) as DrawerOption[]
 
     // Only update if the order has actually changed (avoid overwriting during drag)
-    const currentOrder = itemsWithActions.map(i => i.value).join(',')
-    const newOrder = newItems.map(i => i.value).join(',')
+    const currentOrder = itemsWithActions.map((i) => i.value).join(',')
+    const newOrder = newItems.map((i) => i.value).join(',')
 
     if (currentOrder !== newOrder) {
       itemsWithActions = newItems

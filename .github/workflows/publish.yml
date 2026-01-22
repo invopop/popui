@@ -1,3 +1,5 @@
+name: Release
+
 on:
   push:
     branches: main
@@ -5,16 +7,24 @@ on:
       - 'svelte/**'
       - '.github/workflows/publish.yml'
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 22.x
+          registry-url: 'https://registry.npmjs.org'
 
-      # Install dependencies and build svelte package
+      # Ensure npm 11.5.1 or later is installed
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - run: npm ci
         working-directory: svelte
 
@@ -22,8 +32,8 @@ jobs:
         working-directory: svelte
 
       # Publish to npm
-      - uses: JS-DevTools/npm-publish@v3
-        with:
-          package: ./svelte/package.json
-          token: ${{ secrets.NPM_TOKEN }}
-          ignore-scripts: false
+      - name: Publish to NPM registry
+        working-directory: svelte
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

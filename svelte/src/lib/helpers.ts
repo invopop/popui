@@ -17,6 +17,10 @@ export function toPascalCase(text: string) {
   return text.replace(/(^\w|-\w)/g, (text) => text.replace(/-/, '').toUpperCase())
 }
 
+export function capitalize(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
 export async function resolveIcon(
   icon: IconSource | string | undefined = undefined
 ): Promise<IconSource | undefined> {

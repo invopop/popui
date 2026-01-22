@@ -34,4 +34,4 @@ jobs:
       # Publish to npm
       - name: Publish to NPM registry
         working-directory: svelte
-        run: npm publish
+        run: npm publish --tag beta

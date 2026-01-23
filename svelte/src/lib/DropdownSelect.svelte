@@ -7,6 +7,7 @@
   import clsx from 'clsx'
   import TagStatus from './TagStatus.svelte'
   import { resolveIcon } from './helpers.js'
+  import { buttonVariants } from './button/button.svelte'
 
   let {
     value = $bindable(''),
@@ -17,7 +18,10 @@
     multiple = false,
     fullWidth = false,
     widthClass = 'min-w-[160px] max-w-[420px]',
-    onSelect
+    onSelect,
+    stackLeft = false,
+    stackRight = false,
+    multipleLabel = 'items'
   }: DropdownSelectProps = $props()
 
   let selectDropdown: BaseDropdown | undefined = $state()
@@ -39,20 +43,34 @@
 
   let selectedItems = $derived(items.filter((i) => i.selected))
   let selectedColor = $derived(!multiple && items.find((i) => i.selected)?.color)
+  let selectedColors = $derived(
+    multiple ? selectedItems.filter((i) => i.color).map((i) => i.color) : []
+  )
+  let hasMultipleColors = $derived(multiple && selectedColors.length > 0)
   let selectedIcon = $derived(!multiple && items.find((i) => i.selected)?.icon)
   let selectedIconColor = $derived(
     (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-foreground-default-secondary'
   )
   let selectedLabel = $derived(
-    `${selectedItems[0]?.label || ''}${selectedItems.length > 1 && multiple ? ' and more' : ''}` ||
-      placeholder
+    hasMultipleColors && selectedItems.length > 1
+      ? `${selectedItems.length} ${multipleLabel}`
+      : `${selectedItems[0]?.label || ''}${selectedItems.length > 1 && multiple ? ' and more' : ''}` ||
+          placeholder
   )
 
+  let isStacked = $derived(stackLeft || stackRight)
+
   let styles = $derived(
-    clsx('border backdrop-blur-sm backdrop-filter', {
-      'border-border-selected-bold shadow-active': isOpen,
-      'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen
-    })
+    isStacked
+      ? buttonVariants({
+          variant: 'ghost',
+          stackedLeft: stackLeft,
+          stackedRight: stackRight
+        })
+      : clsx('border backdrop-blur-sm backdrop-filter dropdown-select', {
+          'border-border-selected-bold shadow-active': isOpen,
+          'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen
+        })
   )
 
   function handleClick(val: AnyProp) {
@@ -94,9 +112,22 @@
 >
   {#snippet trigger()}
     <div
-      class="{styles} dropdown-select flex items-center rounded-lg py-1.5 pl-2 pr-[28px] bg-background overflow-hidden w-full h-8"
+      class="{styles} flex items-center rounded-lg py-1.5 pl-2 bg-background overflow-hidden w-full h-7"
+      class:pr-[28px]={!isStacked}
+      class:pr-2={isStacked}
     >
-      {#if selectedColor}
+      {#if hasMultipleColors}
+        <div class="flex items-center gap-1 flex-1 min-w-0">
+          <div class="flex items-center -space-x-0.5">
+            {#each selectedColors.slice(0, 3) as color}
+              <span class="border-l border-background rounded-xs flex first:border-l-0">
+                <TagStatus dot status={color} />
+              </span>
+            {/each}
+          </div>
+          {@render label()}
+        </div>
+      {:else if selectedColor}
         <div class="flex items-center gap-1 flex-1 min-w-0">
           <TagStatus dot status={selectedColor} />
           {@render label()}

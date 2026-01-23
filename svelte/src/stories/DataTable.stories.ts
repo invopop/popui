@@ -99,7 +99,6 @@ const columns: DataTableColumn<Invoice>[] = [
 		accessorKey: 'invoice',
 		header: 'Invoice',
 		cellType: 'text',
-		cellConfig: { className: 'font-medium' },
 		enableSorting: false,
 		enableHiding: false,
 		size: 150,
@@ -235,7 +234,6 @@ export const FixedWidthColumns: Story = {
 				accessorKey: 'invoice',
 				header: 'Invoice',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				enableSorting: false,
 				enableHiding: false,
 				enableResizing: false,
@@ -290,7 +288,6 @@ export const WideColumns: Story = {
 				accessorKey: 'invoice',
 				header: 'Invoice',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				size: 300,
 				minSize: 150
 			},

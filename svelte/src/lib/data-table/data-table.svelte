@@ -218,6 +218,14 @@
                       {/if}
                     {/if}
                     {#if header.column.getCanResize()}
+                      <!-- Always visible vertical border -->
+                      <div
+                        class={cn(
+                          'absolute right-0 top-1/2 -translate-y-1/2 h-3 w-px bg-background-default-tertiary',
+                          header.column.getIsResizing() && 'opacity-0'
+                        )}
+                      ></div>
+                      <!-- Resize handler (larger interactive area, enhanced on hover) -->
                       <div
                         role="button"
                         tabindex="0"
@@ -228,10 +236,8 @@
                       >
                         <div
                           class={cn(
-                            'absolute right-1.5 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity',
-                            header.column.getIsResizing()
-                              ? 'opacity-0'
-                              : 'opacity-0 group-hover:opacity-100'
+                            'absolute right-1.5 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity opacity-0',
+                            !header.column.getIsResizing() && 'group-hover:opacity-100'
                           )}
                         ></div>
                       </div>
@@ -250,9 +256,14 @@
               >
                 {#each row.getVisibleCells() as cell, index (cell.id)}
                   {@const isLastScrollable = index === row.getVisibleCells().length - 2}
+                  {@const visibleCells = row.getVisibleCells()}
+                  {@const firstDataColumnIndex = visibleCells.findIndex(
+                    (c) => c.column.id !== 'select' && c.column.id !== 'actions'
+                  )}
+                  {@const isFirstDataColumn = index === firstDataColumnIndex}
                   <Table.Cell
                     style={getCellStyle(cell, isLastScrollable)}
-                    class={getCellClasses(cell, isLastScrollable)}
+                    class={getCellClasses(cell, isLastScrollable, isFirstDataColumn)}
                   >
                     {#if cell.column.id === 'actions'}
                       {@render StickyCellWrapper({

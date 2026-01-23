@@ -20,6 +20,7 @@ import DrawerContext from './DrawerContext.svelte'
 import DrawerContextItem from './DrawerContextItem.svelte'
 import DrawerContextSeparator from './DrawerContextSeparator.svelte'
 import DropdownSelect from './DropdownSelect.svelte'
+import DropdownSelectGroup from './DropdownSelectGroup.svelte'
 import EmptyState from './EmptyState.svelte'
 import FeedEvents from './FeedEvents.svelte'
 import FeedIconEvent from './FeedIconEvent.svelte'
@@ -102,6 +103,7 @@ export {
   DrawerContextItem,
   DrawerContextSeparator,
   DropdownSelect,
+  DropdownSelectGroup,
   EmptyState,
   FeedEvents,
   FeedIconEvent,

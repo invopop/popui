@@ -42,7 +42,11 @@
     },
     onRowClick,
     onSelectionChange,
-    filters
+    filters,
+    paginationSelectedSlot,
+    paginationUnselectedSlot,
+    onPageChange,
+    onPageSizeChange
   }: DataTableProps<TData> = $props()
 
   const enableSelection = !disableSelection
@@ -297,7 +301,13 @@
       </div>
     </div>
     {#if enablePagination}
-      <DataTablePagination {table} />
+      <DataTablePagination
+        {table}
+        selectedSlot={paginationSelectedSlot}
+        unselectedSlot={paginationUnselectedSlot}
+        {onPageChange}
+        {onPageSizeChange}
+      />
     {/if}
   </div>
 </div>

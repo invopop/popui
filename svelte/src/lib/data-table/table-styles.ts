@@ -25,8 +25,8 @@ export function getHeaderClasses<TData>(header: Header<TData, unknown>, isLastSc
   return clsx(
     'relative whitespace-nowrap overflow-hidden',
     {
-      'sticky right-0 text-right bg-white': header.id === 'actions',
-      'sticky left-0 bg-white z-10': header.id === 'select',
+      'sticky right-0 text-right bg-background': header.id === 'actions',
+      'sticky left-0 bg-background z-10': header.id === 'select',
       'w-full': isLastScrollable,
       'hover:!bg-transparent': !header.column.getCanSort()
     }

@@ -68,6 +68,10 @@ export interface DataTableProps<TData> {
   onRowClick?: (row: TData) => void
   onSelectionChange?: (selectedRows: TData[]) => void
   filters?: Snippet
+  paginationSelectedSlot?: Snippet
+  paginationUnselectedSlot?: Snippet
+  onPageChange?: (pageIndex: number) => void
+  onPageSizeChange?: (pageSize: number) => void
 }
 
 export interface DataTablePaginationProps<T> {
@@ -78,4 +82,8 @@ export interface DataTablePaginationProps<T> {
   rowsPerPageOptions?: number[]
   itemsLabel?: string
   children?: Snippet
+  selectedSlot?: Snippet
+  unselectedSlot?: Snippet
+  onPageChange?: (pageIndex: number) => void
+  onPageSizeChange?: (pageSize: number) => void
 }

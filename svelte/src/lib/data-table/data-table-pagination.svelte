@@ -12,13 +12,18 @@
     showRowsPerPage = true,
     rowsPerPageOptions = [10, 25, 50, 100],
     itemsLabel = 'items',
-    children
+    children,
+    selectedSlot,
+    unselectedSlot,
+    onPageChange,
+    onPageSizeChange
   }: DataTablePaginationProps<any> = $props()
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
   let totalPages = $derived(table.getPageCount())
   let totalItems = $derived(table.getFilteredRowModel().rows.length)
   let rowsPerPage = $derived(table.getState().pagination.pageSize)
+  let hasSelection = $derived(Object.keys(table.getState().rowSelection).length > 0)
 
   let pageInputValue = $derived(`${currentPage}`)
 
@@ -27,6 +32,7 @@
     const value = parseInt(target.value)
     if (value >= 1 && value <= totalPages) {
       table.setPageIndex(value - 1)
+      onPageChange?.(value)
     } else if (target.value === '') {
       // Allow empty input temporarily
       pageInputValue = ''
@@ -40,6 +46,7 @@
       pageInputValue = `${currentPage}`
     } else if (value > totalPages) {
       table.setPageIndex(totalPages - 1)
+      onPageChange?.(totalPages)
     }
   }
 
@@ -63,7 +70,10 @@
             variant="ghost"
             size="md"
             icon={ScrollLeft}
-            onclick={() => table.setPageIndex(0)}
+            onclick={() => {
+              table.setPageIndex(0)
+              onPageChange?.(1)
+            }}
             disabled={currentPage === 1}
             class={cn(currentPage === 1 && 'pointer-events-none opacity-30')}
             aria-label="First page"
@@ -72,7 +82,11 @@
             variant="ghost"
             size="md"
             icon={ArrowLeft}
-            onclick={() => table.previousPage()}
+            onclick={() => {
+              const newPage = currentPage - 1
+              table.previousPage()
+              onPageChange?.(newPage)
+            }}
             disabled={currentPage === 1}
             class={cn(currentPage === 1 && 'pointer-events-none opacity-30')}
             aria-label="Previous page"
@@ -97,7 +111,11 @@
             variant="ghost"
             size="md"
             icon={ArrowRight}
-            onclick={() => table.nextPage()}
+            onclick={() => {
+              const newPage = currentPage + 1
+              table.nextPage()
+              onPageChange?.(newPage)
+            }}
             disabled={currentPage === totalPages}
             class={cn(currentPage === totalPages && 'pointer-events-none opacity-30')}
             aria-label="Next page"
@@ -106,7 +124,10 @@
             variant="ghost"
             size="md"
             icon={ScrollRight}
-            onclick={() => table.setPageIndex(totalPages - 1)}
+            onclick={() => {
+              table.setPageIndex(totalPages - 1)
+              onPageChange?.(totalPages)
+            }}
             disabled={currentPage === totalPages}
             class={cn(currentPage === totalPages && 'pointer-events-none opacity-30')}
             aria-label="Last page"
@@ -122,7 +143,9 @@
               label: `${size} rows`
             }))}
             onchange={(value) => {
-              table.setPageSize(Number(value))
+              const size = Number(value)
+              table.setPageSize(size)
+              onPageSizeChange?.(size)
             }}
             placeholder="Rows per page"
             disablePlaceholder={true}
@@ -138,7 +161,13 @@
       </span>
     {/if}
   </div>
-  {#if children}
-    {@render children()}
-  {/if}
+  <div class="flex items-center gap-2">
+    {#if hasSelection && selectedSlot}
+      {@render selectedSlot()}
+    {:else if !hasSelection && unselectedSlot}
+      {@render unselectedSlot()}
+    {:else if children}
+      {@render children()}
+    {/if}
+  </div>
 </div>

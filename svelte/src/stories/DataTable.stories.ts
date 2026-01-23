@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 import DataTable from '../lib/data-table/data-table.svelte'
+import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
 import { Sign } from '@invopop/ui-icons'
@@ -319,5 +320,20 @@ export const WideColumns: Story = {
 			}
 		],
 		rowActions
+	}
+}
+
+export const WithPaginationSlots: Story = {
+	render: (args) => ({
+		Component: DataTableWithPaginationSlots,
+		props: args
+	}),
+	args: {
+		data: generateInvoices(100),
+		columns,
+		rowActions,
+		onSelectionChange: (selectedRows) => {
+			console.log('Selected rows:', selectedRows)
+		}
 	}
 }

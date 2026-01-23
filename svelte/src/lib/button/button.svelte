@@ -131,37 +131,15 @@
         iconOnly: true,
         class: 'w-8'
       },
-      // stackedLeft removes left border radius
       {
         stackedLeft: true,
-        size: 'sm',
-        class: '!rounded-l-none'
-      },
-      {
-        stackedLeft: true,
-        size: 'md',
-        class: '!rounded-l-none'
-      },
-      {
-        stackedLeft: true,
-        size: 'lg',
-        class: '!rounded-l-none'
-      },
-      // stackedRight removes right border radius
-      {
-        stackedRight: true,
-        size: 'sm',
-        class: '!rounded-r-none'
+        class:
+          '!rounded-l-none hover:!bg-background-default-secondary active:!bg-background-default-secondary'
       },
       {
         stackedRight: true,
-        size: 'md',
-        class: '!rounded-r-none'
-      },
-      {
-        stackedRight: true,
-        size: 'lg',
-        class: '!rounded-r-none'
+        class:
+          '!rounded-r-none hover:!bg-background-default-secondary active:!bg-background-default-secondary'
       }
     ],
     defaultVariants: {

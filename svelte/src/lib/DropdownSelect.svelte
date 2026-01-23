@@ -108,7 +108,7 @@
   placement="bottom-start"
   {fullWidth}
   bind:this={selectDropdown}
-  class={fullWidth ? '' : widthClass}
+  class={fullWidth || isStacked ? '' : widthClass}
 >
   {#snippet trigger()}
     <div

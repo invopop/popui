@@ -14,6 +14,8 @@
     shortcut = false,
     fullwidth = false,
     notification = false,
+    stackedLeft = false,
+    stackedRight = false,
     children,
     onclick,
     class: className,
@@ -30,6 +32,8 @@
     iconClass,
     type,
     disabled,
+    stackedLeft,
+    stackedRight,
     onclick,
     class: `${fullWidthClass} ${className || ''}`,
     ...rest

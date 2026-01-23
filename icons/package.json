@@ -1,7 +1,7 @@
 {
   "name": "@invopop/ui-icons",
   "description": "Icon Sources (based on template) built for @steeze-ui/icons",
-  "version": "0.0.76",
+  "version": "0.0.77",
   "scripts": {
     "dev": "vite dev",
     "build": "npm run package && vite build",
@@ -45,8 +45,7 @@
     "vite": "^4.3.9"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/steeze-ui/icons.git"
+    "url": "https://github.com/invopop/popui"
   },
   "keywords": [
     "raw",

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import DropdownSelect from '../lib/DropdownSelect.svelte'
+import StackedDropdownSelects from './helpers/StackedDropdownSelects.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 import { Edit, Flag, Lock } from '@invopop/ui-icons'
@@ -10,7 +11,7 @@ const meta = {
   title: 'Components/DropdownSelect',
   component: DropdownSelect,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => MarginDecorator]
 } satisfies Meta<DropdownSelect>
 
 export default meta
@@ -107,4 +108,10 @@ export const WithLongText: Story = {
       { value: 2, label: 'Option Two', color: 'green' }
     ]
   }
+}
+
+export const Stacked: Story = {
+  render: () => ({
+    Component: StackedDropdownSelects
+  })
 }

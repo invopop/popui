@@ -25,8 +25,8 @@ export function getHeaderClasses<TData>(header: Header<TData, unknown>, isLastSc
   return clsx(
     'relative whitespace-nowrap overflow-hidden',
     {
-      'sticky right-0 text-right bg-white': header.id === 'actions',
-      'sticky left-0 bg-white z-10': header.id === 'select',
+      'sticky right-0 text-right bg-background': header.id === 'actions',
+      'sticky left-0 bg-background z-10': header.id === 'select',
       'w-full': isLastScrollable,
       'hover:!bg-transparent': !header.column.getCanSort()
     }
@@ -53,13 +53,14 @@ export function getCellStyle<TData>(cell: Cell<TData, unknown>, isLastScrollable
 /**
  * Calculate CSS classes for table cells
  */
-export function getCellClasses<TData>(cell: Cell<TData, unknown>, isLastScrollable: boolean): string {
+export function getCellClasses<TData>(cell: Cell<TData, unknown>, isLastScrollable: boolean, isFirstDataColumn: boolean = false): string {
   return clsx(
     'whitespace-nowrap overflow-hidden',
     {
       'sticky right-0 text-right !p-0': cell.column.id === 'actions',
       'sticky left-0 !p-0 z-10': cell.column.id === 'select',
-      'w-full': isLastScrollable
+      'w-full': isLastScrollable,
+      'font-medium': isFirstDataColumn
     }
   )
 }

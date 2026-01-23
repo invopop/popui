@@ -19,7 +19,7 @@
       'bg-background-status-void text-foreground-default-secondary': status === 'grey',
       'shadow-avatar text-foreground-default-secondary': status === 'empty',
       'px-1.5': dot,
-      'p-1!': dot && !label,
+      'p-0!': dot && !label,
       'px-1': !dot
     })
   )

@@ -36,6 +36,14 @@
       hasIcon: {
         true: '',
         false: ''
+      },
+      stackedLeft: {
+        true: '',
+        false: ''
+      },
+      stackedRight: {
+        true: '',
+        false: ''
       }
     },
     compoundVariants: [
@@ -122,13 +130,25 @@
         size: 'lg',
         iconOnly: true,
         class: 'w-8'
+      },
+      {
+        stackedLeft: true,
+        class:
+          '!rounded-l-none hover:!bg-background-default-secondary active:!bg-background-default-secondary'
+      },
+      {
+        stackedRight: true,
+        class:
+          '!rounded-r-none hover:!bg-background-default-secondary active:!bg-background-default-secondary'
       }
     ],
     defaultVariants: {
       variant: 'primary',
       size: 'md',
       iconOnly: false,
-      hasIcon: false
+      hasIcon: false,
+      stackedLeft: false,
+      stackedRight: false
     }
   })
 
@@ -141,6 +161,8 @@
       icon?: IconSource
       iconPosition?: 'left' | 'right'
       iconClass?: string
+      stackedLeft?: boolean
+      stackedRight?: boolean
     }
 </script>
 
@@ -154,6 +176,8 @@
     icon,
     iconPosition = 'left',
     iconClass = '',
+    stackedLeft = false,
+    stackedRight = false,
     ref = $bindable(null),
     href = undefined,
     type = 'button',
@@ -220,7 +244,7 @@
     bind:this={ref}
     data-slot="button"
     class={cn(
-      buttonVariants({ variant, size, iconOnly, hasIcon }),
+      buttonVariants({ variant, size, iconOnly, hasIcon, stackedLeft, stackedRight }),
       iconPosition === 'right' && 'flex-row-reverse',
       paddingClass,
       className
@@ -238,7 +262,7 @@
     bind:this={ref}
     data-slot="button"
     class={cn(
-      buttonVariants({ variant, size, iconOnly, hasIcon }),
+      buttonVariants({ variant, size, iconOnly, hasIcon, stackedLeft, stackedRight }),
       'group',
       iconPosition === 'right' && 'flex-row-reverse',
       paddingClass,

@@ -218,6 +218,8 @@ export interface AlertDialogProps {
     shortcut?: boolean;
     fullwidth?: boolean;
     notification?: boolean;
+    stackedLeft?: boolean;
+    stackedRight?: boolean;
     children?: Snippet;
     [key: string]: any
     onclick?: (event: MouseEvent) => void;
@@ -472,6 +474,9 @@ export interface BaseDropdownProps {
     fullWidth?: boolean;
     widthClass?: string;
     onSelect?: (value: AnyProp) => void;
+    stackLeft?: boolean;
+    stackRight?: boolean;
+    multipleLabel?: string;
   }
 
   export interface EmptyStateProps {

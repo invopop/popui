@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 import DataTable from '../lib/data-table/data-table.svelte'
+import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
 import { Sign } from '@invopop/ui-icons'
@@ -98,7 +99,6 @@ const columns: DataTableColumn<Invoice>[] = [
 		accessorKey: 'invoice',
 		header: 'Invoice',
 		cellType: 'text',
-		cellConfig: { className: 'font-medium' },
 		enableSorting: false,
 		enableHiding: false,
 		size: 150,
@@ -234,7 +234,6 @@ export const FixedWidthColumns: Story = {
 				accessorKey: 'invoice',
 				header: 'Invoice',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				enableSorting: false,
 				enableHiding: false,
 				enableResizing: false,
@@ -289,7 +288,6 @@ export const WideColumns: Story = {
 				accessorKey: 'invoice',
 				header: 'Invoice',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				size: 300,
 				minSize: 150
 			},
@@ -319,5 +317,20 @@ export const WideColumns: Story = {
 			}
 		],
 		rowActions
+	}
+}
+
+export const WithPaginationSlots: Story = {
+	render: (args) => ({
+		Component: DataTableWithPaginationSlots,
+		props: args
+	}),
+	args: {
+		data: generateInvoices(100),
+		columns,
+		rowActions,
+		onSelectionChange: (selectedRows) => {
+			console.log('Selected rows:', selectedRows)
+		}
 	}
 }

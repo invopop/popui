@@ -62,7 +62,6 @@ export const AllColumnsResizable: Story = {
 				accessorKey: 'name',
 				header: 'Product Name',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				size: 200,
 				minSize: 150
 			},
@@ -133,7 +132,6 @@ export const MixedResizableColumns: Story = {
 				accessorKey: 'name',
 				header: 'Product Name',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				enableResizing: true,
 				size: 250,
 				minSize: 150
@@ -201,7 +199,6 @@ export const ConstrainedResizing: Story = {
 				accessorKey: 'name',
 				header: 'Product Name',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				size: 200,
 				minSize: 150,
 				maxSize: 300
@@ -269,7 +266,6 @@ export const WideContentResizable: Story = {
 				accessorKey: 'name',
 				header: 'Product Name',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				size: 300,
 				minSize: 150
 			},
@@ -385,7 +381,6 @@ export const NoResizing: Story = {
 				accessorKey: 'name',
 				header: 'Product Name',
 				cellType: 'text',
-				cellConfig: { className: 'font-medium' },
 				size: 200
 			},
 			{

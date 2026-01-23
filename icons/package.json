@@ -45,8 +45,7 @@
     "vite": "^4.3.9"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/steeze-ui/icons.git"
+    "url": "https://github.com/invopop/popui"
   },
   "keywords": [
     "raw",

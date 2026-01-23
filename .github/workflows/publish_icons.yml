@@ -1,3 +1,5 @@
+name: Release
+
 on:
   push:
     branches: main
@@ -5,16 +7,24 @@ on:
       - 'icons/**'
       - '.github/workflows/publish_icons.yml'
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 22.x
+          registry-url: 'https://registry.npmjs.org'
 
-      # Install dependencies and build icons package
+      # Ensure npm 11.5.1 or later is installed
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - run: npm ci
         working-directory: icons
 
@@ -22,8 +32,6 @@ jobs:
         working-directory: icons
 
       # Publish to npm
-      - uses: JS-DevTools/npm-publish@v3
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./icons/package.json
-          ignore-scripts: false
+      - name: Publish to NPM registry
+        working-directory: icons
+        run: npm publish

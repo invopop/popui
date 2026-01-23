@@ -33,6 +33,7 @@
     disableSelection = false,
     disablePagination = false,
     rowActions = [],
+    getRowActions,
     onRowAction,
     initialPageSize = 10,
     emptyState = {
@@ -70,7 +71,7 @@
 
   // Build TanStack columns from config
   const columns = $derived.by(() =>
-    buildColumns<TData>(columnConfig, enableSelection, RowActions, rowActions.length > 0)
+    buildColumns<TData>(columnConfig, enableSelection, RowActions, getRowActions !== undefined || rowActions.length > 0)
   )
 
   // Calculate initial column sizes based on available width
@@ -129,8 +130,8 @@
 })}
   <div
     class={cn(
-      'h-10 flex items-center px-3 relative group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected',
-      align === 'right' ? 'justify-end' : ''
+      'h-10 flex items-center relative group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected',
+      align === 'right' ? 'justify-end pl-3 pr-6' : 'pl-6 pr-3'
     )}
   >
     <div class="relative z-10">
@@ -141,7 +142,7 @@
 
 {#snippet RowActions({ row }: { row: Row<TData> })}
   <BaseTableActions
-    actions={rowActions}
+    actions={getRowActions ? getRowActions(row.original) : rowActions}
     onclick={(action) => {
       if (onRowAction) {
         onRowAction(action, row.original)
@@ -188,128 +189,126 @@
   {/if}
 {/snippet}
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col h-screen">
   <DataTableToolbar {table} {filters} />
-  <div class="flex flex-col gap-[5px]">
-    <div bind:this={containerRef} class="relative bg-background">
-      <div class="overflow-x-auto relative z-10">
-        <Table.Root>
-          <Table.Header>
-            {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-              <Table.Row class="hover:!bg-transparent border-b border-border">
-                {#each headerGroup.headers as header, index (header.id)}
-                  {@const isLastScrollable = index === headerGroup.headers.length - 2}
-                  <Table.Head
-                    colspan={header.colSpan}
-                    style={getHeaderStyle(header, isLastScrollable)}
-                    class={getHeaderClasses(header, isLastScrollable)}
-                  >
-                    {#if !header.isPlaceholder}
-                      {#if typeof header.column.columnDef.header === 'string'}
-                        {@render ColumnHeader({
-                          column: header.column as Column<TData>,
-                          title: header.column.columnDef.header as string
-                        })}
-                      {:else}
-                        <FlexRender
-                          content={header.column.columnDef.header}
-                          context={header.getContext()}
-                        />
-                      {/if}
+  <div class="flex-1 overflow-hidden flex flex-col">
+    <div bind:this={containerRef} class="relative bg-background flex-1 overflow-auto">
+      <Table.Root>
+        <Table.Header>
+          {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
+            <Table.Row class="hover:!bg-transparent border-b border-border">
+              {#each headerGroup.headers as header, index (header.id)}
+                {@const isLastScrollable = index === headerGroup.headers.length - 2}
+                <Table.Head
+                  colspan={header.colSpan}
+                  style={getHeaderStyle(header, isLastScrollable)}
+                  class={getHeaderClasses(header, isLastScrollable)}
+                >
+                  {#if !header.isPlaceholder}
+                    {#if typeof header.column.columnDef.header === 'string'}
+                      {@render ColumnHeader({
+                        column: header.column as Column<TData>,
+                        title: header.column.columnDef.header as string
+                      })}
+                    {:else}
+                      <FlexRender
+                        content={header.column.columnDef.header}
+                        context={header.getContext()}
+                      />
                     {/if}
-                    {#if header.column.getCanResize()}
-                      <!-- Always visible vertical border -->
+                  {/if}
+                  {#if header.column.getCanResize()}
+                    <!-- Always visible vertical border -->
+                    <div
+                      class={cn(
+                        'absolute right-0 top-1/2 -translate-y-1/2 h-3 w-px bg-background-default-tertiary',
+                        header.column.getIsResizing() && 'opacity-0'
+                      )}
+                    ></div>
+                    <!-- Resize handler (larger interactive area, enhanced on hover) -->
+                    <div
+                      role="button"
+                      tabindex="0"
+                      aria-label="Resize column"
+                      class="absolute right-0 top-0 h-full w-3 cursor-col-resize select-none touch-none group -mr-1.5"
+                      onmousedown={header.getResizeHandler()}
+                      ontouchstart={header.getResizeHandler()}
+                    >
                       <div
                         class={cn(
-                          'absolute right-0 top-1/2 -translate-y-1/2 h-3 w-px bg-background-default-tertiary',
-                          header.column.getIsResizing() && 'opacity-0'
+                          'absolute right-1.5 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity opacity-0',
+                          !header.column.getIsResizing() && 'group-hover:opacity-100'
                         )}
                       ></div>
-                      <!-- Resize handler (larger interactive area, enhanced on hover) -->
-                      <div
-                        role="button"
-                        tabindex="0"
-                        aria-label="Resize column"
-                        class="absolute right-0 top-0 h-full w-3 cursor-col-resize select-none touch-none group -mr-1.5"
-                        onmousedown={header.getResizeHandler()}
-                        ontouchstart={header.getResizeHandler()}
-                      >
-                        <div
-                          class={cn(
-                            'absolute right-1.5 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity opacity-0',
-                            !header.column.getIsResizing() && 'group-hover:opacity-100'
-                          )}
-                        ></div>
-                      </div>
-                    {/if}
-                  </Table.Head>
-                {/each}
-              </Table.Row>
-            {/each}
-          </Table.Header>
-          <Table.Body>
-            {#each table.getRowModel().rows as row (row.id)}
-              <Table.Row
-                data-state={row.getIsSelected() ? 'selected' : undefined}
-                class="border-b border-border"
-                onclick={() => onRowClick?.(row.original as TData)}
-              >
-                {#each row.getVisibleCells() as cell, index (cell.id)}
-                  {@const isLastScrollable = index === row.getVisibleCells().length - 2}
-                  {@const visibleCells = row.getVisibleCells()}
-                  {@const firstDataColumnIndex = visibleCells.findIndex(
-                    (c) => c.column.id !== 'select' && c.column.id !== 'actions'
-                  )}
-                  {@const isFirstDataColumn = index === firstDataColumnIndex}
-                  <Table.Cell
-                    style={getCellStyle(cell, isLastScrollable)}
-                    class={getCellClasses(cell, isLastScrollable, isFirstDataColumn)}
-                  >
-                    {#if cell.column.id === 'actions'}
-                      {@render StickyCellWrapper({
-                        align: 'right',
-                        children: CellContent
-                      })}
-                      {#snippet CellContent()}
-                        <FlexRender
-                          content={cell.column.columnDef.cell}
-                          context={cell.getContext()}
-                        />
-                      {/snippet}
-                    {:else if cell.column.id === 'select'}
-                      {@render StickyCellWrapper({
-                        align: 'left',
-                        children: CellContent
-                      })}
-                      {#snippet CellContent()}
-                        <FlexRender
-                          content={cell.column.columnDef.cell}
-                          context={cell.getContext()}
-                        />
-                      {/snippet}
-                    {:else}
+                    </div>
+                  {/if}
+                </Table.Head>
+              {/each}
+            </Table.Row>
+          {/each}
+        </Table.Header>
+        <Table.Body>
+          {#each table.getRowModel().rows as row (row.id)}
+            <Table.Row
+              data-state={row.getIsSelected() ? 'selected' : undefined}
+              class="border-b border-border"
+              onclick={() => onRowClick?.(row.original as TData)}
+            >
+              {#each row.getVisibleCells() as cell, index (cell.id)}
+                {@const isLastScrollable = index === row.getVisibleCells().length - 2}
+                {@const visibleCells = row.getVisibleCells()}
+                {@const firstDataColumnIndex = visibleCells.findIndex(
+                  (c) => c.column.id !== 'select' && c.column.id !== 'actions'
+                )}
+                {@const isFirstDataColumn = index === firstDataColumnIndex}
+                <Table.Cell
+                  style={getCellStyle(cell, isLastScrollable)}
+                  class={getCellClasses(cell, isLastScrollable, isFirstDataColumn)}
+                >
+                  {#if cell.column.id === 'actions'}
+                    {@render StickyCellWrapper({
+                      align: 'right',
+                      children: CellContent
+                    })}
+                    {#snippet CellContent()}
                       <FlexRender
                         content={cell.column.columnDef.cell}
                         context={cell.getContext()}
                       />
-                    {/if}
-                  </Table.Cell>
-                {/each}
-              </Table.Row>
-            {:else}
-              <Table.Row>
-                <Table.Cell colspan={columns.length} class="h-48">
-                  <EmptyState
-                    iconSource={emptyState.iconSource}
-                    title={emptyState.title}
-                    description={emptyState.description}
-                  />
+                    {/snippet}
+                  {:else if cell.column.id === 'select'}
+                    {@render StickyCellWrapper({
+                      align: 'left',
+                      children: CellContent
+                    })}
+                    {#snippet CellContent()}
+                      <FlexRender
+                        content={cell.column.columnDef.cell}
+                        context={cell.getContext()}
+                      />
+                    {/snippet}
+                  {:else}
+                    <FlexRender
+                      content={cell.column.columnDef.cell}
+                      context={cell.getContext()}
+                    />
+                  {/if}
                 </Table.Cell>
-              </Table.Row>
-            {/each}
-          </Table.Body>
-        </Table.Root>
-      </div>
+              {/each}
+            </Table.Row>
+          {:else}
+            <Table.Row>
+              <Table.Cell colspan={columns.length} class="h-48">
+                <EmptyState
+                  iconSource={emptyState.iconSource}
+                  title={emptyState.title}
+                  description={emptyState.description}
+                />
+              </Table.Cell>
+            </Table.Row>
+          {/each}
+        </Table.Body>
+      </Table.Root>
     </div>
     {#if enablePagination}
       <DataTablePagination

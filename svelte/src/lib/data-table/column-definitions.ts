@@ -14,20 +14,22 @@ export function createSelectionColumn<TData>(): ColumnDef<TData> {
         checked: table.getIsAllPageRowsSelected(),
         onchange: (value: boolean) => table.toggleAllPageRowsSelected(value),
         indeterminate: table.getIsSomePageRowsSelected() && !table.getIsAllPageRowsSelected(),
-        'aria-label': 'Select all'
+        'aria-label': 'Select all',
+        onclick: (e: MouseEvent) => e.stopPropagation()
       }),
     cell: ({ row }: any) =>
       renderComponent(InputCheckbox, {
         checked: row.getIsSelected(),
         onchange: (value: boolean) => row.toggleSelected(value),
-        'aria-label': 'Select row'
+        'aria-label': 'Select row',
+        onclick: (e: MouseEvent) => e.stopPropagation()
       }),
     enableSorting: false,
     enableHiding: false,
     enableResizing: false,
-    size: 40,
-    minSize: 40,
-    maxSize: 40
+    size: 52,
+    minSize: 52,
+    maxSize: 52
   }
 }
 
@@ -41,8 +43,8 @@ export function createActionsColumn<TData>(
     id: 'actions',
     cell: ({ row }: any) => renderSnippet(rowActionsSnippet, { row }),
     enableResizing: false,
-    size: 44,
-    minSize: 44,
-    maxSize: 44
+    size: 56,
+    minSize: 56,
+    maxSize: 56
   }
 }

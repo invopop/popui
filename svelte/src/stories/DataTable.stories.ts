@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 import DataTable from '../lib/data-table/data-table.svelte'
 import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
-import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
 import { Sign } from '@invopop/ui-icons'
 import type { StatusType } from '$lib/types.js'
@@ -180,7 +179,9 @@ const meta = {
 	title: 'Components/DataTable',
 	component: DataTable as any,
 	tags: ['autodocs'],
-	decorators: [(story) => ({ Component: MarginDecorator, slot: story })]
+	parameters: {
+		layout: 'fullscreen'
+	}
 } satisfies Meta<typeof DataTable>
 
 export default meta
@@ -190,12 +191,33 @@ export const Default: Story = {
 	args: {
 		data: generateInvoices(50),
 		columns,
-		rowActions,
+		getRowActions: (row) => {
+			// Different actions based on invoice state
+			if (row.state === 'paid') {
+				return [
+					{ label: 'View Receipt', value: 'receipt' },
+					{ label: 'Download', value: 'download' }
+				]
+			}
+			if (row.state === 'error') {
+				return [
+					{ label: 'Retry', value: 'retry' },
+					{ label: 'Edit', value: 'edit' },
+					{ label: '', value: '', separator: true },
+					{ label: 'Delete', value: 'delete', destructive: true }
+				]
+			}
+			// Default actions for other states
+			return rowActions
+		},
 		onRowAction: (action, row) => {
 			console.log('Action:', action, 'Row:', row)
 		},
 		onSelectionChange: (selectedRows) => {
 			console.log('Selected rows:', selectedRows)
+		},
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
 		}
 	}
 }
@@ -204,7 +226,10 @@ export const Empty: Story = {
 	args: {
 		data: [],
 		columns,
-		rowActions
+		rowActions,
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
 	}
 }
 
@@ -213,7 +238,10 @@ export const WithoutSelection: Story = {
 		data: generateInvoices(20),
 		columns,
 		disableSelection: true,
-		rowActions
+		rowActions,
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
 	}
 }
 
@@ -221,7 +249,10 @@ export const WithoutActions: Story = {
 	args: {
 		data: generateInvoices(20),
 		columns,
-		rowActions: []
+		rowActions: [],
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
 	}
 }
 
@@ -275,7 +306,10 @@ export const FixedWidthColumns: Story = {
 			}
 		],
 		disableSelection: true,
-		rowActions: []
+		rowActions: [],
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
 	}
 }
 
@@ -316,7 +350,61 @@ export const WideColumns: Story = {
 				minSize: 120
 			}
 		],
-		rowActions
+		rowActions,
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
+	}
+}
+
+export const DynamicRowActions: Story = {
+	args: {
+		data: generateInvoices(30),
+		columns,
+		getRowActions: (row) => {
+			// Paid invoices - limited actions
+			if (row.state === 'paid') {
+				return [
+					{ label: 'View Receipt', value: 'receipt' },
+					{ label: 'Download PDF', value: 'download' },
+					{ label: 'Send Copy', value: 'send' }
+				]
+			}
+
+			// Error invoices - troubleshooting actions
+			if (row.state === 'error') {
+				return [
+					{ label: 'Retry', value: 'retry' },
+					{ label: 'View Error Log', value: 'log' },
+					{ label: 'Edit', value: 'edit' },
+					{ label: '', value: '', separator: true },
+					{ label: 'Delete', value: 'delete', destructive: true }
+				]
+			}
+
+			// Sent invoices - follow-up actions
+			if (row.state === 'sent') {
+				return [
+					{ label: 'Mark as Paid', value: 'mark-paid' },
+					{ label: 'Send Reminder', value: 'reminder' },
+					{ label: 'Edit', value: 'edit' }
+				]
+			}
+
+			// Empty/draft state - creation actions
+			return [
+				{ label: 'Complete Invoice', value: 'complete' },
+				{ label: 'Edit', value: 'edit' },
+				{ label: '', value: '', separator: true },
+				{ label: 'Delete Draft', value: 'delete', destructive: true }
+			]
+		},
+		onRowAction: (action, row) => {
+			console.log('Action:', action, 'Row:', row)
+		},
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
 	}
 }
 
@@ -331,6 +419,9 @@ export const WithPaginationSlots: Story = {
 		rowActions,
 		onSelectionChange: (selectedRows) => {
 			console.log('Selected rows:', selectedRows)
+		},
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
 		}
 	}
 }

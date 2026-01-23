@@ -61,6 +61,7 @@ export interface DataTableProps<TData> {
   disableSelection?: boolean
   disablePagination?: boolean
   rowActions?: TableAction[]
+  getRowActions?: (row: TData) => TableAction[]
   onRowAction?: (action: AnyProp, row: TData) => void
   initialPageSize?: number
   pageSizeOptions?: number[]

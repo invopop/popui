@@ -189,7 +189,7 @@
   {/if}
 {/snippet}
 
-<div class="flex flex-col h-screen">
+<div class="flex flex-col h-full">
   <DataTableToolbar {table} {filters} />
   <div class="flex-1 overflow-hidden flex flex-col">
     <div bind:this={containerRef} class="relative bg-background flex-1 overflow-auto">

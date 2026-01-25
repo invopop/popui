@@ -90,6 +90,7 @@
     if (isEqual(value, val)) return
 
     value = val
+    onSelect?.(value)
   }
 </script>
 

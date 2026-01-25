@@ -441,6 +441,8 @@ export interface BaseDropdownProps {
     from?: string;
     to?: string;
     onSelect?: (date: {from: string, to: string}) => void;
+    stackLeft?: boolean;
+    stackRight?: boolean;
   }
 
   export interface DrawerContextProps {

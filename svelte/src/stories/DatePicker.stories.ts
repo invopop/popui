@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import DatePicker from '../lib/DatePicker.svelte'
+import StackedDatePickers from './helpers/StackedDatePickers.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import ItemPushedToLeftDecorator from './decorartors/ItemPushedToLeftDecorator.svelte'
 import ItemPushedToRightDecorator from './decorartors/ItemPushedToRightDecorator.svelte'
@@ -50,4 +51,10 @@ export const WithSelectedEmptyDates: Story = {
     label: 'Pick a Date',
     position: 'right'
   }
+}
+
+export const Stacked: Story = {
+  render: () => ({
+    Component: StackedDatePickers
+  })
 }

@@ -10,6 +10,7 @@
   import { clickOutside } from './clickOutside'
   import BaseButton from './BaseButton.svelte'
   import { datesFromToday, toCalendarDate } from './helpers'
+  import { buttonVariants } from './button/button.svelte'
 
   const {
     startOfThisWeek,
@@ -112,7 +113,9 @@
     position = 'left',
     from = '',
     to = '',
-    onSelect
+    onSelect,
+    stackLeft = false,
+    stackRight = false
   }: DatePickerProps = $props()
 
   let selectedPeriod = $state('custom')
@@ -121,11 +124,18 @@
     end: undefined
   })
   let isOpen = $state(false)
+  let isStacked = $derived(stackLeft || stackRight)
   let styles = $derived(
-    clsx({
-      'border-border-selected-bold shadow-active': isOpen,
-      'border-border-secondary hover:border-border-default-secondary-hover': !isOpen
-    })
+    isStacked
+      ? buttonVariants({
+          variant: 'ghost',
+          stackedLeft: stackLeft,
+          stackedRight: stackRight
+        })
+      : clsx({
+          'border-border-selected-bold shadow-active': isOpen,
+          'border-border-secondary hover:border-border-default-secondary-hover': !isOpen
+        })
   )
   let selectedLabel = $state(label)
 
@@ -188,7 +198,9 @@
       onclick={() => {
         isOpen = !isOpen
       }}
-      class="{styles} datepicker-trigger w-full py-1.25 pl-7 pr-2 text-left border border-border-default-secondary rounded-lg text-foreground placeholder-foreground text-base cursor-pointer"
+      class="{styles} {isStacked
+        ? 'h-7 py-1.5'
+        : 'py-1.25 border border-border-default-secondary'} datepicker-trigger w-full pl-7 pr-2 text-left rounded-lg text-foreground placeholder-foreground text-base cursor-pointer"
     >
       {selectedLabel}
     </button>

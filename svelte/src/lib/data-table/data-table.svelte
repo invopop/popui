@@ -96,12 +96,8 @@
   })
 
   const table = setupTable({
-    get data() {
-      return data
-    },
-    get columns() {
-      return columns
-    },
+    getData: () => data,
+    getColumns: () => columns,
     enableSelection,
     enablePagination,
     getRowSelection: () => rowSelection,
@@ -297,7 +293,7 @@
               {/each}
             </Table.Row>
           {:else}
-            <Table.Row>
+            <Table.Row class="hover:!bg-transparent">
               <Table.Cell colspan={columns.length} class="h-48">
                 <EmptyState
                   iconSource={emptyState.iconSource}

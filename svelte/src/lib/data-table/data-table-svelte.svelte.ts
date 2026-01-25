@@ -70,6 +70,11 @@ export function createSvelteTable<TData extends RowData>(options: TableOptions<T
 	updateOptions();
 
 	$effect.pre(() => {
+		// Access data and columns to track them - this reads but doesn't write
+		// so it won't cause infinite loops
+		void options.data;
+		void options.columns;
+
 		updateOptions();
 	});
 

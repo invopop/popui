@@ -59,6 +59,9 @@ function createStateUpdater<T>(setState: (value: T) => void) {
 interface TableSetupOptions<TData> {
   enableSelection: boolean
   enablePagination: boolean
+  // Data getters
+  getData?: () => TData[]
+  getColumns?: () => any[]
   // State getters
   getRowSelection: () => RowSelectionState
   getColumnVisibility: () => VisibilityState
@@ -80,12 +83,7 @@ interface TableSetupOptions<TData> {
 /**
  * Create the TanStack table instance with all configuration
  */
-export function setupTable<TData>(
-  options: TableSetupOptions<TData> & {
-    data?: TData[]
-    columns?: any[]
-  }
-) {
+export function setupTable<TData>(options: TableSetupOptions<TData>) {
   const tableOptions: any = {
     state: {
       get sorting() {
@@ -109,6 +107,12 @@ export function setupTable<TData>(
       get columnOrder() {
         return options.getColumnOrder()
       }
+    },
+    get data() {
+      return options.getData?.() ?? []
+    },
+    get columns() {
+      return options.getColumns?.() ?? []
     },
     enableRowSelection: options.enableSelection,
     enableColumnResizing: true,
@@ -166,14 +170,6 @@ export function setupTable<TData>(
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: options.enablePagination ? getPaginationRowModel() : undefined,
     getSortedRowModel: getSortedRowModel()
-  }
-
-  // Add data and columns as getters if provided
-  if (options.data !== undefined) {
-    tableOptions.data = options.data
-  }
-  if (options.columns !== undefined) {
-    tableOptions.columns = options.columns
   }
 
   return createSvelteTable(tableOptions)

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 import DataTable from '../lib/data-table/data-table.svelte'
 import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
+import FullHeightDecorator from './decorartors/FullHeightDecorator.svelte'
 import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
 import { Sign } from '@invopop/ui-icons'
 import type { StatusType } from '$lib/types.js'
@@ -181,7 +182,8 @@ const meta = {
 	tags: ['autodocs'],
 	parameters: {
 		layout: 'fullscreen'
-	}
+	},
+	decorators: [() => FullHeightDecorator]
 } satisfies Meta<typeof DataTable>
 
 export default meta

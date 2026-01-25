@@ -76,10 +76,9 @@
   function handleClick(val: AnyProp) {
     value = val
 
-    onSelect?.(value)
-
     if (multiple) return
 
+    onSelect?.(value)
     selectDropdown?.toggle()
   }
 

@@ -177,7 +177,14 @@ export function setupTable<TData>(options: TableSetupOptions<TData>) {
     getSortedRowModel: getSortedRowModel(),
     // Manual pagination configuration
     manualPagination: options.manualPagination,
-    pageCount: options.pageCount ?? -1,
+    get pageCount() {
+      // Calculate pageCount from rowCount and current pageSize
+      if (options.rowCount !== undefined) {
+        const pageSize = options.getPagination().pageSize
+        return Math.ceil(options.rowCount / pageSize)
+      }
+      return options.pageCount ?? -1
+    },
     rowCount: options.rowCount
   }
 

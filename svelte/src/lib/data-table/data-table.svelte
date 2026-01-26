@@ -46,6 +46,9 @@
     filters,
     paginationSelectedSlot,
     paginationUnselectedSlot,
+    manualPagination = false,
+    pageCount,
+    rowCount,
     onPageChange,
     onPageSizeChange
   }: DataTableProps<TData> = $props()
@@ -100,6 +103,9 @@
     getColumns: () => columns,
     enableSelection,
     enablePagination,
+    manualPagination,
+    pageCount,
+    rowCount,
     getRowSelection: () => rowSelection,
     getColumnVisibility: () => columnVisibility,
     getSorting: () => sorting,

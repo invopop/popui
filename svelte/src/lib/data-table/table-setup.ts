@@ -59,6 +59,10 @@ function createStateUpdater<T>(setState: (value: T) => void) {
 interface TableSetupOptions<TData> {
   enableSelection: boolean
   enablePagination: boolean
+  // Manual pagination support
+  manualPagination?: boolean
+  pageCount?: number
+  rowCount?: number
   // Data getters
   getData?: () => TData[]
   getColumns?: () => any[]
@@ -168,8 +172,13 @@ export function setupTable<TData>(options: TableSetupOptions<TData>) {
       }
     },
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: options.enablePagination ? getPaginationRowModel() : undefined,
-    getSortedRowModel: getSortedRowModel()
+    getPaginationRowModel:
+      options.enablePagination && !options.manualPagination ? getPaginationRowModel() : undefined,
+    getSortedRowModel: getSortedRowModel(),
+    // Manual pagination configuration
+    manualPagination: options.manualPagination,
+    pageCount: options.pageCount ?? -1,
+    rowCount: options.rowCount
   }
 
   return createSvelteTable(tableOptions)

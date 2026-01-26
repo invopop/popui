@@ -71,6 +71,10 @@ export interface DataTableProps<TData> {
   filters?: Snippet
   paginationSelectedSlot?: Snippet
   paginationUnselectedSlot?: Snippet
+  // Manual pagination (server-side) support
+  manualPagination?: boolean // Enable server-side pagination mode
+  pageCount?: number // Total number of pages (for manual pagination)
+  rowCount?: number // Total number of rows (for manual pagination)
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void
 }

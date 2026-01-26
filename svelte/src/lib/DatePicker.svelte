@@ -3,14 +3,16 @@
   import RangeCalendar from '$lib/range-calendar/range-calendar.svelte'
   import { parseDate, type DateValue } from '@internationalized/date'
   import type { DateRange } from 'bits-ui'
-  import { Icon } from '@steeze-ui/svelte-icon'
-  import { Calendar } from '@invopop/ui-icons'
+  import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import Transition from 'svelte-transition'
   import type { DatePickerProps } from './types'
   import { clickOutside } from './clickOutside'
   import BaseButton from './BaseButton.svelte'
-  import { datesFromToday, toCalendarDate } from './helpers'
+  import { datesFromToday, toCalendarDate, resolveIcon } from './helpers'
   import { buttonVariants } from './button/button.svelte'
+  import { offset, flip, shift } from 'svelte-floating-ui/dom'
+  import { createFloatingActions } from 'svelte-floating-ui'
+  import { portal } from 'svelte-portal'
 
   const {
     startOfThisWeek,
@@ -110,13 +112,27 @@
 
   let {
     label = 'Date',
-    position = 'left',
+    placement = 'bottom-start',
     from = '',
     to = '',
     onSelect,
     stackLeft = false,
-    stackRight = false
+    stackRight = false,
+    icon = undefined,
+    iconTheme = 'default'
   }: DatePickerProps = $props()
+
+  const [floatingRef, floatingContent] = createFloatingActions({
+    strategy: 'absolute',
+    placement,
+    middleware: [offset(8), flip(), shift()]
+  })
+
+  let resolvedIcon: IconSource | undefined = $state()
+
+  $effect(() => {
+    resolveIcon(icon).then((res) => (resolvedIcon = res))
+  })
 
   let selectedPeriod = $state('custom')
   let value = $state<DateRange>({
@@ -125,6 +141,7 @@
   })
   let isOpen = $state(false)
   let isStacked = $derived(stackLeft || stackRight)
+  let hasSelectedDates = $derived(value.start !== undefined)
   let styles = $derived(
     isStacked
       ? buttonVariants({
@@ -132,9 +149,9 @@
           stackedLeft: stackLeft,
           stackedRight: stackRight
         })
-      : clsx({
+      : clsx('border backdrop-blur-sm backdrop-filter', {
           'border-border-selected-bold shadow-active': isOpen,
-          'border-border-secondary hover:border-border-default-secondary-hover': !isOpen
+          'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen
         })
   )
   let selectedLabel = $state(label)
@@ -147,9 +164,19 @@
 
   $effect(() => {
     if (from) {
+      const startDate = parseDate(from)
+      const endDate = to ? parseDate(to) : undefined
+
       value = {
-        start: parseDate(from),
-        end: to ? parseDate(to) : undefined
+        start: startDate,
+        end: endDate
+      }
+
+      // Update label directly without calling getLabel() to avoid circular dependency
+      if (startDate === endDate) {
+        selectedLabel = getDisplayFromValue(startDate)
+      } else {
+        selectedLabel = `${getDisplayFromValue(startDate)} → ${getDisplayFromValue(endDate)}`
       }
       return
     }
@@ -193,21 +220,34 @@
 </script>
 
 <div>
-  <div class="relative">
-    <button
-      onclick={() => {
-        isOpen = !isOpen
-      }}
-      class="{styles} {isStacked
-        ? 'h-7 py-1.5'
-        : 'py-1.25 border border-border-default-secondary'} datepicker-trigger w-full pl-7 pr-2 text-left rounded-lg text-foreground placeholder-foreground text-base cursor-pointer"
+  <button
+    use:floatingRef
+    onclick={() => {
+      isOpen = !isOpen
+    }}
+    class="{styles} {isStacked
+      ? 'h-7 py-1.5'
+      : 'py-1.5'} datepicker-trigger flex items-center w-full {resolvedIcon
+      ? 'pl-7'
+      : 'pl-2'} pr-2 text-left rounded-lg bg-background cursor-pointer relative overflow-hidden"
+  >
+    {#if resolvedIcon}
+      <Icon
+        src={resolvedIcon}
+        theme={iconTheme}
+        class="h-4 w-4 absolute top-1.5 left-2 text-foreground-default-secondary"
+      />
+    {/if}
+    <span
+      class="flex-1 text-base truncate {hasSelectedDates
+        ? 'text-foreground'
+        : 'text-foreground-default-secondary'}"
     >
       {selectedLabel}
-    </button>
-    <Icon src={Calendar} class="h-4 w-4 absolute top-2 left-2 text-foreground-default-secondary" />
-  </div>
+    </span>
+  </button>
 
-  <div class="relative">
+  {#if isOpen}
     <Transition
       show={isOpen}
       enter="transition ease-out duration-100"
@@ -219,9 +259,9 @@
     >
       <!-- @ts-ignore -->
       <div
-        class:left-0={position === 'left'}
-        class:right-0={position === 'right'}
-        class="bg-background inline-flex flex-col shadow-lg rounded-xl absolute right-0 top-2 z-40 border border-border"
+        use:portal
+        use:floatingContent
+        class="bg-background inline-flex flex-col shadow-lg rounded-xl absolute z-1001 border border-border"
         use:clickOutside
         onclick_outside={() => {
           if (!isOpen) return
@@ -251,5 +291,5 @@
         </div>
       </div>
     </Transition>
-  </div>
+  {/if}
 </div>

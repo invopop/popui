@@ -437,12 +437,14 @@ export interface BaseDropdownProps {
 
   export interface DatePickerProps {
     label?: string;
-    position?: 'left' | 'right';
+    placement?: Placement;
     from?: string;
     to?: string;
     onSelect?: (date: {from: string, to: string}) => void;
     stackLeft?: boolean;
     stackRight?: boolean;
+    icon?: IconSource | string;
+    iconTheme?: IconTheme;
   }
 
   export interface DrawerContextProps {

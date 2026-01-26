@@ -28,8 +28,7 @@ export const LeftPosition: Story = {
 export const RightPosition: Story = {
   decorators: [() => ItemPushedToRightDecorator],
   args: {
-    label: 'Pick a Date',
-    position: 'right'
+    label: 'Pick a Date'
   }
 }
 
@@ -38,8 +37,7 @@ export const WithSelectedDates: Story = {
   args: {
     from: '2022-12-10',
     to: '2022-12-12',
-    label: 'Pick a Date',
-    position: 'right'
+    label: 'Pick a Date'
   }
 }
 
@@ -48,8 +46,7 @@ export const WithSelectedEmptyDates: Story = {
   args: {
     from: '',
     to: '',
-    label: 'Pick a Date',
-    position: 'right'
+    label: 'Pick a Date'
   }
 }
 

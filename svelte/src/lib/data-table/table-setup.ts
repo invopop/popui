@@ -62,7 +62,7 @@ interface TableSetupOptions<TData> {
   // Manual pagination support
   manualPagination?: boolean
   pageCount?: number
-  rowCount?: number
+  getRowCount?: () => number | undefined
   // Data getters
   getData?: () => TData[]
   getColumns?: () => any[]
@@ -179,13 +179,16 @@ export function setupTable<TData>(options: TableSetupOptions<TData>) {
     manualPagination: options.manualPagination,
     get pageCount() {
       // Calculate pageCount from rowCount and current pageSize
-      if (options.rowCount !== undefined) {
+      const rowCount = options.getRowCount?.()
+      if (rowCount !== undefined) {
         const pageSize = options.getPagination().pageSize
-        return Math.ceil(options.rowCount / pageSize)
+        return Math.ceil(rowCount / pageSize)
       }
       return options.pageCount ?? -1
     },
-    rowCount: options.rowCount
+    get rowCount() {
+      return options.getRowCount?.()
+    }
   }
 
   return createSvelteTable(tableOptions)

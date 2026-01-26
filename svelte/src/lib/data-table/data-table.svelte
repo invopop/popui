@@ -105,7 +105,7 @@
     enablePagination,
     manualPagination,
     pageCount,
-    rowCount,
+    getRowCount: () => rowCount,
     getRowSelection: () => rowSelection,
     getColumnVisibility: () => columnVisibility,
     getSorting: () => sorting,

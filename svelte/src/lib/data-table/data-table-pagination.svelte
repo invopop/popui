@@ -21,11 +21,13 @@
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
   let totalPages = $derived(table.getPageCount())
-  let totalItems = $derived(
-    table.options.manualPagination && table.options.rowCount !== undefined
-      ? table.options.rowCount
-      : table.getFilteredRowModel().rows.length
-  )
+  let totalItems = $derived.by(() => {
+    const rowCount = table.getRowCount?.()
+    if (table.options.manualPagination && rowCount !== undefined) {
+      return rowCount
+    }
+    return table.getFilteredRowModel().rows.length
+  })
   let rowsPerPage = $derived(table.getState().pagination.pageSize)
   let hasSelection = $derived(Object.keys(table.getState().rowSelection).length > 0)
 

@@ -151,7 +151,9 @@
             onchange={(value) => {
               const size = Number(value)
               table.setPageSize(size)
+              table.setPageIndex(0)
               onPageSizeChange?.(size)
+              onPageChange?.(1)
             }}
             placeholder="Rows per page"
             disablePlaceholder={true}

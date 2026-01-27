@@ -77,6 +77,7 @@ export interface DataTableProps<TData> {
   rowCount?: number // Total number of rows (for manual pagination)
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void
+  onSortingChange?: (columnId: string, direction: 'asc' | 'desc') => void
 }
 
 export interface DataTablePaginationProps<T> {

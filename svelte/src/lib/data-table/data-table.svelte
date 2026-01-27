@@ -50,7 +50,8 @@
     pageCount,
     rowCount,
     onPageChange,
-    onPageSizeChange
+    onPageSizeChange,
+    onSortingChange
   }: DataTableProps<TData> = $props()
 
   const enableSelection = !disableSelection
@@ -183,7 +184,12 @@
         <BaseTableHeaderOrderBy
           sortDirection={column.getIsSorted() === 'asc' ? 'asc' : 'desc'}
           isActive={column.getIsSorted() !== false}
-          onOrderBy={(direction) => column.toggleSorting(direction === 'desc')}
+          onOrderBy={(direction) => {
+            column.toggleSorting(direction === 'desc')
+            if (onSortingChange) {
+              onSortingChange(column.id, direction)
+            }
+          }}
           onHide={() => column.toggleVisibility(false)}
         />
       </BaseDropdown>

@@ -51,7 +51,8 @@
     rowCount,
     onPageChange,
     onPageSizeChange,
-    onSortingChange
+    onSortingChange,
+    getRowClassName
   }: DataTableProps<TData> = $props()
 
   const enableSelection = !disableSelection
@@ -264,7 +265,7 @@
           {#each table.getRowModel().rows as row (row.id)}
             <Table.Row
               data-state={row.getIsSelected() ? 'selected' : undefined}
-              class="border-b border-border"
+              class={cn('border-b border-border', getRowClassName?.(row.original as TData))}
               onclick={() => onRowClick?.(row.original as TData)}
             >
               {#each row.getVisibleCells() as cell, index (cell.id)}

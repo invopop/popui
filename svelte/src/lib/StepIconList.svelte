@@ -14,7 +14,7 @@
 {/snippet}
 
 <TooltipProvider>
-  <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 items-center">
+  <div class="flex flex-col space-y-2 sm:flex-row sm:flex-nowrap sm:space-y-0 items-center">
     {#each mainIcons as icon, i (i)}
       <Tooltip>
         <TooltipTrigger class="shrink-0">

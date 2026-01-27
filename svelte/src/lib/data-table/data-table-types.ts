@@ -87,6 +87,7 @@ export interface DataTableProps<TData> {
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void
   onSortingChange?: (columnId: string, direction: 'asc' | 'desc') => void
+  getRowClassName?: (row: TData) => string
 }
 
 export interface DataTablePaginationProps<T> {

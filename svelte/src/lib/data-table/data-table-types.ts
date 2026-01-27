@@ -3,7 +3,7 @@ import type { StatusType, AnyProp, TableAction, EmptyStateProps } from '$lib/typ
 import type { IconSource } from '@steeze-ui/svelte-icon'
 import type { Table } from '@tanstack/table-core'
 
-export type CellType = 'text' | 'boolean' | 'tag' | 'date' | 'currency' | 'custom'
+export type CellType = 'text' | 'boolean' | 'tag' | 'date' | 'currency' | 'uuid' | 'custom'
 
 export interface TextCellConfig {
   className?: string
@@ -33,12 +33,21 @@ export interface CurrencyCellConfig {
   className?: string
 }
 
+export interface UuidCellConfig {
+  prefixLength?: number // default 4 - chars from start
+  suffixLength?: number // default 4 - chars from end
+  full?: boolean // default false - show full UUID
+  disabled?: boolean // default false
+  onCopy?: (value: string) => void
+}
+
 export type CellConfig =
   | TextCellConfig
   | BooleanCellConfig
   | TagCellConfig
   | DateCellConfig
   | CurrencyCellConfig
+  | UuidCellConfig
 
 export interface DataTableColumn<TData> {
   id: string
@@ -46,7 +55,7 @@ export interface DataTableColumn<TData> {
   header?: string // Header text to display - can be any string like "Created At", "Customer Name", etc. Use empty string or omit for no header
   cellType?: CellType
   cellConfig?: CellConfig
-  cell?: (value: any, row: TData) => Snippet | Component | string
+  cell?: Snippet<[TData]> | ((value: any, row: TData) => Snippet | Component | string)
   enableSorting?: boolean
   enableHiding?: boolean
   enableResizing?: boolean

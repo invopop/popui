@@ -6,6 +6,9 @@ import BooleanCell from './cells/boolean-cell.svelte'
 import TagCell from './cells/tag-cell.svelte'
 import DateCell from './cells/date-cell.svelte'
 import CurrencyCell from './cells/currency-cell.svelte'
+import UuidCell from './cells/uuid-cell.svelte'
+import type { Snippet } from 'svelte'
+import { renderSnippet } from './render-helpers.js'
 
 export function createColumns<TData>(columns: DataTableColumn<TData>[]): ColumnDef<TData>[] {
   return columns.map((col) => {
@@ -23,10 +26,17 @@ export function createColumns<TData>(columns: DataTableColumn<TData>[]): ColumnD
 
     // Cell renderer
     if (col.cell) {
-      // Custom cell renderer
+      // Custom cell renderer - can be a Snippet or a function
       tanstackCol.cell = ({ row }) => {
         const value = col.accessorKey ? row.original[col.accessorKey] : undefined
-        return col.cell!(value, row.original)
+
+        // Check if it's a function or a Snippet
+        if (typeof col.cell === 'function') {
+          return col.cell(value, row.original)
+        } else {
+          // It's a Snippet, render it with the row data
+          return renderSnippet(col.cell, row.original)
+        }
       }
     } else if (col.cellType) {
       // Built-in cell renderer based on type
@@ -44,6 +54,8 @@ export function createColumns<TData>(columns: DataTableColumn<TData>[]): ColumnD
             return renderComponent(DateCell, { value: value as any, config: col.cellConfig as any })
           case 'currency':
             return renderComponent(CurrencyCell, { value: value as any, config: col.cellConfig as any })
+          case 'uuid':
+            return renderComponent(UuidCell, { value: value as any, config: col.cellConfig as any })
           default:
             return value
         }

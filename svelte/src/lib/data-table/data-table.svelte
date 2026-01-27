@@ -75,7 +75,12 @@
 
   // Build TanStack columns from config
   const columns = $derived.by(() =>
-    buildColumns<TData>(columnConfig, enableSelection, RowActions, getRowActions !== undefined || rowActions.length > 0)
+    buildColumns<TData>(
+      columnConfig,
+      enableSelection,
+      RowActions,
+      getRowActions !== undefined || rowActions.length > 0
+    )
   )
 
   // Calculate initial column sizes based on available width

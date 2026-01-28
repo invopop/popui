@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 import DataTable from '../lib/data-table/data-table.svelte'
 import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
+import DataTableWithCustomCell from './helpers/DataTableWithCustomCell.svelte'
 import FullHeightDecorator from './decorartors/FullHeightDecorator.svelte'
 import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
 import { Sign } from '@invopop/ui-icons'
@@ -11,6 +12,7 @@ type Invoice = {
 	signed: boolean
 	state: 'paid' | 'sent' | 'empty' | 'error'
 	supplier: string
+	supplierEmail?: string
 	customer: string
 	total: string
 	createdAt: string
@@ -59,15 +61,20 @@ const generateInvoices = (count: number): Invoice[] => {
 		return `${amount} EUR`
 	}
 
-	return Array.from({ length: count }, (_, i) => ({
-		invoice: `INV-2023-${(19 - i).toString().padStart(3, '0')}`,
-		signed: Math.random() > 0.3,
-		state: states[Math.floor(Math.random() * states.length)],
-		supplier: suppliers[Math.floor(Math.random() * suppliers.length)],
-		customer: customers[Math.floor(Math.random() * customers.length)],
-		total: generateAmount(),
-		createdAt: generateDate(i)
-	}))
+	return Array.from({ length: count }, (_, i) => {
+		const supplier = suppliers[Math.floor(Math.random() * suppliers.length)]
+		const supplierSlug = supplier.toLowerCase().replace(/\s+/g, '')
+		return {
+			invoice: `INV-2023-${(19 - i).toString().padStart(3, '0')}`,
+			signed: Math.random() > 0.3,
+			state: states[Math.floor(Math.random() * states.length)],
+			supplier,
+			supplierEmail: `contact@${supplierSlug}.com`,
+			customer: customers[Math.floor(Math.random() * customers.length)],
+			total: generateAmount(),
+			createdAt: generateDate(i)
+		}
+	})
 }
 
 const stateOptions = [
@@ -110,8 +117,7 @@ const columns: DataTableColumn<Invoice>[] = [
 		// No header - will display empty column header
 		cellType: 'boolean',
 		cellConfig: {
-			icon: Sign,
-			iconClass: 'size-4 text-text-secondary-default'
+			icon: Sign
 		},
 		enableSorting: false,
 		enableResizing: false,
@@ -422,6 +428,21 @@ export const WithPaginationSlots: Story = {
 		onSelectionChange: (selectedRows) => {
 			console.log('Selected rows:', selectedRows)
 		},
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
+	}
+}
+
+export const WithCustomCell: Story = {
+	render: (args) => ({
+		Component: DataTableWithCustomCell,
+		props: args
+	}),
+	args: {
+		data: generateInvoices(50),
+		columns,
+		rowActions,
 		onRowClick: (row) => {
 			console.log('Row clicked:', row)
 		}

@@ -19,7 +19,7 @@
   bind:this={ref}
   data-slot="table-row"
   class={cn(
-    'group/row data-[state=selected]:bg-background-selected data-[state=checked]:bg-background-selected transition-colors h-10 data-[state=selected]:hover:bg-background-selected data-[state=checked]:hover:bg-background-selected',
+    'group/row data-[state=selected]:bg-background-selected data-[state=checked]:bg-background-selected h-10 data-[state=selected]:hover:bg-background-selected data-[state=checked]:hover:bg-background-selected',
     className
   )}
   {oncontextmenu}

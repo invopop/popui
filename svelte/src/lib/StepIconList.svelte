@@ -19,9 +19,9 @@
       <Tooltip>
         <TooltipTrigger class="shrink-0">
           <div
-            class="p-1.5 rounded-md border border-border flex items-center space-x-1 bg-background text-icon"
+            class="p-1.5 rounded-md border border-border flex items-center space-x-1 bg-background text-icon shrink-0"
           >
-            <img src={icon.url} alt={icon.name} class="size-4" />
+            <img src={icon.url} alt={icon.name} class="size-4 shrink-0" />
           </div>
         </TooltipTrigger>
         <TooltipContent>{icon.name}</TooltipContent>
@@ -35,7 +35,7 @@
       {@render separator()}
       <Tooltip>
         <TooltipTrigger class="shrink-0">
-          <div class="flex items-center justify-center text-icon font-medium text-base size-7">
+          <div class="flex items-center justify-center text-icon font-medium text-base size-7 shrink-0">
             +{restIcons.length}
           </div>
         </TooltipTrigger>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from '$lib/button/button.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
+  import InputText from '$lib/InputText.svelte'
   import { ArrowLeft, ArrowRight, ScrollLeft, ScrollRight } from '@invopop/ui-icons'
   import { cn } from '$lib/utils.js'
   import type { DataTablePaginationProps } from './data-table-types.js'
@@ -33,15 +34,11 @@
 
   let pageInputValue = $derived(`${currentPage}`)
 
-  function handlePageInput(event: Event) {
-    const target = event.target as HTMLInputElement
-    const value = parseInt(target.value)
-    if (value >= 1 && value <= totalPages) {
-      table.setPageIndex(value - 1)
-      onPageChange?.(value)
-    } else if (target.value === '') {
-      // Allow empty input temporarily
-      pageInputValue = ''
+  function handlePageInput(value: string) {
+    const numValue = parseInt(value)
+    if (numValue >= 1 && numValue <= totalPages) {
+      table.setPageIndex(numValue - 1)
+      onPageChange?.(numValue)
     }
   }
 
@@ -49,8 +46,9 @@
     const target = event.target as HTMLInputElement
     const value = parseInt(target.value)
     if (isNaN(value) || value < 1) {
-      pageInputValue = `${currentPage}`
+      target.value = `${currentPage}`
     } else if (value > totalPages) {
+      target.value = `${totalPages}`
       table.setPageIndex(totalPages - 1)
       onPageChange?.(totalPages)
     }
@@ -99,16 +97,19 @@
           />
         </div>
         <div class="flex items-center gap-1.5">
-          <input
-            type="number"
-            bind:value={pageInputValue}
-            min="1"
-            max={totalPages}
-            oninput={handlePageInput}
-            onblur={handlePageBlur}
-            class="w-12 h-8 px-2 py-1 text-base tracking-tight rounded-lg border border-border-default-secondary bg-background-default-default backdrop-blur-[2px] caret-foreground-accent text-foreground outline-none focus:ring-0 hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-          />
-          <span class="text-sm text-foreground-default-secondary whitespace-nowrap">
+          <div
+            class="w-12 [&>div]:gap-0 [&_input]:!h-7 [&_input]:[appearance:textfield] [&_input]:[&::-webkit-outer-spin-button]:appearance-none [&_input]:[&::-webkit-inner-spin-button]:appearance-none"
+          >
+            <InputText
+              bind:value={pageInputValue}
+              type="number"
+              min="1"
+              max={totalPages}
+              oninput={handlePageInput}
+              onblur={handlePageBlur}
+            />
+          </div>
+          <span class="text-base text-foreground-default-secondary whitespace-nowrap">
             / {totalPages}
           </span>
         </div>
@@ -141,7 +142,7 @@
         </div>
       </div>
       {#if showRowsPerPage}
-        <div class="w-[105px]">
+        <div class="w-[105px] [&_select]:!h-7 [&_select]:!py-[4px]">
           <InputSelect
             value={`${rowsPerPage}`}
             options={rowsPerPageOptions.map((size) => ({
@@ -163,7 +164,7 @@
       {/if}
     </div>
     {#if totalItems > 0}
-      <span class="text-sm text-foreground-default-secondary">
+      <span class="text-base text-foreground-default-secondary">
         {formatNumber(totalItems)}
         {itemsLabel}
       </span>

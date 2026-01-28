@@ -8,8 +8,8 @@
   }: WithElementRef<HTMLTableAttributes> = $props()
 </script>
 
-<div data-slot="table-container" class="relative w-full">
-  <table bind:this={ref} data-slot="table" class={cn('caption-bottom', className)}>
+<div data-slot="table-container" class="relative w-full h-full">
+  <table bind:this={ref} data-slot="table" class={cn('caption-bottom w-full', className)}>
     {@render children?.()}
   </table>
 </div>

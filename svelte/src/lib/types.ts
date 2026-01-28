@@ -608,6 +608,9 @@ export interface BaseDropdownProps {
     disabled?: boolean;
     value?: string | number;
     focusOnLoad?: boolean;
+    stackLeft?: boolean;
+    stackRight?: boolean;
+    widthClass?: string;
     oninput?: (value: string) => void;
     onfocus?: (event: FocusEvent) => void;
     onblur?: (event: FocusEvent) => void;

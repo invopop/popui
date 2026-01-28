@@ -13,6 +13,9 @@
     disabled = false,
     value = $bindable(''),
     focusOnLoad = false,
+    stackLeft = false,
+    stackRight = false,
+    widthClass = '',
     oninput,
     onkeydown,
     onfocus,
@@ -30,21 +33,30 @@
     }, 750)
   }
 
+  let isStacked = $derived(stackLeft || stackRight)
+
   let inputStyles = $derived(
     clsx(
-      'h-8 w-full rounded-lg border px-2 py-1 text-base tracking-tight bg-background-default-default backdrop-blur-[2px] caret-foreground-accent',
+      'px-2 py-1 text-base tracking-tight bg-background-default-default backdrop-blur-[2px] caret-foreground-accent',
       'placeholder:text-foreground-default-tertiary',
       'outline-none focus:ring-0',
+      widthClass,
       {
+        // Width defaults
+        'w-full': !isStacked && !widthClass,
+        // Stacked styles
+        'h-[26px] border-0 rounded-none hover:bg-background-default-secondary focus:bg-background-default-default':
+          isStacked,
+        'rounded-l-lg': isStacked && stackLeft && !stackRight,
+        'rounded-r-lg': isStacked && stackRight && !stackLeft,
+        // Non-stacked styles
+        'h-8 rounded-lg border': !isStacked,
         'pointer-events-none bg-background-default-secondary border-border-default-default':
-          disabled
-      },
-      {
-        'text-foreground-critical border-border-critical-bold caret-foreground-critical': errorText
-      },
-      {
+          !isStacked && disabled,
+        'text-foreground-critical border-border-critical-bold caret-foreground-critical':
+          !isStacked && errorText,
         'text-foreground border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active':
-          !errorText && !disabled
+          !isStacked && !errorText && !disabled
       }
     )
   )

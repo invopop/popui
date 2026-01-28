@@ -11,6 +11,6 @@
 
 {#if shouldShow && config?.icon}
   <div class="flex justify-center">
-    <Icon src={config.icon} class={config.iconClass ?? 'size-4'} />
+    <Icon src={config.icon} class={config.iconClass ?? 'size-4 text-icon'} />
   </div>
 {/if}

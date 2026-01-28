@@ -176,19 +176,26 @@ export function setupTable<TData>(options: TableSetupOptions<TData>) {
       options.enablePagination && !options.manualPagination ? getPaginationRowModel() : undefined,
     getSortedRowModel: getSortedRowModel(),
     // Manual pagination configuration
-    manualPagination: options.manualPagination,
-    get pageCount() {
-      // Calculate pageCount from rowCount and current pageSize
-      const rowCount = options.getRowCount?.()
-      if (rowCount !== undefined) {
-        const pageSize = options.getPagination().pageSize
-        return Math.ceil(rowCount / pageSize)
+    manualPagination: options.manualPagination
+  }
+
+  // Only provide pageCount/rowCount for manual pagination
+  // When manualPagination is false, TanStack Table calculates it automatically
+  if (options.manualPagination) {
+    Object.assign(tableOptions, {
+      get pageCount() {
+        // Calculate pageCount from rowCount and current pageSize
+        const rowCount = options.getRowCount?.()
+        if (rowCount !== undefined) {
+          const pageSize = options.getPagination().pageSize
+          return Math.ceil(rowCount / pageSize)
+        }
+        return options.pageCount ?? -1
+      },
+      get rowCount() {
+        return options.getRowCount?.()
       }
-      return options.pageCount ?? -1
-    },
-    get rowCount() {
-      return options.getRowCount?.()
-    }
+    })
   }
 
   return createSvelteTable(tableOptions)

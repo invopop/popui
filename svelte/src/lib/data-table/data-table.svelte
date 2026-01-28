@@ -132,18 +132,23 @@
 
 {#snippet StickyCellWrapper({
   children,
-  align = 'left'
+  align = 'left',
+  isFirst = false,
+  isLast = false
 }: {
   children: any
   align?: 'left' | 'right'
+  isFirst?: boolean
+  isLast?: boolean
 })}
   <div
     class={cn(
-      'h-10 flex items-center relative group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected',
-      align === 'right' ? 'justify-end pl-3 pr-6' : 'pl-6 pr-3'
+      'absolute inset-0 flex items-center group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected px-3',
+      align === 'right' ? 'justify-end' : '',
+      { 'pl-6': isFirst, 'pr-6': isLast }
     )}
   >
-    <div class="relative z-10">
+    <div class="relative z-10 flex items-center">
       {@render children()}
     </div>
   </div>
@@ -192,6 +197,11 @@
           isActive={column.getIsSorted() !== false}
           onOrderBy={(direction) => {
             column.toggleSorting(direction === 'desc')
+            // Reset to first page when sorting changes (same as page size change)
+            if (manualPagination) {
+              table.setPageIndex(0)
+              onPageChange?.(1)
+            }
             if (onSortingChange) {
               onSortingChange(column.id, direction)
             }
@@ -206,17 +216,19 @@
 <div class="flex flex-col h-full">
   <DataTableToolbar {table} {filters} />
   <div class="flex-1 overflow-hidden flex flex-col">
-    <div bind:this={containerRef} class="relative bg-background flex-1 overflow-auto">
-      <Table.Root>
+    <div bind:this={containerRef} class="relative bg-background flex-1 overflow-auto" style="overscroll-behavior-x: none;">
+      <Table.Root class={data.length === 0 ? 'h-full' : 'h-auto'}>
         <Table.Header>
           {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
             <Table.Row class="hover:!bg-transparent border-b border-border">
               {#each headerGroup.headers as header, index (header.id)}
                 {@const isLastScrollable = index === headerGroup.headers.length - 2}
+                {@const isFirstHeader = index === 0}
+                {@const isLastHeader = index === headerGroup.headers.length - 1}
                 <Table.Head
                   colspan={header.colSpan}
                   style={getHeaderStyle(header, isLastScrollable)}
-                  class={getHeaderClasses(header, isLastScrollable)}
+                  class={getHeaderClasses(header, isLastScrollable, isFirstHeader, isLastHeader)}
                 >
                   {#if !header.isPlaceholder}
                     {#if typeof header.column.columnDef.header === 'string'}
@@ -269,20 +281,24 @@
               onclick={() => onRowClick?.(row.original as TData)}
             >
               {#each row.getVisibleCells() as cell, index (cell.id)}
-                {@const isLastScrollable = index === row.getVisibleCells().length - 2}
                 {@const visibleCells = row.getVisibleCells()}
+                {@const isLastScrollable = index === visibleCells.length - 2}
                 {@const firstDataColumnIndex = visibleCells.findIndex(
                   (c) => c.column.id !== 'select' && c.column.id !== 'actions'
                 )}
                 {@const isFirstDataColumn = index === firstDataColumnIndex}
+                {@const isFirstCell = index === 0}
+                {@const isLastCell = index === visibleCells.length - 1}
                 <Table.Cell
                   style={getCellStyle(cell, isLastScrollable)}
-                  class={getCellClasses(cell, isLastScrollable, isFirstDataColumn)}
+                  class={getCellClasses(cell, isLastScrollable, isFirstDataColumn, isFirstCell, isLastCell)}
                 >
                   {#if cell.column.id === 'actions'}
                     {@render StickyCellWrapper({
                       align: 'right',
-                      children: CellContent
+                      children: CellContent,
+                      isFirst: isFirstCell,
+                      isLast: isLastCell
                     })}
                     {#snippet CellContent()}
                       <FlexRender
@@ -293,7 +309,9 @@
                   {:else if cell.column.id === 'select'}
                     {@render StickyCellWrapper({
                       align: 'left',
-                      children: CellContent
+                      children: CellContent,
+                      isFirst: isFirstCell,
+                      isLast: isLastCell
                     })}
                     {#snippet CellContent()}
                       <FlexRender
@@ -311,13 +329,15 @@
               {/each}
             </Table.Row>
           {:else}
-            <Table.Row class="hover:!bg-transparent">
-              <Table.Cell colspan={columns.length} class="h-48">
-                <EmptyState
-                  iconSource={emptyState.iconSource}
-                  title={emptyState.title}
-                  description={emptyState.description}
-                />
+            <Table.Row class="hover:!bg-transparent h-full">
+              <Table.Cell colspan={columns.length} class="h-full !p-0">
+                <div class="flex items-center justify-center h-full w-full">
+                  <EmptyState
+                    iconSource={emptyState.iconSource}
+                    title={emptyState.title}
+                    description={emptyState.description}
+                  />
+                </div>
               </Table.Cell>
             </Table.Row>
           {/each}

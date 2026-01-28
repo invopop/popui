@@ -42,7 +42,11 @@
   function handlePageInput(value: string) {
     const numValue = parseInt(value)
     if (numValue >= 1 && numValue <= totalPages) {
-      table.setPageIndex(numValue - 1)
+      if (manualPagination) {
+        table.setPagination({ pageIndex: numValue - 1, pageSize: rowsPerPage })
+      } else {
+        table.setPageIndex(numValue - 1)
+      }
       onPageChange?.(numValue)
     }
   }
@@ -54,7 +58,11 @@
       target.value = `${currentPage}`
     } else if (value > totalPages) {
       target.value = `${totalPages}`
-      table.setPageIndex(totalPages - 1)
+      if (manualPagination) {
+        table.setPagination({ pageIndex: totalPages - 1, pageSize: rowsPerPage })
+      } else {
+        table.setPageIndex(totalPages - 1)
+      }
       onPageChange?.(totalPages)
     }
   }
@@ -80,7 +88,11 @@
             size="md"
             icon={ScrollLeft}
             onclick={() => {
-              table.setPageIndex(0)
+              if (manualPagination) {
+                table.setPagination({ pageIndex: 0, pageSize: rowsPerPage })
+              } else {
+                table.setPageIndex(0)
+              }
               onPageChange?.(1)
             }}
             disabled={currentPage === 1}
@@ -93,9 +105,10 @@
             icon={ArrowLeft}
             onclick={() => {
               const newPage = currentPage - 1
-              // For manual pagination, use setPageIndex directly to avoid TanStack's internal checks
               if (manualPagination) {
-                table.setPageIndex(newPage - 1)
+                // For manual pagination, bypass TanStack's navigation and use setPagination directly
+                // to avoid clamping issues with stale pageCount
+                table.setPagination({ pageIndex: newPage - 1, pageSize: rowsPerPage })
               } else {
                 table.previousPage()
               }
@@ -130,9 +143,10 @@
             icon={ArrowRight}
             onclick={() => {
               const newPage = currentPage + 1
-              // For manual pagination, use setPageIndex directly to avoid TanStack's internal checks
               if (manualPagination) {
-                table.setPageIndex(newPage - 1)
+                // For manual pagination, bypass TanStack's navigation and use setPagination directly
+                // to avoid clamping issues with stale pageCount
+                table.setPagination({ pageIndex: newPage - 1, pageSize: rowsPerPage })
               } else {
                 table.nextPage()
               }
@@ -147,7 +161,11 @@
             size="md"
             icon={ScrollRight}
             onclick={() => {
-              table.setPageIndex(totalPages - 1)
+              if (manualPagination) {
+                table.setPagination({ pageIndex: totalPages - 1, pageSize: rowsPerPage })
+              } else {
+                table.setPageIndex(totalPages - 1)
+              }
               onPageChange?.(totalPages)
             }}
             disabled={currentPage === totalPages}

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/sveltekit'
 import DataTable from '../lib/data-table/data-table.svelte'
 import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
 import DataTableWithCustomCell from './helpers/DataTableWithCustomCell.svelte'
+import DataTableManualPagination from './helpers/DataTableManualPagination.svelte'
 import FullHeightDecorator from './decorartors/FullHeightDecorator.svelte'
 import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
 import { Sign } from '@invopop/ui-icons'
@@ -437,6 +438,21 @@ export const WithPaginationSlots: Story = {
 export const WithCustomCell: Story = {
 	render: (args) => ({
 		Component: DataTableWithCustomCell,
+		props: args
+	}),
+	args: {
+		data: generateInvoices(50),
+		columns,
+		rowActions,
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
+	}
+}
+
+export const ManualPagination: Story = {
+	render: (args) => ({
+		Component: DataTableManualPagination,
 		props: args
 	}),
 	args: {

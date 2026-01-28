@@ -17,19 +17,21 @@
     selectedSlot,
     unselectedSlot,
     onPageChange,
-    onPageSizeChange
+    onPageSizeChange,
+    data,
+    rowCount,
+    manualPagination
   }: DataTablePaginationProps<any> = $props()
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
   let totalPages = $derived(table.getPageCount())
   let totalItems = $derived.by(() => {
-    // Access through options to establish reactive dependencies
-    const rowCount = table.options.rowCount
-    if (table.options.manualPagination && rowCount !== undefined) {
+    // Use direct props for reactivity
+    if (manualPagination && rowCount !== undefined) {
       return rowCount
     }
     // For client-side pagination, use data length directly
-    return table.options.data?.length ?? 0
+    return data?.length ?? 0
   })
   let rowsPerPage = $derived(table.getState().pagination.pageSize)
   let hasSelection = $derived(Object.keys(table.getState().rowSelection).length > 0)

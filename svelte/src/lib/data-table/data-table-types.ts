@@ -102,4 +102,8 @@ export interface DataTablePaginationProps<T> {
   unselectedSlot?: Snippet
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void
+  // Pass these directly for reactivity instead of accessing through table.options
+  data?: T[]
+  rowCount?: number
+  manualPagination?: boolean
 }

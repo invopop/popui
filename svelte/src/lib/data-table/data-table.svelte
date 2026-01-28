@@ -347,6 +347,9 @@
     {#if enablePagination}
       <DataTablePagination
         {table}
+        {data}
+        {rowCount}
+        {manualPagination}
         selectedSlot={paginationSelectedSlot}
         unselectedSlot={paginationUnselectedSlot}
         {onPageChange}

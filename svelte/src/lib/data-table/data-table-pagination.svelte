@@ -23,7 +23,10 @@
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
   let totalPages = $derived(table.getPageCount())
   let totalItems = $derived.by(() => {
-    const rowCount = table.getRowCount?.()
+    // Access table.options to establish reactive dependencies
+    const _ = table.options.data // Track data changes
+    const rowCount = table.options.rowCount // Track rowCount changes
+
     if (table.options.manualPagination && rowCount !== undefined) {
       return rowCount
     }

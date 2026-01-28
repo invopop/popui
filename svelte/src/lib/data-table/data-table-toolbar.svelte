@@ -3,14 +3,14 @@
   import type { Snippet } from 'svelte'
   import { DataTableViewOptions } from './index.js'
 
-  let { table, filters }: { table: Table<TData>; filters?: Snippet } = $props()
+  let { table, filters, frozenColumns }: { table: Table<TData>; filters?: Snippet; frozenColumns: Set<string> } = $props()
 </script>
 
-<div class="flex items-center justify-between px-6 py-4">
+<div class="flex items-center justify-between px-4 py-4">
   {#if filters}
     <div class="flex-1">
       {@render filters()}
     </div>
   {/if}
-  <DataTableViewOptions {table} />
+  <DataTableViewOptions {table} {frozenColumns} />
 </div>

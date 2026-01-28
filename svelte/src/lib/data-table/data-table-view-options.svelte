@@ -8,7 +8,7 @@
   import BaseButton from '$lib/BaseButton.svelte'
   import { capitalize } from '$lib/helpers.js'
 
-  let { table }: { table: Table<TData> } = $props()
+  let { table, frozenColumns }: { table: Table<TData>; frozenColumns: Set<string> } = $props()
 
   let itemsWithActions = $state<DrawerOption[]>([])
 
@@ -31,14 +31,17 @@
       label: (col?.columnDef.header as string) || capitalize(col?.id || ''),
       value: col?.id,
       icon: Drag,
-      action: toggleAction
+      action: toggleAction,
+      locked: frozenColumns.has(col?.id || '')
     })) as DrawerOption[]
 
-    // Only update if the order has actually changed (avoid overwriting during drag)
+    // Only update if the order or locked status has changed (avoid overwriting during drag)
     const currentOrder = itemsWithActions.map((i) => i.value).join(',')
     const newOrder = newItems.map((i) => i.value).join(',')
+    const currentLocked = itemsWithActions.map((i) => i.locked ? '1' : '0').join(',')
+    const newLocked = newItems.map((i) => i.locked ? '1' : '0').join(',')
 
-    if (currentOrder !== newOrder) {
+    if (currentOrder !== newOrder || currentLocked !== newLocked) {
       itemsWithActions = newItems
     }
   })
@@ -55,10 +58,15 @@
     const selectColumn = 'select'
     const actionsColumn = 'actions'
 
-    // Build final order: select first (if exists), reordered columns in middle, actions last (if exists)
+    // Separate frozen and non-frozen columns from reordered items
+    const frozenCols = newOrder.filter((id) => frozenColumns.has(id))
+    const nonFrozenCols = newOrder.filter((id) => !frozenColumns.has(id) && id !== selectColumn && id !== actionsColumn)
+
+    // Build final order: select first, then frozen columns (in order), then non-frozen columns, then actions
     const finalOrder = [
       ...(allColumnIds.includes(selectColumn) ? [selectColumn] : []),
-      ...newOrder.filter((id) => id !== selectColumn && id !== actionsColumn),
+      ...frozenCols,
+      ...nonFrozenCols,
       ...(allColumnIds.includes(actionsColumn) ? [actionsColumn] : [])
     ]
 
@@ -70,6 +78,7 @@
   {@const column = table.getColumn(String(item.value))}
   {#if column?.getCanHide()}
     <InputToggle
+      class="cursor-default"
       checked={column?.getIsVisible() ?? false}
       onchange={(v) => column?.toggleVisibility(!!v)}
     />

@@ -75,7 +75,7 @@
 <div
   {id}
   class={cn(
-    'flex items-center justify-between h-11 px-4 py-[5px] bg-background backdrop-blur-[10px]',
+    'flex items-center justify-between h-11 px-4 py-[5px] bg-background backdrop-blur-[10px] border-t border-border',
     className
   )}
 >

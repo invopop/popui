@@ -4,11 +4,20 @@ import clsx from 'clsx'
 /**
  * Calculate inline styles for table headers
  */
-export function getHeaderStyle<TData>(header: Header<TData, unknown>, isLastScrollable: boolean): string {
+export function getHeaderStyle<TData>(
+  header: Header<TData, unknown>,
+  isLastScrollable: boolean,
+  isFrozen: boolean = false,
+  leftOffset: number = 0
+): string {
   const size = header.getSize()
 
   if (header.id === 'actions' || header.id === 'select') {
     return `width: ${size}px; min-width: ${size}px; max-width: ${size}px;`
+  }
+
+  if (isFrozen) {
+    return `min-width: ${size}px; max-width: ${size}px; left: ${leftOffset}px;`
   }
 
   if (isLastScrollable) {
@@ -25,22 +34,22 @@ export function getHeaderClasses<TData>(
   header: Header<TData, unknown>,
   isLastScrollable: boolean,
   isFirstHeader: boolean = false,
-  isLastHeader: boolean = false
+  isLastHeader: boolean = false,
+  isFrozen: boolean = false
 ): string {
-  const isSticky = header.id === 'actions' || header.id === 'select'
+  const isSticky = header.id === 'actions' || header.id === 'select' || isFrozen
 
   return clsx(
     'relative whitespace-nowrap overflow-hidden',
     {
       'sticky right-0 text-right bg-background': header.id === 'actions',
-      'sticky left-0 bg-background z-10': header.id === 'select',
+      'sticky left-0 bg-background z-10': header.id === 'select' || isFrozen,
       'w-full': isLastScrollable,
-      'hover:!bg-transparent': !header.column.getCanSort(),
-      '!pl-6': isFirstHeader && !isSticky,
-      '!pr-6': isLastHeader && !isSticky,
+      '!pl-4': isFirstHeader && !isSticky,
+      '!pr-4': isLastHeader && !isSticky,
       'px-3': isSticky,
-      'pl-6': isSticky && isFirstHeader,
-      'pr-6': isSticky && isLastHeader
+      'pl-4': isSticky && isFirstHeader,
+      'pr-4': isSticky && isLastHeader
     }
   )
 }
@@ -48,11 +57,20 @@ export function getHeaderClasses<TData>(
 /**
  * Calculate inline styles for table cells
  */
-export function getCellStyle<TData>(cell: Cell<TData, unknown>, isLastScrollable: boolean): string {
+export function getCellStyle<TData>(
+  cell: Cell<TData, unknown>,
+  isLastScrollable: boolean,
+  isFrozen: boolean = false,
+  leftOffset: number = 0
+): string {
   const size = cell.column.getSize()
 
   if (cell.column.id === 'actions' || cell.column.id === 'select') {
     return `width: ${size}px; min-width: ${size}px; max-width: ${size}px;`
+  }
+
+  if (isFrozen) {
+    return `min-width: ${size}px; max-width: ${size}px; left: ${leftOffset}px;`
   }
 
   if (isLastScrollable) {
@@ -70,20 +88,24 @@ export function getCellClasses<TData>(
   isLastScrollable: boolean,
   isFirstDataColumn: boolean = false,
   isFirstCell: boolean = false,
-  isLastCell: boolean = false
+  isLastCell: boolean = false,
+  isFrozen: boolean = false
 ): string {
-  const isSticky = cell.column.id === 'actions' || cell.column.id === 'select'
+  const isSticky = cell.column.id === 'actions' || cell.column.id === 'select' || isFrozen
+  const isCurrency = cell.column.columnDef.meta?.cellType === 'currency'
 
   return clsx(
     'whitespace-nowrap overflow-hidden',
     {
       'sticky right-0 text-right': cell.column.id === 'actions',
-      'sticky left-0 z-10': cell.column.id === 'select',
+      'sticky left-0 z-10': cell.column.id === 'select' || isFrozen,
+      'bg-background': isSticky,
       '!p-0': isSticky,
       'w-full': isLastScrollable,
       'font-medium': isFirstDataColumn,
-      '!pl-6': isFirstCell && !isSticky,
-      '!pr-6': isLastCell && !isSticky
+      '!pl-4': isFirstCell && !isSticky,
+      '!pr-4': isLastCell && !isSticky,
+      'text-right': isCurrency
     }
   )
 }

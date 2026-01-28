@@ -343,6 +343,10 @@ export interface BaseDropdownProps {
     sortDirection: TableSortBy;
     onOrderBy?: (direction: TableSortBy) => void;
     onHide?: () => void;
+    onFilter?: () => void;
+    onFreeze?: () => void;
+    isFrozen?: boolean;
+    showSortOptions?: boolean;
   }
 
   export interface BaseTableRowProps {

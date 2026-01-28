@@ -70,9 +70,15 @@
       Sortable.create(ungroupedContainer, {
         animation: 150,
         handle: '.draggable-item',
+        filter: '.no-drag',
+        preventOnFilter: false,
         ghostClass: 'opacity-10',
         dragClass: 'cursor-grabbing',
         forceFallback: true,
+        onMove: (event) => {
+          // Prevent moving items above locked items
+          return !event.related.classList.contains('no-drag')
+        },
         onEnd: (event) => {
           if (event.oldIndex !== undefined && event.newIndex !== undefined) {
             const newItems = [...items]
@@ -103,9 +109,15 @@
           Sortable.create(container, {
             animation: 150,
             handle: '.draggable-item',
+            filter: '.no-drag',
+            preventOnFilter: false,
             ghostClass: 'opacity-10',
             dragClass: 'cursor-grabbing',
             forceFallback: true,
+            onMove: (event) => {
+              // Prevent moving items above locked items
+              return !event.related.classList.contains('no-drag')
+            },
             onEnd: (event) => {
               if (event.oldIndex !== undefined && event.newIndex !== undefined) {
                 const newItems = [...items]
@@ -157,7 +169,7 @@
   {#if item.separator}
     <DrawerContextSeparator />
   {:else}
-    <div class:px-1={!item.groupBy} class:draggable-item={draggable} class:cursor-grab={draggable}>
+    <div class:px-1={!item.groupBy} class:draggable-item={draggable && !item.locked} class:cursor-grab={draggable && !item.locked} class:no-drag={item.locked}>
       <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
     </div>
   {/if}

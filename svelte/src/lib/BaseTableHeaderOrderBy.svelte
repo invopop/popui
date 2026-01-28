@@ -1,25 +1,31 @@
 <script lang="ts">
-  import { SortAscending, SortDescending, Preview } from '@invopop/ui-icons'
+  import { SortAscending, SortDescending, Preview, Filter, Lock } from '@invopop/ui-icons'
   import type { TableSortBy, DrawerOption, BaseTableHeaderOrderByProps } from './types.js'
   import DrawerContext from './DrawerContext.svelte'
 
-  let { isActive = false, sortDirection, onOrderBy, onHide }: BaseTableHeaderOrderByProps = $props()
+  let { isActive = false, sortDirection, onOrderBy, onHide, onFilter, onFreeze, isFrozen = false, showSortOptions = true }: BaseTableHeaderOrderByProps = $props()
 
   let items = $derived([
-    {
-      icon: SortAscending,
-      label: 'Sort Ascending',
-      value: 'asc',
-      selected: isActive && sortDirection === 'asc'
-    },
-    {
-      icon: SortDescending,
-      label: 'Sort Descending',
-      value: 'desc',
-      selected: isActive && sortDirection === 'desc'
-    },
-    { label: '', value: '', separator: true },
-    { icon: Preview, label: 'Hide', value: 'hide' }
+    ...(showSortOptions ? [
+      {
+        icon: SortAscending,
+        label: 'Sort Ascending',
+        value: 'asc',
+        selected: isActive && sortDirection === 'asc'
+      },
+      {
+        icon: SortDescending,
+        label: 'Sort Descending',
+        value: 'desc',
+        selected: isActive && sortDirection === 'desc'
+      },
+      { label: '', value: 'sep-1', separator: true }
+    ] : []),
+    { icon: Filter, label: 'Filter by column', value: 'filter' },
+    { label: '', value: 'sep-2', separator: true },
+    { icon: Lock, label: isFrozen ? 'Unfreeze column' : 'Freeze column', value: 'freeze' },
+    { label: '', value: 'sep-3', separator: true },
+    { icon: Preview, label: 'Hide column', value: 'hide' }
   ] as DrawerOption[])
 </script>
 
@@ -28,6 +34,10 @@
   onclick={(e) => {
     if (e === 'hide') {
       onHide?.()
+    } else if (e === 'filter') {
+      onFilter?.()
+    } else if (e === 'freeze') {
+      onFreeze?.()
     } else {
       onOrderBy?.(e as TableSortBy)
     }

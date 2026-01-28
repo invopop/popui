@@ -92,7 +92,9 @@
       {/if}
     </div>
     {#if item?.action}
-      {@render item.action(item)}
+      <div class="no-drag !cursor-default">
+        {@render item.action(item)}
+      </div>
     {:else if multiple}
       <InputCheckbox
         checked={item?.selected ?? false}

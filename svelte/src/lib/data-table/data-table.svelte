@@ -26,6 +26,7 @@
   import { calculateColumnSizing } from './column-sizing-helpers.js'
   import { getHeaderStyle, getHeaderClasses, getCellStyle, getCellClasses } from './table-styles.js'
   import { buildColumns, setupTable } from './table-setup.js'
+  import clsx from 'clsx'
 
   let {
     data,
@@ -36,6 +37,7 @@
     getRowActions,
     onRowAction,
     initialPageSize = 10,
+    initialPage = 0,
     emptyState = {
       iconSource: Search,
       title: 'No results',
@@ -52,6 +54,8 @@
     onPageChange,
     onPageSizeChange,
     onSortingChange,
+    onFilterChange,
+    onFreezeChange,
     getRowClassName
   }: DataTableProps<TData> = $props()
 
@@ -61,7 +65,7 @@
   let rowSelection = $state<RowSelectionState>({})
   let columnVisibility = $state<VisibilityState>({})
   let sorting = $state<SortingState>([])
-  let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: initialPageSize })
+  let pagination = $state<PaginationState>({ pageIndex: initialPage, pageSize: initialPageSize })
   let columnSizing = $state<ColumnSizingState>({})
   let columnSizingInfo = $state<ColumnSizingInfoState>({
     columnSizingStart: [],
@@ -73,6 +77,8 @@
   })
   let columnOrder = $state<ColumnOrderState>([])
   let containerRef = $state<HTMLDivElement | null>(null)
+  let columnDropdowns: Record<string, BaseDropdown> = {}
+  let frozenColumns = $state<Set<string>>(new Set())
 
   // Build TanStack columns from config
   const columns = $derived.by(() =>
@@ -93,6 +99,11 @@
         columnSizing = newSizing
       }
     }
+  })
+
+  // Sync pagination pageIndex with initialPage prop (for manual pagination resets)
+  $effect(() => {
+    pagination.pageIndex = initialPage
   })
 
   // Track selection changes
@@ -128,24 +139,89 @@
     setColumnSizingInfo: (value) => (columnSizingInfo = value),
     setColumnOrder: (value) => (columnOrder = value)
   })
+
+  function handleFreezeColumn(columnId: string) {
+    const isFrozen = frozenColumns.has(columnId)
+
+    if (isFrozen) {
+      // Unfreeze
+      frozenColumns.delete(columnId)
+      frozenColumns = new Set(frozenColumns)
+    } else {
+      // Freeze
+      frozenColumns.add(columnId)
+      frozenColumns = new Set(frozenColumns)
+
+      // Reorder columns to move frozen column to the left
+      const currentOrder = table.getState().columnOrder.length > 0
+        ? table.getState().columnOrder
+        : table.getAllLeafColumns().map(col => col.id)
+
+      const newOrder = [...currentOrder]
+      const columnIndex = newOrder.indexOf(columnId)
+
+      if (columnIndex > -1) {
+        // Remove from current position
+        newOrder.splice(columnIndex, 1)
+
+        // Find position to insert (after select column if present, otherwise at start)
+        const selectIndex = newOrder.indexOf('select')
+        const insertIndex = selectIndex >= 0 ? selectIndex + 1 : 0
+
+        // Find the last frozen column position
+        let lastFrozenIndex = insertIndex
+        for (let i = insertIndex; i < newOrder.length; i++) {
+          if (frozenColumns.has(newOrder[i])) {
+            lastFrozenIndex = i + 1
+          } else {
+            break
+          }
+        }
+
+        // Insert after the last frozen column
+        newOrder.splice(lastFrozenIndex, 0, columnId)
+
+        table.setColumnOrder(newOrder)
+      }
+    }
+  }
+
+  function calculateFrozenOffset(columnId: string, headers: any[]): number {
+    let offset = 0
+
+    // Find the position of current column
+    for (const header of headers) {
+      if (header.id === columnId) {
+        break
+      }
+      // Add width of previous frozen columns (or select column)
+      if (frozenColumns.has(header.id) || header.id === 'select') {
+        offset += header.getSize()
+      }
+    }
+
+    return offset
+  }
 </script>
 
 {#snippet StickyCellWrapper({
   children,
   align = 'left',
   isFirst = false,
-  isLast = false
+  isLast = false,
+  isFrozen = false
 }: {
   children: any
   align?: 'left' | 'right'
   isFirst?: boolean
   isLast?: boolean
+  isFrozen?: boolean
 })}
   <div
     class={cn(
-      'absolute inset-0 flex items-center group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected px-3',
+      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected px-3',
       align === 'right' ? 'justify-end' : '',
-      { 'pl-6': isFirst, 'pr-6': isLast }
+      { 'pl-4': isFirst, 'pr-4': isLast, 'border-r border-border': isFrozen }
     )}
   >
     <div class="relative z-10 flex items-center">
@@ -171,52 +247,69 @@
   class: className,
   ...restProps
 }: { column: Column<TData>; title?: string } & HTMLAttributes<HTMLDivElement>)}
-  {#if !column?.getCanSort()}
-    <div class={className} {...restProps}>
-      {title || ''}
-    </div>
-  {:else}
-    <div class={cn('flex items-center w-full', className)} {...restProps}>
-      <BaseDropdown fullWidth>
-        {#snippet trigger()}
-          <button
-            class="data-[state=open]:bg-accent w-full flex items-center gap-1 py-2.5 text-left"
-          >
-            <span>
-              {title || ''}
-            </span>
-            {#if column.getIsSorted() === 'desc'}
-              <Icon src={ArrowDown} class="size-4" />
-            {:else if column.getIsSorted() === 'asc'}
-              <Icon src={ArrowUp} class="size-4" />
-            {/if}
-          </button>
-        {/snippet}
-        <BaseTableHeaderOrderBy
-          sortDirection={column.getIsSorted() === 'asc' ? 'asc' : 'desc'}
-          isActive={column.getIsSorted() !== false}
-          onOrderBy={(direction) => {
-            column.toggleSorting(direction === 'desc')
-            // Reset to first page when sorting changes (same as page size change)
-            if (manualPagination) {
-              table.setPageIndex(0)
-              onPageChange?.(1)
-            }
-            if (onSortingChange) {
-              onSortingChange(column.id, direction)
-            }
-          }}
-          onHide={() => column.toggleVisibility(false)}
-        />
-      </BaseDropdown>
-    </div>
-  {/if}
+  {@const isCurrency = column.columnDef.meta?.cellType === 'currency'}
+  <div class={cn('flex items-center w-full', className)} {...restProps}>
+    <BaseDropdown bind:this={columnDropdowns[column.id]} fullWidth>
+      {#snippet trigger()}
+        <button
+          class={clsx('data-[state=open]:bg-accent w-full flex items-center gap-1 py-2.5', {
+            'justify-end': isCurrency,
+            'text-left': !isCurrency
+          })}
+        >
+          <span>
+            {title || ''}
+          </span>
+          {#if column.getIsSorted() === 'desc'}
+            <Icon src={ArrowDown} class="size-4" />
+          {:else if column.getIsSorted() === 'asc'}
+            <Icon src={ArrowUp} class="size-4" />
+          {/if}
+        </button>
+      {/snippet}
+      <BaseTableHeaderOrderBy
+        sortDirection={column.getIsSorted() === 'asc' ? 'asc' : 'desc'}
+        isActive={column.getIsSorted() !== false}
+        isFrozen={frozenColumns.has(column.id)}
+        showSortOptions={column.getCanSort()}
+        onOrderBy={(direction) => {
+          column.toggleSorting(direction === 'desc')
+          // Reset to first page when sorting changes (same as page size change)
+          if (manualPagination) {
+            table.setPageIndex(0)
+            onPageChange?.(1)
+          }
+          if (onSortingChange) {
+            onSortingChange(column.id, direction)
+          }
+          columnDropdowns[column.id]?.toggle()
+        }}
+        onHide={() => {
+          column.toggleVisibility(false)
+          columnDropdowns[column.id]?.toggle()
+        }}
+        onFilter={() => {
+          onFilterChange?.(column.id)
+          columnDropdowns[column.id]?.toggle()
+        }}
+        onFreeze={() => {
+          handleFreezeColumn(column.id)
+          onFreezeChange?.(column.id)
+          columnDropdowns[column.id]?.toggle()
+        }}
+      />
+    </BaseDropdown>
+  </div>
 {/snippet}
 
 <div class="flex flex-col h-full">
-  <DataTableToolbar {table} {filters} />
+  <DataTableToolbar {table} {filters} {frozenColumns} />
   <div class="flex-1 overflow-hidden flex flex-col">
-    <div bind:this={containerRef} class="relative bg-background flex-1 overflow-auto" style="overscroll-behavior-x: none;">
+    <div
+      bind:this={containerRef}
+      class="relative bg-background flex-1 overflow-auto"
+      style="overscroll-behavior-x: none;"
+    >
       <Table.Root class={data.length === 0 ? 'h-full' : 'h-auto'}>
         <Table.Header>
           {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
@@ -225,10 +318,13 @@
                 {@const isLastScrollable = index === headerGroup.headers.length - 2}
                 {@const isFirstHeader = index === 0}
                 {@const isLastHeader = index === headerGroup.headers.length - 1}
+                {@const prevHeader = index > 0 ? headerGroup.headers[index - 1] : null}
+                {@const isFrozen = frozenColumns.has(header.id)}
+                {@const frozenOffset = isFrozen ? calculateFrozenOffset(header.id, headerGroup.headers) : 0}
                 <Table.Head
                   colspan={header.colSpan}
-                  style={getHeaderStyle(header, isLastScrollable)}
-                  class={getHeaderClasses(header, isLastScrollable, isFirstHeader, isLastHeader)}
+                  style={getHeaderStyle(header, isLastScrollable, isFrozen, frozenOffset)}
+                  class={getHeaderClasses(header, isLastScrollable, isFirstHeader, isLastHeader, isFrozen)}
                 >
                   {#if !header.isPlaceholder}
                     {#if typeof header.column.columnDef.header === 'string'}
@@ -243,6 +339,32 @@
                       />
                     {/if}
                   {/if}
+                  <!-- Left resize handler (resizes previous column) -->
+                  {#if prevHeader && prevHeader.column.getCanResize()}
+                    <!-- Always visible vertical border on left -->
+                    <div
+                      class={cn(
+                        'absolute left-0 top-1/2 -translate-y-1/2 h-3 w-px bg-background-default-tertiary',
+                        prevHeader.column.getIsResizing() && 'opacity-0'
+                      )}
+                    ></div>
+                    <!-- Left resize handler -->
+                    <div
+                      role="button"
+                      tabindex="0"
+                      aria-label="Resize previous column"
+                      class="absolute left-0 top-0 h-full w-6 cursor-col-resize select-none touch-none group -ml-3"
+                      onmousedown={prevHeader.getResizeHandler()}
+                      ontouchstart={prevHeader.getResizeHandler()}
+                    >
+                      <div
+                        class={cn(
+                          'absolute left-1.5 top-0 h-full w-0.5 bg-border-default-secondary transition-opacity opacity-0',
+                          !prevHeader.column.getIsResizing() && 'group-hover:opacity-100'
+                        )}
+                      ></div>
+                    </div>
+                  {/if}
                   {#if header.column.getCanResize()}
                     <!-- Always visible vertical border -->
                     <div
@@ -256,7 +378,7 @@
                       role="button"
                       tabindex="0"
                       aria-label="Resize column"
-                      class="absolute right-0 top-0 h-full w-3 cursor-col-resize select-none touch-none group -mr-1.5"
+                      class="absolute right-0 top-0 h-full w-6 cursor-col-resize select-none touch-none group -mr-3"
                       onmousedown={header.getResizeHandler()}
                       ontouchstart={header.getResizeHandler()}
                     >
@@ -289,9 +411,18 @@
                 {@const isFirstDataColumn = index === firstDataColumnIndex}
                 {@const isFirstCell = index === 0}
                 {@const isLastCell = index === visibleCells.length - 1}
+                {@const isFrozen = frozenColumns.has(cell.column.id)}
+                {@const frozenOffset = isFrozen ? calculateFrozenOffset(cell.column.id, visibleCells.map(c => c.column)) : 0}
                 <Table.Cell
-                  style={getCellStyle(cell, isLastScrollable)}
-                  class={getCellClasses(cell, isLastScrollable, isFirstDataColumn, isFirstCell, isLastCell)}
+                  style={getCellStyle(cell, isLastScrollable, isFrozen, frozenOffset)}
+                  class={getCellClasses(
+                    cell,
+                    isLastScrollable,
+                    isFirstDataColumn,
+                    isFirstCell,
+                    isLastCell,
+                    isFrozen
+                  )}
                 >
                   {#if cell.column.id === 'actions'}
                     {@render StickyCellWrapper({
@@ -306,12 +437,13 @@
                         context={cell.getContext()}
                       />
                     {/snippet}
-                  {:else if cell.column.id === 'select'}
+                  {:else if cell.column.id === 'select' || isFrozen}
                     {@render StickyCellWrapper({
                       align: 'left',
                       children: CellContent,
                       isFirst: isFirstCell,
-                      isLast: isLastCell
+                      isLast: isLastCell,
+                      isFrozen: isFrozen
                     })}
                     {#snippet CellContent()}
                       <FlexRender
@@ -320,10 +452,7 @@
                       />
                     {/snippet}
                   {:else}
-                    <FlexRender
-                      content={cell.column.columnDef.cell}
-                      context={cell.getContext()}
-                    />
+                    <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
                   {/if}
                 </Table.Cell>
               {/each}

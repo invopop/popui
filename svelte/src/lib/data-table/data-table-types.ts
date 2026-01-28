@@ -73,6 +73,7 @@ export interface DataTableProps<TData> {
   getRowActions?: (row: TData) => TableAction[]
   onRowAction?: (action: AnyProp, row: TData) => void
   initialPageSize?: number
+  initialPage?: number // Initial page index (0-based, default: 0)
   pageSizeOptions?: number[]
   emptyState?: Omit<EmptyStateProps, 'children' | 'check'>
   onRowClick?: (row: TData) => void
@@ -87,6 +88,8 @@ export interface DataTableProps<TData> {
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void
   onSortingChange?: (columnId: string, direction: 'asc' | 'desc') => void
+  onFilterChange?: (columnId: string) => void
+  onFreezeChange?: (columnId: string) => void
   getRowClassName?: (row: TData) => string
 }
 

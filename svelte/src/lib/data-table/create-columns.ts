@@ -21,7 +21,10 @@ export function createColumns<TData>(columns: DataTableColumn<TData>[]): ColumnD
       enableResizing: col.enableResizing ?? true,
       size: col.size,
       minSize: col.minSize,
-      maxSize: col.maxSize
+      maxSize: col.maxSize,
+      meta: {
+        cellType: col.cellType
+      }
     }
 
     // Cell renderer

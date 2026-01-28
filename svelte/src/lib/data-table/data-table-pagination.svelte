@@ -24,7 +24,7 @@
   }: DataTablePaginationProps<any> = $props()
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
-  let totalPages = $derived(table.getPageCount())
+  let rowsPerPage = $derived(table.getState().pagination.pageSize)
   let totalItems = $derived.by(() => {
     // Use direct props for reactivity
     if (manualPagination && rowCount !== undefined) {
@@ -33,7 +33,8 @@
     // For client-side pagination, use data length directly
     return data?.length ?? 0
   })
-  let rowsPerPage = $derived(table.getState().pagination.pageSize)
+  // Calculate totalPages from reactive values instead of calling table.getPageCount()
+  let totalPages = $derived(Math.ceil(totalItems / rowsPerPage) || 1)
   let hasSelection = $derived(Object.keys(table.getState().rowSelection).length > 0)
 
   let pageInputValue = $derived(`${currentPage}`)

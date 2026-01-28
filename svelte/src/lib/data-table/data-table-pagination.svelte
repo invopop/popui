@@ -93,7 +93,12 @@
             icon={ArrowLeft}
             onclick={() => {
               const newPage = currentPage - 1
-              table.previousPage()
+              // For manual pagination, use setPageIndex directly to avoid TanStack's internal checks
+              if (manualPagination) {
+                table.setPageIndex(newPage - 1)
+              } else {
+                table.previousPage()
+              }
               onPageChange?.(newPage)
             }}
             disabled={currentPage === 1}
@@ -125,7 +130,12 @@
             icon={ArrowRight}
             onclick={() => {
               const newPage = currentPage + 1
-              table.nextPage()
+              // For manual pagination, use setPageIndex directly to avoid TanStack's internal checks
+              if (manualPagination) {
+                table.setPageIndex(newPage - 1)
+              } else {
+                table.nextPage()
+              }
               onPageChange?.(newPage)
             }}
             disabled={currentPage === totalPages}

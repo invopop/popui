@@ -1,9 +1,9 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.4-beta.22",
+  "version": "0.1.4-beta.23",
   "repository": {
-    "url":  "https://github.com/invopop/popui"
+    "url": "https://github.com/invopop/popui"
   },
   "scripts": {
     "dev": "vite dev",
@@ -55,7 +55,6 @@
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "@types/lodash-es": "^4.17.12",
-    "@types/sortablejs": "^1.15.9",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.28.0",
@@ -98,7 +97,7 @@
     "inter-ui": "^3.19.3",
     "lodash-es": "^4.17.21",
     "mode-watcher": "^1.1.0",
-    "sortablejs": "^1.15.6",
+    "svelte-dnd-action": "^0.9.69",
     "svelte-floating-ui": "^1.5.8",
     "svelte-headlessui": "^0.0.46",
     "svelte-intersection-observer-action": "^0.0.4",

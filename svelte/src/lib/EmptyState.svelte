@@ -31,8 +31,12 @@
     </div>
   {/if}
   <div class="flex flex-col items-center gap-0.5 text-center">
-    <h4 class="font-medium text-foreground text-base">{title}</h4>
-    <p class="text-foreground-default-secondary text-base">{description}</p>
+    {#if title}
+      <h4 class="font-medium text-foreground text-base">{title}</h4>
+    {/if}
+    {#if description}
+      <p class="text-foreground-default-secondary text-base">{description}</p>
+    {/if}
   </div>
   {#if children}
     <div class="mt-4">

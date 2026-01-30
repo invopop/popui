@@ -50,7 +50,7 @@
         {/if}
       </span>
     {/snippet}
-    <BaseDropdown bind:this={sortDropdown} {trigger} fullWidth>
+    <BaseDropdown bind:this={sortDropdown} {trigger} fullWidth usePortal={false}>
       <BaseTableHeaderOrderBy
         {sortDirection}
         isActive={sortBy === field.slug}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { DrawerContextProps, DrawerOption } from './types.ts'
+  import type { DrawerContextProps, DrawerOption, AnyProp } from './types.ts'
   import DrawerContextItem from './DrawerContextItem.svelte'
   import DrawerContextSeparator from './DrawerContextSeparator.svelte'
   import EmptyState from './EmptyState.svelte'
@@ -7,20 +7,27 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import { ChevronRight } from '@steeze-ui/heroicons'
   import { slide } from 'svelte/transition'
-  import Sortable from 'sortablejs'
+  import { flip } from 'svelte/animate'
+  import { dndzone } from 'svelte-dnd-action'
   import { onMount } from 'svelte'
+
+  const flipDurationMs = 150
 
   let {
     items = $bindable([]),
     multiple = false,
     draggable = false,
     widthClass = 'w-60',
+    collapsibleGroups = true,
     onclick,
     onselect,
     onreorder,
+    ondropitem,
     children,
     groups
   }: DrawerContextProps = $props()
+
+  type DndItem = DrawerOption & { id: string }
 
   let selectedItems = $derived(items.filter((i) => i.selected))
   let hasGroups = $derived(groups && groups.length > 0)
@@ -46,9 +53,75 @@
   })
 
   let openGroups = $state<Record<string, boolean>>({})
-  let ungroupedContainer: HTMLElement | null = $state(null)
-  let groupContainers: Record<string, HTMLElement | null> = {}
+  let groupDndItems = $state<Record<string, DndItem[]>>({})
+  let ungroupedDndItems = $state<DndItem[]>([])
+  let mounted = $state(false)
+  let itemsCache = $state<DrawerOption[]>([])
+  let isDragging = $state(false)
+  let emitTimeout: number | undefined
 
+  // Build internal DND items from external items
+  function buildListIn() {
+    if (hasGroups) {
+      // Build DND items for each group
+      groups!.forEach((group) => {
+        const groupItems = groupedItems.get(group.slug) || []
+        groupDndItems[group.slug] = groupItems.map((item: DrawerOption, i: number) => ({
+          ...item,
+          id: `${group.slug}-${item.value}-${i}`
+        }))
+      })
+    }
+
+    // Build DND items for ungrouped
+    ungroupedDndItems = ungroupedItems.map((item, i) => ({
+      ...item,
+      id: `ungrouped-${item.value}-${i}`
+    }))
+  }
+
+  // Build external items from internal DND items
+  function buildListOut() {
+    const newItems: DrawerOption[] = []
+    const used = new Set<AnyProp>()
+
+    // Add all grouped items
+    if (hasGroups) {
+      groups!.forEach((group) => {
+        const dndItems = groupDndItems[group.slug] || []
+        dndItems.forEach((dndItem) => {
+          if (!used.has(dndItem.value)) {
+            const { id, ...item } = dndItem
+            newItems.push({ ...item, groupBy: group.slug })
+            used.add(dndItem.value)
+          }
+        })
+      })
+    }
+
+    // Add ungrouped items
+    ungroupedDndItems.forEach((dndItem) => {
+      if (!used.has(dndItem.value)) {
+        const { id, ...item } = dndItem
+        newItems.push(item)
+        used.add(dndItem.value)
+      }
+    })
+
+    return newItems
+  }
+
+  // Sync items when they change from outside
+  $effect(() => {
+    if (items && mounted && !isDragging) {
+      if (JSON.stringify(items) !== JSON.stringify(itemsCache)) {
+        buildListIn()
+        itemsCache = JSON.parse(JSON.stringify(items))
+      }
+    }
+  })
+
+  // Open group with selected item on mount
   $effect(() => {
     if (hasGroups) {
       const selectedItem = items.find((i) => i.selected)
@@ -58,95 +131,78 @@
     }
   })
 
+  // Notify parent of selection changes
   $effect(() => {
     onselect?.(selectedItems)
   })
 
-  function initializeSortable() {
-    if (!draggable) return
+  onMount(() => {
+    itemsCache = JSON.parse(JSON.stringify(items))
+    buildListIn()
+    mounted = true
+  })
 
-    // Initialize sortable for ungrouped items
-    if (ungroupedContainer && ungroupedItems.length > 0) {
-      Sortable.create(ungroupedContainer, {
-        animation: 150,
-        handle: '.draggable-item',
-        filter: '.no-drag',
-        preventOnFilter: false,
-        ghostClass: 'opacity-10',
-        dragClass: 'cursor-grabbing',
-        forceFallback: true,
-        onMove: (event) => {
-          // Prevent moving items above locked items
-          return !event.related.classList.contains('no-drag')
-        },
-        onEnd: (event) => {
-          if (event.oldIndex !== undefined && event.newIndex !== undefined) {
-            const newItems = [...items]
-            const ungroupedIndices = items
-              .map((item, index) => (!item.groupBy ? index : -1))
-              .filter((i) => i !== -1)
-
-            const fromIndex = ungroupedIndices[event.oldIndex]
-            const toIndex = ungroupedIndices[event.newIndex]
-
-            const [removed] = newItems.splice(fromIndex, 1)
-            newItems.splice(toIndex, 0, removed)
-
-            items = newItems
-            onreorder?.(newItems)
-          }
-        }
-      })
-    }
-
-    // Initialize sortable for grouped items
-    if (hasGroups && groups) {
-      groups.forEach((group) => {
-        const container = groupContainers[group.slug]
-        const groupItems = groupedItems.get(group.slug) || []
-
-        if (container && groupItems.length > 0) {
-          Sortable.create(container, {
-            animation: 150,
-            handle: '.draggable-item',
-            filter: '.no-drag',
-            preventOnFilter: false,
-            ghostClass: 'opacity-10',
-            dragClass: 'cursor-grabbing',
-            forceFallback: true,
-            onMove: (event) => {
-              // Prevent moving items above locked items
-              return !event.related.classList.contains('no-drag')
-            },
-            onEnd: (event) => {
-              if (event.oldIndex !== undefined && event.newIndex !== undefined) {
-                const newItems = [...items]
-                const groupedIndices = items
-                  .map((item, index) => (item.groupBy === group.slug ? index : -1))
-                  .filter((i) => i !== -1)
-
-                const fromIndex = groupedIndices[event.oldIndex]
-                const toIndex = groupedIndices[event.newIndex]
-
-                const [removed] = newItems.splice(fromIndex, 1)
-                newItems.splice(toIndex, 0, removed)
-
-                items = newItems
-                onreorder?.(newItems)
-              }
-            }
-          })
-        }
-      })
+  function transformDraggedElement(draggedEl: HTMLElement | undefined) {
+    if (draggedEl) {
+      draggedEl.style.border = 'none'
+      draggedEl.style.outline = 'none'
     }
   }
 
-  onMount(() => {
-    if (draggable) {
-      // Small delay to ensure DOM is ready
-      setTimeout(initializeSortable, 100)
+  function emitGroupDistribution() {
+    if (ondropitem && hasGroups) {
+      // Clear any pending emit
+      if (emitTimeout) {
+        clearTimeout(emitTimeout)
+      }
+
+      // Debounce the emit to avoid duplicate calls when dragging between groups
+      emitTimeout = window.setTimeout(() => {
+        const groupsDistribution: Record<string, DrawerOption[]> = {}
+        groups!.forEach((group) => {
+          const dndItems = groupDndItems[group.slug] || []
+          groupsDistribution[group.slug] = dndItems.map(({ id, ...item }) => item)
+        })
+        ondropitem(groupsDistribution)
+      }, 0)
     }
-  })
+  }
+
+  function handleDndConsider(groupSlug: string, e: CustomEvent<any>) {
+    if (!isDragging) {
+      isDragging = true
+    }
+    groupDndItems[groupSlug] = e.detail.items
+  }
+
+  function handleDndFinalize(groupSlug: string, e: CustomEvent<any>) {
+    isDragging = false
+    groupDndItems[groupSlug] = e.detail.items
+
+    const newItems = buildListOut()
+    items = newItems
+    itemsCache = JSON.parse(JSON.stringify(items))
+    onreorder?.(newItems)
+    emitGroupDistribution()
+  }
+
+  function handleUngroupedDndConsider(e: CustomEvent<any>) {
+    if (!isDragging) {
+      isDragging = true
+    }
+    ungroupedDndItems = e.detail.items
+  }
+
+  function handleUngroupedDndFinalize(e: CustomEvent<any>) {
+    isDragging = false
+    ungroupedDndItems = e.detail.items
+
+    const newItems = buildListOut()
+    items = newItems
+    itemsCache = JSON.parse(JSON.stringify(items))
+    onreorder?.(newItems)
+    emitGroupDistribution()
+  }
 
   function updateItem(item: DrawerOption) {
     items = items.map((i) => {
@@ -157,11 +213,6 @@
 
   function toggleGroup(groupSlug: string) {
     openGroups = openGroups[groupSlug] ? {} : { [groupSlug]: true }
-
-    // Reinitialize sortable when a group is toggled
-    if (draggable) {
-      setTimeout(initializeSortable, 100)
-    }
   }
 </script>
 
@@ -169,7 +220,7 @@
   {#if item.separator}
     <DrawerContextSeparator />
   {:else}
-    <div class:px-1={!item.groupBy} class:draggable-item={draggable && !item.locked} class:cursor-grab={draggable && !item.locked} class:no-drag={item.locked}>
+    <div class:px-1={!item.groupBy} class:cursor-grab={draggable && !item.locked}>
       <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
     </div>
   {/if}
@@ -184,50 +235,88 @@
     {#each groups as group, index}
       {@const groupItems = groupedItems.get(group.slug) || []}
       {@const isLastGroup = index === groups!.length - 1}
-      {@const isOpen = openGroups[group.slug]}
-      {@const hasOpenGroup = Object.values(openGroups).some((v) => v)}
+      {@const isOpen = collapsibleGroups ? openGroups[group.slug] : true}
+      {@const hasOpenGroup = collapsibleGroups ? Object.values(openGroups).some((v) => v) : true}
       <div
         class="px-1"
-        class:flex-1={isOpen}
+        class:flex-1={isOpen && collapsibleGroups}
         class:flex={isOpen}
         class:flex-col={isOpen}
-        class:min-h-0={isOpen}
-        class:flex-shrink-0={!isOpen && hasOpenGroup}
+        class:min-h-0={isOpen && collapsibleGroups}
+        class:flex-shrink-0={!isOpen && hasOpenGroup && collapsibleGroups}
       >
-        <button
-          class="cursor-pointer flex items-center justify-between h-8 pl-2.5 pr-2.5 py-2.5 text-base font-medium text-foreground-default-secondary w-full hover:bg-background-default-secondary rounded-lg overflow-clip flex-shrink-0"
-          onclick={() => toggleGroup(group.slug)}
-        >
-          <div class="flex items-center gap-1.5">
+        {#if collapsibleGroups}
+          <button
+            class="cursor-pointer flex items-center justify-between h-8 pl-2.5 pr-2.5 py-2.5 text-base font-medium text-foreground-default-secondary w-full hover:bg-background-default-secondary rounded-lg overflow-clip flex-shrink-0"
+            onclick={() => toggleGroup(group.slug)}
+          >
+            <div class="flex items-center gap-1.5">
+              <span>{group.label}</span>
+              <Icon
+                src={ChevronRight}
+                class="size-3 text-icon-default-secondary transition-all transform {isOpen
+                  ? 'rotate-90'
+                  : ''}"
+              />
+            </div>
+            {#if groupItems.length && !group.hideCounter}
+              <BaseCounter value={groupItems.length} />
+            {/if}
+          </button>
+        {:else}
+          <div
+            class="flex items-center justify-between h-8 pl-2.5 pr-2.5 py-2.5 text-base font-medium text-foreground-default-secondary w-full overflow-clip flex-shrink-0"
+          >
             <span>{group.label}</span>
-            <Icon
-              src={ChevronRight}
-              class="size-3 text-icon-default-secondary transition-all transform {isOpen
-                ? 'rotate-90'
-                : ''}"
-            />
+            {#if groupItems.length && !group.hideCounter}
+              <BaseCounter value={groupItems.length} />
+            {/if}
           </div>
-          {#if groupItems.length}
-            <BaseCounter value={groupItems.length} />
-          {/if}
-        </button>
+        {/if}
 
         {#if isOpen}
           <div
-            class="w-full overflow-y-auto flex-1 min-h-0"
-            transition:slide={{ duration: 200 }}
-            bind:this={groupContainers[group.slug]}
+            class="w-full overflow-y-auto {collapsibleGroups ? 'flex-1 min-h-0' : ''}"
+            transition:slide={{ duration: collapsibleGroups ? 200 : 0 }}
           >
-            {#if !groupItems.length}
+            {#if draggable}
+              <div
+                use:dndzone={{
+                  items: groupDndItems[group.slug] || [],
+                  flipDurationMs,
+                  dropTargetStyle: {},
+                  type: 'drawer-item',
+                  transformDraggedElement
+                }}
+                onconsider={(e) => handleDndConsider(group.slug, e)}
+                onfinalize={(e) => handleDndFinalize(group.slug, e)}
+              >
+                {#if !groupItems.length}
+                  <div class="px-1 pt-1 pb-5">
+                    <EmptyState
+                      iconSource={group.emptyIcon}
+                      title={group.emptyTitle}
+                      description={group.emptyDescription}
+                    />
+                  </div>
+                {:else}
+                  {#each groupDndItems[group.slug] || [] as dndItem (dndItem.id)}
+                    <div animate:flip={{ duration: flipDurationMs }}>
+                      {@render drawerItem(dndItem)}
+                    </div>
+                  {/each}
+                {/if}
+              </div>
+            {:else if !groupItems.length}
               <div class="px-1 pt-1 pb-5">
                 <EmptyState
                   iconSource={group.emptyIcon}
-                  title={group.emptyTitle || 'No items here'}
-                  description={group.emptyDescription || 'Add items to get started'}
+                  title={group.emptyTitle}
+                  description={group.emptyDescription}
                 />
               </div>
             {:else}
-              {#each groupItems as item}
+              {#each groupItems as item (item.value)}
                 {@render drawerItem(item)}
               {/each}
             {/if}
@@ -241,10 +330,31 @@
   {/if}
 
   {#if ungroupedItems.length}
-    <div class="flex-shrink-0 overflow-y-auto max-h-[564px]" bind:this={ungroupedContainer}>
-      {#each ungroupedItems as item (item.value)}
-        {@render drawerItem(item)}
-      {/each}
-    </div>
+    {#if draggable}
+      <div
+        class="flex-shrink-0 overflow-y-auto max-h-[564px]"
+        use:dndzone={{
+          items: ungroupedDndItems,
+          flipDurationMs,
+          dropTargetStyle: {},
+          type: 'drawer-item',
+          transformDraggedElement
+        }}
+        onconsider={handleUngroupedDndConsider}
+        onfinalize={handleUngroupedDndFinalize}
+      >
+        {#each ungroupedDndItems as dndItem (dndItem.id)}
+          <div animate:flip={{ duration: flipDurationMs }}>
+            {@render drawerItem(dndItem)}
+          </div>
+        {/each}
+      </div>
+    {:else}
+      <div class="flex-shrink-0 overflow-y-auto max-h-[564px]">
+        {#each ungroupedItems as item (item.value)}
+          {@render drawerItem(item)}
+        {/each}
+      </div>
+    {/if}
   {/if}
 </div>

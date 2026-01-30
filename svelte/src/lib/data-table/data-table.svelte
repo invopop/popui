@@ -10,6 +10,7 @@
     type VisibilityState,
     type Column
   } from '@tanstack/table-core'
+  import { onMount, onDestroy } from 'svelte'
   import DataTableToolbar from './data-table-toolbar.svelte'
   import DataTablePagination from './data-table-pagination.svelte'
   import FlexRender from './flex-render.svelte'
@@ -33,6 +34,7 @@
     columns: columnConfig,
     disableSelection = false,
     disablePagination = false,
+    disableKeyboardNavigation = false,
     rowActions = [],
     getRowActions,
     onRowAction,
@@ -40,6 +42,7 @@
     initialPage = 0,
     initialSortColumn,
     initialSortDirection,
+    initialFrozenColumns = [],
     emptyState = {
       iconSource: Search,
       title: 'No results',
@@ -84,7 +87,9 @@
   let columnOrder = $state<ColumnOrderState>([])
   let containerRef = $state<HTMLDivElement | null>(null)
   let columnDropdowns: Record<string, BaseDropdown> = {}
-  let frozenColumns = $state<Set<string>>(new Set())
+  let frozenColumns = $state<Set<string>>(new Set(initialFrozenColumns))
+  let focusedRowIndex = $state<number>(-1)
+  let tableBodyRef: HTMLTableSectionElement | null = null
 
   // Build TanStack columns from config
   const columns = $derived.by(() =>
@@ -110,6 +115,13 @@
   // Sync pagination pageIndex with initialPage prop (for manual pagination resets)
   $effect(() => {
     pagination.pageIndex = initialPage
+  })
+
+  // Reorder initial frozen columns on mount
+  $effect(() => {
+    if (initialFrozenColumns.length > 0 && columnOrder.length === 0) {
+      initialFrozenColumns.forEach(columnId => reorderFrozenColumn(columnId))
+    }
   })
 
   // Track selection changes
@@ -146,49 +158,44 @@
     setColumnOrder: (value) => (columnOrder = value)
   })
 
+  function reorderFrozenColumn(columnId: string) {
+    const currentOrder = table.getState().columnOrder.length > 0
+      ? table.getState().columnOrder
+      : table.getAllLeafColumns().map(col => col.id)
+
+    const newOrder = [...currentOrder]
+    const columnIndex = newOrder.indexOf(columnId)
+
+    if (columnIndex > -1) {
+      newOrder.splice(columnIndex, 1)
+
+      const selectIndex = newOrder.indexOf('select')
+      const insertIndex = selectIndex >= 0 ? selectIndex + 1 : 0
+
+      let lastFrozenIndex = insertIndex
+      for (let i = insertIndex; i < newOrder.length; i++) {
+        if (frozenColumns.has(newOrder[i])) {
+          lastFrozenIndex = i + 1
+        } else {
+          break
+        }
+      }
+
+      newOrder.splice(lastFrozenIndex, 0, columnId)
+      table.setColumnOrder(newOrder)
+    }
+  }
+
   function handleFreezeColumn(columnId: string) {
     const isFrozen = frozenColumns.has(columnId)
 
     if (isFrozen) {
-      // Unfreeze
       frozenColumns.delete(columnId)
       frozenColumns = new Set(frozenColumns)
     } else {
-      // Freeze
       frozenColumns.add(columnId)
       frozenColumns = new Set(frozenColumns)
-
-      // Reorder columns to move frozen column to the left
-      const currentOrder = table.getState().columnOrder.length > 0
-        ? table.getState().columnOrder
-        : table.getAllLeafColumns().map(col => col.id)
-
-      const newOrder = [...currentOrder]
-      const columnIndex = newOrder.indexOf(columnId)
-
-      if (columnIndex > -1) {
-        // Remove from current position
-        newOrder.splice(columnIndex, 1)
-
-        // Find position to insert (after select column if present, otherwise at start)
-        const selectIndex = newOrder.indexOf('select')
-        const insertIndex = selectIndex >= 0 ? selectIndex + 1 : 0
-
-        // Find the last frozen column position
-        let lastFrozenIndex = insertIndex
-        for (let i = insertIndex; i < newOrder.length; i++) {
-          if (frozenColumns.has(newOrder[i])) {
-            lastFrozenIndex = i + 1
-          } else {
-            break
-          }
-        }
-
-        // Insert after the last frozen column
-        newOrder.splice(lastFrozenIndex, 0, columnId)
-
-        table.setColumnOrder(newOrder)
-      }
+      reorderFrozenColumn(columnId)
     }
   }
 
@@ -208,6 +215,88 @@
 
     return offset
   }
+
+  function handleKeydown(event: KeyboardEvent) {
+    const rows = table.getRowModel().rows
+    if (rows.length === 0) return
+
+    // Ignore if user is typing in an input or has a dropdown open
+    if ((event.target as HTMLElement).tagName === 'INPUT' ||
+        (event.target as HTMLElement).tagName === 'TEXTAREA') {
+      return
+    }
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault()
+        if (focusedRowIndex === -1 && rows.length > 0) {
+          // No row focused, focus first row
+          focusedRowIndex = 0
+          scrollToFocusedRow()
+          if (event.shiftKey && enableSelection) {
+            rows[focusedRowIndex].toggleSelected(true)
+          }
+        } else if (focusedRowIndex < rows.length - 1) {
+          // Move down
+          focusedRowIndex++
+          scrollToFocusedRow()
+          if (event.shiftKey && enableSelection) {
+            // Always select when going down
+            rows[focusedRowIndex].toggleSelected(true)
+          }
+        }
+        break
+      case 'ArrowUp':
+        event.preventDefault()
+        if (event.shiftKey && enableSelection && focusedRowIndex >= 0) {
+          // Deselect current row first when going up with shift
+          rows[focusedRowIndex].toggleSelected(false)
+        }
+        if (focusedRowIndex === -1 && rows.length > 0) {
+          // No row focused, focus first row
+          focusedRowIndex = 0
+          scrollToFocusedRow()
+        } else if (focusedRowIndex > 0) {
+          // Move up
+          focusedRowIndex--
+          scrollToFocusedRow()
+        }
+        break
+      case ' ':
+      case 'Enter':
+        event.preventDefault()
+        if (focusedRowIndex >= 0 && focusedRowIndex < rows.length && enableSelection) {
+          const row = rows[focusedRowIndex]
+          row.toggleSelected()
+        }
+        break
+      case 'Escape':
+        focusedRowIndex = -1
+        break
+    }
+  }
+
+  function scrollToFocusedRow() {
+    if (focusedRowIndex >= 0 && tableBodyRef) {
+      const rowElement = tableBodyRef.querySelector(`[data-row-index="${focusedRowIndex}"]`)
+      if (rowElement) {
+        rowElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+      }
+    }
+  }
+
+  // Add global keyboard navigation
+  onMount(() => {
+    if (!disableKeyboardNavigation) {
+      document.addEventListener('keydown', handleKeydown)
+    }
+  })
+
+  onDestroy(() => {
+    if (!disableKeyboardNavigation) {
+      document.removeEventListener('keydown', handleKeydown)
+    }
+  })
 </script>
 
 {#snippet StickyCellWrapper({
@@ -225,7 +314,7 @@
 })}
   <div
     class={cn(
-      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected px-3',
+      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected group-data-[focused=true]/row:bg-background-default-secondary px-3',
       align === 'right' ? 'justify-end' : '',
       { 'pl-4': isFirst, 'pr-4': isLast, 'border-r border-border': isFrozen }
     )}
@@ -255,7 +344,7 @@
 }: { column: Column<TData>; title?: string } & HTMLAttributes<HTMLDivElement>)}
   {@const isCurrency = column.columnDef.meta?.cellType === 'currency'}
   <div class={cn('flex items-center w-full', className)} {...restProps}>
-    <BaseDropdown bind:this={columnDropdowns[column.id]} fullWidth>
+    <BaseDropdown bind:this={columnDropdowns[column.id]} fullWidth usePortal={false}>
       {#snippet trigger()}
         <button
           class={clsx('data-[state=open]:bg-accent w-full flex items-center gap-1 py-2.5', {
@@ -397,10 +486,12 @@
             </Table.Row>
           {/each}
         </Table.Header>
-        <Table.Body>
-          {#each table.getRowModel().rows as row (row.id)}
+        <Table.Body bind:ref={tableBodyRef}>
+          {#each table.getRowModel().rows as row, rowIndex (row.id)}
             <Table.Row
               data-state={row.getIsSelected() ? 'selected' : undefined}
+              data-row-index={rowIndex}
+              data-focused={focusedRowIndex === rowIndex ? 'true' : undefined}
               class={cn('border-b border-border', getRowClassName?.(row.original as TData))}
               onclick={() => onRowClick?.(row.original as TData)}
             >

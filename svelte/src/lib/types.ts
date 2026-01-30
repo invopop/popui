@@ -53,6 +53,7 @@ export type DrawerGroup = {
   emptyIcon?: IconSource
   emptyTitle?: string
   emptyDescription?: string
+  hideCounter?: boolean
 }
 
 export type DrawerOption = SelectOption & {
@@ -274,6 +275,7 @@ export interface BaseDropdownProps {
     fullWidth?: boolean;
     placement?: Placement;
     matchParentWidth?: boolean;
+    usePortal?: boolean;
     trigger?: Snippet;
     children?: Snippet;
     [key: string]: any
@@ -457,9 +459,11 @@ export interface BaseDropdownProps {
     multiple?: boolean;
     draggable?: boolean;
     widthClass?: string;
+    collapsibleGroups?: boolean;
     onclick?: (value: AnyProp) => void;
     onselect?: (selected: DrawerOption[]) => void;
     onreorder?: (items: DrawerOption[]) => void;
+    ondropitem?: (groups: Record<string, DrawerOption[]>) => void;
     children?: Snippet;
     groups?: DrawerGroup[];
   }

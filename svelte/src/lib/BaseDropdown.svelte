@@ -10,11 +10,15 @@
     fullWidth = false,
     placement = 'bottom-start',
     matchParentWidth = false,
+    usePortal = true,
     class: className = '',
     trigger,
     children,
     ...rest
   }: BaseDropdownProps = $props()
+
+  // Conditional portal action - noop if disabled
+  const conditionalPortal = usePortal ? portal : () => {}
 
   const middleware = [offset(6), flip(), shift()]
 
@@ -31,13 +35,15 @@
     )
   }
 
+  let closedFromClickOutside = $state(false)
+
+  // Create floating actions with strategy based on usePortal
+  const strategy = usePortal ? 'absolute' : 'fixed'
   const [floatingRef, floatingContent] = createFloatingActions({
-    strategy: 'absolute',
+    strategy,
     placement,
     middleware
   })
-
-  let closedFromClickOutside = $state(false)
 
   export const toggle = () => {
     isOpen = !isOpen
@@ -62,7 +68,7 @@
   {#if isOpen}
     <div
       class="max-h-40 absolute z-1001"
-      use:portal
+      use:conditionalPortal
       use:floatingContent
       use:clickOutside
       onclick_outside={() => {

@@ -32,7 +32,7 @@ export const WithSeparator: Story = {
     items: [
       { label: 'Cobee S.L.', value: 'cobee' },
       { label: 'Payflow S.L.', value: 'payflow' },
-      { separator: true } as any,
+      { separator: true, value: 'sep-1' } as any,
       { label: 'Footer S.L.', value: 'footer' }
     ]
   }
@@ -146,7 +146,7 @@ export const WithGroupsAndUngrouped: Story = {
       { label: 'Cobee S.L.', value: 'cobee', groupBy: 'live' },
       { label: 'Payflow S.L.', value: 'payflow', groupBy: 'live', selected: true },
       { label: 'Test Company', value: 'test', groupBy: 'sandbox' },
-      { separator: true } as any,
+      { separator: true, value: 'sep-1' } as any,
       { label: 'Create workspace', value: 'add', icon: Close }
     ]
   }
@@ -459,7 +459,7 @@ export const WithGroupsAndAvatars: Story = {
         picture: 'https://i.pravatar.cc/150?img=30'
       },
       // Ungrouped items
-      { separator: true } as any,
+      { separator: true, value: 'sep-1' } as any,
       {
         label: 'Add new member',
         value: 'add-member',
@@ -468,18 +468,114 @@ export const WithGroupsAndAvatars: Story = {
       },
       {
         label: 'Delete internet',
-        value: 'manage',
+        value: 'delete',
         icon: Delete,
         destructive: true
       },
       {
         label: 'Admin',
-        value: 'manage',
+        value: 'admin',
         icon: Settings,
       },
-      { separator: true },
+      { separator: true, value: 'sep-2' } as any,
       { label: 'Logout', value: 'logout', destructive: true, icon: Logout }
     ]
+  }
+}
+
+export const NonCollapsibleGroups: Story = {
+  args: {
+    widthClass: 'w-[300px]',
+    collapsibleGroups: false,
+    groups: [
+      {
+        label: 'Live',
+        slug: 'live',
+        emptyIcon: Workspace,
+        emptyTitle: 'No live workspaces',
+        emptyDescription: 'Create a live workspace to start'
+      },
+      {
+        label: 'Sandbox',
+        slug: 'sandbox',
+        emptyIcon: Workspace,
+        emptyTitle: 'No sandbox workspaces',
+        emptyDescription: 'Create a sandbox workspace to test'
+      }
+    ],
+    items: [
+      { label: 'Cobee S.L.', value: 'cobee', groupBy: 'live' },
+      { label: 'Payflow S.L.', value: 'payflow', groupBy: 'live', selected: true },
+      { label: 'Company A', value: 'companya', groupBy: 'live' },
+      { label: 'Company B', value: 'companyb', groupBy: 'live' },
+      { label: 'Test Company', value: 'test', groupBy: 'sandbox' },
+      { label: 'Dev Company', value: 'dev', groupBy: 'sandbox' },
+      { label: 'Staging Company', value: 'staging', groupBy: 'sandbox' },
+      { separator: true, value: 'sep-1' } as any,
+      { label: 'Create workspace', value: 'add', icon: Close }
+    ]
+  }
+}
+
+export const NonCollapsibleGroupsWithEmptyGroup: Story = {
+  args: {
+    widthClass: 'w-[300px]',
+    collapsibleGroups: false,
+    groups: [
+      {
+        label: 'Active',
+        slug: 'active',
+        emptyIcon: Workspace,
+        emptyTitle: 'No active items',
+        emptyDescription: 'No active items available'
+      },
+      {
+        label: 'Archived',
+        slug: 'archived',
+        emptyIcon: Workspace,
+        emptyTitle: 'No archived items',
+        emptyDescription: 'No archived items to display'
+      }
+    ],
+    items: [
+      { label: 'Item 1', value: 'item1', groupBy: 'active' },
+      { label: 'Item 2', value: 'item2', groupBy: 'active', selected: true },
+      { label: 'Item 3', value: 'item3', groupBy: 'active' }
+    ]
+  }
+}
+
+export const NonCollapsibleGroupsWithSorting: Story = {
+  args: {
+    widthClass: 'w-[300px]',
+    collapsibleGroups: false,
+    draggable: true,
+    groups: [
+      {
+        label: 'High Priority',
+        slug: 'high',
+        emptyDescription: 'Drop items here',
+        hideCounter: true
+      },
+      {
+        label: 'Low Priority',
+        slug: 'low',
+        emptyDescription: 'Drop items here',
+        hideCounter: true
+      }
+    ],
+    items: [
+      { label: 'Task 1', value: 'task1', groupBy: 'high', icon: Settings },
+      { label: 'Task 2', value: 'task2', groupBy: 'high', icon: Edit, selected: true },
+      { label: 'Task 3', value: 'task3', groupBy: 'high', icon: Download },
+      { label: 'Task 4', value: 'task4', groupBy: 'high', icon: Close },
+      { label: 'Task 5', value: 'task5', groupBy: 'low', icon: Workspace },
+      { label: 'Task 6', value: 'task6', groupBy: 'low', icon: Delete },
+      { label: 'Task 7', value: 'task7', groupBy: 'low', icon: Logout }
+    ],
+    ondropitem: (groups: Record<string, any[]>) => {
+      console.log('Groups distribution:', groups)
+    }
   }
 }
 

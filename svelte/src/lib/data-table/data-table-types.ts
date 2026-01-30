@@ -69,6 +69,7 @@ export interface DataTableProps<TData> {
   columns: DataTableColumn<TData>[]
   disableSelection?: boolean
   disablePagination?: boolean
+  disableKeyboardNavigation?: boolean
   rowActions?: TableAction[]
   getRowActions?: (row: TData) => TableAction[]
   onRowAction?: (action: AnyProp, row: TData) => void
@@ -76,6 +77,7 @@ export interface DataTableProps<TData> {
   initialPage?: number // Initial page index (0-based, default: 0)
   initialSortColumn?: string // Initial column to sort by
   initialSortDirection?: 'asc' | 'desc' // Initial sort direction
+  initialFrozenColumns?: string[] // Initial columns to freeze (column IDs)
   pageSizeOptions?: number[]
   emptyState?: Omit<EmptyStateProps, 'children' | 'check'>
   onRowClick?: (row: TData) => void

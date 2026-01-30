@@ -74,6 +74,8 @@ export interface DataTableProps<TData> {
   onRowAction?: (action: AnyProp, row: TData) => void
   initialPageSize?: number
   initialPage?: number // Initial page index (0-based, default: 0)
+  initialSortColumn?: string // Initial column to sort by
+  initialSortDirection?: 'asc' | 'desc' // Initial sort direction
   pageSizeOptions?: number[]
   emptyState?: Omit<EmptyStateProps, 'children' | 'check'>
   onRowClick?: (row: TData) => void

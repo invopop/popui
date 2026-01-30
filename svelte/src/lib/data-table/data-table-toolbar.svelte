@@ -6,7 +6,7 @@
   let { table, filters, frozenColumns }: { table: Table<TData>; filters?: Snippet; frozenColumns: Set<string> } = $props()
 </script>
 
-<div class="flex items-center justify-between px-4 py-4">
+<div class="flex items-center justify-between px-4 py-3">
   {#if filters}
     <div class="flex-1">
       {@render filters()}

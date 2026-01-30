@@ -347,6 +347,7 @@ export interface BaseDropdownProps {
     onFreeze?: () => void;
     isFrozen?: boolean;
     showSortOptions?: boolean;
+    showFilterOption?: boolean;
   }
 
   export interface BaseTableRowProps {

@@ -38,6 +38,8 @@
     onRowAction,
     initialPageSize = 10,
     initialPage = 0,
+    initialSortColumn,
+    initialSortDirection,
     emptyState = {
       iconSource: Search,
       title: 'No results',
@@ -64,7 +66,11 @@
 
   let rowSelection = $state<RowSelectionState>({})
   let columnVisibility = $state<VisibilityState>({})
-  let sorting = $state<SortingState>([])
+  let sorting = $state<SortingState>(
+    initialSortColumn && initialSortDirection
+      ? [{ id: initialSortColumn, desc: initialSortDirection === 'desc' }]
+      : []
+  )
   let pagination = $state<PaginationState>({ pageIndex: initialPage, pageSize: initialPageSize })
   let columnSizing = $state<ColumnSizingState>({})
   let columnSizingInfo = $state<ColumnSizingInfoState>({
@@ -272,6 +278,7 @@
         isActive={column.getIsSorted() !== false}
         isFrozen={frozenColumns.has(column.id)}
         showSortOptions={column.getCanSort()}
+        showFilterOption={!column.columnDef.disableColumnFilter}
         onOrderBy={(direction) => {
           column.toggleSorting(direction === 'desc')
           // Reset to first page when sorting changes (same as page size change)
@@ -305,15 +312,24 @@
 <div class="flex flex-col h-full">
   <DataTableToolbar {table} {filters} {frozenColumns} />
   <div class="flex-1 overflow-hidden flex flex-col">
-    <div
-      bind:this={containerRef}
-      class="relative bg-background flex-1 overflow-auto"
-      style="overscroll-behavior-x: none;"
-    >
-      <Table.Root class={data.length === 0 ? 'h-full' : 'h-auto'}>
-        <Table.Header>
-          {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-            <Table.Row class="hover:!bg-transparent border-b border-border">
+    {#if data.length === 0}
+      <div class="flex-1 flex items-center justify-center bg-background">
+        <EmptyState
+          iconSource={emptyState.iconSource}
+          title={emptyState.title}
+          description={emptyState.description}
+        />
+      </div>
+    {:else}
+      <div
+        bind:this={containerRef}
+        class="relative bg-background flex-1 overflow-auto"
+        style="overscroll-behavior-x: none;"
+      >
+        <Table.Root>
+          <Table.Header>
+            {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
+              <Table.Row class="hover:!bg-transparent border-t border-b border-border">
               {#each headerGroup.headers as header, index (header.id)}
                 {@const isLastScrollable = index === headerGroup.headers.length - 2}
                 {@const isFirstHeader = index === 0}
@@ -341,13 +357,6 @@
                   {/if}
                   <!-- Left resize handler (resizes previous column) -->
                   {#if prevHeader && prevHeader.column.getCanResize()}
-                    <!-- Always visible vertical border on left -->
-                    <div
-                      class={cn(
-                        'absolute left-0 top-1/2 -translate-y-1/2 h-3 w-px bg-background-default-tertiary',
-                        prevHeader.column.getIsResizing() && 'opacity-0'
-                      )}
-                    ></div>
                     <!-- Left resize handler -->
                     <div
                       role="button"
@@ -366,13 +375,6 @@
                     </div>
                   {/if}
                   {#if header.column.getCanResize()}
-                    <!-- Always visible vertical border -->
-                    <div
-                      class={cn(
-                        'absolute right-0 top-1/2 -translate-y-1/2 h-3 w-px bg-background-default-tertiary',
-                        header.column.getIsResizing() && 'opacity-0'
-                      )}
-                    ></div>
                     <!-- Resize handler (larger interactive area, enhanced on hover) -->
                     <div
                       role="button"
@@ -457,22 +459,11 @@
                 </Table.Cell>
               {/each}
             </Table.Row>
-          {:else}
-            <Table.Row class="hover:!bg-transparent h-full">
-              <Table.Cell colspan={columns.length} class="h-full !p-0">
-                <div class="flex items-center justify-center h-full w-full">
-                  <EmptyState
-                    iconSource={emptyState.iconSource}
-                    title={emptyState.title}
-                    description={emptyState.description}
-                  />
-                </div>
-              </Table.Cell>
-            </Table.Row>
           {/each}
         </Table.Body>
       </Table.Root>
     </div>
+    {/if}
     {#if enablePagination}
       <DataTablePagination
         {table}

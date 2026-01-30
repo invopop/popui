@@ -301,7 +301,7 @@
                   </div>
                 {:else}
                   {#each groupDndItems[group.slug] || [] as dndItem (dndItem.id)}
-                    <div animate:flip={{ duration: flipDurationMs }}>
+                    <div animate:flip={{ duration: isDragging ? flipDurationMs : 0 }}>
                       {@render drawerItem(dndItem)}
                     </div>
                   {/each}
@@ -344,7 +344,7 @@
         onfinalize={handleUngroupedDndFinalize}
       >
         {#each ungroupedDndItems as dndItem (dndItem.id)}
-          <div animate:flip={{ duration: flipDurationMs }}>
+          <div animate:flip={{ duration: isDragging ? flipDurationMs : 0 }}>
             {@render drawerItem(dndItem)}
           </div>
         {/each}

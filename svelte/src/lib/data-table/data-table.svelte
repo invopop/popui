@@ -399,7 +399,7 @@
 {/snippet}
 
 <div class="flex flex-col h-full">
-  <DataTableToolbar {table} {filters} {frozenColumns} />
+  <DataTableToolbar {table} {filters} {frozenColumns} onFreezeColumn={handleFreezeColumn} />
   <div class="flex-1 overflow-hidden flex flex-col">
     {#if data.length === 0}
       <div class="flex-1 flex items-center justify-center bg-background">

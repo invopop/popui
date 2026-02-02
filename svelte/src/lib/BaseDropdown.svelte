@@ -49,6 +49,10 @@
     isOpen = !isOpen
   }
 
+  export const close = () => {
+    isOpen = false
+  }
+
   function handleClick(event: MouseEvent) {
     event.stopPropagation()
     if (closedFromClickOutside) return

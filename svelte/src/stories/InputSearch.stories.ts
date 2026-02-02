@@ -52,3 +52,27 @@ export const WithDifferentIcon: Story = {
     shortcut: '⌘F'
   }
 }
+
+export const Loading: Story = {
+  args: {
+    placeholder: 'Search',
+    loading: true
+  }
+}
+
+export const LoadingWithShortcut: Story = {
+  args: {
+    placeholder: 'Search',
+    shortcut: '⌘F',
+    loading: true
+  }
+}
+
+export const LoadingWithValue: Story = {
+  args: {
+    value: 'Searching...',
+    placeholder: 'Search',
+    shortcut: '⌘F',
+    loading: true
+  }
+}

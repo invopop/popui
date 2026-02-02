@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { Search } from '@invopop/ui-icons'
+  import { Search, Close } from '@invopop/ui-icons'
   import ShortcutWrapper from './ShortcutWrapper.svelte'
   import type { InputSearchProps } from './types.js'
+  import clsx from 'clsx'
 
   const debounce = (target: HTMLInputElement) => {
     clearTimeout(timer)
@@ -18,6 +19,8 @@
     placeholder = '',
     icon = Search,
     focusOnLoad = false,
+    size = 'md',
+    loading = false,
     oninput,
     onclick,
     onfocus,
@@ -66,9 +69,22 @@
   <input
     bind:this={input}
     bind:value
-    type="search"
-    class="flex items-center gap-1 h-8 w-full px-2 py-1.5 pl-7 rounded-lg border bg-background-default-default text-base text-foreground-default-default placeholder:text-foreground-default-tertiary outline-none caret-foreground-accent focus:ring-0 border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active"
-    style:padding-right={shortcut ? `${shortcutKeys.length * 20 + 12}px` : undefined}
+    type="text"
+    class={clsx(
+      'flex items-center gap-1 w-full px-2 pl-7 rounded-lg border bg-background-default-default text-base text-foreground-default-default placeholder:text-foreground-default-tertiary outline-none caret-foreground-accent focus:ring-0 border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active',
+      {
+        'h-[26px]': size === 'xs',
+        'h-7 py-1': size === 'sm',
+        'h-8 py-1.5': size === 'md'
+      }
+    )}
+    style:padding-right={shortcut && (value || loading)
+      ? `${shortcutKeys.length * 20 + 32}px`
+      : shortcut
+        ? `${shortcutKeys.length * 20 + 12}px`
+        : value || loading
+          ? '28px'
+          : undefined}
     {placeholder}
     {...rest}
     oninput={handleInput}
@@ -77,6 +93,25 @@
     {onclick}
   />
   <Icon src={icon} class="absolute left-2 size-4 text-foreground-default-tertiary" />
+
+  {#if loading}
+    <div
+      class="absolute text-foreground-default-tertiary"
+      style:right={shortcut ? `${shortcutKeys.length * 20 + 16}px` : '8px'}
+    >
+      <div class="size-4 animate-spin rounded-full border-2 border-current border-t-transparent"></div>
+    </div>
+  {:else if value}
+    <button
+      type="button"
+      class="absolute text-foreground-default-tertiary hover:text-foreground-default-default"
+      style:right={shortcut ? `${shortcutKeys.length * 20 + 16}px` : '8px'}
+      onclick={clear}
+      tabindex="-1"
+    >
+      <Icon src={Close} class="size-4" />
+    </button>
+  {/if}
 
   {#if shortcut}
     <div class="absolute right-2 flex items-center gap-1">

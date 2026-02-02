@@ -65,7 +65,8 @@
   disabled={item?.disabled}
   onclick={handleClick}
 >
-  <div class="{styles} rounded-md pr-2 flex items-center justify-start w-full">
+  <div class="bg-background rounded-md">
+    <div class="{styles} rounded-md pr-2 flex items-center justify-start w-full">
     {#if item?.useAvatar}
       <ProfileAvatar name={item?.label || ''} picture={item?.picture || ''} variant="sm" />
     {:else if item?.picture}
@@ -110,5 +111,6 @@
     {:else if item?.rightIcon}
       <Icon src={item.rightIcon} class="size-4 text-icon-default-secondary" />
     {/if}
+    </div>
   </div>
 </button>

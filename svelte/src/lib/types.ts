@@ -586,6 +586,8 @@ export interface BaseDropdownProps {
     placeholder?: string;
     icon?: IconSource;
     focusOnLoad?: boolean;
+    size?: 'xs' | 'sm' | 'md';
+    loading?: boolean;
     oninput?: (value: string) => void;
     onclick?: (event: MouseEvent) => void;
     onfocus?: (event: FocusEvent) => void;
@@ -605,6 +607,7 @@ export interface BaseDropdownProps {
     placeholder?: string;
     disablePlaceholder?: boolean;
     errorText?: string;
+    size?: 'xs' | 'sm' | 'md';
     onchange?: (value: string) => void;
     [key: string]: any
   }
@@ -620,6 +623,7 @@ export interface BaseDropdownProps {
     stackLeft?: boolean;
     stackRight?: boolean;
     widthClass?: string;
+    size?: 'xs' | 'sm' | 'md';
     oninput?: (value: string) => void;
     onfocus?: (event: FocusEvent) => void;
     onblur?: (event: FocusEvent) => void;

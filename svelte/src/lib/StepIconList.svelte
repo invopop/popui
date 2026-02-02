@@ -9,33 +9,24 @@
   let restIcons = $derived(icons.slice(maxItems, icons.length))
 </script>
 
-{#snippet separator()}
-  <div class="hidden sm:block h-px w-3 bg-border shrink-0"></div>
-{/snippet}
-
 <TooltipProvider>
   <div class="flex flex-col space-y-2 sm:flex-row sm:flex-nowrap sm:space-y-0 items-center">
     {#each mainIcons as icon, i (i)}
       <Tooltip>
-        <TooltipTrigger class="shrink-0">
+        <TooltipTrigger class="shrink-0 {i > 0 ? 'sm:-ml-3' : ''}">
           <div
-            class="p-1.5 rounded-md border border-border flex items-center space-x-1 bg-background text-icon shrink-0"
+            class="p-1.5 rounded-md flex items-center space-x-1 bg-background-default-tertiary text-icon shrink-0 ring-2 ring-background"
           >
             <img src={icon.url} alt={icon.name} class="size-4 shrink-0" />
           </div>
         </TooltipTrigger>
         <TooltipContent>{icon.name}</TooltipContent>
       </Tooltip>
-
-      {#if i < mainIcons.length - 1}
-        {@render separator()}
-      {/if}
     {/each}
     {#if restIcons.length}
-      {@render separator()}
       <Tooltip>
-        <TooltipTrigger class="shrink-0">
-          <div class="flex items-center justify-center text-icon font-medium text-base size-7 shrink-0">
+        <TooltipTrigger class="shrink-0 sm:-ml-3">
+          <div class="flex items-center justify-center text-icon font-medium text-base size-7 shrink-0 rounded-md bg-background-default-tertiary ring-2 ring-background">
             +{restIcons.length}
           </div>
         </TooltipTrigger>

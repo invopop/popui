@@ -121,13 +121,14 @@
         </div>
         <div class="flex items-center gap-1.5">
           <div
-            class="w-12 [&>div]:gap-0 [&_input]:!h-7 [&_input]:[appearance:textfield] [&_input]:[&::-webkit-outer-spin-button]:appearance-none [&_input]:[&::-webkit-inner-spin-button]:appearance-none"
+            class="w-12 [&>div]:gap-0 [&_input]:[appearance:textfield] [&_input]:[&::-webkit-outer-spin-button]:appearance-none [&_input]:[&::-webkit-inner-spin-button]:appearance-none"
           >
             <InputText
               bind:value={pageInputValue}
               type="number"
               min="1"
               max={totalPages}
+              size="sm"
               oninput={handlePageInput}
               onblur={handlePageBlur}
             />
@@ -175,13 +176,14 @@
         </div>
       </div>
       {#if showRowsPerPage}
-        <div class="w-[105px] [&_select]:!h-7 [&_select]:!py-[4px]">
+        <div class="w-[105px]">
           <InputSelect
             value={`${rowsPerPage}`}
             options={rowsPerPageOptions.map((size) => ({
               value: `${size}`,
               label: `${size} rows`
             }))}
+            size="sm"
             onchange={(value) => {
               const size = Number(value)
               table.setPageSize(size)

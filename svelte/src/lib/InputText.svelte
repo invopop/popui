@@ -16,6 +16,7 @@
     stackLeft = false,
     stackRight = false,
     widthClass = '',
+    size = 'md',
     oninput,
     onkeydown,
     onfocus,
@@ -44,13 +45,17 @@
       {
         // Width defaults
         'w-full': !isStacked && !widthClass,
+        // Size variants (applied to all)
+        'h-[26px]': size === 'xs',
+        'h-7': size === 'sm',
+        'h-8': size === 'md',
         // Stacked styles
-        'h-[26px] border-0 rounded-none hover:bg-background-default-secondary focus:bg-background-default-default':
+        'border-0 rounded-none hover:bg-background-default-secondary focus:bg-background-default-default':
           isStacked,
         'rounded-l-lg': isStacked && stackLeft && !stackRight,
         'rounded-r-lg': isStacked && stackRight && !stackLeft,
         // Non-stacked styles
-        'h-8 rounded-lg border': !isStacked,
+        'rounded-lg border': !isStacked,
         'pointer-events-none bg-background-default-secondary border-border-default-default':
           !isStacked && disabled,
         'text-foreground-critical border-border-critical-bold caret-foreground-critical':

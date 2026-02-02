@@ -285,16 +285,37 @@
     }
   }
 
+  // Close dropdowns on horizontal scroll
+  let lastScrollLeft = 0
+  function handleScroll(event: Event) {
+    const target = event.target as HTMLDivElement
+    if (target.scrollLeft !== lastScrollLeft) {
+      lastScrollLeft = target.scrollLeft
+      // Close all column dropdowns
+      Object.values(columnDropdowns).forEach(dropdown => {
+        if (dropdown) {
+          dropdown.close()
+        }
+      })
+    }
+  }
+
   // Add global keyboard navigation
   onMount(() => {
     if (!disableKeyboardNavigation) {
       document.addEventListener('keydown', handleKeydown)
+    }
+    if (containerRef) {
+      containerRef.addEventListener('scroll', handleScroll)
     }
   })
 
   onDestroy(() => {
     if (!disableKeyboardNavigation) {
       document.removeEventListener('keydown', handleKeydown)
+    }
+    if (containerRef) {
+      containerRef.removeEventListener('scroll', handleScroll)
     }
   })
 </script>
@@ -304,19 +325,21 @@
   align = 'left',
   isFirst = false,
   isLast = false,
-  isFrozen = false
+  isFrozen = false,
+  isLastFrozen = false
 }: {
   children: any
   align?: 'left' | 'right'
   isFirst?: boolean
   isLast?: boolean
   isFrozen?: boolean
+  isLastFrozen?: boolean
 })}
   <div
     class={cn(
       'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected group-data-[focused=true]/row:bg-background-default-secondary px-3',
       align === 'right' ? 'justify-end' : '',
-      { 'pl-4': isFirst, 'pr-4': isLast, 'border-r border-border': isFrozen }
+      { 'pl-4': isFirst, 'pr-4': isLast, 'border-r border-border': isFrozen && isLastFrozen }
     )}
   >
     <div class="relative z-10 flex items-center">
@@ -347,7 +370,7 @@
     <BaseDropdown bind:this={columnDropdowns[column.id]} fullWidth usePortal={false}>
       {#snippet trigger()}
         <button
-          class={clsx('data-[state=open]:bg-accent w-full flex items-center gap-1 py-2.5', {
+          class={clsx('data-[state=open]:bg-accent hover:bg-background-default-secondary w-full flex items-center gap-1 py-2.5 px-3', {
             'justify-end': isCurrency,
             'text-left': !isCurrency
           })}
@@ -425,11 +448,13 @@
                 {@const isLastHeader = index === headerGroup.headers.length - 1}
                 {@const prevHeader = index > 0 ? headerGroup.headers[index - 1] : null}
                 {@const isFrozen = frozenColumns.has(header.id)}
+                {@const lastFrozenHeaderId = headerGroup.headers.slice().reverse().find(h => frozenColumns.has(h.id))?.id}
+                {@const isLastFrozenHeader = isFrozen && header.id === lastFrozenHeaderId}
                 {@const frozenOffset = isFrozen ? calculateFrozenOffset(header.id, headerGroup.headers) : 0}
                 <Table.Head
                   colspan={header.colSpan}
                   style={getHeaderStyle(header, isLastScrollable, isFrozen, frozenOffset)}
-                  class={getHeaderClasses(header, isLastScrollable, isFirstHeader, isLastHeader, isFrozen)}
+                  class={getHeaderClasses(header, isLastScrollable, isFirstHeader, isLastHeader, isFrozen, isLastFrozenHeader)}
                 >
                   {#if !header.isPlaceholder}
                     {#if typeof header.column.columnDef.header === 'string'}
@@ -437,6 +462,13 @@
                         column: header.column as Column<TData>,
                         title: header.column.columnDef.header as string
                       })}
+                    {:else if header.id === 'select'}
+                      <div class="flex items-center">
+                        <FlexRender
+                          content={header.column.columnDef.header}
+                          context={header.getContext()}
+                        />
+                      </div>
                     {:else}
                       <FlexRender
                         content={header.column.columnDef.header}
@@ -505,6 +537,8 @@
                 {@const isFirstCell = index === 0}
                 {@const isLastCell = index === visibleCells.length - 1}
                 {@const isFrozen = frozenColumns.has(cell.column.id)}
+                {@const lastFrozenColumnId = visibleCells.map(c => c.column).reverse().find(col => frozenColumns.has(col.id))?.id}
+                {@const isLastFrozen = isFrozen && cell.column.id === lastFrozenColumnId}
                 {@const frozenOffset = isFrozen ? calculateFrozenOffset(cell.column.id, visibleCells.map(c => c.column)) : 0}
                 <Table.Cell
                   style={getCellStyle(cell, isLastScrollable, isFrozen, frozenOffset)}
@@ -536,7 +570,8 @@
                       children: CellContent,
                       isFirst: isFirstCell,
                       isLast: isLastCell,
-                      isFrozen: isFrozen
+                      isFrozen: isFrozen,
+                      isLastFrozen: isLastFrozen
                     })}
                     {#snippet CellContent()}
                       <FlexRender

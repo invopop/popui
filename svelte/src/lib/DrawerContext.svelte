@@ -323,7 +323,7 @@
           </div>
         {/if}
       </div>
-      {#if !isLastGroup}
+      {#if !isLastGroup && collapsibleGroups}
         <DrawerContextSeparator />
       {/if}
     {/each}

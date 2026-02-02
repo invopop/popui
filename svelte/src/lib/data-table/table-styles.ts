@@ -35,15 +35,19 @@ export function getHeaderClasses<TData>(
   isLastScrollable: boolean,
   isFirstHeader: boolean = false,
   isLastHeader: boolean = false,
-  isFrozen: boolean = false
+  isFrozen: boolean = false,
+  isLastFrozen: boolean = false
 ): string {
   const isSticky = header.id === 'actions' || header.id === 'select' || isFrozen
+  const isResizable = header.column.getCanResize()
 
   return clsx(
     'relative whitespace-nowrap overflow-hidden',
     {
       'sticky right-0 text-right bg-background': header.id === 'actions',
       'sticky left-0 bg-background z-10': header.id === 'select' || isFrozen,
+      'border-r border-border': isFrozen && isLastFrozen,
+      'after:content-[""] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-px after:bg-background-default-tertiary': isResizable && !isSticky,
       'w-full': isLastScrollable,
       '!pl-4': isFirstHeader && !isSticky,
       '!pr-4': isLastHeader && !isSticky,

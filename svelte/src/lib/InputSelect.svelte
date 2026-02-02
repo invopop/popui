@@ -4,6 +4,7 @@
   import InputLabel from './InputLabel.svelte'
   import { resolveIcon } from './helpers.js'
   import InputError from './InputError.svelte'
+  import clsx from 'clsx'
 
   let {
     id = Math.random().toString(36).slice(2, 7),
@@ -17,6 +18,7 @@
     placeholder = 'Select one...',
     disablePlaceholder = true,
     errorText = '',
+    size = 'md',
     onchange,
     ...rest
   }: InputSelectProps = $props()
@@ -43,9 +45,16 @@
       {name}
       bind:value
       {disabled}
-      class="h-8 w-full px-2 py-1.5 rounded-lg border bg-background text-base outline-none focus:ring-0 border-border hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active text-foreground ui-select"
-      class:pl-7={resolvedIcon}
-      class:text-foreground-default-secondary={!value}
+      class={clsx(
+        'w-full px-2 rounded-lg border bg-background text-base outline-none focus:ring-0 border-border hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active text-foreground ui-select',
+        {
+          'h-[26px]': size === 'xs',
+          'h-7 py-1': size === 'sm',
+          'h-8 py-1.5': size === 'md',
+          'pl-7': resolvedIcon,
+          'text-foreground-default-secondary': !value
+        }
+      )}
       {...rest}
       onchange={handleChange}
     >

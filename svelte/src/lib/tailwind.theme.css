@@ -996,3 +996,17 @@
   font-variant-numeric: lining-nums tabular-nums;
   font-feature-settings: var(--font-mono-features);
 }
+
+/* Pulse icon animation */
+@keyframes pulse-fill {
+  0%, 100% { fill: var(--color-background-default-tertiary); }
+  40% { fill: var(--color-accent-50); }
+}
+
+.pulse-icon .r0 {
+  animation: pulse-fill 1.6s ease-in-out infinite 0s;
+}
+
+.pulse-icon .r1 {
+  animation: pulse-fill 1.6s ease-in-out infinite 0.16s;
+}

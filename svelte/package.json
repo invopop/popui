@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.4-beta.25",
+  "version": "0.1.4-beta.26",
   "repository": {
     "url": "https://github.com/invopop/popui"
   },
@@ -82,7 +82,7 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/core": "^1.5.1",
-    "@invopop/ui-icons": "^0.0.76",
+    "@invopop/ui-icons": "^0.0.78",
     "@steeze-ui/heroicons": "^2.2.3",
     "@steeze-ui/svelte-icon": "^1.6.2",
     "@tailwindcss/vite": "^4.1.12",

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { Search, Close } from '@invopop/ui-icons'
+  import { Search, Close, Pulse } from '@invopop/ui-icons'
   import ShortcutWrapper from './ShortcutWrapper.svelte'
   import type { InputSearchProps } from './types.js'
   import clsx from 'clsx'
@@ -96,10 +96,10 @@
 
   {#if loading}
     <div
-      class="absolute text-foreground-default-tertiary"
+      class="absolute"
       style:right={shortcut ? `${shortcutKeys.length * 20 + 16}px` : '8px'}
     >
-      <div class="size-4 animate-spin rounded-full border-2 border-current border-t-transparent"></div>
+      <Icon src={Pulse} class="size-4 pulse-icon" />
     </div>
   {:else if value}
     <button

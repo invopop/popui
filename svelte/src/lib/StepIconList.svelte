@@ -38,7 +38,7 @@
       <Tooltip>
         <TooltipTrigger class="shrink-0">
           <div
-            class="flex items-center justify-center text-icon font-medium text-base size-7 shrink-0 rounded-md bg-background-default-tertiary ml-[-1px]"
+            class="flex items-center justify-center text-icon font-medium text-sm size-7 shrink-0 rounded-md bg-background-default-tertiary ml-[-1px]"
           >
             +{restIcons.length}
           </div>

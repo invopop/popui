@@ -395,12 +395,9 @@
         showSortOptions={column.getCanSort()}
         showFilterOption={!column.columnDef.disableColumnFilter}
         onOrderBy={(direction) => {
-          // Always toggle sorting for immediate visual feedback
           column.toggleSorting(direction === 'desc')
-          // Reset to first page when sorting changes (same as page size change)
           if (manualPagination) {
             table.setPageIndex(0)
-            onPageChange?.(1)
           }
           if (onSortingChange) {
             onSortingChange(column.id, direction)

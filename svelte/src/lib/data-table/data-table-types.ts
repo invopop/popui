@@ -88,6 +88,7 @@ export interface DataTableProps<TData> {
   children?: Snippet // Snippet to render as empty state icon
   // Manual pagination (server-side) support
   manualPagination?: boolean // Enable server-side pagination mode
+  manualSorting?: boolean // Enable server-side sorting mode
   pageCount?: number // Total number of pages (for manual pagination)
   rowCount?: number // Total number of rows (for manual pagination)
   onPageChange?: (pageIndex: number) => void

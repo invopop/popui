@@ -61,6 +61,7 @@ interface TableSetupOptions<TData> {
   enablePagination: boolean
   // Manual pagination support
   manualPagination?: boolean
+  manualSorting?: boolean
   pageCount?: number
   getRowCount?: () => number | undefined
   // Data getters
@@ -174,9 +175,11 @@ export function setupTable<TData>(options: TableSetupOptions<TData>) {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel:
       options.enablePagination && !options.manualPagination ? getPaginationRowModel() : undefined,
-    getSortedRowModel: getSortedRowModel(),
+    getSortedRowModel: !options.manualSorting ? getSortedRowModel() : undefined,
     // Manual pagination configuration
-    manualPagination: options.manualPagination
+    manualPagination: options.manualPagination,
+    // Manual sorting configuration
+    manualSorting: options.manualSorting
   }
 
   // Only provide pageCount/rowCount for manual pagination

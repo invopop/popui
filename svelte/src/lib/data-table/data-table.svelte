@@ -54,6 +54,7 @@
     paginationSelectedSlot,
     paginationUnselectedSlot,
     manualPagination = false,
+    manualSorting = false,
     pageCount,
     rowCount,
     onPageChange,
@@ -150,6 +151,7 @@
     enableSelection,
     enablePagination,
     manualPagination,
+    manualSorting,
     pageCount,
     getRowCount: () => rowCount,
     getRowSelection: () => rowSelection,
@@ -402,7 +404,10 @@
         showSortOptions={column.getCanSort()}
         showFilterOption={!column.columnDef.disableColumnFilter}
         onOrderBy={(direction) => {
-          column.toggleSorting(direction === 'desc')
+          // In manual sorting mode, don't update internal state - let props control it
+          if (!manualSorting) {
+            column.toggleSorting(direction === 'desc')
+          }
           // Reset to first page when sorting changes (same as page size change)
           if (manualPagination) {
             table.setPageIndex(0)

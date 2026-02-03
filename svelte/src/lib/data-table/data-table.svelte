@@ -43,6 +43,7 @@
     initialSortColumn,
     initialSortDirection,
     initialFrozenColumns = [],
+    initialColumnOrder = [],
     emptyState = {
       iconSource: Search,
       title: 'No results',
@@ -63,6 +64,7 @@
     onFilterChange,
     onFreezeChange,
     onColumnResize,
+    onColumnOrderChange,
     getRowClassName,
     children
   }: DataTableProps<TData> = $props()
@@ -87,7 +89,7 @@
     startOffset: null,
     startSize: null
   })
-  let columnOrder = $state<ColumnOrderState>([])
+  let columnOrder = $state<ColumnOrderState>(initialColumnOrder)
   let containerRef = $state<HTMLDivElement | null>(null)
   let columnDropdowns: Record<string, BaseDropdown> = {}
   let frozenColumns = $state<Set<string>>(new Set(initialFrozenColumns))
@@ -134,6 +136,13 @@
         .filter((key) => rowSelection[key])
         .map((key) => data[parseInt(key)])
       onSelectionChange(selectedRows)
+    }
+  })
+
+  // Track column order changes
+  $effect(() => {
+    if (onColumnOrderChange && columnOrder.length > 0) {
+      onColumnOrderChange(columnOrder)
     }
   })
 
@@ -206,6 +215,9 @@
       frozenColumns = new Set(frozenColumns)
       reorderFrozenColumn(columnId)
     }
+
+    // Notify parent component of freeze change
+    onFreezeChange?.(columnId)
   }
 
   function calculateFrozenOffset(columnId: string, headers: any[]): number {

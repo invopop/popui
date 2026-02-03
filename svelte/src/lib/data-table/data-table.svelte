@@ -345,7 +345,7 @@
       { 'pl-4': isFirst, 'pr-4': isLast, 'border-r border-border': isFrozen && isLastFrozen }
     )}
   >
-    <div class="relative z-10 flex items-center">
+    <div class="relative z-10 flex items-center w-full">
       {@render children()}
     </div>
   </div>
@@ -594,7 +594,7 @@
       </Table.Root>
       {/if}
     </div>
-    {#if enablePagination}
+    {#if enablePagination && data.length > 0}
       <DataTablePagination
         {table}
         {data}

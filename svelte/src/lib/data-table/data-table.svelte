@@ -119,15 +119,6 @@
     pagination.pageIndex = initialPage
   })
 
-  // Sync sorting state with initialSort props (for manual sorting updates)
-  $effect(() => {
-    if (initialSortColumn && initialSortDirection) {
-      sorting = [{ id: initialSortColumn, desc: initialSortDirection === 'desc' }]
-    } else {
-      sorting = []
-    }
-  })
-
   // Reorder initial frozen columns on mount
   $effect(() => {
     if (initialFrozenColumns.length > 0 && columnOrder.length === 0) {
@@ -404,10 +395,8 @@
         showSortOptions={column.getCanSort()}
         showFilterOption={!column.columnDef.disableColumnFilter}
         onOrderBy={(direction) => {
-          // In manual sorting mode, don't update internal state - let props control it
-          if (!manualSorting) {
-            column.toggleSorting(direction === 'desc')
-          }
+          // Always toggle sorting for immediate visual feedback
+          column.toggleSorting(direction === 'desc')
           // Reset to first page when sorting changes (same as page size change)
           if (manualPagination) {
             table.setPageIndex(0)

@@ -118,6 +118,15 @@
     pagination.pageIndex = initialPage
   })
 
+  // Sync sorting state with initialSort props (for manual sorting updates)
+  $effect(() => {
+    if (initialSortColumn && initialSortDirection) {
+      sorting = [{ id: initialSortColumn, desc: initialSortDirection === 'desc' }]
+    } else {
+      sorting = []
+    }
+  })
+
   // Reorder initial frozen columns on mount
   $effect(() => {
     if (initialFrozenColumns.length > 0 && columnOrder.length === 0) {

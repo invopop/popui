@@ -45,6 +45,7 @@
 
   export const clear = () => {
     value = ''
+    oninput?.('')
   }
 
   let shortcutKeys = $derived(shortcut.split(''))

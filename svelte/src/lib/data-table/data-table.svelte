@@ -61,7 +61,8 @@
     onSortingChange,
     onFilterChange,
     onFreezeChange,
-    getRowClassName
+    getRowClassName,
+    children
   }: DataTableProps<TData> = $props()
 
   const enableSelection = !disableSelection
@@ -424,20 +425,23 @@
 <div class="flex flex-col h-full">
   <DataTableToolbar {table} {filters} {frozenColumns} onFreezeColumn={handleFreezeColumn} />
   <div class="flex-1 overflow-hidden flex flex-col">
-    {#if data.length === 0}
-      <div class="flex-1 flex items-center justify-center bg-background">
-        <EmptyState
-          iconSource={emptyState.iconSource}
-          title={emptyState.title}
-          description={emptyState.description}
-        />
-      </div>
-    {:else}
-      <div
-        bind:this={containerRef}
-        class="relative bg-background flex-1 overflow-auto"
-        style="overscroll-behavior-x: none;"
-      >
+    <div
+      bind:this={containerRef}
+      class="relative bg-background flex-1 overflow-auto"
+      style="overscroll-behavior-x: none;"
+    >
+      {#if data.length === 0}
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="pointer-events-auto">
+            <EmptyState
+              icon={children}
+              iconSource={emptyState.iconSource}
+              title={emptyState.title}
+              description={emptyState.description}
+            />
+          </div>
+        </div>
+      {:else}
         <Table.Root>
           <Table.Header>
             {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
@@ -588,8 +592,8 @@
           {/each}
         </Table.Body>
       </Table.Root>
+      {/if}
     </div>
-    {/if}
     {#if enablePagination}
       <DataTablePagination
         {table}

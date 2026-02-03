@@ -85,6 +85,7 @@ export interface DataTableProps<TData> {
   filters?: Snippet
   paginationSelectedSlot?: Snippet
   paginationUnselectedSlot?: Snippet
+  children?: Snippet // Snippet to render as empty state icon
   // Manual pagination (server-side) support
   manualPagination?: boolean // Enable server-side pagination mode
   pageCount?: number // Total number of pages (for manual pagination)

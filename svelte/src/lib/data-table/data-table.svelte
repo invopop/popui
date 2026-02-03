@@ -62,6 +62,7 @@
     onSortingChange,
     onFilterChange,
     onFreezeChange,
+    onColumnResize,
     getRowClassName,
     children
   }: DataTableProps<TData> = $props()
@@ -156,7 +157,12 @@
     setColumnVisibility: (value) => (columnVisibility = value),
     setSorting: (value) => (sorting = value),
     setPagination: (value) => (pagination = value),
-    setColumnSizing: (value) => (columnSizing = value),
+    setColumnSizing: (value) => {
+      columnSizing = value
+      if (onColumnResize && Object.keys(value).length > 0) {
+        onColumnResize(value)
+      }
+    },
     setColumnSizingInfo: (value) => (columnSizingInfo = value),
     setColumnOrder: (value) => (columnOrder = value)
   })

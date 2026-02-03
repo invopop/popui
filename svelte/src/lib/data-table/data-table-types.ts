@@ -96,6 +96,7 @@ export interface DataTableProps<TData> {
   onSortingChange?: (columnId: string, direction: 'asc' | 'desc') => void
   onFilterChange?: (columnId: string) => void
   onFreezeChange?: (columnId: string) => void
+  onColumnResize?: (columnSizes: Record<string, number>) => void
   getRowClassName?: (row: TData) => string
 }
 

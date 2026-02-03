@@ -105,7 +105,7 @@
   {:else if value}
     <button
       type="button"
-      class="absolute text-foreground-default-tertiary hover:text-foreground-default-default"
+      class="absolute text-foreground"
       style:right={shortcut ? `${shortcutKeys.length * 20 + 16}px` : '8px'}
       onclick={clear}
       tabindex="-1"

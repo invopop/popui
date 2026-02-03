@@ -387,7 +387,7 @@
   ...restProps
 }: { column: Column<TData>; title?: string } & HTMLAttributes<HTMLDivElement>)}
   {@const isCurrency = column.columnDef.meta?.cellType === 'currency'}
-  <div class={cn('flex items-center w-full', className)} {...restProps}>
+  <div class={cn('flex items-center w-full [th[data-last-frozen=true]_&]:border-r [th[data-last-frozen=true]_&]:border-border', className)} {...restProps}>
     <BaseDropdown bind:this={columnDropdowns[column.id]} fullWidth usePortal={false}>
       {#snippet trigger()}
         <button
@@ -432,7 +432,6 @@
         }}
         onFreeze={() => {
           handleFreezeColumn(column.id)
-          onFreezeChange?.(column.id)
           columnDropdowns[column.id]?.toggle()
         }}
       />
@@ -477,6 +476,7 @@
                   colspan={header.colSpan}
                   style={getHeaderStyle(header, isLastScrollable, isFrozen, frozenOffset)}
                   class={getHeaderClasses(header, isLastScrollable, isFirstHeader, isLastHeader, isFrozen, isLastFrozenHeader)}
+                  data-last-frozen={isFrozen && isLastFrozenHeader ? 'true' : undefined}
                 >
                   {#if !header.isPlaceholder}
                     {#if typeof header.column.columnDef.header === 'string'}

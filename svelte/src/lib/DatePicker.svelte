@@ -13,6 +13,7 @@
   import { offset, flip, shift } from 'svelte-floating-ui/dom'
   import { createFloatingActions } from 'svelte-floating-ui'
   import { portal } from 'svelte-portal'
+  import { cn } from './utils'
 
   const {
     startOfThisWeek,
@@ -144,11 +145,11 @@
   let hasSelectedDates = $derived(value.start !== undefined)
   let styles = $derived(
     isStacked
-      ? buttonVariants({
+      ? cn(buttonVariants({
           variant: 'ghost',
           stackedLeft: stackLeft,
           stackedRight: stackRight
-        })
+        }), 'font-normal')
       : clsx('border backdrop-blur-sm backdrop-filter', {
           'border-border-selected-bold shadow-active': isOpen,
           'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen

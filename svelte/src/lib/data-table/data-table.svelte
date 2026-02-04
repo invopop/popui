@@ -119,7 +119,9 @@
 
   // Sync pagination pageIndex with initialPage prop (for manual pagination resets)
   $effect(() => {
-    pagination.pageIndex = initialPage
+    if (manualPagination) {
+      pagination.pageIndex = initialPage
+    }
   })
 
   // Reorder initial frozen columns on mount

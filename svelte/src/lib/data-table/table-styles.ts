@@ -42,10 +42,10 @@ export function getHeaderClasses<TData>(
   const isResizable = header.column.getCanResize()
 
   return clsx(
-    'relative whitespace-nowrap overflow-hidden',
+    'relative whitespace-nowrap overflow-hidden before:content-[""] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-border',
     {
-      'sticky right-0 text-right bg-background': header.id === 'actions',
-      'sticky left-0 bg-background z-10': header.id === 'select' || isFrozen,
+      'sticky right-0 text-right bg-background before:z-20': header.id === 'actions',
+      'sticky left-0 bg-background z-10 before:z-20': header.id === 'select' || isFrozen,
       'after:content-[""] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-px after:bg-background-default-tertiary': isResizable && !isSticky,
       'w-full': isLastScrollable,
       '!pl-4': isFirstHeader && !isSticky,

@@ -494,7 +494,7 @@
         <Table.Root>
           <Table.Header>
             {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-              <Table.Row class="hover:!bg-transparent border-t border-b border-border">
+              <Table.Row class="hover:!bg-transparent">
               {#each headerGroup.headers as header, index (header.id)}
                 {@const isLastScrollable = index === headerGroup.headers.length - 2}
                 {@const isFirstHeader = index === 0}

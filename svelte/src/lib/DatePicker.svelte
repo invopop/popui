@@ -141,21 +141,22 @@
     end: undefined
   })
   let isOpen = $state(false)
+  let selectedLabel = $state(label)
   let isStacked = $derived(stackLeft || stackRight)
   let hasSelectedDates = $derived(value.start !== undefined)
+  let hasConfirmedDates = $derived(selectedLabel !== label)
   let styles = $derived(
     isStacked
-      ? cn(buttonVariants({
+      ? buttonVariants({
           variant: 'ghost',
           stackedLeft: stackLeft,
           stackedRight: stackRight
-        }), 'font-normal')
+        })
       : clsx('border backdrop-blur-sm backdrop-filter', {
           'border-border-selected-bold shadow-active': isOpen,
           'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen
         })
   )
-  let selectedLabel = $state(label)
 
   $effect(() => {
     if (!value.end) {
@@ -240,9 +241,11 @@
       />
     {/if}
     <span
-      class="flex-1 text-base truncate {hasSelectedDates
-        ? 'text-foreground'
-        : 'text-foreground-default-secondary'}"
+      class={clsx('flex-1 text-base truncate', {
+        'text-foreground': hasConfirmedDates,
+        'text-foreground-default-secondary': !hasConfirmedDates,
+        'font-normal': isStacked && !hasConfirmedDates
+      })}
     >
       {selectedLabel}
     </span>

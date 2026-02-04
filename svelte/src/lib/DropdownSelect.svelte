@@ -95,9 +95,11 @@
 
 {#snippet label()}
   <span
-    class="flex-1 text-base truncate {selectedItems.length
-      ? 'text-foreground'
-      : 'text-foreground-default-secondary'}"
+    class={clsx('flex-1 text-base truncate', {
+      'text-foreground': selectedItems.length,
+      'text-foreground-default-secondary': !selectedItems.length,
+      'font-normal': isStacked && !selectedItems.length
+    })}
   >
     {selectedLabel}
   </span>

@@ -204,12 +204,42 @@
     }
   }
 
+  function reorderUnfrozenColumn(columnId: string) {
+    const currentOrder = table.getState().columnOrder.length > 0
+      ? table.getState().columnOrder
+      : table.getAllLeafColumns().map(col => col.id)
+
+    const newOrder = [...currentOrder]
+    const columnIndex = newOrder.indexOf(columnId)
+
+    if (columnIndex > -1) {
+      newOrder.splice(columnIndex, 1)
+
+      const selectIndex = newOrder.indexOf('select')
+      const insertIndex = selectIndex >= 0 ? selectIndex + 1 : 0
+
+      // Find the first unfrozen column position (after all frozen columns)
+      let firstUnfrozenIndex = insertIndex
+      for (let i = insertIndex; i < newOrder.length; i++) {
+        if (frozenColumns.has(newOrder[i])) {
+          firstUnfrozenIndex = i + 1
+        } else {
+          break
+        }
+      }
+
+      newOrder.splice(firstUnfrozenIndex, 0, columnId)
+      table.setColumnOrder(newOrder)
+    }
+  }
+
   function handleFreezeColumn(columnId: string) {
     const isFrozen = frozenColumns.has(columnId)
 
     if (isFrozen) {
       frozenColumns.delete(columnId)
       frozenColumns = new Set(frozenColumns)
+      reorderUnfrozenColumn(columnId)
     } else {
       frozenColumns.add(columnId)
       frozenColumns = new Set(frozenColumns)

@@ -93,6 +93,16 @@
     value = val
     onSelect?.(value)
   }
+
+  export const open = () => {
+    if (!isOpen) {
+      selectDropdown?.toggle()
+    }
+  }
+
+  export const toggle = () => {
+    selectDropdown?.toggle()
+  }
 </script>
 
 {#snippet label()}

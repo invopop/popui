@@ -763,3 +763,16 @@ export interface BaseDropdownProps {
     onCopied?: (uuid: string) => void;
     onLinkClick?: (uuid: string) => void;
   }
+
+  // Re-export DataTable types
+  export type {
+    DataTableColumn,
+    DataTableProps,
+    CellType,
+    TextCellConfig,
+    BooleanCellConfig,
+    TagCellConfig,
+    DateCellConfig,
+    CurrencyCellConfig,
+    CellConfig
+  } from './data-table/data-table-types.js';

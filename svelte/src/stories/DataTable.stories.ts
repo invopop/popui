@@ -112,6 +112,7 @@ const columns: DataTableColumn<Invoice>[] = [
 		cellType: 'text',
 		enableSorting: false,
 		enableHiding: false,
+		disableColumnFilter: true,
 		size: 150,
 		minSize: 120
 	},
@@ -125,6 +126,7 @@ const columns: DataTableColumn<Invoice>[] = [
 		},
 		enableSorting: false,
 		enableResizing: false,
+		disableColumnFilter: true,
 		size: 60,
 		minSize: 60,
 		maxSize: 60
@@ -137,9 +139,6 @@ const columns: DataTableColumn<Invoice>[] = [
 		cellConfig: {
 			options: stateOptions,
 			showDot: true
-		},
-		filterFn: (row, id, value) => {
-			return value.includes(row.state)
 		},
 		size: 100,
 		minSize: 80
@@ -165,6 +164,7 @@ const columns: DataTableColumn<Invoice>[] = [
 		accessorKey: 'total',
 		header: 'Total',
 		cellType: 'currency',
+		disableColumnFilter: true,
 		size: 140,
 		minSize: 120
 	},

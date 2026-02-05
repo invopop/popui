@@ -59,6 +59,7 @@ export interface DataTableColumn<TData> {
   enableSorting?: boolean
   enableHiding?: boolean
   enableResizing?: boolean
+  disableColumnFilter?: boolean
   size?: number
   minSize?: number
   maxSize?: number

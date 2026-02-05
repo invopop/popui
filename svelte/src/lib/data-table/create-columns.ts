@@ -19,6 +19,7 @@ export function createColumns<TData>(columns: DataTableColumn<TData>[]): ColumnD
       enableSorting: col.enableSorting ?? true,
       enableHiding: col.enableHiding ?? true,
       enableResizing: col.enableResizing ?? true,
+      disableColumnFilter: col.disableColumnFilter ?? false,
       size: col.size,
       minSize: col.minSize,
       maxSize: col.maxSize,

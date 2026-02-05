@@ -27,6 +27,23 @@
       mockStepIcons[i % mockStepIcons.length]
     )
   }
+
+  // Generate UUID for each row based on invoice number
+  function generateUuid(invoiceNumber: string): string {
+    const num = parseInt(invoiceNumber.split('-')[2])
+    const segment1 = `${num.toString().padStart(8, '0')}`
+    const segment2 = `${(num * 17).toString(16).padStart(4, '0').slice(0, 4)}`
+    const segment3 = `${(num * 37).toString(16).padStart(4, '0').slice(0, 4)}`
+    const segment4 = `${(num * 73).toString(16).padStart(4, '0').slice(0, 4)}`
+    const segment5 = `${(num * 113).toString(16).padStart(12, '0').slice(0, 12)}`
+    return `${segment1}-${segment2}-${segment3}-${segment4}-${segment5}`
+  }
+
+  // Augment data with UUID field
+  const dataWithUuid = props.data.map((row: any) => ({
+    ...row,
+    id: generateUuid(row.invoice)
+  }))
 </script>
 
 {#snippet supplierCell(row: any)}
@@ -48,6 +65,9 @@
 
 <DataTable
   {...props}
+  data={dataWithUuid}
+  initialFrozenColumns={['invoice', 'signed']}
+  getRowClassName={() => 'h-[60px]'}
   columns={[
     ...props.columns.map((col) => {
       if (col.id === 'supplier') {
@@ -58,6 +78,21 @@
       }
       return col
     }),
+    {
+      id: 'id',
+      accessorKey: 'id',
+      header: 'ID',
+      cellType: 'uuid',
+      cellConfig: {
+        prefixLength: 4,
+        suffixLength: 4,
+        onCopy: (value: string) => console.log('UUID copied:', value)
+      },
+      enableSorting: false,
+      enableResizing: true,
+      size: 180,
+      minSize: 150
+    },
     {
       id: 'steps',
       header: 'Steps',

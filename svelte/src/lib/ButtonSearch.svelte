@@ -46,12 +46,13 @@
 
 <div
   class="overflow-hidden transition-all duration-300 ease-in-out relative rounded-md"
-  style={expanded ? 'width: 12rem;' : 'width: 2.5rem;'}
+  class:w-[280px]={expanded}
+  class:w-10={!expanded}
   use:clickOutside
   onclick_outside={handleClickOutside}
 >
   <div
-    class="w-48 transition-opacity duration-200 absolute left-0 top-0"
+    class="w-[280px] transition-opacity duration-200 absolute left-0 top-0"
     class:opacity-0={!expanded}
     class:opacity-100={expanded}
     class:pointer-events-none={!expanded}

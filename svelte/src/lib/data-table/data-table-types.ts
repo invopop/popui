@@ -1,7 +1,8 @@
 import type { Component, Snippet } from 'svelte'
-import type { StatusType, AnyProp, TableAction, EmptyStateProps } from '$lib/types.js'
+import type { StatusType, AnyProp, TableAction, EmptyStateProps, TableSortBy } from '$lib/types.js'
 import type { IconSource } from '@steeze-ui/svelte-icon'
 import type { Table } from '@tanstack/table-core'
+import type { RenderComponentConfig, RenderSnippetConfig } from './render-helpers.js'
 
 export type CellType = 'text' | 'boolean' | 'tag' | 'date' | 'currency' | 'uuid' | 'custom'
 
@@ -49,13 +50,21 @@ export type CellConfig =
   | CurrencyCellConfig
   | UuidCellConfig
 
+export interface DataTableColumnMeta {
+  filterType?: string
+  filterIcon?: IconSource
+  filterLabel?: string
+  dbField?: string
+  filterOptions?: Array<{ value: string; label: string; [key: string]: any }>
+}
+
 export interface DataTableColumn<TData> {
   id: string
   accessorKey?: keyof TData
   header?: string // Header text to display - can be any string like "Created At", "Customer Name", etc. Use empty string or omit for no header
   cellType?: CellType
   cellConfig?: CellConfig
-  cell?: Snippet<[TData]> | ((value: any, row: TData) => Snippet | Component | string)
+  cell?: Snippet<[TData]> | ((value: any, row: TData) => Snippet | Component | string | RenderComponentConfig<any> | RenderSnippetConfig<any>)
   enableSorting?: boolean
   enableHiding?: boolean
   enableResizing?: boolean
@@ -63,6 +72,7 @@ export interface DataTableColumn<TData> {
   size?: number
   minSize?: number
   maxSize?: number
+  meta?: DataTableColumnMeta
 }
 
 export interface DataTableProps<TData> {
@@ -78,7 +88,7 @@ export interface DataTableProps<TData> {
   initialPageSize?: number
   initialPage?: number // Initial page index (0-based, default: 0)
   initialSortColumn?: string // Initial column to sort by
-  initialSortDirection?: 'asc' | 'desc' // Initial sort direction
+  initialSortDirection?: TableSortBy // Initial sort direction
   initialFrozenColumns?: string[] // Initial columns to freeze (column IDs)
   initialColumnOrder?: string[] // Initial column order (column IDs)
   pageSizeOptions?: number[]
@@ -95,7 +105,7 @@ export interface DataTableProps<TData> {
   rowCount?: number // Total number of rows (for manual pagination)
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void
-  onSortingChange?: (columnId: string, direction: 'asc' | 'desc') => void
+  onSortingChange?: (columnId: string, direction: TableSortBy) => void
   onFilterChange?: (columnId: string) => void
   onFreezeChange?: (columnId: string) => void
   onColumnResize?: (columnSizes: Record<string, number>) => void

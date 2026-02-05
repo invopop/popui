@@ -3,6 +3,7 @@
   import { createFloatingActions } from 'svelte-floating-ui'
   import { clickOutside } from './clickOutside.js'
   import { portal } from 'svelte-portal'
+  import { slide } from 'svelte/transition'
   import type { BaseDropdownProps } from './types.js'
 
   let {
@@ -82,6 +83,7 @@
         }, 100)
         isOpen = false
       }}
+      transition:slide={{ duration: 100 }}
     >
       {@render children?.()}
     </div>

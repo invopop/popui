@@ -4,6 +4,7 @@
   import InputText from '$lib/InputText.svelte'
   import { ArrowLeft, ArrowRight, ScrollLeft, ScrollRight } from '@invopop/ui-icons'
   import { cn } from '$lib/utils.js'
+  import clsx from 'clsx'
   import type { DataTablePaginationProps } from './data-table-types.js'
 
   let {
@@ -14,13 +15,12 @@
     rowsPerPageOptions = [10, 25, 50, 100],
     itemsLabel = 'items',
     children,
-    selectedSlot,
-    unselectedSlot,
     onPageChange,
     onPageSizeChange,
     data,
     rowCount,
-    manualPagination
+    manualPagination,
+    disabled = false
   }: DataTablePaginationProps<any> = $props()
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
@@ -35,7 +35,6 @@
   })
   // Calculate totalPages from reactive values instead of calling table.getPageCount()
   let totalPages = $derived(Math.ceil(totalItems / rowsPerPage) || 1)
-  let hasSelection = $derived(Object.keys(table.getState().rowSelection).length > 0)
 
   let pageInputValue = $derived(`${currentPage}`)
 
@@ -79,7 +78,9 @@
     className
   )}
 >
-  <div class="flex items-center gap-3">
+  <div class={clsx('flex items-center gap-3', {
+    'pointer-events-none opacity-30': disabled
+  })}>
     <div class="flex items-center gap-2">
       <div class="flex items-center gap-1.5">
         <div class="flex items-center">
@@ -205,13 +206,9 @@
       </span>
     {/if}
   </div>
-  <div class="flex items-center gap-2">
-    {#if hasSelection && selectedSlot}
-      {@render selectedSlot()}
-    {:else if !hasSelection && unselectedSlot}
-      {@render unselectedSlot()}
-    {:else if children}
+  {#if children}
+    <div class="flex items-center gap-2">
       {@render children()}
-    {/if}
-  </div>
+    </div>
+  {/if}
 </div>

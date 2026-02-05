@@ -94,6 +94,23 @@ export const Multiple: Story = {
   }
 }
 
+export const MultipleWithColors: Story = {
+  args: {
+    placeholder: 'Label',
+    value: [
+      { value: 1, label: 'Draft', color: 'gray' },
+      { value: 2, label: 'Pending', color: 'yellow' }
+    ],
+    options: [
+      { value: 1, label: 'Draft', color: 'gray' },
+      { value: 2, label: 'Pending', color: 'yellow' },
+      { value: 3, label: 'Approved', color: 'green' },
+      { value: 4, label: 'Rejected', color: 'red' }
+    ],
+    multiple: true
+  }
+}
+
 export const WithLongText: Story = {
   args: {
     icon: Flag,

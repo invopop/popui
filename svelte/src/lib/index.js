@@ -9,6 +9,7 @@ import BaseTableActions from './BaseTableActions.svelte'
 import BaseTableHeaderContent from './BaseTableHeaderContent.svelte'
 import Breadcrumbs from './Breadcrumbs.svelte'
 import ButtonFile from './ButtonFile.svelte'
+import ButtonSearch from './ButtonSearch.svelte'
 import ButtonUuidCopy from './ButtonUuidCopy.svelte'
 import CardCheckbox from './CardCheckbox.svelte'
 import CardRelation from './CardRelation.svelte'
@@ -47,6 +48,7 @@ import ProgressBarCircle from './ProgressBarCircle.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import StatusLabel from './StatusLabel.svelte'
+import StepIcon from './StepIcon.svelte'
 import StepIconList from './StepIconList.svelte'
 import {
   Table,
@@ -92,6 +94,7 @@ export {
   BaseTableHeaderContent,
   Breadcrumbs,
   ButtonFile,
+  ButtonSearch,
   ButtonUuidCopy,
   CardCheckbox,
   CardRelation,
@@ -130,6 +133,7 @@ export {
   SeparatorHorizontal,
   ShortcutWrapper,
   StatusLabel,
+  StepIcon,
   StepIconList,
   Table,
   TableBody,

@@ -404,6 +404,18 @@ export interface BaseDropdownProps {
     oncopied?: (label: string) => void;
   }
 
+  export interface ButtonSearchProps {
+    value?: string;
+    expanded?: boolean;
+    placeholder?: string;
+    size?: 'sm' | 'md';
+    loading?: boolean;
+    autofocus?: boolean;
+    oninput?: (value: string) => void;
+    onExpand?: () => void;
+    onCollapse?: () => void;
+  }
+
   export interface CardCheckboxProps {
     id?: any;
     name?: string;
@@ -700,6 +712,13 @@ export interface BaseDropdownProps {
   export interface StepIconListProps {
     icons?: StepIcon[]
     [key: string]: any
+  }
+
+  export interface StepIconProps {
+    name?: string
+    showMask?: boolean
+    tooltipContent?: Snippet
+    children: Snippet
   }
 
   export interface TagSearchProps {

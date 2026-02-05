@@ -19,7 +19,7 @@
   bind:this={ref}
   data-slot="table-row"
   class={cn(
-    'group/row data-[state=selected]:bg-background-selected data-[state=checked]:bg-background-selected h-10 data-[state=selected]:hover:bg-background-selected data-[state=checked]:hover:bg-background-selected data-[focused=true]:bg-background-default-secondary',
+    'group/row hover:bg-background-default-secondary data-[state=selected]:bg-background-selected data-[state=checked]:bg-background-selected data-[state=error]:bg-background-critical data-[state=success]:bg-background-selected h-10 data-[state=selected]:hover:bg-background-selected data-[state=checked]:hover:bg-background-selected data-[state=error]:hover:bg-background-critical data-[state=success]:hover:bg-background-selected data-[focused=true]:bg-background-default-secondary',
     className
   )}
   {oncontextmenu}

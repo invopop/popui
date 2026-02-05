@@ -3,6 +3,9 @@ import DataTable from '../lib/data-table/data-table.svelte'
 import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
 import DataTableWithCustomCell from './helpers/DataTableWithCustomCell.svelte'
 import DataTableManualPagination from './helpers/DataTableManualPagination.svelte'
+import DataTableEmptyWithFilters from './helpers/DataTableEmptyWithFilters.svelte'
+import DataTableWithoutRowClick from './helpers/DataTableWithoutRowClick.svelte'
+import DataTableWithExternalSelection from './helpers/DataTableWithExternalSelection.svelte'
 import FullHeightDecorator from './decorartors/FullHeightDecorator.svelte'
 import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
 import { Sign } from '@invopop/ui-icons'
@@ -457,6 +460,107 @@ export const ManualPagination: Story = {
 	}),
 	args: {
 		data: generateInvoices(50),
+		columns,
+		rowActions,
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
+	}
+}
+
+export const EmptyWithFilters: Story = {
+	render: (args) => ({
+		Component: DataTableEmptyWithFilters,
+		props: args
+	}),
+	args: {
+		data: [],
+		columns,
+		rowActions,
+		emptyState: {
+			iconSource: undefined,
+			title: 'No invoices found',
+			description: 'Try adjusting your search or filter criteria'
+		}
+	}
+}
+
+export const EmptyWithFiltersDisabled: Story = {
+	render: (args) => ({
+		Component: DataTableEmptyWithFilters,
+		props: args
+	}),
+	args: {
+		data: [],
+		columns,
+		rowActions,
+		disableControls: true,
+		emptyState: {
+			iconSource: undefined,
+			title: 'No invoices found',
+			description: 'Controls are disabled while loading'
+		}
+	}
+}
+
+export const WithoutRowClick: Story = {
+	render: (args) => ({
+		Component: DataTableWithoutRowClick,
+		props: args
+	}),
+	args: {
+		data: generateInvoices(20),
+		columns,
+		rowActions,
+		onRowAction: (action, row) => {
+			console.log('Action:', action, 'Row:', row)
+		}
+	}
+}
+
+export const WithRowStates: Story = {
+	args: {
+		data: (() => {
+			const invoices = generateInvoices(50)
+			// Force some error states for demonstration
+			invoices[2].state = 'error'
+			invoices[5].state = 'error'
+			invoices[8].state = 'error'
+			// Force some paid states for demonstration
+			invoices[1].state = 'paid'
+			invoices[4].state = 'paid'
+			invoices[7].state = 'paid'
+			return invoices
+		})(),
+		columns,
+		rowActions,
+		getRowState: (row) => {
+			// Apply error state to rows with error state
+			if (row.state === 'error') {
+				return { isError: true }
+			}
+			// Apply success state to paid invoices
+			if (row.state === 'paid') {
+				return { isSuccess: true }
+			}
+			return {}
+		},
+		onRowAction: (action, row) => {
+			console.log('Action:', action, 'Row:', row)
+		},
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
+	}
+}
+
+export const WithNewRowFlashEffect: Story = {
+	render: (args) => ({
+		Component: DataTableWithExternalSelection,
+		props: args
+	}),
+	args: {
+		data: generateInvoices(20),
 		columns,
 		rowActions,
 		onRowClick: (row) => {

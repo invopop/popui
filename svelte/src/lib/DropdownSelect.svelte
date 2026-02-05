@@ -42,14 +42,16 @@
   )
 
   let selectedItems = $derived(items.filter((i) => i.selected))
-  let selectedColor = $derived(!multiple && items.find((i) => i.selected)?.color)
+  let selectedItem = $derived(items.find((i) => i.selected))
+  let showSingleIcon = $derived(!multiple || selectedItems.length === 1)
+  let selectedColor = $derived(!multiple && selectedItem?.color)
   let selectedColors = $derived(
     multiple ? selectedItems.filter((i) => i.color).map((i) => i.color) : []
   )
   let hasMultipleColors = $derived(multiple && selectedColors.length > 0)
-  let selectedIcon = $derived(!multiple && items.find((i) => i.selected)?.icon)
+  let selectedIcon = $derived(showSingleIcon && selectedItem?.icon)
   let selectedIconColor = $derived(
-    (!multiple && items.find((i) => i.selected)?.iconClass) || 'text-foreground-default-secondary'
+    (showSingleIcon && selectedItem?.iconClass) || 'text-foreground-default-secondary'
   )
   let selectedLabel = $derived(
     hasMultipleColors && selectedItems.length > 1

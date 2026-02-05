@@ -72,11 +72,11 @@
     bind:value
     type="text"
     class={clsx(
-      'flex items-center gap-1 w-full px-2 pl-7 rounded-lg border bg-background-default-default text-base text-foreground-default-default placeholder:text-foreground-default-tertiary outline-none caret-foreground-accent focus:ring-0 border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active',
+      'flex items-center gap-1 w-full px-2 pl-7 border bg-background-default-default text-base text-foreground-default-default placeholder:text-foreground-default-tertiary outline-none caret-foreground-accent focus:ring-0 border-border-default-secondary hover:border-border-default-secondary-hover focus:border-border-selected-bold focus:shadow-active',
       {
-        'h-[26px]': size === 'xs',
-        'h-7 py-1': size === 'sm',
-        'h-8 py-1.5': size === 'md'
+        'h-[26px] rounded-sm pl-5': size === 'xs',
+        'h-7 py-1 rounded-md pl-6': size === 'sm',
+        'h-8 py-1.5 rounded-lg': size === 'md'
       }
     )}
     style:padding-right={shortcut && (value || loading)
@@ -93,7 +93,11 @@
     {onblur}
     {onclick}
   />
-  <Icon src={icon} class="absolute left-2 size-4 text-foreground-default-tertiary" />
+  <Icon src={icon} class={clsx("absolute size-4 text-foreground-default-tertiary", {
+    'left-1': size === 'xs',
+    'left-1.5': size === 'sm',
+    'left-2': size === 'md'
+  })} />
 
   {#if loading}
     <div

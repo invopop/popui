@@ -70,6 +70,7 @@ export interface DataTableProps<TData> {
   disableSelection?: boolean
   disablePagination?: boolean
   disableKeyboardNavigation?: boolean
+  disableControls?: boolean // Disable all controls (filters, pagination, view options)
   rowActions?: TableAction[]
   getRowActions?: (row: TData) => TableAction[]
   onRowAction?: (action: AnyProp, row: TData) => void
@@ -84,8 +85,7 @@ export interface DataTableProps<TData> {
   onRowClick?: (row: TData) => void
   onSelectionChange?: (selectedRows: TData[]) => void
   filters?: Snippet
-  paginationSelectedSlot?: Snippet
-  paginationUnselectedSlot?: Snippet
+  paginationSlot?: Snippet
   children?: Snippet // Snippet to render as empty state icon
   // Manual pagination (server-side) support
   manualPagination?: boolean // Enable server-side pagination mode
@@ -100,6 +100,7 @@ export interface DataTableProps<TData> {
   onColumnResize?: (columnSizes: Record<string, number>) => void
   onColumnOrderChange?: (columnOrder: string[]) => void
   getRowClassName?: (row: TData) => string
+  getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean }
 }
 
 export interface DataTablePaginationProps<T> {
@@ -110,12 +111,11 @@ export interface DataTablePaginationProps<T> {
   rowsPerPageOptions?: number[]
   itemsLabel?: string
   children?: Snippet
-  selectedSlot?: Snippet
-  unselectedSlot?: Snippet
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void
   // Pass these directly for reactivity instead of accessing through table.options
   data?: T[]
   rowCount?: number
   manualPagination?: boolean
+  disabled?: boolean
 }

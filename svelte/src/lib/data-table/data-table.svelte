@@ -35,6 +35,7 @@
     disableSelection = false,
     disablePagination = false,
     disableKeyboardNavigation = false,
+    disableControls = false,
     rowActions = [],
     getRowActions,
     onRowAction,
@@ -52,8 +53,7 @@
     onRowClick,
     onSelectionChange,
     filters,
-    paginationSelectedSlot,
-    paginationUnselectedSlot,
+    paginationSlot,
     manualPagination = false,
     manualSorting = false,
     pageCount,
@@ -66,6 +66,7 @@
     onColumnResize,
     onColumnOrderChange,
     getRowClassName,
+    getRowState,
     children
   }: DataTableProps<TData> = $props()
 
@@ -95,6 +96,8 @@
   let frozenColumns = $state<Set<string>>(new Set(initialFrozenColumns))
   let focusedRowIndex = $state<number>(-1)
   let tableBodyRef: HTMLTableSectionElement | null = null
+  let animatingRows = $state<Set<any>>(new Set())
+  let previousData = $state<TData[]>([])
 
   // Build TanStack columns from config
   const columns = $derived.by(() =>
@@ -390,7 +393,7 @@
 })}
   <div
     class={cn(
-      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected group-data-[focused=true]/row:bg-background-default-secondary px-3',
+      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected group-data-[state=selected]/row:group-hover/row:bg-background-selected group-data-[state=error]/row:bg-background-critical group-data-[state=error]/row:group-hover/row:bg-background-critical group-data-[state=success]/row:bg-background-selected group-data-[state=success]/row:group-hover/row:bg-background-selected group-data-[focused=true]/row:bg-background-default-secondary px-3',
       align === 'right' ? 'justify-end' : '',
       { 'pl-4': isFirst, 'pr-4': isLast, 'border-r border-border': isFrozen && isLastFrozen }
     )}
@@ -416,16 +419,28 @@
   column,
   title,
   class: className,
+  isFirst = false,
+  hasSelectColumn = false,
   ...restProps
-}: { column: Column<TData>; title?: string } & HTMLAttributes<HTMLDivElement>)}
+}: { column: Column<TData>; title?: string; isFirst?: boolean; hasSelectColumn?: boolean } & HTMLAttributes<HTMLDivElement>)}
   {@const isCurrency = column.columnDef.meta?.cellType === 'currency'}
-  <div class={cn('flex items-center w-full [th[data-last-frozen=true]_&]:border-r [th[data-last-frozen=true]_&]:border-border', className)} {...restProps}>
+  {@const needsEdgePadding = isFirst && !hasSelectColumn}
+  <div
+    class={cn('flex items-center w-full [th[data-last-frozen=true]_&]:border-r [th[data-last-frozen=true]_&]:border-border', className)}
+    oncontextmenu={(e) => {
+      e.preventDefault()
+      columnDropdowns[column.id]?.toggle()
+    }}
+    {...restProps}
+  >
     <BaseDropdown bind:this={columnDropdowns[column.id]} fullWidth usePortal={false}>
       {#snippet trigger()}
         <button
-          class={clsx('data-[state=open]:bg-accent hover:bg-background-default-secondary w-full flex items-center gap-1 py-2.5 px-3', {
+          class={clsx('data-[state=open]:bg-accent hover:bg-background-default-secondary w-full flex items-center gap-1 py-2.5', {
             'justify-end': isCurrency,
-            'text-left': !isCurrency
+            'text-left': !isCurrency,
+            'pl-4 pr-3': needsEdgePadding,
+            'px-3': !needsEdgePadding
           })}
         >
           <span>
@@ -472,7 +487,7 @@
 {/snippet}
 
 <div class="flex flex-col h-full">
-  <DataTableToolbar {table} {filters} {frozenColumns} onFreezeColumn={handleFreezeColumn} />
+  <DataTableToolbar {table} {filters} {frozenColumns} onFreezeColumn={handleFreezeColumn} disabled={disableControls} />
   <div class="flex-1 overflow-hidden flex flex-col">
     <div
       bind:this={containerRef}
@@ -494,6 +509,7 @@
         <Table.Root>
           <Table.Header>
             {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
+              {@const hasSelectColumn = headerGroup.headers.some(h => h.id === 'select')}
               <Table.Row class="hover:!bg-transparent">
               {#each headerGroup.headers as header, index (header.id)}
                 {@const isLastScrollable = index === headerGroup.headers.length - 2}
@@ -514,7 +530,9 @@
                     {#if typeof header.column.columnDef.header === 'string'}
                       {@render ColumnHeader({
                         column: header.column as Column<TData>,
-                        title: header.column.columnDef.header as string
+                        title: header.column.columnDef.header as string,
+                        isFirst: isFirstHeader,
+                        hasSelectColumn
                       })}
                     {:else if header.id === 'select'}
                       <div class="flex items-center">
@@ -574,11 +592,17 @@
         </Table.Header>
         <Table.Body bind:ref={tableBodyRef}>
           {#each table.getRowModel().rows as row, rowIndex (row.id)}
+            {@const rowState = getRowState?.(row.original as TData)}
+            {@const isError = rowState?.isError ?? false}
+            {@const isSuccess = rowState?.isSuccess ?? false}
+            {@const dataState = row.getIsSelected() ? 'selected' : isError ? 'error' : isSuccess ? 'success' : undefined}
             <Table.Row
-              data-state={row.getIsSelected() ? 'selected' : undefined}
+              data-state={dataState}
               data-row-index={rowIndex}
               data-focused={focusedRowIndex === rowIndex ? 'true' : undefined}
-              class={cn('border-b border-border', getRowClassName?.(row.original as TData))}
+              class={cn(clsx('border-b border-border', {
+                'cursor-pointer': onRowClick
+              }), getRowClassName?.(row.original as TData))}
               onclick={() => onRowClick?.(row.original as TData)}
             >
               {#each row.getVisibleCells() as cell, index (cell.id)}
@@ -644,17 +668,20 @@
       </Table.Root>
       {/if}
     </div>
-    {#if enablePagination && data.length > 0}
+    {#if enablePagination}
       <DataTablePagination
         {table}
         {data}
         {rowCount}
         {manualPagination}
-        selectedSlot={paginationSelectedSlot}
-        unselectedSlot={paginationUnselectedSlot}
         {onPageChange}
         {onPageSizeChange}
-      />
+        disabled={disableControls}
+      >
+        {#if paginationSlot}
+          {@render paginationSlot()}
+        {/if}
+      </DataTablePagination>
     {/if}
   </div>
 </div>

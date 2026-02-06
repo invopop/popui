@@ -45,6 +45,7 @@
     initialSortDirection,
     initialFrozenColumns = [],
     initialColumnOrder = [],
+    initialColumnVisibility = {},
     emptyState = {
       iconSource: Search,
       title: 'No results',
@@ -65,6 +66,7 @@
     onFreezeChange,
     onColumnResize,
     onColumnOrderChange,
+    onColumnVisibilityChange,
     getRowClassName,
     getRowState,
     children
@@ -74,7 +76,7 @@
   const enablePagination = !disablePagination
 
   let rowSelection = $state<RowSelectionState>({})
-  let columnVisibility = $state<VisibilityState>({})
+  let columnVisibility = $state<VisibilityState>(initialColumnVisibility)
   let sorting = $state<SortingState>(
     initialSortColumn && initialSortDirection
       ? [{ id: initialSortColumn, desc: initialSortDirection === 'desc' }]
@@ -148,6 +150,13 @@
   $effect(() => {
     if (onColumnOrderChange && columnOrder.length > 0) {
       onColumnOrderChange(columnOrder)
+    }
+  })
+
+  // Track column visibility changes
+  $effect(() => {
+    if (onColumnVisibilityChange && Object.keys(columnVisibility).length > 0) {
+      onColumnVisibilityChange(columnVisibility)
     }
   })
 

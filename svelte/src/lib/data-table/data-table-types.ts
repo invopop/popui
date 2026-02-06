@@ -91,6 +91,7 @@ export interface DataTableProps<TData> {
   initialSortDirection?: TableSortBy // Initial sort direction
   initialFrozenColumns?: string[] // Initial columns to freeze (column IDs)
   initialColumnOrder?: string[] // Initial column order (column IDs)
+  initialColumnVisibility?: Record<string, boolean> // Initial column visibility state
   pageSizeOptions?: number[]
   emptyState?: Omit<EmptyStateProps, 'children' | 'check'>
   onRowClick?: (row: TData) => void
@@ -110,6 +111,7 @@ export interface DataTableProps<TData> {
   onFreezeChange?: (columnId: string) => void
   onColumnResize?: (columnSizes: Record<string, number>) => void
   onColumnOrderChange?: (columnOrder: string[]) => void
+  onColumnVisibilityChange?: (visibility: Record<string, boolean>) => void
   getRowClassName?: (row: TData) => string
   getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean }
 }

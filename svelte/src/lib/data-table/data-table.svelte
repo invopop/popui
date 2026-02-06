@@ -393,7 +393,7 @@
 })}
   <div
     class={cn(
-      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected group-data-[state=selected]/row:group-hover/row:bg-background-selected group-data-[state=error]/row:bg-background-critical group-data-[state=error]/row:group-hover/row:bg-background-critical group-data-[state=success]/row:bg-background-selected group-data-[state=success]/row:group-hover/row:bg-background-selected group-data-[focused=true]/row:bg-background-default-secondary px-3',
+      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected group-data-[state=selected]/row:group-hover/row:bg-background-selected group-data-[state=error]/row:bg-background-critical group-data-[state=error]/row:group-hover/row:bg-background-critical group-data-[state=success]/row:bg-background-selected group-data-[state=success]/row:group-hover/row:bg-background-selected group-data-[focused=true]/row:bg-background-default-secondary px-3 shadow-[inset_0_-1px_0_0_var(--color-border)]',
       align === 'right' ? 'justify-end' : '',
       { 'pl-4': isFirst, 'pr-4': isLast, 'border-r border-border': isFrozen && isLastFrozen }
     )}
@@ -600,13 +600,14 @@
               data-state={dataState}
               data-row-index={rowIndex}
               data-focused={focusedRowIndex === rowIndex ? 'true' : undefined}
-              class={cn(clsx('border-b border-border', {
+              class={cn(clsx('shadow-[inset_0_-1px_0_0_var(--color-border)]', {
                 'cursor-pointer': onRowClick
               }), getRowClassName?.(row.original as TData))}
               onclick={() => onRowClick?.(row.original as TData)}
             >
               {#each row.getVisibleCells() as cell, index (cell.id)}
                 {@const visibleCells = row.getVisibleCells()}
+                {@const allCells = row.getAllCells()}
                 {@const isLastScrollable = index === visibleCells.length - 2}
                 {@const firstDataColumnIndex = visibleCells.findIndex(
                   (c) => c.column.id !== 'select' && c.column.id !== 'actions'
@@ -615,9 +616,9 @@
                 {@const isFirstCell = index === 0}
                 {@const isLastCell = index === visibleCells.length - 1}
                 {@const isFrozen = frozenColumns.has(cell.column.id)}
-                {@const lastFrozenColumnId = visibleCells.map(c => c.column).reverse().find(col => frozenColumns.has(col.id))?.id}
+                {@const lastFrozenColumnId = allCells.map(c => c.column).reverse().find(col => frozenColumns.has(col.id))?.id}
                 {@const isLastFrozen = isFrozen && cell.column.id === lastFrozenColumnId}
-                {@const frozenOffset = isFrozen ? calculateFrozenOffset(cell.column.id, visibleCells.map(c => c.column)) : 0}
+                {@const frozenOffset = isFrozen ? calculateFrozenOffset(cell.column.id, allCells.map(c => c.column)) : 0}
                 <Table.Cell
                   style={getCellStyle(cell, isLastScrollable, isFrozen, frozenOffset)}
                   class={getCellClasses(

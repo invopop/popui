@@ -13,7 +13,7 @@
   bind:this={ref}
   data-slot="table-head"
   class={cn(
-    'text-foreground-default-secondary text-base font-normal text-left align-middle [&:has([role=checkbox])]:p-0 [&:has(button)]:p-0 px-3 bg-background',
+    'text-foreground-default-secondary text-base font-normal text-left align-middle [&:has([role=checkbox])]:p-0 [&:has(button)]:p-0 px-3 bg-background shadow-[inset_0_-1px_0_0_var(--color-border)]',
     className
   )}
   {...restProps}

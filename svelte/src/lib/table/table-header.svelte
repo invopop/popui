@@ -15,7 +15,7 @@
 <thead
   bind:this={ref}
   data-slot="table-header"
-  class={cn('sticky top-0 z-20 [&_tr]:border-b [&_tr]:border-border bg-background', className)}
+  class={cn('sticky top-0 z-20 bg-background', className)}
   onclick={bubble('click')}
   onkeydown={bubble('keydown')}
 >

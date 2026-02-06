@@ -568,3 +568,4 @@ export const WithNewRowFlashEffect: Story = {
 		}
 	}
 }
+

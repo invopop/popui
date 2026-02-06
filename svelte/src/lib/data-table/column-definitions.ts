@@ -27,9 +27,9 @@ export function createSelectionColumn<TData>(): ColumnDef<TData> {
     enableSorting: false,
     enableHiding: false,
     enableResizing: false,
-    size: 52,
-    minSize: 52,
-    maxSize: 52
+    size: 40,
+    minSize: 40,
+    maxSize: 40
   }
 }
 

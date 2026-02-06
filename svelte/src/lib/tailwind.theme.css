@@ -672,7 +672,7 @@
   --color-icon-inverse-secondary: var(--color-neutral-white-alpha-40);
   --color-icon-inverse-bold: var(--color-neutral-white-alpha-100);
 
-  --color-icon-selected-default: var(--color-positive-50);
+  --color-icon-selected-default: var(--color-accent-50);
   --color-icon-accent-default: var(--color-accent-50);
 
   --color-icon-success-default: var(--color-positive-50);
@@ -887,7 +887,7 @@
     --color-background-selected-default-hover: var(--color-accent-alpha-30);
     --color-background-selected-default-press: var(--color-accent-alpha-40);
     --color-background-selected-inverse: var(--color-white-10);
-    --color-background-selected-inverse-hover: var(--color-nwhite-20);
+    --color-background-selected-inverse-hover: var(--color-white-20);
     --color-background-selected-inverse-press: var(--color-white-30);
 
     --color-background-accent-default: var(--color-accent-60);
@@ -957,7 +957,7 @@
     --color-icon-inverse-secondary: var(--color-neutral-white-alpha-40);
     --color-icon-inverse-bold: var(--color-neutral-white-alpha-100);
 
-    --color-icon-selected-default: var(--color-positive-50);
+    --color-icon-selected-default: var(--color-accent-50);
     --color-icon-accent-default: var(--color-white);
     --color-icon-success-default: var(--color-positive-50);
 

@@ -51,7 +51,7 @@ export type CellConfig =
   | UuidCellConfig
 
 export interface DataTableColumnMeta {
-  filterType?: string
+  filterType?: 'select' | 'text' | 'numeric' | 'date' | 'uuid'
   filterIcon?: IconSource
   filterLabel?: string
   dbField?: string

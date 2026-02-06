@@ -178,6 +178,29 @@ export const SecondaryIconOnly: Story = {
   }
 }
 
+// Selected Variant
+export const Selected: Story = {
+  args: {
+    slot: 'Selected Button',
+    variant: 'selected'
+  }
+}
+
+export const SelectedWithIcon: Story = {
+  args: {
+    slot: 'Button',
+    icon: Cog6Tooth,
+    variant: 'selected'
+  }
+}
+
+export const SelectedIconOnly: Story = {
+  args: {
+    icon: Cog6Tooth,
+    variant: 'selected'
+  }
+}
+
 // Dark Variant (Navigation)
 export const Dark: Story = {
   decorators: [() => DarkBackgroundDecorator as any],

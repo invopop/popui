@@ -20,6 +20,8 @@
           'bg-transparent text-foreground hover:shadow-button-default active:shadow-button-pressed hover:bg-background-default-tertiary-hover active:bg-background-default-tertiary-hover [&_svg]:text-icon',
         secondary:
           'bg-background-default-tertiary text-foreground shadow-button-default hover:bg-background-default-tertiary-hover active:bg-background-default-tertiary-hover active:shadow-button-pressed [&_svg]:text-icon',
+        selected:
+          'bg-background-selected border border-border-selected text-foreground-selected shadow-button-default hover:bg-background-selected-hover active:bg-background-selected-hover active:shadow-button-pressed [&_svg]:text-icon-selected',
         dark: 'bg-transparent text-foreground-inverse border border-border-inverse-secondary hover:bg-background-selected-inverse active:bg-background-inverse-tertiary active:shadow-button-dark-pressed [&_svg]:text-icon-inverse',
         'dark-ghost':
           'bg-transparent text-foreground-inverse hover:bg-background-selected-inverse active:bg-background-inverse-tertiary active:shadow-button-dark-pressed [&_svg]:text-icon-inverse'
@@ -105,6 +107,11 @@
         variant: ['secondary', 'outline', 'ghost'],
         iconOnly: true,
         class: '[&_svg]:!text-icon-default-bold'
+      },
+      {
+        variant: 'selected',
+        iconOnly: true,
+        class: '[&_svg]:!text-icon-selected'
       },
       {
         variant: ['primary', 'warning', 'dark-ghost'],

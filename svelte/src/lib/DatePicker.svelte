@@ -120,7 +120,8 @@
     stackLeft = false,
     stackRight = false,
     icon = undefined,
-    iconTheme = 'default'
+    iconTheme = 'default',
+    isOpen = $bindable(false)
   }: DatePickerProps = $props()
 
   const [floatingRef, floatingContent] = createFloatingActions({
@@ -140,7 +141,6 @@
     start: undefined,
     end: undefined
   })
-  let isOpen = $state(false)
   let selectedLabel = $state(label)
   let isStacked = $derived(stackLeft || stackRight)
   let hasSelectedDates = $derived(value.start !== undefined)
@@ -218,6 +218,19 @@
     selectedLabel = getLabel()
 
     onSelect?.({ from: value.start?.toString() || '', to: value.end?.toString() || '' })
+  }
+
+  // Exposed methods
+  export function open() {
+    isOpen = true
+  }
+
+  export function close() {
+    isOpen = false
+  }
+
+  export function toggle() {
+    isOpen = !isOpen
   }
 </script>
 

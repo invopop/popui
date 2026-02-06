@@ -464,6 +464,7 @@ export interface BaseDropdownProps {
     stackRight?: boolean;
     icon?: IconSource | string;
     iconTheme?: IconTheme;
+    isOpen?: boolean;
   }
 
   export interface DrawerContextProps {

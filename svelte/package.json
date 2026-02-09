@@ -81,6 +81,9 @@
   "types": "./dist/index.d.ts",
   "type": "module",
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",
+    "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "^2.1.5",
+    "@atlaskit/pragmatic-drag-and-drop-hitbox": "^1.1.0",
     "@floating-ui/core": "^1.5.1",
     "@invopop/ui-icons": "^0.0.78",
     "@steeze-ui/heroicons": "^2.2.3",
@@ -97,7 +100,6 @@
     "inter-ui": "^3.19.3",
     "lodash-es": "^4.17.21",
     "mode-watcher": "^1.1.0",
-    "svelte-dnd-action": "^0.9.69",
     "svelte-floating-ui": "^1.5.8",
     "svelte-headlessui": "^0.0.46",
     "svelte-intersection-observer-action": "^0.0.4",

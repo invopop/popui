@@ -8,8 +8,26 @@
   import { ChevronRight } from '@steeze-ui/heroicons'
   import { slide } from 'svelte/transition'
   import { flip } from 'svelte/animate'
-  import { dndzone } from 'svelte-dnd-action'
-  import { onMount } from 'svelte'
+  import {
+    draggable as makeDraggable,
+    dropTargetForElements
+  } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
+  import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine'
+  import { autoScrollForElements } from '@atlaskit/pragmatic-drag-and-drop-auto-scroll/element'
+  import { reorder } from '@atlaskit/pragmatic-drag-and-drop/reorder'
+  import {
+    attachClosestEdge,
+    extractClosestEdge,
+    type Edge
+  } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
+  import { onMount, onDestroy, untrack } from 'svelte'
+  import {
+    shouldShowDropIndicator,
+    reorderItems,
+    moveItemBetweenGroups,
+    type DropIndicatorState,
+    type DndItem as DndItemType
+  } from './drawer-dnd-helpers'
 
   const flipDurationMs = 150
 
@@ -59,6 +77,9 @@
   let itemsCache = $state<DrawerOption[]>([])
   let isDragging = $state(false)
   let emitTimeout: number | undefined
+  let draggedOverGroup = $state<string | null>(null)
+  let dropIndicator = $state<DropIndicatorState>(null)
+  let cleanupFunctions: (() => void)[] = []
 
   // Build internal DND items from external items
   function buildListIn() {
@@ -140,14 +161,18 @@
     itemsCache = JSON.parse(JSON.stringify(items))
     buildListIn()
     mounted = true
+
+    // Set up auto-scroll
+    const autoScrollCleanup = autoScrollForElements({
+      element: document.documentElement
+    })
+    cleanupFunctions.push(autoScrollCleanup)
   })
 
-  function transformDraggedElement(draggedEl: HTMLElement | undefined) {
-    if (draggedEl) {
-      draggedEl.style.border = 'none'
-      draggedEl.style.outline = 'none'
-    }
-  }
+  onDestroy(() => {
+    cleanupFunctions.forEach((cleanup) => cleanup())
+    cleanupFunctions = []
+  })
 
   function emitGroupDistribution() {
     if (ondropitem && hasGroups) {
@@ -168,40 +193,199 @@
     }
   }
 
-  function handleDndConsider(groupSlug: string, e: CustomEvent<any>) {
-    if (!isDragging) {
-      isDragging = true
+  // Setup draggable item (Svelte action)
+  function setupDraggableItem(element: HTMLElement, params: [DndItem, string]) {
+    const [dndItem, groupSlug] = params
+    if (!element || dndItem.locked) return
+
+    const cleanup = makeDraggable({
+      element,
+      getInitialData: () => ({ id: dndItem.id, groupSlug, type: 'drawer-item' }),
+      onDragStart: () => {
+        isDragging = true
+        dropIndicator = null
+      },
+      onDrop: () => {
+        isDragging = false
+        dropIndicator = null
+      }
+    })
+
+    return {
+      destroy() {
+        cleanup()
+      }
     }
-    groupDndItems[groupSlug] = e.detail.items
   }
 
-  function handleDndFinalize(groupSlug: string, e: CustomEvent<any>) {
-    isDragging = false
-    groupDndItems[groupSlug] = e.detail.items
+  // Setup drop zone for a container (group or ungrouped) (Svelte action)
+  function setupDropZone(element: HTMLElement, groupSlug: string) {
+    if (!element) return
 
-    const newItems = buildListOut()
-    items = newItems
-    itemsCache = JSON.parse(JSON.stringify(items))
-    onreorder?.(newItems)
-    emitGroupDistribution()
-  }
+    const cleanup = dropTargetForElements({
+      element,
+      getData: () => {
+        const items =
+          groupSlug === 'ungrouped' ? ungroupedDndItems : groupDndItems[groupSlug] || []
+        return { groupSlug, items: items.map((i) => i.id) }
+      },
+      canDrop: ({ source }) => source.data.type === 'drawer-item',
+      onDragEnter: () => {
+        draggedOverGroup = groupSlug
+      },
+      onDragLeave: () => {
+        if (draggedOverGroup === groupSlug) {
+          draggedOverGroup = null
+        }
+      },
+      onDrop: ({ source, location }) => {
+        draggedOverGroup = null
+        dropIndicator = null
+        const sourceId = source.data.id as string
+        const sourceGroup = source.data.groupSlug as string
+        const targetGroup = groupSlug
 
-  function handleUngroupedDndConsider(e: CustomEvent<any>) {
-    if (!isDragging) {
-      isDragging = true
+        // Get source and target arrays
+        const sourceItems =
+          sourceGroup === 'ungrouped' ? ungroupedDndItems : groupDndItems[sourceGroup] || []
+        const targetItems =
+          targetGroup === 'ungrouped' ? ungroupedDndItems : groupDndItems[targetGroup] || []
+
+        // Find the dragged item
+        const sourceIndex = sourceItems.findIndex((item) => item.id === sourceId)
+        if (sourceIndex === -1) return
+
+        const draggedItem = sourceItems[sourceIndex]
+
+        // If moving within the same group, we need to handle reordering
+        if (sourceGroup === targetGroup) {
+          // Check if we're dropping on another item
+          const dropTargets = location.current.dropTargets
+          const itemDropTarget = dropTargets.find((target) => target.data.itemId)
+
+          if (itemDropTarget) {
+            const targetItemId = itemDropTarget.data.itemId as string
+            const edge = extractClosestEdge(itemDropTarget.data)
+
+            if (edge) {
+              const newItems = reorderItems(targetItems, sourceId, targetItemId, edge)
+
+              if (targetGroup === 'ungrouped') {
+                ungroupedDndItems = newItems
+              } else {
+                groupDndItems[targetGroup] = newItems
+              }
+            }
+          }
+        } else {
+          // Moving between groups
+          const dropTargets = location.current.dropTargets
+          const itemDropTarget = dropTargets.find((target) => target.data.itemId)
+
+          let targetItemId: string | undefined
+          let edge: Edge | undefined
+
+          if (itemDropTarget) {
+            targetItemId = itemDropTarget.data.itemId as string
+            edge = extractClosestEdge(itemDropTarget.data) || undefined
+          }
+
+          const { newSourceItems, newTargetItems } = moveItemBetweenGroups(
+            sourceItems,
+            targetItems,
+            sourceId,
+            targetItemId,
+            edge
+          )
+
+          if (sourceGroup === 'ungrouped') {
+            ungroupedDndItems = newSourceItems
+          } else {
+            groupDndItems[sourceGroup] = newSourceItems
+          }
+
+          if (targetGroup === 'ungrouped') {
+            ungroupedDndItems = newTargetItems
+          } else {
+            groupDndItems[targetGroup] = newTargetItems
+          }
+        }
+
+        // Update items and notify
+        const newItems = buildListOut()
+        items = newItems
+        itemsCache = JSON.parse(JSON.stringify(items))
+        onreorder?.(newItems)
+        emitGroupDistribution()
+      }
+    })
+
+    return {
+      destroy() {
+        cleanup()
+      }
     }
-    ungroupedDndItems = e.detail.items
   }
 
-  function handleUngroupedDndFinalize(e: CustomEvent<any>) {
-    isDragging = false
-    ungroupedDndItems = e.detail.items
+  // Setup drop zone for individual items (for reordering within same group) (Svelte action)
+  function setupItemDropZone(element: HTMLElement, params: [DndItem, string]) {
+    const [dndItem, groupSlug] = params
+    if (!element) return
 
-    const newItems = buildListOut()
-    items = newItems
-    itemsCache = JSON.parse(JSON.stringify(items))
-    onreorder?.(newItems)
-    emitGroupDistribution()
+    const cleanup = dropTargetForElements({
+      element,
+      getData: ({ input }) => {
+        const data = { itemId: dndItem.id, groupSlug }
+        return attachClosestEdge(data, {
+          element,
+          input,
+          allowedEdges: ['top', 'bottom']
+        })
+      },
+      canDrop: ({ source }) => {
+        return source.data.type === 'drawer-item' && source.data.id !== dndItem.id
+      },
+      onDragEnter: ({ self, source }) => {
+        const edge = extractClosestEdge(self.data)
+        if (!edge) return
+
+        const sourceId = source.data.id as string
+        const sourceGroup = source.data.groupSlug as string
+        const items = groupSlug === 'ungrouped' ? ungroupedDndItems : groupDndItems[groupSlug] || []
+
+        if (shouldShowDropIndicator(sourceId, dndItem.id, sourceGroup, groupSlug, edge, items)) {
+          dropIndicator = { itemId: dndItem.id, edge }
+        }
+      },
+      onDrag: ({ self, source }) => {
+        const edge = extractClosestEdge(self.data)
+        if (!edge) return
+
+        const sourceId = source.data.id as string
+        const sourceGroup = source.data.groupSlug as string
+        const items = groupSlug === 'ungrouped' ? ungroupedDndItems : groupDndItems[groupSlug] || []
+
+        if (shouldShowDropIndicator(sourceId, dndItem.id, sourceGroup, groupSlug, edge, items)) {
+          dropIndicator = { itemId: dndItem.id, edge }
+        } else {
+          dropIndicator = null
+        }
+      },
+      onDragLeave: () => {
+        if (dropIndicator?.itemId === dndItem.id) {
+          dropIndicator = null
+        }
+      },
+      onDrop: () => {
+        dropIndicator = null
+      }
+    })
+
+    return {
+      destroy() {
+        cleanup()
+      }
+    }
   }
 
   function updateItem(item: DrawerOption) {
@@ -231,7 +415,7 @@
 >
   {@render children?.()}
 
-  {#if hasGroups}
+  {#if hasGroups && groups}
     {#each groups as group, index}
       {@const groupItems = groupedItems.get(group.slug) || []}
       {@const isLastGroup = index === groups!.length - 1}
@@ -281,15 +465,8 @@
           >
             {#if draggable}
               <div
-                use:dndzone={{
-                  items: groupDndItems[group.slug] || [],
-                  flipDurationMs,
-                  dropTargetStyle: {},
-                  type: 'drawer-item',
-                  transformDraggedElement
-                }}
-                onconsider={(e) => handleDndConsider(group.slug, e)}
-                onfinalize={(e) => handleDndFinalize(group.slug, e)}
+                use:setupDropZone={group.slug}
+                class="min-h-[40px]"
               >
                 {#if !groupItems.length}
                   <div class="px-1 pt-1 pb-5">
@@ -301,7 +478,19 @@
                   </div>
                 {:else}
                   {#each groupDndItems[group.slug] || [] as dndItem (dndItem.id)}
-                    <div animate:flip={{ duration: isDragging ? flipDurationMs : 0 }}>
+                    {@const showTopIndicator =
+                      dropIndicator?.itemId === dndItem.id && dropIndicator?.edge === 'top'}
+                    {@const showBottomIndicator =
+                      dropIndicator?.itemId === dndItem.id && dropIndicator?.edge === 'bottom'}
+                    <div
+                      animate:flip={{ duration: isDragging ? flipDurationMs : 0 }}
+                      use:setupDraggableItem={[dndItem, group.slug]}
+                      use:setupItemDropZone={[dndItem, group.slug]}
+                      class:border-t-2={showTopIndicator}
+                      class:border-t-border-selected={showTopIndicator}
+                      class:border-b-2={showBottomIndicator}
+                      class:border-b-border-selected={showBottomIndicator}
+                    >
                       {@render drawerItem(dndItem)}
                     </div>
                   {/each}
@@ -332,19 +521,23 @@
   {#if ungroupedItems.length}
     {#if draggable}
       <div
-        class="flex-shrink-0 overflow-y-auto max-h-[564px]"
-        use:dndzone={{
-          items: ungroupedDndItems,
-          flipDurationMs,
-          dropTargetStyle: {},
-          type: 'drawer-item',
-          transformDraggedElement
-        }}
-        onconsider={handleUngroupedDndConsider}
-        onfinalize={handleUngroupedDndFinalize}
+        class="flex-shrink-0 overflow-y-auto max-h-[564px] min-h-[40px]"
+        use:setupDropZone={'ungrouped'}
       >
         {#each ungroupedDndItems as dndItem (dndItem.id)}
-          <div animate:flip={{ duration: isDragging ? flipDurationMs : 0 }}>
+          {@const showTopIndicator =
+            dropIndicator?.itemId === dndItem.id && dropIndicator?.edge === 'top'}
+          {@const showBottomIndicator =
+            dropIndicator?.itemId === dndItem.id && dropIndicator?.edge === 'bottom'}
+          <div
+            animate:flip={{ duration: isDragging ? flipDurationMs : 0 }}
+            use:setupDraggableItem={[dndItem, 'ungrouped']}
+            use:setupItemDropZone={[dndItem, 'ungrouped']}
+            class:border-t-2={showTopIndicator}
+            class:border-t-border-selected={showTopIndicator}
+            class:border-b-2={showBottomIndicator}
+            class:border-b-border-selected={showBottomIndicator}
+          >
             {@render drawerItem(dndItem)}
           </div>
         {/each}

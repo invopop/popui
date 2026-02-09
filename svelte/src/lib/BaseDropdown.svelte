@@ -49,7 +49,7 @@
   // Custom transition that mimics shadcn style
   function dropdownTransition(
     node: HTMLElement,
-    { duration = 150 }: { duration?: number } = {}
+    { duration = 70 }: { duration?: number } = {}
   ): TransitionConfig {
     const side = placement.split('-')[0]
 
@@ -110,7 +110,7 @@
         }, 100)
         isOpen = false
       }}
-      transition:dropdownTransition={{ duration: 150 }}
+      transition:dropdownTransition={{ duration: 70 }}
     >
       {@render children?.()}
     </div>

@@ -500,6 +500,7 @@ export interface BaseDropdownProps {
     fullWidth?: boolean;
     widthClass?: string;
     onSelect?: (value: AnyProp) => void;
+    onOpenChange?: (isOpen: boolean) => void;
     stackLeft?: boolean;
     stackRight?: boolean;
     multipleLabel?: string;

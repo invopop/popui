@@ -19,6 +19,7 @@
     fullWidth = false,
     widthClass = 'min-w-[160px] max-w-[420px]',
     onSelect,
+    onOpenChange,
     stackLeft = false,
     stackRight = false,
     multipleLabel = 'items'
@@ -30,6 +31,10 @@
 
   $effect(() => {
     resolveIcon(icon).then((res) => (resolvedIcon = res))
+  })
+
+  $effect(() => {
+    onOpenChange?.(isOpen)
   })
 
   let items = $derived(

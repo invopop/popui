@@ -45,14 +45,14 @@
 </script>
 
 <div
-  class="overflow-hidden transition-all duration-300 ease-in-out relative rounded-md"
+  class="overflow-hidden transition-all duration-150 ease-in-out relative rounded-md"
   class:w-[280px]={expanded}
   class:w-10={!expanded}
   use:clickOutside
   onclick_outside={handleClickOutside}
 >
   <div
-    class="w-[280px] transition-opacity duration-200 absolute left-0 top-0"
+    class="w-[280px] transition-opacity duration-100 absolute left-0 top-0"
     class:opacity-0={!expanded}
     class:opacity-100={expanded}
     class:pointer-events-none={!expanded}
@@ -68,7 +68,7 @@
     />
   </div>
   <div
-    class="transition-opacity duration-200"
+    class="transition-opacity duration-100"
     class:opacity-0={expanded}
     class:opacity-100={!expanded}
     class:pointer-events-none={expanded}

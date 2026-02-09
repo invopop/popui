@@ -76,6 +76,7 @@
   let mounted = $state(false)
   let itemsCache = $state<DrawerOption[]>([])
   let isDragging = $state(false)
+  let draggedItemId = $state<string | null>(null)
   let emitTimeout: number | undefined
   let draggedOverGroup = $state<string | null>(null)
   let dropIndicator = $state<DropIndicatorState>(null)
@@ -203,10 +204,12 @@
       getInitialData: () => ({ id: dndItem.id, groupSlug, type: 'drawer-item' }),
       onDragStart: () => {
         isDragging = true
+        draggedItemId = dndItem.id
         dropIndicator = null
       },
       onDrop: () => {
         isDragging = false
+        draggedItemId = null
         dropIndicator = null
       }
     })
@@ -225,8 +228,7 @@
     const cleanup = dropTargetForElements({
       element,
       getData: () => {
-        const items =
-          groupSlug === 'ungrouped' ? ungroupedDndItems : groupDndItems[groupSlug] || []
+        const items = groupSlug === 'ungrouped' ? ungroupedDndItems : groupDndItems[groupSlug] || []
         return { groupSlug, items: items.map((i) => i.id) }
       },
       canDrop: ({ source }) => source.data.type === 'drawer-item',
@@ -464,10 +466,7 @@
             transition:slide={{ duration: collapsibleGroups ? 200 : 0 }}
           >
             {#if draggable}
-              <div
-                use:setupDropZone={group.slug}
-                class="min-h-[40px]"
-              >
+              <div use:setupDropZone={group.slug} class="min-h-[40px]">
                 {#if !groupItems.length}
                   <div class="px-1 pt-1 pb-5">
                     <EmptyState
@@ -482,14 +481,17 @@
                       dropIndicator?.itemId === dndItem.id && dropIndicator?.edge === 'top'}
                     {@const showBottomIndicator =
                       dropIndicator?.itemId === dndItem.id && dropIndicator?.edge === 'bottom'}
+                    {@const isBeingDragged = draggedItemId === dndItem.id}
                     <div
                       animate:flip={{ duration: isDragging ? flipDurationMs : 0 }}
                       use:setupDraggableItem={[dndItem, group.slug]}
                       use:setupItemDropZone={[dndItem, group.slug]}
                       class:border-t-2={showTopIndicator}
-                      class:border-t-border-selected={showTopIndicator}
+                      class:border-t-accent-50={showTopIndicator}
                       class:border-b-2={showBottomIndicator}
-                      class:border-b-border-selected={showBottomIndicator}
+                      class:border-b-accent-50={showBottomIndicator}
+                      class:opacity-40={isBeingDragged}
+                      class="transition-opacity"
                     >
                       {@render drawerItem(dndItem)}
                     </div>
@@ -529,14 +531,17 @@
             dropIndicator?.itemId === dndItem.id && dropIndicator?.edge === 'top'}
           {@const showBottomIndicator =
             dropIndicator?.itemId === dndItem.id && dropIndicator?.edge === 'bottom'}
+          {@const isBeingDragged = draggedItemId === dndItem.id}
           <div
             animate:flip={{ duration: isDragging ? flipDurationMs : 0 }}
             use:setupDraggableItem={[dndItem, 'ungrouped']}
             use:setupItemDropZone={[dndItem, 'ungrouped']}
             class:border-t-2={showTopIndicator}
-            class:border-t-border-selected={showTopIndicator}
+            class:border-t-accent-50={showTopIndicator}
             class:border-b-2={showBottomIndicator}
-            class:border-b-border-selected={showBottomIndicator}
+            class:border-b-accent-50={showBottomIndicator}
+            class:opacity-40={isBeingDragged}
+            class="transition-opacity"
           >
             {@render drawerItem(dndItem)}
           </div>

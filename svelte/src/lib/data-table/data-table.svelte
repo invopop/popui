@@ -46,6 +46,7 @@
     initialFrozenColumns = [],
     initialColumnOrder = [],
     initialColumnVisibility = {},
+    initialColumnSizing = {},
     emptyState = {
       iconSource: Search,
       title: 'No results',
@@ -83,7 +84,7 @@
       : []
   )
   let pagination = $state<PaginationState>({ pageIndex: initialPage, pageSize: initialPageSize })
-  let columnSizing = $state<ColumnSizingState>({})
+  let columnSizing = $state<ColumnSizingState>(initialColumnSizing)
   let columnSizingInfo = $state<ColumnSizingInfoState>({
     columnSizingStart: [],
     deltaOffset: null,
@@ -433,7 +434,7 @@
   hasSelectColumn = false,
   ...restProps
 }: { column: Column<TData>; title?: string; isFirst?: boolean; hasSelectColumn?: boolean } & HTMLAttributes<HTMLDivElement>)}
-  {@const isCurrency = column.columnDef.meta?.cellType === 'currency'}
+  {@const isCurrency = column.columnDef.cellType === 'currency'}
   {@const needsEdgePadding = isFirst && !hasSelectColumn}
   <div
     class={cn('flex items-center w-full [th[data-last-frozen=true]_&]:border-r [th[data-last-frozen=true]_&]:border-border', className)}

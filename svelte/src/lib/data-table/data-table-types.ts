@@ -92,6 +92,7 @@ export interface DataTableProps<TData> {
   initialFrozenColumns?: string[] // Initial columns to freeze (column IDs)
   initialColumnOrder?: string[] // Initial column order (column IDs)
   initialColumnVisibility?: Record<string, boolean> // Initial column visibility state
+  initialColumnSizing?: Record<string, number> // Initial column sizes (column ID -> width in pixels)
   pageSizeOptions?: number[]
   emptyState?: Omit<EmptyStateProps, 'children' | 'check'>
   onRowClick?: (row: TData) => void

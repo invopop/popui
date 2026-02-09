@@ -101,6 +101,7 @@
   let tableBodyRef: HTMLTableSectionElement | null = null
   let animatingRows = $state<Set<any>>(new Set())
   let previousData = $state<TData[]>([])
+  let tableRenderKey = $state<number>(0) // Force re-render when visibility changes
 
   // Build TanStack columns from config
   const columns = $derived.by(() =>
@@ -178,7 +179,11 @@
     getColumnSizingInfo: () => columnSizingInfo,
     getColumnOrder: () => columnOrder,
     setRowSelection: (value) => (rowSelection = value),
-    setColumnVisibility: (value) => (columnVisibility = value),
+    setColumnVisibility: (value) => {
+      columnVisibility = value
+      // Increment render key to force table rebuild after visibility changes
+      tableRenderKey++
+    },
     setSorting: (value) => (sorting = value),
     setPagination: (value) => (pagination = value),
     setColumnSizing: (value) => {
@@ -519,7 +524,7 @@
       {:else}
         <Table.Root>
           <Table.Header>
-            {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
+            {#each table.getHeaderGroups() as headerGroup (`${headerGroup.id}-${tableRenderKey}`)}
               {@const hasSelectColumn = headerGroup.headers.some(h => h.id === 'select')}
               <Table.Row class="hover:!bg-transparent">
               {#each headerGroup.headers as header, index (header.id)}

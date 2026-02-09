@@ -3,8 +3,8 @@
   import { createFloatingActions } from 'svelte-floating-ui'
   import { clickOutside } from './clickOutside.js'
   import { portal } from 'svelte-portal'
-  import { slide } from 'svelte/transition'
   import type { BaseDropdownProps } from './types.js'
+  import type { TransitionConfig } from 'svelte/transition'
 
   let {
     isOpen = $bindable(false),
@@ -46,6 +46,33 @@
     middleware
   })
 
+  // Custom transition that mimics shadcn style
+  function dropdownTransition(
+    node: HTMLElement,
+    { duration = 150 }: { duration?: number } = {}
+  ): TransitionConfig {
+    const side = placement.split('-')[0]
+
+    // Calculate slide direction
+    let slideY = 0
+    let slideX = 0
+    if (side === 'bottom') slideY = -8
+    if (side === 'top') slideY = 8
+    if (side === 'left') slideX = 8
+    if (side === 'right') slideX = -8
+
+    return {
+      duration,
+      css: (t) => {
+        const eased = t * (2 - t) // ease-out
+        return `
+          opacity: ${eased};
+          transform: scale(${0.95 + eased * 0.05}) translate(${slideX * (1 - eased)}px, ${slideY * (1 - eased)}px);
+        `
+      }
+    }
+  }
+
   export const toggle = () => {
     isOpen = !isOpen
   }
@@ -83,7 +110,7 @@
         }, 100)
         isOpen = false
       }}
-      transition:slide={{ duration: 100 }}
+      transition:dropdownTransition={{ duration: 150 }}
     >
       {@render children?.()}
     </div>

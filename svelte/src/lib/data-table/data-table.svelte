@@ -272,8 +272,9 @@
       if (header.id === columnId) {
         break
       }
-      // Add width of previous frozen columns (or select column)
-      if (frozenColumns.has(header.id) || header.id === 'select') {
+      // Only add width of previous frozen columns that are visible (or select column)
+      const isVisible = header.column?.getIsVisible?.() ?? true
+      if (isVisible && (frozenColumns.has(header.id) || header.id === 'select')) {
         offset += header.getSize()
       }
     }

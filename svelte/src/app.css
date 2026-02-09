@@ -2,3 +2,4 @@
 @import "./lib/tailwind.theme.css";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";

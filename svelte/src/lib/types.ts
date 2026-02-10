@@ -14,6 +14,7 @@ export type ButtonVariant =
   | 'dark'
   | 'outline'
   | 'ghost'
+  | 'selected'
   | 'dark-ghost'
 
 export type StatusType =

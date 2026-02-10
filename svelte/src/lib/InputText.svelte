@@ -38,7 +38,7 @@
 
   let inputStyles = $derived(
     clsx(
-      'px-2 py-1 text-base tracking-tight bg-background-default-default backdrop-blur-[2px] caret-foreground-accent',
+      'px-2 py-1 text-base text-foreground tracking-tight bg-background-default-default backdrop-blur-[2px] caret-foreground-accent',
       'placeholder:text-foreground-default-tertiary',
       'outline-none focus:ring-0',
       widthClass,

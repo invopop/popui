@@ -58,6 +58,12 @@ export interface DataTableColumnMeta {
   filterOptions?: Array<{ value: string; label: string; [key: string]: any }>
 }
 
+export interface LoadingConfig {
+  lines?: number // Number of skeleton lines to show (default: 1)
+  showAvatar?: boolean // Show skeleton avatar before lines (default: false)
+  avatarSize?: number // Size of skeleton avatar in pixels (default: 32)
+}
+
 export interface DataTableColumn<TData> {
   id: string
   accessorKey?: keyof TData
@@ -73,11 +79,13 @@ export interface DataTableColumn<TData> {
   minSize?: number
   maxSize?: number
   meta?: DataTableColumnMeta
+  loadingConfig?: LoadingConfig // Configuration for loading skeleton placeholders
 }
 
 export interface DataTableProps<TData> {
   data: TData[]
   columns: DataTableColumn<TData>[]
+  loading?: boolean // Show skeleton placeholders instead of data (default: false)
   disableSelection?: boolean
   disablePagination?: boolean
   disableKeyboardNavigation?: boolean

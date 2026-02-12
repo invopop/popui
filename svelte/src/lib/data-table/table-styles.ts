@@ -46,6 +46,7 @@ export function getHeaderClasses<TData>(
     {
       'sticky right-0 text-right bg-background before:z-20': header.id === 'actions',
       'sticky left-0 bg-background z-10 before:z-20': header.id === 'select' || isFrozen,
+      'z-0': !isSticky,
       'after:content-[""] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-px after:bg-background-default-tertiary after:z-20': isResizable && (header.id !== 'actions' && header.id !== 'select') && !isLastFrozen,
       'w-full': isLastScrollable,
       '!pr-4': isLastHeader && !isSticky,
@@ -101,6 +102,7 @@ export function getCellClasses<TData>(
     {
       'sticky right-0 text-right': cell.column.id === 'actions',
       'sticky left-0 z-10': cell.column.id === 'select' || isFrozen,
+      'z-0': !isSticky,
       'bg-background': isSticky,
       '!p-0': isSticky,
       'w-full': isLastScrollable,

@@ -47,6 +47,7 @@ import ProgressBar from './ProgressBar.svelte'
 import ProgressBarCircle from './ProgressBarCircle.svelte'
 import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
+import { Skeleton, SkeletonAvatar, SkeletonCard, SkeletonList } from './skeleton'
 import StatusLabel from './StatusLabel.svelte'
 import StepIcon from './StepIcon.svelte'
 import StepIconList from './StepIconList.svelte'
@@ -132,6 +133,10 @@ export {
   ProgressBarCircle,
   SeparatorHorizontal,
   ShortcutWrapper,
+  Skeleton,
+  SkeletonAvatar,
+  SkeletonCard,
+  SkeletonList,
   StatusLabel,
   StepIcon,
   StepIconList,

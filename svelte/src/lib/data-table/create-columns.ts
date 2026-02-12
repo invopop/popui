@@ -23,6 +23,7 @@ export function createColumns<TData>(columns: DataTableColumn<TData>[]): ColumnD
       size: col.size,
       minSize: col.minSize,
       maxSize: col.maxSize,
+      loadingConfig: col.loadingConfig,
       meta: {
         cellType: col.cellType
       }

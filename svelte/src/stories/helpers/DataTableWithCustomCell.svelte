@@ -1,6 +1,7 @@
 <script lang="ts">
   import DataTable from '../../lib/data-table/data-table.svelte'
   import { renderSnippet } from '../../lib/data-table/index.js'
+  import Button from '../../lib/button/button.svelte'
   import StepIconList from '../../lib/StepIconList.svelte'
   import type { DataTableProps } from '../../lib/data-table/data-table-types.js'
   import type { StepIcon } from '../../lib/types.js'
@@ -8,6 +9,8 @@
   type Props<TData> = DataTableProps<TData>
 
   let props: Props<any> = $props()
+
+  let isLoading = $state(false)
 
   // Mock step icons
   const mockStepIcons = [
@@ -63,17 +66,34 @@
   {/if}
 {/snippet}
 
+{#snippet paginationControls()}
+  <Button
+    variant="secondary"
+    size="md"
+    onclick={() => {
+      isLoading = !isLoading
+    }}
+  >
+    {isLoading ? 'Hide Loading' : 'Show Loading'}
+  </Button>
+{/snippet}
+
 <DataTable
   {...props}
   data={dataWithUuid}
+  loading={isLoading}
   initialFrozenColumns={['invoice', 'signed']}
   getRowClassName={() => 'h-[60px]'}
+  paginationSlot={paginationControls}
   columns={[
     ...props.columns.map((col) => {
       if (col.id === 'supplier') {
         return {
           ...col,
-          cell: (value, row) => renderSnippet(supplierCell, row)
+          cell: (value, row) => renderSnippet(supplierCell, row),
+          loadingConfig: {
+            lines: 2
+          }
         }
       }
       return col

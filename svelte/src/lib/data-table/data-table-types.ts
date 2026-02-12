@@ -1,17 +1,32 @@
 import type { Component, Snippet } from 'svelte'
 import type { StatusType, AnyProp, TableAction, EmptyStateProps, TableSortBy } from '$lib/types.js'
 import type { IconSource } from '@steeze-ui/svelte-icon'
-import type { Table, Row, Header } from '@tanstack/table-core'
+import type { Table, Row, Header, Cell } from '@tanstack/table-core'
 import type { RenderComponentConfig, RenderSnippetConfig } from './render-helpers.js'
 import type BaseDropdown from '$lib/BaseDropdown.svelte'
 
 export type CellType = 'text' | 'boolean' | 'tag' | 'date' | 'currency' | 'uuid' | 'custom'
+
+export type StickyCellWrapperSnippet = Snippet<
+  [
+    {
+      children: any
+      align?: 'left' | 'right'
+      isFirst?: boolean
+      isLast?: boolean
+      isFrozen?: boolean
+      isLastFrozen?: boolean
+    }
+  ]
+>
 
 export interface BooleanCellConfig {
   icon?: IconSource
   iconClass?: string
   showWhenTrue?: boolean // default true
   showWhenFalse?: boolean // default false
+  hintWhenTrue?: string // Tooltip text to show on hover when value is true
+  hintWhenFalse?: string // Tooltip text to show on hover when value is false
 }
 
 export type CellConfig =
@@ -55,6 +70,16 @@ export interface DataTableColumnMeta {
   loadingConfig?: LoadingConfig
 }
 
+export interface DataTableCellProps<TData> {
+  cell: Cell<TData, unknown>
+  index: number
+  visibleCells: Cell<TData, unknown>[]
+  allCells: Cell<TData, unknown>[]
+  frozenColumns: Set<string>
+  loading?: boolean
+  StickyCellWrapper: StickyCellWrapperSnippet
+}
+
 export interface DataTableHeaderCellProps<TData> {
   header: Header<TData, unknown>
   index: number
@@ -93,19 +118,8 @@ export interface DataTableRowProps<TData> {
   loading?: boolean
   onRowClick?: (row: TData) => void
   getRowClassName?: (row: TData) => string
-  getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean }
-  StickyCellWrapper: Snippet<
-    [
-      {
-        children: any
-        align?: 'left' | 'right'
-        isFirst?: boolean
-        isLast?: boolean
-        isFrozen?: boolean
-        isLastFrozen?: boolean
-      }
-    ]
-  >
+  getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean; isWarning?: boolean }
+  StickyCellWrapper: StickyCellWrapperSnippet
 }
 
 export interface DataTableProps<TData> {
@@ -148,11 +162,17 @@ export interface DataTableProps<TData> {
   onColumnOrderChange?: (columnOrder: string[]) => void
   onColumnVisibilityChange?: (visibility: Record<string, boolean>) => void
   getRowClassName?: (row: TData) => string
-  getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean }
+  getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean; isWarning?: boolean }
 }
 
 export interface DateCellConfig {
   className?: string
+}
+
+export interface CellSkeletonProps {
+  isBoolean?: boolean
+  loadingConfig?: LoadingConfig
+  withPadding?: boolean
 }
 
 export interface LoadingConfig {

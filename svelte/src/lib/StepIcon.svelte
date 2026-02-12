@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { Tooltip, TooltipContent, TooltipTrigger } from '$lib/tooltip'
-  import { onMount, onDestroy } from 'svelte'
+  import { TooltipAutoHide, TooltipContent, TooltipTrigger } from '$lib/tooltip'
   import type { StepIconProps } from '$lib/types.js'
 
   let {
@@ -9,23 +8,9 @@
     tooltipContent,
     children
   }: StepIconProps = $props()
-
-  let isOpen = $state(false)
-
-  function handleScroll() {
-    isOpen = false
-  }
-
-  onMount(() => {
-    window.addEventListener('scroll', handleScroll, true)
-  })
-
-  onDestroy(() => {
-    window.removeEventListener('scroll', handleScroll, true)
-  })
 </script>
 
-<Tooltip bind:open={isOpen}>
+<TooltipAutoHide>
   <TooltipTrigger class="shrink-0">
     <div
       style={showMask
@@ -47,4 +32,4 @@
       {name}
     {/if}
   </TooltipContent>
-</Tooltip>
+</TooltipAutoHide>

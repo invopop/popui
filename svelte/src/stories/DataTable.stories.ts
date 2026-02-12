@@ -530,6 +530,10 @@ export const WithRowStates: Story = {
 			invoices[1].state = 'paid'
 			invoices[4].state = 'paid'
 			invoices[7].state = 'paid'
+			// Force some sent states for warning demonstration
+			invoices[3].state = 'sent'
+			invoices[6].state = 'sent'
+			invoices[9].state = 'sent'
 			return invoices
 		})(),
 		columns,
@@ -538,6 +542,10 @@ export const WithRowStates: Story = {
 			// Apply error state to rows with error state
 			if (row.state === 'error') {
 				return { isError: true }
+			}
+			// Apply warning state to sent invoices
+			if (row.state === 'sent') {
+				return { isWarning: true }
 			}
 			// Apply success state to paid invoices
 			if (row.state === 'paid') {
@@ -562,6 +570,83 @@ export const WithNewRowFlashEffect: Story = {
 	args: {
 		data: generateInvoices(20),
 		columns,
+		rowActions,
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
+	}
+}
+
+export const WithBooleanHints: Story = {
+	args: {
+		data: generateInvoices(30),
+		columns: [
+			{
+				id: 'invoice',
+				accessorKey: 'invoice',
+				header: 'Invoice',
+				cellType: 'text',
+				enableSorting: false,
+				enableHiding: false,
+				disableColumnFilter: true,
+				size: 150,
+				minSize: 120
+			},
+			{
+				id: 'signed',
+				accessorKey: 'signed',
+				header: 'Signed',
+				cellType: 'boolean',
+				cellConfig: {
+					icon: Sign,
+					hintWhenTrue: 'This invoice is signed',
+					hintWhenFalse: 'This invoice is not signed'
+				},
+				enableSorting: false,
+				enableResizing: false,
+				disableColumnFilter: true,
+				size: 80,
+				minSize: 80,
+				maxSize: 80
+			},
+			{
+				id: 'state',
+				accessorKey: 'state',
+				header: 'State',
+				cellType: 'tag',
+				cellConfig: {
+					options: stateOptions,
+					showDot: true
+				},
+				size: 100,
+				minSize: 80
+			},
+			{
+				id: 'supplier',
+				accessorKey: 'supplier',
+				header: 'Supplier',
+				cellType: 'text',
+				size: 220,
+				minSize: 150
+			},
+			{
+				id: 'customer',
+				accessorKey: 'customer',
+				header: 'Customer',
+				cellType: 'text',
+				size: 220,
+				minSize: 150
+			},
+			{
+				id: 'total',
+				accessorKey: 'total',
+				header: 'Total',
+				cellType: 'currency',
+				disableColumnFilter: true,
+				size: 140,
+				minSize: 120
+			}
+		],
 		rowActions,
 		onRowClick: (row) => {
 			console.log('Row clicked:', row)

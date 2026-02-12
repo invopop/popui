@@ -313,7 +313,7 @@
 })}
   <div
     class={cn(
-      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected group-data-[state=selected]/row:group-hover/row:bg-background-selected group-data-[state=error]/row:bg-background-critical group-data-[state=error]/row:group-hover/row:bg-background-critical group-data-[state=success]/row:bg-background-selected group-data-[state=success]/row:group-hover/row:bg-background-selected group-data-[focused=true]/row:bg-background-default-secondary px-3 shadow-[inset_0_-1px_0_0_var(--color-border)]',
+      'absolute inset-0 flex items-center bg-background group-hover/row:bg-background-default-secondary group-data-[state=selected]/row:bg-background-selected group-data-[state=selected]/row:group-hover/row:bg-background-selected group-data-[state=error]/row:bg-background-critical group-data-[state=error]/row:group-hover/row:bg-background-critical group-data-[state=warning]/row:bg-background-warning group-data-[state=warning]/row:group-hover/row:bg-background-warning group-data-[state=success]/row:bg-background-selected group-data-[state=success]/row:group-hover/row:bg-background-selected group-data-[focused=true]/row:bg-background-default-secondary px-3 shadow-[inset_0_-1px_0_0_var(--color-border)]',
       {
         'justify-end': align === 'right',
         'pl-4': isFirst,

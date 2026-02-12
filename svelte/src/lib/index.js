@@ -4,9 +4,7 @@ import BaseCard from './BaseCard.svelte'
 import BaseCounter from './BaseCounter.svelte'
 import BaseDropdown from './BaseDropdown.svelte'
 import BaseFlag from './BaseFlag.svelte'
-import BaseTable from './BaseTable.svelte'
 import BaseTableActions from './BaseTableActions.svelte'
-import BaseTableHeaderContent from './BaseTableHeaderContent.svelte'
 import Breadcrumbs from './Breadcrumbs.svelte'
 import ButtonFile from './ButtonFile.svelte'
 import ButtonSearch from './ButtonSearch.svelte'
@@ -90,9 +88,7 @@ export {
   BaseCounter,
   BaseDropdown,
   BaseFlag,
-  BaseTable,
   BaseTableActions,
-  BaseTableHeaderContent,
   Breadcrumbs,
   ButtonFile,
   ButtonSearch,

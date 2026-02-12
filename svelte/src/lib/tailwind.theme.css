@@ -617,7 +617,7 @@
 
   --color-background-attention-default: var(--color-attention-alpha-10);
 
-  --color-background-warning-default: var(--color-warning-alpha-10);
+  --color-background-warning-default: var(--color-warning-alpha-5);
   --color-background-warning-bold: var(--color-warning-60);
   --color-background-warning-inverse: var(--color-warning-50);
 

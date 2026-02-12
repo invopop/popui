@@ -286,59 +286,9 @@ export interface BaseDropdownProps {
     country?: string;
   }
 
-  export interface BaseTableProps {
-    sortBy?: string;
-    sortDirection?: TableSortBy;
-    fields?: TableField[];
-    data?: TableDataRow[];
-    getActions?: TableActionProp;
-    groupLabel?: TableGroupLabelProp;
-    disableRowClick?: boolean;
-    hideCounter?: boolean;
-    selectable?: boolean;
-    selectedRows?: TableDataRow[];
-    selectedTrackedBy?: string;
-    hideSelectAll?: boolean;
-    disableKeyboardNavigation?: boolean;
-    [key: string]: any
-    ontableEndReached?: () => void;
-    onSelectAllRows?: (selected: boolean) => void;
-    onRowClick?: (row: TableDataRow) => void;
-    onRowRightClick?: (row: TableDataRow) => void;
-    onRowNewTabClick?: (row: TableDataRow) => void;
-    onCopied?: (uuid: string) => void;
-    onOrderBy?: (field: string, direction: TableSortBy) => void;
-    onClickAction?: (args: {row: TableDataRow, action: AnyProp}) => void;
-  }
-
   export interface BaseTableActionsProps {
     actions: TableAction[];
     onclick?: (value: AnyProp) => void;
-  }
-
-  export interface BaseTableCellContentProps {
-    field: TableField;
-    data?: unknown;
-    isMobile?: boolean;
-    badge?: Badge | null;
-    status?: FeedItemStatus | null;
-    icons?: TableIcon[] | null;
-    onCopied?: (uuid: string) => void;
-  }
-
-  export interface BaseTableCheckboxProps {
-    checkboxButton?: HTMLButtonElement | undefined;
-    checked?: boolean;
-    hidden?: boolean;
-    indeterminate?: boolean;
-    onChecked?: (checked: boolean) => void;
-  }
-
-  export interface BaseTableHeaderProps {
-    field: TableField;
-    sortBy?: string;
-    sortDirection: TableSortBy;
-    onOrderBy?: (field: string, direction: TableSortBy) => void;
   }
 
   export interface BaseTableHeaderOrderByProps {
@@ -351,25 +301,6 @@ export interface BaseDropdownProps {
     isFrozen?: boolean;
     showSortOptions?: boolean;
     showFilterOption?: boolean;
-  }
-
-  export interface BaseTableRowProps {
-    row: TableDataRow;
-    getActions?: TableActionProp;
-    fields?: TableField[];
-    disableRowClick?: boolean;
-    selectable?: boolean;
-    selected?: boolean;
-    selectionMode?: string;
-    selectedTrackedBy?: string;
-    selectedRows?: TableDataRow[];
-    onclick?: (event: MouseEvent) => void;
-    onmouseover?: () => void;
-    oncontextmenu?: () => void;
-    onfocus?: () => void;
-    onChecked?: (checked: boolean) => void;
-    onCopied?: (uuid: string) => void;
-    onClickAction?: (args: {row: TableDataRow, action: AnyProp}) => void;
   }
 
   export interface BreadcrumbProps {

@@ -25,18 +25,20 @@
     loading = false
   }: DataTableHeaderCellProps<TData> = $props()
 
-  const isLastScrollable = index === headers.length - 2
-  const isFirstHeader = index === 0
-  const isLastHeader = index === headers.length - 1
-  const prevHeader = index > 0 ? headers[index - 1] : null
-  const isFrozen = frozenColumns.has(header.id)
-  const lastFrozenHeaderId = headers
-    .slice()
-    .reverse()
-    .find((h) => frozenColumns.has(h.id))?.id
-  const isLastFrozenHeader = isFrozen && header.id === lastFrozenHeaderId
-  const frozenOffset = isFrozen ? calculateFrozenOffset(header.id, headers, frozenColumns) : 0
-  const hasSelectColumn = headers.some((h) => h.id === 'select')
+  const isLastScrollable = $derived(index === headers.length - 2)
+  const isFirstHeader = $derived(index === 0)
+  const isLastHeader = $derived(index === headers.length - 1)
+  const prevHeader = $derived(index > 0 ? headers[index - 1] : null)
+  const isFrozen = $derived(frozenColumns.has(header.id))
+  const lastFrozenHeaderId = $derived(
+    headers
+      .slice()
+      .reverse()
+      .find((h) => frozenColumns.has(h.id))?.id
+  )
+  const isLastFrozenHeader = $derived(isFrozen && header.id === lastFrozenHeaderId)
+  const frozenOffset = $derived(isFrozen ? calculateFrozenOffset(header.id, headers, frozenColumns) : 0)
+  const hasSelectColumn = $derived(headers.some((h) => h.id === 'select'))
 </script>
 
 {#snippet ResizeHandle({

@@ -1,45 +1,17 @@
 import type { Component, Snippet } from 'svelte'
 import type { StatusType, AnyProp, TableAction, EmptyStateProps, TableSortBy } from '$lib/types.js'
 import type { IconSource } from '@steeze-ui/svelte-icon'
-import type { Table } from '@tanstack/table-core'
+import type { Table, Row, Header } from '@tanstack/table-core'
 import type { RenderComponentConfig, RenderSnippetConfig } from './render-helpers.js'
+import type BaseDropdown from '$lib/BaseDropdown.svelte'
 
 export type CellType = 'text' | 'boolean' | 'tag' | 'date' | 'currency' | 'uuid' | 'custom'
-
-export interface TextCellConfig {
-  className?: string
-}
 
 export interface BooleanCellConfig {
   icon?: IconSource
   iconClass?: string
   showWhenTrue?: boolean // default true
   showWhenFalse?: boolean // default false
-}
-
-export interface TagCellConfig {
-  options: Array<{
-    value: string
-    label: string
-    color: StatusType
-  }>
-  showDot?: boolean
-}
-
-export interface DateCellConfig {
-  className?: string
-}
-
-export interface CurrencyCellConfig {
-  className?: string
-}
-
-export interface UuidCellConfig {
-  prefixLength?: number // default 4 - chars from start
-  suffixLength?: number // default 4 - chars from end
-  full?: boolean // default false - show full UUID
-  disabled?: boolean // default false
-  onCopy?: (value: string) => void
 }
 
 export type CellConfig =
@@ -50,18 +22,8 @@ export type CellConfig =
   | CurrencyCellConfig
   | UuidCellConfig
 
-export interface DataTableColumnMeta {
-  filterType?: 'select' | 'text' | 'numeric' | 'date' | 'uuid'
-  filterIcon?: IconSource
-  filterLabel?: string
-  dbField?: string
-  filterOptions?: Array<{ value: string; label: string; [key: string]: any }>
-}
-
-export interface LoadingConfig {
-  lines?: number // Number of skeleton lines to show (default: 1)
-  showAvatar?: boolean // Show skeleton avatar before lines (default: false)
-  avatarSize?: number // Size of skeleton avatar in pixels (default: 32)
+export interface CurrencyCellConfig {
+  className?: string
 }
 
 export interface DataTableColumn<TData> {
@@ -80,6 +42,70 @@ export interface DataTableColumn<TData> {
   maxSize?: number
   meta?: DataTableColumnMeta
   loadingConfig?: LoadingConfig // Configuration for loading skeleton placeholders
+}
+
+export interface DataTableColumnMeta {
+  cellType?: CellType
+  dbField?: string
+  disableColumnFilter?: boolean
+  filterIcon?: IconSource
+  filterLabel?: string
+  filterOptions?: Array<{ value: string; label: string; [key: string]: any }>
+  filterType?: 'select' | 'text' | 'numeric' | 'date' | 'uuid'
+  loadingConfig?: LoadingConfig
+}
+
+export interface DataTableHeaderCellProps<TData> {
+  header: Header<TData, unknown>
+  index: number
+  headers: Header<TData, unknown>[]
+  frozenColumns: Set<string>
+  columnDropdowns?: Record<string, BaseDropdown>
+  onSortingChange?: (columnId: string, direction: TableSortBy) => void
+  onFilterChange?: (columnId: string) => void
+  onFreezeChange?: (columnId: string) => void
+  manualPagination?: boolean
+  loading?: boolean
+}
+
+export interface DataTablePaginationProps<T> {
+  table: Table<T>
+  id?: string
+  class?: string
+  showRowsPerPage?: boolean
+  rowsPerPageOptions?: number[]
+  itemsLabel?: string
+  children?: Snippet
+  onPageChange?: (pageIndex: number) => void
+  onPageSizeChange?: (pageSize: number) => void
+  // Pass these directly for reactivity instead of accessing through table.options
+  data?: T[]
+  rowCount?: number
+  manualPagination?: boolean
+  disabled?: boolean
+}
+
+export interface DataTableRowProps<TData> {
+  row: Row<TData>
+  rowIndex: number
+  frozenColumns: Set<string>
+  focusedRowIndex: number
+  loading?: boolean
+  onRowClick?: (row: TData) => void
+  getRowClassName?: (row: TData) => string
+  getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean }
+  StickyCellWrapper: Snippet<
+    [
+      {
+        children: any
+        align?: 'left' | 'right'
+        isFirst?: boolean
+        isLast?: boolean
+        isFrozen?: boolean
+        isLastFrozen?: boolean
+      }
+    ]
+  >
 }
 
 export interface DataTableProps<TData> {
@@ -125,19 +151,42 @@ export interface DataTableProps<TData> {
   getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean }
 }
 
-export interface DataTablePaginationProps<T> {
-  table: Table<T>
-  id?: string
-  class?: string
-  showRowsPerPage?: boolean
-  rowsPerPageOptions?: number[]
-  itemsLabel?: string
-  children?: Snippet
-  onPageChange?: (pageIndex: number) => void
-  onPageSizeChange?: (pageSize: number) => void
-  // Pass these directly for reactivity instead of accessing through table.options
-  data?: T[]
-  rowCount?: number
-  manualPagination?: boolean
-  disabled?: boolean
+export interface DateCellConfig {
+  className?: string
+}
+
+export interface LoadingConfig {
+  lines?: number // Number of skeleton lines to show (default: 1)
+  showAvatar?: boolean // Show skeleton avatar before lines (default: false)
+  avatarSize?: number // Size of skeleton avatar in pixels (default: 32)
+}
+
+// Extend TanStack Table's ColumnMeta to include our custom properties
+declare module '@tanstack/table-core' {
+  interface ColumnMeta<TData, TValue> {
+    cellType?: CellType
+    disableColumnFilter?: boolean
+    loadingConfig?: LoadingConfig
+  }
+}
+
+export interface TagCellConfig {
+  options: Array<{
+    value: string
+    label: string
+    color: StatusType
+  }>
+  showDot?: boolean
+}
+
+export interface TextCellConfig {
+  className?: string
+}
+
+export interface UuidCellConfig {
+  prefixLength?: number // default 4 - chars from start
+  suffixLength?: number // default 4 - chars from end
+  full?: boolean // default false - show full UUID
+  disabled?: boolean // default false
+  onCopy?: (value: string) => void
 }

@@ -7,7 +7,6 @@ import TagCell from './cells/tag-cell.svelte'
 import DateCell from './cells/date-cell.svelte'
 import CurrencyCell from './cells/currency-cell.svelte'
 import UuidCell from './cells/uuid-cell.svelte'
-import type { Snippet } from 'svelte'
 import { renderSnippet } from './render-helpers.js'
 
 export function createColumns<TData>(columns: DataTableColumn<TData>[]): ColumnDef<TData>[] {
@@ -19,28 +18,29 @@ export function createColumns<TData>(columns: DataTableColumn<TData>[]): ColumnD
       enableSorting: col.enableSorting ?? true,
       enableHiding: col.enableHiding ?? true,
       enableResizing: col.enableResizing ?? true,
-      disableColumnFilter: col.disableColumnFilter ?? false,
       size: col.size,
       minSize: col.minSize,
       maxSize: col.maxSize,
-      loadingConfig: col.loadingConfig,
       meta: {
-        cellType: col.cellType
+        cellType: col.cellType,
+        disableColumnFilter: col.disableColumnFilter ?? false,
+        loadingConfig: col.loadingConfig
       }
     }
 
     // Cell renderer
     if (col.cell) {
       // Custom cell renderer - can be a Snippet or a function
+      const cellRenderer = col.cell
       tanstackCol.cell = ({ row }) => {
         const value = col.accessorKey ? row.original[col.accessorKey] : undefined
 
         // Check if it's a function or a Snippet
-        if (typeof col.cell === 'function') {
-          return col.cell(value, row.original)
+        if (typeof cellRenderer === 'function') {
+          return cellRenderer(value, row.original)
         } else {
           // It's a Snippet, render it with the row data
-          return renderSnippet(col.cell, row.original)
+          return renderSnippet(cellRenderer, row.original)
         }
       }
     } else if (col.cellType) {

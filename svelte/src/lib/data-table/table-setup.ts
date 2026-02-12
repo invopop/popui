@@ -6,7 +6,8 @@ import type {
   RowSelectionState,
   SortingState,
   VisibilityState,
-  Updater
+  Updater,
+  TableOptions
 } from '@tanstack/table-core'
 import {
   getCoreRowModel,
@@ -89,7 +90,7 @@ interface TableSetupOptions<TData> {
  * Create the TanStack table instance with all configuration
  */
 export function setupTable<TData>(options: TableSetupOptions<TData>) {
-  const tableOptions: any = {
+  const tableOptions: TableOptions<TData> = {
     state: {
       get sorting() {
         return options.getSorting()

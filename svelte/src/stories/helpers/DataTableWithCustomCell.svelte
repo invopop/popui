@@ -26,9 +26,7 @@
   // Generate random steps for each row
   function generateSteps(rowIndex: number): StepIcon[] {
     const count = Math.floor(Math.random() * 5) + 2 // 2-6 steps
-    return Array.from({ length: count }, (_, i) =>
-      mockStepIcons[i % mockStepIcons.length]
-    )
+    return Array.from({ length: count }, (_, i) => mockStepIcons[i % mockStepIcons.length])
   }
 
   // Generate UUID for each row based on invoice number
@@ -86,11 +84,11 @@
   getRowClassName={() => 'h-[60px]'}
   paginationSlot={paginationControls}
   columns={[
-    ...props.columns.map((col) => {
+    ...props.columns.map((col): any => {
       if (col.id === 'supplier') {
         return {
           ...col,
-          cell: (value, row) => renderSnippet(supplierCell, row),
+          cell: (_: string, row: any) => renderSnippet(supplierCell, row),
           loadingConfig: {
             lines: 2
           }
@@ -116,7 +114,7 @@
     {
       id: 'steps',
       header: 'Steps',
-      cell: (value, row) => renderSnippet(stepsCell, row),
+      cell: (_: undefined, row: any) => renderSnippet(stepsCell, row),
       enableSorting: false,
       enableResizing: true,
       size: 300,

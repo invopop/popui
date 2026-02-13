@@ -301,6 +301,7 @@ export interface BaseDropdownProps {
     isFrozen?: boolean;
     showSortOptions?: boolean;
     showFilterOption?: boolean;
+    showHideOption?: boolean;
   }
 
   export interface BreadcrumbProps {

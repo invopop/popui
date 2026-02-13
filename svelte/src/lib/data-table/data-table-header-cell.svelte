@@ -126,6 +126,7 @@
         isFrozen={frozenColumns.has(column.id)}
         showSortOptions={column.getCanSort()}
         showFilterOption={!column.columnDef.meta?.disableColumnFilter}
+        showHideOption={column.getCanHide()}
         onOrderBy={(direction) => {
           column.toggleSorting(direction === 'desc')
           if (onSortingChange) {

@@ -3,7 +3,7 @@
   import type { TableSortBy, DrawerOption, BaseTableHeaderOrderByProps } from './types.js'
   import DrawerContext from './DrawerContext.svelte'
 
-  let { isActive = false, sortDirection, onOrderBy, onHide, onFilter, onFreeze, isFrozen = false, showSortOptions = true, showFilterOption = true }: BaseTableHeaderOrderByProps = $props()
+  let { isActive = false, sortDirection, onOrderBy, onHide, onFilter, onFreeze, isFrozen = false, showSortOptions = true, showFilterOption = true, showHideOption = true }: BaseTableHeaderOrderByProps = $props()
 
   let items = $derived([
     ...(showSortOptions ? [
@@ -26,8 +26,10 @@
       { label: '', value: 'sep-2', separator: true }
     ] : []),
     { icon: Lock, label: isFrozen ? 'Unfreeze column' : 'Freeze column', value: 'freeze' },
-    { label: '', value: 'sep-3', separator: true },
-    { icon: Preview, label: 'Hide column', value: 'hide' }
+    ...(showHideOption ? [
+      { label: '', value: 'sep-3', separator: true },
+      { icon: Preview, label: 'Hide column', value: 'hide' }
+    ] : [])
   ] as DrawerOption[])
 </script>
 

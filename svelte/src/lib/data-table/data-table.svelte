@@ -47,6 +47,7 @@
     disablePagination = false,
     disableKeyboardNavigation = false,
     disableControls = false,
+    disableJumpToPage = false,
     rowActions = [],
     getRowActions,
     onRowAction,
@@ -196,7 +197,14 @@
       tableRenderKey++
     },
     setSorting: (value) => (sorting = value),
-    setPagination: (value) => (pagination = value),
+    setPagination: (value) => {
+      const pageChanged = pagination.pageIndex !== value.pageIndex
+      pagination = value
+      // Clear selection when page changes
+      if (pageChanged && Object.keys(rowSelection).length > 0) {
+        rowSelection = {}
+      }
+    },
     setColumnSizing: (value) => {
       columnSizing = value
       if (onColumnResize && Object.keys(value).length > 0) {
@@ -417,6 +425,7 @@
         {manualPagination}
         {onPageChange}
         {onPageSizeChange}
+        {disableJumpToPage}
         disabled={disableControls || loading}
       >
         {#if paginationSlot}

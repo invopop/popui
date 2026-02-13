@@ -20,7 +20,8 @@
     data,
     rowCount,
     manualPagination,
-    disabled = false
+    disabled = false,
+    disableJumpToPage = false
   }: DataTablePaginationProps<any> = $props()
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
@@ -78,28 +79,32 @@
     className
   )}
 >
-  <div class={clsx('flex items-center gap-3', {
-    'pointer-events-none opacity-30': disabled
-  })}>
+  <div
+    class={clsx('flex items-center gap-3', {
+      'pointer-events-none opacity-30': disabled
+    })}
+  >
     <div class="flex items-center gap-2">
       <div class="flex items-center gap-1.5">
         <div class="flex items-center">
-          <Button
-            variant="ghost"
-            size="md"
-            icon={ScrollLeft}
-            onclick={() => {
-              if (manualPagination) {
-                table.setPagination({ pageIndex: 0, pageSize: rowsPerPage })
-              } else {
-                table.setPageIndex(0)
-              }
-              onPageChange?.(1)
-            }}
-            disabled={currentPage === 1}
-            class={cn(currentPage === 1 && 'pointer-events-none opacity-30')}
-            aria-label="First page"
-          />
+          {#if !disableJumpToPage}
+            <Button
+              variant="ghost"
+              size="md"
+              icon={ScrollLeft}
+              onclick={() => {
+                if (manualPagination) {
+                  table.setPagination({ pageIndex: 0, pageSize: rowsPerPage })
+                } else {
+                  table.setPageIndex(0)
+                }
+                onPageChange?.(1)
+              }}
+              disabled={currentPage === 1}
+              class={cn(currentPage === 1 && 'pointer-events-none opacity-30')}
+              aria-label="First page"
+            />
+          {/if}
           <Button
             variant="ghost"
             size="md"
@@ -132,6 +137,7 @@
               size="sm"
               oninput={handlePageInput}
               onblur={handlePageBlur}
+              disabled={disableJumpToPage}
             />
           </div>
           <span class="text-base text-foreground-default-secondary whitespace-nowrap">
@@ -158,22 +164,24 @@
             class={cn(currentPage === totalPages && 'pointer-events-none opacity-30')}
             aria-label="Next page"
           />
-          <Button
-            variant="ghost"
-            size="md"
-            icon={ScrollRight}
-            onclick={() => {
-              if (manualPagination) {
-                table.setPagination({ pageIndex: totalPages - 1, pageSize: rowsPerPage })
-              } else {
-                table.setPageIndex(totalPages - 1)
-              }
-              onPageChange?.(totalPages)
-            }}
-            disabled={currentPage === totalPages}
-            class={cn(currentPage === totalPages && 'pointer-events-none opacity-30')}
-            aria-label="Last page"
-          />
+          {#if !disableJumpToPage}
+            <Button
+              variant="ghost"
+              size="md"
+              icon={ScrollRight}
+              onclick={() => {
+                if (manualPagination) {
+                  table.setPagination({ pageIndex: totalPages - 1, pageSize: rowsPerPage })
+                } else {
+                  table.setPageIndex(totalPages - 1)
+                }
+                onPageChange?.(totalPages)
+              }}
+              disabled={currentPage === totalPages}
+              class={cn(currentPage === totalPages && 'pointer-events-none opacity-30')}
+              aria-label="Last page"
+            />
+          {/if}
         </div>
       </div>
       {#if showRowsPerPage}
@@ -190,7 +198,6 @@
               table.setPageSize(size)
               table.setPageIndex(0)
               onPageSizeChange?.(size)
-              onPageChange?.(1)
             }}
             placeholder="Rows per page"
             disablePlaceholder={true}

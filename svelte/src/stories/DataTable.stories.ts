@@ -654,3 +654,18 @@ export const WithBooleanHints: Story = {
 	}
 }
 
+export const DisableJumpToPage: Story = {
+	args: {
+		data: generateInvoices(100),
+		columns,
+		rowActions,
+		disableJumpToPage: true,
+		onSelectionChange: (selectedRows) => {
+			console.log('Selected rows:', selectedRows)
+		},
+		onRowClick: (row) => {
+			console.log('Row clicked:', row)
+		}
+	}
+}
+

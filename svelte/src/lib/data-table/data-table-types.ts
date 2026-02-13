@@ -108,6 +108,7 @@ export interface DataTablePaginationProps<T> {
   rowCount?: number
   manualPagination?: boolean
   disabled?: boolean
+  disableJumpToPage?: boolean // Disable first/last page buttons and make page input read-only
 }
 
 export interface DataTableRowProps<TData> {
@@ -130,6 +131,7 @@ export interface DataTableProps<TData> {
   disablePagination?: boolean
   disableKeyboardNavigation?: boolean
   disableControls?: boolean // Disable all controls (filters, pagination, view options)
+  disableJumpToPage?: boolean // Disable first/last page buttons and make page input read-only
   rowActions?: TableAction[]
   getRowActions?: (row: TData) => TableAction[]
   onRowAction?: (action: AnyProp, row: TData) => void

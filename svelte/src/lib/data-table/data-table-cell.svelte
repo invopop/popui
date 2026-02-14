@@ -64,7 +64,7 @@
       isLast: isLastCell
     })}
     {#snippet CellContent()}
-      <div class={loading ? 'opacity-30' : ''}>
+      <div class="w-full {loading ? 'opacity-30' : ''}">
         <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
       </div>
     {/snippet}
@@ -81,7 +81,7 @@
       {#if loading && cell.column.id !== 'select'}
         <CellSkeleton {isBoolean} {loadingConfig} />
       {:else}
-        <div class={cell.column.id === 'select' && loading ? 'opacity-30' : ''}>
+        <div class="w-full {cell.column.id === 'select' && loading ? 'opacity-30' : ''}">
           <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
         </div>
       {/if}

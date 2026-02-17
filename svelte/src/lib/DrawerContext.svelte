@@ -33,7 +33,6 @@
     getNextFocusedIndex,
     selectFocusedItem
   } from './drawer-keyboard-helpers'
-  import { isInputFocused } from './helpers'
 
   const flipDurationMs = 150
 
@@ -74,6 +73,27 @@
     })
 
     return { groupedItems: grouped, ungroupedItems: ungrouped }
+  })
+
+  // Items in display order (matches visual rendering order)
+  let itemsInDisplayOrder = $derived.by(() => {
+    const displayOrder: DrawerOption[] = []
+
+    if (hasGroups && groups) {
+      // Add grouped items in group order, only if group is open (when collapsible)
+      groups.forEach((group) => {
+        const isOpen = collapsibleGroups ? openGroups[group.slug] : true
+        if (isOpen) {
+          const groupItems = groupedItems.get(group.slug) || []
+          displayOrder.push(...groupItems)
+        }
+      })
+    }
+
+    // Add ungrouped items
+    displayOrder.push(...ungroupedItems)
+
+    return displayOrder
   })
 
   let openGroups = $state<Record<string, boolean>>({})
@@ -413,7 +433,7 @@
   }
 
   let focusedItemValue = $derived.by(() => {
-    const focusableItems = getFocusableItems(items)
+    const focusableItems = getFocusableItems(itemsInDisplayOrder)
     if (focusedIndex >= 0 && focusedIndex < focusableItems.length) {
       return focusableItems[focusedIndex].value
     }
@@ -421,10 +441,10 @@
   })
 
   function handleKeyDown(event: KeyboardEvent) {
-    // Don't handle if any input is focused or container doesn't exist
-    if (isInputFocused() || !containerRef || !document.body.contains(containerRef)) return
+    // Don't handle if container doesn't exist
+    if (!containerRef || !document.body.contains(containerRef)) return
 
-    const focusableItems = getFocusableItems(items)
+    const focusableItems = getFocusableItems(itemsInDisplayOrder)
     if (focusableItems.length === 0) return
 
     if (event.key === 'ArrowDown') {
@@ -435,7 +455,7 @@
       focusedIndex = getNextFocusedIndex(focusedIndex, 'up', focusableItems.length)
     } else if (event.key === ' ' || event.key === 'Enter') {
       event.preventDefault()
-      const result = selectFocusedItem(items, focusedIndex, multiple)
+      const result = selectFocusedItem(itemsInDisplayOrder, focusedIndex, multiple)
       if (result) {
         if (result.shouldUpdate) {
           updateItem(result.item)
@@ -484,7 +504,7 @@
       >
         {#if collapsibleGroups}
           <button
-            class="cursor-pointer flex items-center justify-between h-8 pl-2.5 pr-2.5 py-2.5 text-base font-medium text-foreground-default-secondary w-full hover:bg-background-default-secondary rounded-lg overflow-clip flex-shrink-0"
+            class="cursor-pointer flex items-center justify-between h-8 pl-2.5 pr-2.5 py-2.5 text-base font-medium text-foreground-default-secondary w-full hover:bg-background-default-secondary rounded-lg overflow-clip flex-shrink-0 outline-none"
             onclick={() => toggleGroup(group.slug)}
           >
             <div class="flex items-center gap-1.5">

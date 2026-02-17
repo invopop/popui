@@ -505,12 +505,12 @@ export const NonCollapsibleGroups: Story = {
     ],
     items: [
       { label: 'Cobee S.L.', value: 'cobee', groupBy: 'live' },
-      { label: 'Payflow S.L.', value: 'payflow', groupBy: 'live', selected: true },
-      { label: 'Company A', value: 'companya', groupBy: 'live' },
-      { label: 'Company B', value: 'companyb', groupBy: 'live' },
       { label: 'Test Company', value: 'test', groupBy: 'sandbox' },
+      { label: 'Payflow S.L.', value: 'payflow', groupBy: 'live', selected: true },
       { label: 'Dev Company', value: 'dev', groupBy: 'sandbox' },
+      { label: 'Company A', value: 'companya', groupBy: 'live' },
       { label: 'Staging Company', value: 'staging', groupBy: 'sandbox' },
+      { label: 'Company B', value: 'companyb', groupBy: 'live' },
       { separator: true, value: 'sep-1' } as any,
       { label: 'Create workspace', value: 'add', icon: Close }
     ]

@@ -61,6 +61,7 @@ export type DrawerOption = SelectOption & {
   separator?: boolean
   destructive?: boolean
   selected?: boolean
+  focused?: boolean
   icon?: IconSource | undefined
   rightIcon?: IconSource | undefined
   country?: string
@@ -420,6 +421,7 @@ export interface BaseDropdownProps {
     scrollIfSelected?: boolean;
     onclick?: (value: AnyProp) => void;
     onchange?: (item: DrawerOption) => void;
+    onfocus?: (item: DrawerOption) => void;
   }
 
 

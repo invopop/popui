@@ -28,6 +28,12 @@
     type DropIndicatorState,
     type DndItem as DndItemType
   } from './drawer-dnd-helpers'
+  import {
+    getFocusableItems,
+    getNextFocusedIndex,
+    selectFocusedItem
+  } from './drawer-keyboard-helpers'
+  import { isInputFocused } from './helpers'
 
   const flipDurationMs = 150
 
@@ -81,6 +87,8 @@
   let draggedOverGroup = $state<string | null>(null)
   let dropIndicator = $state<DropIndicatorState>(null)
   let cleanupFunctions: (() => void)[] = []
+  let focusedIndex = $state<number>(-1)
+  let containerRef = $state<HTMLDivElement | null>(null)
 
   // Build internal DND items from external items
   function buildListIn() {
@@ -168,11 +176,14 @@
       element: document.documentElement
     })
     cleanupFunctions.push(autoScrollCleanup)
+
+    window.addEventListener('keydown', handleKeyDown)
   })
 
   onDestroy(() => {
     cleanupFunctions.forEach((cleanup) => cleanup())
     cleanupFunctions = []
+    window.removeEventListener('keydown', handleKeyDown)
   })
 
   function emitGroupDistribution() {
@@ -400,6 +411,40 @@
   function toggleGroup(groupSlug: string) {
     openGroups = openGroups[groupSlug] ? {} : { [groupSlug]: true }
   }
+
+  let focusedItemValue = $derived.by(() => {
+    const focusableItems = getFocusableItems(items)
+    if (focusedIndex >= 0 && focusedIndex < focusableItems.length) {
+      return focusableItems[focusedIndex].value
+    }
+    return null
+  })
+
+  function handleKeyDown(event: KeyboardEvent) {
+    // Don't handle if any input is focused or container doesn't exist
+    if (isInputFocused() || !containerRef || !document.body.contains(containerRef)) return
+
+    const focusableItems = getFocusableItems(items)
+    if (focusableItems.length === 0) return
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
+      focusedIndex = getNextFocusedIndex(focusedIndex, 'down', focusableItems.length)
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault()
+      focusedIndex = getNextFocusedIndex(focusedIndex, 'up', focusableItems.length)
+    } else if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault()
+      const result = selectFocusedItem(items, focusedIndex, multiple)
+      if (result) {
+        if (result.shouldUpdate) {
+          updateItem(result.item)
+        } else {
+          onclick?.(result.item.value)
+        }
+      }
+    }
+  }
 </script>
 
 {#snippet drawerItem(item: DrawerOption)}
@@ -407,12 +452,18 @@
     <DrawerContextSeparator />
   {:else}
     <div class:px-1={!item.groupBy} class:cursor-grab={draggable && !item.locked}>
-      <DrawerContextItem {item} {multiple} {onclick} onchange={updateItem} />
+      <DrawerContextItem
+        item={{ ...item, focused: item.value === focusedItemValue }}
+        {multiple}
+        {onclick}
+        onchange={updateItem}
+      />
     </div>
   {/if}
 {/snippet}
 
 <div
+  bind:this={containerRef}
   class="{widthClass} border border-border rounded-2xl shadow-lg bg-background flex flex-col py-1 max-h-[568px] list-none"
 >
   {@render children?.()}

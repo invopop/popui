@@ -15,19 +15,24 @@
     item = $bindable(),
     scrollIfSelected = false,
     onchange,
-    onclick
+    onclick,
+    onfocus
   }: DrawerContextItemProps = $props()
 
   let el: HTMLElement | undefined = $state()
+
+  let shouldShowHoverStyle = $derived.by(() => {
+    if (multiple) return true
+    if (item?.selected || item?.disabled) return false
+    return true
+  })
 
   let styles = $derived(
     clsx(
       'px-2 py-1.5 space-x-1.5',
       { 'bg-background-selected': item?.selected && !multiple },
-      {
-        'group-hover:bg-background-default-secondary':
-          (!item?.selected && !item?.disabled) || multiple
-      }
+      { 'bg-background-default-secondary': item?.focused && shouldShowHoverStyle },
+      { 'group-hover:bg-background-default-secondary': shouldShowHoverStyle }
     )
   )
 
@@ -67,50 +72,53 @@
 >
   <div class="bg-background rounded-md">
     <div class="{styles} rounded-md pr-2 flex items-center justify-start w-full">
-    {#if item?.useAvatar}
-      <ProfileAvatar name={item?.label || ''} picture={item?.picture || ''} variant="sm" />
-    {:else if item?.picture}
-      <ProfileAvatar name={item?.label || ''} picture={item?.picture} variant="sm" />
-    {:else if item?.icon}
-      <Icon
-        src={item.icon}
-        class="w-4 h-4 {item?.destructive
-          ? 'text-icon-critical'
-          : item?.iconClass || 'text-icon'} {item?.locked ? 'opacity-30' : ''}"
-      />
-    {/if}
-    <div class="whitespace-nowrap flex-1 text-left flex items-center space-x-1.5 truncate" {title}>
-      {#if item?.color}
-        <TagStatus status={item.color} dot />
+      {#if item?.useAvatar}
+        <ProfileAvatar name={item?.label || ''} picture={item?.picture || ''} variant="sm" />
+      {:else if item?.picture}
+        <ProfileAvatar name={item?.label || ''} picture={item?.picture} variant="sm" />
+      {:else if item?.icon}
+        <Icon
+          src={item.icon}
+          class="w-4 h-4 {item?.destructive
+            ? 'text-icon-critical'
+            : item?.iconClass || 'text-icon'} {item?.locked ? 'opacity-30' : ''}"
+        />
       {/if}
-      <span class="{labelStyles} text-base font-medium truncate">{item?.label || ''}</span>
+      <div
+        class="whitespace-nowrap flex-1 text-left flex items-center space-x-1.5 truncate"
+        {title}
+      >
+        {#if item?.color}
+          <TagStatus status={item.color} dot />
+        {/if}
+        <span class="{labelStyles} text-base font-medium truncate">{item?.label || ''}</span>
 
-      {#if item?.country}
-        <BaseFlag country={item.country} />
-        <span class="text-xs font-medium text-foreground-default-secondary uppercase">
-          {item.country}
-        </span>
-      {/if}
-    </div>
-    {#if item?.action}
-      <div class="no-drag !cursor-default">
-        {@render item.action(item)}
+        {#if item?.country}
+          <BaseFlag country={item.country} />
+          <span class="text-xs font-medium text-foreground-default-secondary uppercase">
+            {item.country}
+          </span>
+        {/if}
       </div>
-    {:else if multiple}
-      <InputCheckbox
-        checked={item?.selected ?? false}
-        onchange={(value) => {
-          if (item) {
-            item.selected = value
-            onchange?.(item)
-          }
-        }}
-      />
-    {:else if item?.selected}
-      <Icon src={Success} class="size-4 text-icon-selected" />
-    {:else if item?.rightIcon}
-      <Icon src={item.rightIcon} class="size-4 text-icon-default-secondary" />
-    {/if}
+      {#if item?.action}
+        <div class="no-drag !cursor-default">
+          {@render item.action(item)}
+        </div>
+      {:else if multiple}
+        <InputCheckbox
+          checked={item?.selected ?? false}
+          onchange={(value) => {
+            if (item) {
+              item.selected = value
+              onchange?.(item)
+            }
+          }}
+        />
+      {:else if item?.selected}
+        <Icon src={Success} class="size-4 text-icon-selected" />
+      {:else if item?.rightIcon}
+        <Icon src={item.rightIcon} class="size-4 text-icon-default-secondary" />
+      {/if}
     </div>
   </div>
 </button>

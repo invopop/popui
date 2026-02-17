@@ -90,7 +90,7 @@
 
 <div class="flex {className}" class:w-full={fullWidth} role="menu">
   <button
-    class="cursor-pointer text-left w-full min-w-0"
+    class="cursor-pointer text-left w-full min-w-0 outline-none"
     use:floatingRef
     {...rest}
     onclick={handleClick}

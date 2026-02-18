@@ -18,7 +18,8 @@
       value: a,
       icon: a.icon,
       separator: a.separator,
-      destructive: a.destructive
+      destructive: a.destructive,
+      disabled: a.disabled
     })) as DrawerOption[]
   )
 

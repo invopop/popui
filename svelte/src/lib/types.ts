@@ -116,6 +116,7 @@ export type TableAction = {
   slug?: string
   separator?: boolean
   destructive?: boolean
+  disabled?: boolean
   value?: AnyProp
 }
 

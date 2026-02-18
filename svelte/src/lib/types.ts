@@ -110,14 +110,8 @@ export type Badge = {
 
 export type TableDataRow = { [key: string]: unknown }
 
-export type TableAction = {
-  icon?: IconSource
-  label?: string
+export type TableAction = DrawerOption & {
   slug?: string
-  separator?: boolean
-  destructive?: boolean
-  disabled?: boolean
-  value?: AnyProp
 }
 
 export type TableSortBy = '' | 'asc' | 'desc'

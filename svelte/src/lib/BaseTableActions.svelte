@@ -19,7 +19,8 @@
       icon: a.icon,
       separator: a.separator,
       destructive: a.destructive,
-      disabled: a.disabled
+      disabled: a.disabled,
+      action: a.action
     })) as DrawerOption[]
   )
 

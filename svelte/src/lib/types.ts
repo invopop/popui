@@ -605,6 +605,7 @@ export interface BaseDropdownProps {
     collapsedSidebar?: boolean;
     iconTheme?: IconTheme;
     icon?: IconSource | string | undefined;
+    beta?: boolean;
     children?: MenuItemProps[] | undefined;
     onclick?: (url: string) => void;
   }

@@ -9,6 +9,7 @@
   import { FolderL } from '@invopop/ui-icons'
   import { resolveIcon } from './helpers.js'
   import DrawerContext from './DrawerContext.svelte'
+  import TagBeta from './TagBeta.svelte'
 
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy: 'absolute',
@@ -26,6 +27,7 @@
     collapsedSidebar = false,
     iconTheme = 'default',
     icon = undefined,
+    beta = false,
     children = undefined,
     onclick
   }: MenuItemProps = $props()
@@ -118,6 +120,9 @@
       {/if}
       {#if !collapsedSidebar}
         <span class="whitespace-nowrap tracking-normal">{label}</span>
+        {#if beta}
+          <TagBeta />
+        {/if}
       {/if}
     </span>
     {#if collapsable && !collapsedSidebar}

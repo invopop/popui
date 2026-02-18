@@ -21,7 +21,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   decorators: [() => DarkBackgroundDecorator],
   args: {
-    label: 'Item'
+    label: 'Item',
+    beta: true
   }
 }
 

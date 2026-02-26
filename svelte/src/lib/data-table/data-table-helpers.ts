@@ -16,7 +16,16 @@ export function reorderFrozenColumn<TData>(
   const columnIndex = newOrder.indexOf(columnId)
 
   if (columnIndex > -1) {
-    newOrder.splice(columnIndex, 1)
+    // Remove the actions column if present (we'll add it back at the end)
+    const actionsIndex = newOrder.indexOf('actions')
+    const hasActions = actionsIndex > -1
+    if (hasActions) {
+      newOrder.splice(actionsIndex, 1)
+    }
+
+    // Remove the column to be frozen from its current position
+    const updatedColumnIndex = newOrder.indexOf(columnId)
+    newOrder.splice(updatedColumnIndex, 1)
 
     const selectIndex = newOrder.indexOf('select')
     const insertIndex = selectIndex >= 0 ? selectIndex + 1 : 0
@@ -31,6 +40,12 @@ export function reorderFrozenColumn<TData>(
     }
 
     newOrder.splice(lastFrozenIndex, 0, columnId)
+
+    // Add actions column back at the end
+    if (hasActions) {
+      newOrder.push('actions')
+    }
+
     table.setColumnOrder(newOrder)
   }
 }
@@ -49,7 +64,16 @@ export function reorderUnfrozenColumn<TData>(
   const columnIndex = newOrder.indexOf(columnId)
 
   if (columnIndex > -1) {
-    newOrder.splice(columnIndex, 1)
+    // Remove the actions column if present (we'll add it back at the end)
+    const actionsIndex = newOrder.indexOf('actions')
+    const hasActions = actionsIndex > -1
+    if (hasActions) {
+      newOrder.splice(actionsIndex, 1)
+    }
+
+    // Remove the column to be unfrozen from its current position
+    const updatedColumnIndex = newOrder.indexOf(columnId)
+    newOrder.splice(updatedColumnIndex, 1)
 
     const selectIndex = newOrder.indexOf('select')
     const insertIndex = selectIndex >= 0 ? selectIndex + 1 : 0
@@ -65,6 +89,12 @@ export function reorderUnfrozenColumn<TData>(
     }
 
     newOrder.splice(firstUnfrozenIndex, 0, columnId)
+
+    // Add actions column back at the end
+    if (hasActions) {
+      newOrder.push('actions')
+    }
+
     table.setColumnOrder(newOrder)
   }
 }

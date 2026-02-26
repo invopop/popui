@@ -27,8 +27,6 @@
 		"tmp",
 		"go",
 		"html",
-		"icons/node_modules",
-		"icons/dist",
 		"**/_templ.go",
 		"**/*.templ"
 	]

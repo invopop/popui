@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.48",
+  "version": "0.1.49",
   "repository": {
     "url": "https://github.com/invopop/popui"
   },
@@ -47,16 +47,16 @@
     "@storybook/addon-links": "^9.1.3",
     "@storybook/sveltekit": "^9.1.3",
     "@storybook/testing-library": "^0.2.2",
-    "@sveltejs/adapter-auto": "^3.0.0",
-    "@sveltejs/kit": "^2.5.27",
+    "@sveltejs/adapter-auto": "^7.0.1",
+    "@sveltejs/kit": "^2.53.2",
     "@sveltejs/package": "^2.3.7",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@tailwindcss/cli": "^4.1.13",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "@types/lodash-es": "^4.17.12",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-storybook": "^9.1.3",
@@ -74,8 +74,8 @@
     "tailwindcss": "^4.1.13",
     "tslib": "^2.4.1",
     "typescript": "^5.5.0",
-    "vite": "^5.4.4",
-    "vitest": "^1.0.0"
+    "vite": "^5.4.21",
+    "vitest": "^2.1.8"
   },
   "svelte": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -85,7 +85,7 @@
     "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "^2.1.5",
     "@atlaskit/pragmatic-drag-and-drop-hitbox": "^1.1.0",
     "@floating-ui/core": "^1.5.1",
-    "@invopop/ui-icons": "^0.0.78",
+    "@invopop/ui-icons": "^0.0.82",
     "@steeze-ui/heroicons": "^2.2.3",
     "@steeze-ui/svelte-icon": "^1.6.2",
     "@tailwindcss/vite": "^4.1.12",
@@ -110,5 +110,8 @@
     "tailwind-variants": "^1.0.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^4.3.5"
+  },
+  "overrides": {
+    "cookie": "^0.7.0"
   }
 }

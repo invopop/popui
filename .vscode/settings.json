@@ -15,7 +15,6 @@
         "**/tmp/**": true,
         "**/_templ.go": true,
         "**/go/assets/**": true,
-        "**/icons/dist/**": true,
         "**/package-lock.json": true,
         "**/.storybook-static/**": true
     },

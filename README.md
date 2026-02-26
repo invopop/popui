@@ -5,7 +5,6 @@ Popui is a set of reusable components to be used inside Console UI and other Inv
 This repository contains:
 
 - **Svelte Component Library** - Reusable Svelte components with Tailwind theme configuration
-- **Icons** - Icon library based on @steeze-ui/icons
 
 > **Note:** The Go library has been moved to [github.com/invopop/popui.go](https://github.com/invopop/popui.go)
 
@@ -64,36 +63,3 @@ The library exports a Tailwind theme configuration that you can import into your
 ```
 
 This provides access to the Popui design system's color palette, typography, spacing, and other design tokens.
-
-## Icons
-
-The icons library is a separate package that generates Svelte icon components based on [@steeze-ui/icons](https://github.com/steeze-ui/icons).
-
-The icons are located in the `/icons` directory and are published separately as `@invopop/ui-icons`.
-
-### Building Icons
-
-```bash
-cd icons
-npm install
-npm run build:icons
-```
-
-### Using Icons
-
-Install the package:
-
-```bash
-npm install @invopop/ui-icons
-```
-
-Import icons in your Svelte app:
-
-```svelte
-<script>
-  import { Icon } from '@steeze-ui/svelte-icon'
-  import { ArrowRight } from '@invopop/ui-icons'
-</script>
-
-<Icon src={ArrowRight} />
-```

@@ -1,14 +1,16 @@
 /**
  * PopUI Tailwind v4 Theme Configuration
- * 
+ *
  * This file can be imported in any project using:
  * @import "@invopop/popui/tailwind.theme.css";
- * 
+ *
  * Three-tier color system:
  * 1. Primitive colors: Raw color values from Figma (e.g., mint-100)
  * 2. Semantic colors: Named palettes using base colors (e.g., positive-100)
  * 3. Token colors: Application-specific using semantic colors (e.g., foreground-default)
  */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
 
 @theme {
   /* ============================================
@@ -799,7 +801,7 @@
 
   /* Font Family */
   --font-sans: Inter, sans-serif;
-  --font-mono: "Geist Mono", CommitMono, ui-monospace, Menlo, Monaco, Consolas, "Ubuntu Mono", "Roboto Mono", "DejaVu Sans Mono", monospace;
+  --font-mono: "Geist Mono", CommitMono, ui-monospace, Menlo, Monaco, Consolas, "Roboto Mono", "DejaVu Sans Mono", monospace;
 
   /* Font Features for Monospace */
   --font-mono-features: "ss02" on, "ss08" on, "ss09" on;

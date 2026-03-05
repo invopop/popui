@@ -76,6 +76,8 @@
         <ProfileAvatar name={item?.label || ''} picture={item?.picture || ''} variant="sm" />
       {:else if item?.picture}
         <ProfileAvatar name={item?.label || ''} picture={item?.picture} variant="sm" />
+      {:else if typeof item?.icon === 'string'}
+        <img src={item.icon} alt="" class="w-4 h-4 text-icon {item?.locked ? 'opacity-30' : ''}" />
       {:else if item?.icon}
         <Icon
           src={item.icon}
@@ -91,9 +93,12 @@
         {#if item?.color}
           <TagStatus status={item.color} dot />
         {/if}
+        {#if item?.country && item?.flagPosition === 'before'}
+          <BaseFlag country={item.country} />
+        {/if}
         <span class="{labelStyles} text-base font-medium truncate">{item?.label || ''}</span>
 
-        {#if item?.country}
+        {#if item?.country && item?.flagPosition === 'after'}
           <BaseFlag country={item.country} />
           <span class="text-xs font-medium text-foreground-default-secondary uppercase">
             {item.country}

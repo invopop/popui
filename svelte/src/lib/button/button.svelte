@@ -170,11 +170,13 @@
       iconClass?: string
       stackedLeft?: boolean
       stackedRight?: boolean
+      shortcut?: boolean
     }
 </script>
 
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
+  import ShortcutWrapper from '../ShortcutWrapper.svelte'
 
   let {
     class: className,
@@ -185,6 +187,7 @@
     iconClass = '',
     stackedLeft = false,
     stackedRight = false,
+    shortcut = false,
     ref = $bindable(null),
     href = undefined,
     type = 'button',
@@ -211,11 +214,23 @@
   )
 </script>
 
-{#snippet iconContent()}
+{#snippet iconElement()}
   {#if icon}
     <div class={cn('relative z-10', iconClass && `[&_svg]:${iconClass}`)}>
       <Icon src={icon} class={iconSize} />
     </div>
+  {/if}
+{/snippet}
+
+{#snippet iconContent()}
+  {#if shortcut}
+    <ShortcutWrapper
+      theme={['dark', 'primary', 'danger'].includes(variant) ? 'navigation' : 'light'}
+    >
+      {@render iconElement()}
+    </ShortcutWrapper>
+  {:else}
+    {@render iconElement()}
   {/if}
 {/snippet}
 

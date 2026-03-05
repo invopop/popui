@@ -333,3 +333,28 @@ export const WithDangerIcon: Story = {
     dangerIcon: true
   }
 }
+
+// Shortcut
+export const WithShortcut: Story = {
+  args: {
+    icon: Cog6Tooth,
+    variant: 'ghost',
+    shortcut: true
+  }
+}
+
+export const WithShortcutPrimary: Story = {
+  args: {
+    icon: Add,
+    variant: 'primary',
+    shortcut: true
+  }
+}
+
+export const WithShortcutOutline: Story = {
+  args: {
+    icon: Cog6Tooth,
+    variant: 'outline',
+    shortcut: true
+  }
+}

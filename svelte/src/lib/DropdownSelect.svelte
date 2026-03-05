@@ -6,6 +6,7 @@
   import DrawerContext from './DrawerContext.svelte'
   import clsx from 'clsx'
   import TagStatus from './TagStatus.svelte'
+  import BaseFlag from './BaseFlag.svelte'
   import { resolveIcon } from './helpers.js'
   import { buttonVariants } from './button/button.svelte'
 
@@ -18,6 +19,7 @@
     multiple = false,
     fullWidth = false,
     widthClass = 'min-w-[160px] max-w-[420px]',
+    flagPosition = 'before',
     onSelect,
     onOpenChange,
     stackLeft = false,
@@ -151,9 +153,16 @@
           <TagStatus dot status={selectedColor} />
           {@render label()}
         </div>
+      {:else if !multiple && selectedItem?.country}
+        <div class="flex items-center gap-1 flex-1 min-w-0">
+          <BaseFlag country={selectedItem.country} />
+          {@render label()}
+        </div>
       {:else if selectedIcon || resolvedIcon}
         <div class="flex items-center gap-1 flex-1 min-w-0">
-          {#if selectedIcon}
+          {#if typeof selectedIcon === 'string'}
+            <img src={selectedIcon} alt="" class="size-4 flex-shrink-0 text-icon" />
+          {:else if selectedIcon}
             <Icon src={selectedIcon} {iconTheme} class="{selectedIconColor} size-4 flex-shrink-0" />
           {:else if resolvedIcon}
             <Icon src={resolvedIcon} {iconTheme} class="text-icon size-4 flex-shrink-0" />
@@ -169,6 +178,7 @@
     widthClass="min-w-[256px]"
     {multiple}
     {items}
+    {flagPosition}
     onclick={handleClick}
     onselect={handleSelected}
   />

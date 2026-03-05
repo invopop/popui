@@ -34,6 +34,7 @@
     disabled,
     stackedLeft,
     stackedRight,
+    shortcut,
     onclick,
     class: `${fullWidthClass} ${className || ''}`,
     ...rest

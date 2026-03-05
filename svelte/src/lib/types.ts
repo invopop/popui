@@ -62,7 +62,7 @@ export type DrawerOption = SelectOption & {
   destructive?: boolean
   selected?: boolean
   focused?: boolean
-  icon?: IconSource | undefined
+  icon?: IconSource | string | undefined
   rightIcon?: IconSource | undefined
   country?: string
   color?: StatusType
@@ -74,6 +74,7 @@ export type DrawerOption = SelectOption & {
   groupBy?: string
   useAvatar?: boolean
   action?: Snippet<[DrawerOption]>
+  flagPosition?: 'before' | 'after'
 }
 
 export type Company = {
@@ -402,6 +403,7 @@ export interface BaseDropdownProps {
     draggable?: boolean;
     widthClass?: string;
     collapsibleGroups?: boolean;
+    flagPosition?: 'before' | 'after';
     onclick?: (value: AnyProp) => void;
     onselect?: (selected: DrawerOption[]) => void;
     onreorder?: (items: DrawerOption[]) => void;
@@ -429,6 +431,7 @@ export interface BaseDropdownProps {
     multiple?: boolean;
     fullWidth?: boolean;
     widthClass?: string;
+    flagPosition?: 'before' | 'after';
     onSelect?: (value: AnyProp) => void;
     onOpenChange?: (isOpen: boolean) => void;
     stackLeft?: boolean;

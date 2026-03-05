@@ -132,3 +132,52 @@ export const Stacked: Story = {
     Component: StackedDropdownSelects
   })
 }
+
+export const WithFlags: Story = {
+  args: {
+    placeholder: 'Select country',
+    value: 'ES',
+    options: [
+      { value: 'GLOBAL', label: 'All countries', country: 'GLOBAL' },
+      { value: 'ES', label: 'Spain', country: 'ES' },
+      { value: 'FR', label: 'France', country: 'FR' },
+      { value: 'DE', label: 'Germany', country: 'DE' },
+      { value: 'IT', label: 'Italy', country: 'IT' },
+      { value: 'PT', label: 'Portugal', country: 'PT' },
+      { value: 'GB', label: 'United Kingdom', country: 'GB' }
+    ]
+  }
+}
+
+export const WithFlagsMultiple: Story = {
+  args: {
+    placeholder: 'Select countries',
+    multiple: true,
+    value: [
+      { value: 'ES', label: 'Spain', country: 'ES' },
+      { value: 'FR', label: 'France', country: 'FR' }
+    ],
+    options: [
+      { value: 'ES', label: 'Spain', country: 'ES' },
+      { value: 'FR', label: 'France', country: 'FR' },
+      { value: 'DE', label: 'Germany', country: 'DE' },
+      { value: 'IT', label: 'Italy', country: 'IT' },
+      { value: 'PT', label: 'Portugal', country: 'PT' },
+      { value: 'GB', label: 'United Kingdom', country: 'GB' }
+    ]
+  }
+}
+
+export const WithLogoUrls: Story = {
+  args: {
+    placeholder: 'Select app',
+    value: 'slack',
+    options: [
+      { value: 'slack', label: 'Slack', icon: 'https://api.iconify.design/mdi/slack.svg' },
+      { value: 'github', label: 'GitHub', icon: 'https://api.iconify.design/mdi/github.svg' },
+      { value: 'twitter', label: 'Twitter', icon: 'https://api.iconify.design/mdi/twitter.svg' },
+      { value: 'linkedin', label: 'LinkedIn', icon: 'https://api.iconify.design/mdi/linkedin.svg' },
+      { value: 'email', label: 'Email', icon: 'https://api.iconify.design/mdi/email.svg' }
+    ]
+  }
+}

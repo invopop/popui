@@ -19,12 +19,10 @@
   }: CardCheckboxProps = $props()
 
   let containerStyles = $derived(
-    clsx('border gap-3', {
+    clsx('border gap-3 rounded-xl', {
       'border-foreground-selected': checked,
       'border-border': !checked,
-      'bg-background-default-secondary': disabled,
-      'rounded-lg': hideRadio,
-      'rounded-xl': !hideRadio
+      'bg-background-default-secondary': disabled
     })
   )
 

@@ -4,13 +4,14 @@
  * This file can be imported in any project using:
  * @import "@invopop/popui/tailwind.theme.css";
  *
+ * To use the Geist Mono font, add this to your HTML or main CSS file:
+ * @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
+ *
  * Three-tier color system:
  * 1. Primitive colors: Raw color values from Figma (e.g., mint-100)
  * 2. Semantic colors: Named palettes using base colors (e.g., positive-100)
  * 3. Token colors: Application-specific using semantic colors (e.g., foreground-default)
  */
-
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
 
 @theme {
   /* ============================================

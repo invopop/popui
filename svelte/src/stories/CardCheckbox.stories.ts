@@ -2,8 +2,10 @@ import type { Meta, StoryObj } from '@storybook/sveltekit'
 import { CodeFork, CheckBadge } from '@invopop/ui-icons'
 import CardCheckbox from '../lib/CardCheckbox.svelte'
 import CardCheckboxWithFooter from './helpers/CardCheckboxWithFooter.svelte'
+import CardCheckboxVertical from './helpers/CardCheckboxVertical.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidth80Decorator from './decorartors/MaxWidth80Decorator.svelte'
+import MaxWidthMdDecorator from './decorartors/MaxWidthMdDecorator.svelte'
 
 const meta = {
   title: 'Components/CardCheckbox',
@@ -82,6 +84,20 @@ export const WithFooterSlot: StoryObj<typeof CardCheckboxWithFooter> = {
   args: {
     title: 'With Footer',
     description: 'Workflow with step icons',
+    checked: false
+  }
+}
+
+export const VerticalLayout: StoryObj<typeof CardCheckboxVertical> = {
+  decorators: [() => MaxWidthMdDecorator as any],
+  render: (args) => ({
+    Component: CardCheckboxVertical,
+    props: args
+  }),
+  args: {
+    title: 'Send invoice',
+    icon: CodeFork,
+    hideRadio: true,
     checked: false
   }
 }

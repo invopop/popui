@@ -274,6 +274,7 @@ export interface BaseDropdownProps {
     placement?: Placement;
     matchParentWidth?: boolean;
     usePortal?: boolean;
+    strategy?: 'absolute' | 'fixed';
     trigger?: Snippet;
     children?: Snippet;
     [key: string]: any
@@ -437,6 +438,7 @@ export interface BaseDropdownProps {
     stackLeft?: boolean;
     stackRight?: boolean;
     multipleLabel?: string;
+    strategy?: 'absolute' | 'fixed';
   }
 
   export interface EmptyStateProps {

@@ -24,7 +24,8 @@
     onOpenChange,
     stackLeft = false,
     stackRight = false,
-    multipleLabel = 'items'
+    multipleLabel = 'items',
+    strategy
   }: DropdownSelectProps = $props()
 
   let selectDropdown: BaseDropdown | undefined = $state()
@@ -128,6 +129,7 @@
   bind:isOpen
   placement="bottom-start"
   {fullWidth}
+  {strategy}
   bind:this={selectDropdown}
   class={fullWidth || isStacked ? '' : widthClass}
 >

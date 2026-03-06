@@ -12,6 +12,7 @@
     placement = 'bottom-start',
     matchParentWidth = false,
     usePortal = true,
+    strategy: strategyProp,
     class: className = '',
     trigger,
     children,
@@ -19,7 +20,7 @@
   }: BaseDropdownProps = $props()
 
   // Conditional portal action - noop if disabled
-  const conditionalPortal = usePortal ? portal : () => {}
+  const conditionalPortal = $derived(usePortal ? portal : () => {})
 
   const middleware = [offset(6), flip(), shift()]
 
@@ -38,8 +39,8 @@
 
   let closedFromClickOutside = $state(false)
 
-  // Create floating actions with strategy based on usePortal
-  const strategy = usePortal ? 'absolute' : 'fixed'
+  // Create floating actions with strategy based on prop or usePortal
+  const strategy = $derived(strategyProp ?? (usePortal ? 'absolute' : 'fixed'))
   const [floatingRef, floatingContent] = createFloatingActions({
     strategy,
     placement,

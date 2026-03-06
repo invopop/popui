@@ -37,11 +37,11 @@
 <label for={id} class="cursor-pointer">
   <div class={containerStyles}>
     <div class={headerStyles}>
-      <div class="flex grow items-start gap-1 min-w-0">
+      <div class="flex grow items-start gap-1 min-w-0" data-card-content>
         {#if icon}
-          <Icon src={icon} class="size-4 text-icon shrink-0 mt-0.5" />
+          <Icon src={icon} class="size-4 text-icon shrink-0 mt-0.5" data-card-icon />
         {/if}
-        <div class="flex flex-col gap-1 min-w-0">
+        <div class="flex flex-col gap-1 min-w-0" data-card-text>
           <span class="text-base font-medium text-foreground">
             {title}
           </span>

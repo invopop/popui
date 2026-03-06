@@ -5,7 +5,7 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 import { Cog6Tooth } from '@steeze-ui/heroicons'
 import DarkBackgroundDecorator from './decorartors/DarkBackgroundDecorator.svelte'
-import { Close, Add } from '@invopop/ui-icons'
+import { Close, Add, Enter } from '@invopop/ui-icons'
 
 const meta = {
   title: 'Components/BaseButton',
@@ -337,7 +337,7 @@ export const WithDangerIcon: Story = {
 // Shortcut
 export const WithShortcut: Story = {
   args: {
-    icon: Cog6Tooth,
+    icon: Enter,
     variant: 'ghost',
     shortcut: true
   }
@@ -345,7 +345,7 @@ export const WithShortcut: Story = {
 
 export const WithShortcutPrimary: Story = {
   args: {
-    icon: Add,
+    icon: Enter,
     variant: 'primary',
     shortcut: true
   }
@@ -353,7 +353,7 @@ export const WithShortcutPrimary: Story = {
 
 export const WithShortcutOutline: Story = {
   args: {
-    icon: Cog6Tooth,
+    icon: Enter,
     variant: 'outline',
     shortcut: true
   }

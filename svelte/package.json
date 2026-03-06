@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.52",
+  "version": "0.1.53",
   "repository": {
     "url": "https://github.com/invopop/popui"
   },
@@ -85,7 +85,7 @@
     "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "^2.1.5",
     "@atlaskit/pragmatic-drag-and-drop-hitbox": "^1.1.0",
     "@floating-ui/core": "^1.5.1",
-    "@invopop/ui-icons": "^0.0.84",
+    "@invopop/ui-icons": "^0.0.85",
     "@steeze-ui/heroicons": "^2.2.3",
     "@steeze-ui/svelte-icon": "^1.6.2",
     "@tailwindcss/vite": "^4.1.12",

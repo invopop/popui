@@ -225,6 +225,7 @@
 {#snippet iconContent()}
   {#if shortcut}
     <ShortcutWrapper
+      size="md"
       theme={['dark', 'primary', 'danger'].includes(variant) ? 'navigation' : 'light'}
     >
       {@render iconElement()}

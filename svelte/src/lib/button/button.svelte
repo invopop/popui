@@ -177,6 +177,7 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
   import ShortcutWrapper from '../ShortcutWrapper.svelte'
+  import clsx from 'clsx'
 
   let {
     class: className,
@@ -239,10 +240,10 @@
 
 {#snippet buttonContent()}
   <div
-    class={cn(
-      'inline-flex items-center transition-transform group-active:translate-y-px',
-      !iconOnly && 'gap-1'
-    )}
+    class={clsx('inline-flex items-center transition-transform group-active:translate-y-px', {
+      'gap-1': !iconOnly && !shortcut,
+      'gap-1.5': !iconOnly && shortcut
+    })}
   >
     {#if icon && !children}
       {@render iconContent()}

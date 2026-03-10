@@ -347,7 +347,9 @@ export const WithShortcutPrimary: Story = {
   args: {
     icon: Enter,
     variant: 'primary',
-    shortcut: true
+    shortcut: true,
+    slot: 'Submit',
+    iconPosition: 'right'
   }
 }
 

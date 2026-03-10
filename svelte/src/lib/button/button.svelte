@@ -200,13 +200,15 @@
   let iconOnly = $derived(!children)
   let hasIcon = $derived(!!icon && !iconOnly)
 
-  let iconSize = $derived(
-    {
+  let iconSize = $derived.by(() => {
+    if (shortcut) return 'size-3'
+
+    return {
       sm: 'size-3',
       md: 'size-4',
       lg: 'size-4'
     }[size]
-  )
+  })
 
   // For icon-right, we need to reverse the padding
   let paddingClass = $derived(
@@ -225,7 +227,7 @@
 {#snippet iconContent()}
   {#if shortcut}
     <ShortcutWrapper
-      size="md"
+      size="sm"
       theme={['dark', 'primary', 'danger'].includes(variant) ? 'navigation' : 'light'}
     >
       {@render iconElement()}

@@ -103,13 +103,18 @@
 
 {#snippet toggleAction(item: DrawerOption)}
   {@const column = table.getColumn(String(item.value))}
-  {#if column?.getCanHide()}
-    <InputToggle
-      class="cursor-default"
-      checked={column?.getIsVisible() ?? false}
-      onchange={(v) => column?.toggleVisibility(!!v)}
-    />
-  {/if}
+  {@const canHide = column?.getCanHide() ?? false}
+  <InputToggle
+    class="cursor-default"
+    checked={column?.getIsVisible() ?? false}
+    disabled={!canHide}
+    hint={!canHide ? 'This column cannot be hidden' : undefined}
+    onchange={(v) => {
+      if (canHide) {
+        column?.toggleVisibility(!!v)
+      }
+    }}
+  />
 {/snippet}
 
 <BaseDropdown class="ms-auto hidden lg:flex">

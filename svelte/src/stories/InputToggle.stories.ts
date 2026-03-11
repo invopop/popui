@@ -36,3 +36,47 @@ export const WithLabelChecked: Story = {
     checked: true
   }
 }
+
+export const Disabled: Story = {
+  args: {
+    disabled: true
+  }
+}
+
+export const DisabledChecked: Story = {
+  args: {
+    disabled: true,
+    checked: true
+  }
+}
+
+export const DisabledWithLabel: Story = {
+  args: {
+    disabled: true,
+    label: 'Disabled Label'
+  }
+}
+
+export const DisabledWithLabelChecked: Story = {
+  args: {
+    disabled: true,
+    label: 'Disabled Label',
+    checked: true
+  }
+}
+
+export const DisabledWithHint: Story = {
+  args: {
+    disabled: true,
+    hint: 'This option cannot be changed'
+  }
+}
+
+export const DisabledWithLabelAndHint: Story = {
+  args: {
+    disabled: true,
+    label: 'Disabled with hint',
+    checked: true,
+    hint: 'This option is locked and cannot be modified'
+  }
+}

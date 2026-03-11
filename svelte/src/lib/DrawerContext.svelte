@@ -8,6 +8,7 @@
   import { ChevronRight } from '@steeze-ui/heroicons'
   import { slide } from 'svelte/transition'
   import { flip } from 'svelte/animate'
+  import clsx from 'clsx'
   import {
     draggable as makeDraggable,
     dropTargetForElements
@@ -52,6 +53,16 @@
   }: DrawerContextProps = $props()
 
   type DndItem = DrawerOption & { id: string }
+
+  let containerClasses = $derived(
+    clsx(
+      widthClass,
+      'border border-border rounded-2xl shadow-lg bg-background flex flex-col py-1 max-h-[568px] overflow-y-auto list-none',
+      {
+        '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden': draggable
+      }
+    )
+  )
 
   let selectedItems = $derived(items.filter((i) => i.selected))
   let hasGroups = $derived(groups && groups.length > 0)
@@ -485,7 +496,7 @@
 
 <div
   bind:this={containerRef}
-  class="{widthClass} border border-border rounded-2xl shadow-lg bg-background flex flex-col py-1 max-h-[568px] list-none"
+  class={containerClasses}
 >
   {@render children?.()}
 

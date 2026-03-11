@@ -2,7 +2,6 @@
   import 'inter-ui/inter.css'
   import CardCheckbox from '$lib/CardCheckbox.svelte'
   import { CodeFork, Invoice } from '@invopop/ui-icons'
-  import UuidCopy from '$lib/UuidCopy.svelte'
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
   import StepIconList from '$lib/StepIconList.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
@@ -57,13 +56,10 @@
   />
   <CardCheckbox name="something" title="Invoice" icon={Invoice} hideRadio checked />
   <div>
-    <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" full compact />
+    <ButtonUuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" full />
   </div>
   <div>
     <ButtonUuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" />
-  </div>
-  <div>
-    <UuidCopy uuid="84c6c2e0-2a55-11ef-9c40-dfb2994c7b4f" compact />
   </div>
   <div>
     <StepIconList

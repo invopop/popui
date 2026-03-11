@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
+import { fn } from 'storybook/test'
 import DataTable from '../lib/data-table/data-table.svelte'
 import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
 import DataTableWithCustomCell from './helpers/DataTableWithCustomCell.svelte'
@@ -222,15 +223,9 @@ export const Default: Story = {
 			// Default actions for other states
 			return rowActions
 		},
-		onRowAction: (action, row) => {
-			console.log('Action:', action, 'Row:', row)
-		},
-		onSelectionChange: (selectedRows) => {
-			console.log('Selected rows:', selectedRows)
-		},
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onRowAction: fn(),
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -239,9 +234,8 @@ export const Empty: Story = {
 		data: [],
 		columns,
 		rowActions,
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -251,9 +245,7 @@ export const WithoutSelection: Story = {
 		columns,
 		disableSelection: true,
 		rowActions,
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onRowClick: fn()
 	}
 }
 
@@ -262,9 +254,8 @@ export const WithoutActions: Story = {
 		data: generateInvoices(20),
 		columns,
 		rowActions: [],
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -319,9 +310,7 @@ export const FixedWidthColumns: Story = {
 		],
 		disableSelection: true,
 		rowActions: [],
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onRowClick: fn()
 	}
 }
 
@@ -338,11 +327,46 @@ export const WideColumns: Story = {
 				minSize: 150
 			},
 			{
+				id: 'signed',
+				accessorKey: 'signed',
+				cellType: 'boolean',
+				cellConfig: {
+					icon: Sign
+				},
+				enableSorting: false,
+				enableResizing: false,
+				disableColumnFilter: true,
+				size: 60,
+				minSize: 60,
+				maxSize: 60
+			},
+			{
+				id: 'state',
+				accessorKey: 'state',
+				header: 'State',
+				cellType: 'tag',
+				cellConfig: {
+					options: stateOptions,
+					showDot: true
+				},
+				size: 150,
+				minSize: 100
+			},
+			{
 				id: 'supplier',
 				accessorKey: 'supplier',
 				header: 'Supplier',
 				cellType: 'text',
+				enableHiding: false,
 				size: 400,
+				minSize: 200
+			},
+			{
+				id: 'supplierEmail',
+				accessorKey: 'supplierEmail',
+				header: 'Supplier Email',
+				cellType: 'text',
+				size: 350,
 				minSize: 200
 			},
 			{
@@ -360,12 +384,83 @@ export const WideColumns: Story = {
 				cellType: 'currency',
 				size: 200,
 				minSize: 120
+			},
+			{
+				id: 'createdAt',
+				accessorKey: 'createdAt',
+				header: 'Created At',
+				cellType: 'date',
+				size: 200,
+				minSize: 140
+			},
+			{
+				id: 'paymentMethod',
+				accessorKey: 'customer',
+				header: 'Payment Method',
+				cellType: 'text',
+				size: 250,
+				minSize: 180
+			},
+			{
+				id: 'category',
+				accessorKey: 'supplier',
+				header: 'Category',
+				cellType: 'text',
+				size: 200,
+				minSize: 150
+			},
+			{
+				id: 'taxRate',
+				accessorKey: 'total',
+				header: 'Tax Rate',
+				cellType: 'text',
+				size: 180,
+				minSize: 120
+			},
+			{
+				id: 'discount',
+				accessorKey: 'total',
+				header: 'Discount',
+				cellType: 'currency',
+				size: 180,
+				minSize: 120
+			},
+			{
+				id: 'currency',
+				accessorKey: 'total',
+				header: 'Currency',
+				cellType: 'text',
+				size: 120,
+				minSize: 100
+			},
+			{
+				id: 'reference',
+				accessorKey: 'invoice',
+				header: 'Reference',
+				cellType: 'text',
+				size: 180,
+				minSize: 140
+			},
+			{
+				id: 'notes',
+				accessorKey: 'supplier',
+				header: 'Notes',
+				cellType: 'text',
+				size: 250,
+				minSize: 180
+			},
+			{
+				id: 'status',
+				accessorKey: 'state',
+				header: 'Status',
+				cellType: 'text',
+				size: 140,
+				minSize: 120
 			}
 		],
 		rowActions,
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -411,12 +506,9 @@ export const DynamicRowActions: Story = {
 				{ label: 'Delete Draft', value: 'delete', destructive: true }
 			]
 		},
-		onRowAction: (action, row) => {
-			console.log('Action:', action, 'Row:', row)
-		},
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onRowAction: fn(),
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -429,12 +521,8 @@ export const WithPaginationSlots: Story = {
 		data: generateInvoices(100),
 		columns,
 		rowActions,
-		onSelectionChange: (selectedRows) => {
-			console.log('Selected rows:', selectedRows)
-		},
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -447,9 +535,7 @@ export const WithCustomCell: Story = {
 		data: generateInvoices(50),
 		columns,
 		rowActions,
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onRowClick: fn()
 	}
 }
 
@@ -462,9 +548,7 @@ export const ManualPagination: Story = {
 		data: generateInvoices(50),
 		columns,
 		rowActions,
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onRowClick: fn()
 	}
 }
 
@@ -512,9 +596,7 @@ export const WithoutRowClick: Story = {
 		data: generateInvoices(20),
 		columns,
 		rowActions,
-		onRowAction: (action, row) => {
-			console.log('Action:', action, 'Row:', row)
-		}
+		onRowAction: fn()
 	}
 }
 
@@ -553,12 +635,9 @@ export const WithRowStates: Story = {
 			}
 			return {}
 		},
-		onRowAction: (action, row) => {
-			console.log('Action:', action, 'Row:', row)
-		},
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onRowAction: fn(),
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -571,9 +650,8 @@ export const WithNewRowFlashEffect: Story = {
 		data: generateInvoices(20),
 		columns,
 		rowActions,
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -648,9 +726,8 @@ export const WithBooleanHints: Story = {
 			}
 		],
 		rowActions,
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 
@@ -660,12 +737,8 @@ export const DisableJumpToPage: Story = {
 		columns,
 		rowActions,
 		disableJumpToPage: true,
-		onSelectionChange: (selectedRows) => {
-			console.log('Selected rows:', selectedRows)
-		},
-		onRowClick: (row) => {
-			console.log('Row clicked:', row)
-		}
+		onSelectionChange: fn(),
+		onRowClick: fn()
 	}
 }
 

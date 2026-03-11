@@ -2,7 +2,7 @@
   import clsx from 'clsx'
   import type { FeedItemDetailProps } from './types.ts'
   import FeedIconStatus from './FeedIconStatus.svelte'
-  import UuidCopy from './UuidCopy.svelte'
+  import ButtonUuidCopy from './ButtonUuidCopy.svelte'
   import FeedEvents from './FeedEvents.svelte'
   import { slide } from 'svelte/transition'
   import SeparatorHorizontal from './SeparatorHorizontal.svelte'
@@ -52,7 +52,7 @@
   <div class="pl-3 py-1 pr-2.5 flex items-center space-x-0.5">
     <span class="text-sm text-foreground-default-secondary whitespace-nowrap">{idLabel}</span>
     {#if uuid}
-      <UuidCopy {uuid} full small {onCopied} />
+      <ButtonUuidCopy {uuid} full oncopied={onCopied} />
     {/if}
   </div>
   {#if events.length}

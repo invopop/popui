@@ -596,6 +596,8 @@ export interface BaseDropdownProps {
     id?: string;
     checked?: boolean;
     label?: string;
+    disabled?: boolean;
+    hint?: string;
     onchange?: (checked: boolean) => void;
     [key: string]: any
   }
@@ -686,20 +688,6 @@ export interface BaseDropdownProps {
     size?: 'sm' | 'md';
     theme?: 'light' | 'navigation';
     children?: Snippet;
-  }
-
-  export interface UuidCopyProps {
-    uuid?: string;
-    small?: boolean;
-    dark?: boolean;
-    rightAlign?: boolean;
-    prefixLength?: number;
-    suffixLength?: number;
-    full?: boolean;
-    compact?: boolean;
-    link?: boolean;
-    onCopied?: (uuid: string) => void;
-    onLinkClick?: (uuid: string) => void;
   }
 
   // Re-export DataTable types

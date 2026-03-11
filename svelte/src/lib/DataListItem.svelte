@@ -9,6 +9,7 @@
     label = '',
     value = '',
     monospaced = false,
+    vertical = false,
     children,
     onCopy,
     onLink
@@ -35,20 +36,30 @@
   }
 </script>
 
-<div class="flex gap-6 items-center group">
-  <div class="text-foreground-default-secondary text-base min-w-[125px]">
+<div
+  class={clsx('flex group', {
+    'flex-col gap-1.5': vertical,
+    'gap-6 items-center': !vertical
+  })}
+>
+  <div
+    class={clsx('text-foreground-default-secondary text-base', {
+      'pl-2': vertical,
+      'min-w-[125px]': !vertical
+    })}
+  >
     {label}
   </div>
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     class={clsx(
-      'flex flex-1 gap-1 items-center group-hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0',
+      'flex flex-1 gap-1 items-center group-hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0 h-8',
       { 'cursor-pointer': clickAction }
     )}
     onclick={clickAction ? handleAreaClick : undefined}
   >
-    <div class="flex-1 min-w-0 h-8">
+    <div class="flex-1 min-w-0">
       <div class={valueStyles}>
         {#if children}
           {@render children()}
@@ -59,6 +70,7 @@
     </div>
     {#if onCopy}
       <BaseButton
+        size="sm"
         variant="outline"
         icon={Duplicate}
         onclick={async () => {
@@ -70,6 +82,7 @@
     {/if}
     {#if onLink}
       <BaseButton
+        size="sm"
         variant="outline"
         icon={ExternalLink}
         onclick={onLink}

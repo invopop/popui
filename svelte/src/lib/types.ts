@@ -379,7 +379,7 @@ export interface BaseDropdownProps {
     label?: string;
     value?: string;
     monospaced?: boolean;
-    fullWidth?: boolean;
+    vertical?: boolean;
     children?: Snippet;
     onCopy?: () => void;
     onLink?: () => void;

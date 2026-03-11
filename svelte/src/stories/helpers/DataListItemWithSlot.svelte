@@ -10,6 +10,7 @@
     fullWidth?: boolean
     onCopy?: boolean
     onLink?: boolean
+    vertical?: boolean
   }
 
   let {
@@ -18,6 +19,7 @@
     value = '',
     monospaced = false,
     fullWidth = false,
+    vertical = false,
     onCopy,
     onLink
   }: Props = $props()
@@ -35,22 +37,9 @@
 </script>
 
 {#if useSlot}
-  <DataListItem
-    {label}
-    {value}
-    {fullWidth}
-    onCopy={copyHandler}
-    onLink={linkHandler}
-  >
+  <DataListItem {label} {value} {vertical} onCopy={copyHandler} onLink={linkHandler}>
     <TagStatus status="green" label="Closed" />
   </DataListItem>
 {:else}
-  <DataListItem
-    {label}
-    {value}
-    {monospaced}
-    {fullWidth}
-    onCopy={copyHandler}
-    onLink={linkHandler}
-  />
+  <DataListItem {label} {value} {monospaced} {vertical} onCopy={copyHandler} onLink={linkHandler} />
 {/if}

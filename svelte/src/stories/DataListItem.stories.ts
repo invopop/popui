@@ -64,3 +64,13 @@ export const WithSlot: Story = {
     onLink: true
   }
 }
+
+export const Vertical: Story = {
+  args: {
+    label: 'Customer',
+    value: 'Invopop S.L.',
+    vertical: true,
+    onCopy: true,
+    onLink: true
+  }
+}

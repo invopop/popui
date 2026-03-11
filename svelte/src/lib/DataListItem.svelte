@@ -3,6 +3,7 @@
   import type { DataListItemProps } from './types'
   import BaseButton from './BaseButton.svelte'
   import { Duplicate, ExternalLink } from '@invopop/ui-icons'
+  import { copyToClipboard } from './helpers'
 
   let {
     label = '',
@@ -21,11 +22,12 @@
 
   let clickAction = $derived(onCopy || onLink)
 
-  const handleAreaClick = (e: MouseEvent) => {
+  const handleAreaClick = async (e: MouseEvent) => {
     // Only handle click if not clicking on a button
     if ((e.target as HTMLElement).closest('button')) return
 
     if (onCopy) {
+      await copyToClipboard(value)
       onCopy()
     } else if (onLink) {
       onLink()
@@ -46,7 +48,7 @@
     )}
     onclick={clickAction ? handleAreaClick : undefined}
   >
-    <div class="flex-1 min-w-0">
+    <div class="flex-1 min-w-0 h-8">
       <div class={valueStyles}>
         {#if children}
           {@render children()}
@@ -59,7 +61,10 @@
       <BaseButton
         variant="outline"
         icon={Duplicate}
-        onclick={onCopy}
+        onclick={async () => {
+          await copyToClipboard(value)
+          onCopy()
+        }}
         class="opacity-0 group-hover:opacity-100 transition-opacity"
       />
     {/if}

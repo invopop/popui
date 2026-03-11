@@ -2,6 +2,7 @@
   import { Duplicate } from '@invopop/ui-icons'
   import BaseButton from './BaseButton.svelte'
   import type { ButtonUuidCopyProps } from './types'
+  import { copyToClipboard } from './helpers'
 
   let {
     uuid = '',
@@ -35,7 +36,7 @@
   data-uuid-copy
   onclick={async (e) => {
     e.stopPropagation()
-    await navigator.clipboard.writeText(uuid)
+    await copyToClipboard(uuid)
     oncopied?.(uuid)
   }}
 >

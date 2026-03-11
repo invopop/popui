@@ -139,7 +139,6 @@ export type TableField = {
   helperIcons?: (data: TableDataRow) => TableIcon[]
   monospaced?: boolean
   nowrap?: boolean
-  monospacedNums?: boolean
   rightAlign?: boolean
   isCountry?: boolean
   copy?: boolean
@@ -380,9 +379,10 @@ export interface BaseDropdownProps {
     label?: string;
     value?: string;
     monospaced?: boolean;
-    monospacedNums?: boolean;
     fullWidth?: boolean;
     children?: Snippet;
+    onCopy?: () => void;
+    onLink?: () => void;
   }
 
   export interface DatePickerProps {

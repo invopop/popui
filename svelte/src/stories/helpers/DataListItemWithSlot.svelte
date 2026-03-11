@@ -7,8 +7,9 @@
     label?: string
     value?: string
     monospaced?: boolean
-    monospacedNums?: boolean
     fullWidth?: boolean
+    onCopy?: boolean
+    onLink?: boolean
   }
 
   let {
@@ -16,15 +17,40 @@
     label = '',
     value = '',
     monospaced = false,
-    monospacedNums = false,
-    fullWidth = false
+    fullWidth = false,
+    onCopy,
+    onLink
   }: Props = $props()
+
+  const handleCopy = () => {
+    console.log('Copy clicked')
+  }
+
+  const handleLink = () => {
+    console.log('Link clicked')
+  }
+
+  let copyHandler = $derived(onCopy === true ? handleCopy : undefined)
+  let linkHandler = $derived(onLink === true ? handleLink : undefined)
 </script>
 
 {#if useSlot}
-  <DataListItem {label} {value} {fullWidth}>
+  <DataListItem
+    {label}
+    {value}
+    {fullWidth}
+    onCopy={copyHandler}
+    onLink={linkHandler}
+  >
     <TagStatus status="green" label="Closed" />
   </DataListItem>
 {:else}
-  <DataListItem {label} {value} {monospaced} {monospacedNums} {fullWidth} />
+  <DataListItem
+    {label}
+    {value}
+    {monospaced}
+    {fullWidth}
+    onCopy={copyHandler}
+    onLink={linkHandler}
+  />
 {/if}

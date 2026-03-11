@@ -126,17 +126,17 @@
       {
         size: 'sm',
         iconOnly: true,
-        class: 'w-6'
+        class: 'w-6 shrink-0'
       },
       {
         size: 'md',
         iconOnly: true,
-        class: 'w-7'
+        class: 'w-7 shrink-0'
       },
       {
         size: 'lg',
         iconOnly: true,
-        class: 'w-8'
+        class: 'w-8 shrink-0'
       },
       {
         stackedLeft: true,
@@ -201,15 +201,7 @@
   let iconOnly = $derived(!children)
   let hasIcon = $derived(!!icon && !iconOnly)
 
-  let iconSize = $derived.by(() => {
-    if (shortcut) return 'size-3'
-
-    return {
-      sm: 'size-3',
-      md: 'size-4',
-      lg: 'size-4'
-    }[size]
-  })
+  let iconSize = $derived(shortcut ? 'size-3' : 'size-4')
 
   // For icon-right, we need to reverse the padding
   let paddingClass = $derived(
@@ -240,7 +232,7 @@
 
 {#snippet buttonContent()}
   <div
-    class={clsx('inline-flex items-center transition-transform group-active:translate-y-px', {
+    class={clsx('inline-flex items-center transition-transform group-active/button:translate-y-px', {
       'gap-1': !iconOnly && !shortcut,
       'gap-1.5': !iconOnly && shortcut
     })}
@@ -271,6 +263,7 @@
     data-slot="button"
     class={cn(
       buttonVariants({ variant, size, iconOnly, hasIcon, stackedLeft, stackedRight }),
+      'group/button',
       iconPosition === 'right' && 'flex-row-reverse',
       paddingClass,
       className
@@ -289,7 +282,7 @@
     data-slot="button"
     class={cn(
       buttonVariants({ variant, size, iconOnly, hasIcon, stackedLeft, stackedRight }),
-      'group',
+      'group/button',
       iconPosition === 'right' && 'flex-row-reverse',
       paddingClass,
       className

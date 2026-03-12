@@ -55,7 +55,7 @@
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     class={clsx(
-      'flex flex-1 gap-1 items-start group-hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0 min-h-8',
+      'flex flex-1 gap-1.5 items-start group-hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0 min-h-8',
       { 'cursor-pointer': clickAction }
     )}
     onclick={clickAction ? handleAreaClick : undefined}

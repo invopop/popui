@@ -16,8 +16,9 @@
   }: DataListItemProps = $props()
 
   let valueStyles = $derived(
-    clsx('text-foreground font-medium text-base truncate min-w-0', {
-      'font-mono slashed-zero tabular-nums lining-nums': monospaced
+    clsx('text-foreground font-medium text-base min-w-0', {
+      'font-mono slashed-zero tabular-nums lining-nums': monospaced,
+      truncate: !children
     })
   )
 
@@ -54,12 +55,12 @@
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     class={clsx(
-      'flex flex-1 gap-1 items-center group-hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0 h-8',
+      'flex flex-1 gap-1 items-start group-hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0 min-h-8',
       { 'cursor-pointer': clickAction }
     )}
     onclick={clickAction ? handleAreaClick : undefined}
   >
-    <div class="flex-1 min-w-0">
+    <div class="flex-1 min-w-0 overflow-x-auto">
       <div class={valueStyles}>
         {#if children}
           {@render children()}

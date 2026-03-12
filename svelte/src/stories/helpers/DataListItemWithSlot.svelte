@@ -38,7 +38,12 @@
 
 {#if useSlot}
   <DataListItem {label} {value} {vertical} onCopy={copyHandler} onLink={linkHandler}>
-    <TagStatus status="green" label="Closed" />
+    <div class="flex flex-col gap-2 w-max">
+      <div class="font-medium">Multi-line content example with long text that extends beyond the container</div>
+      <div class="text-sm text-foreground-default-secondary">
+        This is a taller slot content that demonstrates horizontal scrolling when content is wider than the available space.
+      </div>
+    </div>
   </DataListItem>
 {:else}
   <DataListItem {label} {value} {monospaced} {vertical} onCopy={copyHandler} onLink={linkHandler} />

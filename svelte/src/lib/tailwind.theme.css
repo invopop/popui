@@ -1008,24 +1008,27 @@
 }
 
 .icon-sidebar-hide_anim_line {
-  transition-behavior: allow-discrete;
+  transform: translate(3.5px, 0.5px);
+}
+
+.icon-sidebar-hide:hover .icon-sidebar-hide_anim_line {
+  transform: translate(-.25px, 0.5px) scale(0.70, 1);
 }
 
 .icon-sidebar-hide_anim {
   overflow: hidden;
 }
 
-.icon-sidebar-hide:hover .icon-sidebar-hide_anim_line {
-  transform: translate(-2.5px, 0) scale(0.70, 1);
-}
-
 .icon-sidebar-hide:hover .icon-sidebar-hide_anim_line rect {
   rx: 0.5px;
 }
 
+.icon-sidebar-hide_anim_arrow {
+    transform: translate(-1.5px, -2px);
+}
+
 .icon-sidebar-hide:hover .icon-sidebar-hide_anim_arrow {
-  transform: translate(-11px, 0);
-  display: block;
+  transform: translate(-4px, -2px);
 }
 
 /* Animated sidebar show icon */
@@ -1057,7 +1060,7 @@
 }
 
 .icon-sidebar-show:hover .icon-sidebar-show_anim_arrow {
-    transform: scale(-1,1) translate(-4px, 0);
+  transform: scale(-1, 1) translate(-4px, 0);
 }
 
 /* Animated pulse icon */

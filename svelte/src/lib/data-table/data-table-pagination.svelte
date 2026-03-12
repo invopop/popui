@@ -141,7 +141,7 @@
             />
           </div>
           <span class="text-base text-foreground-default-secondary whitespace-nowrap">
-            / {totalPages}
+            / {formatNumber(totalPages)}
           </span>
         </div>
         <div class="flex items-center">

@@ -16,11 +16,11 @@
   }: DataListItemProps = $props()
 
   let valueStyles = $derived(
-    clsx('text-foreground font-medium text-base min-w-0 flex', {
+    clsx('text-foreground font-medium text-base min-w-0', {
       'font-mono slashed-zero tabular-nums lining-nums': monospaced,
       truncate: !children,
-      'h-6 items-center': !children,
-      'items-start': children
+      'leading-6': !children,
+      'flex items-start': children
     })
   )
 
@@ -62,7 +62,11 @@
     )}
     onclick={clickAction ? handleAreaClick : undefined}
   >
-    <div class="flex-1 min-w-0 overflow-x-auto">
+    <div
+      class={clsx('flex-1 min-w-0', {
+        'overflow-x-auto': children
+      })}
+    >
       <div class={valueStyles}>
         {#if children}
           {@render children()}

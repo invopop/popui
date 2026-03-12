@@ -6,5 +6,9 @@
 </script>
 
 <div class={cn('truncate', config?.className)}>
-  {value}
+  {#if value != null && value !== ''}
+    {value}
+  {:else}
+    <span class="text-foreground-default-tertiary">-</span>
+  {/if}
 </div>

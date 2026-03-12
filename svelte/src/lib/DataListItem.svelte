@@ -16,7 +16,7 @@
   }: DataListItemProps = $props()
 
   let valueStyles = $derived(
-    clsx('text-foreground font-medium text-base min-w-0', {
+    clsx('text-foreground font-medium text-base min-w-0 h-6 flex items-center', {
       'font-mono slashed-zero tabular-nums lining-nums': monospaced,
       truncate: !children
     })
@@ -38,7 +38,7 @@
 </script>
 
 <div
-  class={clsx('flex group', {
+  class={clsx('flex', {
     'flex-col gap-1.5': vertical,
     'gap-6 items-center': !vertical
   })}
@@ -55,7 +55,7 @@
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     class={clsx(
-      'flex flex-1 gap-1.5 items-start group-hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0 min-h-8',
+      'flex flex-1 gap-1.5 items-start group hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0 min-h-8',
       { 'cursor-pointer': clickAction }
     )}
     onclick={clickAction ? handleAreaClick : undefined}

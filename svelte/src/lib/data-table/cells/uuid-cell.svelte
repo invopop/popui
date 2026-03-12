@@ -5,13 +5,17 @@
   let { value, config }: { value: string; config?: UuidCellConfig } = $props()
 </script>
 
-<div class="relative z-0">
-  <ButtonUuidCopy
-    uuid={value}
-    prefixLength={config?.prefixLength}
-    suffixLength={config?.suffixLength}
-    full={config?.full}
-    disabled={config?.disabled}
-    oncopied={config?.onCopy}
-  />
-</div>
+{#if value != null && value !== ''}
+  <div class="relative z-0">
+    <ButtonUuidCopy
+      uuid={value}
+      prefixLength={config?.prefixLength}
+      suffixLength={config?.suffixLength}
+      full={config?.full}
+      disabled={config?.disabled}
+      oncopied={config?.onCopy}
+    />
+  </div>
+{:else}
+  <span class="text-foreground-default-tertiary">-</span>
+{/if}

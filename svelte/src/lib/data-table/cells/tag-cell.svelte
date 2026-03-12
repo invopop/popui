@@ -9,4 +9,6 @@
 
 {#if option}
   <TagStatus label={option.label} status={option.color} dot={config.showDot ?? false} />
+{:else if value == null || value === ''}
+  <span class="text-foreground-default-tertiary">-</span>
 {/if}

@@ -23,7 +23,11 @@
 </script>
 
 {#if typeof content === 'string'}
-  {content}
+  {#if content}
+    {content}
+  {:else}
+    <span class="text-foreground-default-tertiary">-</span>
+  {/if}
 {:else if content instanceof Function}
   <!-- It's unlikely that a CellContext will be passed to a Header -->
   <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
@@ -34,7 +38,9 @@
   {:else if result instanceof RenderSnippetConfig}
     {@const { snippet, params } = result}
     {@render snippet({ ...params, attach })}
-  {:else}
+  {:else if result != null && result !== ''}
     {result}
+  {:else}
+    <span class="text-foreground-default-tertiary">-</span>
   {/if}
 {/if}

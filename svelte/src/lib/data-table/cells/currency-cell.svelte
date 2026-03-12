@@ -5,6 +5,10 @@
   let { value, config }: { value: any; config?: CurrencyCellConfig } = $props()
 </script>
 
-<span class={cn('font-mono text-base text-foreground text-right block', config?.className)}>
-  {value}
-</span>
+{#if value != null && value !== ''}
+  <span class={cn('font-mono text-base text-foreground text-right block', config?.className)}>
+    {value}
+  </span>
+{:else}
+  <span class="text-foreground-default-tertiary text-right block">-</span>
+{/if}

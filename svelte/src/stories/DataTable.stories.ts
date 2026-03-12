@@ -742,3 +742,132 @@ export const DisableJumpToPage: Story = {
 	}
 }
 
+export const EmptyCellValues: Story = {
+	args: {
+		data: [
+			{
+				invoice: 'INV-001',
+				signed: true,
+				state: 'paid' as const,
+				supplier: 'Regular Text',
+				customer: '',
+				total: '100 EUR',
+				createdAt: 'Jan 1, 2025',
+				count: 5,
+				description: 'Normal value'
+			},
+			{
+				invoice: 'INV-002',
+				signed: false,
+				state: 'sent' as const,
+				supplier: null,
+				customer: 'Customer Name',
+				total: '',
+				createdAt: 'Jan 2, 2025',
+				count: 0,
+				description: null
+			},
+			{
+				invoice: 'INV-003',
+				signed: true,
+				state: 'empty' as const,
+				supplier: undefined,
+				customer: undefined,
+				total: undefined,
+				createdAt: undefined,
+				count: undefined,
+				description: undefined
+			},
+			{
+				invoice: '',
+				signed: false,
+				state: 'error' as const,
+				supplier: 'Text Value',
+				customer: null,
+				total: '0 EUR',
+				createdAt: '',
+				count: null,
+				description: ''
+			}
+		],
+		columns: [
+			{
+				id: 'invoice',
+				accessorKey: 'invoice',
+				header: 'Invoice',
+				cellType: 'text',
+				size: 150,
+				minSize: 120
+			},
+			{
+				id: 'signed',
+				accessorKey: 'signed',
+				cellType: 'boolean',
+				cellConfig: {
+					icon: Sign
+				},
+				enableSorting: false,
+				enableResizing: false,
+				size: 60,
+				minSize: 60,
+				maxSize: 60
+			},
+			{
+				id: 'state',
+				accessorKey: 'state',
+				header: 'State',
+				cellType: 'tag',
+				cellConfig: {
+					options: stateOptions,
+					showDot: true
+				},
+				size: 120,
+				minSize: 100
+			},
+			{
+				id: 'supplier',
+				accessorKey: 'supplier',
+				header: 'Supplier (null test)',
+				cellType: 'text',
+				size: 200,
+				minSize: 150
+			},
+			{
+				id: 'customer',
+				accessorKey: 'customer',
+				header: 'Customer (empty string)',
+				cellType: 'text',
+				size: 200,
+				minSize: 150
+			},
+			{
+				id: 'total',
+				accessorKey: 'total',
+				header: 'Total (undefined)',
+				cellType: 'text',
+				size: 180,
+				minSize: 120
+			},
+			{
+				id: 'count',
+				accessorKey: 'count',
+				header: 'Count (0 test)',
+				cellType: 'text',
+				size: 150,
+				minSize: 100
+			},
+			{
+				id: 'description',
+				accessorKey: 'description',
+				header: 'Description (mixed)',
+				cellType: 'text',
+				size: 180,
+				minSize: 150
+			}
+		],
+		disableSelection: true,
+		rowActions: [],
+		onRowClick: fn()
+	}
+}
+

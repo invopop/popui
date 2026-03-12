@@ -16,9 +16,11 @@
   }: DataListItemProps = $props()
 
   let valueStyles = $derived(
-    clsx('text-foreground font-medium text-base min-w-0 h-6 flex items-center', {
+    clsx('text-foreground font-medium text-base min-w-0 flex', {
       'font-mono slashed-zero tabular-nums lining-nums': monospaced,
-      truncate: !children
+      truncate: !children,
+      'h-6 items-center': !children,
+      'items-start': children
     })
   )
 

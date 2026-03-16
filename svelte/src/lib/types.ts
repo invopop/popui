@@ -332,6 +332,7 @@ export interface BaseDropdownProps {
     full?: boolean;
     disabled?: boolean;
     oncopied?: (label: string) => void;
+    class?: string;
   }
 
   export interface ButtonSearchProps {

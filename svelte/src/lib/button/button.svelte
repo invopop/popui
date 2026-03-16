@@ -232,10 +232,14 @@
 
 {#snippet buttonContent()}
   <div
-    class={clsx('inline-flex items-center transition-transform group-active/button:translate-y-px', {
-      'gap-1': !iconOnly && !shortcut,
-      'gap-1.5': !iconOnly && shortcut
-    })}
+    data-button-content
+    class={clsx(
+      'inline-flex items-center transition-transform group-active/button:translate-y-px',
+      {
+        'gap-1': !iconOnly && !shortcut,
+        'gap-1.5': !iconOnly && shortcut
+      }
+    )}
   >
     {#if icon && !children}
       {@render iconContent()}

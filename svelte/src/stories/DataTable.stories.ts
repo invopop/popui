@@ -8,7 +8,8 @@ import DataTableEmptyWithFilters from './helpers/DataTableEmptyWithFilters.svelt
 import DataTableWithoutRowClick from './helpers/DataTableWithoutRowClick.svelte'
 import DataTableWithExternalSelection from './helpers/DataTableWithExternalSelection.svelte'
 import FullHeightDecorator from './decorartors/FullHeightDecorator.svelte'
-import type { DataTableColumn, RowAction } from '../lib/data-table/data-table-types.js'
+import type { DataTableColumn } from '../lib/data-table/data-table-types.js'
+import type { TableAction } from '$lib/types.js'
 import { Sign } from '@invopop/ui-icons'
 import type { StatusType } from '$lib/types.js'
 
@@ -21,6 +22,7 @@ type Invoice = {
 	customer: string
 	total: string
 	createdAt: string
+	uuid?: string
 }
 
 const generateInvoices = (count: number): Invoice[] => {
@@ -66,6 +68,14 @@ const generateInvoices = (count: number): Invoice[] => {
 		return `${amount} EUR`
 	}
 
+	const generateUuid = () => {
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			const r = Math.random() * 16 | 0
+			const v = c == 'x' ? r : (r & 0x3 | 0x8)
+			return v.toString(16)
+		})
+	}
+
 	return Array.from({ length: count }, (_, i) => {
 		const supplier = suppliers[Math.floor(Math.random() * suppliers.length)]
 		const supplierSlug = supplier.toLowerCase().replace(/\s+/g, '')
@@ -77,7 +87,8 @@ const generateInvoices = (count: number): Invoice[] => {
 			supplierEmail: `contact@${supplierSlug}.com`,
 			customer: customers[Math.floor(Math.random() * customers.length)],
 			total: generateAmount(),
-			createdAt: generateDate(i)
+			createdAt: generateDate(i),
+			uuid: generateUuid()
 		}
 	})
 }
@@ -179,7 +190,7 @@ const columns: DataTableColumn<Invoice>[] = [
 	}
 ]
 
-const rowActions: RowAction[] = [
+const rowActions: TableAction[] = [
 	{ label: 'Edit', value: 'edit' },
 	{ label: 'Make a copy', value: 'copy' },
 	{ label: 'Favorite', value: 'favorite' },
@@ -194,7 +205,7 @@ const meta = {
 	parameters: {
 		layout: 'fullscreen'
 	},
-	decorators: [() => FullHeightDecorator]
+	decorators: [() => FullHeightDecorator as any]
 } satisfies Meta<typeof DataTable>
 
 export default meta
@@ -204,7 +215,7 @@ export const Default: Story = {
 	args: {
 		data: generateInvoices(50),
 		columns,
-		getRowActions: (row) => {
+		getRowActions: (row: Invoice) => {
 			// Different actions based on invoice state
 			if (row.state === 'paid') {
 				return [
@@ -324,6 +335,18 @@ export const WideColumns: Story = {
 				header: 'Invoice',
 				cellType: 'text',
 				size: 300,
+				minSize: 150
+			},
+			{
+				id: 'uuid',
+				accessorKey: 'uuid',
+				header: 'UUID',
+				cellType: 'uuid',
+				cellConfig: {
+					prefixLength: 4,
+					suffixLength: 4
+				},
+				size: 200,
 				minSize: 150
 			},
 			{
@@ -468,7 +491,7 @@ export const DynamicRowActions: Story = {
 	args: {
 		data: generateInvoices(30),
 		columns,
-		getRowActions: (row) => {
+		getRowActions: (row: Invoice) => {
 			// Paid invoices - limited actions
 			if (row.state === 'paid') {
 				return [
@@ -514,7 +537,7 @@ export const DynamicRowActions: Story = {
 
 export const WithPaginationSlots: Story = {
 	render: (args) => ({
-		Component: DataTableWithPaginationSlots,
+		Component: DataTableWithPaginationSlots as any,
 		props: args
 	}),
 	args: {
@@ -528,7 +551,7 @@ export const WithPaginationSlots: Story = {
 
 export const WithCustomCell: Story = {
 	render: (args) => ({
-		Component: DataTableWithCustomCell,
+		Component: DataTableWithCustomCell as any,
 		props: args
 	}),
 	args: {
@@ -541,7 +564,7 @@ export const WithCustomCell: Story = {
 
 export const ManualPagination: Story = {
 	render: (args) => ({
-		Component: DataTableManualPagination,
+		Component: DataTableManualPagination as any,
 		props: args
 	}),
 	args: {
@@ -554,7 +577,7 @@ export const ManualPagination: Story = {
 
 export const EmptyWithFilters: Story = {
 	render: (args) => ({
-		Component: DataTableEmptyWithFilters,
+		Component: DataTableEmptyWithFilters as any,
 		props: args
 	}),
 	args: {
@@ -571,7 +594,7 @@ export const EmptyWithFilters: Story = {
 
 export const EmptyWithFiltersDisabled: Story = {
 	render: (args) => ({
-		Component: DataTableEmptyWithFilters,
+		Component: DataTableEmptyWithFilters as any,
 		props: args
 	}),
 	args: {
@@ -589,7 +612,7 @@ export const EmptyWithFiltersDisabled: Story = {
 
 export const WithoutRowClick: Story = {
 	render: (args) => ({
-		Component: DataTableWithoutRowClick,
+		Component: DataTableWithoutRowClick as any,
 		props: args
 	}),
 	args: {
@@ -620,7 +643,7 @@ export const WithRowStates: Story = {
 		})(),
 		columns,
 		rowActions,
-		getRowState: (row) => {
+		getRowState: (row: Invoice) => {
 			// Apply error state to rows with error state
 			if (row.state === 'error') {
 				return { isError: true }
@@ -643,7 +666,7 @@ export const WithRowStates: Story = {
 
 export const WithNewRowFlashEffect: Story = {
 	render: (args) => ({
-		Component: DataTableWithExternalSelection,
+		Component: DataTableWithExternalSelection as any,
 		props: args
 	}),
 	args: {

@@ -14,6 +14,7 @@
       full={config?.full}
       disabled={config?.disabled}
       oncopied={config?.onCopy}
+      class="!font-[weight:inherit]"
     />
   </div>
 {:else}

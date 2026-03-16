@@ -3,6 +3,7 @@
   import BaseButton from './BaseButton.svelte'
   import type { ButtonUuidCopyProps } from './types'
   import { copyToClipboard } from './helpers'
+  import { cn } from './utils'
 
   let {
     uuid = '',
@@ -10,21 +11,13 @@
     suffixLength = 4,
     full = false,
     disabled = false,
-    oncopied
+    oncopied,
+    class: className
   }: ButtonUuidCopyProps = $props()
 
-  function shortenString(inputString: string, prefixLength: number, suffixLength: number) {
-    if (inputString.length <= prefixLength + suffixLength) {
-      return inputString // Return the whole string if it's too short
-    }
-
-    const prefix = inputString.substring(0, prefixLength)
-    const suffix = inputString.substring(inputString.length - suffixLength)
-
-    return prefix + '...' + suffix
-  }
-
-  let formattedUuid = $derived(full ? uuid : shortenString(uuid, prefixLength, suffixLength))
+  let prefix = $derived(uuid.substring(0, prefixLength))
+  let suffix = $derived(uuid.substring(uuid.length - suffixLength))
+  let middle = $derived(uuid.substring(prefixLength, uuid.length - suffixLength))
 </script>
 
 <BaseButton
@@ -34,11 +27,23 @@
   iconPosition="right"
   variant="ghost"
   data-uuid-copy
+  class={cn(
+    'max-w-full [&_[data-button-content]]:max-w-full [&_[data-button-content]]:min-w-0 [&_[data-button-content]>span]:min-w-0',
+    className
+  )}
   onclick={async (e) => {
     e.stopPropagation()
     await copyToClipboard(uuid)
     oncopied?.(uuid)
   }}
 >
-  <span class="font-mono">{formattedUuid}</span>
+  {#if full}
+    <span class="font-mono">{uuid}</span>
+  {:else}
+    <span class="font-mono flex items-center min-w-0 overflow-hidden">
+      <span class="shrink-0">{prefix}</span>
+      <span class="truncate min-w-0">{middle}</span>
+      <span class="shrink-0">{suffix}</span>
+    </span>
+  {/if}
 </BaseButton>

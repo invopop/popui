@@ -190,6 +190,14 @@ export type StepIcon = {
 }
 
 // Component props
+export interface AccordionProps {
+  label: string
+  open?: boolean
+  children?: Snippet
+  onToggle?: (open: boolean) => void
+  class?: string
+}
+
 export interface AlertDialogProps {
     open?: boolean
     destructive?: boolean

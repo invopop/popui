@@ -1,3 +1,4 @@
+import Accordion from './Accordion.svelte'
 import AlertDialog from './AlertDialog.svelte'
 import BaseButton from './BaseButton.svelte'
 import BaseCard from './BaseCard.svelte'
@@ -81,6 +82,7 @@ import {
 } from './data-table'
 
 export {
+  Accordion,
   AlertDialog,
   BaseButton,
   BaseCard,

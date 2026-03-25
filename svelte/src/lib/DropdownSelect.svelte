@@ -9,6 +9,7 @@
   import BaseFlag from './BaseFlag.svelte'
   import { resolveIcon } from './helpers.js'
   import { buttonVariants } from './button/button.svelte'
+  import { cn } from './utils.js'
 
   let {
     value = $bindable(''),
@@ -25,7 +26,9 @@
     stackLeft = false,
     stackRight = false,
     multipleLabel = 'items',
-    strategy
+    strategy,
+    disabled = false,
+    class: className = ''
   }: DropdownSelectProps = $props()
 
   let selectDropdown: BaseDropdown | undefined = $state()
@@ -71,16 +74,25 @@
   let isStacked = $derived(stackLeft || stackRight)
 
   let styles = $derived(
-    isStacked
-      ? buttonVariants({
-          variant: 'ghost',
-          stackedLeft: stackLeft,
-          stackedRight: stackRight
-        })
-      : clsx('border backdrop-blur-sm backdrop-filter dropdown-select', {
-          'border-border-selected-bold shadow-active': isOpen,
-          'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen
-        })
+    cn(
+      'flex items-center rounded-lg py-1.5 pl-2 bg-background overflow-hidden w-full h-7',
+      {
+        'pr-[28px]': !isStacked,
+        'pr-2': isStacked,
+        'opacity-30 pointer-events-none': disabled
+      },
+      isStacked
+        ? buttonVariants({
+            variant: 'ghost',
+            stackedLeft: stackLeft,
+            stackedRight: stackRight
+          })
+        : clsx('border backdrop-blur-sm backdrop-filter dropdown-select', {
+            'border-border-selected-bold shadow-active': isOpen,
+            'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen
+          }),
+      className
+    )
   )
 
   function handleClick(val: AnyProp) {
@@ -115,6 +127,7 @@
 
 {#snippet label()}
   <span
+    data-dropdown-select-label
     class={clsx('flex-1 text-base truncate', {
       'text-foreground': selectedItems.length,
       'text-foreground-default-secondary': !selectedItems.length,
@@ -126,19 +139,17 @@
 {/snippet}
 
 <BaseDropdown
+  data-dropdown-select
   bind:isOpen
   placement="bottom-start"
   {fullWidth}
   {strategy}
+  {disabled}
   bind:this={selectDropdown}
   class={fullWidth || isStacked ? '' : widthClass}
 >
   {#snippet trigger()}
-    <div
-      class="{styles} flex items-center rounded-lg py-1.5 pl-2 bg-background overflow-hidden w-full h-7"
-      class:pr-[28px]={!isStacked}
-      class:pr-2={isStacked}
-    >
+    <div data-dropdown-select-trigger class={styles}>
       {#if hasMultipleColors}
         <div class="flex items-center gap-1 flex-1 min-w-0">
           <div class="flex items-center -space-x-0.5">
@@ -177,6 +188,7 @@
     </div>
   {/snippet}
   <DrawerContext
+    data-dropdown-select-content
     widthClass="min-w-[256px]"
     {multiple}
     {items}

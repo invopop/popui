@@ -127,6 +127,18 @@ export const WithLongText: Story = {
   }
 }
 
+export const Disabled: Story = {
+  args: {
+    placeholder: 'Label',
+    value: 1,
+    disabled: true,
+    options: [
+      { icon: Edit, value: 1, label: 'Option one' },
+      { icon: Lock, value: 2, label: 'Option Two' }
+    ]
+  }
+}
+
 export const Stacked: Story = {
   render: () => ({
     Component: StackedDropdownSelects

@@ -49,7 +49,8 @@
     onreorder,
     ondropitem,
     children,
-    groups
+    groups,
+    ...rest
   }: DrawerContextProps = $props()
 
   type DndItem = DrawerOption & { id: string }
@@ -497,6 +498,7 @@
 <div
   bind:this={containerRef}
   class={containerClasses}
+  {...rest}
 >
   {@render children?.()}
 

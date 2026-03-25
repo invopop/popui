@@ -420,6 +420,7 @@ export interface BaseDropdownProps {
     ondropitem?: (groups: Record<string, DrawerOption[]>) => void;
     children?: Snippet;
     groups?: DrawerGroup[];
+    [key: string]: unknown;
   }
 
   export interface DrawerContextItemProps {
@@ -448,6 +449,8 @@ export interface BaseDropdownProps {
     stackRight?: boolean;
     multipleLabel?: string;
     strategy?: 'absolute' | 'fixed';
+    disabled?: boolean;
+    class?: string;
   }
 
   export interface EmptyStateProps {

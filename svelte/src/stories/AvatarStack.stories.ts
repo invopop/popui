@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
+import { Hashtag, PencilSquare, DocumentText, Envelope } from '@steeze-ui/heroicons'
 
-import StepIconList from '../lib/StepIconList.svelte'
+import AvatarStack from '../lib/AvatarStack.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 
-// More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
-  title: 'Components/StepIconList',
-  component: StepIconList,
+  title: 'Components/AvatarStack',
+  component: AvatarStack as any,
   tags: ['autodocs'],
   decorators: [() => MarginDecorator as any]
-} satisfies Meta<StepIconList>
+} satisfies Meta<AvatarStack>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-// Mock icon data
+// Mock icon data using URLs
 const mockIcons = [
   { name: 'Hashtag', url: 'https://api.iconify.design/mdi/pound.svg' },
   { name: 'Sign', url: 'https://api.iconify.design/mdi/pencil.svg' },
@@ -23,7 +23,14 @@ const mockIcons = [
   { name: 'Email', url: 'https://api.iconify.design/mdi/email.svg' }
 ]
 
-// More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
+// Mock icon data using IconSource
+const mockIconSources = [
+  { name: 'Hashtag', icon: Hashtag },
+  { name: 'Sign', icon: PencilSquare },
+  { name: 'Invoice', icon: DocumentText },
+  { name: 'Email', icon: Envelope }
+]
+
 export const TwoIcons: Story = {
   args: {
     icons: mockIcons.slice(0, 2)
@@ -77,5 +84,36 @@ export const TenIconsWithOverflow: Story = {
 export const Empty: Story = {
   args: {
     icons: []
+  }
+}
+
+export const WithIconSource: Story = {
+  args: {
+    icons: mockIconSources
+  }
+}
+
+export const WithIconSourceSmall: Story = {
+  args: {
+    icons: mockIconSources,
+    size: 'sm'
+  }
+}
+
+export const SmallSize: Story = {
+  args: {
+    icons: mockIcons,
+    size: 'sm'
+  }
+}
+
+export const SmallSizeWithOverflow: Story = {
+  args: {
+    icons: [
+      ...mockIcons,
+      { name: 'GitHub', url: 'https://api.iconify.design/mdi/github.svg' },
+      { name: 'Twitter', url: 'https://api.iconify.design/mdi/twitter.svg' }
+    ],
+    size: 'sm'
   }
 }

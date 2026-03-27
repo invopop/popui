@@ -48,8 +48,8 @@ import SeparatorHorizontal from './SeparatorHorizontal.svelte'
 import ShortcutWrapper from './ShortcutWrapper.svelte'
 import { Skeleton, SkeletonAvatar, SkeletonCard, SkeletonList } from './skeleton'
 import StatusLabel from './StatusLabel.svelte'
-import StepIcon from './StepIcon.svelte'
-import StepIconList from './StepIconList.svelte'
+import AvatarIcon from './AvatarIcon.svelte'
+import AvatarStack from './AvatarStack.svelte'
 import {
   Table,
   TableHeader,
@@ -135,8 +135,8 @@ export {
   SkeletonCard,
   SkeletonList,
   StatusLabel,
-  StepIcon,
-  StepIconList,
+  AvatarIcon,
+  AvatarStack,
   Table,
   TableBody,
   TableCaption,

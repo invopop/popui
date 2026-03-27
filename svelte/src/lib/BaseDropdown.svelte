@@ -13,6 +13,7 @@
     matchParentWidth = false,
     usePortal = true,
     strategy: strategyProp,
+    disabled = false,
     class: className = '',
     trigger,
     children,
@@ -91,7 +92,8 @@
 
 <div class="flex {className}" class:w-full={fullWidth} role="menu">
   <button
-    class="cursor-pointer text-left w-full min-w-0 outline-none"
+    class="cursor-pointer disabled:cursor-default text-left w-full min-w-0 outline-none"
+    {disabled}
     use:floatingRef
     {...rest}
     onclick={handleClick}

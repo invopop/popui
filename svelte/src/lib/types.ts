@@ -184,9 +184,10 @@ export type Breadcrumb = {
   copiable?: boolean
 }
 
-export type StepIcon = {
+export type AvatarIcon = {
   name: string
-  url: string
+  url?: string
+  icon?: IconSource
 }
 
 // Component props
@@ -282,6 +283,7 @@ export interface BaseDropdownProps {
     matchParentWidth?: boolean;
     usePortal?: boolean;
     strategy?: 'absolute' | 'fixed';
+    disabled?: boolean;
     trigger?: Snippet;
     children?: Snippet;
     [key: string]: any
@@ -661,14 +663,16 @@ export interface BaseDropdownProps {
     label?: string;
   }
 
-  export interface StepIconListProps {
-    icons?: StepIcon[]
-    [key: string]: any
+  export interface AvatarStackProps {
+    icons?: AvatarIcon[]
+    size?: 'sm' | 'md'
+    class?: string
   }
 
-  export interface StepIconProps {
+  export interface AvatarIconProps {
     name?: string
     showMask?: boolean
+    size?: 'sm' | 'md'
     tooltipContent?: Snippet
     children: Snippet
   }

@@ -90,8 +90,7 @@
         : clsx('border backdrop-blur-sm backdrop-filter dropdown-select', {
             'border-border-selected-bold shadow-active': isOpen,
             'border-border-default-secondary hover:border-border-default-secondary-hover': !isOpen
-          }),
-      className
+          })
     )
   )
 
@@ -146,7 +145,7 @@
   {strategy}
   {disabled}
   bind:this={selectDropdown}
-  class={fullWidth || isStacked ? '' : widthClass}
+  class={cn(fullWidth || isStacked ? '' : widthClass, className)}
 >
   {#snippet trigger()}
     <div data-dropdown-select-trigger class={styles}>

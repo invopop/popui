@@ -25,6 +25,7 @@
     onclick,
     onfocus,
     onblur,
+    class: className = '',
     ...rest
   }: InputSearchProps = $props()
 
@@ -66,8 +67,9 @@
   })
 </script>
 
-<div class="relative flex items-center">
+<div data-input-search class="relative flex items-center {className}">
   <input
+    data-input-search-input
     bind:this={input}
     bind:value
     type="text"

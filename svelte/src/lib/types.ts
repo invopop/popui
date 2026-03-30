@@ -74,6 +74,7 @@ export type DrawerOption = SelectOption & {
   groupBy?: string
   useAvatar?: boolean
   action?: Snippet<[DrawerOption]>
+  content?: Snippet<[DrawerOption]>
   flagPosition?: 'before' | 'after'
 }
 

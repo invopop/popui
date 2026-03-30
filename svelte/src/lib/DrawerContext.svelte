@@ -484,12 +484,16 @@
   {#if item.separator}
     <DrawerContextSeparator />
   {:else}
+    {#snippet itemChildren()}
+      {@render item.content?.(item)}
+    {/snippet}
     <div class:px-1={!item.groupBy} class:cursor-grab={draggable && !item.locked}>
       <DrawerContextItem
         item={{ ...item, focused: item.value === focusedItemValue, flagPosition: item.flagPosition || flagPosition }}
         {multiple}
         {onclick}
         onchange={updateItem}
+        children={item.content ? itemChildren : undefined}
       />
     </div>
   {/if}

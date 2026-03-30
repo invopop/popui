@@ -16,7 +16,7 @@
     scrollIfSelected = false,
     onchange,
     onclick,
-    onfocus
+    children
   }: DrawerContextItemProps = $props()
 
   let el: HTMLElement | undefined = $state()
@@ -96,7 +96,11 @@
         {#if item?.country && item?.flagPosition === 'before'}
           <BaseFlag country={item.country} />
         {/if}
-        <span class="{labelStyles} text-base font-medium truncate">{item?.label || ''}</span>
+        {#if children}
+          {@render children()}
+        {:else}
+          <span class="{labelStyles} text-base font-medium truncate">{item?.label || ''}</span>
+        {/if}
 
         {#if item?.country && item?.flagPosition === 'after'}
           <BaseFlag country={item.country} />

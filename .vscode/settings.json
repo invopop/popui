@@ -5,6 +5,8 @@
         "css-unused-selector": "ignore"
     },
     "svelte.plugin.svelte.defaultScriptLanguage": "ts",
+    // Disable Svelte LS TypeScript diagnostics on all files at startup (main freeze culprit)
+    "svelte.plugin.typescript.diagnostics.enable": false,
     // Exclude patterns to reduce file watching
     "files.watcherExclude": {
         "**/.git/objects/**": true,
@@ -28,8 +30,8 @@
         "**/package-lock.json": true,
         "**/.storybook-static": true
     },
-    // Use workspace TypeScript
-    "typescript.tsdk": "node_modules/typescript/lib",
+    // Use TypeScript from the svelte subproject (not root, which has none)
+    "typescript.tsdk": "svelte/node_modules/typescript/lib",
     // Disable certain TypeScript features for better performance
     "typescript.surveys.enabled": false,
     "typescript.disableAutomaticTypeAcquisition": true,

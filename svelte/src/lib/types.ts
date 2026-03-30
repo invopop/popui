@@ -431,7 +431,7 @@ export interface BaseDropdownProps {
     scrollIfSelected?: boolean;
     onclick?: (value: AnyProp) => void;
     onchange?: (item: DrawerOption) => void;
-    onfocus?: (item: DrawerOption) => void;
+    children?: Snippet;
   }
 
 

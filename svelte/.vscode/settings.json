@@ -1,0 +1,12 @@
+{
+  "files.watcherExclude": {
+    "**/.svelte-kit/**": true,
+    "**/node_modules/**": true,
+    "**/.cache/**": true,
+    "**/node_modules/.vite/**": true
+  },
+  "files.exclude": {
+    "**/.svelte-kit": true,
+    "**/.cache": true
+  }
+}

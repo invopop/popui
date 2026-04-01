@@ -170,6 +170,10 @@
           <BaseFlag country={selectedItem.country} />
           {@render label()}
         </div>
+      {:else if !multiple && selectedItem?.content}
+        <div class="flex items-center gap-1 flex-1 min-w-0">
+          {@render selectedItem.content(selectedItem)}
+        </div>
       {:else if selectedIcon || resolvedIcon}
         <div class="flex items-center gap-1 flex-1 min-w-0">
           {#if typeof selectedIcon === 'string'}

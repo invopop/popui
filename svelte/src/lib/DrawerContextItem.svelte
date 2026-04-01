@@ -31,8 +31,10 @@
     clsx(
       'px-2 py-1.5 space-x-1.5',
       { 'bg-background-selected': item?.selected && !multiple },
-      { 'bg-background-default-secondary': item?.focused && shouldShowHoverStyle },
-      { 'group-hover:bg-background-default-secondary': shouldShowHoverStyle }
+      {
+        'group-hover:bg-background-default-secondary group-data-[selected]:bg-background-default-secondary':
+          shouldShowHoverStyle
+      }
     )
   )
 
@@ -66,7 +68,7 @@
 
 <button
   bind:this={el}
-  class="cursor-pointer w-full disabled:opacity-30 group"
+  class="cursor-pointer w-full disabled:opacity-30 group focus:outline-none"
   disabled={item?.disabled}
   onclick={handleClick}
 >

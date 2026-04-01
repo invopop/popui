@@ -61,7 +61,6 @@ export type DrawerOption = SelectOption & {
   separator?: boolean
   destructive?: boolean
   selected?: boolean
-  focused?: boolean
   icon?: IconSource | string | undefined
   rightIcon?: IconSource | undefined
   country?: string
@@ -423,6 +422,7 @@ export interface BaseDropdownProps {
     ondropitem?: (groups: Record<string, DrawerOption[]>) => void;
     children?: Snippet;
     groups?: DrawerGroup[];
+    class?: string;
     [key: string]: unknown;
   }
 

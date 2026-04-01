@@ -2,7 +2,7 @@
   import DataTable from '../../lib/data-table/data-table.svelte'
   import { renderSnippet } from '../../lib/data-table/index.js'
   import Button from '../../lib/button/button.svelte'
-  import StepIconList from '../../lib/StepIconList.svelte'
+  import StepIconList from '../../lib/AvatarStack.svelte'
   import type { DataTableProps } from '../../lib/data-table/data-table-types.js'
   import type { StepIcon } from '../../lib/types.js'
 

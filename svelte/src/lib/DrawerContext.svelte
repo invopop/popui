@@ -9,6 +9,7 @@
   import { slide } from 'svelte/transition'
   import { flip } from 'svelte/animate'
   import clsx from 'clsx'
+  import { cn } from './utils.js'
   import {
     draggable as makeDraggable,
     dropTargetForElements
@@ -22,6 +23,7 @@
     type Edge
   } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
   import { onMount, onDestroy, untrack } from 'svelte'
+  import { Command } from 'bits-ui'
   import {
     shouldShowDropIndicator,
     reorderItems,
@@ -29,11 +31,6 @@
     type DropIndicatorState,
     type DndItem as DndItemType
   } from './drawer-dnd-helpers'
-  import {
-    getFocusableItems,
-    getNextFocusedIndex,
-    selectFocusedItem
-  } from './drawer-keyboard-helpers'
 
   const flipDurationMs = 150
 
@@ -50,18 +47,18 @@
     ondropitem,
     children,
     groups,
+    class: className,
     ...rest
   }: DrawerContextProps = $props()
 
   type DndItem = DrawerOption & { id: string }
 
   let containerClasses = $derived(
-    clsx(
+    cn(
       widthClass,
-      'border border-border rounded-2xl shadow-lg bg-background flex flex-col py-1 max-h-[568px] overflow-y-auto list-none',
-      {
-        '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden': draggable
-      }
+      'border border-border rounded-2xl shadow-lg bg-background flex flex-col py-1 max-h-[568px] overflow-y-auto list-none outline-none',
+      clsx({ '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden': draggable }),
+      className
     )
   )
 
@@ -88,27 +85,6 @@
     return { groupedItems: grouped, ungroupedItems: ungrouped }
   })
 
-  // Items in display order (matches visual rendering order)
-  let itemsInDisplayOrder = $derived.by(() => {
-    const displayOrder: DrawerOption[] = []
-
-    if (hasGroups && groups) {
-      // Add grouped items in group order, only if group is open (when collapsible)
-      groups.forEach((group) => {
-        const isOpen = collapsibleGroups ? openGroups[group.slug] : true
-        if (isOpen) {
-          const groupItems = groupedItems.get(group.slug) || []
-          displayOrder.push(...groupItems)
-        }
-      })
-    }
-
-    // Add ungrouped items
-    displayOrder.push(...ungroupedItems)
-
-    return displayOrder
-  })
-
   let openGroups = $state<Record<string, boolean>>({})
   let groupDndItems = $state<Record<string, DndItem[]>>({})
   let ungroupedDndItems = $state<DndItem[]>([])
@@ -120,8 +96,6 @@
   let draggedOverGroup = $state<string | null>(null)
   let dropIndicator = $state<DropIndicatorState>(null)
   let cleanupFunctions: (() => void)[] = []
-  let focusedIndex = $state<number>(-1)
-  let containerRef = $state<HTMLDivElement | null>(null)
 
   // Build internal DND items from external items
   function buildListIn() {
@@ -204,19 +178,15 @@
     buildListIn()
     mounted = true
 
-    // Set up auto-scroll
     const autoScrollCleanup = autoScrollForElements({
       element: document.documentElement
     })
     cleanupFunctions.push(autoScrollCleanup)
-
-    window.addEventListener('keydown', handleKeyDown)
   })
 
   onDestroy(() => {
     cleanupFunctions.forEach((cleanup) => cleanup())
     cleanupFunctions = []
-    window.removeEventListener('keydown', handleKeyDown)
   })
 
   function emitGroupDistribution() {
@@ -445,37 +415,11 @@
     openGroups = openGroups[groupSlug] ? {} : { [groupSlug]: true }
   }
 
-  let focusedItemValue = $derived.by(() => {
-    const focusableItems = getFocusableItems(itemsInDisplayOrder)
-    if (focusedIndex >= 0 && focusedIndex < focusableItems.length) {
-      return focusableItems[focusedIndex].value
-    }
-    return null
-  })
-
-  function handleKeyDown(event: KeyboardEvent) {
-    // Don't handle if container doesn't exist
-    if (!containerRef || !document.body.contains(containerRef)) return
-
-    const focusableItems = getFocusableItems(itemsInDisplayOrder)
-    if (focusableItems.length === 0) return
-
-    if (event.key === 'ArrowDown') {
-      event.preventDefault()
-      focusedIndex = getNextFocusedIndex(focusedIndex, 'down', focusableItems.length)
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault()
-      focusedIndex = getNextFocusedIndex(focusedIndex, 'up', focusableItems.length)
-    } else if (event.key === ' ' || event.key === 'Enter') {
-      event.preventDefault()
-      const result = selectFocusedItem(itemsInDisplayOrder, focusedIndex, multiple)
-      if (result) {
-        if (result.shouldUpdate) {
-          updateItem(result.item)
-        } else {
-          onclick?.(result.item.value)
-        }
-      }
+  function handleItemSelect(item: DrawerOption) {
+    if (multiple) {
+      updateItem({ ...item, selected: !item.selected })
+    } else {
+      onclick?.(item.value)
     }
   }
 </script>
@@ -487,20 +431,26 @@
     {#snippet itemChildren()}
       {@render item.content?.(item)}
     {/snippet}
-    <div class:px-1={!item.groupBy} class:cursor-grab={draggable && !item.locked}>
+    <Command.Item
+      value={String(item.value)}
+      disabled={item.disabled || item.locked}
+      onSelect={() => handleItemSelect(item)}
+      class={clsx('group outline-none', { 'px-1': !item.groupBy, 'cursor-grab': draggable && !item.locked })}
+    >
       <DrawerContextItem
-        item={{ ...item, focused: item.value === focusedItemValue, flagPosition: item.flagPosition || flagPosition }}
+        item={{ ...item, flagPosition: item.flagPosition || flagPosition }}
         {multiple}
         {onclick}
         onchange={updateItem}
         children={item.content ? itemChildren : undefined}
       />
-    </div>
+    </Command.Item>
   {/if}
 {/snippet}
 
-<div
-  bind:this={containerRef}
+<Command.Root
+  shouldFilter={false}
+  loop
   class={containerClasses}
   {...rest}
 >
@@ -644,4 +594,4 @@
       </div>
     {/if}
   {/if}
-</div>
+</Command.Root>

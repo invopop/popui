@@ -416,6 +416,7 @@ export interface BaseDropdownProps {
     widthClass?: string;
     collapsibleGroups?: boolean;
     flagPosition?: 'before' | 'after';
+    autofocus?: boolean;
     onclick?: (value: AnyProp) => void;
     onselect?: (selected: DrawerOption[]) => void;
     onreorder?: (items: DrawerOption[]) => void;

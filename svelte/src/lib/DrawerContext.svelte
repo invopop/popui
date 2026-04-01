@@ -41,6 +41,7 @@
     widthClass = 'w-60',
     collapsibleGroups = true,
     flagPosition = 'after',
+    autofocus = false,
     onclick,
     onselect,
     onreorder,
@@ -89,6 +90,7 @@
   let groupDndItems = $state<Record<string, DndItem[]>>({})
   let ungroupedDndItems = $state<DndItem[]>([])
   let mounted = $state(false)
+  let commandRootEl = $state<HTMLElement | null>(null)
   let itemsCache = $state<DrawerOption[]>([])
   let isDragging = $state(false)
   let draggedItemId = $state<string | null>(null)
@@ -177,6 +179,12 @@
     itemsCache = JSON.parse(JSON.stringify(items))
     buildListIn()
     mounted = true
+
+    if (autofocus) {
+      setTimeout(() => {
+        commandRootEl?.focus()
+      }, 10)
+    }
 
     const autoScrollCleanup = autoScrollForElements({
       element: document.documentElement
@@ -452,6 +460,7 @@
   shouldFilter={false}
   loop
   class={containerClasses}
+  bind:ref={commandRootEl}
   {...rest}
 >
   {@render children?.()}

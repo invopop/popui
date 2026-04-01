@@ -141,8 +141,11 @@ export function handleScrollEvent(
 
 // Keyboard navigation helpers
 export function shouldIgnoreKeyEvent(event: KeyboardEvent): boolean {
-  const targetTag = (event.target as HTMLElement).tagName
-  return targetTag === 'INPUT' || targetTag === 'TEXTAREA'
+  const target = event.target as HTMLElement
+  const targetTag = target.tagName
+  if (targetTag === 'INPUT' || targetTag === 'TEXTAREA') return true
+  if (target.closest('[data-command-root]')) return true
+  return false
 }
 
 export function handleArrowDown<TData>(

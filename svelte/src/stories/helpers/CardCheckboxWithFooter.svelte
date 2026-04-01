@@ -1,6 +1,6 @@
 <script lang="ts">
   import CardCheckbox from '../../lib/CardCheckbox.svelte'
-  import StepIconList from '../../lib/StepIconList.svelte'
+  import AvatarStack from '../../lib/AvatarStack.svelte'
   import type { IconSource } from '@steeze-ui/svelte-icon'
 
   interface Props {
@@ -46,6 +46,6 @@
   {hideRadio}
 >
   {#snippet footer()}
-    <StepIconList icons={footerIcons} />
+    <AvatarStack icons={footerIcons} />
   {/snippet}
 </CardCheckbox>

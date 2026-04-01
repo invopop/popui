@@ -34,6 +34,7 @@
 </script>
 
 <DrawerContext
+  autofocus
   {items}
   onclick={(e) => {
     if (e === 'hide') {

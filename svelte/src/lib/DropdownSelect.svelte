@@ -193,6 +193,7 @@
   <DrawerContext
     data-dropdown-select-content
     widthClass="min-w-[256px]"
+    autofocus
     {multiple}
     {items}
     {flagPosition}

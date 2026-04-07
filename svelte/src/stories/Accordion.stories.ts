@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Accordion',
   component: AccordionWithContent as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<AccordionWithContent>
 
 export default meta

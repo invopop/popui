@@ -137,6 +137,16 @@
   </span>
 {/snippet}
 
+{#snippet triggerIcon()}
+  {#if typeof selectedIcon === 'string'}
+    <img src={selectedIcon} alt="" class="size-4 flex-shrink-0 text-icon" />
+  {:else if selectedIcon}
+    <Icon src={selectedIcon} {iconTheme} class="{selectedIconColor} size-4 flex-shrink-0" />
+  {:else if resolvedIcon}
+    <Icon src={resolvedIcon} {iconTheme} class="text-icon size-4 flex-shrink-0" />
+  {/if}
+{/snippet}
+
 <BaseDropdown
   data-dropdown-select
   bind:isOpen
@@ -149,8 +159,8 @@
 >
   {#snippet trigger()}
     <div data-dropdown-select-trigger class={styles}>
-      {#if hasMultipleColors}
-        <div class="flex items-center gap-1 flex-1 min-w-0">
+      <div class="flex items-center gap-1 flex-1 min-w-0 whitespace-nowrap">
+        {#if hasMultipleColors}
           <div class="flex items-center -space-x-0.5">
             {#each selectedColors.slice(0, 3) as color}
               <span class="border-l border-background rounded-xs flex first:border-l-0">
@@ -159,35 +169,22 @@
             {/each}
           </div>
           {@render label()}
-        </div>
-      {:else if selectedColor}
-        <div class="flex items-center gap-1 flex-1 min-w-0">
+        {:else if selectedColor}
           <TagStatus dot status={selectedColor} />
           {@render label()}
-        </div>
-      {:else if !multiple && selectedItem?.country}
-        <div class="flex items-center gap-1 flex-1 min-w-0">
+        {:else if !multiple && selectedItem?.country}
           <BaseFlag country={selectedItem.country} />
           {@render label()}
-        </div>
-      {:else if !multiple && selectedItem?.content}
-        <div class="flex items-center gap-1 flex-1 min-w-0">
+        {:else if !multiple && selectedItem?.content}
+          {@render triggerIcon()}
           {@render selectedItem.content(selectedItem)}
-        </div>
-      {:else if selectedIcon || resolvedIcon}
-        <div class="flex items-center gap-1 flex-1 min-w-0">
-          {#if typeof selectedIcon === 'string'}
-            <img src={selectedIcon} alt="" class="size-4 flex-shrink-0 text-icon" />
-          {:else if selectedIcon}
-            <Icon src={selectedIcon} {iconTheme} class="{selectedIconColor} size-4 flex-shrink-0" />
-          {:else if resolvedIcon}
-            <Icon src={resolvedIcon} {iconTheme} class="text-icon size-4 flex-shrink-0" />
-          {/if}
+        {:else if selectedIcon || resolvedIcon}
+          {@render triggerIcon()}
           {@render label()}
-        </div>
-      {:else}
-        {@render label()}
-      {/if}
+        {:else}
+          {@render label()}
+        {/if}
+      </div>
     </div>
   {/snippet}
   <DrawerContext

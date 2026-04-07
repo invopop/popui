@@ -205,7 +205,7 @@ const meta = {
 	parameters: {
 		layout: 'fullscreen'
 	},
-	decorators: [() => FullHeightDecorator as any]
+	decorators: [() => ({ Component: FullHeightDecorator as any })]
 } satisfies Meta<typeof DataTable>
 
 export default meta

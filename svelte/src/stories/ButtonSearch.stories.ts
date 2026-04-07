@@ -5,9 +5,9 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 
 const meta = {
   title: 'Components/ButtonSearch',
-  component: ButtonSearch,
+  component: ButtonSearch as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<ButtonSearch>
 
 export default meta

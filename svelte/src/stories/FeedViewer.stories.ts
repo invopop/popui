@@ -8,9 +8,9 @@ import { CircleStack, Sparkles } from '@steeze-ui/heroicons'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/FeedViewer',
-  component: FeedViewer,
+  component: FeedViewer as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthMdDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthMdDecorator as any })]
 } satisfies Meta<FeedViewer>
 
 export default meta

@@ -47,7 +47,7 @@ export const DefaultComplete: Story = {
 }
 
 export const Dark25: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.25,
     variant: 'dark'
@@ -55,7 +55,7 @@ export const Dark25: Story = {
 }
 
 export const Dark33: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.33,
     variant: 'dark'
@@ -63,7 +63,7 @@ export const Dark33: Story = {
 }
 
 export const Dark50: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.5,
     variant: 'dark'
@@ -71,7 +71,7 @@ export const Dark50: Story = {
 }
 
 export const Dark75: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.75,
     variant: 'dark'
@@ -79,7 +79,7 @@ export const Dark75: Story = {
 }
 
 export const DarkComplete: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 1,
     variant: 'dark'

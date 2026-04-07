@@ -1,6 +1,7 @@
 <script lang="ts">
   import DataTable from '$lib/data-table/data-table.svelte'
-  import type { DataTableColumn, RowAction } from '$lib/data-table/data-table-types.js'
+  import type { DataTableColumn } from '$lib/data-table/data-table-types.js'
+  import type { TableAction } from '$lib/types.js'
   import BaseButton from '$lib/BaseButton.svelte'
 
   type Invoice = {
@@ -27,7 +28,7 @@
   }: {
     data: Invoice[]
     columns: DataTableColumn<Invoice>[]
-    rowActions?: RowAction[]
+    rowActions?: TableAction[]
     onRowClick?: (row: Invoice) => void
     getRowState?: (row: Invoice) => { isError?: boolean; isSuccess?: boolean }
     getRowClassName?: (row: Invoice) => string

@@ -11,7 +11,7 @@ const meta = {
   title: 'Components/CardCheckbox',
   component: CardCheckbox as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<CardCheckbox>
 
 export default meta
@@ -68,7 +68,7 @@ export const DisabledChecked: Story = {
 }
 
 export const WithOkIconHideRadio: Story = {
-  decorators: [() => MaxWidth80Decorator as any],
+  decorators: [() => ({ Component: MaxWidth80Decorator as any })],
   args: {
     title: 'OK',
     icon: CheckBadge,
@@ -78,7 +78,7 @@ export const WithOkIconHideRadio: Story = {
 
 export const WithFooterSlot: StoryObj<typeof CardCheckboxWithFooter> = {
   render: (args) => ({
-    Component: CardCheckboxWithFooter,
+    Component: CardCheckboxWithFooter as any,
     props: args
   }),
   args: {
@@ -89,9 +89,9 @@ export const WithFooterSlot: StoryObj<typeof CardCheckboxWithFooter> = {
 }
 
 export const VerticalLayout: StoryObj<typeof CardCheckboxVertical> = {
-  decorators: [() => MaxWidthMdDecorator as any],
+  decorators: [() => ({ Component: MaxWidthMdDecorator as any })],
   render: (args) => ({
-    Component: CardCheckboxVertical,
+    Component: CardCheckboxVertical as any,
     props: args
   }),
   args: {

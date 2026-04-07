@@ -8,7 +8,7 @@ const meta = {
   title: 'Components/Tabs',
   component: TabsComponent as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<TabsComponent>
 
 export default meta

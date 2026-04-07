@@ -8,9 +8,9 @@ import { Cog6Tooth } from '@steeze-ui/heroicons'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/FeedIconEvent',
-  component: FeedIconEvent,
+  component: FeedIconEvent as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<FeedIconEvent>
 
 export default meta

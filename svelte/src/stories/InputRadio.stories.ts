@@ -8,7 +8,7 @@ const meta = {
   title: 'Components/InputRadio',
   component: InputRadio as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<InputRadio>
 
 export default meta

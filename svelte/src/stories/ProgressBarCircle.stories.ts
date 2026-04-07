@@ -60,7 +60,7 @@ export const DefaultLarge50: Story = {
 }
 
 export const DarkSmall25: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.25,
     size: 48,
@@ -69,7 +69,7 @@ export const DarkSmall25: Story = {
 }
 
 export const DarkSmall50: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.5,
     size: 48,
@@ -78,7 +78,7 @@ export const DarkSmall50: Story = {
 }
 
 export const DarkSmall75: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.75,
     size: 48,
@@ -87,7 +87,7 @@ export const DarkSmall75: Story = {
 }
 
 export const DarkSmallComplete: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 1,
     size: 48,
@@ -96,7 +96,7 @@ export const DarkSmallComplete: Story = {
 }
 
 export const DarkMedium50: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.5,
     size: 64,
@@ -105,7 +105,7 @@ export const DarkMedium50: Story = {
 }
 
 export const DarkLarge50: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     progress: 0.5,
     size: 96,

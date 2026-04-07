@@ -11,7 +11,7 @@ const meta = {
   title: 'Components/ProfileAvatar',
   component: ProfileAvatar as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<ProfileAvatar>
 
 export default meta
@@ -77,7 +77,7 @@ export const WithPictureXL: Story = {
 }
 
 export const DarkBackground: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     name: 'Brad Pitt',
     dark: true
@@ -85,7 +85,7 @@ export const DarkBackground: Story = {
 }
 
 export const DarkBackgroundXL: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     name: 'Brad Pitt',
     dark: true,
@@ -94,7 +94,7 @@ export const DarkBackgroundXL: Story = {
 }
 
 export const DarkBackgroundWithPicture: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     name: 'Brad Pitt',
     dark: true,
@@ -120,7 +120,7 @@ export const WithIconXL: Story = {
 }
 
 export const WithIconDark: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     name: 'Brad Pitt',
     icon: User,
@@ -129,7 +129,7 @@ export const WithIconDark: Story = {
 }
 
 export const WithIconDarkXL: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     name: 'Brad Pitt',
     icon: User,

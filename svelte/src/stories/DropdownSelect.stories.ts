@@ -2,16 +2,16 @@ import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import DropdownSelect from '../lib/DropdownSelect.svelte'
 import StackedDropdownSelects from './helpers/StackedDropdownSelects.svelte'
+import DropdownSelectWithContent from './helpers/DropdownSelectWithContent.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
-import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 import { Edit, Flag, Lock } from '@invopop/ui-icons'
 
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/DropdownSelect',
-  component: DropdownSelect,
+  component: DropdownSelect as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<DropdownSelect>
 
 export default meta
@@ -98,11 +98,11 @@ export const MultipleWithColors: Story = {
   args: {
     placeholder: 'Label',
     value: [
-      { value: 1, label: 'Draft', color: 'gray' },
+      { value: 1, label: 'Draft', color: 'grey' },
       { value: 2, label: 'Pending', color: 'yellow' }
     ],
     options: [
-      { value: 1, label: 'Draft', color: 'gray' },
+      { value: 1, label: 'Draft', color: 'grey' },
       { value: 2, label: 'Pending', color: 'yellow' },
       { value: 3, label: 'Approved', color: 'green' },
       { value: 4, label: 'Rejected', color: 'red' }
@@ -139,9 +139,15 @@ export const Disabled: Story = {
   }
 }
 
+export const WithContent: Story = {
+  render: () => ({
+    Component: DropdownSelectWithContent as any
+  })
+}
+
 export const Stacked: Story = {
   render: () => ({
-    Component: StackedDropdownSelects
+    Component: StackedDropdownSelects as any
   })
 }
 

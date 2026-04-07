@@ -6,9 +6,9 @@ import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 
 const meta = {
   title: 'Components/ButtonFile',
-  component: ButtonFile,
+  component: ButtonFile as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<ButtonFile>
 
 export default meta

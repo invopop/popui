@@ -4,7 +4,7 @@
   import Button from '../../lib/button/button.svelte'
   import StepIconList from '../../lib/AvatarStack.svelte'
   import type { DataTableProps } from '../../lib/data-table/data-table-types.js'
-  import type { StepIcon } from '../../lib/types.js'
+  import type { AvatarIcon } from '../../lib/types.js'
 
   type Props<TData> = DataTableProps<TData>
 
@@ -24,7 +24,7 @@
   ]
 
   // Generate random steps for each row
-  function generateSteps(rowIndex: number): StepIcon[] {
+  function generateSteps(rowIndex: number): AvatarIcon[] {
     const count = Math.floor(Math.random() * 5) + 2 // 2-6 steps
     return Array.from({ length: count }, (_, i) => mockStepIcons[i % mockStepIcons.length])
   }

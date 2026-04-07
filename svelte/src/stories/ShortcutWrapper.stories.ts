@@ -24,7 +24,7 @@ export const SmallLight: Story = {
 }
 
 export const SmallNavigation: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   render: () => ({
     Component: ShortcutWrapperWithIcon as any,
     props: {
@@ -45,7 +45,7 @@ export const MediumLight: Story = {
 }
 
 export const MediumNavigation: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   render: () => ({
     Component: ShortcutWrapperWithIcon as any,
     props: {
@@ -67,7 +67,7 @@ export const LetterSmallLight: Story = {
 }
 
 export const LetterSmallNavigation: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   render: () => ({
     Component: ShortcutWrapperWithLetter as any,
     props: {
@@ -90,7 +90,7 @@ export const LetterMediumLight: Story = {
 }
 
 export const LetterMediumNavigation: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   render: () => ({
     Component: ShortcutWrapperWithLetter as any,
     props: {

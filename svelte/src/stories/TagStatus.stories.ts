@@ -7,9 +7,9 @@ import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/TagStatus',
-  component: TagStatus,
+  component: TagStatus as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<TagStatus>
 
 export default meta

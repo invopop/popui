@@ -8,9 +8,9 @@ import { Cog6Tooth } from '@steeze-ui/heroicons'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/InputSelect',
-  component: InputSelect,
+  component: InputSelect as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<InputSelect>
 
 export default meta

@@ -9,7 +9,7 @@ const meta = {
   title: 'Components/CounterWidget',
   component: CounterWidget as any,
   tags: ['autodocs'],
-  decorators: [() => DarkBackgroundDecorator as any, () => MaxWidthMdDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any }), () => ({ Component: MaxWidthMdDecorator as any })],
 } satisfies Meta<CounterWidget>
 
 export default meta

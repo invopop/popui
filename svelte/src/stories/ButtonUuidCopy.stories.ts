@@ -8,7 +8,7 @@ const meta = {
   title: 'Components/ButtonUuidCopy',
   component: ButtonUuidCopy as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<ButtonUuidCopy>
 
 export default meta
@@ -30,7 +30,7 @@ export const FullUuid: Story = {
 }
 
 export const CustomPrefixSuffix: Story = {
-  decorators: [() => MaxWidthXsDecorator as any],
+  decorators: [() => ({ Component: MaxWidthXsDecorator as any })],
   args: {
     uuid: sampleUuid,
     prefixLength: 6,
@@ -46,7 +46,7 @@ export const Disabled: Story = {
 }
 
 export const Truncated: Story = {
-  decorators: [() => MaxWidthXsDecorator as any],
+  decorators: [() => ({ Component: MaxWidthXsDecorator as any })],
   args: {
     uuid: sampleUuid
   },

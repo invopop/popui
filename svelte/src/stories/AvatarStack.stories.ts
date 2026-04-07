@@ -8,7 +8,7 @@ const meta = {
   title: 'Components/AvatarStack',
   component: AvatarStack as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<AvatarStack>
 
 export default meta

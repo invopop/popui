@@ -8,7 +8,7 @@ const meta = {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any, () => MaxWidthMdDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthMdDecorator as any })]
 } satisfies Meta<Breadcrumbs>
 
 export default meta

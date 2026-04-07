@@ -11,7 +11,7 @@ const meta = {
   title: 'Components/DrawerContext',
   component: DrawerContext as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<DrawerContext>
 
 export default meta
@@ -224,7 +224,7 @@ export const WithCountries: Story = {
 
 export const WithAction: Story = {
   render: () => ({
-    Component: WithActionStory
+    Component: WithActionStory as any
   })
 }
 

@@ -103,7 +103,7 @@
         <InputSearch
           placeholder="Search invoices..."
           value={searchQuery}
-          onchange={(e) => handleSearchChange(e.currentTarget.value)}
+          onchange={handleSearchChange}
         />
         <div class="text-sm text-muted-foreground">
           Current page: {currentPage + 1}

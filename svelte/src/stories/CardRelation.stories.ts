@@ -8,9 +8,9 @@ import { Invoice } from '@invopop/ui-icons'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/CardRelation',
-  component: CardRelation,
+  component: CardRelation as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<CardRelation>
 
 export default meta

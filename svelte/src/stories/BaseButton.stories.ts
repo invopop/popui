@@ -11,7 +11,7 @@ const meta = {
   title: 'Components/BaseButton',
   component: BaseButton as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<BaseButton>
 
 export default meta
@@ -203,7 +203,7 @@ export const SelectedIconOnly: Story = {
 
 // Dark Variant (Navigation)
 export const Dark: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     slot: 'Dark Button',
     variant: 'dark'
@@ -211,7 +211,7 @@ export const Dark: Story = {
 }
 
 export const DarkWithIcon: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     slot: 'Button',
     icon: Cog6Tooth,
@@ -220,7 +220,7 @@ export const DarkWithIcon: Story = {
 }
 
 export const DarkIconOnly: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     icon: Cog6Tooth,
     variant: 'dark'
@@ -229,7 +229,7 @@ export const DarkIconOnly: Story = {
 
 // Dark Ghost Variant
 export const DarkGhost: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     slot: 'Dark Ghost Button',
     variant: 'dark-ghost'
@@ -237,7 +237,7 @@ export const DarkGhost: Story = {
 }
 
 export const DarkGhostWithIcon: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     slot: 'Button',
     icon: Cog6Tooth,
@@ -246,7 +246,7 @@ export const DarkGhostWithIcon: Story = {
 }
 
 export const DarkGhostIconOnly: Story = {
-  decorators: [() => DarkBackgroundDecorator as any],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     icon: Cog6Tooth,
     variant: 'dark-ghost'
@@ -316,7 +316,7 @@ export const IconRight: Story = {
 
 // Fullwidth
 export const Fullwidth: Story = {
-  decorators: [() => MaxWidthSmDecorator as any],
+  decorators: [() => ({ Component: MaxWidthSmDecorator as any })],
   args: {
     slot: 'Full Width Button',
     variant: 'primary',

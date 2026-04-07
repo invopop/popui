@@ -7,9 +7,9 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/Notification',
-  component: Notification,
+  component: Notification as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<Notification>
 
 export default meta
@@ -93,7 +93,7 @@ export const CriticalWithoutDescription: Story = {
 
 export const WithButton: Story = {
   render: () => ({
-    Component: NotificationWithButton,
+    Component: NotificationWithButton as any,
     props: {
       type: 'info',
       title: 'Title',
@@ -104,7 +104,7 @@ export const WithButton: Story = {
 
 export const WithButtonNoDescription: Story = {
   render: () => ({
-    Component: NotificationWithButton,
+    Component: NotificationWithButton as any,
     props: {
       type: 'warning',
       title: 'Title'

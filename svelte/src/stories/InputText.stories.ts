@@ -8,9 +8,9 @@ import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/InputText',
-  component: InputText,
+  component: InputText as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<InputText>
 
 export default meta
@@ -18,14 +18,14 @@ type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const WithoutLabel: Story = {
-  decorators: [() => MaxWidthSmDecorator as any],
+  decorators: [() => ({ Component: MaxWidthSmDecorator as any })],
   args: {
     placeholder: 'Placeholder'
   }
 }
 
 export const WithLabel: Story = {
-  decorators: [() => MaxWidthSmDecorator as any],
+  decorators: [() => ({ Component: MaxWidthSmDecorator as any })],
   args: {
     placeholder: 'Placeholder',
     label: 'Label'
@@ -33,7 +33,7 @@ export const WithLabel: Story = {
 }
 
 export const Disabled: Story = {
-  decorators: [() => MaxWidthSmDecorator as any],
+  decorators: [() => ({ Component: MaxWidthSmDecorator as any })],
   args: {
     placeholder: 'Placeholder',
     disabled: true
@@ -41,7 +41,7 @@ export const Disabled: Story = {
 }
 
 export const WithError: Story = {
-  decorators: [() => MaxWidthSmDecorator as any],
+  decorators: [() => ({ Component: MaxWidthSmDecorator as any })],
   args: {
     value: 'Wrong Thing',
     placeholder: 'Placeholder',
@@ -50,7 +50,7 @@ export const WithError: Story = {
 }
 
 export const Autofocus: Story = {
-  decorators: [() => MaxWidthSmDecorator as any],
+  decorators: [() => ({ Component: MaxWidthSmDecorator as any })],
   args: {
     value: '',
     placeholder: 'Placeholder',
@@ -60,6 +60,6 @@ export const Autofocus: Story = {
 
 export const Stacked: Story = {
   render: () => ({
-    Component: StackedInputTexts
+    Component: StackedInputTexts as any
   })
 }

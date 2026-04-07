@@ -9,9 +9,9 @@ import { Close } from '@invopop/ui-icons'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/MenuItemCollapsible',
-  component: MenuItemCollapsible,
+  component: MenuItemCollapsible as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<MenuItemCollapsible>
 
 export default meta
@@ -19,14 +19,14 @@ type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     title: 'Help'
   }
 }
 
 export const WithIcon: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     title: 'Help',
     icon: Close
@@ -34,7 +34,7 @@ export const WithIcon: Story = {
 }
 
 export const Collapsed: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     title: 'Help',
     collapsed: true

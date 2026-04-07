@@ -9,9 +9,9 @@ import { Cog6Tooth } from '@steeze-ui/heroicons'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/MenuItem',
-  component: MenuItem,
+  component: MenuItem as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<MenuItem>
 
 export default meta
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     label: 'Item',
     beta: true
@@ -27,7 +27,7 @@ export const Default: Story = {
 }
 
 export const WithIcon: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     label: 'Item',
     icon: Cog6Tooth
@@ -35,7 +35,7 @@ export const WithIcon: Story = {
 }
 
 export const WithIconAsText: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     label: 'Item',
     icon: 'invoice'
@@ -43,7 +43,7 @@ export const WithIconAsText: Story = {
 }
 
 export const FolderItem: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     label: 'Folder Item',
     isFolderItem: true
@@ -51,7 +51,7 @@ export const FolderItem: Story = {
 }
 
 export const FolderItemWithIcon: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     label: 'Folder Item',
     isFolderItem: true,
@@ -60,7 +60,7 @@ export const FolderItemWithIcon: Story = {
 }
 
 export const FolderItemSelected: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     label: 'Folder Item',
     isFolderItem: true,
@@ -69,7 +69,7 @@ export const FolderItemSelected: Story = {
 }
 
 export const CollapsableClosed: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     label: 'Folder Item',
     collapsable: true
@@ -77,7 +77,7 @@ export const CollapsableClosed: Story = {
 }
 
 export const CollapsableOpen: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     label: 'Folder Item',
     collapsable: true,

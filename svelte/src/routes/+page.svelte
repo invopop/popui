@@ -3,7 +3,7 @@
   import CardCheckbox from '$lib/CardCheckbox.svelte'
   import { CodeFork, Invoice } from '@invopop/ui-icons'
   import ButtonUuidCopy from '$lib/ButtonUuidCopy.svelte'
-  import StepIconList from '$lib/StepIconList.svelte'
+  import StepIconList from '$lib/AvatarStack.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
   import BaseButton from '$lib/BaseButton.svelte'
   import BaseCard from '$lib/BaseCard.svelte'

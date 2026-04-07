@@ -8,9 +8,9 @@ import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/GlobalSearch',
-  component: GlobalSearch,
+  component: GlobalSearch as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator, () => MaxWidthSmDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<GlobalSearch>
 
 export default meta
@@ -18,11 +18,11 @@ type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const Default: Story = {
-  decorators: [() => DarkBackgroundDecorator]
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })]
 }
 
 export const Collapsed: Story = {
-  decorators: [() => DarkBackgroundDecorator],
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
   args: {
     collapsed: true
   }

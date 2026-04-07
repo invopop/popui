@@ -9,9 +9,9 @@ import ItemPushedToRightDecorator from './decorartors/ItemPushedToRightDecorator
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/DatePicker',
-  component: DatePicker,
+  component: DatePicker as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<DatePicker>
 
 export default meta
@@ -19,21 +19,21 @@ type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/svelte/writing-stories/args
 export const LeftPosition: Story = {
-  decorators: [() => ItemPushedToLeftDecorator],
+  decorators: [() => ({ Component: ItemPushedToLeftDecorator as any })],
   args: {
     label: 'Pick a Date'
   }
 }
 
 export const RightPosition: Story = {
-  decorators: [() => ItemPushedToRightDecorator],
+  decorators: [() => ({ Component: ItemPushedToRightDecorator as any })],
   args: {
     label: 'Pick a Date'
   }
 }
 
 export const WithSelectedDates: Story = {
-  decorators: [() => ItemPushedToRightDecorator],
+  decorators: [() => ({ Component: ItemPushedToRightDecorator as any })],
   args: {
     from: '2022-12-10',
     to: '2022-12-12',
@@ -42,7 +42,7 @@ export const WithSelectedDates: Story = {
 }
 
 export const WithSelectedEmptyDates: Story = {
-  decorators: [() => ItemPushedToRightDecorator],
+  decorators: [() => ({ Component: ItemPushedToRightDecorator as any })],
   args: {
     from: '',
     to: '',
@@ -52,6 +52,6 @@ export const WithSelectedEmptyDates: Story = {
 
 export const Stacked: Story = {
   render: () => ({
-    Component: StackedDatePickers
+    Component: StackedDatePickers as any
   })
 }

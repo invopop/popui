@@ -8,9 +8,9 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 
 const meta = {
   title: 'Components/Skeleton',
-  component: Skeleton,
+  component: Skeleton as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<typeof Skeleton>
 
 export default meta
@@ -24,7 +24,7 @@ export const Default: Story = {
 
 export const Avatar: Story = {
   render: (args) => ({
-    Component: SkeletonAvatar,
+    Component: SkeletonAvatar as any,
     props: args
   }),
   args: {
@@ -34,7 +34,7 @@ export const Avatar: Story = {
 
 export const Card: Story = {
   render: (args) => ({
-    Component: SkeletonCard,
+    Component: SkeletonCard as any,
     props: args
   }),
   args: {
@@ -46,7 +46,7 @@ export const Card: Story = {
 
 export const List: Story = {
   render: (args) => ({
-    Component: SkeletonList,
+    Component: SkeletonList as any,
     props: args
   }),
   args: {

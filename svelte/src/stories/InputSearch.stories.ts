@@ -8,9 +8,9 @@ import { Hashtag } from '@invopop/ui-icons'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/InputSearch',
-  component: InputSearch,
+  component: InputSearch as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<InputSearch>
 
 export default meta

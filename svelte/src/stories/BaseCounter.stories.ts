@@ -9,7 +9,7 @@ const meta = {
   title: 'Components/BaseCounter',
   component: BaseCounter as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator as any, () => MaxWidthSmDecorator as any]
+  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
 } satisfies Meta<BaseCounter>
 
 export default meta
@@ -34,7 +34,7 @@ export const Navigation: Story = {
     value: 3,
     theme: 'navigation'
   },
-  decorators: [() => DarkBackgroundDecorator as any]
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })]
 }
 
 export const SingleDigit: Story = {

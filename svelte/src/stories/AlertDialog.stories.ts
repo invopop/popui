@@ -6,9 +6,9 @@ import MarginDecorator from './decorartors/MarginDecorator.svelte'
 // More on how to set up stories at: https://storybook.js.org/docs/svelte/writing-stories/introduction
 const meta = {
   title: 'Components/AlertDialog',
-  component: AlertDialogComponent,
+  component: AlertDialogComponent as any,
   tags: ['autodocs'],
-  decorators: [() => MarginDecorator]
+  decorators: [() => ({ Component: MarginDecorator as any })]
 } satisfies Meta<AlertDialogComponent>
 
 export default meta

@@ -47,7 +47,7 @@ export const WithIconSnippet: Story = {
 
 export const WithAction: StoryObj<typeof EmptyStateWithAction> = {
   render: (args) => ({
-    Component: EmptyStateWithAction,
+    Component: EmptyStateWithAction as any,
     props: args
   }),
   args: {

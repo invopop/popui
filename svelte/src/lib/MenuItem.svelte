@@ -104,7 +104,7 @@
 
 <div class={wrapperStyles}>
   {#if isFolderItem && (highlight || active)}
-    <div class="border-l border-white h-3 w-px absolute top-[14px] left-0 -m-px"></div>
+    <div class="border-l border-white h-3 w-px absolute top-3.5 left-0 -m-px"></div>
   {/if}
   <button
     use:floatingRef
@@ -147,7 +147,7 @@
           onmouseleave={handleBlur}
           class="pt-4 z-30"
         >
-          <DrawerContext onclick={handleClickChild} {items} />
+          <DrawerContext autofocus onclick={handleClickChild} {items} />
         </div>
       {/if}
     {:else if open || !collapsable}

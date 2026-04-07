@@ -15,7 +15,7 @@
   let items = $derived(
     actions.map((a) => ({
       label: a.label,
-      value: a,
+      value: a.slug || a.label,
       icon: a.icon,
       separator: a.separator,
       destructive: a.destructive,
@@ -42,9 +42,11 @@
 
 <BaseDropdown bind:isOpen bind:this={actionDropdown} {trigger}>
   <DrawerContext
+    autofocus
     {items}
     onclick={(e) => {
-      onclick?.(e)
+      const action = actions.find((a) => (a.slug || a.label) === e)
+      onclick?.(action)
       actionDropdown?.toggle()
     }}
   />

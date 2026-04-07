@@ -122,6 +122,7 @@
     <BaseButton icon={Sliders} variant="outline" size="md" />
   {/snippet}
   <DrawerContext
+    autofocus
     items={itemsWithActions}
     {groups}
     draggable

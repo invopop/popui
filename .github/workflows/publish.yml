@@ -21,9 +21,12 @@ jobs:
           node-version: 22.x
           registry-url: 'https://registry.npmjs.org'
 
-      # Ensure npm 11.5.1 or later is installed for OIDC provenance publishing
-      - name: Update npm
-        run: npm install -g npm@latest
+      # Ensure npm 11+ is installed for OIDC provenance publishing
+      # Using corepack avoids issues with corrupted npm in GitHub runners
+      - name: Update npm via corepack
+        run: |
+          corepack enable npm
+          corepack install -g npm@latest
 
       - run: npm ci
         working-directory: svelte

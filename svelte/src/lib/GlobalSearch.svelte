@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Icon } from '@steeze-ui/svelte-icon'
-  import { Search, Slash } from '@invopop/ui-icons'
+  import { Search, Command } from '@invopop/ui-icons'
   import { onDestroy, onMount } from 'svelte'
   import clsx from 'clsx'
   import ShortcutWrapper from './ShortcutWrapper.svelte'
@@ -25,11 +25,16 @@
       return
     }
 
+    if (!event.ctrlKey && !event.metaKey) {
+      return
+    }
+
     // We allow to type the GLOBAL SEARCH KEY on text fields
     if (isInputFocused()) {
       return
     }
 
+    event.preventDefault()
     onOpen?.()
   }
 
@@ -46,8 +51,13 @@
   <Icon src={Search} class="size-4 text-foreground-inverse shrink-0" />
   {#if !collapsed}
     <span class="text-foreground-inverse-secondary text-base flex-1 text-left">Search</span>
-    <ShortcutWrapper theme="navigation">
-      <Icon src={Slash} class="size-3" />
-    </ShortcutWrapper>
+    <div class="flex items-center gap-1">
+      <ShortcutWrapper theme="navigation">
+        <Icon src={Command} class="size-3" />
+      </ShortcutWrapper>
+      <ShortcutWrapper theme="navigation">
+        <span class="text-sm font-semibold uppercase">{GLOBAL_SEARCH_KEY}</span>
+      </ShortcutWrapper>
+    </div>
   {/if}
 </button>

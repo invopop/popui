@@ -1,1 +1,1 @@
-export const GLOBAL_SEARCH_KEY = '/'
+export const GLOBAL_SEARCH_KEY = 'k'

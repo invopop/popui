@@ -68,7 +68,7 @@ import TagStatus from './TagStatus.svelte'
 import TitleMain from './TitleMain.svelte'
 import TitleSection from './TitleSection.svelte'
 import { Toaster } from './sonner'
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipAutoHide } from './tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider, TooltipAutoHide } from './tooltip'
 import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
 import { buttonVariants } from './button/button.svelte' // Ensure button styles are included
 import {
@@ -159,6 +159,7 @@ export {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  TooltipProvider,
   TooltipAutoHide,
   resolveIcon,
   getCountryName,

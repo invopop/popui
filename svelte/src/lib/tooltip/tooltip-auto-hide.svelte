@@ -4,8 +4,10 @@
   import type { Snippet } from 'svelte'
 
   let {
+    delayDuration = 700,
     children
   }: {
+    delayDuration?: number
     children: Snippet
   } = $props()
 
@@ -24,7 +26,7 @@
   })
 </script>
 
-<TooltipProvider>
+<TooltipProvider {delayDuration}>
   <Tooltip bind:open={isOpen}>
     {@render children()}
   </Tooltip>

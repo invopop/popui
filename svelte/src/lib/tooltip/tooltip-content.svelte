@@ -7,8 +7,10 @@
     sideOffset = 0,
     side = 'top',
     children,
+    showArrow = false,
     arrowClasses
   }: TooltipPrimitive.ContentProps & {
+    showArrow?: boolean
     arrowClasses?: string
   } = $props()
 </script>
@@ -25,20 +27,22 @@
     )}
   >
     {@render children?.()}
-    <TooltipPrimitive.Arrow>
-      {#snippet child({ props })}
-        <div
-          class={cn(
-            'bg-background-default-negative z-[1002] size-2.5 rotate-45 rounded-[2px]',
-            'data-[side=top]:translate-x-1/2 data-[side=top]:translate-y-[calc(-50%_+_2px)]',
-            'data-[side=bottom]:-translate-x-1/2 data-[side=bottom]:-translate-y-[calc(-50%_+_1px)]',
-            'data-[side=right]:translate-x-[calc(50%_+_2px)] data-[side=right]:translate-y-1/2',
-            'data-[side=left]:-translate-y-[calc(50%_-_3px)]',
-            arrowClasses
-          )}
-          {...props}
-        ></div>
-      {/snippet}
-    </TooltipPrimitive.Arrow>
+    {#if showArrow}
+      <TooltipPrimitive.Arrow>
+        {#snippet child({ props })}
+          <div
+            class={cn(
+              'bg-background-default-negative z-[1002] size-2.5 rotate-45 rounded-[2px]',
+              'data-[side=top]:translate-x-1/2 data-[side=top]:translate-y-[calc(-50%_+_2px)]',
+              'data-[side=bottom]:-translate-x-1/2 data-[side=bottom]:-translate-y-[calc(-50%_+_1px)]',
+              'data-[side=right]:translate-x-[calc(50%_+_2px)] data-[side=right]:translate-y-1/2',
+              'data-[side=left]:-translate-y-[calc(50%_-_3px)]',
+              arrowClasses
+            )}
+            {...props}
+          ></div>
+        {/snippet}
+      </TooltipPrimitive.Arrow>
+    {/if}
   </TooltipPrimitive.Content>
 </TooltipPrimitive.Portal>

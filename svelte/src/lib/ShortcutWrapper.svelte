@@ -10,8 +10,10 @@
       'size-5 rounded-md': size === 'md',
       'bg-background-default-secondary border-border-default-secondary shadow-shortcut text-foreground-default-secondary':
         theme === 'light',
-      'bg-background-inverse-secondary border-border-inverse-secondary shadow-[0px_1px_0px_rgba(255,255,255,0.20)] text-foreground-inverse-secondary':
-        theme === 'navigation'
+      'border-border-inverse-secondary shadow-shortcut-inverse text-foreground-inverse-secondary':
+        theme === 'navigation' && size === 'sm',
+      'bg-[rgba(255,255,255,0.05)] border-[rgba(255,255,255,0.1)] shadow-[0px_1px_0px_0px_rgba(255,255,255,0.15)] text-foreground-inverse-secondary':
+        theme === 'navigation' && size === 'md'
     })
   )
 </script>

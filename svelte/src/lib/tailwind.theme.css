@@ -601,6 +601,9 @@
   --color-background-default-accent: var(--color-brand-50);
   --color-background-default-negative: var(--color-neutral-100);
 
+  --color-background-inverse-default: var(--color-neutral-alpha-5);
+  --color-background-inverse-secondary: var(--color-neutral-white-alpha-100);
+
   --color-background-selected-default: var(--color-accent-alpha-10);
   --color-background-selected-default-hover: var(--color-accent-alpha-20);
   --color-background-selected-default-press: var(--color-accent-alpha-30);
@@ -731,6 +734,8 @@
   /* Background */
   --color-background: var(--color-background-default-default);
   
+  --color-background-inverse: var(--color-background-inverse-default);
+
   --color-background-selected: var(--color-background-selected-default);
   --color-background-selected-hover: var(--color-background-selected-default-hover);
   --color-background-selected-press: var(--color-background-selected-default-press);
@@ -784,6 +789,7 @@
   --shadow-lg:  0 8px 30px 0 rgba(10, 10, 10, 0.12);
   --shadow-xl:  0 8px 28px -6px rgba(10, 10, 10, 0.12), 0 18px 88px -4px rgba(10, 10, 10, 0.14);
   --shadow-active: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--color-background-accent-default, var(--color-positive-50)));
+  --shadow-warning: 0px 0px 0px 2px color-mix(in lab, transparent 88%, var(--color-border-warning-bold, var(--color-warning-50)));
   --shadow-button-default: 0 2px 6px -1px rgba(11, 11, 16, 0.04), 0 -2px 4px 0 rgba(11, 11, 16, 0.04) inset;
   --shadow-button-primary: 0 -4px 4px 0 rgba(11, 11, 16, 0.12) inset, 0 1px 1.5px 0 rgba(255, 255, 255, 0.16) inset, 0 2px 4px -1px rgba(11, 11, 16, 0.08);
   --shadow-button-pressed: 0 2px 6px 0 rgba(11, 11, 16, 0.16) inset, 0 -2px 5px -2px rgba(255, 255, 255, 0.25) inset;
@@ -885,6 +891,9 @@
     --color-background-default-bold: var(--color-neutral-100);
     --color-background-default-accent: var(--color-neutral-white-alpha-10);
     --color-background-default-negative: var(--color-neutral-100);
+
+    --color-background-inverse-default: var(--color-neutral-90);
+    --color-background-inverse-secondary: var(--color-neutral-white-alpha-5);
 
     --color-background-selected-default: var(--color-accent-alpha-20);
     --color-background-selected-default-hover: var(--color-accent-alpha-30);

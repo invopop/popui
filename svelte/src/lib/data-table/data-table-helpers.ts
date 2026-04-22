@@ -209,3 +209,15 @@ export function handleSelectKey<TData>(
     rows[currentIndex].toggleSelected()
   }
 }
+
+export function handleEnterKey<TData>(
+  currentIndex: number,
+  rows: Row<TData>[],
+  loading: boolean,
+  onRowClick?: (row: TData) => void
+): void {
+  if (loading || !onRowClick) return
+  if (currentIndex >= 0 && currentIndex < rows.length) {
+    onRowClick(rows[currentIndex].original as TData)
+  }
+}

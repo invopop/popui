@@ -9,35 +9,30 @@
     type SortingState,
     type VisibilityState
   } from '@tanstack/table-core'
-  import { onMount, onDestroy } from 'svelte'
+  import { onMount, onDestroy, untrack } from 'svelte'
   import DataTableToolbar from './data-table-toolbar.svelte'
   import DataTablePagination from './data-table-pagination.svelte'
   import DataTableHeaderCell from './data-table-header-cell.svelte'
   import DataTableRow from './data-table-row.svelte'
-  import FlexRender from './flex-render.svelte'
   import * as Table from '../table/index.js'
   import BaseTableActions from '$lib/BaseTableActions.svelte'
   import BaseDropdown from '$lib/BaseDropdown.svelte'
   import EmptyState from '$lib/EmptyState.svelte'
-  import Skeleton from '$lib/skeleton/skeleton.svelte'
-  import SkeletonAvatar from '$lib/skeleton/skeleton-avatar.svelte'
   import { Search } from '@invopop/ui-icons'
   import { cn } from '$lib/utils.js'
   import type { DataTableProps } from './data-table-types.js'
   import { calculateColumnSizing } from './column-sizing-helpers.js'
-  import { getCellStyle, getCellClasses } from './table-styles.js'
   import { buildColumns, setupTable } from './table-setup.js'
   import {
     reorderFrozenColumn,
     reorderUnfrozenColumn,
-    calculateFrozenOffset,
     handleScrollEvent,
     shouldIgnoreKeyEvent,
     handleArrowDown,
     handleArrowUp,
-    handleSelectKey
+    handleSelectKey,
+    handleEnterKey
   } from './data-table-helpers.js'
-  import clsx from 'clsx'
 
   let {
     data,
@@ -89,14 +84,18 @@
   const enablePagination = !disablePagination
 
   let rowSelection = $state<RowSelectionState>({})
-  let columnVisibility = $state<VisibilityState>(initialColumnVisibility)
+  let columnVisibility = $state<VisibilityState>(untrack(() => initialColumnVisibility))
   let sorting = $state<SortingState>(
-    initialSortColumn && initialSortDirection
-      ? [{ id: initialSortColumn, desc: initialSortDirection === 'desc' }]
-      : []
+    untrack(() =>
+      initialSortColumn && initialSortDirection
+        ? [{ id: initialSortColumn, desc: initialSortDirection === 'desc' }]
+        : []
+    )
   )
-  let pagination = $state<PaginationState>({ pageIndex: initialPage, pageSize: initialPageSize })
-  let columnSizing = $state<ColumnSizingState>(initialColumnSizing)
+  let pagination = $state<PaginationState>(
+    untrack(() => ({ pageIndex: initialPage, pageSize: initialPageSize }))
+  )
+  let columnSizing = $state<ColumnSizingState>(untrack(() => initialColumnSizing))
   let columnSizingInfo = $state<ColumnSizingInfoState>({
     columnSizingStart: [],
     deltaOffset: null,
@@ -105,10 +104,10 @@
     startOffset: null,
     startSize: null
   })
-  let columnOrder = $state<ColumnOrderState>(initialColumnOrder)
+  let columnOrder = $state<ColumnOrderState>(untrack(() => initialColumnOrder))
   let containerRef = $state<HTMLDivElement | null>(null)
   let columnDropdowns = $state<Record<string, BaseDropdown>>({})
-  let frozenColumns = $state<Set<string>>(new Set(initialFrozenColumns))
+  let frozenColumns = $state<Set<string>>(untrack(() => new Set(initialFrozenColumns)))
   let focusedRowIndex = $state<number>(-1)
   let tableBodyRef = $state<HTMLTableSectionElement | null>(null)
   let tableRenderKey = $state<number>(0) // Force re-render when visibility changes
@@ -259,9 +258,12 @@
         )
         break
       case ' ':
-      case 'Enter':
         event.preventDefault()
         handleSelectKey(focusedRowIndex, rows, enableSelection)
+        break
+      case 'Enter':
+        event.preventDefault()
+        handleEnterKey(focusedRowIndex, rows, loading, onRowClick)
         break
       case 'Escape':
         focusedRowIndex = -1

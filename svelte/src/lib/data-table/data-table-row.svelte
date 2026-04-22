@@ -21,8 +21,9 @@
   const isError = $derived(rowState?.isError ?? false)
   const isSuccess = $derived(rowState?.isSuccess ?? false)
   const isWarning = $derived(rowState?.isWarning ?? false)
+  const isSelected = $derived(rowState?.isSelected ?? false)
   const dataState = $derived.by(() => {
-    if (row.getIsSelected()) return 'selected'
+    if (row.getIsSelected() || isSelected) return 'selected'
     if (isError) return 'error'
     if (isWarning) return 'warning'
     if (isSuccess) return 'success'

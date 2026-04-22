@@ -119,7 +119,12 @@ export interface DataTableRowProps<TData> {
   loading?: boolean
   onRowClick?: (row: TData) => void
   getRowClassName?: (row: TData) => string
-  getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean; isWarning?: boolean }
+  getRowState?: (row: TData) => {
+    isSuccess?: boolean
+    isError?: boolean
+    isWarning?: boolean
+    isSelected?: boolean
+  }
   StickyCellWrapper: StickyCellWrapperSnippet
 }
 
@@ -164,7 +169,12 @@ export interface DataTableProps<TData> {
   onColumnOrderChange?: (columnOrder: string[]) => void
   onColumnVisibilityChange?: (visibility: Record<string, boolean>) => void
   getRowClassName?: (row: TData) => string
-  getRowState?: (row: TData) => { isSuccess?: boolean; isError?: boolean; isWarning?: boolean }
+  getRowState?: (row: TData) => {
+    isSuccess?: boolean
+    isError?: boolean
+    isWarning?: boolean
+    isSelected?: boolean
+  }
 }
 
 export interface DateCellConfig {

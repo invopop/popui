@@ -1,12 +1,46 @@
 {
-  "files.watcherExclude": {
-    "**/.svelte-kit/**": true,
-    "**/node_modules/**": true,
-    "**/.cache/**": true,
-    "**/node_modules/.vite/**": true
-  },
-  "files.exclude": {
-    "**/.svelte-kit": true,
-    "**/.cache": true
-  }
+    // Svelte Language Server optimizations
+    "svelte.plugin.svelte.compilerWarnings": {
+        "css-unused-selector": "ignore"
+    },
+    "svelte.plugin.svelte.defaultScriptLanguage": "ts",
+    // Disable Svelte LS TypeScript diagnostics on all files at startup (main freeze culprit)
+    "svelte.plugin.typescript.diagnostics.enable": false,
+    // Use TypeScript from this project's node_modules
+    "js/ts.tsdk.path": "node_modules/typescript/lib",
+    // Disable certain TypeScript features for better performance
+    "typescript.surveys.enabled": false,
+    "js/ts.tsserver.automaticTypeAcquisition.enabled": false,
+    // Reduce TypeScript server memory usage
+    "js/ts.tsserver.maxMemory": 4096,
+    "js/ts.tsserver.experimental.enableProjectDiagnostics": false,
+    // Exclude patterns to reduce file watching
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true,
+        "**/.svelte-kit/**": true,
+        "**/.cache/**": true,
+        "**/node_modules/.vite/**": true,
+        "**/dist/**": true,
+        "**/tmp/**": true,
+        "**/package-lock.json": true,
+        "**/.storybook-static/**": true
+    },
+    // Exclude from search to improve performance
+    "search.exclude": {
+        "**/.svelte-kit": true,
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/tmp": true,
+        "**/package-lock.json": true,
+        "**/.storybook-static": true
+    },
+    // Exclude from explorer
+    "files.exclude": {
+        "**/.svelte-kit": true,
+        "**/.cache": true,
+        "**/node_modules": true,
+        "**/.git": true
+    }
 }

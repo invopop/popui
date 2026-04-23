@@ -118,6 +118,7 @@ export interface DataTableRowProps<TData> {
   focusedRowIndex: number
   loading?: boolean
   onRowClick?: (row: TData) => void
+  onFocusRow?: () => void
   getRowClassName?: (row: TData) => string
   getRowState?: (row: TData) => {
     isSuccess?: boolean
@@ -151,6 +152,7 @@ export interface DataTableProps<TData> {
   pageSizeOptions?: number[]
   emptyState?: Omit<EmptyStateProps, 'children' | 'check'>
   onRowClick?: (row: TData) => void
+  onRowFocus?: (row: TData) => void
   onSelectionChange?: (selectedRows: TData[]) => void
   filters?: Snippet
   paginationSlot?: Snippet

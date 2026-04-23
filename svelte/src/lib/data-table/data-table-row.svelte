@@ -12,6 +12,7 @@
     focusedRowIndex,
     loading = false,
     onRowClick,
+    onFocusRow,
     getRowClassName,
     getRowState,
     StickyCellWrapper
@@ -42,7 +43,11 @@
     }),
     getRowClassName?.(row.original as TData)
   )}
-  onclick={() => !loading && onRowClick?.(row.original as TData)}
+  onclick={() => {
+    if (loading) return
+    onFocusRow?.()
+    onRowClick?.(row.original as TData)
+  }}
 >
   {#each row.getVisibleCells() as cell, index (cell.id)}
     <DataTableCell

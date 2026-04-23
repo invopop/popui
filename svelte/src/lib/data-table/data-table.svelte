@@ -60,6 +60,7 @@
       description: 'Try adjusting your filters or search query'
     },
     onRowClick,
+    onRowFocus,
     onSelectionChange,
     filters,
     paginationSlot,
@@ -157,6 +158,14 @@
         .map((key) => data[parseInt(key)])
       onSelectionChange(selectedRows)
     }
+  })
+
+  // Track focused row changes (keyboard navigation or row click)
+  $effect(() => {
+    if (!onRowFocus || focusedRowIndex < 0) return
+    const rows = table.getRowModel().rows
+    const focusedRow = rows[focusedRowIndex]
+    if (focusedRow) onRowFocus(focusedRow.original)
   })
 
   // Track column order changes
@@ -410,6 +419,7 @@
                 {focusedRowIndex}
                 {loading}
                 {onRowClick}
+                onFocusRow={() => (focusedRowIndex = rowIndex)}
                 {getRowClassName}
                 {getRowState}
                 {StickyCellWrapper}

@@ -160,14 +160,6 @@
     }
   })
 
-  // Track focused row changes (keyboard navigation or row click)
-  $effect(() => {
-    if (!onRowFocus || focusedRowIndex < 0) return
-    const rows = table.getRowModel().rows
-    const focusedRow = rows[focusedRowIndex]
-    if (focusedRow) onRowFocus(focusedRow.original)
-  })
-
   // Track column order changes
   $effect(() => {
     if (onColumnOrderChange && columnOrder.length > 0) {
@@ -255,6 +247,7 @@
           enableSelection,
           scrollToFocusedRow
         )
+        if (rows[focusedRowIndex]) onRowFocus?.(rows[focusedRowIndex].original)
         break
       case 'ArrowUp':
         event.preventDefault()
@@ -265,6 +258,7 @@
           enableSelection,
           scrollToFocusedRow
         )
+        if (rows[focusedRowIndex]) onRowFocus?.(rows[focusedRowIndex].original)
         break
       case ' ':
         event.preventDefault()

@@ -68,6 +68,8 @@ interface TableSetupOptions<TData> {
   // Data getters
   getData?: () => TData[]
   getColumns?: () => any[]
+  // Row identity — see DataTableProps.getRowId
+  getRowId?: (row: TData, index: number) => string
   // State getters
   getRowSelection: () => RowSelectionState
   getColumnVisibility: () => VisibilityState
@@ -177,6 +179,7 @@ export function setupTable<TData>(options: TableSetupOptions<TData>) {
     getPaginationRowModel:
       options.enablePagination && !options.manualPagination ? getPaginationRowModel() : undefined,
     getSortedRowModel: !options.manualSorting ? getSortedRowModel() : undefined,
+    getRowId: options.getRowId,
     // Manual pagination configuration
     manualPagination: options.manualPagination,
     // Manual sorting configuration

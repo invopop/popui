@@ -78,6 +78,7 @@
     onColumnVisibilityChange,
     getRowClassName,
     getRowState,
+    getRowId,
     children
   }: DataTableProps<TData> = $props()
 
@@ -177,6 +178,7 @@
   const table = setupTable<TData>({
     getData: () => data,
     getColumns: () => columns,
+    getRowId,
     enableSelection,
     enablePagination,
     manualPagination,

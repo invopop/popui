@@ -151,6 +151,14 @@ export interface DataTableProps<TData> {
   initialColumnSizing?: Record<string, number> // Initial column sizes (column ID -> width in pixels)
   pageSizeOptions?: number[]
   emptyState?: Omit<EmptyStateProps, 'children' | 'check'>
+  /**
+   * Identify rows by a stable key derived from the data instead of the default
+   * row index. Critical when consumers prepend/insert rows: with index-based
+   * IDs, Svelte's keyed `{#each}` reuses the existing top `<tr>` and mounts a
+   * fresh DOM node at the bottom for the shifted-down row, which sends row-
+   * level animations (slide-in, flash) to the wrong element.
+   */
+  getRowId?: (row: TData, index: number) => string
   onRowClick?: (row: TData) => void
   onRowFocus?: (row: TData) => void
   onSelectionChange?: (selectedRows: TData[]) => void

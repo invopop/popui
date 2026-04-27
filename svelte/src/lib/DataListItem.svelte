@@ -48,7 +48,7 @@
   <div
     class={clsx('text-foreground-default-secondary text-base', {
       'pl-2': vertical,
-      'min-w-[125px]': !vertical
+      'min-w-[148px]': !vertical
     })}
   >
     {label}

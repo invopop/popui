@@ -82,8 +82,8 @@
     children
   }: DataTableProps<TData> = $props()
 
-  const enableSelection = !disableSelection
-  const enablePagination = !disablePagination
+  const enableSelection = $derived(!disableSelection)
+  const enablePagination = $derived(!disablePagination)
 
   let rowSelection = $state<RowSelectionState>({})
   let columnVisibility = $state<VisibilityState>(untrack(() => initialColumnVisibility))
@@ -383,7 +383,7 @@
         <Table.Root>
           <Table.Header>
             {#each table.getHeaderGroups() as headerGroup (`${headerGroup.id}-${tableRenderKey}`)}
-              <Table.Row class="hover:!bg-transparent">
+              <Table.Row class="hover:bg-transparent!">
                 {#each headerGroup.headers as header, index (header.id)}
                   <DataTableHeaderCell
                     {header}

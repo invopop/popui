@@ -154,9 +154,12 @@
   // Track selection changes
   $effect(() => {
     if (onSelectionChange) {
-      const selectedRows = Object.keys(rowSelection)
-        .filter((key) => rowSelection[key])
-        .map((key) => data[parseInt(key)])
+      const selectedKeys = Object.keys(rowSelection).filter((key) => rowSelection[key])
+      const selectedRows = getRowId
+        ? selectedKeys
+            .map((key) => data.find((row, idx) => getRowId(row, idx) === key))
+            .filter((row): row is TData => row !== undefined)
+        : selectedKeys.map((key) => data[parseInt(key)])
       onSelectionChange(selectedRows)
     }
   })

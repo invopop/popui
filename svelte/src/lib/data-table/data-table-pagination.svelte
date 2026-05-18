@@ -2,6 +2,7 @@
   import Button from '$lib/button/button.svelte'
   import InputSelect from '$lib/InputSelect.svelte'
   import InputText from '$lib/InputText.svelte'
+  import Skeleton from '$lib/skeleton/skeleton.svelte'
   import { ArrowLeft, ArrowRight, ScrollLeft, ScrollRight } from '@invopop/ui-icons'
   import { cn } from '$lib/utils.js'
   import clsx from 'clsx'
@@ -21,7 +22,8 @@
     rowCount,
     manualPagination,
     disabled = false,
-    disableJumpToPage = false
+    disableJumpToPage = false,
+    countLoading = false
   }: DataTablePaginationProps<any> = $props()
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
@@ -140,8 +142,13 @@
               disabled={disableJumpToPage}
             />
           </div>
-          <span class="text-base text-foreground-default-secondary whitespace-nowrap">
-            / {formatNumber(totalPages)}
+          <span class="text-base text-foreground-default-secondary whitespace-nowrap flex items-center gap-1.5">
+            /
+            {#if countLoading}
+              <Skeleton class="h-4 w-8" />
+            {:else}
+              {formatNumber(totalPages)}
+            {/if}
           </span>
         </div>
         <div class="flex items-center">
@@ -206,7 +213,12 @@
         </div>
       {/if}
     </div>
-    {#if totalItems > 0}
+    {#if countLoading}
+      <span class="text-base text-foreground-default-secondary flex items-center gap-1.5">
+        <Skeleton class="h-4 w-10" />
+        {itemsLabel}
+      </span>
+    {:else if totalItems > 0}
       <span class="text-base text-foreground-default-secondary">
         {formatNumber(totalItems)}
         {itemsLabel}

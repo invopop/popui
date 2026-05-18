@@ -109,6 +109,7 @@ export interface DataTablePaginationProps<T> {
   manualPagination?: boolean
   disabled?: boolean
   disableJumpToPage?: boolean // Disable first/last page buttons and make page input read-only
+  countLoading?: boolean // Show skeletons in place of page-count and item-count while totals are still loading
 }
 
 export interface DataTableRowProps<TData> {
@@ -170,6 +171,8 @@ export interface DataTableProps<TData> {
   manualSorting?: boolean // Enable server-side sorting mode
   pageCount?: number // Total number of pages (for manual pagination)
   rowCount?: number // Total number of rows (for manual pagination)
+  countLoading?: boolean // Show skeletons in place of page-count and item-count while totals are still loading
+
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void
   onSortingChange?: (columnId: string, direction: TableSortBy) => void

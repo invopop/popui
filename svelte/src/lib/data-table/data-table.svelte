@@ -68,6 +68,7 @@
     manualSorting = false,
     pageCount,
     rowCount,
+    countLoading = false,
     onPageChange,
     onPageSizeChange,
     onSortingChange,
@@ -437,6 +438,7 @@
         {onPageChange}
         {onPageSizeChange}
         {disableJumpToPage}
+        {countLoading}
         disabled={disableControls || loading}
       >
         {#if paginationSlot}

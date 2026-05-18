@@ -20,6 +20,7 @@
     onPageSizeChange,
     data,
     rowCount,
+    pageCount,
     manualPagination,
     disabled = false,
     disableJumpToPage = false,
@@ -36,8 +37,12 @@
     // For client-side pagination, use data length directly
     return data?.length ?? 0
   })
-  // Calculate totalPages from reactive values instead of calling table.getPageCount()
-  let totalPages = $derived(Math.ceil(totalItems / rowsPerPage) || 1)
+  // Prefer the caller-supplied pageCount when provided (manual pagination): it lets
+  // consumers express "Next is available" before an exact rowCount is known. Fall
+  // back to deriving from rowCount/data for the client-side default.
+  let totalPages = $derived(
+    manualPagination && pageCount !== undefined ? pageCount : Math.ceil(totalItems / rowsPerPage) || 1
+  )
 
   let pageInputValue = $derived(`${currentPage}`)
 

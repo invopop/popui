@@ -434,6 +434,7 @@
         {table}
         {data}
         {rowCount}
+        {pageCount}
         {manualPagination}
         {onPageChange}
         {onPageSizeChange}

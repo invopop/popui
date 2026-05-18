@@ -106,6 +106,7 @@ export interface DataTablePaginationProps<T> {
   // Pass these directly for reactivity instead of accessing through table.options
   data?: T[]
   rowCount?: number
+  pageCount?: number // Caller-controlled page count for manual pagination; used instead of computing from rowCount so consumers can enable Next/Prev before an exact total is known
   manualPagination?: boolean
   disabled?: boolean
   disableJumpToPage?: boolean // Disable first/last page buttons and make page input read-only

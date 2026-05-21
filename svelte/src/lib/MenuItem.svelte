@@ -27,13 +27,22 @@
   }: MenuItemProps = $props()
 
   let resolvedIcon: IconSource | undefined = $state()
-  let itemStyles = $derived(
-    clsx('flex-1 min-w-0 px-2 py-1.5 h-8', {
-      'text-foreground-inverse font-medium': !isFolderItem,
-      'text-foreground-inverse-secondary': isFolderItem && !active,
-      'bg-background-selected-inverse text-white': active,
+  let rowStyles = $derived(
+    clsx('flex items-center rounded-lg border border-transparent p-1', {
+      'gap-1.5': action || collapsable,
+      'bg-background-selected-inverse': active,
       'hover:bg-background-selected-inverse': !active
     })
+  )
+  let buttonStyles = $derived(
+    clsx(
+      'flex-1 min-w-0 h-6 cursor-pointer text-base flex items-center hover:text-white focus:text-white',
+      {
+        'text-foreground-inverse font-medium': !isFolderItem,
+        'text-foreground-inverse-secondary': isFolderItem && !active,
+        'text-white': active
+      }
+    )
   )
   let wrapperStyles = $derived(
     clsx({
@@ -63,12 +72,12 @@
       data-menu-item-tree-indicator
     ></div>
   {/if}
-  <div class={clsx('flex items-center', { 'gap-1.5': action })} data-menu-item-row>
+  <div class={rowStyles} data-menu-item-row>
     <button
       onclick={handleClick}
       title={label}
       data-menu-item-button
-      class="cursor-pointer {itemStyles} text-base border border-transparent flex items-center justify-between hover:text-white focus:text-white rounded-lg"
+      class={buttonStyles}
     >
       <span class="flex items-center space-x-1.5 min-w-0 flex-1" data-menu-item-content>
         {#if imageUrl}
@@ -91,23 +100,20 @@
           <TagBeta />
         {/if}
       </span>
-      {#if collapsable}
-        <button
-          class="cursor-pointer"
-          data-menu-item-chevron
-          onclick={(e) => {
-            e.stopPropagation()
-            open = !open
-          }}
-        >
-          <Icon src={open ? ChevronDown : ChevronRight} class="h-4 w-4 text-white-40" />
-        </button>
-      {/if}
     </button>
     {#if action}
       <span class="shrink-0" data-menu-item-action>
         {@render action()}
       </span>
+    {/if}
+    {#if collapsable}
+      <button
+        class="shrink-0 cursor-pointer"
+        data-menu-item-chevron
+        onclick={() => (open = !open)}
+      >
+        <Icon src={open ? ChevronDown : ChevronRight} class="h-4 w-4 text-white-40" />
+      </button>
     {/if}
   </div>
   {#if children?.length && (open || !collapsable)}

@@ -104,6 +104,17 @@ export const WithAction: Story = {
   }
 }
 
+export const CollapsableWithImageAndAction: Story = {
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
+  render: (args) => ({ Component: MenuItemWithAction as any, props: args }),
+  args: {
+    label: 'Peppol',
+    imageUrl: 'https://www.google.com/s2/favicons?domain=peppol.org&sz=32',
+    collapsable: true,
+    open: true
+  }
+}
+
 export const Truncating: Story = {
   decorators: [
     () => ({ Component: DarkBackgroundDecorator as any }),

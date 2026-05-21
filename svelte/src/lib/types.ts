@@ -625,11 +625,14 @@ export interface BaseDropdownProps {
     collapsable?: boolean;
     open?: boolean;
     active?: boolean;
-    collapsedSidebar?: boolean;
     iconTheme?: IconTheme;
     icon?: IconSource | string | undefined;
+    imageUrl?: string;
     beta?: boolean;
     children?: MenuItemProps[] | undefined;
+    action?: Snippet;
+    ref?: HTMLDivElement | null;
+    class?: string;
     onclick?: (url: string) => void;
   }
 

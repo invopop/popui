@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 
 import MenuItem from '../lib/MenuItem.svelte'
+import MenuItemWithAction from './helpers/MenuItemWithAction.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthSmDecorator from './decorartors/MaxWidthSmDecorator.svelte'
+import MaxWidthXsDecorator from './decorartors/MaxWidthXsDecorator.svelte'
 import DarkBackgroundDecorator from './decorartors/DarkBackgroundDecorator.svelte'
 import { Cog6Tooth } from '@steeze-ui/heroicons'
 
@@ -82,5 +84,42 @@ export const CollapsableOpen: Story = {
     label: 'Folder Item',
     collapsable: true,
     open: true
+  }
+}
+
+export const WithImage: Story = {
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
+  args: {
+    label: 'Acme Invoicing',
+    imageUrl: 'https://www.google.com/s2/favicons?domain=invopop.com&sz=32'
+  }
+}
+
+export const WithAction: Story = {
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
+  render: (args) => ({ Component: MenuItemWithAction as any, props: args }),
+  args: {
+    label: 'Item with action',
+    icon: Cog6Tooth
+  }
+}
+
+export const Truncating: Story = {
+  decorators: [
+    () => ({ Component: DarkBackgroundDecorator as any }),
+    () => ({ Component: MaxWidthXsDecorator as any })
+  ],
+  args: {
+    label: 'A very long menu item label that should truncate when the container is narrow',
+    icon: Cog6Tooth
+  }
+}
+
+export const CustomClass: Story = {
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
+  args: {
+    label: 'Custom class targeting label',
+    icon: Cog6Tooth,
+    class: '[&_[data-menu-item-label]]:italic [&_[data-menu-item-label]]:tracking-wider'
   }
 }

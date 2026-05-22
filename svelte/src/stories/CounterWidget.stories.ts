@@ -109,3 +109,48 @@ export const DocsOverageNotAllowed: Story = {
     allowOverage: false
   }
 }
+
+export const CollapsedEmpty: Story = {
+  args: {
+    label: 'Pops',
+    current: 0,
+    total: 200,
+    collapsed: true
+  }
+}
+
+export const CollapsedDefault: Story = {
+  args: {
+    label: 'Pops',
+    current: 40,
+    total: 200,
+    collapsed: true
+  }
+}
+
+export const CollapsedWarning: Story = {
+  args: {
+    label: 'Pops',
+    current: 180,
+    total: 200,
+    collapsed: true
+  }
+}
+
+export const CollapsedCritical: Story = {
+  args: {
+    label: 'Pops',
+    current: 200,
+    total: 200,
+    collapsed: true
+  }
+}
+
+export const CollapsedOverage: Story = {
+  args: {
+    label: 'Docs',
+    current: 240,
+    total: 200,
+    collapsed: true
+  }
+}

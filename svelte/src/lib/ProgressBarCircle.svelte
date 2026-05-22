@@ -4,13 +4,16 @@
   let { progress, size, variant = 'default' }: ProgressBarCircleProps = $props()
 
   let angle = $derived(360 * progress)
-  let filledColor = $derived(
-    variant === 'dark' ? 'var(--color-icon-inverse-bold)' : 'var(--color-icon-selected-default)'
-  )
+  let filledColor = $derived.by(() => {
+    if (variant === 'critical') return 'var(--color-background-critical-inverse)'
+    if (variant === 'warning') return 'var(--color-background-warning-inverse)'
+    if (variant === 'dark') return 'var(--color-icon-inverse-bold)'
+    return 'var(--color-icon-selected-default)'
+  })
   let restColor = $derived(
-    variant === 'dark'
-      ? 'var(--color-background-selected-inverse-hover)'
-      : 'var(--color-background-default-tertiary)'
+    variant === 'default'
+      ? 'var(--color-background-default-tertiary)'
+      : 'var(--color-background-selected-inverse-hover)'
   )
   let background = $derived(
     `conic-gradient(${filledColor} 0deg ${angle}deg, ${restColor} ${angle}deg 360deg)`

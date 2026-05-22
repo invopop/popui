@@ -255,6 +255,7 @@ export interface CounterWidgetProps {
 	resetDate?: string;
 	icon?: IconSource;
 	allowOverage?: boolean;
+	collapsed?: boolean;
 }
 
 export interface ProgressBarProps {
@@ -268,7 +269,7 @@ export interface ProgressBarProps {
 export interface ProgressBarCircleProps {
 	progress: number;
 	size: number;
-	variant?: 'default' | 'dark';
+	variant?: 'default' | 'dark' | 'warning' | 'critical';
 }
 
 export interface TagProgressProps {
@@ -625,6 +626,7 @@ export interface BaseDropdownProps {
     collapsable?: boolean;
     open?: boolean;
     active?: boolean;
+    collapsedSidebar?: boolean;
     iconTheme?: IconTheme;
     icon?: IconSource | string | undefined;
     imageUrl?: string;

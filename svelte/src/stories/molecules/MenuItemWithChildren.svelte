@@ -6,6 +6,7 @@
 
   interface Props {
     collapsable?: boolean
+    collapsedSidebar?: boolean
     open?: boolean
     active?: boolean
     children: MenuItemProps[]
@@ -15,6 +16,7 @@
 
   let {
     collapsable = false,
+    collapsedSidebar = false,
     open = false,
     active = false,
     children,
@@ -34,6 +36,7 @@
               {icon}
               {active}
               {collapsable}
+              {collapsedSidebar}
               {open}
               {children}
               {url}

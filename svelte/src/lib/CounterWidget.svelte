@@ -2,6 +2,7 @@
   import type { CounterWidgetProps } from './types'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Warning, Failure } from '@invopop/ui-icons'
+  import { untrack } from 'svelte'
   import ProgressBar from './ProgressBar.svelte'
   import ProgressBarCircle from './ProgressBarCircle.svelte'
 
@@ -25,9 +26,25 @@
     if (isWarning) return 'warning'
     return 'dark'
   })
+
+  const EXPAND_DELAY_MS = 200
+  let showCollapsed = $state(untrack(() => collapsed))
+  let expandTimer: ReturnType<typeof setTimeout> | null = null
+
+  $effect(() => {
+    if (expandTimer) clearTimeout(expandTimer)
+    if (collapsed) {
+      showCollapsed = true
+    } else {
+      expandTimer = setTimeout(() => (showCollapsed = false), EXPAND_DELAY_MS)
+    }
+    return () => {
+      if (expandTimer) clearTimeout(expandTimer)
+    }
+  })
 </script>
 
-{#if collapsed}
+{#if showCollapsed}
   <div
     class="size-8 p-1.75 flex items-center justify-center rounded-lg border border-transparent hover:bg-background-selected-inverse"
     title="{label}: {current}/{total}"

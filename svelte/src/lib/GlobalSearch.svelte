@@ -15,7 +15,7 @@
       'cursor-pointer flex items-center border border-border-inverse-default rounded-lg box-border',
       {
         'gap-1 px-2 py-1.5 w-full hover:bg-background-selected-inverse h-8': !collapsed,
-        'p-2 size-8': collapsed
+        'p-2 size-8 mx-auto': collapsed
       }
     )
   )

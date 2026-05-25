@@ -1,7 +1,7 @@
 {
   "name": "@invopop/popui",
   "license": "MIT",
-  "version": "0.1.97",
+  "version": "0.1.98",
   "repository": {
     "url": "https://github.com/invopop/popui"
   },
@@ -106,6 +106,7 @@
     "svelte-intersection-observer-action": "^0.0.4",
     "svelte-portal": "^2.2.1",
     "svelte-sonner": "^1.0.5",
+    "svelte-toolbelt": "^0.10.6",
     "svelte-transition": "^0.0.17",
     "svelte-viewport-info": "^1.0.2",
     "tailwind-variants": "^1.0.0",

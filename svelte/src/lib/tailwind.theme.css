@@ -837,6 +837,26 @@
   --text-xs: 10px;
   --text-xs--line-height: 12px;
   --text-xs--letter-spacing: var(--tracking-wide);
+
+  /* ============================================
+     SHADCN-COMPATIBLE TOKEN ALIASES (Sheet, Separator, Sidebar)
+     ============================================ */
+
+  /* Generic aliases used by Sheet and Sidebar.Input */
+  --color-foreground-secondary: var(--color-foreground-default-secondary);
+  --color-input: var(--color-border-default-default);
+  --color-ring: var(--color-foreground-default-default);
+
+  /* Sidebar — defaults to the brand-bold (inverse/dark) surface so popui's
+     Sidebar matches the existing dark chrome out of the box. */
+  --color-sidebar: var(--color-background-default-bold);
+  --color-sidebar-foreground: var(--color-foreground-inverse-default);
+  --color-sidebar-primary: var(--color-foreground-inverse-default);
+  --color-sidebar-primary-foreground: var(--color-background-default-bold);
+  --color-sidebar-accent: var(--color-background-selected-inverse);
+  --color-sidebar-accent-foreground: var(--color-foreground-inverse-default);
+  --color-sidebar-border: var(--color-border-inverse-default);
+  --color-sidebar-ring: var(--color-border-inverse-secondary);
 }
 
 @layer theme {

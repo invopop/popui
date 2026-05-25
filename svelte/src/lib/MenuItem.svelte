@@ -46,7 +46,7 @@
       'pl-2': !collapsedSidebar && !imageUrl,
       'pl-[10px]': !collapsedSidebar && imageUrl,
       'gap-1.5': !collapsedSidebar && (action || collapsable),
-      'size-8 p-[7px] justify-center': collapsedSidebar,
+      'size-8 p-[7px] justify-center mx-auto': collapsedSidebar,
       'bg-background-selected-inverse': active,
       'hover:bg-background-selected-inverse': !active
     })

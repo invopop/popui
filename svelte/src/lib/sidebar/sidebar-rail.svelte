@@ -5,6 +5,16 @@
   import { SIDEBAR_DRAG_THRESHOLD_PX } from './constants.js'
   import { useSidebar } from './context.svelte.js'
 
+  function portal(node: HTMLElement) {
+    const target = typeof document !== 'undefined' ? document.body : null
+    if (target) target.appendChild(node)
+    return {
+      destroy() {
+        if (node.parentNode) node.parentNode.removeChild(node)
+      }
+    }
+  }
+
   let {
     ref = $bindable(null),
     class: className,
@@ -139,6 +149,7 @@
 
 {#if tooltipVisible}
   <div
+    use:portal
     role="tooltip"
     bind:offsetWidth={tooltipWidth}
     bind:offsetHeight={tooltipHeight}

@@ -55,10 +55,8 @@
 <BaseDropdown
   bind:isOpen={dropdownOpen}
   placement="bottom-start"
-  class={clsx({
-    'mx-auto': collapsed,
-    'w-full': !collapsed
-  })}
+  fullWidth={!collapsed}
+  class={clsx({ 'mx-auto': collapsed })}
 >
   {#snippet trigger()}
     <div

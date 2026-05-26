@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { HTMLAttributes } from 'svelte/elements'
+  import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements'
   import { Tooltip as TooltipPrimitive } from 'bits-ui'
   import ShortcutWrapper from '$lib/ShortcutWrapper.svelte'
   import TooltipContent from '$lib/tooltip/tooltip-content.svelte'
@@ -150,28 +150,29 @@
 >
   <TooltipPrimitive.Trigger disabled={isDragging}>
     {#snippet child({ props })}
+      {@const buttonProps = props as HTMLButtonAttributes}
       <button
         bind:this={ref}
-        {...props}
-        onpointerenter={(e: PointerEvent) => {
-          props.onpointerenter?.(e)
+        {...buttonProps}
+        onpointerenter={(e) => {
+          buttonProps.onpointerenter?.(e)
           onPointerEnter(e)
         }}
-        onpointermove={(e: PointerEvent) => {
-          props.onpointermove?.(e)
+        onpointermove={(e) => {
+          buttonProps.onpointermove?.(e)
           onPointerMove(e)
         }}
-        onpointerdown={(e: PointerEvent) => {
-          props.onpointerdown?.(e)
+        onpointerdown={(e) => {
+          buttonProps.onpointerdown?.(e)
           onPointerDown(e)
         }}
-        onpointerup={(e: PointerEvent) => {
-          props.onpointerup?.(e)
+        onpointerup={(e) => {
+          buttonProps.onpointerup?.(e)
           onPointerUp(e)
         }}
         onpointercancel={onPointerUp}
-        onclick={(e: MouseEvent) => {
-          props.onclick?.(e)
+        onclick={(e) => {
+          buttonProps.onclick?.(e)
           onClick(e)
         }}
         ondblclick={onDoubleClick}

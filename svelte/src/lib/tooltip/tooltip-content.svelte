@@ -8,7 +8,8 @@
     side = 'top',
     children,
     showArrow = false,
-    arrowClasses
+    arrowClasses,
+    ...rest
   }: TooltipPrimitive.ContentProps & {
     showArrow?: boolean
     arrowClasses?: string
@@ -21,6 +22,7 @@
     data-slot="tooltip-content"
     {sideOffset}
     {side}
+    {...rest}
     class={cn(
       'bg-background-default-negative border border-border-inverse z-[1002] rounded-md px-2 py-1 text-sm font-medium text-foreground-inverse leading-5 tracking-tight shadow-md',
       className

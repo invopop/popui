@@ -1,19 +1,11 @@
 <script lang="ts">
   import type { HTMLAttributes } from 'svelte/elements'
+  import { Tooltip as TooltipPrimitive } from 'bits-ui'
   import ShortcutWrapper from '$lib/ShortcutWrapper.svelte'
+  import TooltipContent from '$lib/tooltip/tooltip-content.svelte'
   import { cn, type WithElementRef } from '$lib/utils.js'
-  import { SIDEBAR_DRAG_THRESHOLD_PX } from './constants.js'
+  import { SIDEBAR_DRAG_THRESHOLD_PX, SIDEBAR_MIN_WIDTH_PX } from './constants.js'
   import { useSidebar } from './context.svelte.js'
-
-  function portal(node: HTMLElement) {
-    const target = typeof document !== 'undefined' ? document.body : null
-    if (target) target.appendChild(node)
-    return {
-      destroy() {
-        if (node.parentNode) node.parentNode.removeChild(node)
-      }
-    }
-  }
 
   let {
     ref = $bindable(null),
@@ -29,50 +21,77 @@
   let dragMoved = false
   let dragDirection: 1 | -1 = 1
 
-  let isHovering = $state(false)
   let isDragging = $state(false)
-  let tooltipVisible = $derived(isHovering && !isDragging)
-  let tooltipX = $state(0)
-  let tooltipY = $state(0)
-  let tooltipWidth = $state(0)
-  let tooltipHeight = $state(0)
+  let tooltipOpen = $state(false)
+  let cursorX = $state(0)
+  let cursorY = $state(0)
 
+  const TOOLTIP_HOVER_DELAY_MS = 700
   const TOOLTIP_CURSOR_OFFSET = 12
-  const TOOLTIP_VIEWPORT_PADDING = 8
 
-  let tooltipLeft = $derived.by(() => {
-    if (tooltipWidth === 0 || typeof window === 'undefined') return tooltipX
-    const desired = tooltipX - tooltipWidth / 2
-    const minX = TOOLTIP_VIEWPORT_PADDING
-    const maxX = window.innerWidth - tooltipWidth - TOOLTIP_VIEWPORT_PADDING
-    return Math.max(minX, Math.min(maxX, desired))
+  let cursorAnchor = $derived.by(() => {
+    const x = cursorX
+    const y = cursorY
+    return {
+      getBoundingClientRect: () => DOMRect.fromRect({ x, y, width: 0, height: 0 })
+    }
   })
-
-  let tooltipTop = $derived.by(() => {
-    const desired = tooltipY + TOOLTIP_CURSOR_OFFSET
-    if (tooltipHeight === 0 || typeof window === 'undefined') return desired
-    const maxY = window.innerHeight - tooltipHeight - TOOLTIP_VIEWPORT_PADDING
-    return Math.min(maxY, desired)
-  })
-
-  function updateTooltipPosition(e: PointerEvent) {
-    tooltipX = e.clientX
-    tooltipY = e.clientY
-  }
 
   function onPointerEnter(e: PointerEvent) {
     const sidebarRoot = (e.currentTarget as HTMLElement).closest('[data-slot="sidebar"]')
     dragDirection = sidebarRoot?.getAttribute('data-side') === 'right' ? -1 : 1
-    updateTooltipPosition(e)
-    isHovering = true
+    cursorX = e.clientX
+    cursorY = e.clientY
   }
 
-  function onPointerLeave() {
-    isHovering = false
+  const COLLAPSE_DRAG_OVERSHOOT_PX = 100
+  const POST_DRAG_CLICK_GUARD_MS = 250
+  let dragEndTime = 0
+
+  function onPointerMove(e: PointerEvent) {
+    cursorX = e.clientX
+    cursorY = e.clientY
+    const button = e.currentTarget as HTMLButtonElement
+    if (!button.hasPointerCapture(e.pointerId)) return
+    const delta = (e.clientX - dragStartX) * dragDirection
+    if (Math.abs(delta) > SIDEBAR_DRAG_THRESHOLD_PX) {
+      dragMoved = true
+      isDragging = true
+      sidebar.isResizing = true
+      tooltipOpen = false
+    }
+    if (!dragMoved) return
+    if (sidebar.state === 'collapsed') {
+      if (delta > 0) {
+        button.releasePointerCapture(e.pointerId)
+        document.body.style.cursor = ''
+        document.body.style.userSelect = ''
+        isDragging = false
+        sidebar.isResizing = false
+        dragMoved = false
+        dragEndTime = Date.now()
+        sidebar.setOpen(true)
+      }
+      return
+    }
+    const targetWidth = dragStartWidthPx + delta
+    if (targetWidth < SIDEBAR_MIN_WIDTH_PX - COLLAPSE_DRAG_OVERSHOOT_PX) {
+      button.releasePointerCapture(e.pointerId)
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+      isDragging = false
+      sidebar.isResizing = false
+      dragMoved = false
+      dragEndTime = Date.now()
+      sidebar.resetWidth()
+      sidebar.setOpen(false)
+      return
+    }
+    sidebar.setWidth(targetWidth)
   }
 
   function onPointerDown(e: PointerEvent) {
-    if (sidebar.state !== 'expanded' || sidebar.isMobile) return
+    if (sidebar.isMobile) return
     const button = e.currentTarget as HTMLButtonElement
     const sidebarRoot = button.closest('[data-slot="sidebar"]')
     dragDirection = sidebarRoot?.getAttribute('data-side') === 'right' ? -1 : 1
@@ -86,77 +105,104 @@
     document.body.style.userSelect = 'none'
   }
 
-  function onPointerMove(e: PointerEvent) {
-    if (tooltipVisible) updateTooltipPosition(e)
-    const button = e.currentTarget as HTMLButtonElement
-    if (!button.hasPointerCapture(e.pointerId)) return
-    const delta = (e.clientX - dragStartX) * dragDirection
-    if (Math.abs(delta) > SIDEBAR_DRAG_THRESHOLD_PX) {
-      dragMoved = true
-      isDragging = true
-    }
-    if (dragMoved) sidebar.setWidth(dragStartWidthPx + delta)
-  }
-
   function onPointerUp(e: PointerEvent) {
     const button = e.currentTarget as HTMLButtonElement
     if (button.hasPointerCapture(e.pointerId)) button.releasePointerCapture(e.pointerId)
     document.body.style.cursor = ''
     document.body.style.userSelect = ''
     isDragging = false
+    sidebar.isResizing = false
+    if (dragMoved) {
+      dragEndTime = Date.now()
+      dragMoved = false
+    }
   }
 
+  const DOUBLE_CLICK_DELAY_MS = 300
+  let pendingClickTimer: ReturnType<typeof setTimeout> | undefined
+
   function onClick(e: MouseEvent) {
-    if (dragMoved) {
+    if (Date.now() - dragEndTime < POST_DRAG_CLICK_GUARD_MS) {
       e.preventDefault()
       e.stopPropagation()
-      dragMoved = false
       return
     }
-    sidebar.toggle()
+    clearTimeout(pendingClickTimer)
+    pendingClickTimer = setTimeout(() => {
+      pendingClickTimer = undefined
+      sidebar.toggle()
+    }, DOUBLE_CLICK_DELAY_MS)
+  }
+
+  function onDoubleClick() {
+    if (sidebar.isMobile) return
+    clearTimeout(pendingClickTimer)
+    pendingClickTimer = undefined
+    sidebar.setOpen(true)
+    sidebar.resetWidth()
   }
 </script>
 
-<button
-  bind:this={ref}
-  data-sidebar="rail"
-  data-slot="sidebar-rail"
-  aria-label="Toggle Sidebar"
-  tabindex={-1}
-  type="button"
-  onpointerenter={onPointerEnter}
-  onpointerleave={onPointerLeave}
-  onpointerdown={onPointerDown}
-  onpointermove={onPointerMove}
-  onpointerup={onPointerUp}
-  onpointercancel={onPointerUp}
-  onclick={onClick}
-  class={cn(
-    'absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex',
-    'after:absolute after:inset-y-0 after:left-1/2 after:w-[2px]',
-    'hover:after:bg-sidebar-border',
-    'group-data-[side=left]:cursor-w-resize group-data-[side=right]:cursor-e-resize',
-    '[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize',
-    'hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full',
-    '[[data-side=left][data-collapsible=offcanvas]_&]:-right-2',
-    '[[data-side=right][data-collapsible=offcanvas]_&]:-left-2',
-    className
-  )}
-  {...restProps}
+<TooltipPrimitive.Root
+  bind:open={tooltipOpen}
+  delayDuration={TOOLTIP_HOVER_DELAY_MS}
+  disableHoverableContent
 >
-  {@render children?.()}
-</button>
-
-{#if tooltipVisible}
-  <div
-    use:portal
-    role="tooltip"
-    bind:offsetWidth={tooltipWidth}
-    bind:offsetHeight={tooltipHeight}
-    class="fixed z-[1002] pointer-events-none rounded-md border border-border-inverse bg-background-default-negative px-3 py-2 text-sm font-medium text-foreground-inverse leading-5 tracking-tight shadow-md"
-    style="left: {tooltipLeft}px; top: {tooltipTop}px; visibility: {tooltipWidth > 0
-      ? 'visible'
-      : 'hidden'};"
+  <TooltipPrimitive.Trigger disabled={isDragging}>
+    {#snippet child({ props })}
+      <button
+        bind:this={ref}
+        {...props}
+        onpointerenter={(e: PointerEvent) => {
+          props.onpointerenter?.(e)
+          onPointerEnter(e)
+        }}
+        onpointermove={(e: PointerEvent) => {
+          props.onpointermove?.(e)
+          onPointerMove(e)
+        }}
+        onpointerdown={(e: PointerEvent) => {
+          props.onpointerdown?.(e)
+          onPointerDown(e)
+        }}
+        onpointerup={(e: PointerEvent) => {
+          props.onpointerup?.(e)
+          onPointerUp(e)
+        }}
+        onpointercancel={onPointerUp}
+        onclick={(e: MouseEvent) => {
+          props.onclick?.(e)
+          onClick(e)
+        }}
+        ondblclick={onDoubleClick}
+        data-sidebar="rail"
+        data-slot="sidebar-rail"
+        aria-label="Toggle Sidebar"
+        tabindex={-1}
+        type="button"
+        class={cn(
+          'absolute inset-y-0 z-50 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex',
+          'after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:transition-colors after:duration-150',
+          'hover:after:delay-150 hover:after:bg-background-accent-default',
+          'group-data-[side=left]:cursor-w-resize group-data-[side=right]:cursor-e-resize',
+          '[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize',
+          'hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full',
+          '[[data-side=left][data-collapsible=offcanvas]_&]:-right-2',
+          '[[data-side=right][data-collapsible=offcanvas]_&]:-left-2',
+          className
+        )}
+        {...restProps}
+      >
+        {@render children?.()}
+      </button>
+    {/snippet}
+  </TooltipPrimitive.Trigger>
+  <TooltipContent
+    customAnchor={cursorAnchor}
+    side="bottom"
+    align="center"
+    sideOffset={TOOLTIP_CURSOR_OFFSET}
+    class="px-3 py-2"
   >
     <div class="flex flex-col gap-1.5">
       {#if sidebar.state === 'expanded'}
@@ -172,5 +218,5 @@
         </div>
       </div>
     </div>
-  </div>
-{/if}
+  </TooltipContent>
+</TooltipPrimitive.Root>

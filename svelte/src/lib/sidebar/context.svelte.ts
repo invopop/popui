@@ -20,6 +20,7 @@ class SidebarState {
   open = $derived.by(() => this.props.open())
   openMobile = $state(false)
   width = $state<string>(SIDEBAR_WIDTH)
+  isResizing = $state(false)
   setOpen: SidebarStateProps['setOpen']
   #isMobile: IsMobile
   state = $derived.by(() => (this.open ? 'expanded' : 'collapsed'))
@@ -46,6 +47,17 @@ class SidebarState {
         localStorage.setItem(SIDEBAR_WIDTH_STORAGE_KEY, this.width)
       } catch {
         // ignore quota / private-mode errors
+      }
+    }
+  }
+
+  resetWidth = () => {
+    this.width = SIDEBAR_WIDTH
+    if (typeof localStorage !== 'undefined') {
+      try {
+        localStorage.removeItem(SIDEBAR_WIDTH_STORAGE_KEY)
+      } catch {
+        // ignore private-mode errors
       }
     }
   }

@@ -41,7 +41,7 @@
   let highlight = $state(false)
   let leaveHoverTimeout: ReturnType<typeof setTimeout> | null = null
   let rowStyles = $derived(
-    clsx('flex items-center rounded-lg border border-transparent', {
+    clsx('flex items-center rounded-lg', {
       'py-1 pr-1': !collapsedSidebar,
       'pl-2': !collapsedSidebar && !imageUrl,
       'pl-[10px]': !collapsedSidebar && imageUrl,
@@ -165,7 +165,7 @@
       </span>
     </button>
     {#if !collapsedSidebar && action}
-      <span class="shrink-0" data-menu-item-action>
+      <span class="shrink-0 flex items-center" data-menu-item-action>
         {@render action()}
       </span>
     {/if}

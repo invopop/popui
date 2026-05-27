@@ -73,7 +73,7 @@
     <div
       data-slot="sidebar-gap"
       class={cn(
-        'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear group-data-[resizing=true]:transition-none',
+        'relative w-(--sidebar-width) bg-transparent transition-[width] duration-150 ease-linear group-data-[resizing=true]:transition-none',
         'group-data-[collapsible=offcanvas]:w-0',
         'group-data-[side=right]:rotate-180',
         variant === 'floating' || variant === 'inset'
@@ -84,7 +84,7 @@
     <div
       data-slot="sidebar-container"
       class={cn(
-        'fixed inset-y-0 z-50 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear group-data-[resizing=true]:transition-none md:flex',
+        'fixed inset-y-0 z-50 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-150 ease-linear group-data-[resizing=true]:transition-none md:flex',
         side === 'left'
           ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
           : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',

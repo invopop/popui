@@ -4,7 +4,7 @@
   import ShortcutWrapper from '$lib/ShortcutWrapper.svelte'
   import TooltipContent from '$lib/tooltip/tooltip-content.svelte'
   import { cn, type WithElementRef } from '$lib/utils.js'
-  import { SIDEBAR_DRAG_THRESHOLD_PX, SIDEBAR_MIN_WIDTH_PX } from './constants.js'
+  import { SIDEBAR_DRAG_THRESHOLD_PX, SIDEBAR_WIDTH_ICON_PX } from './constants.js'
   import { useSidebar } from './context.svelte.js'
 
   let {
@@ -20,6 +20,7 @@
   let dragStartWidthPx = 0
   let dragMoved = false
   let dragDirection: 1 | -1 = 1
+  let activePointerId: number | null = null
 
   let isDragging = $state(false)
   let tooltipOpen = $state(false)
@@ -29,6 +30,8 @@
   const TOOLTIP_HOVER_DELAY_MS = 700
   const TOOLTIP_CURSOR_OFFSET = 12
 
+  let tooltipDelay = $derived(isDragging ? Number.MAX_SAFE_INTEGER : TOOLTIP_HOVER_DELAY_MS)
+
   let cursorAnchor = $derived.by(() => {
     const x = cursorX
     const y = cursorY
@@ -37,6 +40,9 @@
     }
   })
 
+  const POST_DRAG_CLICK_GUARD_MS = 250
+  let dragEndTime = 0
+
   function onPointerEnter(e: PointerEvent) {
     const sidebarRoot = (e.currentTarget as HTMLElement).closest('[data-slot="sidebar"]')
     dragDirection = sidebarRoot?.getAttribute('data-side') === 'right' ? -1 : 1
@@ -44,70 +50,19 @@
     cursorY = e.clientY
   }
 
-  const COLLAPSE_DRAG_OVERSHOOT_PX = 100
-  const POST_DRAG_CLICK_GUARD_MS = 250
-  let dragEndTime = 0
-
-  function onPointerMove(e: PointerEvent) {
+  function onPointerMoveOnTrigger(e: PointerEvent) {
+    if (activePointerId !== null) return
     cursorX = e.clientX
     cursorY = e.clientY
-    const button = e.currentTarget as HTMLButtonElement
-    if (!button.hasPointerCapture(e.pointerId)) return
-    const delta = (e.clientX - dragStartX) * dragDirection
-    if (Math.abs(delta) > SIDEBAR_DRAG_THRESHOLD_PX) {
-      dragMoved = true
-      isDragging = true
-      sidebar.isResizing = true
-      tooltipOpen = false
-    }
-    if (!dragMoved) return
-    if (sidebar.state === 'collapsed') {
-      if (delta > 0) {
-        button.releasePointerCapture(e.pointerId)
-        document.body.style.cursor = ''
-        document.body.style.userSelect = ''
-        isDragging = false
-        sidebar.isResizing = false
-        dragMoved = false
-        dragEndTime = Date.now()
-        sidebar.setOpen(true)
-      }
-      return
-    }
-    const targetWidth = dragStartWidthPx + delta
-    if (targetWidth < SIDEBAR_MIN_WIDTH_PX - COLLAPSE_DRAG_OVERSHOOT_PX) {
-      button.releasePointerCapture(e.pointerId)
-      document.body.style.cursor = ''
-      document.body.style.userSelect = ''
-      isDragging = false
-      sidebar.isResizing = false
-      dragMoved = false
-      dragEndTime = Date.now()
-      sidebar.resetWidth()
-      sidebar.setOpen(false)
-      return
-    }
-    sidebar.setWidth(targetWidth)
   }
 
-  function onPointerDown(e: PointerEvent) {
-    if (sidebar.isMobile) return
-    const button = e.currentTarget as HTMLButtonElement
-    const sidebarRoot = button.closest('[data-slot="sidebar"]')
-    dragDirection = sidebarRoot?.getAttribute('data-side') === 'right' ? -1 : 1
-
-    const container = sidebarRoot?.querySelector('[data-slot="sidebar-container"]')
-    dragStartWidthPx = container instanceof HTMLElement ? container.offsetWidth : 256
-    dragStartX = e.clientX
-    dragMoved = false
-    button.setPointerCapture(e.pointerId)
-    document.body.style.cursor = 'col-resize'
-    document.body.style.userSelect = 'none'
-  }
-
-  function onPointerUp(e: PointerEvent) {
-    const button = e.currentTarget as HTMLButtonElement
-    if (button.hasPointerCapture(e.pointerId)) button.releasePointerCapture(e.pointerId)
+  function endDrag() {
+    if (activePointerId !== null) {
+      window.removeEventListener('pointermove', onWindowPointerMove)
+      window.removeEventListener('pointerup', onWindowPointerUp)
+      window.removeEventListener('pointercancel', onWindowPointerUp)
+      activePointerId = null
+    }
     document.body.style.cursor = ''
     document.body.style.userSelect = ''
     isDragging = false
@@ -118,7 +73,60 @@
     }
   }
 
-  const DOUBLE_CLICK_DELAY_MS = 300
+  function onWindowPointerMove(e: PointerEvent) {
+    if (e.pointerId !== activePointerId) return
+    cursorX = e.clientX
+    cursorY = e.clientY
+    const delta = (e.clientX - dragStartX) * dragDirection
+    if (Math.abs(delta) > SIDEBAR_DRAG_THRESHOLD_PX) {
+      dragMoved = true
+      isDragging = true
+      sidebar.isResizing = true
+      tooltipOpen = false
+    }
+    if (!dragMoved) return
+    if (sidebar.state === 'collapsed') {
+      if (delta > 0) {
+        endDrag()
+        sidebar.setOpen(true)
+      }
+      return
+    }
+    const targetWidth = dragStartWidthPx + delta
+    if (targetWidth < SIDEBAR_WIDTH_ICON_PX) {
+      endDrag()
+      sidebar.resetWidth()
+      sidebar.setOpen(false)
+      return
+    }
+    sidebar.setWidth(targetWidth)
+  }
+
+  function onWindowPointerUp(e: PointerEvent) {
+    if (e.pointerId !== activePointerId) return
+    endDrag()
+  }
+
+  function onPointerDown(e: PointerEvent) {
+    if (sidebar.isMobile) return
+    if (e.button !== 0) return
+    const target = e.currentTarget as HTMLElement
+    const sidebarRoot = target.closest('[data-slot="sidebar"]')
+    dragDirection = sidebarRoot?.getAttribute('data-side') === 'right' ? -1 : 1
+
+    const container = sidebarRoot?.querySelector('[data-slot="sidebar-container"]')
+    dragStartWidthPx = container instanceof HTMLElement ? container.offsetWidth : 256
+    dragStartX = e.clientX
+    dragMoved = false
+    activePointerId = e.pointerId
+    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = 'none'
+    window.addEventListener('pointermove', onWindowPointerMove)
+    window.addEventListener('pointerup', onWindowPointerUp)
+    window.addEventListener('pointercancel', onWindowPointerUp)
+  }
+
+  const DOUBLE_CLICK_DELAY_MS = 150
   let pendingClickTimer: ReturnType<typeof setTimeout> | undefined
 
   function onClick(e: MouseEvent) {
@@ -145,10 +153,10 @@
 
 <TooltipPrimitive.Root
   bind:open={tooltipOpen}
-  delayDuration={TOOLTIP_HOVER_DELAY_MS}
+  delayDuration={tooltipDelay}
   disableHoverableContent
 >
-  <TooltipPrimitive.Trigger disabled={isDragging}>
+  <TooltipPrimitive.Trigger>
     {#snippet child({ props })}
       {@const buttonProps = props as HTMLButtonAttributes}
       <button
@@ -160,17 +168,12 @@
         }}
         onpointermove={(e) => {
           buttonProps.onpointermove?.(e)
-          onPointerMove(e)
+          onPointerMoveOnTrigger(e)
         }}
         onpointerdown={(e) => {
           buttonProps.onpointerdown?.(e)
           onPointerDown(e)
         }}
-        onpointerup={(e) => {
-          buttonProps.onpointerup?.(e)
-          onPointerUp(e)
-        }}
-        onpointercancel={onPointerUp}
         onclick={(e) => {
           buttonProps.onclick?.(e)
           onClick(e)
@@ -203,19 +206,24 @@
     side="bottom"
     align="center"
     sideOffset={TOOLTIP_CURSOR_OFFSET}
-    class="px-3 py-2"
   >
-    <div class="flex flex-col gap-1.5">
+    <div class="flex flex-col gap-1">
       {#if sidebar.state === 'expanded'}
-        <div>Drag to resize</div>
+        <div class="flex w-full items-center justify-between gap-3">
+          <span>Drag to resize</span>
+          <div class="flex items-center gap-0.5 opacity-0">
+            <ShortcutWrapper size="sm" theme="navigation">⌘</ShortcutWrapper>
+            <ShortcutWrapper size="sm" theme="navigation">.</ShortcutWrapper>
+          </div>
+        </div>
       {/if}
-      <div class="flex items-center justify-between gap-3">
+      <div class="flex w-full items-center justify-between gap-3">
         <span>
           {sidebar.state === 'expanded' ? 'Click to collapse' : 'Click to expand'}
         </span>
-        <div class="flex items-center gap-1">
-          <ShortcutWrapper size="md" theme="navigation">⌘</ShortcutWrapper>
-          <ShortcutWrapper size="md" theme="navigation">.</ShortcutWrapper>
+        <div class="flex items-center gap-0.5">
+          <ShortcutWrapper size="sm" theme="navigation">⌘</ShortcutWrapper>
+          <ShortcutWrapper size="sm" theme="navigation">.</ShortcutWrapper>
         </div>
       </div>
     </div>

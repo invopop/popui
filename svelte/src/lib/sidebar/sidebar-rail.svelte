@@ -21,16 +21,16 @@
   let dragMoved = false
   let dragDirection: 1 | -1 = 1
   let activePointerId: number | null = null
+  let resizeCommitted = false
 
   let isDragging = $state(false)
+  let isPointerDown = $state(false)
   let tooltipOpen = $state(false)
   let cursorX = $state(0)
   let cursorY = $state(0)
 
   const TOOLTIP_HOVER_DELAY_MS = 700
   const TOOLTIP_CURSOR_OFFSET = 12
-
-  let tooltipDelay = $derived(isDragging ? Number.MAX_SAFE_INTEGER : TOOLTIP_HOVER_DELAY_MS)
 
   let cursorAnchor = $derived.by(() => {
     const x = cursorX
@@ -39,6 +39,27 @@
       getBoundingClientRect: () => DOMRect.fromRect({ x, y, width: 0, height: 0 })
     }
   })
+
+  $effect(() => {
+    if ((isDragging || isPointerDown) && tooltipOpen) {
+      tooltipOpen = false
+    }
+  })
+
+  let globalDragStyleEl: HTMLStyleElement | null = null
+
+  function setGlobalDragStyles() {
+    if (globalDragStyleEl) return
+    globalDragStyleEl = document.createElement('style')
+    globalDragStyleEl.textContent =
+      '*, *::before, *::after { cursor: col-resize !important; user-select: none !important; }'
+    document.head.appendChild(globalDragStyleEl)
+  }
+
+  function clearGlobalDragStyles() {
+    globalDragStyleEl?.remove()
+    globalDragStyleEl = null
+  }
 
   const POST_DRAG_CLICK_GUARD_MS = 250
   let dragEndTime = 0
@@ -63,10 +84,11 @@
       window.removeEventListener('pointercancel', onWindowPointerUp)
       activePointerId = null
     }
-    document.body.style.cursor = ''
-    document.body.style.userSelect = ''
+    clearGlobalDragStyles()
     isDragging = false
+    isPointerDown = false
     sidebar.isResizing = false
+    resizeCommitted = false
     if (dragMoved) {
       dragEndTime = Date.now()
       dragMoved = false
@@ -77,6 +99,7 @@
     if (e.pointerId !== activePointerId) return
     cursorX = e.clientX
     cursorY = e.clientY
+    if (resizeCommitted) return
     const delta = (e.clientX - dragStartX) * dragDirection
     if (Math.abs(delta) > SIDEBAR_DRAG_THRESHOLD_PX) {
       dragMoved = true
@@ -87,14 +110,14 @@
     if (!dragMoved) return
     if (sidebar.state === 'collapsed') {
       if (delta > 0) {
-        endDrag()
+        resizeCommitted = true
         sidebar.setOpen(true)
       }
       return
     }
     const targetWidth = dragStartWidthPx + delta
     if (targetWidth < SIDEBAR_WIDTH_ICON_PX) {
-      endDrag()
+      resizeCommitted = true
       sidebar.resetWidth()
       sidebar.setOpen(false)
       return
@@ -119,8 +142,9 @@
     dragStartX = e.clientX
     dragMoved = false
     activePointerId = e.pointerId
-    document.body.style.cursor = 'col-resize'
-    document.body.style.userSelect = 'none'
+    isPointerDown = true
+    tooltipOpen = false
+    setGlobalDragStyles()
     window.addEventListener('pointermove', onWindowPointerMove)
     window.addEventListener('pointerup', onWindowPointerUp)
     window.addEventListener('pointercancel', onWindowPointerUp)
@@ -153,7 +177,7 @@
 
 <TooltipPrimitive.Root
   bind:open={tooltipOpen}
-  delayDuration={tooltipDelay}
+  delayDuration={TOOLTIP_HOVER_DELAY_MS}
   disableHoverableContent
 >
   <TooltipPrimitive.Trigger>

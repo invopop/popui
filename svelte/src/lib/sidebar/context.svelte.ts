@@ -42,12 +42,14 @@ class SidebarState {
   setWidth = (px: number) => {
     const clamped = Math.max(SIDEBAR_MIN_WIDTH_PX, Math.min(SIDEBAR_MAX_WIDTH_PX, px))
     this.width = `${clamped}px`
-    if (typeof localStorage !== 'undefined') {
-      try {
-        localStorage.setItem(SIDEBAR_WIDTH_STORAGE_KEY, this.width)
-      } catch {
-        // ignore quota / private-mode errors
-      }
+  }
+
+  persistWidth = () => {
+    if (typeof localStorage === 'undefined') return
+    try {
+      localStorage.setItem(SIDEBAR_WIDTH_STORAGE_KEY, this.width)
+    } catch {
+      // ignore quota / private-mode errors
     }
   }
 

@@ -88,6 +88,9 @@
     isDragging = false
     isPointerDown = false
     sidebar.isResizing = false
+    if (dragMoved && !resizeCommitted) {
+      sidebar.persistWidth()
+    }
     resizeCommitted = false
     if (dragMoved) {
       dragEndTime = Date.now()

@@ -3,4 +3,4 @@
 // (e.g. github.com/invopop/popui/go/props becomes github.com/invopop/popui.go/props).
 module github.com/invopop/popui
 
-go 1.23.0
+go 1.23

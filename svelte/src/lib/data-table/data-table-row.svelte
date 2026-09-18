@@ -3,6 +3,7 @@
   import * as Table from '../table/index.js'
   import DataTableCell from './data-table-cell.svelte'
   import { cn } from '$lib/utils.js'
+  import { isModifiedClick, openInNewTab } from '$lib/helpers.js'
   import clsx from 'clsx'
 
   let {
@@ -12,12 +13,14 @@
     focusedRowIndex,
     loading = false,
     onRowClick,
+    getRowHref,
     onFocusRow,
     getRowClassName,
     getRowState,
     StickyCellWrapper
   }: DataTableRowProps<TData> = $props()
 
+  const href = $derived(getRowHref?.(row.original as TData))
   const rowState = $derived(getRowState?.(row.original as TData))
   const isError = $derived(rowState?.isError ?? false)
   const isSuccess = $derived(rowState?.isSuccess ?? false)
@@ -43,10 +46,20 @@
     }),
     getRowClassName?.(row.original as TData)
   )}
-  onclick={() => {
+  onclick={(event) => {
     if (loading) return
+    if (href && isModifiedClick(event)) {
+      openInNewTab(href)
+      return
+    }
     onFocusRow?.()
     onRowClick?.(row.original as TData)
+  }}
+  onauxclick={(event) => {
+    // Middle button fires auxclick, not click.
+    if (loading || !href || event.button !== 1) return
+    event.preventDefault()
+    openInNewTab(href)
   }}
 >
   {#each row.getVisibleCells() as cell, index (cell.id)}

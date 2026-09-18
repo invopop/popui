@@ -60,6 +60,7 @@
       description: 'Try adjusting your filters or search query'
     },
     onRowClick,
+    getRowHref,
     onRowFocus,
     onSelectionChange,
     filters,
@@ -272,7 +273,7 @@
         break
       case 'Enter':
         event.preventDefault()
-        handleEnterKey(focusedRowIndex, rows, loading, onRowClick)
+        handleEnterKey(focusedRowIndex, rows, loading, onRowClick, getRowHref, event)
         break
       case 'Escape':
         focusedRowIndex = -1
@@ -419,6 +420,7 @@
                 {focusedRowIndex}
                 {loading}
                 {onRowClick}
+                {getRowHref}
                 onFocusRow={() => (focusedRowIndex = rowIndex)}
                 {getRowClassName}
                 {getRowState}

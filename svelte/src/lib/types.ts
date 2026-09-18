@@ -393,6 +393,14 @@ export interface BaseDropdownProps {
     monospaced?: boolean;
     vertical?: boolean;
     children?: Snippet;
+    /**
+     * Renders the link button as a real anchor (open-in-new-tab, right-click)
+     * and makes a plain click on the row follow it. `onLink` still fires on
+     * plain clicks, for side effects such as closing a panel.
+     */
+    linkHref?: string;
+    /** Anchor target for `linkHref`, e.g. `_blank` for external URLs. */
+    linkTarget?: string;
     onCopy?: () => void;
     onLink?: () => void;
   }
@@ -621,6 +629,10 @@ export interface BaseDropdownProps {
 
   export interface MenuItemProps {
     label?: string;
+    /**
+     * When set, the row renders as an anchor so it supports open-in-new-tab
+     * (modifier/middle click) and the browser performs the navigation itself.
+     */
     url?: string;
     isFolderItem?: boolean;
     collapsable?: boolean;
@@ -635,6 +647,10 @@ export interface BaseDropdownProps {
     action?: Snippet;
     ref?: HTMLDivElement | null;
     class?: string;
+    /**
+     * Fires on plain clicks only. With a `url`, modifier/middle clicks are left
+     * to the browser and do not call this.
+     */
     onclick?: (url: string) => void;
   }
 

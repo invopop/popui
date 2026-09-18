@@ -260,6 +260,17 @@ export const WithoutSelection: Story = {
 	}
 }
 
+export const WithRowHref: Story = {
+	args: {
+		data: generateInvoices(20),
+		columns,
+		rowActions,
+		getRowHref: (row: Invoice) => `/invoices/${row.uuid ?? row.invoice}`,
+		onSelectionChange: fn(),
+		onRowClick: fn()
+	}
+}
+
 export const WithoutActions: Story = {
 	args: {
 		data: generateInvoices(20),

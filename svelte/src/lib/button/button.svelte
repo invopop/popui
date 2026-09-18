@@ -273,6 +273,7 @@
       className
     )}
     href={disabled ? undefined : href}
+    onclick={disabled ? undefined : onclick}
     aria-disabled={disabled}
     role={disabled ? 'link' : undefined}
     tabindex={disabled ? -1 : undefined}

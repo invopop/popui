@@ -21,6 +21,10 @@
   }: DataTableRowProps<TData> = $props()
 
   const href = $derived(getRowHref?.(row.original as TData))
+
+  function isInteractiveTarget(event: MouseEvent) {
+    return !!(event.target as HTMLElement | null)?.closest('a, button, input, select, textarea')
+  }
   const rowState = $derived(getRowState?.(row.original as TData))
   const isError = $derived(rowState?.isError ?? false)
   const isSuccess = $derived(rowState?.isSuccess ?? false)
@@ -48,7 +52,7 @@
   )}
   onclick={(event) => {
     if (loading) return
-    if (href && isModifiedClick(event)) {
+    if (href && isModifiedClick(event) && !isInteractiveTarget(event)) {
       openInNewTab(href)
       return
     }
@@ -57,7 +61,7 @@
   }}
   onauxclick={(event) => {
     // Middle button fires auxclick, not click.
-    if (loading || !href || event.button !== 1) return
+    if (loading || !href || event.button !== 1 || isInteractiveTarget(event)) return
     event.preventDefault()
     openInNewTab(href)
   }}

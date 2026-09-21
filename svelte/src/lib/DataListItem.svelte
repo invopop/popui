@@ -32,6 +32,12 @@
   let clickAction = $derived(!!onCopy || hasLink)
   let linkRel = $derived(linkTarget === '_blank' ? 'noopener' : undefined)
 
+  // With linkHref the anchor handles modifier clicks itself; only report plain ones.
+  function handleLinkClick(event: MouseEvent) {
+    if (linkHref && isModifiedClick(event)) return
+    onLink?.()
+  }
+
   const handleAreaClick = async (e: MouseEvent) => {
     // Only handle click if not clicking on a button or the link itself
     if ((e.target as HTMLElement).closest('button, a')) return
@@ -50,7 +56,7 @@
     if (linkHref) {
       // Click the rendered anchor so the client-side router (e.g. SvelteKit)
       // handles the navigation the same way a direct click would.
-      areaEl?.querySelector<HTMLAnchorElement>('a[href]')?.click()
+      areaEl?.querySelector<HTMLAnchorElement>('a[data-list-item-link]')?.click()
       return
     }
 
@@ -115,7 +121,8 @@
         href={linkHref}
         target={linkTarget}
         rel={linkRel}
-        onclick={onLink}
+        onclick={handleLinkClick}
+        data-list-item-link
         class="opacity-0 group-hover:opacity-100 transition-opacity"
       />
     {/if}

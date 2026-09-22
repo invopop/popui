@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
+import { fn } from 'storybook/test'
 
 import BaseButton from './helpers/BaseButtonWithSlot.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
@@ -37,6 +38,16 @@ export const PrimaryIconOnly: Story = {
   args: {
     icon: Add,
     variant: 'primary'
+  }
+}
+
+export const AsLink: Story = {
+  args: {
+    slot: 'Open docs',
+    icon: Add,
+    variant: 'primary',
+    href: 'https://docs.invopop.com',
+    onclick: fn()
   }
 }
 

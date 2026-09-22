@@ -3,7 +3,7 @@
   import type { DataListItemProps } from './types'
   import BaseButton from './BaseButton.svelte'
   import { Duplicate, ExternalLink } from '@invopop/ui-icons'
-  import { copyToClipboard } from './helpers'
+  import { copyToClipboard, isModifiedClick, openInNewTab } from './helpers'
 
   let {
     label = '',
@@ -11,9 +11,13 @@
     monospaced = false,
     vertical = false,
     children,
+    linkHref,
+    linkTarget,
     onCopy,
     onLink
   }: DataListItemProps = $props()
+
+  let areaEl: HTMLDivElement | undefined = $state()
 
   let valueStyles = $derived(
     clsx('text-foreground font-medium text-base min-w-0', {
@@ -24,18 +28,39 @@
     })
   )
 
-  let clickAction = $derived(onCopy || onLink)
+  let hasLink = $derived(!!(linkHref || onLink))
+  let clickAction = $derived(!!onCopy || hasLink)
+  let linkRel = $derived(linkTarget === '_blank' ? 'noopener' : undefined)
+
+  // With linkHref the anchor handles modifier clicks itself; only report plain ones.
+  function handleLinkClick(event: MouseEvent) {
+    if (linkHref && isModifiedClick(event)) return
+    onLink?.()
+  }
 
   const handleAreaClick = async (e: MouseEvent) => {
-    // Only handle click if not clicking on a button
-    if ((e.target as HTMLElement).closest('button')) return
+    // Only handle click if not clicking on a button or the link itself
+    if ((e.target as HTMLElement).closest('button, a')) return
 
     if (onCopy) {
       await copyToClipboard(value)
       onCopy()
-    } else if (onLink) {
-      onLink()
+      return
     }
+
+    if (linkHref && isModifiedClick(e)) {
+      openInNewTab(linkHref)
+      return
+    }
+
+    if (linkHref) {
+      // Click the rendered anchor so the client-side router (e.g. SvelteKit)
+      // handles the navigation the same way a direct click would.
+      areaEl?.querySelector<HTMLAnchorElement>('a[data-list-item-link]')?.click()
+      return
+    }
+
+    onLink?.()
   }
 </script>
 
@@ -56,6 +81,7 @@
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
+    bind:this={areaEl}
     class={clsx(
       'flex flex-1 gap-1.5 items-start group hover:bg-background-default-secondary py-1 pl-2 pr-1 rounded-md min-w-0 min-h-8',
       { 'cursor-pointer': clickAction }
@@ -87,12 +113,16 @@
         class="opacity-0 group-hover:opacity-100 transition-opacity"
       />
     {/if}
-    {#if onLink}
+    {#if hasLink}
       <BaseButton
         size="sm"
         variant="outline"
         icon={ExternalLink}
-        onclick={onLink}
+        href={linkHref}
+        target={linkTarget}
+        rel={linkRel}
+        onclick={handleLinkClick}
+        data-list-item-link
         class="opacity-0 group-hover:opacity-100 transition-opacity"
       />
     {/if}

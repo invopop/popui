@@ -49,6 +49,15 @@ export const WithLinkOnly: Story = {
   }
 }
 
+export const WithLinkHref: Story = {
+  args: {
+    label: 'Website',
+    value: 'https://invopop.com',
+    linkHref: 'https://invopop.com',
+    linkTarget: '_blank'
+  }
+}
+
 export const WithoutButtons: Story = {
   args: {
     label: 'Description',

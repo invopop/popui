@@ -1,5 +1,6 @@
 // Helper functions for data table operations
 import type { Table, Row } from '@tanstack/table-core'
+import { openInNewTab } from '$lib/helpers.js'
 import type BaseDropdown from '$lib/BaseDropdown.svelte'
 
 export function reorderFrozenColumn<TData>(
@@ -214,10 +215,19 @@ export function handleEnterKey<TData>(
   currentIndex: number,
   rows: Row<TData>[],
   loading: boolean,
-  onRowClick?: (row: TData) => void
+  onRowClick?: (row: TData) => void,
+  getRowHref?: (row: TData) => string | undefined,
+  event?: KeyboardEvent
 ): void {
-  if (loading || !onRowClick) return
-  if (currentIndex >= 0 && currentIndex < rows.length) {
-    onRowClick(rows[currentIndex].original as TData)
+  if (loading) return
+  if (currentIndex < 0 || currentIndex >= rows.length) return
+
+  const original = rows[currentIndex].original as TData
+  const href = getRowHref?.(original)
+  if (href && event && (event.metaKey || event.ctrlKey)) {
+    openInNewTab(href)
+    return
   }
+
+  onRowClick?.(original)
 }

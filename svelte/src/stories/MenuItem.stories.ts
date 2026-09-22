@@ -13,7 +13,10 @@ const meta = {
   title: 'Components/MenuItem',
   component: MenuItem as any,
   tags: ['autodocs'],
-  decorators: [() => ({ Component: MarginDecorator as any }), () => ({ Component: MaxWidthSmDecorator as any })]
+  decorators: [
+    () => ({ Component: MarginDecorator as any }),
+    () => ({ Component: MaxWidthSmDecorator as any })
+  ]
 } satisfies Meta<MenuItem>
 
 export default meta
@@ -41,6 +44,15 @@ export const WithIconAsText: Story = {
   args: {
     label: 'Item',
     icon: 'invoice'
+  }
+}
+
+export const WithUrl: Story = {
+  decorators: [() => ({ Component: DarkBackgroundDecorator as any })],
+  args: {
+    label: 'Link item (renders as anchor)',
+    icon: Cog6Tooth,
+    url: '/settings'
   }
 }
 

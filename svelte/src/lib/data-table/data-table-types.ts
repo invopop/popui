@@ -120,6 +120,7 @@ export interface DataTableRowProps<TData> {
   focusedRowIndex: number
   loading?: boolean
   onRowClick?: (row: TData) => void
+  getRowHref?: (row: TData) => string | undefined
   onFocusRow?: () => void
   getRowClassName?: (row: TData) => string
   getRowState?: (row: TData) => {
@@ -162,6 +163,12 @@ export interface DataTableProps<TData> {
    */
   getRowId?: (row: TData, index: number) => string
   onRowClick?: (row: TData) => void
+  /**
+   * URL a row navigates to. When provided, modifier/middle clicks and
+   * modifier+Enter open it in a new tab instead of calling `onRowClick`.
+   * Plain clicks still go through `onRowClick`.
+   */
+  getRowHref?: (row: TData) => string | undefined
   onRowFocus?: (row: TData) => void
   onSelectionChange?: (selectedRows: TData[]) => void
   filters?: Snippet

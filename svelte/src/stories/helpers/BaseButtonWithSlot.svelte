@@ -14,6 +14,8 @@
     shortcut?: boolean
     fullwidth?: boolean
     notification?: boolean
+    href?: string
+    onclick?: (event: MouseEvent) => void
   }
 
   let {
@@ -26,7 +28,9 @@
     dangerIcon = false,
     shortcut = false,
     fullwidth = false,
-    notification = false
+    notification = false,
+    href = undefined,
+    onclick = undefined
   }: Props = $props()
 </script>
 
@@ -41,6 +45,8 @@
     {shortcut}
     {fullwidth}
     {notification}
+    {href}
+    {onclick}
   >
     {slot}
   </BaseButton>
@@ -55,5 +61,7 @@
     {shortcut}
     {fullwidth}
     {notification}
+    {href}
+    {onclick}
   />
 {/if}

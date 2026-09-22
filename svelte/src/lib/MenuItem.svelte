@@ -7,7 +7,7 @@
   import type { MenuItemProps, DrawerOption, AnyProp } from './types.ts'
   import { Icon, type IconSource } from '@steeze-ui/svelte-icon'
   import { ChevronDown, ChevronRight, FolderL } from '@invopop/ui-icons'
-  import { resolveIcon } from './helpers.js'
+  import { isModifiedClick, resolveIcon } from './helpers.js'
   import DrawerContext from './DrawerContext.svelte'
   import TagBeta from './TagBeta.svelte'
 
@@ -82,7 +82,11 @@
     resolveIcon(icon).then((res) => (resolvedIcon = res))
   })
 
-  function handleClick() {
+  // With a url the row is an anchor and the browser handles modifier/middle
+  // clicks (new tab). Only report plain clicks so consumers don't navigate twice.
+  function handleClick(event: MouseEvent) {
+    if (url && isModifiedClick(event)) return
+
     if (!url && collapsable) {
       open = !open
     }
@@ -111,6 +115,37 @@
   }
 </script>
 
+{#snippet content()}
+  <span
+    class={clsx('flex items-center', {
+      'space-x-1.5 min-w-0 flex-1': !collapsedSidebar
+    })}
+    data-menu-item-content
+  >
+    {#if imageUrl}
+      <img
+        src={imageUrl}
+        alt={label}
+        class="size-4 shrink-0 rounded bg-white object-contain"
+        data-menu-item-image
+      />
+    {:else if resolvedIcon}
+      <Icon
+        src={resolvedIcon}
+        theme={iconTheme}
+        class="{iconStyles} h-4 w-4 text-icon-inverse"
+        data-menu-item-icon
+      />
+    {/if}
+    {#if !collapsedSidebar}
+      <span class="truncate tracking-normal" data-menu-item-label>{label}</span>
+      {#if beta}
+        <TagBeta />
+      {/if}
+    {/if}
+  </span>
+{/snippet}
+
 <div bind:this={ref} class={cn(wrapperStyles, className)} data-menu-item-root>
   {#if isFolderItem}
     <div
@@ -129,41 +164,21 @@
     onmouseleave={collapsedSidebar ? handleBlur : undefined}
     role={collapsedSidebar ? 'presentation' : undefined}
   >
-    <button
-      onclick={handleClick}
-      title={label}
-      data-menu-item-button
-      class={buttonStyles}
-    >
-      <span
-        class={clsx('flex items-center', {
-          'space-x-1.5 min-w-0 flex-1': !collapsedSidebar
-        })}
-        data-menu-item-content
+    {#if url}
+      <a href={url} onclick={handleClick} title={label} data-menu-item-button class={buttonStyles}>
+        {@render content()}
+      </a>
+    {:else}
+      <button
+        type="button"
+        onclick={handleClick}
+        title={label}
+        data-menu-item-button
+        class={buttonStyles}
       >
-        {#if imageUrl}
-          <img
-            src={imageUrl}
-            alt={label}
-            class="size-4 shrink-0 rounded bg-white object-contain"
-            data-menu-item-image
-          />
-        {:else if resolvedIcon}
-          <Icon
-            src={resolvedIcon}
-            theme={iconTheme}
-            class="{iconStyles} h-4 w-4 text-icon-inverse"
-            data-menu-item-icon
-          />
-        {/if}
-        {#if !collapsedSidebar}
-          <span class="truncate tracking-normal" data-menu-item-label>{label}</span>
-          {#if beta}
-            <TagBeta />
-          {/if}
-        {/if}
-      </span>
-    </button>
+        {@render content()}
+      </button>
+    {/if}
     {#if !collapsedSidebar && action}
       <span class="shrink-0 flex items-center" data-menu-item-action>
         {@render action()}

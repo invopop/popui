@@ -163,3 +163,16 @@ export function datesFromToday(): DatesFromToday {
 export async function copyToClipboard(text: string) {
   await navigator.clipboard.writeText(text)
 }
+
+/**
+ * True when a click carries a modifier key or comes from a non-primary button,
+ * i.e. the browser will open the link in a new tab/window itself. Callers
+ * rendering anchors should skip their own navigation side effects in that case.
+ */
+export function isModifiedClick(event: MouseEvent) {
+  return event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
+}
+
+export function openInNewTab(href: string) {
+  window.open(href, '_blank', 'noopener')
+}

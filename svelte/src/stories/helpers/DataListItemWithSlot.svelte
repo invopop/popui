@@ -10,6 +10,8 @@
     fullWidth?: boolean
     onCopy?: boolean
     onLink?: boolean
+    linkHref?: string
+    linkTarget?: string
     vertical?: boolean
   }
 
@@ -21,7 +23,9 @@
     fullWidth = false,
     vertical = false,
     onCopy,
-    onLink
+    onLink,
+    linkHref,
+    linkTarget
   }: Props = $props()
 
   const handleCopy = () => {
@@ -50,7 +54,7 @@
 </script>
 
 {#if useSlot}
-  <DataListItem {label} {value} onCopy={copyHandler} onLink={linkHandler} vertical monospaced={isMonospaced}>
+  <DataListItem {label} {value} onCopy={copyHandler} onLink={linkHandler} {linkHref} {linkTarget} vertical monospaced={isMonospaced}>
     <pre
       class="whitespace-pre text-foreground font-mono text-sm overflow-auto max-h-30 p-1 flex items-start">{JSON.stringify(
         sampleValue,
@@ -59,5 +63,5 @@
       )}</pre>
   </DataListItem>
 {:else}
-  <DataListItem {label} {value} {monospaced} {vertical} onCopy={copyHandler} onLink={linkHandler} />
+  <DataListItem {label} {value} {monospaced} {vertical} onCopy={copyHandler} onLink={linkHandler} {linkHref} {linkTarget} />
 {/if}

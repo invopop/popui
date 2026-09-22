@@ -108,7 +108,13 @@ import {
   SidebarTrigger,
   useSidebar
 } from './sidebar'
-import { resolveIcon, getCountryName, getStatusType } from './helpers.js'
+import {
+  resolveIcon,
+  getCountryName,
+  getStatusType,
+  isModifiedClick,
+  openInNewTab
+} from './helpers.js'
 import { buttonVariants } from './button/button.svelte' // Ensure button styles are included
 import {
   DataTable,
@@ -238,6 +244,8 @@ export {
   resolveIcon,
   getCountryName,
   getStatusType,
+  isModifiedClick,
+  openInNewTab,
   buttonVariants,
   DataTable,
   DataTableToolbar,

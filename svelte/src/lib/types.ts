@@ -649,7 +649,9 @@ export interface BaseDropdownProps {
     class?: string;
     /**
      * Fires on plain clicks only. With a `url`, modifier/middle clicks are left
-     * to the browser and do not call this.
+     * to the browser and do not call this. When `url` is set the anchor already
+     * performs the navigation, so use this for side effects (closing a popover,
+     * analytics) and do not call `goto(url)` here or the page navigates twice.
      */
     onclick?: (url: string) => void;
   }

@@ -4,6 +4,7 @@
   import type { DrawerOption, DrawerGroup } from '$lib/types.js'
   import BaseDropdown from '$lib/BaseDropdown.svelte'
   import DrawerContext from '$lib/DrawerContext.svelte'
+  import DrawerContextItem from '$lib/DrawerContextItem.svelte'
   import InputToggle from '$lib/InputToggle.svelte'
   import BaseButton from '$lib/BaseButton.svelte'
   import { capitalize } from '$lib/helpers.js'
@@ -129,17 +130,15 @@
   />
 {/snippet}
 
+<!-- An item like the column rows above it rather than a button, so it shares
+     their height, padding and hover. -->
 {#snippet resetFooter()}
-  <BaseButton
-    data-table-view-options-reset
-    icon={Reset}
-    variant="ghost"
-    size="sm"
-    class="w-full justify-start"
-    onclick={resetColumns}
-  >
-    Reset columns
-  </BaseButton>
+  <div data-table-view-options-reset>
+    <DrawerContextItem
+      item={{ label: 'Reset columns', value: 'reset-columns', icon: Reset }}
+      onclick={resetColumns}
+    />
+  </div>
 {/snippet}
 
 <BaseDropdown bind:isOpen class="ms-auto hidden lg:flex">

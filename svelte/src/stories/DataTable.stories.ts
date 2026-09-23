@@ -4,6 +4,7 @@ import DataTable from '../lib/data-table/data-table.svelte'
 import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
 import DataTableWithCustomCell from './helpers/DataTableWithCustomCell.svelte'
 import DataTableManualPagination from './helpers/DataTableManualPagination.svelte'
+import DataTableWithReset from './helpers/DataTableWithReset.svelte'
 import DataTableEmptyWithFilters from './helpers/DataTableEmptyWithFilters.svelte'
 import DataTableWithoutRowClick from './helpers/DataTableWithoutRowClick.svelte'
 import DataTableWithExternalSelection from './helpers/DataTableWithExternalSelection.svelte'
@@ -247,6 +248,12 @@ export const Default: Story = {
 }
 
 export const WithResetColumns: Story = {
+	// Resize, reorder, freeze or hide some columns, then Reset columns: the
+	// helper remounts the table, as a consumer would after clearing its storage.
+	render: (args) => ({
+		Component: DataTableWithReset as any,
+		props: args
+	}),
 	args: {
 		data: generateInvoices(20),
 		columns,

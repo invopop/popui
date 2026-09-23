@@ -35,7 +35,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 24.x
           registry-url: 'https://registry.npmjs.org'
 
       # Trusted publishing needs npm 11.5.1 or later. Pinned to the major so a
@@ -43,8 +43,10 @@ jobs:
       - name: Install npm 11
         run: npm install -g npm@11
 
+      # The files by name: on Node 22 and 24 a directory given to --test is
+      # loaded as a module rather than searched for tests.
       - name: Test the version rules
-        run: node --test .github/scripts/
+        run: node --test .github/scripts/*.test.mjs
 
       - name: Work out the version
         id: version

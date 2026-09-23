@@ -1,9 +1,10 @@
 <script lang="ts" generics="TData">
-  import { Sliders, Drag } from '@invopop/ui-icons'
+  import { Sliders, Drag, Reset } from '@invopop/ui-icons'
   import type { Table } from '@tanstack/table-core'
   import type { DrawerOption, DrawerGroup } from '$lib/types.js'
   import BaseDropdown from '$lib/BaseDropdown.svelte'
   import DrawerContext from '$lib/DrawerContext.svelte'
+  import DrawerContextItem from '$lib/DrawerContextItem.svelte'
   import InputToggle from '$lib/InputToggle.svelte'
   import BaseButton from '$lib/BaseButton.svelte'
   import { capitalize } from '$lib/helpers.js'
@@ -11,12 +12,24 @@
   let {
     table,
     frozenColumns,
-    onFreezeColumn
+    onFreezeColumn,
+    onResetColumns
   }: {
     table: Table<TData>
     frozenColumns: Set<string>
     onFreezeColumn: (columnId: string) => void
+    onResetColumns?: () => void
   } = $props()
+
+  let isOpen = $state(false)
+
+  function resetColumns() {
+    // Closed first: the consumer typically remounts the table, taking this
+    // dropdown with it, and a menu left open over the rebuilt table would be
+    // pointing at columns that are no longer where it shows them.
+    isOpen = false
+    onResetColumns?.()
+  }
 
   const groups: DrawerGroup[] = [
     {
@@ -117,7 +130,18 @@
   />
 {/snippet}
 
-<BaseDropdown class="ms-auto hidden lg:flex">
+<!-- An item like the column rows above it rather than a button, so it shares
+     their height, padding and hover. -->
+{#snippet resetFooter()}
+  <div data-table-view-options-reset>
+    <DrawerContextItem
+      item={{ label: 'Reset columns', value: 'reset-columns', icon: Reset }}
+      onclick={resetColumns}
+    />
+  </div>
+{/snippet}
+
+<BaseDropdown bind:isOpen class="ms-auto hidden lg:flex">
   {#snippet trigger()}
     <BaseButton icon={Sliders} variant="outline" size="md" />
   {/snippet}
@@ -128,5 +152,6 @@
     draggable
     collapsibleGroups={false}
     ondropitem={handleDropItem}
+    footer={onResetColumns ? resetFooter : undefined}
   />
 </BaseDropdown>

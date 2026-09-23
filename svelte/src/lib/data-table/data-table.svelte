@@ -78,6 +78,7 @@
     onColumnResize,
     onColumnOrderChange,
     onColumnVisibilityChange,
+    onResetColumns,
     getRowClassName,
     getRowState,
     getRowId,
@@ -365,6 +366,7 @@
     {filters}
     {frozenColumns}
     onFreezeColumn={handleFreezeColumn}
+    {onResetColumns}
     disabled={disableControls}
   />
   <div class="flex-1 overflow-hidden flex flex-col">

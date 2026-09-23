@@ -47,6 +47,7 @@
     onreorder,
     ondropitem,
     children,
+    footer,
     groups,
     class: className,
     ...rest
@@ -602,5 +603,11 @@
         {/each}
       </div>
     {/if}
+  {/if}
+
+  {#if footer}
+    <div data-drawer-footer class="flex-shrink-0 border-t border-border px-1 pt-1 mt-1">
+      {@render footer()}
+    </div>
   {/if}
 </Command.Root>

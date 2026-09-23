@@ -4,6 +4,7 @@ import DataTable from '../lib/data-table/data-table.svelte'
 import DataTableWithPaginationSlots from './helpers/DataTableWithPaginationSlots.svelte'
 import DataTableWithCustomCell from './helpers/DataTableWithCustomCell.svelte'
 import DataTableManualPagination from './helpers/DataTableManualPagination.svelte'
+import DataTableWithReset from './helpers/DataTableWithReset.svelte'
 import DataTableEmptyWithFilters from './helpers/DataTableEmptyWithFilters.svelte'
 import DataTableWithoutRowClick from './helpers/DataTableWithoutRowClick.svelte'
 import DataTableWithExternalSelection from './helpers/DataTableWithExternalSelection.svelte'
@@ -205,6 +206,12 @@ const meta = {
 	parameters: {
 		layout: 'fullscreen'
 	},
+	// Present but undefined, so the preview's argTypesRegex does not turn it into
+	// an implicit action: that would offer "Reset columns" in every story, doing
+	// nothing. Stories that want the action pass their own fn().
+	args: {
+		onResetColumns: undefined
+	},
 	decorators: [() => ({ Component: FullHeightDecorator as any })]
 } satisfies Meta<typeof DataTable>
 
@@ -235,6 +242,26 @@ export const Default: Story = {
 			return rowActions
 		},
 		onRowAction: fn(),
+		onSelectionChange: fn(),
+		onRowClick: fn()
+	}
+}
+
+export const WithResetColumns: Story = {
+	// Resize, reorder, freeze or hide some columns, then Reset columns: the
+	// helper remounts the table, as a consumer would after clearing its storage.
+	render: (args) => ({
+		Component: DataTableWithReset as any,
+		props: args
+	}),
+	args: {
+		data: generateInvoices(20),
+		columns,
+		rowActions,
+		// Shows "Reset columns" at the foot of the Table options list.
+		onResetColumns: fn(),
+		// Explicit, because the table reports its selection from an effect on
+		// mount, and an implicit action called while rendering throws.
 		onSelectionChange: fn(),
 		onRowClick: fn()
 	}

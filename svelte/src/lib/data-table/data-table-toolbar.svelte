@@ -4,7 +4,21 @@
   import { DataTableViewOptions } from './index.js'
   import clsx from 'clsx'
 
-  let { table, filters, frozenColumns, onFreezeColumn, disabled = false }: { table: Table<TData>; filters?: Snippet; frozenColumns: Set<string>; onFreezeColumn: (columnId: string) => void; disabled?: boolean } = $props()
+  let {
+    table,
+    filters,
+    frozenColumns,
+    onFreezeColumn,
+    onResetColumns,
+    disabled = false
+  }: {
+    table: Table<TData>
+    filters?: Snippet
+    frozenColumns: Set<string>
+    onFreezeColumn: (columnId: string) => void
+    onResetColumns?: () => void
+    disabled?: boolean
+  } = $props()
 </script>
 
 <div class={clsx('flex items-center justify-between px-4 py-2.5', {
@@ -15,5 +29,5 @@
       {@render filters()}
     </div>
   {/if}
-  <DataTableViewOptions {table} {frozenColumns} {onFreezeColumn} />
+  <DataTableViewOptions {table} {frozenColumns} {onFreezeColumn} {onResetColumns} />
 </div>

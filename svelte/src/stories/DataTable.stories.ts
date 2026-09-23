@@ -240,6 +240,17 @@ export const Default: Story = {
 	}
 }
 
+export const WithResetColumns: Story = {
+	args: {
+		data: generateInvoices(20),
+		columns,
+		rowActions,
+		// Shows "Reset columns" at the foot of the Table options list.
+		onResetColumns: fn(),
+		onRowClick: fn()
+	}
+}
+
 export const Empty: Story = {
 	args: {
 		data: [],

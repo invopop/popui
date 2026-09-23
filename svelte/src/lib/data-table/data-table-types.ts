@@ -189,6 +189,9 @@ export interface DataTableProps<TData> {
   onColumnResize?: (columnSizes: Record<string, number>) => void
   onColumnOrderChange?: (columnOrder: string[]) => void
   onColumnVisibilityChange?: (visibility: Record<string, boolean>) => void
+  // Adds "Reset columns" to the Table options list. The table does not own
+  // where its layout is persisted, so the consumer clears that and remounts.
+  onResetColumns?: () => void
   getRowClassName?: (row: TData) => string
   getRowState?: (row: TData) => {
     isSuccess?: boolean

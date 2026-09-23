@@ -129,6 +129,19 @@
   />
 {/snippet}
 
+{#snippet resetFooter()}
+  <BaseButton
+    data-table-view-options-reset
+    icon={Reset}
+    variant="ghost"
+    size="sm"
+    class="w-full justify-start"
+    onclick={resetColumns}
+  >
+    Reset columns
+  </BaseButton>
+{/snippet}
+
 <BaseDropdown bind:isOpen class="ms-auto hidden lg:flex">
   {#snippet trigger()}
     <BaseButton icon={Sliders} variant="outline" size="md" />
@@ -140,18 +153,6 @@
     draggable
     collapsibleGroups={false}
     ondropitem={handleDropItem}
+    footer={onResetColumns ? resetFooter : undefined}
   />
-  {#if onResetColumns}
-    <div data-table-view-options-footer class="border-t border-border-default-secondary p-1">
-      <BaseButton
-        icon={Reset}
-        variant="ghost"
-        size="sm"
-        class="w-full justify-start"
-        onclick={resetColumns}
-      >
-        Reset columns
-      </BaseButton>
-    </div>
-  {/if}
 </BaseDropdown>

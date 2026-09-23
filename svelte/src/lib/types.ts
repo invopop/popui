@@ -431,6 +431,8 @@ export interface BaseDropdownProps {
     onreorder?: (items: DrawerOption[]) => void;
     ondropitem?: (groups: Record<string, DrawerOption[]>) => void;
     children?: Snippet;
+    // Rendered inside the card, after every group, divided from them.
+    footer?: Snippet;
     groups?: DrawerGroup[];
     class?: string;
     [key: string]: unknown;

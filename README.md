@@ -26,7 +26,17 @@ npm run storybook
 
 ### Publishing the Svelte Library
 
-To publish the library to [npm](https://www.npmjs.com), manually increase the version in `svelte/package.json` and make a PR to the `main` branch. Once merged, it will automatically release a new version of the library.
+Releases are automatic. Every merge to `main` that changes the library (`svelte/src/lib`, `svelte/package.json`, the lockfile or the Svelte config) publishes a new version to [npm](https://www.npmjs.com) and creates a matching `popui@x.y.z` tag and [GitHub release](https://github.com/invopop/popui/releases), with notes listing the PRs merged since the last one. Changes to stories or docs don't release.
+
+The version is worked out by the release workflow, not edited by hand, and follows the same markers as our Go releases. It reads every commit message since the last release, including the commits a merged PR brings in or a squashed PR's title and description:
+
+- **Minor** by default: `0.100.0` → `0.101.0`. `#minor` says the same thing explicitly.
+- **Patch** with `#patch` in a message: `0.101.0` → `0.101.1`.
+- **Major** with `#major` in a message: `0.101.1` → `1.0.0`.
+
+If messages disagree, the largest wins: `#major` over `#minor` over `#patch`. Only the marker as a whole word counts, so `#patching` or a PR reference like `#218` doesn't.
+
+The version in `svelte/package.json` is a floor, not the current version. It's only used when it's higher than the last release, which is how to jump to a specific version (as the move from `0.1.x` to `0.100.0` did). Otherwise leave it alone.
 
 ### Using the Svelte Library
 

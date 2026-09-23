@@ -1,40 +1,101 @@
 name: Release
 
+# Every push to main that changes the published library releases it: the
+# version is worked out here rather than bumped by hand, published to npm, and
+# recorded as a `popui@x.y.z` tag and GitHub release. Stories, docs and other
+# files outside svelte/src/lib do not release.
 on:
   push:
     branches: main
     paths:
-      - 'svelte/**'
+      - 'svelte/src/lib/**'
+      - 'svelte/package.json'
+      - 'svelte/package-lock.json'
+      - 'svelte/svelte.config.js'
       - '.github/workflows/publish.yml'
+      - '.github/scripts/next-version.mjs'
+
+# One release at a time, in order: two merges in quick succession must not
+# both work out the same next version.
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 permissions:
-  id-token: write # Required for OIDC
-  contents: write
+  id-token: write # npm trusted publishing (OIDC)
+  contents: write # the popui@x.y.z tag and release
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the popui@* tags
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
           registry-url: 'https://registry.npmjs.org'
 
-      # Ensure npm 11+ is installed for OIDC provenance publishing
-      # Using corepack avoids issues with corrupted npm in GitHub runners
-      - name: Update npm via corepack
+      # Trusted publishing needs npm 11.5.1 or later. Pinned to the major so a
+      # new npm cannot change how this publishes without a change here.
+      - name: Install npm 11
+        run: npm install -g npm@11
+
+      - name: Test the version rules
+        run: node --test .github/scripts/
+
+      - name: Work out the version
+        id: version
         run: |
-          corepack enable npm
-          corepack install -g npm@latest
+          previous_tag=$(git tag -l 'popui@*' --sort=-v:refname | head -1)
+          published=$(npm view @invopop/popui version 2>/dev/null || true)
+          floor=$(node -p "require('./svelte/package.json').version")
+
+          # A minor, unless a commit message since the last release says
+          # #major or #patch — every commit a merge brings in, or a squashed
+          # PR's title and description.
+          if [ -n "$previous_tag" ]; then
+            git log --format=%B "$previous_tag..$GITHUB_SHA" > "$RUNNER_TEMP/messages"
+          else
+            git log -1 --format=%B "$GITHUB_SHA" > "$RUNNER_TEMP/messages"
+          fi
+
+          version=$(node .github/scripts/next-version.mjs \
+            --released-tag "${previous_tag#popui@}" \
+            --published "$published" \
+            --package "$floor" \
+            --messages-file "$RUNNER_TEMP/messages")
+
+          echo "Previous tag: ${previous_tag:-none}, npm: ${published:-none}, floor: $floor -> $version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "previous_tag=$previous_tag" >> "$GITHUB_OUTPUT"
 
       - run: npm ci
         working-directory: svelte
 
+      # Only in this checkout: nothing is committed back to main. Same-version
+      # is allowed because the floor in package.json can be the version itself.
+      - name: Set the version
+        working-directory: svelte
+        run: npm version "${{ steps.version.outputs.version }}" --no-git-tag-version --allow-same-version
+
       - run: npm run package
         working-directory: svelte
 
-      # Publish to npm
-      - name: Publish to NPM registry
+      - name: Publish to npm
         working-directory: svelte
         run: npm publish
+
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+          PREVIOUS_TAG: ${{ steps.version.outputs.previous_tag }}
+        run: |
+          gh release create "popui@$VERSION" \
+            --target "$GITHUB_SHA" \
+            --title "@invopop/popui $VERSION" \
+            --generate-notes \
+            ${PREVIOUS_TAG:+--notes-start-tag "$PREVIOUS_TAG"}

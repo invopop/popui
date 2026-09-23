@@ -28,11 +28,13 @@ npm run storybook
 
 Releases are automatic. Every merge to `main` that changes the library (`svelte/src/lib`, `svelte/package.json`, the lockfile or the Svelte config) publishes a new version to [npm](https://www.npmjs.com) and creates a matching `popui@x.y.z` tag and [GitHub release](https://github.com/invopop/popui/releases), with notes listing the PRs merged since the last one. Changes to stories or docs don't release.
 
-The version is worked out by the release workflow, not edited by hand:
+The version is worked out by the release workflow, not edited by hand, and follows the same markers as our Go releases. It reads every commit message since the last release, including the commits a merged PR brings in or a squashed PR's title and description:
 
-- **Patch** by default: `0.100.0` → `0.100.1`.
-- **Minor** when the merged PR has the `release:minor` label: `0.100.3` → `0.101.0`. While popui is on `0.x`, this is how to mark a **breaking change**.
-- **Major** when the merged PR has the `release:major` label: `0.101.2` → `1.0.0`.
+- **Minor** by default: `0.100.0` → `0.101.0`. `#minor` says the same thing explicitly.
+- **Patch** with `#patch` in a message: `0.101.0` → `0.101.1`.
+- **Major** with `#major` in a message: `0.101.1` → `1.0.0`.
+
+If messages disagree, the largest wins: `#major` over `#minor` over `#patch`. Only the marker as a whole word counts, so `#patching` or a PR reference like `#218` doesn't.
 
 The version in `svelte/package.json` is a floor, not the current version. It's only used when it's higher than the last release, which is how to jump to a specific version (as the move from `0.1.x` to `0.100.0` did). Otherwise leave it alone.
 

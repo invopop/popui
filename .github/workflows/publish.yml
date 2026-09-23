@@ -24,7 +24,6 @@ concurrency:
 permissions:
   id-token: write # npm trusted publishing (OIDC)
   contents: write # the popui@x.y.z tag and release
-  pull-requests: read # the merged PR's release label
 
 jobs:
   publish:
@@ -49,27 +48,27 @@ jobs:
 
       - name: Work out the version
         id: version
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           previous_tag=$(git tag -l 'popui@*' --sort=-v:refname | head -1)
           published=$(npm view @invopop/popui version 2>/dev/null || true)
           floor=$(node -p "require('./svelte/package.json').version")
 
-          # patch, unless the PR merged into this commit carries a release label.
-          labels=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" \
-            --jq '.[0].labels[]?.name // empty' 2>/dev/null || true)
-          bump=patch
-          if grep -qx 'release:minor' <<<"$labels"; then bump=minor; fi
-          if grep -qx 'release:major' <<<"$labels"; then bump=major; fi
+          # A minor, unless a commit message since the last release says
+          # #major or #patch — every commit a merge brings in, or a squashed
+          # PR's title and description.
+          if [ -n "$previous_tag" ]; then
+            git log --format=%B "$previous_tag..$GITHUB_SHA" > "$RUNNER_TEMP/messages"
+          else
+            git log -1 --format=%B "$GITHUB_SHA" > "$RUNNER_TEMP/messages"
+          fi
 
           version=$(node .github/scripts/next-version.mjs \
             --released-tag "${previous_tag#popui@}" \
             --published "$published" \
             --package "$floor" \
-            --bump "$bump")
+            --messages-file "$RUNNER_TEMP/messages")
 
-          echo "Previous tag: ${previous_tag:-none}, npm: ${published:-none}, floor: $floor, bump: $bump -> $version"
+          echo "Previous tag: ${previous_tag:-none}, npm: ${published:-none}, floor: $floor -> $version"
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "previous_tag=$previous_tag" >> "$GITHUB_OUTPUT"
 

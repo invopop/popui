@@ -7,11 +7,12 @@
 //
 // svelte/package.json is a floor rather than the version: when it is higher
 // than what was last released, it is used as-is, which is how a deliberate
-// jump (0.100.0, 1.0.0) is made. Otherwise the released version is bumped by
-// the PR's release label — patch unless told otherwise.
+// jump (0.100.0, 1.0.0) is made. Otherwise the released version is bumped as
+// the commit messages since the last release say — #major, #minor or #patch,
+// as the Go packages' releases read them — and by a minor when none does.
 //
 // Usage: node next-version.mjs --released-tag 0.1.104 --published 0.1.104 \
-//          --package 0.100.0 --bump patch
+//          --package 0.100.0 --messages-file messages.txt
 
 const SEMVER = /^(\d+)\.(\d+)\.(\d+)$/
 
@@ -34,7 +35,22 @@ export function increment(version, bump) {
   throw new Error(`unknown bump "${bump}"`)
 }
 
-export function nextVersion({ releasedTag, published, pkg, bump = 'patch' }) {
+const DEFAULT_BUMP = 'minor'
+
+/**
+ * Reads the bump from commit messages: #major over #minor over #patch, and
+ * the default when none is there. Only the marker as a word counts, so a PR
+ * reference like #218, or #patching, is not one.
+ */
+export function bumpFromMessages(messages) {
+  const says = (word) => new RegExp(`(^|[^\\w#])#${word}(?![\\w-])`, 'im').test(messages ?? '')
+  if (says('major')) return 'major'
+  if (says('minor')) return 'minor'
+  if (says('patch')) return 'patch'
+  return DEFAULT_BUMP
+}
+
+export function nextVersion({ releasedTag, published, pkg, bump = DEFAULT_BUMP }) {
   const known = [releasedTag, published].filter((v) => parse(v))
   if (!parse(pkg)) throw new Error(`svelte/package.json has no plain x.y.z version: "${pkg}"`)
   if (known.length === 0) return pkg
@@ -50,12 +66,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       .slice(2)
       .reduce((pairs, arg, i, all) => (arg.startsWith('--') ? [...pairs, [arg.slice(2), all[i + 1]]] : pairs), [])
   )
-  process.stdout.write(
-    nextVersion({
-      releasedTag: args['released-tag'],
-      published: args.published,
-      pkg: args.package,
-      bump: args.bump || 'patch'
-    }) + '\n'
-  )
+  const { readFileSync } = await import('node:fs')
+  const messages = args['messages-file'] ? readFileSync(args['messages-file'], 'utf8') : ''
+  const bump = bumpFromMessages(messages)
+  const version = nextVersion({
+    releasedTag: args['released-tag'],
+    published: args.published,
+    pkg: args.package,
+    bump
+  })
+  // The bump on stderr, for the log; stdout carries only the version.
+  process.stderr.write(`bump: ${bump}\n`)
+  process.stdout.write(version + '\n')
 }

@@ -205,6 +205,12 @@ const meta = {
 	parameters: {
 		layout: 'fullscreen'
 	},
+	// Present but undefined, so the preview's argTypesRegex does not turn it into
+	// an implicit action: that would offer "Reset columns" in every story, doing
+	// nothing. Stories that want the action pass their own fn().
+	args: {
+		onResetColumns: undefined
+	},
 	decorators: [() => ({ Component: FullHeightDecorator as any })]
 } satisfies Meta<typeof DataTable>
 
@@ -247,6 +253,9 @@ export const WithResetColumns: Story = {
 		rowActions,
 		// Shows "Reset columns" at the foot of the Table options list.
 		onResetColumns: fn(),
+		// Explicit, because the table reports its selection from an effect on
+		// mount, and an implicit action called while rendering throws.
+		onSelectionChange: fn(),
 		onRowClick: fn()
 	}
 }

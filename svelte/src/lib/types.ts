@@ -373,7 +373,7 @@ export interface BaseDropdownProps {
   }
 
 export interface CardDeckProps<T = any> {
-  /** The cards' data, one card per item. Bindable: a committed move reassigns it in the new order. */
+  /** The cards' data, one card per item. */
   items?: T[]
   /** Renders the content of one card. The deck draws the card's border and background. */
   card: Snippet<[T, number]>
@@ -381,28 +381,10 @@ export interface CardDeckProps<T = any> {
   label?: string
   /** Trailing head content, such as an Add button. */
   action?: Snippet
-  /** Turns the deck into a drag-to-reorder list, toggled by a Reorder button in the head. */
-  reorderable?: boolean
-  /** Whether reorder mode is on. Bindable. Ignored unless `reorderable` is set. */
-  reordering?: boolean
-  /**
-   * Stable identity of an item, used to key the cards and report the order. Defaults to the item
-   * itself for strings and numbers, and to `item.id` for objects; an object without one is
-   * numbered in the order the deck first sees it. Those numbers only hold within one deck
-   * instance, so pass a `getId` returning real ids whenever the order is persisted (`name`,
-   * `onreorder`).
-   */
-  getId?: (item: T) => string | number
-  /** Makes each card a link to the returned URL. Navigation is suppressed while reordering. */
+  /** Makes each card a link to the returned URL. */
   href?: (item: T) => string | undefined
   /** Caps the height of the cards (any CSS length, e.g. `20rem`) and scrolls them under the head, fading the edges with more to show. */
   maxHeight?: string
-  /** On a reorderable deck, renders a hidden input holding the ids in their current order, comma separated. */
-  name?: string
-  reorderLabel?: string
-  reorderDoneLabel?: string
-  /** Called after every committed move with the reordered items. */
-  onreorder?: (items: T[]) => void
   class?: string
 }
 

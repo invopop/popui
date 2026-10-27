@@ -20,7 +20,7 @@
 
   let { withAction = false, ...rest }: Props = $props()
 
-  let items: PaymentMethod[] = $state([
+  const items: PaymentMethod[] = [
     {
       id: 'visa',
       logo: 'https://assets.invopop.com/payment-methods/visa.svg',
@@ -43,10 +43,10 @@
       digits: '· 1041',
       expiry: 'Exp 07/28'
     }
-  ])
+  ]
 </script>
 
-<CardDeck {...rest} bind:items action={withAction ? addAction : undefined}>
+<CardDeck {...rest} {items} action={withAction ? addAction : undefined}>
   {#snippet card(method)}
     <!-- The Default tag sits with the digits rather than beside the expiry, so
          every card's expiry lands in the same column. -->

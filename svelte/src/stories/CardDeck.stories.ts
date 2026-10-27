@@ -34,31 +34,6 @@ export const WithoutHead: Story = {
   args: {}
 }
 
-export const Reorderable: Story = {
-  args: {
-    label: 'Payment',
-    reorderable: true,
-    name: 'payment_order'
-  }
-}
-
-export const Reordering: Story = {
-  args: {
-    label: 'Payment',
-    reorderable: true,
-    reordering: true
-  }
-}
-
-export const CustomLabels: Story = {
-  args: {
-    label: 'Métodos de pago',
-    reorderable: true,
-    reorderLabel: 'Ordenar',
-    reorderDoneLabel: 'Listo'
-  }
-}
-
 // Link cards in scrolling decks: each card navigates, and the long lists cap
 // their height under a fixed head.
 export const References: Story = {

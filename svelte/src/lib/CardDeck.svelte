@@ -196,12 +196,18 @@
       card.style.transform = `translateY(${dy}px)`
     }
 
-    function onUp() {
+    function onUp(e: PointerEvent) {
       window.removeEventListener('pointermove', onMove)
       window.removeEventListener('pointerup', onUp)
       window.removeEventListener('pointercancel', onUp)
       document.body.style.cursor = ''
       document.body.style.userSelect = ''
+      // A cancelled pointer was never released over a slot: everything glides
+      // back to where it started and nothing is committed.
+      if (e.type === 'pointercancel' && to !== from) {
+        to = from
+        layout()
+      }
       // Where the card comes to rest: the slot it now owns, measured against
       // the layout captured at drag start.
       let rest = 0

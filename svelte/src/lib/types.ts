@@ -387,8 +387,10 @@ export interface CardDeckProps<T = any> {
   reordering?: boolean
   /**
    * Stable identity of an item, used to key the cards and report the order. Defaults to the item
-   * itself for strings and numbers, and to `item.id` for objects; an object without one gets its
-   * 1-based position when first rendered, which stays with it as it moves.
+   * itself for strings and numbers, and to `item.id` for objects; an object without one is
+   * numbered in the order the deck first sees it. Those numbers only hold within one deck
+   * instance, so pass a `getId` returning real ids whenever the order is persisted (`name`,
+   * `onreorder`).
    */
   getId?: (item: T) => string | number
   /** On a reorderable deck, renders a hidden input holding the ids in their current order, comma separated. */

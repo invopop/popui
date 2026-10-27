@@ -18,9 +18,11 @@
   // and Escape is the one key bound, to leave the mode.
 
   // Fallback identities for object items carrying no id, keyed by the item so
-  // they outlive any reordering. An item gets its 1-based position the first
-  // time it is seen and keeps it from then on: re-deriving it from the live
-  // index would relabel every item on every move, losing the permutation.
+  // they outlive any reordering. An item is numbered in the order this deck
+  // first sees it and keeps that number from then on: re-deriving it from the
+  // live index would relabel every item on every move, losing the permutation.
+  // The numbers mean nothing outside this deck instance, so a deck whose order
+  // is persisted needs a getId returning real ids.
   const fallbackIds = new WeakMap<object, string>()
   let fallbackCount = 0
 
@@ -53,6 +55,10 @@
   // together here, two changes that cancel out — so they must not animate, or
   // each displaced card slides a slot it has already travelled.
   let settling = $state(false)
+  // From release until the drop is committed. A drag started in that window
+  // would be measured against cards still holding the last drop's offsets,
+  // and the pending commit would then reorder by stale indices.
+  let committing = false
 
   let ids = $derived(items.map((item) => getId(item)))
   let hasHead = $derived(!!label || !!action || reorderable)
@@ -80,6 +86,7 @@
 
   function onpointerdown(e: PointerEvent) {
     if (!isReordering || e.button > 0 || !root) return
+    if (committing || draggingId !== null) return
     const el = (e.target as Element | null)?.closest<HTMLElement>('[data-card-deck-card]')
     if (!el || el.parentElement !== root) return
     // Suppresses the text selection and native image drag that would
@@ -161,6 +168,7 @@
       const target = rest ? `translateY(${rest}px)` : ''
       // Releasing the card restores its transform transition, so it glides
       // the last few pixels into place.
+      committing = true
       flushSync(() => (draggingId = null))
       card.style.transform = target
 
@@ -168,6 +176,7 @@
       function settle() {
         if (settled) return
         settled = true
+        card.removeEventListener('transitionend', onTransitionEnd)
         // Committing is a swap of two equal quantities: every card's layout
         // position shifts by exactly the offset it was holding, so the reorder
         // and the transform reset cancel out to no visible movement — as long
@@ -182,11 +191,17 @@
         // Flushes layout so the untransitioned state is what the frame paints.
         void root?.offsetHeight
         flushSync(() => (settling = false))
+        committing = false
         if (to !== from) onreorder?.(next)
+      }
+      // Only the card's own glide counts: transitions inside it bubble up
+      // here too, and would commit the drop before the card has landed.
+      function onTransitionEnd(e: TransitionEvent) {
+        if (e.target === card && e.propertyName === 'transform') settle()
       }
       if (current === target) settle()
       else {
-        card.addEventListener('transitionend', settle, { once: true })
+        card.addEventListener('transitionend', onTransitionEnd)
         setTimeout(settle, 300)
       }
     }
@@ -197,11 +212,14 @@
   }
 
   // Escape is a way out of the mode, not a way to reorder — the cards
-  // themselves are drag-only.
+  // themselves are drag-only. It's heard window-wide, as focus needn't be in
+  // the deck: Safari and Firefox on macOS don't focus a clicked button.
   function onkeydown(e: KeyboardEvent) {
     if (isReordering && e.key === 'Escape') toggleReorder()
   }
 </script>
+
+<svelte:window {onkeydown} />
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
@@ -213,7 +231,6 @@
     className
   )}
   {onpointerdown}
-  {onkeydown}
 >
   {#if hasHead}
     <div

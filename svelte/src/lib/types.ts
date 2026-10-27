@@ -393,6 +393,10 @@ export interface CardDeckProps<T = any> {
    * `onreorder`).
    */
   getId?: (item: T) => string | number
+  /** Makes each card a link to the returned URL. Navigation is suppressed while reordering. */
+  href?: (item: T) => string | undefined
+  /** Caps the height of the cards (any CSS length, e.g. `20rem`) and scrolls them under the head, fading the edges with more to show. */
+  maxHeight?: string
   /** On a reorderable deck, renders a hidden input holding the ids in their current order, comma separated. */
   name?: string
   reorderLabel?: string

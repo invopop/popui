@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/sveltekit'
 import CardDeckWithContent from './helpers/CardDeckWithContent.svelte'
+import CardDeckReferences from './helpers/CardDeckReferences.svelte'
 import MarginDecorator from './decorartors/MarginDecorator.svelte'
 import MaxWidthMdDecorator from './decorartors/MaxWidthMdDecorator.svelte'
 
@@ -56,6 +57,12 @@ export const CustomLabels: Story = {
     reorderLabel: 'Ordenar',
     reorderDoneLabel: 'Listo'
   }
+}
+
+// Link cards in scrolling decks: each card navigates, and the long lists cap
+// their height under a fixed head.
+export const References: Story = {
+  render: () => ({ Component: CardDeckReferences as any })
 }
 
 export const CustomClass: Story = {

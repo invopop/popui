@@ -9,6 +9,8 @@
 
   // CardDeck stacks cards on a tinted background — use it to group related
   // cards into one visual unit (billing plans, payment methods, addresses).
+  // With `href` each card is a link; with `maxHeight` the cards scroll under a
+  // fixed head, faded at whichever edge has more to show.
   //
   // With `reorderable` the deck also becomes a drag-to-reorder list, toggled
   // by a Reorder button in the head. Entering reorder mode fades a drag handle
@@ -42,6 +44,8 @@
     reorderable = false,
     reordering = $bindable(false),
     getId = defaultGetId,
+    href,
+    maxHeight = '',
     name = '',
     reorderLabel = 'Reorder',
     reorderDoneLabel = 'Done',
@@ -50,6 +54,9 @@
   }: CardDeckProps<T> = $props()
 
   let root: HTMLDivElement | undefined = $state()
+  let list: HTMLDivElement | undefined = $state()
+  let fadeTop = $state(false)
+  let fadeBottom = $state(false)
   let draggingId: string | number | null = $state(null)
   // The commit frame: the items are reordered and the cards' offsets dropped
   // together here, two changes that cancel out — so they must not animate, or
@@ -74,21 +81,57 @@
     })
   )
 
+  // Fades the scrolled list's edges only where there is more to scroll to, so
+  // a list at rest at the top shows a hard top edge and a soft bottom one.
+  let listMask = $derived.by(() => {
+    if (!fadeTop && !fadeBottom) return undefined
+    const top = fadeTop ? 'transparent 0, black 24px' : 'black 0'
+    const bottom = fadeBottom ? 'black calc(100% - 24px), transparent 100%' : 'black 100%'
+    return `linear-gradient(to bottom, ${top}, ${bottom})`
+  })
+
+  function updateFade() {
+    if (!list || !maxHeight) {
+      fadeTop = fadeBottom = false
+      return
+    }
+    fadeTop = list.scrollTop > 0
+    fadeBottom = list.scrollTop + list.clientHeight < list.scrollHeight - 1
+  }
+
+  // A capped list doesn't change size as cards come and go, so the cards are
+  // observed too; re-run on every change of the items to pick up new ones.
+  $effect(() => {
+    if (!list || !maxHeight) return updateFade()
+    void ids
+    updateFade()
+    const observer = new ResizeObserver(updateFade)
+    observer.observe(list)
+    Array.from(list.children).forEach((child) => observer.observe(child))
+    return () => observer.disconnect()
+  })
+
+  // Cards are grab handles while reordering: a link card mustn't navigate,
+  // whether clicked or activated from the keyboard.
+  function onCardClick(e: MouseEvent) {
+    if (isReordering) e.preventDefault()
+  }
+
   function toggleReorder() {
     reordering = !reordering
   }
 
   // The deck's own cards, in DOM order, which is always the items' order.
   function cardElements(): HTMLElement[] {
-    if (!root) return []
-    return Array.from(root.querySelectorAll<HTMLElement>(':scope > [data-card-deck-card]'))
+    if (!list) return []
+    return Array.from(list.querySelectorAll<HTMLElement>(':scope > [data-card-deck-card]'))
   }
 
   function onpointerdown(e: PointerEvent) {
-    if (!isReordering || e.button > 0 || !root) return
+    if (!isReordering || e.button > 0 || !list) return
     if (committing || draggingId !== null) return
     const el = (e.target as Element | null)?.closest<HTMLElement>('[data-card-deck-card]')
-    if (!el || el.parentElement !== root) return
+    if (!el || el.parentElement !== list) return
     // Suppresses the text selection and native image drag that would
     // otherwise start under the pointer. It also keeps focus off the card,
     // which is deliberate: cards are dragged, never selected.
@@ -104,12 +147,12 @@
   function startDrag(card: HTMLElement, event: PointerEvent) {
     const cards = cardElements()
     const from = cards.indexOf(card)
-    if (from < 0 || !root) return
+    if (from < 0 || !list) return
     // Positions are measured once: every later position is derived from them,
     // so a card sliding out of the way can't feed back into the maths.
     const boxes = cards.map((c) => ({ top: c.offsetTop, height: c.offsetHeight }))
     const centers = boxes.map((b) => b.top + b.height / 2)
-    const gap = parseFloat(getComputedStyle(root).rowGap) || 0
+    const gap = parseFloat(getComputedStyle(list).rowGap) || 0
     // Removing the dragged card from the flow closes a gap this tall.
     const slot = boxes[from].height + gap
     const startY = event.clientY
@@ -189,7 +232,7 @@
         })
         cards.forEach((c) => (c.style.transform = ''))
         // Flushes layout so the untransitioned state is what the frame paints.
-        void root?.offsetHeight
+        void list?.offsetHeight
         flushSync(() => (settling = false))
         committing = false
         if (to !== from) onreorder?.(next)
@@ -266,47 +309,70 @@
     </div>
   {/if}
 
-  {#each items as item, index (getId(item))}
-    <div
-      data-card-deck-card
-      data-card-deck-id={getId(item)}
-      class={cn(
-        'relative flex items-center gap-1.5 p-3 rounded-xl border border-border bg-background w-full',
-        {
-          'transition-[padding] duration-150 ease-out motion-reduce:transition-none': reorderable,
-          // Room for the handle and a grab cursor: the whole card is the grab
-          // target. Vertical drags belong to the deck, not to the scroller.
-          'pl-8 cursor-grab touch-none select-none transition-[padding,transform]': isReordering,
-          '!transition-none': settling || draggingId === getId(item),
-          // The card under the pointer tracks it 1:1 and lifts above the
-          // cards it passes.
-          'cursor-grabbing z-10 shadow-[0_6px_16px_rgb(0_0_0/0.12)]': draggingId === getId(item)
-        }
-      )}
-    >
-      {#if reorderable}
-        <!-- Present up front, collapsed, so entering the mode has something to
-             animate in from. -->
-        <Icon
-          src={Drag}
-          data-card-deck-handle
-          aria-hidden="true"
-          class={clsx(
-            'absolute left-2 top-1/2 -translate-y-1/2 size-4 text-icon pointer-events-none transition-[opacity,translate] duration-150 ease-out motion-reduce:transition-none',
-            {
-              'opacity-0 -translate-x-1': !isReordering,
-              'opacity-100 translate-x-0': isReordering
-            }
-          )}
-        />
-      {/if}
-      <!-- Inert while reordering, so the card's links, menus and buttons
-           can't be reached and the pointer lands on the card itself. -->
-      <div data-card-deck-content inert={isReordering} class={inertStyles}>
-        {@render card(item, index)}
-      </div>
-    </div>
-  {/each}
+  <!-- Positioned, so the cards' offsetTop is measured against the list and not
+       thrown off by its scroll position. -->
+  <div
+    bind:this={list}
+    data-card-deck-cards
+    class={clsx('relative flex flex-col gap-0.5', {
+      // No scrollbar: it would sit over the cards' right edge, and the faded,
+      // cut-off last card already says the list scrolls.
+      'overflow-y-auto overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden':
+        !!maxHeight
+    })}
+    style:max-height={maxHeight || undefined}
+    style:mask-image={listMask}
+    style:-webkit-mask-image={listMask}
+    onscroll={updateFade}
+  >
+    {#each items as item, index (getId(item))}
+      {@const cardHref = href?.(item)}
+      <svelte:element
+        this={cardHref ? 'a' : 'div'}
+        href={cardHref}
+        draggable={cardHref ? 'false' : undefined}
+        onclick={cardHref ? onCardClick : undefined}
+        data-card-deck-card
+        data-card-deck-id={getId(item)}
+        class={cn(
+          'relative flex items-center gap-1.5 p-3 rounded-xl border border-border bg-background w-full',
+          {
+            'transition-[padding] duration-150 ease-out motion-reduce:transition-none': reorderable,
+            'hover:border-border-default-secondary': !!cardHref && !isReordering,
+            // Room for the handle and a grab cursor: the whole card is the grab
+            // target. Vertical drags belong to the deck, not to the scroller.
+            'pl-8 cursor-grab touch-none select-none transition-[padding,transform]': isReordering,
+            '!transition-none': settling || draggingId === getId(item),
+            // The card under the pointer tracks it 1:1 and lifts above the
+            // cards it passes.
+            'cursor-grabbing z-10 shadow-[0_6px_16px_rgb(0_0_0/0.12)]': draggingId === getId(item)
+          }
+        )}
+      >
+        {#if reorderable}
+          <!-- Present up front, collapsed, so entering the mode has something to
+               animate in from. -->
+          <Icon
+            src={Drag}
+            data-card-deck-handle
+            aria-hidden="true"
+            class={clsx(
+              'absolute left-2 top-1/2 -translate-y-1/2 size-4 text-icon pointer-events-none transition-[opacity,translate] duration-150 ease-out motion-reduce:transition-none',
+              {
+                'opacity-0 -translate-x-1': !isReordering,
+                'opacity-100 translate-x-0': isReordering
+              }
+            )}
+          />
+        {/if}
+        <!-- Inert while reordering, so the card's links, menus and buttons
+             can't be reached and the pointer lands on the card itself. -->
+        <div data-card-deck-content inert={isReordering} class={inertStyles}>
+          {@render card(item, index)}
+        </div>
+      </svelte:element>
+    {/each}
+  </div>
 
   {#if reorderable && name}
     <input type="hidden" {name} value={ids.join(',')} />

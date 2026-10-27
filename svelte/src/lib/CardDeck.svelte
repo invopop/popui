@@ -46,9 +46,11 @@
 
   // A capped list doesn't change size as cards come and go, so the cards are
   // observed too; re-run on every change of the items to pick up new ones.
+  // Spreading reads every element, so an item replaced in place counts too,
+  // not only a change of length.
   $effect(() => {
     if (!list || !maxHeight) return updateFade()
-    void items.length
+    void [...items]
     updateFade()
     const observer = new ResizeObserver(updateFade)
     observer.observe(list)

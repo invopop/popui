@@ -11,6 +11,7 @@ import ButtonFile from './ButtonFile.svelte'
 import ButtonSearch from './ButtonSearch.svelte'
 import ButtonUuidCopy from './ButtonUuidCopy.svelte'
 import CardCheckbox from './CardCheckbox.svelte'
+import CardDeck from './CardDeck.svelte'
 import CardRelation from './CardRelation.svelte'
 import CompanySelector from './CompanySelector.svelte'
 import CounterWidget from './CounterWidget.svelte'
@@ -140,6 +141,7 @@ export {
   ButtonSearch,
   ButtonUuidCopy,
   CardCheckbox,
+  CardDeck,
   CardRelation,
   CompanySelector,
   CounterWidget,

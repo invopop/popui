@@ -372,6 +372,30 @@ export interface BaseDropdownProps {
     onchange?: (checked: boolean) => void;
   }
 
+export interface CardDeckProps<T = any> {
+  /** The cards' data, one card per item. Bindable: a committed move reassigns it in the new order. */
+  items?: T[]
+  /** Renders the content of one card. The deck draws the card's border and background. */
+  card: Snippet<[T, number]>
+  /** Label of the muted head row. */
+  label?: string
+  /** Trailing head content, such as an Add button. */
+  action?: Snippet
+  /** Turns the deck into a drag-to-reorder list, toggled by a Reorder button in the head. */
+  reorderable?: boolean
+  /** Whether reorder mode is on. Bindable. */
+  reordering?: boolean
+  /** Stable identity of an item, used to key the cards and report the order. Defaults to `item.id`, then the item itself. */
+  getId?: (item: T) => string | number
+  /** On a reorderable deck, renders a hidden input holding the ids in their current order, comma separated. */
+  name?: string
+  reorderLabel?: string
+  reorderDoneLabel?: string
+  /** Called after every committed move with the reordered items. */
+  onreorder?: (items: T[]) => void
+  class?: string
+}
+
   export interface CardRelationProps {
     title?: string;
     icon?: IconSource | undefined;

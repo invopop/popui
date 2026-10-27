@@ -3,6 +3,9 @@
   import InputSelect from '$lib/InputSelect.svelte'
   import InputText from '$lib/InputText.svelte'
   import Skeleton from '$lib/skeleton/skeleton.svelte'
+  import BaseDropdown from '$lib/BaseDropdown.svelte'
+  import DrawerContext from '$lib/DrawerContext.svelte'
+  import type { DrawerOption } from '$lib/types.js'
   import { ArrowLeft, ArrowRight, ScrollLeft, ScrollRight } from '@invopop/ui-icons'
   import { cn } from '$lib/utils.js'
   import clsx from 'clsx'
@@ -24,8 +27,14 @@
     manualPagination,
     disabled = false,
     disableJumpToPage = false,
-    countLoading = false
+    countLoading = false,
+    paginationStyle = 'pages',
+    rowCountCapped = false,
+    locale
   }: DataTablePaginationProps<any> = $props()
+
+  let ranged = $derived(paginationStyle === 'range')
+  let jumpable = $derived(!ranged && !disableJumpToPage)
 
   let currentPage = $derived(table.getState().pagination.pageIndex + 1)
   let rowsPerPage = $derived(table.getState().pagination.pageSize)
@@ -44,7 +53,36 @@
     manualPagination && pageCount !== undefined ? pageCount : Math.ceil(totalItems / rowsPerPage) || 1
   )
 
+  // The rows on screen, counted from one. With manual pagination data is just
+  // this page; otherwise it is every row, of which this page is a slice.
+  let rangeStart = $derived((currentPage - 1) * rowsPerPage + 1)
+  let rangeEnd = $derived(
+    manualPagination
+      ? rangeStart + (data?.length ?? 0) - 1
+      : Math.min(currentPage * rowsPerPage, totalItems)
+  )
+  // Manual pagination without a rowCount means the total is not known, as
+  // when a count gave up; client-side pagination always knows it.
+  let totalKnown = $derived(!manualPagination || rowCount !== undefined)
+
   let pageInputValue = $derived(`${currentPage}`)
+
+  // In the range style the rows on screen are the page size control: one
+  // figure the eye already reads, rather than a select beside it repeating it.
+  let sizeMenuOpen = $state(false)
+  let sizeOptions: DrawerOption[] = $derived(
+    rowsPerPageOptions.map((size) => ({
+      label: `${size} rows`,
+      value: size,
+      selected: size === rowsPerPage
+    }))
+  )
+
+  function changePageSize(size: number) {
+    table.setPageSize(size)
+    table.setPageIndex(0)
+    onPageSizeChange?.(size)
+  }
 
   function handlePageInput(value: string) {
     const numValue = parseInt(value)
@@ -74,8 +112,12 @@
     }
   }
 
+  // Undefined leaves the choice to the browser, so thousands are grouped as
+  // the viewer expects: 1,234 in English, 1.234 in Spanish, 1 234 in French.
+  let numberFormat = $derived(new Intl.NumberFormat(locale))
+
   function formatNumber(num: number): string {
-    return new Intl.NumberFormat('en-US').format(num)
+    return numberFormat.format(num)
   }
 </script>
 
@@ -94,7 +136,7 @@
     <div class="flex items-center gap-2">
       <div class="flex items-center gap-1.5">
         <div class="flex items-center">
-          {#if !disableJumpToPage}
+          {#if jumpable}
             <Button
               variant="ghost"
               size="md"
@@ -132,30 +174,32 @@
             aria-label="Previous page"
           />
         </div>
-        <div class="flex items-center gap-1.5">
-          <div
-            class="w-12 [&>div]:gap-0 [&_input]:[appearance:textfield] [&_input]:[&::-webkit-outer-spin-button]:appearance-none [&_input]:[&::-webkit-inner-spin-button]:appearance-none"
-          >
-            <InputText
-              bind:value={pageInputValue}
-              type="number"
-              min="1"
-              max={totalPages}
-              size="sm"
-              oninput={handlePageInput}
-              onblur={handlePageBlur}
-              disabled={disableJumpToPage}
-            />
+        {#if !ranged}
+          <div class="flex items-center gap-1.5">
+            <div
+              class="w-12 [&>div]:gap-0 [&_input]:[appearance:textfield] [&_input]:[&::-webkit-outer-spin-button]:appearance-none [&_input]:[&::-webkit-inner-spin-button]:appearance-none"
+            >
+              <InputText
+                bind:value={pageInputValue}
+                type="number"
+                min="1"
+                max={totalPages}
+                size="sm"
+                oninput={handlePageInput}
+                onblur={handlePageBlur}
+                disabled={disableJumpToPage}
+              />
+            </div>
+            <span class="text-base text-foreground-default-secondary whitespace-nowrap flex items-center gap-1.5">
+              /
+              {#if countLoading}
+                <Skeleton class="h-4 w-8" />
+              {:else}
+                {formatNumber(totalPages)}
+              {/if}
+            </span>
           </div>
-          <span class="text-base text-foreground-default-secondary whitespace-nowrap flex items-center gap-1.5">
-            /
-            {#if countLoading}
-              <Skeleton class="h-4 w-8" />
-            {:else}
-              {formatNumber(totalPages)}
-            {/if}
-          </span>
-        </div>
+        {/if}
         <div class="flex items-center">
           <Button
             variant="ghost"
@@ -176,7 +220,7 @@
             class={cn(currentPage === totalPages && 'pointer-events-none opacity-30')}
             aria-label="Next page"
           />
-          {#if !disableJumpToPage}
+          {#if jumpable}
             <Button
               variant="ghost"
               size="md"
@@ -196,7 +240,7 @@
           {/if}
         </div>
       </div>
-      {#if showRowsPerPage}
+      {#if showRowsPerPage && !ranged}
         <div class="w-[105px]">
           <InputSelect
             value={`${rowsPerPage}`}
@@ -205,12 +249,7 @@
               label: `${size} rows`
             }))}
             size="sm"
-            onchange={(value) => {
-              const size = Number(value)
-              table.setPageSize(size)
-              table.setPageIndex(0)
-              onPageSizeChange?.(size)
-            }}
+            onchange={(value) => changePageSize(Number(value))}
             placeholder="Rows per page"
             disablePlaceholder={true}
             aria-label="Rows per page"
@@ -218,7 +257,55 @@
         </div>
       {/if}
     </div>
-    {#if countLoading}
+    {#if ranged}
+      {#if rangeEnd >= rangeStart}
+        <span
+          class="text-base text-foreground-default-secondary flex items-center gap-1.5 whitespace-nowrap"
+          data-testid="pagination-range"
+        >
+          {#if showRowsPerPage}
+            <BaseDropdown
+              bind:isOpen={sizeMenuOpen}
+              placement="top-start"
+              aria-label="Rows per page"
+              aria-haspopup="listbox"
+              aria-expanded={sizeMenuOpen}
+            >
+              {#snippet trigger()}
+                <span
+                  class={cn(
+                    'text-foreground rounded-md px-1 -mx-1 hover:bg-background-default-secondary',
+                    sizeMenuOpen && 'bg-background-default-secondary'
+                  )}
+                >
+                  {formatNumber(rangeStart)}–{formatNumber(rangeEnd)}
+                </span>
+              {/snippet}
+              <DrawerContext
+                autofocus
+                widthClass="w-36"
+                items={sizeOptions}
+                onclick={(value) => {
+                  sizeMenuOpen = false
+                  changePageSize(Number(value))
+                }}
+              />
+            </BaseDropdown>
+          {:else}
+            <span>{formatNumber(rangeStart)}–{formatNumber(rangeEnd)}</span>
+          {/if}
+          of
+          {#if countLoading}
+            <Skeleton class="h-4 w-10" />
+          {:else if totalKnown}
+            <span>{formatNumber(totalItems)}{rowCountCapped ? '+' : ''}</span>
+          {:else}
+            many
+          {/if}
+          {itemsLabel}
+        </span>
+      {/if}
+    {:else if countLoading}
       <span class="text-base text-foreground-default-secondary flex items-center gap-1.5">
         <Skeleton class="h-4 w-10" />
         {itemsLabel}

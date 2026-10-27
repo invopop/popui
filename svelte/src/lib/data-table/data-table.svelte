@@ -70,6 +70,9 @@
     pageCount,
     rowCount,
     countLoading = false,
+    paginationStyle = 'pages',
+    rowCountCapped = false,
+    locale,
     onPageChange,
     onPageSizeChange,
     onSortingChange,
@@ -444,6 +447,9 @@
         {onPageSizeChange}
         {disableJumpToPage}
         {countLoading}
+        {paginationStyle}
+        {rowCountCapped}
+        {locale}
         disabled={disableControls || loading}
       >
         {#if paginationSlot}

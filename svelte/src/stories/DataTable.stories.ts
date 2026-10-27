@@ -803,6 +803,45 @@ export const DisableJumpToPage: Story = {
 	}
 }
 
+export const RangePagination: Story = {
+	args: {
+		data: generateInvoices(100),
+		columns,
+		rowActions,
+		paginationStyle: 'range',
+		onSelectionChange: fn(),
+		onRowClick: fn()
+	}
+}
+
+// A search whose count stopped at its limit: "1–25 of 10,000+".
+export const RangePaginationCapped: Story = {
+	args: {
+		data: generateInvoices(25),
+		columns,
+		paginationStyle: 'range',
+		manualPagination: true,
+		initialPageSize: 25,
+		rowCount: 10000,
+		rowCountCapped: true,
+		pageCount: 2,
+		onPageChange: fn()
+	}
+}
+
+// A count that could not finish: "1–25 of many", with Next still offered.
+export const RangePaginationUnknownTotal: Story = {
+	args: {
+		data: generateInvoices(25),
+		columns,
+		paginationStyle: 'range',
+		manualPagination: true,
+		initialPageSize: 25,
+		pageCount: 2,
+		onPageChange: fn()
+	}
+}
+
 export const EmptyCellValues: Story = {
 	args: {
 		data: [

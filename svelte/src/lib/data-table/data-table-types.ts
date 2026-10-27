@@ -111,7 +111,22 @@ export interface DataTablePaginationProps<T> {
   disabled?: boolean
   disableJumpToPage?: boolean // Disable first/last page buttons and make page input read-only
   countLoading?: boolean // Show skeletons in place of page-count and item-count while totals are still loading
+  paginationStyle?: DataTablePaginationStyle
+  rowCountCapped?: boolean // rowCount is a lower bound: the true total is at least this many
+  locale?: string // BCP 47 tag for number formatting; defaults to the browser's
 }
+
+/**
+ * How the pagination bar presents position.
+ *
+ * - `pages`: a page number input and page count, with first and last buttons.
+ * - `range`: the rows on screen and the total, as "1–50 of 1,234 items", with
+ *   previous and next only. Suits keyset (cursor) pagination, which can step
+ *   but not jump, and totals that are counted separately from the rows: a
+ *   total still loading shows a placeholder, a capped one shows as "10,000+",
+ *   and an unknown one (manual pagination without rowCount) as "many".
+ */
+export type DataTablePaginationStyle = 'pages' | 'range'
 
 export interface DataTableRowProps<TData> {
   row: Row<TData>
@@ -180,6 +195,9 @@ export interface DataTableProps<TData> {
   pageCount?: number // Total number of pages (for manual pagination)
   rowCount?: number // Total number of rows (for manual pagination)
   countLoading?: boolean // Show skeletons in place of page-count and item-count while totals are still loading
+  paginationStyle?: DataTablePaginationStyle // 'pages' (default) or 'range'
+  rowCountCapped?: boolean // rowCount is a lower bound: shown as "10,000+" in range style
+  locale?: string // BCP 47 tag for the pagination's numbers; defaults to the browser's
 
   onPageChange?: (pageIndex: number) => void
   onPageSizeChange?: (pageSize: number) => void

@@ -14,7 +14,9 @@
     isDefault?: boolean
   }
 
-  interface Props extends Omit<CardDeckProps<PaymentMethod>, 'card' | 'items'> {
+  // `action` is set below from withAction, and `href` is left out because these
+  // cards hold a button, which a link card can't contain.
+  interface Props extends Omit<CardDeckProps<PaymentMethod>, 'card' | 'items' | 'action' | 'href'> {
     withAction?: boolean
   }
 

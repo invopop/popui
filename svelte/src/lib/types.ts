@@ -381,7 +381,11 @@ export interface CardDeckProps<T = any> {
   label?: string
   /** Trailing head content, such as an Add button. */
   action?: Snippet
-  /** Makes each card a link to the returned URL. */
+  /**
+   * Makes each card a link to the returned URL. The whole card becomes the link, so its content
+   * must not hold interactive controls (buttons, menus, inputs, other links): nesting them in a link
+   * is invalid HTML and gives keyboard and screen reader users two overlapping targets.
+   */
   href?: (item: T) => string | undefined
   /** Caps the height of the cards (any CSS length, e.g. `20rem`) and scrolls them under the head, fading the edges with more to show. */
   maxHeight?: string

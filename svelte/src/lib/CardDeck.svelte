@@ -61,6 +61,9 @@
   data-card-deck
   class={cn(
     'flex flex-col gap-0.5 p-0.5 rounded-2xl bg-background-default-secondary w-full',
+    // The scrolling list's focus ring is drawn by the deck: the list's own
+    // edge-fade mask would hide any ring on the list.
+    'has-[[data-card-deck-cards]:focus-visible]:ring-2 has-[[data-card-deck-cards]:focus-visible]:ring-border-selected-bold',
     className
   )}
 >
@@ -87,13 +90,11 @@
     role={overflowing ? 'region' : undefined}
     aria-label={overflowing ? label || 'Cards' : undefined}
     tabindex={overflowing ? 0 : undefined}
-    class={clsx('flex flex-col gap-0.5 rounded-xl', {
+    class={clsx('flex flex-col gap-0.5 focus-visible:outline-none', {
       // No scrollbar: it would sit over the cards' right edge, and the faded,
       // cut-off last card already says the list scrolls.
       'overflow-y-auto overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden':
-        !!maxHeight,
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-selected-bold':
-        overflowing
+        !!maxHeight
     })}
     style:max-height={maxHeight || undefined}
     style:mask-image={listMask}

@@ -47,6 +47,7 @@
     getRowActions,
     onRowAction,
     initialPageSize = 10,
+    pageSizeOptions,
     initialPage = 0,
     initialSortColumn,
     initialSortDirection,
@@ -450,6 +451,7 @@
         {paginationStyle}
         {rowCountCapped}
         {locale}
+        rowsPerPageOptions={pageSizeOptions}
         disabled={disableControls || loading}
       >
         {#if paginationSlot}

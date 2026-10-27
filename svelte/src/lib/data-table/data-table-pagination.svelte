@@ -9,6 +9,7 @@
   import { ArrowLeft, ArrowRight, ScrollLeft, ScrollRight } from '@invopop/ui-icons'
   import { cn } from '$lib/utils.js'
   import clsx from 'clsx'
+  import { onMount } from 'svelte'
   import type { DataTablePaginationProps } from './data-table-types.js'
 
   let {
@@ -114,7 +115,11 @@
 
   // Undefined leaves the choice to the browser, so thousands are grouped as
   // the viewer expects: 1,234 in English, 1.234 in Spanish, 1 234 in French.
-  let numberFormat = $derived(new Intl.NumberFormat(locale))
+  // Only once mounted, though: a server-rendered page formats in the server's
+  // locale, and hydration has to see the same text before it can change it.
+  let mounted = $state(false)
+  onMount(() => (mounted = true))
+  let numberFormat = $derived(new Intl.NumberFormat(locale ?? (mounted ? undefined : 'en-US')))
 
   function formatNumber(num: number): string {
     return numberFormat.format(num)
@@ -259,7 +264,7 @@
     </div>
     {#if ranged}
       {#if rangeEnd >= rangeStart}
-        <span
+        <div
           class="text-base text-foreground-default-secondary flex items-center gap-1.5 whitespace-nowrap"
           data-testid="pagination-range"
         >
@@ -303,7 +308,7 @@
             many
           {/if}
           {itemsLabel}
-        </span>
+        </div>
       {/if}
     {:else if countLoading}
       <span class="text-base text-foreground-default-secondary flex items-center gap-1.5">

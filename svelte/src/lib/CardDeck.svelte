@@ -98,7 +98,12 @@
         data-card-deck-card
         class={cn(
           'flex items-center gap-1.5 p-3 rounded-xl border border-border bg-background w-full',
-          { 'hover:border-border-default-secondary': !!cardHref }
+          {
+            // The inputs' focus style. It leads with the card's own border,
+            // which a scrolling list can't clip the way it would an outline.
+            'hover:border-border-default-secondary focus-visible:outline-none focus-visible:border-border-selected-bold focus-visible:shadow-active':
+              !!cardHref
+          }
         )}
       >
         {@render card(item, index)}

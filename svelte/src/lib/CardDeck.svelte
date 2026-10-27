@@ -12,10 +12,25 @@
   //
   // With `reorderable` the deck also becomes a drag-to-reorder list, toggled
   // by a Reorder button in the head. Entering reorder mode fades a drag handle
-  // in at each card's left edge and disables every button in the deck bar the
-  // toggle; a card's own content stops taking pointer events, so its links and
-  // menus are inert while reordering. Cards are moved by dragging only, and
-  // Escape is the one key bound, to leave the mode.
+  // in at each card's left edge and makes the head's action and every card's
+  // content inert, so their links, menus and buttons can't be reached and read
+  // as disabled; only the toggle stays live. Cards are moved by dragging only,
+  // and Escape is the one key bound, to leave the mode.
+
+  // Fallback identities for object items carrying no id, keyed by the item so
+  // they outlive any reordering. An item gets its 1-based position the first
+  // time it is seen and keeps it from then on: re-deriving it from the live
+  // index would relabel every item on every move, losing the permutation.
+  const fallbackIds = new WeakMap<object, string>()
+  let fallbackCount = 0
+
+  function defaultGetId(item: T): string | number {
+    if (item === null || typeof item !== 'object') return item as string | number
+    const id = (item as { id?: string | number }).id
+    if (id !== undefined && id !== null) return id
+    if (!fallbackIds.has(item)) fallbackIds.set(item, String(++fallbackCount))
+    return fallbackIds.get(item) as string
+  }
 
   let {
     items = $bindable([]),
@@ -24,7 +39,7 @@
     action,
     reorderable = false,
     reordering = $bindable(false),
-    getId = (item: T) => (item as any)?.id ?? (item as any),
+    getId = defaultGetId,
     name = '',
     reorderLabel = 'Reorder',
     reorderDoneLabel = 'Done',
@@ -41,19 +56,17 @@
 
   let ids = $derived(items.map((item) => getId(item)))
   let hasHead = $derived(!!label || !!action || reorderable)
+  // Reorder mode only exists on a reorderable deck: without the toggle there
+  // would be no handle and no way out of it.
+  let isReordering = $derived(reorderable && reordering)
 
-  // Turns the deck's buttons off while reordering — a card's menu or action
-  // shouldn't be reachable, and it should look unreachable — sparing the
-  // reorder toggle itself. Only buttons this disabled are re-enabled, so a
-  // button the consumer had already disabled stays that way.
-  $effect(() => {
-    if (!reordering || !root) return
-    const disabled = Array.from(root.querySelectorAll('button')).filter(
-      (btn) => !btn.disabled && !btn.hasAttribute('data-card-deck-reorder')
-    )
-    disabled.forEach((btn) => (btn.disabled = true))
-    return () => disabled.forEach((btn) => (btn.disabled = false))
-  })
+  // Wraps whatever goes inert while reordering. Inert doesn't trigger
+  // BaseButton's disabled: styles, so its faded look is reapplied here.
+  let inertStyles = $derived(
+    clsx('contents', {
+      'pointer-events-none [&_button]:opacity-30': isReordering
+    })
+  )
 
   function toggleReorder() {
     reordering = !reordering
@@ -66,7 +79,7 @@
   }
 
   function onpointerdown(e: PointerEvent) {
-    if (!reordering || e.button > 0 || !root) return
+    if (!isReordering || e.button > 0 || !root) return
     const el = (e.target as Element | null)?.closest<HTMLElement>('[data-card-deck-card]')
     if (!el || el.parentElement !== root) return
     // Suppresses the text selection and native image drag that would
@@ -186,16 +199,7 @@
   // Escape is a way out of the mode, not a way to reorder — the cards
   // themselves are drag-only.
   function onkeydown(e: KeyboardEvent) {
-    if (reordering && e.key === 'Escape') toggleReorder()
-  }
-
-  // Cards are grab handles while reordering, never links or buttons — this
-  // also catches a link activated from the keyboard.
-  function onclickcapture(e: MouseEvent) {
-    if (!reordering) return
-    if (!(e.target as Element | null)?.closest('[data-card-deck-card]')) return
-    e.preventDefault()
-    e.stopPropagation()
+    if (isReordering && e.key === 'Escape') toggleReorder()
   }
 </script>
 
@@ -203,14 +207,13 @@
 <div
   bind:this={root}
   data-card-deck
-  data-card-deck-reordering={reordering || undefined}
+  data-card-deck-reordering={isReordering || undefined}
   class={cn(
     'flex flex-col gap-0.5 p-0.5 rounded-2xl bg-background-default-secondary w-full',
     className
   )}
   {onpointerdown}
   {onkeydown}
-  {onclickcapture}
 >
   {#if hasHead}
     <div
@@ -220,22 +223,25 @@
       <span data-card-deck-label>{label}</span>
       {#if action || reorderable}
         <div data-card-deck-action class="flex items-center gap-1">
-          {@render action?.()}
+          {#if action}
+            <div data-card-deck-action-content inert={isReordering} class={inertStyles}>
+              {@render action()}
+            </div>
+          {/if}
           {#if reorderable}
             <BaseButton
               data-card-deck-reorder
               size="sm"
-              icon={reordering ? Tick : undefined}
-              aria-pressed={reordering}
+              icon={isReordering ? Tick : undefined}
               onclick={toggleReorder}
               class={clsx({
                 // Bang-prefixed, as the resting button's own background,
                 // border, hover states and icon colour would otherwise win.
                 '!bg-background-success-bold !text-foreground-inverse !border-transparent hover:!bg-background-success-bold [&_svg]:!text-icon-inverse':
-                  reordering
+                  isReordering
               })}
             >
-              {reordering ? reorderDoneLabel : reorderLabel}
+              {isReordering ? reorderDoneLabel : reorderLabel}
             </BaseButton>
           {/if}
         </div>
@@ -251,11 +257,9 @@
         'relative flex items-center gap-1.5 p-3 rounded-xl border border-border bg-background w-full',
         {
           'transition-[padding] duration-150 ease-out motion-reduce:transition-none': reorderable,
-          // Room for the handle, a grab cursor, and the card's own content
-          // made inert: the whole card is the grab target. Vertical drags
-          // belong to the deck, not to the scroller.
-          'pl-8 cursor-grab touch-none select-none transition-[padding,transform] [&_*]:pointer-events-none':
-            reordering,
+          // Room for the handle and a grab cursor: the whole card is the grab
+          // target. Vertical drags belong to the deck, not to the scroller.
+          'pl-8 cursor-grab touch-none select-none transition-[padding,transform]': isReordering,
           '!transition-none': settling || draggingId === getId(item),
           // The card under the pointer tracks it 1:1 and lifts above the
           // cards it passes.
@@ -273,13 +277,17 @@
           class={clsx(
             'absolute left-2 top-1/2 -translate-y-1/2 size-4 text-icon pointer-events-none transition-[opacity,translate] duration-150 ease-out motion-reduce:transition-none',
             {
-              'opacity-0 -translate-x-1': !reordering,
-              'opacity-100 translate-x-0': reordering
+              'opacity-0 -translate-x-1': !isReordering,
+              'opacity-100 translate-x-0': isReordering
             }
           )}
         />
       {/if}
-      {@render card(item, index)}
+      <!-- Inert while reordering, so the card's links, menus and buttons
+           can't be reached and the pointer lands on the card itself. -->
+      <div data-card-deck-content inert={isReordering} class={inertStyles}>
+        {@render card(item, index)}
+      </div>
     </div>
   {/each}
 

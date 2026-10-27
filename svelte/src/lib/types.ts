@@ -383,9 +383,13 @@ export interface CardDeckProps<T = any> {
   action?: Snippet
   /** Turns the deck into a drag-to-reorder list, toggled by a Reorder button in the head. */
   reorderable?: boolean
-  /** Whether reorder mode is on. Bindable. */
+  /** Whether reorder mode is on. Bindable. Ignored unless `reorderable` is set. */
   reordering?: boolean
-  /** Stable identity of an item, used to key the cards and report the order. Defaults to `item.id`, then the item itself. */
+  /**
+   * Stable identity of an item, used to key the cards and report the order. Defaults to the item
+   * itself for strings and numbers, and to `item.id` for objects; an object without one gets its
+   * 1-based position when first rendered, which stays with it as it moves.
+   */
   getId?: (item: T) => string | number
   /** On a reorderable deck, renders a hidden input holding the ids in their current order, comma separated. */
   name?: string

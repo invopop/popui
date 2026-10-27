@@ -93,7 +93,9 @@
     class={clsx('flex flex-col gap-0.5 focus-visible:outline-none', {
       // No scrollbar: it would sit over the cards' right edge, and the faded,
       // cut-off last card already says the list scrolls.
-      'overflow-y-auto overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden':
+      // The scroll padding matches the edge fade, so a card scrolled into view
+      // by focus stops clear of the fade instead of under it.
+      'overflow-y-auto overscroll-contain scroll-py-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden':
         !!maxHeight
     })}
     style:max-height={maxHeight || undefined}
@@ -110,9 +112,9 @@
         class={cn(
           'flex items-center gap-1.5 p-3 rounded-xl border border-border bg-background w-full',
           {
-            // The inputs' focus border, without their outer shadow: the card's
-            // own border sits inside it, where a scrolling list can't clip it.
-            'hover:border-border-default-secondary focus-visible:outline-none focus-visible:border-border-selected-bold':
+            // The inputs' focus border, doubled by an inset ring: both sit
+            // inside the card, where a scrolling list can't clip them.
+            'hover:border-border-default-secondary focus-visible:outline-none focus-visible:border-border-selected-bold focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-border-selected-bold':
               !!cardHref
           }
         )}

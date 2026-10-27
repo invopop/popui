@@ -21,6 +21,7 @@
   let list: HTMLDivElement | undefined = $state()
   let fadeTop = $state(false)
   let fadeBottom = $state(false)
+  let overflowing = $state(false)
 
   let hasHead = $derived(!!label || !!action)
 
@@ -35,9 +36,10 @@
 
   function updateFade() {
     if (!list || !maxHeight) {
-      fadeTop = fadeBottom = false
+      fadeTop = fadeBottom = overflowing = false
       return
     }
+    overflowing = list.scrollHeight > list.clientHeight + 1
     fadeTop = list.scrollTop > 0
     fadeBottom = list.scrollTop + list.clientHeight < list.scrollHeight - 1
   }
@@ -76,14 +78,22 @@
     </div>
   {/if}
 
+  <!-- An overflowing list is a focusable, labelled region, so the cut-off cards
+       can be scrolled to from the keyboard even when they hold nothing focusable. -->
+  <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
   <div
     bind:this={list}
     data-card-deck-cards
-    class={clsx('flex flex-col gap-0.5', {
+    role={overflowing ? 'region' : undefined}
+    aria-label={overflowing ? label || 'Cards' : undefined}
+    tabindex={overflowing ? 0 : undefined}
+    class={clsx('flex flex-col gap-0.5 rounded-xl', {
       // No scrollbar: it would sit over the cards' right edge, and the faded,
       // cut-off last card already says the list scrolls.
       'overflow-y-auto overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden':
-        !!maxHeight
+        !!maxHeight,
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-selected-bold':
+        overflowing
     })}
     style:max-height={maxHeight || undefined}
     style:mask-image={listMask}
@@ -99,9 +109,9 @@
         class={cn(
           'flex items-center gap-1.5 p-3 rounded-xl border border-border bg-background w-full',
           {
-            // The inputs' focus style. It leads with the card's own border,
-            // which a scrolling list can't clip the way it would an outline.
-            'hover:border-border-default-secondary focus-visible:outline-none focus-visible:border-border-selected-bold focus-visible:shadow-active':
+            // The inputs' focus border, without their outer shadow: the card's
+            // own border sits inside it, where a scrolling list can't clip it.
+            'hover:border-border-default-secondary focus-visible:outline-none focus-visible:border-border-selected-bold':
               !!cardHref
           }
         )}

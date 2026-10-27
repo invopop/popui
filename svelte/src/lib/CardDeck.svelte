@@ -103,7 +103,9 @@
     style:-webkit-mask-image={listMask}
     onscroll={updateFade}
   >
-    {#each items as item, index}
+    <!-- Keyed by the item itself, so a card's state (a loaded image, a typed
+         value) stays with its item when the list is filtered or reordered. -->
+    {#each items as item, index (item)}
       {@const cardHref = href?.(item)}
       <svelte:element
         this={cardHref ? 'a' : 'div'}

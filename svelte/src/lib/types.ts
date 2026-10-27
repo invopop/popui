@@ -373,7 +373,7 @@ export interface BaseDropdownProps {
   }
 
 export interface CardDeckProps<T = any> {
-  /** The cards' data, one card per item. */
+  /** The cards' data, one card per item. Cards are keyed by the item itself, so items must be distinct: no repeated strings or numbers, and no object listed twice. */
   items?: T[]
   /** Renders the content of one card. The deck draws the card's border and background. */
   card: Snippet<[T, number]>

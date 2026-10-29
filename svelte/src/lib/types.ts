@@ -372,6 +372,26 @@ export interface BaseDropdownProps {
     onchange?: (checked: boolean) => void;
   }
 
+export interface CardDeckProps<T = any> {
+  /** The cards' data, one card per item. Cards are keyed by the item itself, so items must be distinct: no repeated strings or numbers, and no object listed twice. */
+  items?: T[]
+  /** Renders the content of one card. The deck draws the card's border and background. */
+  card: Snippet<[T, number]>
+  /** Label of the muted head row. */
+  label?: string
+  /** Trailing head content, such as an Add button. */
+  action?: Snippet
+  /**
+   * Makes each card a link to the returned URL. The whole card becomes the link, so its content
+   * must not hold interactive controls (buttons, menus, inputs, other links): nesting them in a link
+   * is invalid HTML and gives keyboard and screen reader users two overlapping targets.
+   */
+  href?: (item: T) => string | undefined
+  /** Caps the height of the cards (any CSS length, e.g. `20rem`) and scrolls them under the head, fading the edges with more to show. */
+  maxHeight?: string
+  class?: string
+}
+
   export interface CardRelationProps {
     title?: string;
     icon?: IconSource | undefined;

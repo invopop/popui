@@ -73,7 +73,7 @@
   let sizeMenuOpen = $state(false)
   let sizeOptions: DrawerOption[] = $derived(
     rowsPerPageOptions.map((size) => ({
-      label: `${size} rows`,
+      label: `${formatNumber(size)} rows`,
       value: size,
       selected: size === rowsPerPage
     }))
@@ -251,7 +251,7 @@
             value={`${rowsPerPage}`}
             options={rowsPerPageOptions.map((size) => ({
               value: `${size}`,
-              label: `${size} rows`
+              label: `${formatNumber(size)} rows`
             }))}
             size="sm"
             onchange={(value) => changePageSize(Number(value))}

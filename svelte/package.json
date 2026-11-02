@@ -113,7 +113,7 @@
     "svelte-viewport-info": "^1.0.2",
     "tailwind-variants": "^1.0.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^4.3.5"
+    "zod": "^4.6.6"
   },
   "overrides": {
     "cookie": "^0.7.0",

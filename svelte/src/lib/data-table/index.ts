@@ -18,6 +18,7 @@ export { default as CurrencyCell } from "./cells/currency-cell.svelte";
 export type {
   DataTableColumn,
   DataTableProps,
+  DataTablePaginationStyle,
   CellType,
   TextCellConfig,
   BooleanCellConfig,
